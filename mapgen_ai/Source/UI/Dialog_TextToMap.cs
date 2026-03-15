@@ -125,14 +125,14 @@ namespace MapGenAI.UI
 
                     // defName=내부용, label=유저 표시용, description=설명
                     string desc = !string.IsNullOrEmpty(mut.description) ? $" - {mut.description}" : "";
-                    categories[catKey].Add("MapGenAI_MutatorLabel".Translate(mut.defName, mut.label, desc));
+                    categories[catKey].Add("MapGenAI_MutatorLabel".Tr(mut.defName, mut.label, desc));
                 }
 
                 if (categories.Count == 0)
                 {
                     if (!ModsConfig.OdysseyActive)
-                        return "MapGenAI_OdysseyRequired".Translate();
-                    return "MapGenAI_NoMutatorsAvailable".Translate();
+                        return "MapGenAI_OdysseyRequired".Tr();
+                    return "MapGenAI_NoMutatorsAvailable".Tr();
                 }
 
                 var sb = new System.Text.StringBuilder();
@@ -144,7 +144,7 @@ namespace MapGenAI.UI
             }
             catch
             {
-                return "MapGenAI_MutatorLoadFailed".Translate();
+                return "MapGenAI_MutatorLoadFailed".Tr();
             }
         }
 
@@ -177,13 +177,13 @@ namespace MapGenAI.UI
             bool isKo = IsKorean();
 
             // --- 타일 정보 수집 ---
-            string biome = "MapGenAI_Unknown".Translate();
+            string biome = "MapGenAI_Unknown".Tr();
             string biomeDef = "";
             string hillsStr = "";
             bool hasRiver = false;
             bool isCoastal = false;
             float elev = 0f;
-            string riverInfo = "MapGenAI_RiverNone".Translate();
+            string riverInfo = "MapGenAI_RiverNone".Tr();
 
             try
             {
@@ -192,7 +192,7 @@ namespace MapGenAI.UI
                     var tile = Find.WorldGrid[tileId];
                     if (tile != null)
                     {
-                        biome = tile.PrimaryBiome?.label ?? "MapGenAI_Unknown".Translate();
+                        biome = tile.PrimaryBiome?.label ?? "MapGenAI_Unknown".Tr();
                         biomeDef = tile.PrimaryBiome?.defName ?? "";
                         hillsStr = tile.hilliness.ToString();
                         hasRiver = tile.Rivers != null && tile.Rivers.Count > 0;
@@ -200,12 +200,12 @@ namespace MapGenAI.UI
 
                         if (hasRiver)
                         {
-                            riverInfo = "MapGenAI_RiverPresent".Translate();
+                            riverInfo = "MapGenAI_RiverPresent".Tr();
                             foreach (var rl in tile.Rivers)
                             {
                                 var nb = Find.WorldGrid[rl.neighbor];
                                 if (nb?.PrimaryBiome?.defName == "Ocean" || nb?.PrimaryBiome?.defName == "Lake")
-                                    riverInfo += "MapGenAI_RiverOceanLink".Translate();
+                                    riverInfo += "MapGenAI_RiverOceanLink".Tr();
                             }
                         }
 
@@ -299,7 +299,7 @@ Additional parameters:
 - fertility_offset: Fertility offset (-1.0~1.0, default 0). Positive=more rich soil (0.5 recommended), negative=less. Use for 'lots of rich soil', 'fertile map' requests.";
 
             // 섹션 3: 타일 컨텍스트 + 유효 옵션 (동적)
-            string coastalLabel = isCoastal ? "MapGenAI_Yes".Translate().ToString() : "MapGenAI_No".Translate().ToString();
+            string coastalLabel = isCoastal ? "MapGenAI_Yes".Tr().ToString() : "MapGenAI_No".Tr().ToString();
             string tileContext = isKo
                 ? $@"
 [타일 정보] 바이옴={biome}({biomeDef}), 지형={hillsStr}, 고도={elev:F0}m, 강={riverInfo}, 해안={coastalLabel}
@@ -449,7 +449,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _openedTileId = Find.WorldSelector.SelectedTile;
 
             _history.Add(new ChatMessage("assistant",
-                "MapGenAI_Welcome".Translate()));
+                "MapGenAI_Welcome".Tr()));
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -461,7 +461,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 if (_pendingError != null)
                 {
                     // API 오류 (토큰 소진, 네트워크 등) → 채팅에 오류 표시
-                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(_pendingError)));
+                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Tr(_pendingError)));
                     _pendingError = null;
                     _isWaiting = false;
                     _statusText = "";
@@ -513,7 +513,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             // 전송 버튼
             GUI.enabled = !_isWaiting && !string.IsNullOrEmpty(_inputText);
-            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Translate().ToString()))
+            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Tr().ToString()))
                 SendMessage();
             GUI.enabled = true;
 
@@ -529,20 +529,20 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 var presetSaveRect = new Rect(generateRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
                 var presetLoadRect = new Rect(presetSaveRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
 
-                if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Translate()))
+                if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Tr()))
                     GenerateMap();
 
-                if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Translate()))
+                if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Tr()))
                     Find.WindowStack.Add(new Dialog_PresetName(SaveCurrentPreset));
 
-                if (Widgets.ButtonText(presetLoadRect, "MapGenAI_PresetLoad".Translate()))
+                if (Widgets.ButtonText(presetLoadRect, "MapGenAI_PresetLoad".Tr()))
                     ShowPresetLoadMenu();
             }
             else
             {
                 // 파라미터 미준비 상태에서도 프리셋 불러오기 가능
                 var loadOnlyRect = new Rect(inRect.x, bottomY, 140f, 36f);
-                if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Translate()))
+                if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Tr()))
                     ShowPresetLoadMenu();
 
                 if (_statusText != "")
@@ -594,7 +594,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             {
                 float dotCount = ((int)(Time.realtimeSinceStartup * 2f)) % 4;
                 string dots = new string('.', (int)dotCount);
-                string waitText = $"{"MapGenAI_Waiting".Translate()}{dots}";
+                string waitText = $"{"MapGenAI_Waiting".Tr()}{dots}";
                 float waitH = Text.CalcHeight(waitText, msgTextWidth) + 12f;
                 var waitColor = new Color(0.3f, 0.3f, 0.3f, 0.7f);
                 Widgets.DrawBoxSolid(new Rect(0f, y, msgRenderWidth, waitH), waitColor);
@@ -628,7 +628,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _inputText = "";
             _history.Add(new ChatMessage("user", text));
             _isWaiting = true;
-            _statusText = "MapGenAI_Requesting".Translate();
+            _statusText = "MapGenAI_Requesting".Tr();
             _paramsReady = false;
 
             ILLMClient client;
@@ -639,7 +639,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             catch (Exception e)
             {
                 Log.Error($"[MapGenAI] 클라이언트 생성 실패: {e}");
-                _statusText = "MapGenAI_Error".Translate(e.Message);
+                _statusText = "MapGenAI_Error".Tr(e.Message);
                 _isWaiting = false;
                 return;
             }
@@ -673,7 +673,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _isWaiting = false;
             if (response == null)
             {
-                _statusText = "MapGenAI_NoResponse".Translate();
+                _statusText = "MapGenAI_NoResponse".Tr();
                 return;
             }
 
@@ -710,7 +710,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
                     MapGenParams.Apply(data);
                     _paramsReady = true;
-                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Translate().ToString();
+                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Tr().ToString();
 
                     // 경고 메시지가 있으면 채팅에 추가
                     string warningText = "";
@@ -721,7 +721,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                     }
 
                     _history.Add(new ChatMessage("assistant",
-                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
+                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Tr()}"));
                     _statusText = "";
                 }
             }
@@ -778,7 +778,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 var mutDef = DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
                 if (mutDef == null)
                 {
-                    warnings.Add("MapGenAI_MutatorNotFound".Translate(defName));
+                    warnings.Add("MapGenAI_MutatorNotFound".Tr(defName));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -789,7 +789,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 검증 2: Coast 카테고리인데 해안 아닌 타일
                 if (!isCoastal && hasCats && mutDef.categories.Contains("Coast"))
                 {
-                    warnings.Add("MapGenAI_MutatorCoastalOnly".Translate(label));
+                    warnings.Add("MapGenAI_MutatorCoastalOnly".Tr(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -797,7 +797,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 검증 3: River 카테고리인데 강 없는 타일
                 if (!hasRiver && hasCats && mutDef.categories.Contains("River"))
                 {
-                    warnings.Add("MapGenAI_MutatorRiverOnly".Translate(label));
+                    warnings.Add("MapGenAI_MutatorRiverOnly".Tr(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -999,7 +999,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             };
 
             PresetManager.Save(presetName, data);
-            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Translate(presetName)));
+            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Tr(presetName)));
         }
 
         private void ShowPresetLoadMenu()
@@ -1007,7 +1007,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             var presets = PresetManager.ListPresets();
             if (presets.Count == 0)
             {
-                _history.Add(new ChatMessage("assistant", "MapGenAI_NoPresets".Translate()));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_NoPresets".Tr()));
                 return;
             }
 
@@ -1033,7 +1033,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                     if (Widgets.ButtonInvisible(xRect))
                     {
                         PresetManager.Delete(presetName);
-                        _history.Add(new ChatMessage("assistant", "MapGenAI_PresetDeletedMsg".Translate(presetName)));
+                        _history.Add(new ChatMessage("assistant", "MapGenAI_PresetDeletedMsg".Tr(presetName)));
                         return true; // 메뉴 닫기
                     }
                     return false;
@@ -1049,7 +1049,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             var data = PresetManager.Load(presetName);
             if (data == null)
             {
-                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Translate(presetName)));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Tr(presetName)));
                 return;
             }
 
@@ -1057,12 +1057,12 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _paramsReady = true;
             _statusText = "";
             _history.Add(new ChatMessage("assistant",
-                "MapGenAI_PresetLoadedMsg".Translate(
+                "MapGenAI_PresetLoadedMsg".Tr(
                     presetName, data.hills, data.hill_amount.ToString("F2"),
                     data.vegetation_density.ToString("F1"), data.animal_density.ToString("F1"),
                     (data.river?.present ?? false).ToString(), data.caves.ToString(),
                     data.geysers.ToString())
-                + "\n\n" + "MapGenAI_ModifyHint".Translate()));
+                + "\n\n" + "MapGenAI_ModifyHint".Tr()));
         }
 
         private void GenerateMap()
@@ -1070,7 +1070,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             // "이 설정으로 맵 생성" 클릭 시: 파라미터 유지한 채로 닫기
             _keepParams = true;
             Close();
-            Messages.Message("MapGenAI_ParamsSaved".Translate(),
+            Messages.Message("MapGenAI_ParamsSaved".Tr(),
                 MessageTypeDefOf.PositiveEvent);
         }
 
@@ -1085,7 +1085,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 대화 취소/닫기 → 파라미터 리셋 + Map Preview 원래대로
                 MapGenParams.Reset();
                 MapGenParams.RefreshMapPreview();
-                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Translate()}");
+                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Tr()}");
             }
         }
     }
@@ -1112,7 +1112,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Small;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "MapGenAI_PresetNamePrompt".Translate());
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "MapGenAI_PresetNamePrompt".Tr());
 
             GUI.SetNextControlName("PresetNameInput");
             _name = Widgets.TextField(new Rect(inRect.x, inRect.y + 34f, inRect.width, 30f), _name);
@@ -1127,9 +1127,9 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             float btnW = 80f;
             float btnY = inRect.yMax - 36f;
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "MapGenAI_Save".Translate()))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "MapGenAI_Save".Tr()))
                 TrySave();
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "MapGenAI_Cancel".Translate()))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "MapGenAI_Cancel".Tr()))
                 Close();
         }
 
