@@ -36,9 +36,19 @@
   <MapGenAI_Yes>예</MapGenAI_Yes>
   <MapGenAI_No>아니오</MapGenAI_No>
 
+  <!-- Status messages -->
+  <MapGenAI_Requesting>LLM에게 요청 중...</MapGenAI_Requesting>
+  <MapGenAI_Waiting>AI 응답 대기 중</MapGenAI_Waiting>
+  <MapGenAI_ParamsSet>맵 파라미터가 설정되었습니다.</MapGenAI_ParamsSet>
+
   <!-- Mutator list labels -->
   <MapGenAI_MutatorLabel>{0}(표시명:{1}{2})</MapGenAI_MutatorLabel>
   <MapGenAI_OdysseyRequired>  (특수 지형 변형은 Odyssey DLC가 필요합니다. Odyssey 없이는 호수/온천/피요르드 등 mutator를 사용할 수 없습니다.)</MapGenAI_OdysseyRequired>
   <MapGenAI_NoMutatorsAvailable>  (이 타일에서 사용 가능한 특수 지형 변형 없음)</MapGenAI_NoMutatorsAvailable>
   <MapGenAI_MutatorLoadFailed>  (mutator 목록 로드 실패)</MapGenAI_MutatorLoadFailed>
+
+  <!-- Mutator validation warnings -->
+  <MapGenAI_MutatorNotFound>[!] '{0}'은(는) 존재하지 않는 지형 변형이어서 제거되었습니다.</MapGenAI_MutatorNotFound>
+  <MapGenAI_MutatorCoastalOnly>[!] [{0}]은(는) 해안 타일에서만 가능하여 제거되었습니다.</MapGenAI_MutatorCoastalOnly>
+  <MapGenAI_MutatorRiverOnly>[!] [{0}]은(는) 강이 있는 타일에서만 가능하여 제거되었습니다.</MapGenAI_MutatorRiverOnly>
 </LanguageData>

@@ -36,9 +36,19 @@
   <MapGenAI_Yes>Yes</MapGenAI_Yes>
   <MapGenAI_No>No</MapGenAI_No>
 
+  <!-- Status messages -->
+  <MapGenAI_Requesting>Requesting LLM...</MapGenAI_Requesting>
+  <MapGenAI_Waiting>Waiting for AI response</MapGenAI_Waiting>
+  <MapGenAI_ParamsSet>Map parameters have been set.</MapGenAI_ParamsSet>
+
   <!-- Mutator list labels -->
   <MapGenAI_MutatorLabel>{0}(label:{1}{2})</MapGenAI_MutatorLabel>
   <MapGenAI_OdysseyRequired>  (Special terrain features require the Odyssey DLC. Without Odyssey, mutators like lakes/hot springs/fjords are unavailable.)</MapGenAI_OdysseyRequired>
   <MapGenAI_NoMutatorsAvailable>  (No special terrain features available for this tile)</MapGenAI_NoMutatorsAvailable>
   <MapGenAI_MutatorLoadFailed>  (Failed to load mutator list)</MapGenAI_MutatorLoadFailed>
+
+  <!-- Mutator validation warnings -->
+  <MapGenAI_MutatorNotFound>[!] '{0}' is not a valid terrain feature and was removed.</MapGenAI_MutatorNotFound>
+  <MapGenAI_MutatorCoastalOnly>[!] [{0}] is only available on coastal tiles and was removed.</MapGenAI_MutatorCoastalOnly>
+  <MapGenAI_MutatorRiverOnly>[!] [{0}] is only available on tiles with a river and was removed.</MapGenAI_MutatorRiverOnly>
 </LanguageData>

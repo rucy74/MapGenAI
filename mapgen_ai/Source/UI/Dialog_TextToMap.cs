@@ -38,6 +38,15 @@ namespace MapGenAI.UI
             { "Mountain", "Caves", "Coast", "River" };
 
         /// <summary>
+        /// 현재 게임 언어가 한국어인지 확인.
+        /// </summary>
+        private static bool IsKorean()
+        {
+            try { return Prefs.LangFolderName == "Korean"; }
+            catch { return false; }
+        }
+
+        /// <summary>
         /// DefDatabase에서 TileMutatorDef를 읽어 LLM용 목록 생성.
         /// Layer 1: 현재 타일 조건에 맞는 mutator만 포함 (사전 필터링).
         /// - Odyssey 비활성 → 바닐라 4개 외 전부 제거
@@ -116,14 +125,14 @@ namespace MapGenAI.UI
 
                     // defName=내부용, label=유저 표시용, description=설명
                     string desc = !string.IsNullOrEmpty(mut.description) ? $" - {mut.description}" : "";
-                    categories[catKey].Add($"{mut.defName}(표시명:{mut.label}{desc})");
+                    categories[catKey].Add("MapGenAI_MutatorLabel".Translate(mut.defName, mut.label, desc));
                 }
 
                 if (categories.Count == 0)
                 {
                     if (!ModsConfig.OdysseyActive)
-                        return "  (특수 지형 변형은 Odyssey DLC가 필요합니다. Odyssey 없이는 호수/온천/피요르드 등 mutator를 사용할 수 없습니다.)";
-                    return "  (이 타일에서 사용 가능한 특수 지형 변형 없음)";
+                        return "MapGenAI_OdysseyRequired".Translate();
+                    return "MapGenAI_NoMutatorsAvailable".Translate();
                 }
 
                 var sb = new System.Text.StringBuilder();
@@ -135,7 +144,7 @@ namespace MapGenAI.UI
             }
             catch
             {
-                return "  (mutator 목록 로드 실패)";
+                return "MapGenAI_MutatorLoadFailed".Translate();
             }
         }
 
@@ -165,14 +174,16 @@ namespace MapGenAI.UI
 
         private static string BuildSystemPrompt(int tileId)
         {
+            bool isKo = IsKorean();
+
             // --- 타일 정보 수집 ---
-            string biome = "알 수 없음";
+            string biome = "MapGenAI_Unknown".Translate();
             string biomeDef = "";
             string hillsStr = "";
             bool hasRiver = false;
             bool isCoastal = false;
             float elev = 0f;
-            string riverInfo = "없음";
+            string riverInfo = "MapGenAI_RiverNone".Translate();
 
             try
             {
@@ -181,7 +192,7 @@ namespace MapGenAI.UI
                     var tile = Find.WorldGrid[tileId];
                     if (tile != null)
                     {
-                        biome = tile.PrimaryBiome?.label ?? "알 수 없음";
+                        biome = tile.PrimaryBiome?.label ?? "MapGenAI_Unknown".Translate();
                         biomeDef = tile.PrimaryBiome?.defName ?? "";
                         hillsStr = tile.hilliness.ToString();
                         hasRiver = tile.Rivers != null && tile.Rivers.Count > 0;
@@ -189,12 +200,12 @@ namespace MapGenAI.UI
 
                         if (hasRiver)
                         {
-                            riverInfo = "있음";
+                            riverInfo = "MapGenAI_RiverPresent".Translate();
                             foreach (var rl in tile.Rivers)
                             {
                                 var nb = Find.WorldGrid[rl.neighbor];
                                 if (nb?.PrimaryBiome?.defName == "Ocean" || nb?.PrimaryBiome?.defName == "Lake")
-                                    riverInfo += " (바다/호수로 연결됨)";
+                                    riverInfo += "MapGenAI_RiverOceanLink".Translate();
                             }
                         }
 
@@ -220,10 +231,13 @@ namespace MapGenAI.UI
 
             // --- Layer 2: 구조화된 프롬프트 ---
             // 섹션 1: 역할 (짧게)
-            string role = "당신은 RimWorld 맵 생성 도우미입니다. 유저 요청을 JSON으로 변환합니다.";
+            string role = isKo
+                ? "당신은 RimWorld 맵 생성 도우미입니다. 유저 요청을 JSON으로 변환합니다."
+                : "You are a RimWorld map generation assistant. Convert user requests to JSON.";
 
             // 섹션 2: JSON 스키마
-            string schema = @"반드시 아래 두 형식 중 하나의 JSON만 출력하세요.
+            string schema = isKo
+                ? @"반드시 아래 두 형식 중 하나의 JSON만 출력하세요.
 
 질문/안내: {""action"":""ask"",""message"":""내용""}
 맵 생성: {""action"":""generate"",""description"":""맵 설명"",""params"":{...}}
@@ -252,20 +266,61 @@ elevation_shapes 가이드:
 - river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=오른쪽, 90=위, 180=왼쪽, 270=아래. 미지정시 자동.
 - river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
 - straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
-- fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용.";
+- fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용."
+                : @"Output exactly one of these two JSON formats.
+
+Question/guide: {""action"":""ask"",""message"":""content""}
+Map generation: {""action"":""generate"",""description"":""map description"",""params"":{...}}
+
+params schema:
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+
+elevation_shapes guide:
+- slope: A slope where one side is higher. Use direction to set the high side. Example: direction=left means left side is higher.
+- radial: Edges are high, center is low (basin/fortress). Use size to control mountain thickness. Mountain fortress=radial(strong).
+- split: Axis-based split. Positive strength=canyon (mountains on both sides, valley in center). Negative strength=mountain range (mountain in center, plains on sides). Use direction for axis, gap for width.
+- bump: Gaussian bump/depression. Use position for location, size for extent. Negative strength=depression. fill=water to create a lake.
+- noise: Perlin noise for irregular terrain. Larger size means bigger clusters.
+- ring: Donut-shaped mountain range. Use position for center, size for ring radius, strength for height. Suitable for craters/circular fortress terrain.
+- Multiple shapes can be combined (additive). Use elevation_shapes for complex terrain, hills for simple requests.
+- Do not use hills and elevation_shapes together. If elevation_shapes is present, hills is ignored.
+- Mountain range=split+negative strength (center high). Canyon=split+positive strength (center low). Diagonal range=split(direction=top_left, strength=negative_strong, gap=tiny).
+
+Additional parameters:
+- rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
+- ruin_density: Ruin density (0.0~2.5, default 1.0). 0=no ruins, 2.5=very many.
+- danger_density: Ancient danger density (0.0~2.5, default 1.0). 0=no dangers, 2.5=very many.
+- rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"" requests.
+- hill_size: Mountain size (small=fragmented, medium=default, large=huge mountains). Or a number (0.005~0.1, default 0.021).
+- hill_smoothness: Mountain surface roughness (rough=jagged, normal=default, smooth=smooth). Or a number (0.5~6.0, default 2.0).
+- river_direction: River direction. left/right/up/down or 0-360 degree angle. 0=right, 90=up, 180=left, 270=down. Auto if unspecified.
+- river_position: River position. left/right/up/down/center or 0.0~1.0 number. Left/right moves on x-axis, up/down on z-axis. Center if unspecified.
+- straight_river: Straight river (true/false). If true, the river flows in a straight line without meandering. Use for 'straight river', 'canal' requests.
+- fertility_offset: Fertility offset (-1.0~1.0, default 0). Positive=more rich soil (0.5 recommended), negative=less. Use for 'lots of rich soil', 'fertile map' requests.";
 
             // 섹션 3: 타일 컨텍스트 + 유효 옵션 (동적)
-            string tileContext = $@"
-[타일 정보] 바이옴={biome}({biomeDef}), 지형={hillsStr}, 고도={elev:F0}m, 강={riverInfo}, 해안={(isCoastal ? "예" : "아니오")}
+            string coastalLabel = isCoastal ? "MapGenAI_Yes".Translate().ToString() : "MapGenAI_No".Translate().ToString();
+            string tileContext = isKo
+                ? $@"
+[타일 정보] 바이옴={biome}({biomeDef}), 지형={hillsStr}, 고도={elev:F0}m, 강={riverInfo}, 해안={coastalLabel}
 
 [사용 가능한 석재] rock_types에는 이 defName만 사용하세요.
   {rockList}
 
 [사용 가능한 mutators] 이 목록에 있는 defName만 사용하세요.
+{mutatorList}"
+                : $@"
+[Tile Info] Biome={biome}({biomeDef}), Terrain={hillsStr}, Elevation={elev:F0}m, River={riverInfo}, Coastal={coastalLabel}
+
+[Available rocks] Use only these defNames for rock_types.
+  {rockList}
+
+[Available mutators] Use only defNames from this list.
 {mutatorList}";
 
-            // 섹션 4: 규칙 (5줄 이하, "하지 마세요" 대신 "이 중에서 골라주세요")
-            string rules = @"규칙:
+            // 섹션 4: 규칙
+            string rules = isKo
+                ? @"규칙:
 - 지형 형태 요청(링 형태, 대각선, 경사면, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
   링/도넛=ring, 산맥=split+negative_strong+gap:medium(산 폭), 협곡=split+strong+gap:small(골짜기 폭), 호수=bump+fill:water, 경사면=slope
 - mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
@@ -281,14 +336,32 @@ elevation_shapes 가이드:
 - 온천/간헐천 추가는 반드시 mutators:[""HotSprings""]를 사용하세요. geysers 파라미터는 사용하지 마세요.
 - 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
 - 수정 요청(이전 맵에 추가/변경) 시, 이전 응답의 params를 모두 포함하고 요청된 부분만 변경하세요. 파라미터를 빠뜨리면 기본값으로 초기화됩니다.
-- 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요.";
+- 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
+                : @"Rules:
+- For terrain shape requests (ring, diagonal, slope, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
+  Ring/donut=ring, mountain range=split+negative_strong+gap:medium(mountain width), canyon=split+strong+gap:small(valley width), lake=bump+fill:water, slope=slope
+- Only use defNames from the above list in the mutators array. You cannot add anything not in the list.
+- If the user requests animals/special terrain not in the list, do not substitute something similar. Use action=ask to honestly inform them the feature is unavailable.
+- Always respond to the user in English. Do not show raw defNames, parameter names, or labels directly.
+- Match the user's natural language to the correct English defName/label (e.g., hot springs=HotSprings, marble=Marble).
+- For impossible requests, use action=ask to honestly inform the user.
+- When generating, include a user-friendly English map description in the description field.
+- Do not include parameters the user did not request. Omit keys to keep defaults. Especially rock_types, ore_density, ruin_density, danger_density should only be included when requested.
+- Add caves=caves:true, remove caves=caves:false (set explicitly).
+- Rock requests (marble only, lots of granite, etc.) use rock_types. rock_count and rock_types can be used together.
+- More/fewer ruins=ruin_density, ancient dangers=danger_density.
+- To add hot springs/geysers, always use mutators:[""HotSprings""]. Do not use a geysers parameter.
+- Rich soil (fertile soil) adjustments use fertility_offset. Positive=more rich soil, negative=less.
+- For modification requests (add/change from previous map), include all params from the previous response and only change the requested parts. Omitting parameters resets them to defaults.
+- For vague requests (""add animal habitat"", ""add special terrain"", etc.), use action=ask to ask the user to specify exactly what they want from the list.";
 
-            // 섹션 5: few-shot 예시 (한국어, 기본 + elevation_shapes + 거절)
+            // 섹션 5: few-shot 예시
             string fewShot;
             if (!isCoastal)
             {
                 // 내륙 타일: elevation_shapes 예시 + 해안 거절 예시
-                fewShot = @"
+                fewShot = isKo
+                    ? @"
 예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
 응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
 
@@ -305,12 +378,31 @@ elevation_shapes 가이드:
 응답: {""action"":""generate"",""description"":""좌상-우하 방향으로 대각선 산맥이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
 
 예시6) 유저: ""피요르드 있는 맵 만들어줘""
-응답: {""action"":""ask"",""message"":""현재 타일은 해안가가 아닙니다. 피요르드를 원하시면 세계지도에서 해안가 타일을 선택해주세요.""}";
+응답: {""action"":""ask"",""message"":""현재 타일은 해안가가 아닙니다. 피요르드를 원하시면 세계지도에서 해안가 타일을 선택해주세요.""}"
+                    : @"
+Ex1) User: ""Make a map with lots of mountains and hot springs""
+Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+
+Ex2) User: ""Mountain fortress with hot springs""
+Response: {""action"":""generate"",""description"":""A fortress surrounded by mountains with hot springs"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
+
+Ex3) User: ""Map with a lake in the center""
+Response: {""action"":""generate"",""description"":""A map with a lake in the center"",""params"":{""elevation_shapes"":[{""type"":""bump"",""position"":""center"",""size"":""large"",""strength"":""negative_strong"",""fill"":""water""}]}}
+
+Ex4) User: ""Marble only map with lots of ruins""
+Response: {""action"":""generate"",""description"":""A map with only marble and lots of ruins"",""params"":{""rock_types"":[""Marble""],""ruin_density"":2.0}}
+
+Ex5) User: ""Map with a diagonal mountain range""
+Response: {""action"":""generate"",""description"":""A map with a diagonal mountain range from top-left to bottom-right"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
+
+Ex6) User: ""Make a map with fjords""
+Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjords, please select a coastal tile on the world map.""}";
             }
             else
             {
                 // 해안 타일: 기본 + elevation_shapes 예시
-                fewShot = @"
+                fewShot = isKo
+                    ? @"
 예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
 응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
 
@@ -318,7 +410,16 @@ elevation_shapes 가이드:
 응답: {""action"":""generate"",""description"":""왼쪽에 산이 있고 오른쪽 아래에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
 
 예시3) 유저: ""그냥 추천해줘""
-응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}";
+응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}"
+                    : @"
+Ex1) User: ""Make a map with lots of mountains and hot springs""
+Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+
+Ex2) User: ""Mountains on the left, lake on the bottom right""
+Response: {""action"":""generate"",""description"":""A map with mountains on the left and a lake in the bottom right"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
+
+Ex3) User: ""Just recommend something""
+Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}";
             }
 
             return $@"{role}
@@ -348,13 +449,7 @@ elevation_shapes 가이드:
             _openedTileId = Find.WorldSelector.SelectedTile;
 
             _history.Add(new ChatMessage("assistant",
-                "어떤 맵을 만들어 드릴까요?\n\n" +
-                "이런 것들을 해볼 수 있어요:\n" +
-                "  - \"대각선 산맥에 중앙 호수\"\n" +
-                "  - \"온천이 있는 산악 요새\"\n" +
-                "  - \"강을 일자로, 왼쪽에 배치\"\n" +
-                "  - \"대리석으로만 된 깨끗한 평지\"\n" +
-                "  - \"그냥 추천해줘\""));
+                "MapGenAI_Welcome".Translate()));
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -366,7 +461,7 @@ elevation_shapes 가이드:
                 if (_pendingError != null)
                 {
                     // API 오류 (토큰 소진, 네트워크 등) → 채팅에 오류 표시
-                    _history.Add(new ChatMessage("assistant", $"[오류] {_pendingError}"));
+                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(_pendingError)));
                     _pendingError = null;
                     _isWaiting = false;
                     _statusText = "";
@@ -418,7 +513,7 @@ elevation_shapes 가이드:
 
             // 전송 버튼
             GUI.enabled = !_isWaiting && !string.IsNullOrEmpty(_inputText);
-            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "전송"))
+            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Translate().ToString()))
                 SendMessage();
             GUI.enabled = true;
 
@@ -434,20 +529,20 @@ elevation_shapes 가이드:
                 var presetSaveRect = new Rect(generateRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
                 var presetLoadRect = new Rect(presetSaveRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
 
-                if (Widgets.ButtonText(generateRect, "이 설정으로 맵 생성"))
+                if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Translate()))
                     GenerateMap();
 
-                if (Widgets.ButtonText(presetSaveRect, "프리셋 저장"))
+                if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Translate()))
                     Find.WindowStack.Add(new Dialog_PresetName(SaveCurrentPreset));
 
-                if (Widgets.ButtonText(presetLoadRect, "프리셋 불러오기"))
+                if (Widgets.ButtonText(presetLoadRect, "MapGenAI_PresetLoad".Translate()))
                     ShowPresetLoadMenu();
             }
             else
             {
                 // 파라미터 미준비 상태에서도 프리셋 불러오기 가능
                 var loadOnlyRect = new Rect(inRect.x, bottomY, 140f, 36f);
-                if (Widgets.ButtonText(loadOnlyRect, "프리셋 불러오기"))
+                if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Translate()))
                     ShowPresetLoadMenu();
 
                 if (_statusText != "")
@@ -499,7 +594,7 @@ elevation_shapes 가이드:
             {
                 float dotCount = ((int)(Time.realtimeSinceStartup * 2f)) % 4;
                 string dots = new string('.', (int)dotCount);
-                string waitText = $"AI 응답 대기 중{dots}";
+                string waitText = $"{"MapGenAI_Waiting".Translate()}{dots}";
                 float waitH = Text.CalcHeight(waitText, msgTextWidth) + 12f;
                 var waitColor = new Color(0.3f, 0.3f, 0.3f, 0.7f);
                 Widgets.DrawBoxSolid(new Rect(0f, y, msgRenderWidth, waitH), waitColor);
@@ -533,7 +628,7 @@ elevation_shapes 가이드:
             _inputText = "";
             _history.Add(new ChatMessage("user", text));
             _isWaiting = true;
-            _statusText = "LLM에게 요청 중...";
+            _statusText = "MapGenAI_Requesting".Translate();
             _paramsReady = false;
 
             ILLMClient client;
@@ -544,7 +639,7 @@ elevation_shapes 가이드:
             catch (Exception e)
             {
                 Log.Error($"[MapGenAI] 클라이언트 생성 실패: {e}");
-                _statusText = $"오류: {e.Message}";
+                _statusText = "MapGenAI_Error".Translate(e.Message);
                 _isWaiting = false;
                 return;
             }
@@ -578,7 +673,7 @@ elevation_shapes 가이드:
             _isWaiting = false;
             if (response == null)
             {
-                _statusText = "응답 없음. API 키를 확인해주세요.";
+                _statusText = "MapGenAI_NoResponse".Translate();
                 return;
             }
 
@@ -615,7 +710,7 @@ elevation_shapes 가이드:
 
                     MapGenParams.Apply(data);
                     _paramsReady = true;
-                    var desc = parsed.GetString("description") ?? "맵 파라미터가 설정되었습니다.";
+                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Translate().ToString();
 
                     // 경고 메시지가 있으면 채팅에 추가
                     string warningText = "";
@@ -626,7 +721,7 @@ elevation_shapes 가이드:
                     }
 
                     _history.Add(new ChatMessage("assistant",
-                        $"{desc}{warningText}\n\n아래 버튼으로 맵을 생성하거나, 채팅으로 수정할 수 있습니다."));
+                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
                     _statusText = "";
                 }
             }
@@ -683,7 +778,7 @@ elevation_shapes 가이드:
                 var mutDef = DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
                 if (mutDef == null)
                 {
-                    warnings.Add($"[!] '{defName}'은(는) 존재하지 않는 지형 변형이어서 제거되었습니다.");
+                    warnings.Add("MapGenAI_MutatorNotFound".Translate(defName));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -694,7 +789,7 @@ elevation_shapes 가이드:
                 // 검증 2: Coast 카테고리인데 해안 아닌 타일
                 if (!isCoastal && hasCats && mutDef.categories.Contains("Coast"))
                 {
-                    warnings.Add($"[!] [{label}]은(는) 해안 타일에서만 가능하여 제거되었습니다.");
+                    warnings.Add("MapGenAI_MutatorCoastalOnly".Translate(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -702,7 +797,7 @@ elevation_shapes 가이드:
                 // 검증 3: River 카테고리인데 강 없는 타일
                 if (!hasRiver && hasCats && mutDef.categories.Contains("River"))
                 {
-                    warnings.Add($"[!] [{label}]은(는) 강이 있는 타일에서만 가능하여 제거되었습니다.");
+                    warnings.Add("MapGenAI_MutatorRiverOnly".Translate(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -904,7 +999,7 @@ elevation_shapes 가이드:
             };
 
             PresetManager.Save(presetName, data);
-            _history.Add(new ChatMessage("assistant", $"프리셋 \"{presetName}\" 이(가) 저장되었습니다."));
+            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Translate(presetName)));
         }
 
         private void ShowPresetLoadMenu()
@@ -912,7 +1007,7 @@ elevation_shapes 가이드:
             var presets = PresetManager.ListPresets();
             if (presets.Count == 0)
             {
-                _history.Add(new ChatMessage("assistant", "저장된 프리셋이 없습니다."));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_NoPresets".Translate()));
                 return;
             }
 
@@ -938,7 +1033,7 @@ elevation_shapes 가이드:
                     if (Widgets.ButtonInvisible(xRect))
                     {
                         PresetManager.Delete(presetName);
-                        _history.Add(new ChatMessage("assistant", $"프리셋 \"{presetName}\" 이(가) 삭제되었습니다."));
+                        _history.Add(new ChatMessage("assistant", "MapGenAI_PresetDeletedMsg".Translate(presetName)));
                         return true; // 메뉴 닫기
                     }
                     return false;
@@ -954,7 +1049,7 @@ elevation_shapes 가이드:
             var data = PresetManager.Load(presetName);
             if (data == null)
             {
-                _history.Add(new ChatMessage("assistant", $"프리셋 \"{presetName}\" 불러오기에 실패했습니다."));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Translate(presetName)));
                 return;
             }
 
@@ -962,11 +1057,12 @@ elevation_shapes 가이드:
             _paramsReady = true;
             _statusText = "";
             _history.Add(new ChatMessage("assistant",
-                $"프리셋 \"{presetName}\" 을(를) 불러왔습니다.\n" +
-                $"언덕={data.hills}, 산양={data.hill_amount:F2}, 나무={data.vegetation_density:F1}, " +
-                $"동물={data.animal_density:F1}, 강={data.river?.present ?? false}, " +
-                $"동굴={data.caves}, 간헐천={data.geysers}\n\n" +
-                "아래 버튼으로 맵을 생성하거나, 채팅으로 수정할 수 있습니다."));
+                "MapGenAI_PresetLoadedMsg".Translate(
+                    presetName, data.hills, data.hill_amount.ToString("F2"),
+                    data.vegetation_density.ToString("F1"), data.animal_density.ToString("F1"),
+                    (data.river?.present ?? false).ToString(), data.caves.ToString(),
+                    data.geysers.ToString())
+                + "\n\n" + "MapGenAI_ModifyHint".Translate()));
         }
 
         private void GenerateMap()
@@ -974,7 +1070,7 @@ elevation_shapes 가이드:
             // "이 설정으로 맵 생성" 클릭 시: 파라미터 유지한 채로 닫기
             _keepParams = true;
             Close();
-            Messages.Message("MapGen AI: 파라미터 저장 완료. 맵을 시작하면 적용됩니다.",
+            Messages.Message("MapGenAI_ParamsSaved".Translate(),
                 MessageTypeDefOf.PositiveEvent);
         }
 
@@ -989,7 +1085,7 @@ elevation_shapes 가이드:
                 // 대화 취소/닫기 → 파라미터 리셋 + Map Preview 원래대로
                 MapGenParams.Reset();
                 MapGenParams.RefreshMapPreview();
-                Log.Message("[MapGenAI] 대화 취소 — 파라미터 리셋, 미리보기 원래대로");
+                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Translate()}");
             }
         }
     }
@@ -1016,7 +1112,7 @@ elevation_shapes 가이드:
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Small;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "프리셋 이름을 입력하세요:");
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "MapGenAI_PresetNamePrompt".Translate());
 
             GUI.SetNextControlName("PresetNameInput");
             _name = Widgets.TextField(new Rect(inRect.x, inRect.y + 34f, inRect.width, 30f), _name);
@@ -1031,9 +1127,9 @@ elevation_shapes 가이드:
 
             float btnW = 80f;
             float btnY = inRect.yMax - 36f;
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "저장"))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "MapGenAI_Save".Translate()))
                 TrySave();
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "취소"))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "MapGenAI_Cancel".Translate()))
                 Close();
         }
 
