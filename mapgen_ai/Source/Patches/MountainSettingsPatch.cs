@@ -62,7 +62,7 @@ namespace MapGenAI.Patches
                     AccessTools.Method(typeof(Patch_MountainSettings), nameof(GetHillSize)));
                 newInstr.MoveLabelsFrom(codes[hillSizeIndex]);
                 codes[hillSizeIndex] = newInstr;
-                Log.Message($"[MapGenAI] Transpiler: hillSize 교체 (index={hillSizeIndex})");
+                if (Prefs.DevMode) Log.Message($"[MapGenAI] Transpiler: hillSize (index={hillSizeIndex})");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace MapGenAI.Patches
                 codes[hillSmoothnessIndex] = new CodeInstruction(
                     OpCodes.Call,
                     AccessTools.Method(typeof(Patch_MountainSettings), nameof(GetHillSmoothness)));
-                Log.Message($"[MapGenAI] Transpiler: hillSmoothness 교체 (index={hillSmoothnessIndex})");
+                if (Prefs.DevMode) Log.Message($"[MapGenAI] Transpiler: hillSmoothness (index={hillSmoothnessIndex})");
             }
             else
             {

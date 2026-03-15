@@ -14,7 +14,6 @@ namespace MapGenAI
             Settings = GetSettings<MapGenAISettings>();
             Harmony = new HarmonyLib.Harmony("Choco.MapGenAI");
             Harmony.PatchAll();
-            Log.Message("[MapGenAI] Mod loaded.");
         }
 
         public override string SettingsCategory() => "MapGen AI";

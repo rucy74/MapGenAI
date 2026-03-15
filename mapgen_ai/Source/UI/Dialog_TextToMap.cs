@@ -40,11 +40,7 @@ namespace MapGenAI.UI
         /// <summary>
         /// 현재 게임 언어가 한국어인지 확인.
         /// </summary>
-        private static bool IsKorean()
-        {
-            try { return Prefs.LangFolderName == "Korean"; }
-            catch { return false; }
-        }
+        private static bool IsKorean() => L10n.IsKorean();
 
         /// <summary>
         /// DefDatabase에서 TileMutatorDef를 읽어 LLM용 목록 생성.
@@ -328,6 +324,7 @@ Additional parameters:
 - 유저에게 설명할 때는 반드시 모든 내용을 한국어로 설명하세요. defName, 영어 파라미터명, 영어 label을 그대로 보여주지 마세요.
 - 유저가 한국어로 요청하면 영어 defName/label과 매칭하세요 (예: 오아시스→Oasis, 코코아 나무→WildTropicalPlants).
 - 불가능한 요청에는 action=ask로 솔직하게 안내하세요.
+- 타일에 강이 없으면(강=없음) 강 관련 요청(river_direction, river_position, straight_river, 강 추가 등)은 action=ask로 '이 타일에는 강이 없습니다. 세계지도에서 강이 있는 타일을 선택하세요.'라고 안내하세요.
 - generate 시 description에 유저가 이해할 수 있는 한국어 맵 설명을 포함하세요.
 - 유저가 요청하지 않은 파라미터는 JSON에 포함하지 마세요. 기본값을 유지하려면 해당 키를 생략하세요. 특히 rock_types, ore_density, ruin_density, danger_density 등은 요청 시에만 포함.
 - 동굴 추가=caves:true, 동굴 제거=caves:false (명시적으로 설정).
@@ -345,6 +342,7 @@ Additional parameters:
 - Always respond to the user in English. Do not show raw defNames, parameter names, or labels directly.
 - Match the user's natural language to the correct English defName/label (e.g., hot springs=HotSprings, marble=Marble).
 - For impossible requests, use action=ask to honestly inform the user.
+- If the tile has no river (River=None), reject river-related requests (river_direction, river_position, straight_river, add river, etc.) with action=ask: 'This tile has no river. Please select a tile with a river on the world map.'
 - When generating, include a user-friendly English map description in the description field.
 - Do not include parameters the user did not request. Omit keys to keep defaults. Especially rock_types, ore_density, ruin_density, danger_density should only be included when requested.
 - Add caves=caves:true, remove caves=caves:false (set explicitly).
@@ -909,6 +907,66 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                         fill = s.GetString("fill")
                     });
                 }
+            }
+
+            // --- 기존 파라미터 병합: JSON에 없는 필드는 이전 값 유지 ---
+            if (MapGenParams.HasParams)
+            {
+                if (obj.GetString("hills") == null && data.elevation_shapes == null)
+                    data.hills = MapGenParams.Hills;
+                if (obj.GetString("hill_amount") == null)
+                    data.hill_amount = MapGenParams.HillAmount;
+                if (obj.GetString("vegetation_density") == null)
+                    data.vegetation_density = MapGenParams.VegetationDensity;
+                if (obj.GetString("animal_density") == null)
+                    data.animal_density = MapGenParams.AnimalDensity;
+                if (obj.GetString("fertility_offset") == null)
+                    data.fertility_offset = MapGenParams.FertilityOffset;
+                if (!data.caves_explicit)
+                    data.caves = MapGenParams.HasCaves;
+                if (obj.GetString("coast_direction") == null)
+                    data.coast_direction = MapGenParams.CoastDirection;
+                if (obj.GetString("rock_count") == null)
+                    data.rock_count = MapGenParams.RockCount;
+                if (obj.GetString("ore_density") == null)
+                    data.ore_density = MapGenParams.OreDensity;
+                if (obj.GetString("ruin_density") == null)
+                    data.ruin_density = MapGenParams.RuinDensity;
+                if (obj.GetString("danger_density") == null)
+                    data.danger_density = MapGenParams.DangerDensity;
+                if (obj.GetString("rock_chunks") == null)
+                    data.rock_chunks = MapGenParams.HasRockChunks;
+                if (obj.GetString("hill_size") == null)
+                    data.hill_size = MapGenParams.HillSize;
+                if (obj.GetString("hill_smoothness") == null)
+                    data.hill_smoothness = MapGenParams.HillSmoothness;
+                if (obj.GetString("straight_river") == null)
+                    data.straight_river = MapGenParams.StraightRiver;
+
+                // 강: JSON에 river 관련 키가 하나도 없으면 이전 값 유지
+                if (data.river == null && obj.GetString("river_direction") == null
+                    && obj.GetString("river_position") == null && obj.GetObject("river") == null)
+                {
+                    data.river = new RiverData
+                    {
+                        present = MapGenParams.HasRiver,
+                        direction_angle = MapGenParams.RiverDirectionAngle,
+                        x_position = MapGenParams.RiverXPosition,
+                        z_position = MapGenParams.RiverZPosition
+                    };
+                }
+
+                // 석재: JSON에 없으면 이전 값 유지
+                if (data.rock_types == null && MapGenParams.RockTypes.Count > 0)
+                    data.rock_types = new List<string>(MapGenParams.RockTypes);
+
+                // elevation_shapes: JSON에 없으면 이전 값 유지
+                if (data.elevation_shapes == null && MapGenParams.ElevationShapes.Count > 0)
+                    data.elevation_shapes = new List<ElevationShape>(MapGenParams.ElevationShapes);
+
+                // mutators: JSON에 없으면 이전 값 유지
+                if (data.mutators == null && MapGenParams.Mutators.Count > 0)
+                    data.mutators = new List<string>(MapGenParams.Mutators);
             }
 
             return data;

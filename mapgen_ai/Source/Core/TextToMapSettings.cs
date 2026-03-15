@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using MapGenAI.UI;
 using Verse;
 using UnityEngine;
 
@@ -61,25 +62,26 @@ namespace MapGenAI
             var listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            listing.Label("LLM 제공자");
+            bool ko = L10n.IsKorean();
+            listing.Label(ko ? "LLM 제공자" : "LLM Provider");
             if (listing.RadioButton("Google Gemini", activeProvider == LLMProvider.Gemini))
                 activeProvider = LLMProvider.Gemini;
             if (listing.RadioButton("OpenAI (ChatGPT)", activeProvider == LLMProvider.OpenAI))
                 activeProvider = LLMProvider.OpenAI;
-            if (listing.RadioButton("로컬 (Ollama / LM Studio)", activeProvider == LLMProvider.Local))
+            if (listing.RadioButton(ko ? "로컬 (Ollama / LM Studio)" : "Local (Ollama / LM Studio)", activeProvider == LLMProvider.Local))
                 activeProvider = LLMProvider.Local;
 
             listing.GapLine();
 
             if (activeProvider == LLMProvider.Gemini)
                 DrawProviderSection(listing, LLMProvider.Gemini,
-                    ref geminiApiKey, "Gemini API 키",
+                    ref geminiApiKey, ko ? "Gemini API 키" : "Gemini API Key",
                     ref geminiModel, _geminiModels,
                     ref _showGeminiList);
 
             else if (activeProvider == LLMProvider.OpenAI)
                 DrawProviderSection(listing, LLMProvider.OpenAI,
-                    ref openAiApiKey, "OpenAI API 키",
+                    ref openAiApiKey, ko ? "OpenAI API 키" : "OpenAI API Key",
                     ref openAiModel, _openAiModels,
                     ref _showOpenAiList);
 
@@ -100,13 +102,13 @@ namespace MapGenAI
             // 버튼: 접기/펼치기 토글
             string btnText;
             if (_isFetchingModels && _fetchedProvider == provider)
-                btnText = "불러오는 중...";
+                btnText = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
             else if (showList)
-                btnText = $"▲ 접기 (현재: {currentModel})";
+                btnText = L10n.IsKorean() ? $"▲ 접기 (현재: {currentModel})" : $"▲ Collapse (current: {currentModel})";
             else if (modelList.Count > 0)
-                btnText = $"▼ 모델 선택 (현재: {currentModel})";
+                btnText = L10n.IsKorean() ? $"▼ 모델 선택 (현재: {currentModel})" : $"▼ Select model (current: {currentModel})";
             else
-                btnText = "모델 목록 불러오기";
+                btnText = L10n.IsKorean() ? "모델 목록 불러오기" : "Fetch model list";
 
             if (listing.ButtonText(btnText) && !_isFetchingModels)
             {
@@ -128,7 +130,7 @@ namespace MapGenAI
             {
                 if (_isFetchingModels)
                 {
-                    listing.Label("  불러오는 중...");
+                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
                 }
                 else if (modelList.Count > 0)
                 {
@@ -143,18 +145,18 @@ namespace MapGenAI
 
         private void DrawLocalSection(Listing_Standard listing)
         {
-            listing.Label("로컬 서버 URL");
+            listing.Label(L10n.IsKorean() ? "로컬 서버 URL" : "Local server URL");
             localBaseUrl = listing.TextEntry(localBaseUrl);
 
             string btnText;
             if (_isFetchingModels && _fetchedProvider == LLMProvider.Local)
-                btnText = "불러오는 중...";
+                btnText = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
             else if (_showLocalList)
                 btnText = $"▲ 접기 (현재: {localModel})";
             else if (_localModels.Count > 0)
                 btnText = $"▼ 모델 선택 (현재: {localModel})";
             else
-                btnText = "모델 목록 불러오기";
+                btnText = L10n.IsKorean() ? "모델 목록 불러오기" : "Fetch model list";
 
             if (listing.ButtonText(btnText) && !_isFetchingModels)
             {
@@ -173,7 +175,7 @@ namespace MapGenAI
             if (_showLocalList)
             {
                 if (_isFetchingModels)
-                    listing.Label("  불러오는 중...");
+                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
                 else foreach (var m in _localModels)
                 {
                     if (listing.RadioButton("  " + m, localModel == m))
@@ -205,7 +207,7 @@ namespace MapGenAI
         private void FetchModelsAsync(LLMProvider provider)
         {
             _isFetchingModels = true;
-            _fetchStatus = "불러오는 중...";
+            _fetchStatus = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
 
             Task.Run(async () =>
             {
@@ -220,13 +222,13 @@ namespace MapGenAI
                     };
 
                     _fetchedModels = models;
-                    _fetchedStatus = $"✓ {models.Count}개 모델 로드됨";
+                    _fetchedStatus = L10n.IsKorean() ? $"✓ {models.Count}개 모델 로드됨" : $"✓ {models.Count} models loaded";
                     _modelsFetched = true; // 마지막에 set
                 }
                 catch (System.Exception e)
                 {
                     _fetchedModels = new List<string>();
-                    _fetchedStatus = $"오류: {e.Message}";
+                    _fetchedStatus = L10n.IsKorean() ? $"오류: {e.Message}" : $"Error: {e.Message}";
                     _modelsFetched = true;
                 }
             });

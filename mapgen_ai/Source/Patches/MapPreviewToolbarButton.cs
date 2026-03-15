@@ -41,7 +41,7 @@ namespace MapGenAI.Patches
             // MapPreviewToolbar.Button은 abstract class — 리플렉션으로 서브클래스를 만들 수 없으므로
             // 등록 자체를 포기하고 fallback(텍스트 버튼)에 의존.
             // Map Preview 툴바 옆에 텍스트 버튼이 표시됨.
-            Log.Message("[MapGenAI] Map Preview 감지됨 — 툴바 옆 텍스트 버튼 사용");
+            // Map Preview detected — fallback text button
             IsRegistered = false;
         }
     }

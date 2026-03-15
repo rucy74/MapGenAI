@@ -130,8 +130,7 @@ namespace MapGenAI.Patches
             float strength = ElevationShape.ParseStrength(shape.strength);
             float angleDeg = ElevationShape.ParseDirection(shape.direction);
 
-            // Map Designer: Rotate(0, 180 - angle, 0) → 라디안 변환
-            float thetaRad = (180f - angleDeg) * Mathf.Deg2Rad;
+            float thetaRad = angleDeg * Mathf.Deg2Rad;
             float cosTheta = Mathf.Cos(thetaRad);
             float sinTheta = Mathf.Sin(thetaRad);
 
