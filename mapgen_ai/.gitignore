@@ -1,0 +1,17 @@
+# 빌드 결과물
+Source/obj/
+Source/Tests/obj/
+Source/Tests/bin/
+Assemblies/MapGenAI.dll
+Assemblies/MapGenAI.pdb
+
+# API 키
+dev_config.json
+
+# IDE
+.vs/
+*.user
+
+# 외부 모드 (같은 상위 폴더의 다른 프로젝트)
+../Rimtalk/
+../test_mod/

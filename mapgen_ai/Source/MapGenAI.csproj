@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>MapGenAI</AssemblyName>
+    <RootNamespace>MapGenAI</RootNamespace>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- Reloader: 빌드마다 버전 자동 증가 -->
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tests\**" />
+    <None Remove="Tests\**" />
+    <!-- InGameTestRunner는 RimWorld 인게임 테스트이므로 메인 어셈블리에 포함 -->
+    <Compile Include="Tests\InGameTestRunner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- RimWorld -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- System.Net.Http -->
+    <Reference Include="System.Net.Http" />
+
+    <!-- Harmony -->
+    <Reference Include="0Harmony">
+      <HintPath>G:\SteamLibrary\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Map Preview (필수 의존) -->
+    <Reference Include="MapPreview">
+      <HintPath>Libs\MapPreview.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MapPreviewMod">
+      <HintPath>Libs\MapPreviewMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
