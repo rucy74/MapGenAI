@@ -142,6 +142,39 @@ namespace MapGenAI.Patches
             return toolbar != null ? (Rect?)toolbar.windowRect : null;
         }
 
+        private static void DrawAIButton(Rect btnRect)
+        {
+            var oldColor = GUI.color;
+            var oldAnchor = Text.Anchor;
+            var oldFont = Text.Font;
+
+            bool hover = btnRect.Contains(Event.current.mousePosition);
+
+            // 배경 (hover 시 밝게)
+            Widgets.DrawBoxSolid(btnRect, hover
+                ? new Color(0.22f, 0.52f, 0.75f, 0.95f)
+                : new Color(0.15f, 0.38f, 0.58f, 0.9f));
+
+            // 테두리
+            GUI.color = hover
+                ? new Color(0.4f, 0.7f, 0.9f, 0.8f)
+                : new Color(0.3f, 0.5f, 0.7f, 0.5f);
+            Widgets.DrawBox(btnRect, 1);
+
+            // 텍스트
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = hover ? Color.white : new Color(0.9f, 0.95f, 1f);
+            Widgets.Label(btnRect, "✦ AI 맵 생성");
+
+            GUI.color = oldColor;
+            Text.Anchor = oldAnchor;
+            Text.Font = oldFont;
+
+            if (Widgets.ButtonInvisible(btnRect))
+                Find.WindowStack.Add(new Dialog_TextToMap());
+        }
+
         static void Postfix()
         {
             try
@@ -180,8 +213,7 @@ namespace MapGenAI.Patches
                         var btnRect = new Rect(tr.xMax + Gap, tr.y + (tr.height - BtnH) / 2f, BtnW, BtnH);
                         if (btnRect.xMax > Verse.UI.screenWidth - 5f)
                             btnRect = new Rect(tr.x, tr.yMax + Gap, BtnW, BtnH);
-                        if (Widgets.ButtonText(btnRect, "✦ AI 맵 생성"))
-                            Find.WindowStack.Add(new Dialog_TextToMap());
+                        DrawAIButton(btnRect);
                     }
                 }
             }

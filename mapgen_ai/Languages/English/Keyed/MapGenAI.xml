@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- UI -->
+  <MapGenAI_Title>MapGen AI</MapGenAI_Title>
+  <MapGenAI_Button>✦ AI Map Gen</MapGenAI_Button>
+  <MapGenAI_Send>Send</MapGenAI_Send>
+  <MapGenAI_PresetSave>Save Preset</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>Load Preset</MapGenAI_PresetLoad>
+  <MapGenAI_Generate>Generate with these settings</MapGenAI_Generate>
+  <MapGenAI_PresetNamePrompt>Enter preset name:</MapGenAI_PresetNamePrompt>
+  <MapGenAI_Save>Save</MapGenAI_Save>
+  <MapGenAI_Cancel>Cancel</MapGenAI_Cancel>
+
+  <!-- Messages -->
+  <MapGenAI_Error>[Error] {0}</MapGenAI_Error>
+  <MapGenAI_NoResponse>No response. Please check your API key.</MapGenAI_NoResponse>
+  <MapGenAI_ParamsSaved>MapGen AI: Parameters saved. They will be applied when you start the map.</MapGenAI_ParamsSaved>
+  <MapGenAI_NoPresets>No saved presets.</MapGenAI_NoPresets>
+  <MapGenAI_PresetSavedMsg>Preset "{0}" has been saved.</MapGenAI_PresetSavedMsg>
+  <MapGenAI_PresetDeletedMsg>Preset "{0}" has been deleted.</MapGenAI_PresetDeletedMsg>
+  <MapGenAI_PresetLoadFailed>Failed to load preset "{0}".</MapGenAI_PresetLoadFailed>
+  <MapGenAI_ModifyHint>Press the button below to generate, or modify via chat.</MapGenAI_ModifyHint>
+  <MapGenAI_DialogCancelled>Dialog cancelled — parameters reset, preview restored</MapGenAI_DialogCancelled>
+
+  <!-- Welcome -->
+  <MapGenAI_Welcome>Describe your ideal map in natural language!\n\nExamples:\n  - "Diagonal mountain range with central lake"\n  - "Mountain fortress with hot springs"\n  - "Straight river on the left side"\n  - "Clean flatland with marble only"\n  - "Just recommend something"</MapGenAI_Welcome>
+
+  <!-- Preset loaded details -->
+  <MapGenAI_PresetLoadedMsg>Loaded preset "{0}".\nHills={1}, Amount={2}, Trees={3}, Animals={4}, River={5}, Caves={6}, Geysers={7}</MapGenAI_PresetLoadedMsg>
+
+  <!-- Tile context labels -->
+  <MapGenAI_Unknown>Unknown</MapGenAI_Unknown>
+  <MapGenAI_RiverNone>None</MapGenAI_RiverNone>
+  <MapGenAI_RiverPresent>Present</MapGenAI_RiverPresent>
+  <MapGenAI_RiverOceanLink> (connected to ocean/lake)</MapGenAI_RiverOceanLink>
+  <MapGenAI_Yes>Yes</MapGenAI_Yes>
+  <MapGenAI_No>No</MapGenAI_No>
+
+  <!-- Mutator list labels -->
+  <MapGenAI_MutatorLabel>{0}(label:{1}{2})</MapGenAI_MutatorLabel>
+  <MapGenAI_OdysseyRequired>  (Special terrain features require the Odyssey DLC. Without Odyssey, mutators like lakes/hot springs/fjords are unavailable.)</MapGenAI_OdysseyRequired>
+  <MapGenAI_NoMutatorsAvailable>  (No special terrain features available for this tile)</MapGenAI_NoMutatorsAvailable>
+  <MapGenAI_MutatorLoadFailed>  (Failed to load mutator list)</MapGenAI_MutatorLoadFailed>
+</LanguageData>

@@ -146,18 +146,37 @@ namespace MapGenAI.MapGen
         // Elevation Shape 프리미티브 목록 (additive 조합)
         public static List<ElevationShape> ElevationShapes { get; private set; } = new List<ElevationShape>();
         public static float VegetationDensity { get; private set; } = 1f;  // 0.0~2.0
+        /// <summary>비옥도 오프셋 (-1.0~1.0). 양수=기름진 토양 증가, 음수=감소.</summary>
+        public static float FertilityOffset { get; private set; } = 0f;
         public static float AnimalDensity { get; private set; } = 1f;      // 0.0~2.0
 
         // 수계
         public static bool HasRiver { get; private set; } = false;
         public static string RiverDirection { get; private set; } = "vertical";
+        /// <summary>강 방향 각도 (0-360도, -1=자동). 0=오른쪽, 90=위, 180=왼쪽, 270=아래.</summary>
+        public static float RiverDirectionAngle { get; private set; } = -1f;
         public static float RiverXPosition { get; private set; } = 0.5f;
+        /// <summary>강 Z축 위치 (0.0~1.0, 0.5=중앙). 수직 강에서 위/아래 이동.</summary>
+        public static float RiverZPosition { get; private set; } = 0.5f;
 
         // 지물
         public static bool HasRoads { get; private set; } = false;
         public static bool HasCaves { get; private set; } = false;
         public static bool CavesExplicitlySet { get; private set; } = false;
         public static int GeyserCount { get; private set; } = -1;   // -1 = 기본값
+
+        // 돌덩어리 (RockChunk) 제어
+        /// <summary>돌덩어리 생성 여부 (기본 true). false면 GenStep_RockChunks를 완전히 스킵.</summary>
+        public static bool HasRockChunks { get; private set; } = true;
+
+        // 산 크기/부드러움 (Perlin 파라미터)
+        /// <summary>산 크기 (Perlin frequency). 기본 0.021. 작을수록 큰 산맥, 클수록 잘게 쪼개짐.</summary>
+        public static float HillSize { get; private set; } = 0.021f;
+        /// <summary>산 부드러움 (Perlin lacunarity). 기본 2.0. 낮을수록 거친 지형, 높을수록 매끄러움.</summary>
+        public static float HillSmoothness { get; private set; } = 2.0f;
+
+        /// <summary>일자 강 (구불거림 제거). true면 강이 직선.</summary>
+        public static bool StraightRiver { get; private set; } = false;
 
         // TileMutator (Odyssey): LLM이 선택한 mutator defName 목록
         public static List<string> Mutators { get; private set; } = new List<string>();
@@ -199,9 +218,32 @@ namespace MapGenAI.MapGen
             HillAmount = Mathf.Clamp(data.hill_amount, 0.5f, 1.6f);
             VegetationDensity = Mathf.Clamp(data.vegetation_density, 0f, 2f);
             AnimalDensity = Mathf.Clamp(data.animal_density, 0f, 2f);
+            FertilityOffset = Mathf.Clamp(data.fertility_offset, -1f, 1f);
             HasRiver = data.river?.present ?? false;
             RiverDirection = (data.river?.direction == "horizontal") ? "horizontal" : "vertical";
+            RiverDirectionAngle = data.river?.direction_angle ?? -1f;
+            // 하위 호환: direction이 "horizontal"/"vertical" 문자열이면 angle로 변환
+            if (RiverDirectionAngle < 0f && data.river != null)
+            {
+                string dir = data.river.direction?.ToLower();
+                if (dir == "horizontal") RiverDirectionAngle = 0f;    // 수평 (좌-우)
+                else if (dir == "vertical") RiverDirectionAngle = -1f; // 바닐라 자동
+                else if (dir == "left") RiverDirectionAngle = 0f;
+                else if (dir == "up") RiverDirectionAngle = 90f;
+                else if (dir == "right") RiverDirectionAngle = 180f;
+                else if (dir == "down") RiverDirectionAngle = 270f;
+                else if (float.TryParse(dir, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out float parsed))
+                {
+                    RiverDirectionAngle = Mathf.Repeat(parsed, 360f);
+                }
+            }
+            else if (RiverDirectionAngle >= 0f)
+            {
+                RiverDirectionAngle = Mathf.Repeat(RiverDirectionAngle, 360f);
+            }
             RiverXPosition = Mathf.Clamp(data.river?.x_position ?? 0.5f, 0f, 1f);
+            RiverZPosition = Mathf.Clamp(data.river?.z_position ?? 0.5f, 0f, 1f);
             HasRoads = data.roads;
             HasCaves = data.caves;
             CavesExplicitlySet = data.caves_explicit;
@@ -242,6 +284,16 @@ namespace MapGenAI.MapGen
             // 폐허/위험 밀도
             RuinDensity = Mathf.Clamp(data.ruin_density, 0f, 2.5f);
             DangerDensity = Mathf.Clamp(data.danger_density, 0f, 2.5f);
+
+            // 돌덩어리
+            HasRockChunks = data.rock_chunks;
+
+            // 산 크기/부드러움
+            HillSize = data.hill_size > 0f ? Mathf.Clamp(data.hill_size, 0.005f, 0.1f) : 0.021f;
+            HillSmoothness = data.hill_smoothness > 0f ? Mathf.Clamp(data.hill_smoothness, 0.5f, 6f) : 2.0f;
+
+            // 일자 강
+            StraightRiver = data.straight_river;
 
             // 석재 종류
             RockTypes.Clear();
@@ -295,10 +347,12 @@ namespace MapGenAI.MapGen
             HasParams = true;
 
             Verse.Log.Message($"[MapGenAI] 파라미터 적용: 언덕={Hills}, 산양={HillAmount:F2}, 나무={VegetationDensity:F1}, " +
-                $"동물={AnimalDensity:F1}, 강={HasRiver}, 동굴={HasCaves}, 간헐천={GeyserCount}, " +
-                $"해안={CoastDirection}, 석재수={RockCount}, 석재종류={RockTypes.Count}개, 광석밀도={OreDensity:F2}, " +
-                $"폐허밀도={RuinDensity:F2}, 위험밀도={DangerDensity:F2}, mutators={Mutators.Count}개, " +
-                $"elevation_shapes={ElevationShapes.Count}개");
+                $"동물={AnimalDensity:F1}, 강={HasRiver}(방향={RiverDirectionAngle:F0}, X={RiverXPosition:F2}, Z={RiverZPosition:F2}), " +
+                $"동굴={HasCaves}, 간헐천={GeyserCount}, 해안={CoastDirection}, " +
+                $"석재수={RockCount}, 석재종류={RockTypes.Count}개, 광석밀도={OreDensity:F2}, " +
+                $"폐허밀도={RuinDensity:F2}, 위험밀도={DangerDensity:F2}, " +
+                $"돌덩어리={HasRockChunks}, 산크기={HillSize:F4}, 산부드러움={HillSmoothness:F1}, " +
+                $"mutators={Mutators.Count}개, elevation_shapes={ElevationShapes.Count}개");
 
             // 월드 타일에 mutator 영구 적용 (Map Designer 방식)
             // 타일 설명의 "특징"에 반영되고, Map Preview/실제 맵 모두 정상 동작
@@ -467,13 +521,20 @@ namespace MapGenAI.MapGen
             HillAmount = 1f;
             VegetationDensity = 1f;
             AnimalDensity = 1f;
+            FertilityOffset = 0f;
             HasRiver = false;
             RiverDirection = "vertical";
+            RiverDirectionAngle = -1f;
             RiverXPosition = 0.5f;
+            RiverZPosition = 0.5f;
             HasRoads = false;
             HasCaves = false;
             CavesExplicitlySet = false;
             GeyserCount = -1;
+            HasRockChunks = true;
+            HillSize = 0.021f;
+            HillSmoothness = 2.0f;
+            StraightRiver = false;
             CoastDirection = "auto";
             RockCount = -1;
             OreDensity = 1f;
@@ -500,6 +561,7 @@ namespace MapGenAI.MapGen
         public float hill_amount = 1f;
         public float vegetation_density = 1f;
         public float animal_density = 1f;
+        public float fertility_offset = 0f;        // -1.0~1.0, 비옥도 오프셋
         public RiverData river;
         public bool roads;
         public bool caves;
@@ -510,6 +572,10 @@ namespace MapGenAI.MapGen
         public float ore_density = 1f;             // 0.0~2.5, 1.0 = 기본값
         public float ruin_density = 1f;            // 0.0~2.5, 1.0 = 기본값 (폐허 밀도)
         public float danger_density = 1f;          // 0.0~2.5, 1.0 = 기본값 (고대 위험 밀도)
+        public bool rock_chunks = true;            // true=돌덩어리 생성, false=제거
+        public float hill_size = 0f;               // Perlin frequency (기본 0.021). 0=기본값 사용
+        public float hill_smoothness = 0f;         // Perlin lacunarity (기본 2.0). 0=기본값 사용
+        public bool straight_river = false;       // true=일자 강 (구불거림 제거)
         public List<string> rock_types;            // 원하는 석재 defName 목록 (Granite, Limestone, Marble, Sandstone, Slate)
         public List<string> mutators;           // 추가할 TileMutator defName 목록
         public List<string> remove_mutators;    // 제거할 TileMutator defName 목록
@@ -519,7 +585,9 @@ namespace MapGenAI.MapGen
     public class RiverData
     {
         public bool present;
-        public string direction = "vertical";
+        public string direction = "vertical";   // 하위 호환: "horizontal"/"vertical" 또는 "left"/"up"/"right"/"down" 또는 각도 문자열
+        public float direction_angle = -1f;     // 0-360도, -1=자동
         public float x_position = 0.5f;
+        public float z_position = 0.5f;
     }
 }

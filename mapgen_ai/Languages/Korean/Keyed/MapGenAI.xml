@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- UI -->
+  <MapGenAI_Title>MapGen AI</MapGenAI_Title>
+  <MapGenAI_Button>✦ AI 맵 생성</MapGenAI_Button>
+  <MapGenAI_Send>전송</MapGenAI_Send>
+  <MapGenAI_PresetSave>프리셋 저장</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>프리셋 불러오기</MapGenAI_PresetLoad>
+  <MapGenAI_Generate>이 설정으로 맵 생성</MapGenAI_Generate>
+  <MapGenAI_PresetNamePrompt>프리셋 이름을 입력하세요:</MapGenAI_PresetNamePrompt>
+  <MapGenAI_Save>저장</MapGenAI_Save>
+  <MapGenAI_Cancel>취소</MapGenAI_Cancel>
+
+  <!-- Messages -->
+  <MapGenAI_Error>[오류] {0}</MapGenAI_Error>
+  <MapGenAI_NoResponse>응답 없음. API 키를 확인해주세요.</MapGenAI_NoResponse>
+  <MapGenAI_ParamsSaved>MapGen AI: 파라미터 저장 완료. 맵을 시작하면 적용됩니다.</MapGenAI_ParamsSaved>
+  <MapGenAI_NoPresets>저장된 프리셋이 없습니다.</MapGenAI_NoPresets>
+  <MapGenAI_PresetSavedMsg>프리셋 "{0}" 이(가) 저장되었습니다.</MapGenAI_PresetSavedMsg>
+  <MapGenAI_PresetDeletedMsg>프리셋 "{0}" 이(가) 삭제되었습니다.</MapGenAI_PresetDeletedMsg>
+  <MapGenAI_PresetLoadFailed>프리셋 "{0}" 불러오기에 실패했습니다.</MapGenAI_PresetLoadFailed>
+  <MapGenAI_ModifyHint>아래 버튼으로 맵을 생성하거나, 채팅으로 수정할 수 있습니다.</MapGenAI_ModifyHint>
+  <MapGenAI_DialogCancelled>대화 취소 — 파라미터 리셋, 미리보기 원래대로</MapGenAI_DialogCancelled>
+
+  <!-- Welcome -->
+  <MapGenAI_Welcome>맵을 자연어로 설명해 보세요!\n\n예시:\n  - "대각선 산맥에 중앙 호수"\n  - "온천이 있는 산악 요새"\n  - "강을 일자로, 왼쪽에 배치"\n  - "대리석으로만 된 깨끗한 평지"\n  - "그냥 추천해줘"</MapGenAI_Welcome>
+
+  <!-- Preset loaded details -->
+  <MapGenAI_PresetLoadedMsg>프리셋 "{0}" 을(를) 불러왔습니다.\n언덕={1}, 산양={2}, 나무={3}, 동물={4}, 강={5}, 동굴={6}, 간헐천={7}</MapGenAI_PresetLoadedMsg>
+
+  <!-- Tile context labels -->
+  <MapGenAI_Unknown>알 수 없음</MapGenAI_Unknown>
+  <MapGenAI_RiverNone>없음</MapGenAI_RiverNone>
+  <MapGenAI_RiverPresent>있음</MapGenAI_RiverPresent>
+  <MapGenAI_RiverOceanLink> (바다/호수로 연결됨)</MapGenAI_RiverOceanLink>
+  <MapGenAI_Yes>예</MapGenAI_Yes>
+  <MapGenAI_No>아니오</MapGenAI_No>
+
+  <!-- Mutator list labels -->
+  <MapGenAI_MutatorLabel>{0}(표시명:{1}{2})</MapGenAI_MutatorLabel>
+  <MapGenAI_OdysseyRequired>  (특수 지형 변형은 Odyssey DLC가 필요합니다. Odyssey 없이는 호수/온천/피요르드 등 mutator를 사용할 수 없습니다.)</MapGenAI_OdysseyRequired>
+  <MapGenAI_NoMutatorsAvailable>  (이 타일에서 사용 가능한 특수 지형 변형 없음)</MapGenAI_NoMutatorsAvailable>
+  <MapGenAI_MutatorLoadFailed>  (mutator 목록 로드 실패)</MapGenAI_MutatorLoadFailed>
+</LanguageData>

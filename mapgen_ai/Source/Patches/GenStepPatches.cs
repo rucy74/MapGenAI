@@ -43,16 +43,38 @@ namespace MapGenAI.Patches
                     elevGrid[cell] += offset;
             }
 
-            // 2. 각 ElevationShape 적용 (additive)
+            // 2. 각 ElevationShape 적용 (비-물 먼저, 물 나중 → 산맥 위 호수 정상 생성)
             var shapes = MapGenParams.ElevationShapes;
-            if (shapes.Count == 0) return;
+            float fertOffset = MapGenParams.FertilityOffset;
+            if (shapes.Count == 0 && Mathf.Abs(fertOffset) < 0.01f) return;
 
             foreach (var shape in shapes)
             {
-                ApplyShape(shape, map, elevGrid);
+                if (shape.fill != "water")
+                    ApplyShape(shape, map, elevGrid);
+            }
+            foreach (var shape in shapes)
+            {
+                if (shape.fill == "water")
+                    ApplyShape(shape, map, elevGrid);
             }
 
-            // 3. 최종 클램핑
+            // 3. Fertility 오프셋 적용 (기름진 토양 증감)
+            if (Mathf.Abs(fertOffset) > 0.01f)
+            {
+                var fertGrid = MapGenerator.Fertility;
+                if (fertGrid != null)
+                {
+                    foreach (var cell in mapBounds)
+                    {
+                        // 물 영역(-1000 이하)은 건드리지 않음
+                        if (fertGrid[cell] > -500f)
+                            fertGrid[cell] += fertOffset;
+                    }
+                }
+            }
+
+            // 4. 최종 클램핑
             foreach (var cell in mapBounds)
             {
                 elevGrid[cell] = Mathf.Clamp(elevGrid[cell], -1f, 1f);
@@ -255,20 +277,24 @@ namespace MapGenAI.Patches
 
                 if (fillWater)
                 {
-                    // 호수 모드: Map Designer Lake.cs와 동일 방식
-                    // Perlin 노이즈로 불규칙한 해안선 + fertility 음수 → 물 지형
-                    if (grid[cell] < 0.65f && fertilityGrid != null)
+                    // 호수 모드: Perlin 노이즈로 불규칙한 해안선 + fertility 음수 → 물 지형
+                    // elevation 체크 제거: 산맥 위에도 호수가 올바르게 생성됨 (물이 지형을 깎음)
+                    if (fertilityGrid != null)
                     {
                         float dist = Mathf.Sqrt(distSq);
-                        // Map Designer: lakeGrid = roundness * perlin + 0.1 * (size - distance)
-                        // Map Designer Lake.cs와 동일: Verse.Noise.Perlin + 거리
                         float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) : 0f;
                         float lakeVal = noiseRoundness * noise + 0.1f * (radius - dist);
 
                         if (lakeVal > radius * 0.05f)       // 깊은 물 (중심)
+                        {
                             fertilityGrid[cell] = -2005f;
+                            grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                        }
                         else if (lakeVal > 0f)               // 얕은 물 (가장자리)
+                        {
                             fertilityGrid[cell] = -1025f;
+                            grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                        }
                         else if (lakeVal > -radius * 0.03f)  // 해변
                             fertilityGrid[cell] = 1f;
                     }

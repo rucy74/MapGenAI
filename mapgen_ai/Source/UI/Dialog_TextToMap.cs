@@ -20,10 +20,6 @@ namespace MapGenAI.UI
         private bool _paramsReady = false;
         private int _lastMessageCount = 0; // 새 메시지 추가 시만 auto-scroll
 
-        // 프리셋 관련 UI 상태
-        private bool _showPresetNameInput = false;
-        private string _presetNameInput = "";
-
         // 이 대화에서 열린 타일 ID (닫힐 때 파라미터 리셋 판단용)
         private readonly int _openedTileId;
 
@@ -35,7 +31,7 @@ namespace MapGenAI.UI
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
 
-        public override Vector2 InitialSize => new Vector2(600f, 500f);
+        public override Vector2 InitialSize => new Vector2(620f, 520f);
 
         // 바닐라 기본 mutator defName (자동 관리되므로 LLM 목록에서 제외)
         private static readonly HashSet<string> VanillaAutoMutators = new HashSet<string>
@@ -124,7 +120,11 @@ namespace MapGenAI.UI
                 }
 
                 if (categories.Count == 0)
+                {
+                    if (!ModsConfig.OdysseyActive)
+                        return "  (특수 지형 변형은 Odyssey DLC가 필요합니다. Odyssey 없이는 호수/온천/피요르드 등 mutator를 사용할 수 없습니다.)";
                     return "  (이 타일에서 사용 가능한 특수 지형 변형 없음)";
+                }
 
                 var sb = new System.Text.StringBuilder();
                 foreach (var kv in categories)
@@ -229,11 +229,11 @@ namespace MapGenAI.UI
 맵 생성: {""action"":""generate"",""description"":""맵 설명"",""params"":{...}}
 
 params 스키마:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""caves"":true|false,""geysers"":0~10,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes 가이드:
 - slope: 한쪽이 높은 경사면. direction으로 높은 방향 지정. 예: direction=left → 왼쪽이 높음.
-- radial: 가장자리가 높고 중심이 낮음. size로 산맥 두께 조절.
+- radial: 가장자리가 높고 중심이 낮음(분지/요새). size로 산맥 두께 조절. 산악 요새=radial(strong).
 - split: 축 방향 분할. positive strength=협곡(양쪽 산+가운데 골짜기), negative strength=산맥(가운데 산+양쪽 평지). direction으로 축 방향, gap으로 폭.
 - bump: 가우시안 돌출/함몰. position으로 위치, size로 크기. negative strength=함몰. fill=water로 호수 생성.
 - noise: 펄린 노이즈로 불규칙 지형. size가 클수록 큰 덩어리.
@@ -245,7 +245,14 @@ elevation_shapes 가이드:
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
 - ruin_density: 폐허 밀도 (0.0~2.5, 기본 1.0). 0=폐허 없음, 2.5=매우 많음.
-- danger_density: 고대 위험 밀도 (0.0~2.5, 기본 1.0). 0=위험 없음, 2.5=매우 많음.";
+- danger_density: 고대 위험 밀도 (0.0~2.5, 기본 1.0). 0=위험 없음, 2.5=매우 많음.
+- rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"" 요청 시 사용.
+- hill_size: 산맥 크기 (small=잘게 쪼개짐, medium=기본, large=거대 산맥). 또는 숫자(0.005~0.1, 기본 0.021).
+- hill_smoothness: 산 표면 거칠기 (rough=울퉁불퉁, normal=기본, smooth=매끄러움). 또는 숫자(0.5~6.0, 기본 2.0).
+- river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=오른쪽, 90=위, 180=왼쪽, 270=아래. 미지정시 자동.
+- river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
+- straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
+- fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용.";
 
             // 섹션 3: 타일 컨텍스트 + 유효 옵션 (동적)
             string tileContext = $@"
@@ -262,13 +269,19 @@ elevation_shapes 가이드:
 - 지형 형태 요청(링 형태, 대각선, 경사면, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
   링/도넛=ring, 산맥=split+negative_strong+gap:medium(산 폭), 협곡=split+strong+gap:small(골짜기 폭), 호수=bump+fill:water, 경사면=slope
 - mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
-- 유저에게는 영어 표시명을 한국어로 번역하여 설명하세요. defName을 그대로 보여주지 마세요.
+- 목록에 없는 동물/특수 지형을 요청받으면, 비슷한 것으로 대체하지 말고 action=ask로 해당 기능이 없다고 솔직하게 안내하세요.
+- 유저에게 설명할 때는 반드시 모든 내용을 한국어로 설명하세요. defName, 영어 파라미터명, 영어 label을 그대로 보여주지 마세요.
 - 유저가 한국어로 요청하면 영어 defName/label과 매칭하세요 (예: 오아시스→Oasis, 코코아 나무→WildTropicalPlants).
 - 불가능한 요청에는 action=ask로 솔직하게 안내하세요.
 - generate 시 description에 유저가 이해할 수 있는 한국어 맵 설명을 포함하세요.
+- 유저가 요청하지 않은 파라미터는 JSON에 포함하지 마세요. 기본값을 유지하려면 해당 키를 생략하세요. 특히 rock_types, ore_density, ruin_density, danger_density 등은 요청 시에만 포함.
 - 동굴 추가=caves:true, 동굴 제거=caves:false (명시적으로 설정).
 - 석재 요청(대리석으로만, 화강암 많이 등)은 rock_types로 처리. rock_count와 rock_types를 동시에 쓸 수 있음.
-- 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.";
+- 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.
+- 온천/간헐천 추가는 반드시 mutators:[""HotSprings""]를 사용하세요. geysers 파라미터는 사용하지 마세요.
+- 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
+- 수정 요청(이전 맵에 추가/변경) 시, 이전 응답의 params를 모두 포함하고 요청된 부분만 변경하세요. 파라미터를 빠뜨리면 기본값으로 초기화됩니다.
+- 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요.";
 
             // 섹션 5: few-shot 예시 (한국어, 기본 + elevation_shapes + 거절)
             string fewShot;
@@ -279,8 +292,8 @@ elevation_shapes 가이드:
 예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
 응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
 
-예시2) 유저: ""중앙을 감싸는 언덕 형태로""
-응답: {""action"":""generate"",""description"":""가장자리에 산이 둘러싼 분지 맵"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}]}}
+예시2) 유저: ""온천이 있는 산악 요새""
+응답: {""action"":""generate"",""description"":""산으로 둘러싸인 요새 형태에 온천이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
 
 예시3) 유저: ""가운데 호수 있는 맵""
 응답: {""action"":""generate"",""description"":""중앙에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""bump"",""position"":""center"",""size"":""large"",""strength"":""negative_strong"",""fill"":""water""}]}}
@@ -335,7 +348,13 @@ elevation_shapes 가이드:
             _openedTileId = Find.WorldSelector.SelectedTile;
 
             _history.Add(new ChatMessage("assistant",
-                "안녕하세요! 원하는 맵을 설명해주세요.\n예: '왼쪽에 언덕, 오른쪽에 강' 또는 '북유럽 느낌으로' 또는 '그냥 추천해줘'"));
+                "어떤 맵을 만들어 드릴까요?\n\n" +
+                "이런 것들을 해볼 수 있어요:\n" +
+                "  - \"대각선 산맥에 중앙 호수\"\n" +
+                "  - \"온천이 있는 산악 요새\"\n" +
+                "  - \"강을 일자로, 왼쪽에 배치\"\n" +
+                "  - \"대리석으로만 된 깨끗한 평지\"\n" +
+                "  - \"그냥 추천해줘\""));
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -361,11 +380,23 @@ elevation_shapes 가이드:
             }
 
             var font = Text.Font;
-            Text.Font = GameFont.Small;
 
-            // 채팅 영역 (프리셋 이름 입력 중이면 추가 높이 확보)
-            float bottomReserve = InputHeight + 50f + (_showPresetNameInput ? 34f : 0f);
-            var chatRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height - bottomReserve);
+            // 타이틀 바
+            var titleRect = new Rect(inRect.x, inRect.y, inRect.width, 28f);
+            Widgets.DrawBoxSolid(titleRect, new Color(0.15f, 0.35f, 0.55f, 0.95f));
+            Text.Font = GameFont.Small;
+            var oldAnchor = Text.Anchor;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            var oldColor = GUI.color;
+            GUI.color = new Color(0.9f, 0.95f, 1f);
+            Widgets.Label(titleRect, "MapGen AI");
+            GUI.color = oldColor;
+            Text.Anchor = oldAnchor;
+
+            // 채팅 영역 (타이틀 아래)
+            float topOffset = titleRect.yMax + 4f;
+            float bottomReserve = InputHeight + 50f;
+            var chatRect = new Rect(inRect.x, topOffset, inRect.width, inRect.height - topOffset - bottomReserve + inRect.y);
             DrawChat(chatRect);
 
             // 입력창 + 전송 버튼
@@ -377,7 +408,6 @@ elevation_shapes 가이드:
             if (Event.current.type == EventType.KeyDown
                 && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
-                Log.Message($"[MapGenAI] Enter key consumed in Dialog, tile={Find.WorldSelector.SelectedTile}");
                 Event.current.Use();
                 if (!_isWaiting && !string.IsNullOrEmpty(_inputText))
                     SendMessage();
@@ -386,44 +416,16 @@ elevation_shapes 가이드:
             GUI.SetNextControlName("ChatInput");
             _inputText = Widgets.TextField(inputRect, _inputText);
 
-            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "전송") && !_isWaiting)
+            // 전송 버튼
+            GUI.enabled = !_isWaiting && !string.IsNullOrEmpty(_inputText);
+            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "전송"))
                 SendMessage();
+            GUI.enabled = true;
 
             // 하단: 맵 생성 버튼 + 프리셋 버튼 or 상태 텍스트
             var bottomY = sendRect.yMax + 6f;
             if (_paramsReady)
             {
-                // 프리셋 이름 입력 모드
-                if (_showPresetNameInput)
-                {
-                    var nameRow = new Rect(inRect.x, bottomY, inRect.width, 30f);
-                    float saveBtnW = 60f;
-                    float cancelBtnW = 50f;
-                    float nameFieldW = nameRow.width - saveBtnW - cancelBtnW - 12f;
-                    var nameFieldRect = new Rect(nameRow.x, nameRow.y, nameFieldW, nameRow.height);
-                    var saveConfirmRect = new Rect(nameFieldRect.xMax + 4f, nameRow.y, saveBtnW, nameRow.height);
-                    var cancelRect = new Rect(saveConfirmRect.xMax + 4f, nameRow.y, cancelBtnW, nameRow.height);
-
-                    GUI.SetNextControlName("PresetNameInput");
-                    _presetNameInput = Widgets.TextField(nameFieldRect, _presetNameInput);
-
-                    if (Widgets.ButtonText(saveConfirmRect, "저장"))
-                    {
-                        if (!string.IsNullOrEmpty(_presetNameInput.Trim()))
-                        {
-                            SaveCurrentPreset(_presetNameInput.Trim());
-                            _showPresetNameInput = false;
-                            _presetNameInput = "";
-                        }
-                    }
-                    if (Widgets.ButtonText(cancelRect, "취소"))
-                    {
-                        _showPresetNameInput = false;
-                        _presetNameInput = "";
-                    }
-                    bottomY += 34f;
-                }
-
                 // 맵 생성 + 프리셋 저장 버튼 (가로 배치)
                 float btnSpacing = 6f;
                 float presetBtnW = 100f;
@@ -436,10 +438,7 @@ elevation_shapes 가이드:
                     GenerateMap();
 
                 if (Widgets.ButtonText(presetSaveRect, "프리셋 저장"))
-                {
-                    _showPresetNameInput = true;
-                    _presetNameInput = "";
-                }
+                    Find.WindowStack.Add(new Dialog_PresetName(SaveCurrentPreset));
 
                 if (Widgets.ButtonText(presetLoadRect, "프리셋 불러오기"))
                     ShowPresetLoadMenu();
@@ -487,8 +486,8 @@ elevation_shapes 가이드:
                 float x = isUser ? scrollWidth - msgRenderWidth : 0f;
 
                 var bgColor = isUser
-                    ? new Color(0.2f, 0.4f, 0.7f, 0.9f)
-                    : new Color(0.25f, 0.25f, 0.25f, 0.9f);
+                    ? new Color(0.18f, 0.38f, 0.62f, 0.92f)  // 유저: 진한 파랑
+                    : new Color(0.18f, 0.20f, 0.22f, 0.92f);  // AI: 어두운 회색
 
                 Widgets.DrawBoxSolid(new Rect(x, y, msgRenderWidth, msgHeight), bgColor);
                 Widgets.Label(new Rect(x, y, msgRenderWidth, msgHeight).ContractedBy(6f), msg.Content);
@@ -720,6 +719,7 @@ elevation_shapes 가이드:
                 hill_amount = obj.GetFloat("hill_amount", 1f),
                 vegetation_density = obj.GetFloat("vegetation_density", 1f),
                 animal_density = obj.GetFloat("animal_density", 1f),
+                fertility_offset = obj.GetFloat("fertility_offset", 0f),
                 roads = obj.GetBool("roads"),
                 caves = obj.GetBool("caves"),
                 caves_explicit = obj.GetString("caves") != null,
@@ -728,7 +728,11 @@ elevation_shapes 가이드:
                 rock_count = obj.GetInt("rock_count", -1),
                 ore_density = obj.GetFloat("ore_density", 1f),
                 ruin_density = obj.GetFloat("ruin_density", 1f),
-                danger_density = obj.GetFloat("danger_density", 1f)
+                danger_density = obj.GetFloat("danger_density", 1f),
+                rock_chunks = obj.GetString("rock_chunks") != null ? obj.GetBool("rock_chunks") : true,
+                hill_size = ParseHillSize(obj.GetString("hill_size")),
+                hill_smoothness = ParseHillSmoothness(obj.GetString("hill_smoothness")),
+                straight_river = obj.GetBool("straight_river")
             };
 
             // rock_types 배열 파싱
@@ -746,8 +750,33 @@ elevation_shapes 가이드:
                 {
                     present = riverObj.GetBool("present"),
                     direction = riverObj.GetString("direction") ?? "vertical",
-                    x_position = riverObj.GetFloat("x_position", 0.5f)
+                    direction_angle = riverObj.GetFloat("direction_angle", -1f),
+                    x_position = riverObj.GetFloat("x_position", 0.5f),
+                    z_position = riverObj.GetFloat("z_position", 0.5f)
                 };
+
+            // river_direction / river_position 단축키 지원 (river 객체 없이 직접 지정 가능)
+            {
+                string rdStr = obj.GetString("river_direction");
+                string rpStr = obj.GetString("river_position");
+                if (rdStr != null || rpStr != null)
+                {
+                    if (data.river == null)
+                        data.river = new RiverData { present = true };
+                    if (rdStr != null) data.river.direction = rdStr;
+                    if (rpStr != null)
+                    {
+                        string rp = rpStr.Trim().ToLower();
+                        // up/down은 z축 이동
+                        if (rp == "up" || rp == "top")
+                            data.river.z_position = 0.8f;
+                        else if (rp == "down" || rp == "bottom")
+                            data.river.z_position = 0.2f;
+                        else
+                            data.river.x_position = ParseRiverPosition(rpStr);
+                    }
+                }
+            }
 
             // mutators 배열 파싱
             var mutatorsArr = obj.GetArray("mutators");
@@ -790,6 +819,55 @@ elevation_shapes 가이드:
             return data;
         }
 
+        /// <summary>hill_size 시맨틱 파싱. small/medium/large 또는 숫자.</summary>
+        private static float ParseHillSize(string val)
+        {
+            if (string.IsNullOrEmpty(val)) return 0f; // 0 = 기본값 사용
+            val = val.Trim().ToLower();
+            switch (val)
+            {
+                case "small":  return 0.035f; // 큰 산맥 (frequency 높음 = 작은 패턴이지만, Map Designer에서는 반대 해석)
+                case "medium": return 0.021f; // 바닐라 기본
+                case "large":  return 0.012f; // 거대한 산맥 (낮은 frequency = 큰 패턴)
+                default:
+                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture, out float f) ? f : 0f;
+            }
+        }
+
+        /// <summary>hill_smoothness 시맨틱 파싱. rough/normal/smooth 또는 숫자.</summary>
+        private static float ParseHillSmoothness(string val)
+        {
+            if (string.IsNullOrEmpty(val)) return 0f; // 0 = 기본값 사용
+            val = val.Trim().ToLower();
+            switch (val)
+            {
+                case "rough":  return 1.0f; // 매우 거친
+                case "normal": return 2.0f; // 바닐라 기본
+                case "smooth": return 3.5f; // 매끄러운
+                default:
+                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture, out float f) ? f : 0f;
+            }
+        }
+
+        /// <summary>river_position 시맨틱 파싱. left/center/right 또는 0.0-1.0 숫자.</summary>
+        private static float ParseRiverPosition(string val)
+        {
+            if (string.IsNullOrEmpty(val)) return 0.5f;
+            val = val.Trim().ToLower();
+            switch (val)
+            {
+                case "left":   return 0.2f;
+                case "center": return 0.5f;
+                case "right":  return 0.8f;
+                default:
+                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture, out float f)
+                        ? Mathf.Clamp(f, 0f, 1f) : 0.5f;
+            }
+        }
+
         private void SaveCurrentPreset(string presetName)
         {
             // 현재 MapGenParams 상태를 MapParamsData로 변환
@@ -803,7 +881,9 @@ elevation_shapes 가이드:
                 {
                     present = MapGenParams.HasRiver,
                     direction = MapGenParams.RiverDirection,
-                    x_position = MapGenParams.RiverXPosition
+                    direction_angle = MapGenParams.RiverDirectionAngle,
+                    x_position = MapGenParams.RiverXPosition,
+                    z_position = MapGenParams.RiverZPosition
                 },
                 roads = MapGenParams.HasRoads,
                 caves = MapGenParams.HasCaves,
@@ -813,6 +893,9 @@ elevation_shapes 가이드:
                 ore_density = MapGenParams.OreDensity,
                 ruin_density = MapGenParams.RuinDensity,
                 danger_density = MapGenParams.DangerDensity,
+                rock_chunks = MapGenParams.HasRockChunks,
+                hill_size = MapGenParams.HillSize,
+                hill_smoothness = MapGenParams.HillSmoothness,
                 rock_types = MapGenParams.RockTypes.Count > 0
                     ? new List<string>(MapGenParams.RockTypes) : null,
                 mutators = new List<string>(MapGenParams.Mutators),
@@ -837,19 +920,30 @@ elevation_shapes 가이드:
             foreach (var name in presets)
             {
                 var presetName = name; // 클로저 캡처용 로컬 변수
-                menuOptions.Add(new FloatMenuOption(presetName, () => LoadPreset(presetName)));
-            }
-
-            // 구분선 + 삭제 메뉴
-            menuOptions.Add(new FloatMenuOption("--- 삭제 ---", null));
-            foreach (var name in presets)
-            {
-                var presetName = name;
-                menuOptions.Add(new FloatMenuOption($"[삭제] {presetName}", () =>
+                var option = new FloatMenuOption(presetName, () => LoadPreset(presetName));
+                option.extraPartWidth = 30f;
+                option.extraPartOnGUI = (Rect rect) =>
                 {
-                    PresetManager.Delete(presetName);
-                    _history.Add(new ChatMessage("assistant", $"프리셋 \"{presetName}\" 이(가) 삭제되었습니다."));
-                }));
+                    // X 삭제 버튼
+                    var xRect = new Rect(rect.x + 5f, rect.y + (rect.height - 20f) / 2f, 20f, 20f);
+                    var oldColor = GUI.color;
+                    bool xHover = xRect.Contains(Event.current.mousePosition);
+                    GUI.color = xHover ? new Color(1f, 0.3f, 0.3f) : new Color(0.6f, 0.3f, 0.3f);
+                    Text.Font = GameFont.Small;
+                    var oldAnchor = Text.Anchor;
+                    Text.Anchor = TextAnchor.MiddleCenter;
+                    Widgets.Label(xRect, "×");
+                    Text.Anchor = oldAnchor;
+                    GUI.color = oldColor;
+                    if (Widgets.ButtonInvisible(xRect))
+                    {
+                        PresetManager.Delete(presetName);
+                        _history.Add(new ChatMessage("assistant", $"프리셋 \"{presetName}\" 이(가) 삭제되었습니다."));
+                        return true; // 메뉴 닫기
+                    }
+                    return false;
+                };
+                menuOptions.Add(option);
             }
 
             Find.WindowStack.Add(new FloatMenu(menuOptions));
@@ -896,6 +990,59 @@ elevation_shapes 가이드:
                 MapGenParams.Reset();
                 MapGenParams.RefreshMapPreview();
                 Log.Message("[MapGenAI] 대화 취소 — 파라미터 리셋, 미리보기 원래대로");
+            }
+        }
+    }
+
+    /// <summary>
+    /// 프리셋 이름 입력 다이얼로그 (모달 팝업)
+    /// </summary>
+    public class Dialog_PresetName : Window
+    {
+        private string _name = "";
+        private readonly Action<string> _onSave;
+
+        public override Vector2 InitialSize => new Vector2(300f, 140f);
+
+        public Dialog_PresetName(Action<string> onSave)
+        {
+            _onSave = onSave;
+            doCloseButton = false;
+            absorbInputAroundWindow = true;
+            closeOnClickedOutside = true;
+            layer = WindowLayer.Super;
+        }
+
+        public override void DoWindowContents(Rect inRect)
+        {
+            Text.Font = GameFont.Small;
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "프리셋 이름을 입력하세요:");
+
+            GUI.SetNextControlName("PresetNameInput");
+            _name = Widgets.TextField(new Rect(inRect.x, inRect.y + 34f, inRect.width, 30f), _name);
+
+            // Enter 키로 저장
+            if (Event.current.type == EventType.KeyDown
+                && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
+            {
+                Event.current.Use();
+                TrySave();
+            }
+
+            float btnW = 80f;
+            float btnY = inRect.yMax - 36f;
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "저장"))
+                TrySave();
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "취소"))
+                Close();
+        }
+
+        private void TrySave()
+        {
+            if (!string.IsNullOrEmpty(_name.Trim()))
+            {
+                _onSave(_name.Trim());
+                Close();
             }
         }
     }
