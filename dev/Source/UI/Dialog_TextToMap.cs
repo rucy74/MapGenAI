@@ -321,6 +321,7 @@ Additional parameters:
             // 섹션 4: 규칙
             string rules = isKo
                 ? @"규칙:
+- [최우선] elevation_shapes 수정 시: 위 '현재 적용된 파라미터'의 elevation_shapes 목록을 output에 그대로 복사하고, 새 항목을 추가하세요. 기존 항목을 빠뜨리면 사라집니다. 전체 제거만 elevation_shapes:[]를 사용하세요.
 - 지형 형태 요청(링 형태, 대각선, 경사면, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
   링/도넛=ring, 산맥=split+negative_strong+gap:medium(산 폭), 협곡=split+strong+gap:small(골짜기 폭), 호수=bump+fill:water, 경사면=slope
 - mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
@@ -336,9 +337,9 @@ Additional parameters:
 - 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.
 - 온천/간헐천 추가는 반드시 mutators:[""HotSprings""]를 사용하세요. geysers 파라미터는 사용하지 마세요.
 - 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
-- 수정 요청(이전 맵에 추가/변경) 시, 이전 응답의 params를 모두 포함하고 요청된 부분만 변경하세요. 파라미터를 빠뜨리면 기본값으로 초기화됩니다.
 - 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
                 : @"Rules:
+- [TOP PRIORITY] When modifying elevation_shapes: copy the ENTIRE elevation_shapes list from 'Currently applied parameters' above into your output, then add new items. Omitting existing items removes them. Use elevation_shapes:[] only to clear all.
 - For terrain shape requests (ring, diagonal, slope, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
   Ring/donut=ring, mountain range=split+negative_strong+gap:medium(mountain width), canyon=split+strong+gap:small(valley width), lake=bump+fill:water, slope=slope
 - Only use defNames from the above list in the mutators array. You cannot add anything not in the list.
@@ -354,7 +355,6 @@ Additional parameters:
 - More/fewer ruins=ruin_density, ancient dangers=danger_density.
 - To add hot springs/geysers, always use mutators:[""HotSprings""]. Do not use a geysers parameter.
 - Rich soil (fertile soil) adjustments use fertility_offset. Positive=more rich soil, negative=less.
-- For modification requests (add/change from previous map), include all params from the previous response and only change the requested parts. Omitting parameters resets them to defaults.
 - For vague requests (""add animal habitat"", ""add special terrain"", etc.), use action=ask to ask the user to specify exactly what they want from the list.";
 
             // 섹션 5: few-shot 예시
@@ -426,13 +426,37 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
 
+            // 수정 예시: 현재 elevation_shapes가 있으면 수정 방법을 구체적으로 보여줌
+            string modExample = "";
+            if (MapGenParams.ElevationShapes.Count > 0)
+            {
+                var existingShapes = MapGenParams.ElevationShapes;
+                var firstShape = existingShapes[0];
+                // 현재 첫 번째 shape를 JSON으로 직렬화
+                var fp = new System.Collections.Generic.List<string>();
+                if (!string.IsNullOrEmpty(firstShape.type))      fp.Add($"\"type\":\"{firstShape.type}\"");
+                if (!string.IsNullOrEmpty(firstShape.direction)) fp.Add($"\"direction\":\"{firstShape.direction}\"");
+                if (!string.IsNullOrEmpty(firstShape.strength))  fp.Add($"\"strength\":\"{firstShape.strength}\"");
+                if (!string.IsNullOrEmpty(firstShape.position))  fp.Add($"\"position\":\"{firstShape.position}\"");
+                if (!string.IsNullOrEmpty(firstShape.size))      fp.Add($"\"size\":\"{firstShape.size}\"");
+                string firstJson = "{" + string.Join(",", fp) + "}";
+
+                modExample = isKo
+                    ? $"\n[수정 예시] 현재 elevation_shapes에 호수 추가:\n" +
+                      $"유저: \"왼쪽 아래에 호수 추가해줘\"\n" +
+                      $"응답: {{\"action\":\"generate\",\"description\":\"기존 지형에 왼쪽 아래 호수 추가\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}"
+                    : $"\n[Modification example] Adding a lake to current elevation_shapes:\n" +
+                      $"User: \"Add a lake in the bottom left\"\n" +
+                      $"Response: {{\"action\":\"generate\",\"description\":\"Added a lake in bottom-left to existing terrain\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}";
+            }
+
             return $@"{role}
 
 {schema}
 {tileContext}
 {currentParams}
 {rules}
-{fewShot}";
+{fewShot}{modExample}";
         }
 
         // Enter 키가 Window 시스템을 통해 월드맵으로 전달되는 것 방지

@@ -307,9 +307,11 @@ namespace MapGenAI.MapGen
             }
 
             // --- ElevationShapes 파싱 ---
-            ElevationShapes.Clear();
+            // data.elevation_shapes == null: LLM이 생략 → 기존 shapes 유지 (수정 요청 시 누락 방지)
+            // data.elevation_shapes != null (빈 배열 포함): LLM이 명시 → 교체
             if (data.elevation_shapes != null)
             {
+                ElevationShapes.Clear();
                 foreach (var shape in data.elevation_shapes)
                 {
                     if (shape != null && !string.IsNullOrEmpty(shape.type))
@@ -544,6 +546,8 @@ namespace MapGenAI.MapGen
             Mutators.Clear();
             RemoveMutators.Clear();
             ElevationShapes.Clear();
+
+            RefreshMapPreview();
         }
 
         /// <summary>현재 파라미터 상태를 MapParamsData 스냅샷으로 반환 (undo용).</summary>
@@ -600,16 +604,29 @@ namespace MapGenAI.MapGen
 
             if (ElevationShapes.Count > 0)
             {
-                foreach (var s in ElevationShapes)
+                // LLM이 복사해서 쓸 수 있도록 JSON 형태로 출력
+                var shapeJsonList = ElevationShapes.Select(s =>
                 {
-                    var parts = new List<string> { $"type={s.type}" };
-                    if (!string.IsNullOrEmpty(s.direction)) parts.Add($"direction={s.direction}");
-                    if (!string.IsNullOrEmpty(s.strength)) parts.Add($"strength={s.strength}");
-                    if (!string.IsNullOrEmpty(s.position)) parts.Add($"position={s.position}");
-                    if (!string.IsNullOrEmpty(s.size)) parts.Add($"size={s.size}");
-                    if (!string.IsNullOrEmpty(s.gap)) parts.Add($"gap={s.gap}");
-                    if (!string.IsNullOrEmpty(s.fill)) parts.Add($"fill={s.fill}");
-                    sb.AppendLine($"- elevation_shape: {{{string.Join(", ", parts)}}}");
+                    var parts = new List<string>();
+                    if (!string.IsNullOrEmpty(s.type))      parts.Add($"\"type\":\"{s.type}\"");
+                    if (!string.IsNullOrEmpty(s.direction)) parts.Add($"\"direction\":\"{s.direction}\"");
+                    if (!string.IsNullOrEmpty(s.strength))  parts.Add($"\"strength\":\"{s.strength}\"");
+                    if (!string.IsNullOrEmpty(s.position))  parts.Add($"\"position\":\"{s.position}\"");
+                    if (!string.IsNullOrEmpty(s.size))      parts.Add($"\"size\":\"{s.size}\"");
+                    if (!string.IsNullOrEmpty(s.gap))       parts.Add($"\"gap\":\"{s.gap}\"");
+                    if (!string.IsNullOrEmpty(s.fill))      parts.Add($"\"fill\":\"{s.fill}\"");
+                    return "{" + string.Join(",", parts) + "}";
+                });
+                string shapesJson = $"[{string.Join(",", shapeJsonList)}]";
+                if (isKo)
+                {
+                    sb.AppendLine($"- [중요] elevation_shapes (이 목록을 반드시 output에 포함하고 새 shape는 추가하세요. 전체 제거 시 elevation_shapes:[]):");
+                    sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
+                }
+                else
+                {
+                    sb.AppendLine($"- [IMPORTANT] elevation_shapes (MUST include this list in output; append new shapes. To clear all: elevation_shapes:[]):");
+                    sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
                 }
             }
             else
