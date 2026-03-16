@@ -24,9 +24,9 @@ Type anything like "mountain fortress with hot springs", "straight river on the 
 
 [h2]Supported LLM Providers[/h2]
 [list]
-[*] [b]Google Gemini[/b] — Free tier available (recommended for getting started)
+[*] [b]Google Gemini[/b]
 [*] [b]OpenAI[/b]
-[*] [b]Local LLMs[/b] — Ollama, LM Studio, or any OpenAI-compatible API
+[*] [b]Local LLMs[/b]
 [/list]
 
 [h2]Example Prompts[/h2]
@@ -38,12 +38,20 @@ Type anything like "mountain fortress with hot springs", "straight river on the 
 [*] "Just recommend something"
 [/list]
 
+[h2]Tips[/h2]
+[list]
+[*] [b]Describe everything in one message[/b] — For best results, put all your requirements in a single prompt rather than adding them one by one. For example, instead of "add mountains" → "now add a river" → "make it straight", try: "Mountains on the right with a straight river on the left". LLMs perform significantly better with single comprehensive instructions ([url=https://arxiv.org/abs/2505.06120]research shows up to 39% accuracy drop in multi-turn conversations[/url]).
+[*] If you do need to tweak, the AI will try to preserve your previous settings — but a fresh single prompt is always more reliable.
+[/list]
+
 [h2]Requirements[/h2]
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642]Map Preview[/url] (required dependency)
-[*] Harmony (auto-loaded)
 [*] An API key from Gemini, OpenAI, or a local LLM server
 [/list]
+
+[h2]About Development[/h2]
+This mod was 100% built by [url=https://claude.ai/claude-code]Claude Code[/url] (AI coding agent). The author has zero C# experience and is not a developer — every line of code, every Harmony patch, and every UI element was written by AI through natural language conversation.
 
 [h2]Compatibility[/h2]
 [list]

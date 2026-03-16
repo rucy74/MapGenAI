@@ -224,7 +224,7 @@ namespace MapGenAI.Patches
         }
     }
 
-    /// <summary>[DebugAction] 인게임 빠른 테스트 버튼</summary>
+#if DEBUG
     public static class TextToMap_DebugActions
     {
         [DebugAction("TextToMap", "대화창 열기", allowedGameStates = AllowedGameStates.Playing)]
@@ -242,11 +242,11 @@ namespace MapGenAI.Patches
                 var response = await client.SendChatAsync(
                     new System.Collections.Generic.List<LLM.ChatMessage>
                     {
-                        new LLM.ChatMessage("user", "안녕하세요, API 연결 테스트입니다. 한 문장으로 응답해주세요.")
+                        new LLM.ChatMessage("user", "API connection test. Reply in one sentence.")
                     },
-                    "당신은 RimWorld 맵 생성 도우미입니다.");
+                    "You are a RimWorld map generation assistant.");
                 LongEventHandler.ExecuteWhenFinished(() =>
-                    Log.Message($"[MapGenAI] API 응답: {response}"));
+                    Log.Message($"[MapGenAI] API response: {response}"));
             });
         }
 
@@ -255,20 +255,20 @@ namespace MapGenAI.Patches
         {
             if (!MapGen.MapGenParams.HasParams)
             {
-                Log.Message("[MapGenAI] 저장된 파라미터 없음");
+                Log.Message("[MapGenAI] No params stored");
                 return;
             }
-            Log.Message($"[MapGenAI] 파라미터: 언덕={MapGen.MapGenParams.Hills}, " +
-                        $"나무={MapGen.MapGenParams.VegetationDensity}, " +
-                        $"강={MapGen.MapGenParams.HasRiver}, " +
-                        $"도로={MapGen.MapGenParams.HasRoads}");
+            Log.Message($"[MapGenAI] Params: hills={MapGen.MapGenParams.Hills}, " +
+                        $"veg={MapGen.MapGenParams.VegetationDensity}, " +
+                        $"shapes={MapGen.MapGenParams.ElevationShapes.Count}");
         }
 
         [DebugAction("TextToMap", "미리보기 캐시 초기화", allowedGameStates = AllowedGameStates.Playing)]
         static void ClearPreviewCache()
         {
             MapPreviewIntegration.ClearCache();
-            Log.Message("[MapGenAI] 미리보기 캐시 초기화 완료");
+            Log.Message("[MapGenAI] Preview cache cleared");
         }
     }
+#endif
 }

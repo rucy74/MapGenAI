@@ -31,6 +31,9 @@ namespace MapGenAI
         private bool _showOpenAiList = false;
         private bool _showLocalList = false;
 
+        // 스크롤 위치
+        private Vector2 _modelScrollPos = Vector2.zero;
+
         private bool _isFetchingModels = false;
         private string _fetchStatus = "";
 
@@ -74,24 +77,24 @@ namespace MapGenAI
             listing.GapLine();
 
             if (activeProvider == LLMProvider.Gemini)
-                DrawProviderSection(listing, LLMProvider.Gemini,
+                DrawProviderSection(listing, inRect, LLMProvider.Gemini,
                     ref geminiApiKey, ko ? "Gemini API 키" : "Gemini API Key",
                     ref geminiModel, _geminiModels,
                     ref _showGeminiList);
 
             else if (activeProvider == LLMProvider.OpenAI)
-                DrawProviderSection(listing, LLMProvider.OpenAI,
+                DrawProviderSection(listing, inRect, LLMProvider.OpenAI,
                     ref openAiApiKey, ko ? "OpenAI API 키" : "OpenAI API Key",
                     ref openAiModel, _openAiModels,
                     ref _showOpenAiList);
 
             else if (activeProvider == LLMProvider.Local)
-                DrawLocalSection(listing);
+                DrawLocalSection(listing, inRect);
 
             listing.End();
         }
 
-        private void DrawProviderSection(Listing_Standard listing, LLMProvider provider,
+        private void DrawProviderSection(Listing_Standard listing, Rect inRect, LLMProvider provider,
             ref string apiKey, string apiKeyLabel,
             ref string currentModel, List<string> modelList,
             ref bool showList)
@@ -125,25 +128,48 @@ namespace MapGenAI
                 }
             }
 
-            // 목록 표시
+            // 목록 표시 (스크롤 영역)
             if (showList)
             {
                 if (_isFetchingModels)
                 {
                     listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
                 }
+                else if (modelList.Count == 0 && !string.IsNullOrEmpty(_fetchStatus))
+                {
+                    listing.Label("  " + _fetchStatus);
+                }
                 else if (modelList.Count > 0)
                 {
+                    float curY = listing.CurHeight;
+                    listing.End();
+
+                    float maxH = inRect.height - curY - 10f;
+                    float scrollH = Mathf.Min(maxH, 300f);
+                    float itemH = 30f;
+                    float contentH = modelList.Count * itemH;
+                    var outRect = new Rect(inRect.x, inRect.y + curY, inRect.width, scrollH);
+                    var viewRect = new Rect(0f, 0f, outRect.width - 16f, contentH);
+
+                    Widgets.BeginScrollView(outRect, ref _modelScrollPos, viewRect);
+                    float y = 0f;
                     foreach (var m in modelList)
                     {
-                        if (listing.RadioButton("  " + m, currentModel == m))
+                        var row = new Rect(0f, y, viewRect.width, itemH);
+                        if (Widgets.RadioButtonLabeled(row, "  " + m, currentModel == m))
                             currentModel = m;
+                        y += itemH;
                     }
+                    Widgets.EndScrollView();
+
+                    // listing 재개 (스크롤 영역 아래부터)
+                    var remainRect = new Rect(inRect.x, outRect.yMax, inRect.width, inRect.height - outRect.yMax + inRect.y);
+                    listing.Begin(remainRect);
                 }
             }
         }
 
-        private void DrawLocalSection(Listing_Standard listing)
+        private void DrawLocalSection(Listing_Standard listing, Rect inRect)
         {
             listing.Label(L10n.IsKorean() ? "로컬 서버 URL" : "Local server URL");
             localBaseUrl = listing.TextEntry(localBaseUrl);
@@ -152,9 +178,9 @@ namespace MapGenAI
             if (_isFetchingModels && _fetchedProvider == LLMProvider.Local)
                 btnText = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
             else if (_showLocalList)
-                btnText = $"▲ 접기 (현재: {localModel})";
+                btnText = L10n.IsKorean() ? $"▲ 접기 (현재: {localModel})" : $"▲ Collapse (current: {localModel})";
             else if (_localModels.Count > 0)
-                btnText = $"▼ 모델 선택 (현재: {localModel})";
+                btnText = L10n.IsKorean() ? $"▼ 모델 선택 (현재: {localModel})" : $"▼ Select model (current: {localModel})";
             else
                 btnText = L10n.IsKorean() ? "모델 목록 불러오기" : "Fetch model list";
 
@@ -175,11 +201,34 @@ namespace MapGenAI
             if (_showLocalList)
             {
                 if (_isFetchingModels)
-                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
-                else foreach (var m in _localModels)
                 {
-                    if (listing.RadioButton("  " + m, localModel == m))
-                        localModel = m;
+                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
+                }
+                else if (_localModels.Count > 0)
+                {
+                    float curY = listing.CurHeight;
+                    listing.End();
+
+                    float maxH = inRect.height - curY - 10f;
+                    float scrollH = Mathf.Min(maxH, 300f);
+                    float itemH = 30f;
+                    float contentH = _localModels.Count * itemH;
+                    var outRect = new Rect(inRect.x, inRect.y + curY, inRect.width, scrollH);
+                    var viewRect = new Rect(0f, 0f, outRect.width - 16f, contentH);
+
+                    Widgets.BeginScrollView(outRect, ref _modelScrollPos, viewRect);
+                    float y = 0f;
+                    foreach (var m in _localModels)
+                    {
+                        var row = new Rect(0f, y, viewRect.width, itemH);
+                        if (Widgets.RadioButtonLabeled(row, "  " + m, localModel == m))
+                            localModel = m;
+                        y += itemH;
+                    }
+                    Widgets.EndScrollView();
+
+                    var remainRect = new Rect(inRect.x, outRect.yMax, inRect.width, inRect.height - outRect.yMax + inRect.y);
+                    listing.Begin(remainRect);
                 }
             }
         }
@@ -236,22 +285,30 @@ namespace MapGenAI
 
         private async Task<List<string>> FetchGeminiModels()
         {
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models?key={geminiApiKey}";
-            var response = await Http.GetStringAsync(url);
             var models = new List<string>();
-            var parts = response.Split('"');
-            for (int i = 0; i < parts.Length - 2; i++)
+            string pageToken = null;
+            do
             {
-                if (parts[i] == "name" && parts[i + 2].StartsWith("models/"))
+                var url = $"https://generativelanguage.googleapis.com/v1beta/models?key={geminiApiKey}&pageSize=100";
+                if (pageToken != null) url += $"&pageToken={pageToken}";
+                var response = await Http.GetStringAsync(url);
+                var parts = response.Split('"');
+                pageToken = null;
+                for (int i = 0; i < parts.Length - 2; i++)
                 {
-                    var name = parts[i + 2].Substring("models/".Length);
-                    if ((name.StartsWith("gemini-") || name.StartsWith("gemma-"))
-                        && !name.Contains("embedding") && !name.Contains("imagen")
-                        && !name.Contains("veo") && !name.Contains("tts")
-                        && !name.Contains("audio"))
-                        models.Add(name);
+                    if (parts[i] == "name" && parts[i + 2].StartsWith("models/"))
+                    {
+                        var name = parts[i + 2].Substring("models/".Length);
+                        if ((name.StartsWith("gemini-") || name.StartsWith("gemma-"))
+                            && !name.Contains("embedding") && !name.Contains("imagen")
+                            && !name.Contains("veo") && !name.Contains("tts")
+                            && !name.Contains("audio"))
+                            models.Add(name);
+                    }
+                    if (parts[i] == "nextPageToken")
+                        pageToken = parts[i + 2];
                 }
-            }
+            } while (pageToken != null);
             return models;
         }
 
@@ -264,8 +321,13 @@ namespace MapGenAI
             var models = new List<string>();
             var parts = json.Split('"');
             for (int i = 0; i < parts.Length - 2; i++)
-                if (parts[i] == "id" && (parts[i + 2].StartsWith("gpt-") || parts[i + 2].StartsWith("o1") || parts[i + 2].StartsWith("o3")))
-                    models.Add(parts[i + 2]);
+                if (parts[i] == "id")
+                {
+                    var id = parts[i + 2];
+                    if (id.StartsWith("gpt-") || id.StartsWith("o1") || id.StartsWith("o3") || id.StartsWith("o4")
+                        || id.StartsWith("chatgpt-"))
+                        models.Add(id);
+                }
             return models.OrderBy(m => m).ToList();
         }
 
