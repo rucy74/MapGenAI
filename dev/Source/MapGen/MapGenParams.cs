@@ -376,9 +376,14 @@ namespace MapGenAI.MapGen
                 var tile = Verse.Find.WorldGrid?[tileId];
                 if (tile == null) return;
 
+                // 이전 적용이 있으면 먼저 복원 (Undo 시에도 이전 mutator가 제거되어야 함)
+                bool hadPreviousApplication = _mutatorAppliedTileId >= 0;
+                if (hadPreviousApplication)
+                    RestoreMutatorsFromWorldTile();
+
                 bool hasMutatorChanges = Mutators.Count > 0;
                 bool hasRemoveMutators = RemoveMutators.Count > 0;
-                // 현재 타일에 Caves mutator가 있는지
+                // 현재 타일에 Caves mutator가 있는지 (복원 후 기준)
                 bool tileHasCaves = tile.Mutators.Any(m => m.defName == "Caves");
                 // caves 추가가 필요한지 (HasCaves=true이고 타일에 없을 때만)
                 bool needCavesAdd = HasCaves && !tileHasCaves;
@@ -386,11 +391,8 @@ namespace MapGenAI.MapGen
                 bool needCavesRemove = tileHasCaves &&
                     (RemoveMutators.Contains("Caves") || (CavesExplicitlySet && !HasCaves));
 
-                // 아무 변경도 없으면 타일 건드리지 않음
+                // 새로 적용할 것이 없으면 종료 (이미 복원은 완료됨)
                 if (!hasMutatorChanges && !hasRemoveMutators && !needCavesAdd && !needCavesRemove) return;
-
-                // 이전 적용 복원
-                RestoreMutatorsFromWorldTile();
 
                 // 원본 저장 (복원 후 다시 읽기)
                 _mutatorAppliedTileId = tileId;
