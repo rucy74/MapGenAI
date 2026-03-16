@@ -545,6 +545,97 @@ namespace MapGenAI.MapGen
             RemoveMutators.Clear();
             ElevationShapes.Clear();
         }
+
+        /// <summary>현재 파라미터 상태를 MapParamsData 스냅샷으로 반환 (undo용).</summary>
+        public static MapParamsData ToSnapshot()
+        {
+            return new MapParamsData
+            {
+                hills = Hills,
+                hill_amount = HillAmount,
+                vegetation_density = VegetationDensity,
+                animal_density = AnimalDensity,
+                fertility_offset = FertilityOffset,
+                river = new RiverData
+                {
+                    present = HasRiver,
+                    direction_angle = RiverDirectionAngle,
+                    x_position = RiverXPosition,
+                    z_position = RiverZPosition
+                },
+                roads = HasRoads,
+                caves = HasCaves,
+                caves_explicit = CavesExplicitlySet,
+                geysers = GeyserCount,
+                coast_direction = CoastDirection,
+                rock_count = RockCount,
+                ore_density = OreDensity,
+                ruin_density = RuinDensity,
+                danger_density = DangerDensity,
+                rock_chunks = HasRockChunks,
+                hill_size = HillSize,
+                hill_smoothness = HillSmoothness,
+                straight_river = StraightRiver,
+                rock_types = new List<string>(RockTypes),
+                mutators = new List<string>(Mutators),
+                remove_mutators = new List<string>(RemoveMutators),
+                elevation_shapes = ElevationShapes.Select(s => new ElevationShape
+                {
+                    type = s.type, direction = s.direction, strength = s.strength,
+                    position = s.position, size = s.size, gap = s.gap, fill = s.fill
+                }).ToList()
+            };
+        }
+
+        /// <summary>현재 파라미터 상태를 시스템 프롬프트용 텍스트로 반환.</summary>
+        public static string BuildCurrentParamsText(bool isKo)
+        {
+            if (!HasParams) return "";
+
+            var sb = new System.Text.StringBuilder();
+            if (isKo)
+                sb.AppendLine("\n## 현재 적용된 파라미터 (이 상태에서 수정하세요. 변경하지 않는 값은 그대로 유지하세요.):");
+            else
+                sb.AppendLine("\n## Currently applied parameters (modify from this state. Keep unchanged values as-is.):");
+
+            if (ElevationShapes.Count > 0)
+            {
+                foreach (var s in ElevationShapes)
+                {
+                    var parts = new List<string> { $"type={s.type}" };
+                    if (!string.IsNullOrEmpty(s.direction)) parts.Add($"direction={s.direction}");
+                    if (!string.IsNullOrEmpty(s.strength)) parts.Add($"strength={s.strength}");
+                    if (!string.IsNullOrEmpty(s.position)) parts.Add($"position={s.position}");
+                    if (!string.IsNullOrEmpty(s.size)) parts.Add($"size={s.size}");
+                    if (!string.IsNullOrEmpty(s.gap)) parts.Add($"gap={s.gap}");
+                    if (!string.IsNullOrEmpty(s.fill)) parts.Add($"fill={s.fill}");
+                    sb.AppendLine($"- elevation_shape: {{{string.Join(", ", parts)}}}");
+                }
+            }
+            else
+                sb.AppendLine($"- hills: {Hills}, hill_amount: {HillAmount:F2}");
+
+            sb.AppendLine($"- vegetation_density: {VegetationDensity:F1}, animal_density: {AnimalDensity:F1}, fertility_offset: {FertilityOffset:F2}");
+
+            if (HasRiver)
+                sb.AppendLine($"- river: present (direction_angle={RiverDirectionAngle:F0}, x={RiverXPosition:F2}, z={RiverZPosition:F2}, straight={StraightRiver})");
+            else
+                sb.AppendLine("- river: none");
+
+            if (HasCaves) sb.AppendLine("- caves: true");
+            if (CoastDirection != "auto") sb.AppendLine($"- coast_direction: {CoastDirection}");
+            if (RockTypes.Count > 0) sb.AppendLine($"- rock_types: [{string.Join(", ", RockTypes)}]");
+            if (Mutators.Count > 0) sb.AppendLine($"- active_mutators: [{string.Join(", ", Mutators)}]");
+            if (RockCount > 0) sb.AppendLine($"- rock_count: {RockCount}");
+            if (OreDensity != 1f) sb.AppendLine($"- ore_density: {OreDensity:F2}");
+            if (RuinDensity != 1f) sb.AppendLine($"- ruin_density: {RuinDensity:F2}");
+            if (DangerDensity != 1f) sb.AppendLine($"- danger_density: {DangerDensity:F2}");
+            if (!HasRockChunks) sb.AppendLine("- rock_chunks: false");
+            if (HillSize != 0.021f) sb.AppendLine($"- hill_size: {HillSize:F4}");
+            if (HillSmoothness != 2.0f) sb.AppendLine($"- hill_smoothness: {HillSmoothness:F1}");
+
+            return sb.ToString();
+        }
     }
 
     // LLM JSON 역직렬화용 데이터 클래스

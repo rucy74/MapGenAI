@@ -6,6 +6,8 @@
   <MapGenAI_Send>전송</MapGenAI_Send>
   <MapGenAI_PresetSave>프리셋 저장</MapGenAI_PresetSave>
   <MapGenAI_PresetLoad>프리셋 불러오기</MapGenAI_PresetLoad>
+  <MapGenAI_Undo>되돌리기</MapGenAI_Undo>
+  <MapGenAI_Reset>초기화</MapGenAI_Reset>
   <MapGenAI_Generate>이 설정으로 맵 생성</MapGenAI_Generate>
   <MapGenAI_PresetNamePrompt>프리셋 이름을 입력하세요:</MapGenAI_PresetNamePrompt>
   <MapGenAI_Save>저장</MapGenAI_Save>

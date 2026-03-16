@@ -23,6 +23,10 @@ namespace MapGenAI.UI
         // 이 대화에서 열린 타일 ID (닫힐 때 파라미터 리셋 판단용)
         private readonly int _openedTileId;
 
+        // Undo / Reset
+        private readonly Stack<MapParamsData> _paramStack = new Stack<MapParamsData>();
+        private MapParamsData _initialSnapshot; // dialog 열릴 때 저장
+
         // LongEventHandler 대신 volatile 필드로 백그라운드→메인 스레드 전달
         private volatile bool _responseReady = false;
         private string _pendingResponse = null;
@@ -420,10 +424,13 @@ Ex3) User: ""Just recommend something""
 Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}";
             }
 
+            string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
+
             return $@"{role}
 
 {schema}
 {tileContext}
+{currentParams}
 {rules}
 {fewShot}";
         }
@@ -445,6 +452,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             layer = WindowLayer.Super;
 
             _openedTileId = Find.WorldSelector.SelectedTile;
+            _initialSnapshot = MapGenParams.HasParams ? MapGenParams.ToSnapshot() : null;
 
             _history.Add(new ChatMessage("assistant",
                 "MapGenAI_Welcome".Tr()));
@@ -515,20 +523,32 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 SendMessage();
             GUI.enabled = true;
 
-            // 하단: 맵 생성 버튼 + 프리셋 버튼 or 상태 텍스트
+            // 하단: 맵 생성 버튼 + Undo/Reset + 프리셋 버튼 or 상태 텍스트
             var bottomY = sendRect.yMax + 6f;
+            float sp = 6f;
+            float undoBtnW = 80f;
+            float resetBtnW = 80f;
+            float presetBtnW = 90f;
+
             if (_paramsReady)
             {
-                // 맵 생성 + 프리셋 저장 버튼 (가로 배치)
-                float btnSpacing = 6f;
-                float presetBtnW = 100f;
-                float generateBtnW = inRect.width - presetBtnW * 2 - btnSpacing * 2;
-                var generateRect = new Rect(inRect.x, bottomY, generateBtnW, 36f);
-                var presetSaveRect = new Rect(generateRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
-                var presetLoadRect = new Rect(presetSaveRect.xMax + btnSpacing, bottomY, presetBtnW, 36f);
+                float generateBtnW = inRect.width - undoBtnW - resetBtnW - presetBtnW * 2 - sp * 4;
+                var generateRect   = new Rect(inRect.x, bottomY, generateBtnW, 36f);
+                var undoRect       = new Rect(generateRect.xMax + sp, bottomY, undoBtnW, 36f);
+                var resetRect      = new Rect(undoRect.xMax + sp, bottomY, resetBtnW, 36f);
+                var presetSaveRect = new Rect(resetRect.xMax + sp, bottomY, presetBtnW, 36f);
+                var presetLoadRect = new Rect(presetSaveRect.xMax + sp, bottomY, presetBtnW, 36f);
 
                 if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Tr()))
                     GenerateMap();
+
+                GUI.enabled = _paramStack.Count > 0 && !_isWaiting;
+                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Tr()))
+                    DoUndo();
+                GUI.enabled = true;
+
+                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Tr()))
+                    DoReset();
 
                 if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Tr()))
                     Find.WindowStack.Add(new Dialog_PresetName(SaveCurrentPreset));
@@ -538,14 +558,24 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             }
             else
             {
-                // 파라미터 미준비 상태에서도 프리셋 불러오기 가능
-                var loadOnlyRect = new Rect(inRect.x, bottomY, 140f, 36f);
+                var undoRect     = new Rect(inRect.x, bottomY, undoBtnW, 36f);
+                var resetRect    = new Rect(undoRect.xMax + sp, bottomY, resetBtnW, 36f);
+                var loadOnlyRect = new Rect(resetRect.xMax + sp, bottomY, presetBtnW, 36f);
+
+                GUI.enabled = _paramStack.Count > 0 && !_isWaiting;
+                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Tr()))
+                    DoUndo();
+                GUI.enabled = true;
+
+                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Tr()))
+                    DoReset();
+
                 if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Tr()))
                     ShowPresetLoadMenu();
 
                 if (_statusText != "")
                 {
-                    Widgets.Label(new Rect(loadOnlyRect.xMax + 8f, bottomY + 4f, inRect.width - loadOnlyRect.width - 8f, 28f), _statusText);
+                    Widgets.Label(new Rect(loadOnlyRect.xMax + 8f, bottomY + 4f, inRect.width - loadOnlyRect.xMax - 8f, 28f), _statusText);
                 }
             }
 
@@ -643,7 +673,13 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             }
 
             Log.Message($"[MapGenAI] LLM 요청 시작 (provider={MapGenAIMod.Settings.activeProvider})");
-            var historySnapshot = new List<ChatMessage>(_history);
+
+            // 전송 전 현재 파라미터 스냅샷 저장 (undo용)
+            if (MapGenParams.HasParams)
+                _paramStack.Push(MapGenParams.ToSnapshot());
+
+            // 현재 user 메시지 1개만 전달 (현재 파라미터 상태는 system prompt에 포함)
+            var singleMessage = new List<ChatMessage> { new ChatMessage("user", text) };
             int tileId = Find.WorldSelector?.SelectedTile ?? -1;
             var systemPrompt = BuildSystemPrompt(tileId);
 
@@ -652,7 +688,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 try
                 {
                     Log.Message("[MapGenAI] Task.Run 시작");
-                    var response = await client.SendChatAsync(historySnapshot, systemPrompt);
+                    var response = await client.SendChatAsync(singleMessage, systemPrompt);
                     Log.Message($"[MapGenAI] 응답 수신: {(response == null ? "null" : response.Length + "자")}");
                     _pendingResponse = response;
                     _responseReady = true;
@@ -725,7 +761,8 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             }
             catch
             {
-                _history.Add(new ChatMessage("assistant", response));
+                _history.Add(new ChatMessage("assistant",
+                    IsKorean() ? "응답을 처리할 수 없습니다. 다시 시도해 주세요." : "Failed to process response. Please try again."));
                 _statusText = "";
             }
         }
@@ -1058,6 +1095,43 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             PresetManager.Save(presetName, data);
             _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Tr(presetName)));
+        }
+
+        private void DoUndo()
+        {
+            if (_paramStack.Count == 0 || _isWaiting) return;
+
+            var prev = _paramStack.Pop();
+            MapGenParams.Apply(prev);
+            _paramsReady = true;
+
+            // 마지막 user + assistant 메시지 쌍 제거 (환영 메시지는 유지)
+            if (_history.Count >= 3)
+                _history.RemoveRange(_history.Count - 2, 2);
+            else if (_history.Count == 2)
+                _history.RemoveAt(_history.Count - 1);
+
+            _history.Add(new ChatMessage("assistant",
+                IsKorean() ? "이전 상태로 되돌렸습니다." : "Reverted to previous state."));
+        }
+
+        private void DoReset()
+        {
+            _paramStack.Clear();
+
+            if (_initialSnapshot != null)
+            {
+                MapGenParams.Apply(_initialSnapshot);
+                _paramsReady = true;
+            }
+            else
+            {
+                MapGenParams.Reset();
+                _paramsReady = false;
+            }
+
+            _history.Clear();
+            _history.Add(new ChatMessage("assistant", "MapGenAI_Welcome".Tr()));
         }
 
         private void ShowPresetLoadMenu()

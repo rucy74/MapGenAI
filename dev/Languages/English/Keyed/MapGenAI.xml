@@ -6,6 +6,8 @@
   <MapGenAI_Send>Send</MapGenAI_Send>
   <MapGenAI_PresetSave>Save Preset</MapGenAI_PresetSave>
   <MapGenAI_PresetLoad>Load Preset</MapGenAI_PresetLoad>
+  <MapGenAI_Undo>Undo</MapGenAI_Undo>
+  <MapGenAI_Reset>Reset</MapGenAI_Reset>
   <MapGenAI_Generate>Generate with these settings</MapGenAI_Generate>
   <MapGenAI_PresetNamePrompt>Enter preset name:</MapGenAI_PresetNamePrompt>
   <MapGenAI_Save>Save</MapGenAI_Save>
