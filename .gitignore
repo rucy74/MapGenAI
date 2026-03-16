@@ -1,0 +1,19 @@
+# Build artifacts
+dev/Source/obj/
+dev/Source/Tests/obj/
+dev/Source/Tests/bin/
+dev/Assemblies/
+
+# API key
+dev/dev_config.json
+
+# IDE
+.vs/
+*.user
+
+# External projects
+../Rimtalk/
+../test_mod/
+../blueprint_ai/
+../RIMWORLD_MODDING_GUIDE.md
+../release/

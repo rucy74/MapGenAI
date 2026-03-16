@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; padding: 0; overflow: hidden; }
+
+.wrap {
+  width: 636px; height: 358px;
+  position: relative;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ===== Map background (full) ===== */
+.map {
+  position: absolute; top: 0; left: 268px; right: 0; bottom: 46px;
+  background: #4a6030; overflow: hidden;
+}
+.mountain { position: absolute; border-radius: 30%; }
+.m1 { width: 120px; height: 85px; top: 8px; left: 5px; background: #48483f; transform: rotate(-12deg); }
+.m2 { width: 80px; height: 58px; top: 38px; left: 78px; background: #52524c; transform: rotate(8deg); }
+.m3 { width: 100px; height: 68px; top: -8px; left: 48px; background: #4e4c46; transform: rotate(14deg); }
+.m4 { width: 60px; height: 48px; top: 72px; left: 28px; background: #585854; transform: rotate(-20deg); }
+.m5 { width: 42px; height: 35px; top: 5px; left: 162px; background: #565652; transform: rotate(5deg); }
+.m6 { width: 55px; height: 42px; top: 25px; left: 220px; background: #505048; transform: rotate(-8deg); }
+.river {
+  position: absolute; width: 260%; height: 22px;
+  background: linear-gradient(180deg, #265575, #3888b2, #265575);
+  top: 46%; left: -45%; transform: rotate(-28deg);
+}
+.lake {
+  position: absolute; width: 48px; height: 36px;
+  background: radial-gradient(ellipse, #3882ad 25%, #2a7098 55%, transparent 100%);
+  border-radius: 50%; bottom: 40px; right: 22px;
+}
+.tree { position: absolute; width: 4px; height: 4px; background: #3a5828; border-radius: 50%; }
+.geyser {
+  position: absolute; width: 7px; height: 7px;
+  background: radial-gradient(circle, #f0a828 15%, #d06828 55%, transparent 100%);
+  border-radius: 50%;
+}
+
+/* ===== Chat panel (left) ===== */
+.chat-panel {
+  position: absolute; top: 0; left: 0; width: 268px; bottom: 46px;
+  background: linear-gradient(180deg, #1e2a38, #162230);
+  border-right: 2px solid #2a4060;
+  overflow: hidden;
+}
+.title-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 30px;
+  background: linear-gradient(90deg, #1a4a7a, #2668a8);
+  padding: 0 12px; display: flex; align-items: center; gap: 7px;
+}
+.title-bar .icon { font-size: 13px; color: #a0c8ff; }
+.title-bar .text { color: #e8f0ff; font-size: 13px; font-weight: 700; }
+
+/* Chat messages - absolute positioned */
+.msg {
+  position: absolute; left: 9px; right: 9px;
+  padding: 5px 9px; border-radius: 8px;
+  font-size: 10px; line-height: 1.35;
+}
+.msg.user {
+  background: #2a5080; color: #d8e8ff;
+  border-bottom-right-radius: 2px;
+  text-align: right;
+}
+.msg.ai {
+  background: #252f3c; color: #a8b8c8;
+  border-bottom-left-radius: 2px;
+  border: 1px solid #354555;
+}
+.msg1 { top: 36px; left: 40px; right: 9px; }
+.msg2 { top: 78px; }
+.msg3 { top: 145px; left: 60px; right: 9px; }
+.msg4 { top: 173px; }
+
+/* Input bar */
+.input-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
+  padding: 4px 7px; display: flex; gap: 4px;
+  border-top: 1px solid #2a4060;
+  background: #162230;
+}
+.input-field {
+  flex: 1; background: #1a2838; border: 1px solid #3a5070;
+  border-radius: 4px; padding: 3px 7px; color: #506878; font-size: 9px;
+}
+.send-btn {
+  background: #2a6aaa; color: #e0f0ff; border: none;
+  border-radius: 4px; padding: 3px 9px; font-size: 9px; font-weight: 600;
+}
+
+/* ===== Arrow ===== */
+.arrow-circle {
+  position: absolute; top: 130px; left: 256px; z-index: 10;
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, #2868aa, #45a5e5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px rgba(69,165,229,0.5);
+  color: white; font-size: 13px; font-weight: 900;
+}
+.arrow-circle span { margin-left: 1px; }
+
+/* ===== Bottom banner ===== */
+.banner {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 46px;
+  background: linear-gradient(180deg, #0c1018 0%, #101620 100%);
+  border-top: 1px solid #1a2430;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.banner-title {
+  font-size: 22px; font-weight: 800; letter-spacing: 4px;
+  color: #d0e0f0;
+  text-shadow: 0 0 12px rgba(40,100,180,0.25);
+}
+.banner-title .hi { color: #50baff; }
+.banner-sub {
+  font-size: 9px; color: #506878; letter-spacing: 1.5px; margin-top: -1px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Map (right side, above banner) -->
+  <div class="map">
+    <div class="mountain m1"></div>
+    <div class="mountain m2"></div>
+    <div class="mountain m3"></div>
+    <div class="mountain m4"></div>
+    <div class="mountain m5"></div>
+    <div class="mountain m6"></div>
+    <div class="river"></div>
+    <div class="lake"></div>
+    <div class="geyser" style="bottom:80px;left:45px;"></div>
+    <div class="geyser" style="bottom:110px;left:110px;"></div>
+    <div class="geyser" style="bottom:60px;left:165px;"></div>
+    <div class="tree" style="top:115px;left:18px;"></div>
+    <div class="tree" style="top:130px;left:42px;"></div>
+    <div class="tree" style="top:160px;left:65px;"></div>
+    <div class="tree" style="top:175px;left:30px;"></div>
+    <div class="tree" style="top:195px;left:88px;"></div>
+    <div class="tree" style="top:210px;left:55px;"></div>
+    <div class="tree" style="top:225px;left:128px;"></div>
+    <div class="tree" style="top:185px;left:188px;"></div>
+    <div class="tree" style="top:145px;left:225px;"></div>
+    <div class="tree" style="top:248px;left:168px;"></div>
+    <div class="tree" style="top:90px;left:195px;"></div>
+    <div class="tree" style="top:75px;left:248px;"></div>
+    <div class="tree" style="top:250px;left:95px;"></div>
+    <div class="tree" style="top:235px;left:240px;"></div>
+    <div class="tree" style="top:270px;left:50px;"></div>
+    <div class="tree" style="top:265px;left:200px;"></div>
+  </div>
+
+  <!-- Chat panel (left, above banner) -->
+  <div class="chat-panel">
+    <div class="title-bar">
+      <span class="icon">&#10022;</span>
+      <span class="text">MapGen AI</span>
+    </div>
+    <div class="msg user msg1">Mountain fortress with hot springs<br>and a river on the left</div>
+    <div class="msg ai msg2">Generating a fortress surrounded by mountains, with hot springs and a river on the left.</div>
+    <div class="msg user msg3">Make the river straight</div>
+    <div class="msg ai msg4">Done! Straight river applied. Generate or keep chatting.</div>
+    <div class="input-bar">
+      <div class="input-field">Describe your map...</div>
+      <div class="send-btn">Send</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-circle"><span>&#9654;</span></div>
+
+  <!-- Bottom banner -->
+  <div class="banner">
+    <div class="banner-sub">Describe your map &mdash; AI generates it</div>
+    <div class="banner-title">MAPGEN <span class="hi">AI</span></div>
+  </div>
+</div>
+</body>
+</html>
