@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using MapGenAI.UI;
 using Verse;
 using UnityEngine;
 
@@ -65,26 +64,25 @@ namespace MapGenAI
             var listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            bool ko = L10n.IsKorean();
-            listing.Label(ko ? "LLM 제공자" : "LLM Provider");
+            listing.Label("MapGenAI_Settings_Provider".Translate());
             if (listing.RadioButton("Google Gemini", activeProvider == LLMProvider.Gemini))
                 activeProvider = LLMProvider.Gemini;
             if (listing.RadioButton("OpenAI (ChatGPT)", activeProvider == LLMProvider.OpenAI))
                 activeProvider = LLMProvider.OpenAI;
-            if (listing.RadioButton(ko ? "로컬 (Ollama / LM Studio)" : "Local (Ollama / LM Studio)", activeProvider == LLMProvider.Local))
+            if (listing.RadioButton("MapGenAI_Settings_LocalProvider".Translate(), activeProvider == LLMProvider.Local))
                 activeProvider = LLMProvider.Local;
 
             listing.GapLine();
 
             if (activeProvider == LLMProvider.Gemini)
                 DrawProviderSection(listing, inRect, LLMProvider.Gemini,
-                    ref geminiApiKey, ko ? "Gemini API 키" : "Gemini API Key",
+                    ref geminiApiKey, "MapGenAI_Settings_GeminiKey".Translate(),
                     ref geminiModel, _geminiModels,
                     ref _showGeminiList);
 
             else if (activeProvider == LLMProvider.OpenAI)
                 DrawProviderSection(listing, inRect, LLMProvider.OpenAI,
-                    ref openAiApiKey, ko ? "OpenAI API 키" : "OpenAI API Key",
+                    ref openAiApiKey, "MapGenAI_Settings_OpenAIKey".Translate(),
                     ref openAiModel, _openAiModels,
                     ref _showOpenAiList);
 
@@ -105,13 +103,13 @@ namespace MapGenAI
             // 버튼: 접기/펼치기 토글
             string btnText;
             if (_isFetchingModels && _fetchedProvider == provider)
-                btnText = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
+                btnText = "MapGenAI_Settings_Loading".Translate();
             else if (showList)
-                btnText = L10n.IsKorean() ? $"▲ 접기 (현재: {currentModel})" : $"▲ Collapse (current: {currentModel})";
+                btnText = "MapGenAI_Settings_Collapse".Translate(currentModel);
             else if (modelList.Count > 0)
-                btnText = L10n.IsKorean() ? $"▼ 모델 선택 (현재: {currentModel})" : $"▼ Select model (current: {currentModel})";
+                btnText = "MapGenAI_Settings_SelectModel".Translate(currentModel);
             else
-                btnText = L10n.IsKorean() ? "모델 목록 불러오기" : "Fetch model list";
+                btnText = "MapGenAI_Settings_FetchModels".Translate();
 
             if (listing.ButtonText(btnText) && !_isFetchingModels)
             {
@@ -133,7 +131,7 @@ namespace MapGenAI
             {
                 if (_isFetchingModels)
                 {
-                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
+                    listing.Label("  " + "MapGenAI_Settings_Loading".Translate());
                 }
                 else if (modelList.Count == 0 && !string.IsNullOrEmpty(_fetchStatus))
                 {
@@ -171,18 +169,18 @@ namespace MapGenAI
 
         private void DrawLocalSection(Listing_Standard listing, Rect inRect)
         {
-            listing.Label(L10n.IsKorean() ? "로컬 서버 URL" : "Local server URL");
+            listing.Label("MapGenAI_Settings_LocalUrl".Translate());
             localBaseUrl = listing.TextEntry(localBaseUrl);
 
             string btnText;
             if (_isFetchingModels && _fetchedProvider == LLMProvider.Local)
-                btnText = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
+                btnText = "MapGenAI_Settings_Loading".Translate();
             else if (_showLocalList)
-                btnText = L10n.IsKorean() ? $"▲ 접기 (현재: {localModel})" : $"▲ Collapse (current: {localModel})";
+                btnText = "MapGenAI_Settings_Collapse".Translate(localModel);
             else if (_localModels.Count > 0)
-                btnText = L10n.IsKorean() ? $"▼ 모델 선택 (현재: {localModel})" : $"▼ Select model (current: {localModel})";
+                btnText = "MapGenAI_Settings_SelectModel".Translate(localModel);
             else
-                btnText = L10n.IsKorean() ? "모델 목록 불러오기" : "Fetch model list";
+                btnText = "MapGenAI_Settings_FetchModels".Translate();
 
             if (listing.ButtonText(btnText) && !_isFetchingModels)
             {
@@ -202,7 +200,7 @@ namespace MapGenAI
             {
                 if (_isFetchingModels)
                 {
-                    listing.Label(L10n.IsKorean() ? "  불러오는 중..." : "  Loading...");
+                    listing.Label("  " + "MapGenAI_Settings_Loading".Translate());
                 }
                 else if (_localModels.Count > 0)
                 {
@@ -256,7 +254,7 @@ namespace MapGenAI
         private void FetchModelsAsync(LLMProvider provider)
         {
             _isFetchingModels = true;
-            _fetchStatus = L10n.IsKorean() ? "불러오는 중..." : "Loading...";
+            _fetchStatus = "MapGenAI_Settings_Loading".Translate();
 
             Task.Run(async () =>
             {
@@ -271,13 +269,13 @@ namespace MapGenAI
                     };
 
                     _fetchedModels = models;
-                    _fetchedStatus = L10n.IsKorean() ? $"✓ {models.Count}개 모델 로드됨" : $"✓ {models.Count} models loaded";
+                    _fetchedStatus = "MapGenAI_Settings_ModelsLoaded".Translate(models.Count);
                     _modelsFetched = true; // 마지막에 set
                 }
                 catch (System.Exception e)
                 {
                     _fetchedModels = new List<string>();
-                    _fetchedStatus = L10n.IsKorean() ? $"오류: {e.Message}" : $"Error: {e.Message}";
+                    _fetchedStatus = "MapGenAI_Settings_FetchError".Translate(e.Message);
                     _modelsFetched = true;
                 }
             });

@@ -165,7 +165,7 @@ namespace MapGenAI.Patches
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = hover ? Color.white : new Color(0.9f, 0.95f, 1f);
-            Widgets.Label(btnRect, "MapGenAI_Button".Tr());
+            Widgets.Label(btnRect, "MapGenAI_Button".Translate());
 
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
