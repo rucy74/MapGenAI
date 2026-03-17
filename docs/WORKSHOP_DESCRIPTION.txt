@@ -55,9 +55,6 @@ Type anything like "mountain fortress with hot springs", "straight river on the 
 
 [h2]About Development[/h2]
 This mod was 100% built by [url=https://claude.ai/claude-code]Claude Code[/url] (AI coding agent). The author has zero C# experience and is not a developer — every line of code, every Harmony patch, and every UI element was written by AI through natural language conversation.
-
-[url=https://github.com/rucy74/MapGenAI]GitHub (Source Code)[/url]
-
 [h2]Compatibility[/h2]
 [list]
 [*] RimWorld 1.5 / 1.6
