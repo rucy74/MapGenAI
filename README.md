@@ -1,6 +1,6 @@
 # MapGen AI
 
-![Preview](dist/About/Preview.png)
+![Preview](docs/assets/preview_composite.png)
 
 **Describe your map in natural language — AI generates it for you.**
 
