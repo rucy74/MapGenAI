@@ -1,6 +1,6 @@
 # MapGen AI
 
-![Preview](About/Preview.png)
+![Preview](dist/About/Preview.png)
 
 **Describe your map in natural language — AI generates it for you.**
 
@@ -17,7 +17,7 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 - **Terrain Tuning** — Rich soil, vegetation, animals, ore, ruins, rock types, caves, geysers
 - **Odyssey DLC Support** — 60+ tile mutators (hot springs, fjords, oasis, animal habitats, etc.)
 - **Preset System** — Save and load your favorite map configurations
-- **Korean / English** — Full bilingual UI and AI responses
+- **Korean / English / Japanese / Chinese (Simplified)** — Full multilingual UI and AI responses
 
 ## Quick Start
 
