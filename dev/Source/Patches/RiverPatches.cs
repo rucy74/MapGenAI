@@ -12,10 +12,10 @@ namespace MapGenAI.Patches
     /// angle 파라미터를 사용자 지정 각도로 교체.
     /// Map Designer 1.6 RiverDirectionPatch.cs와 동일 방식.
     ///
-    /// 각도 규칙 (RimWorld 내부):
-    /// 0도=오른쪽, 90도=위, 180도=왼쪽, 270도=아래
-    /// "왼쪽으로 흐름" = 강이 왼쪽→오른쪽, angle=0
-    /// "위로 흐름" = 강이 아래→위, angle=90
+    /// 각도 규칙 (RimWorld 내부, 화면/나침반 기준):
+    /// 0도=북(위), 90도=동(오른쪽), 180도=남(아래), 270도=서(왼쪽)
+    /// "수평(좌우)으로 흐름" = angle=90 또는 270
+    /// "수직(상하)으로 흐름" = angle=0 또는 180
     /// </summary>
     [HarmonyPatch(typeof(TileMutatorWorker_River), "IsFlowingAToB")]
     static class Patch_RiverDirection_Flowing

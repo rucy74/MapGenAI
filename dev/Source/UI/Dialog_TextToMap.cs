@@ -125,14 +125,14 @@ namespace MapGenAI.UI
 
                     // defName=내부용, label=유저 표시용, description=설명
                     string desc = !string.IsNullOrEmpty(mut.description) ? $" - {mut.description}" : "";
-                    categories[catKey].Add("MapGenAI_MutatorLabel".Tr(mut.defName, mut.label, desc));
+                    categories[catKey].Add("MapGenAI_MutatorLabel".Translate(mut.defName, mut.label, desc));
                 }
 
                 if (categories.Count == 0)
                 {
                     if (!ModsConfig.OdysseyActive)
-                        return "MapGenAI_OdysseyRequired".Tr();
-                    return "MapGenAI_NoMutatorsAvailable".Tr();
+                        return "MapGenAI_OdysseyRequired".Translate();
+                    return "MapGenAI_NoMutatorsAvailable".Translate();
                 }
 
                 var sb = new System.Text.StringBuilder();
@@ -144,7 +144,7 @@ namespace MapGenAI.UI
             }
             catch
             {
-                return "MapGenAI_MutatorLoadFailed".Tr();
+                return "MapGenAI_MutatorLoadFailed".Translate();
             }
         }
 
@@ -177,13 +177,13 @@ namespace MapGenAI.UI
             bool isKo = IsKorean();
 
             // --- 타일 정보 수집 ---
-            string biome = "MapGenAI_Unknown".Tr();
+            string biome = "MapGenAI_Unknown".Translate();
             string biomeDef = "";
             string hillsStr = "";
             bool hasRiver = false;
             bool isCoastal = false;
             float elev = 0f;
-            string riverInfo = "MapGenAI_RiverNone".Tr();
+            string riverInfo = "MapGenAI_RiverNone".Translate();
 
             try
             {
@@ -192,7 +192,7 @@ namespace MapGenAI.UI
                     var tile = Find.WorldGrid[tileId];
                     if (tile != null)
                     {
-                        biome = tile.PrimaryBiome?.label ?? "MapGenAI_Unknown".Tr();
+                        biome = tile.PrimaryBiome?.label ?? "MapGenAI_Unknown".Translate();
                         biomeDef = tile.PrimaryBiome?.defName ?? "";
                         hillsStr = tile.hilliness.ToString();
                         hasRiver = tile.Rivers != null && tile.Rivers.Count > 0;
@@ -200,12 +200,12 @@ namespace MapGenAI.UI
 
                         if (hasRiver)
                         {
-                            riverInfo = "MapGenAI_RiverPresent".Tr();
+                            riverInfo = "MapGenAI_RiverPresent".Translate();
                             foreach (var rl in tile.Rivers)
                             {
                                 var nb = Find.WorldGrid[rl.neighbor];
                                 if (nb?.PrimaryBiome?.defName == "Ocean" || nb?.PrimaryBiome?.defName == "Lake")
-                                    riverInfo += "MapGenAI_RiverOceanLink".Tr();
+                                    riverInfo += "MapGenAI_RiverOceanLink".Translate();
                             }
                         }
 
@@ -260,10 +260,11 @@ elevation_shapes 가이드:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
 - ruin_density: 폐허 밀도 (0.0~2.5, 기본 1.0). 0=폐허 없음, 2.5=매우 많음.
 - danger_density: 고대 위험 밀도 (0.0~2.5, 기본 1.0). 0=위험 없음, 2.5=매우 많음.
-- rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"" 요청 시 사용.
+- rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"", ""돌 없애줘"", ""바위 없애줘"", ""돌덩어리 없애"", ""깔끔하게"" 요청 시 사용.
 - hill_size: 산맥 크기 (small=잘게 쪼개짐, medium=기본, large=거대 산맥). 또는 숫자(0.005~0.1, 기본 0.021).
 - hill_smoothness: 산 표면 거칠기 (rough=울퉁불퉁, normal=기본, smooth=매끄러움). 또는 숫자(0.5~6.0, 기본 2.0).
-- river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=오른쪽, 90=위, 180=왼쪽, 270=아래. 미지정시 자동.
+- hill_amount: 전체 고도 오프셋 (0.1~1.6, 기본 1.0). 0.1=완전 평지(강제), 0.5=완만한 평지, 1.6=전체를 높임(산이 많아짐). ""완전 평지"" 요청 시 0.1 사용. 1.0은 기본값(변화 없음).
+- river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=위(북), 90=오른쪽(동), 180=아래(남), 270=왼쪽(서). 미지정시 자동.
 - river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
 - straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
 - fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용."
@@ -290,16 +291,17 @@ Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
 - ruin_density: Ruin density (0.0~2.5, default 1.0). 0=no ruins, 2.5=very many.
 - danger_density: Ancient danger density (0.0~2.5, default 1.0). 0=no dangers, 2.5=very many.
-- rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"" requests.
+- rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"", ""remove rocks"", ""no rocks"", ""remove boulders"", ""clear terrain"" requests.
 - hill_size: Mountain size (small=fragmented, medium=default, large=huge mountains). Or a number (0.005~0.1, default 0.021).
 - hill_smoothness: Mountain surface roughness (rough=jagged, normal=default, smooth=smooth). Or a number (0.5~6.0, default 2.0).
-- river_direction: River direction. left/right/up/down or 0-360 degree angle. 0=right, 90=up, 180=left, 270=down. Auto if unspecified.
+- hill_amount: Global elevation offset (0.1~1.6, default 1.0). 0.1=completely flat (forced), 0.5=gently flattened, 1.6=raises entire terrain (more mountains). Use 0.1 for ""completely flat"", ""flat terrain"", ""remove hills"", ""no mountains"" requests. 1.0 is default (no change).
+- river_direction: River direction. left/right/up/down or 0-360 degree angle. 0=up(north), 90=right(east), 180=down(south), 270=left(west). Auto if unspecified.
 - river_position: River position. left/right/up/down/center or 0.0~1.0 number. Left/right moves on x-axis, up/down on z-axis. Center if unspecified.
 - straight_river: Straight river (true/false). If true, the river flows in a straight line without meandering. Use for 'straight river', 'canal' requests.
 - fertility_offset: Fertility offset (-1.0~1.0, default 0). Positive=more rich soil (0.5 recommended), negative=less. Use for 'lots of rich soil', 'fertile map' requests.";
 
             // 섹션 3: 타일 컨텍스트 + 유효 옵션 (동적)
-            string coastalLabel = isCoastal ? "MapGenAI_Yes".Tr().ToString() : "MapGenAI_No".Tr().ToString();
+            string coastalLabel = isCoastal ? "MapGenAI_Yes".Translate().ToString() : "MapGenAI_No".Translate().ToString();
             string tileContext = isKo
                 ? $@"
 [타일 정보] 바이옴={biome}({biomeDef}), 지형={hillsStr}, 고도={elev:F0}m, 강={riverInfo}, 해안={coastalLabel}
@@ -321,7 +323,9 @@ Additional parameters:
             // 섹션 4: 규칙
             string rules = isKo
                 ? @"규칙:
-- [최우선] elevation_shapes 수정 시: 위 '현재 적용된 파라미터'의 elevation_shapes 목록을 output에 그대로 복사하고, 새 항목을 추가하세요. 기존 항목을 빠뜨리면 사라집니다. 전체 제거만 elevation_shapes:[]를 사용하세요.
+- [최우선] elevation_shapes 수정 시: ①추가=기존 목록 전체 복사+새 항목 추가 ②특정 항목 제거=제거할 항목을 빼고 나머지만 출력 ③전체 제거=elevation_shapes:[] ※출력에 없는 항목은 삭제됩니다.
+- 완전 평지/언덕 없애/산 없애 요청(평평하게, 언덕 없애, 민둥하게, 평지로): hills:none + hill_amount:0.1 + elevation_shapes:[] 조합을 반드시 사용하세요. hills:none만으로는 기반 지형 노이즈가 남아 실제로 평평하지 않습니다.
+- ""바위"" 요청 구분: 돌덩어리/바위조각(지면에 흩어진 바위) = rock_chunks:false / 바위 지형/언덕/산(솟아오른 지형) = hill_amount:0.5 + hills:none
 - 지형 형태 요청(링 형태, 대각선, 경사면, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
   링/도넛=ring, 산맥=split+negative_strong+gap:medium(산 폭), 협곡=split+strong+gap:small(골짜기 폭), 호수=bump+fill:water, 경사면=slope
 - mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
@@ -339,7 +343,9 @@ Additional parameters:
 - 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
 - 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
                 : @"Rules:
-- [TOP PRIORITY] When modifying elevation_shapes: copy the ENTIRE elevation_shapes list from 'Currently applied parameters' above into your output, then add new items. Omitting existing items removes them. Use elevation_shapes:[] only to clear all.
+- [TOP PRIORITY] When modifying elevation_shapes: ①Add=copy entire existing list + append new items ②Remove specific item=output list WITHOUT that item ③Remove all=elevation_shapes:[] Items not in output are deleted.
+- For flat/no-hills/no-mountains requests (make flat, remove hills, remove mountains, no mountains): use hills:none + hill_amount:0.1 + elevation_shapes:[] combination. hills:none alone leaves the base terrain noise — the map is NOT actually flat without hill_amount:0.1.
+- ""rock"" disambiguation: loose rocks/boulders (scattered stones on ground) = rock_chunks:false / rocky terrain/hills/mountains (elevated ground) = hill_amount:0.5 + hills:none
 - For terrain shape requests (ring, diagonal, slope, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
   Ring/donut=ring, mountain range=split+negative_strong+gap:medium(mountain width), canyon=split+strong+gap:small(valley width), lake=bump+fill:water, slope=slope
 - Only use defNames from the above list in the mutators array. You cannot add anything not in the list.
@@ -379,7 +385,10 @@ Additional parameters:
 예시5) 유저: ""대각선 산맥 하나 있는 맵""
 응답: {""action"":""generate"",""description"":""좌상-우하 방향으로 대각선 산맥이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
 
-예시6) 유저: ""피요르드 있는 맵 만들어줘""
+예시6) 유저: ""완전 평지로 만들어줘""
+응답: {""action"":""generate"",""description"":""완전히 평평한 맵"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
+
+예시7) 유저: ""피요르드 있는 맵 만들어줘""
 응답: {""action"":""ask"",""message"":""현재 타일은 해안가가 아닙니다. 피요르드를 원하시면 세계지도에서 해안가 타일을 선택해주세요.""}"
                     : @"
 Ex1) User: ""Make a map with lots of mountains and hot springs""
@@ -397,7 +406,10 @@ Response: {""action"":""generate"",""description"":""A map with only marble and 
 Ex5) User: ""Map with a diagonal mountain range""
 Response: {""action"":""generate"",""description"":""A map with a diagonal mountain range from top-left to bottom-right"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
 
-Ex6) User: ""Make a map with fjords""
+Ex6) User: ""Make it completely flat""
+Response: {""action"":""generate"",""description"":""A completely flat map"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
+
+Ex7) User: ""Make a map with fjords""
 Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjords, please select a coastal tile on the world map.""}";
             }
             else
@@ -412,7 +424,13 @@ Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjo
 응답: {""action"":""generate"",""description"":""왼쪽에 산이 있고 오른쪽 아래에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
 
 예시3) 유저: ""그냥 추천해줘""
-응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}"
+응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
+
+예시4) 유저: ""완전 평지로 만들어줘""
+응답: {""action"":""generate"",""description"":""완전히 평평한 맵"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
+
+예시5) 유저: ""바위 없애줘""
+응답: {""action"":""generate"",""description"":""돌덩어리 없는 깨끗한 맵"",""params"":{""rock_chunks"":false}}"
                     : @"
 Ex1) User: ""Make a map with lots of mountains and hot springs""
 Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
@@ -421,7 +439,13 @@ Ex2) User: ""Mountains on the left, lake on the bottom right""
 Response: {""action"":""generate"",""description"":""A map with mountains on the left and a lake in the bottom right"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
 
 Ex3) User: ""Just recommend something""
-Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}";
+Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
+
+Ex4) User: ""Make it completely flat""
+Response: {""action"":""generate"",""description"":""A completely flat map"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
+
+Ex5) User: ""Remove the rocks""
+Response: {""action"":""generate"",""description"":""A clean map with no scattered boulders"",""params"":{""rock_chunks"":false}}";
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
@@ -432,7 +456,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             {
                 var existingShapes = MapGenParams.ElevationShapes;
                 var firstShape = existingShapes[0];
-                // 현재 첫 번째 shape를 JSON으로 직렬화
+                // 첫 번째 shape JSON 직렬화
                 var fp = new System.Collections.Generic.List<string>();
                 if (!string.IsNullOrEmpty(firstShape.type))      fp.Add($"\"type\":\"{firstShape.type}\"");
                 if (!string.IsNullOrEmpty(firstShape.direction)) fp.Add($"\"direction\":\"{firstShape.direction}\"");
@@ -441,13 +465,40 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 if (!string.IsNullOrEmpty(firstShape.size))      fp.Add($"\"size\":\"{firstShape.size}\"");
                 string firstJson = "{" + string.Join(",", fp) + "}";
 
+                // 제거 예시: 첫 번째 shape를 뺀 나머지 목록
+                string removalShapesJson;
+                if (existingShapes.Count == 1)
+                {
+                    removalShapesJson = "[]";
+                }
+                else
+                {
+                    var others = existingShapes.Skip(1).Select(s => {
+                        var p = new System.Collections.Generic.List<string>();
+                        if (!string.IsNullOrEmpty(s.type))      p.Add($"\"type\":\"{s.type}\"");
+                        if (!string.IsNullOrEmpty(s.direction)) p.Add($"\"direction\":\"{s.direction}\"");
+                        if (!string.IsNullOrEmpty(s.strength))  p.Add($"\"strength\":\"{s.strength}\"");
+                        if (!string.IsNullOrEmpty(s.position))  p.Add($"\"position\":\"{s.position}\"");
+                        if (!string.IsNullOrEmpty(s.size))      p.Add($"\"size\":\"{s.size}\"");
+                        return "{" + string.Join(",", p) + "}";
+                    });
+                    removalShapesJson = "[" + string.Join(",", others) + "]";
+                }
+                string firstDesc = firstShape.direction ?? firstShape.type ?? "해당";
+
                 modExample = isKo
-                    ? $"\n[수정 예시] 현재 elevation_shapes에 호수 추가:\n" +
+                    ? $"\n[추가 예시] elevation_shapes에 호수 추가:\n" +
                       $"유저: \"왼쪽 아래에 호수 추가해줘\"\n" +
-                      $"응답: {{\"action\":\"generate\",\"description\":\"기존 지형에 왼쪽 아래 호수 추가\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}"
-                    : $"\n[Modification example] Adding a lake to current elevation_shapes:\n" +
+                      $"응답: {{\"action\":\"generate\",\"description\":\"기존 지형에 왼쪽 아래 호수 추가\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}\n" +
+                      $"[제거 예시] '{firstDesc}' shape 제거:\n" +
+                      $"유저: \"{firstDesc} 지형 없애줘\"\n" +
+                      $"응답: {{\"action\":\"generate\",\"description\":\"{firstDesc} 지형 제거\",\"params\":{{\"elevation_shapes\":{removalShapesJson}}}}}"
+                    : $"\n[Addition example] Adding a lake to current elevation_shapes:\n" +
                       $"User: \"Add a lake in the bottom left\"\n" +
-                      $"Response: {{\"action\":\"generate\",\"description\":\"Added a lake in bottom-left to existing terrain\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}";
+                      $"Response: {{\"action\":\"generate\",\"description\":\"Added a lake in bottom-left to existing terrain\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}\n" +
+                      $"[Removal example] Removing '{firstDesc}' shape:\n" +
+                      $"User: \"Remove the {firstDesc} terrain\"\n" +
+                      $"Response: {{\"action\":\"generate\",\"description\":\"Removed {firstDesc} terrain\",\"params\":{{\"elevation_shapes\":{removalShapesJson}}}}}";
             }
 
             return $@"{role}
@@ -479,7 +530,8 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _initialSnapshot = MapGenParams.HasParams ? MapGenParams.ToSnapshot() : null;
 
             _history.Add(new ChatMessage("assistant",
-                "MapGenAI_Welcome".Tr()));
+                "MapGenAI_Welcome".Translate()));
+
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -491,7 +543,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 if (_pendingError != null)
                 {
                     // API 오류 (토큰 소진, 네트워크 등) → 채팅에 오류 표시
-                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Tr(_pendingError)));
+                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(_pendingError)));
                     _pendingError = null;
                     _isWaiting = false;
                     _statusText = "";
@@ -543,7 +595,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             // 전송 버튼
             GUI.enabled = !_isWaiting && !string.IsNullOrEmpty(_inputText);
-            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Tr().ToString()))
+            if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Translate().ToString()))
                 SendMessage();
             GUI.enabled = true;
 
@@ -563,21 +615,21 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 var presetSaveRect = new Rect(resetRect.xMax + sp, bottomY, presetBtnW, 36f);
                 var presetLoadRect = new Rect(presetSaveRect.xMax + sp, bottomY, presetBtnW, 36f);
 
-                if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Tr()))
+                if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Translate()))
                     GenerateMap();
 
                 GUI.enabled = _paramStack.Count > 0 && !_isWaiting;
-                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Tr()))
+                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Translate()))
                     DoUndo();
                 GUI.enabled = true;
 
-                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Tr()))
+                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Translate()))
                     DoReset();
 
-                if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Tr()))
+                if (Widgets.ButtonText(presetSaveRect, "MapGenAI_PresetSave".Translate()))
                     Find.WindowStack.Add(new Dialog_PresetName(SaveCurrentPreset));
 
-                if (Widgets.ButtonText(presetLoadRect, "MapGenAI_PresetLoad".Tr()))
+                if (Widgets.ButtonText(presetLoadRect, "MapGenAI_PresetLoad".Translate()))
                     ShowPresetLoadMenu();
             }
             else
@@ -587,14 +639,14 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 var loadOnlyRect = new Rect(resetRect.xMax + sp, bottomY, presetBtnW, 36f);
 
                 GUI.enabled = _paramStack.Count > 0 && !_isWaiting;
-                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Tr()))
+                if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Translate()))
                     DoUndo();
                 GUI.enabled = true;
 
-                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Tr()))
+                if (Widgets.ButtonText(resetRect, "MapGenAI_Reset".Translate()))
                     DoReset();
 
-                if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Tr()))
+                if (Widgets.ButtonText(loadOnlyRect, "MapGenAI_PresetLoad".Translate()))
                     ShowPresetLoadMenu();
 
                 if (_statusText != "")
@@ -646,7 +698,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             {
                 float dotCount = ((int)(Time.realtimeSinceStartup * 2f)) % 4;
                 string dots = new string('.', (int)dotCount);
-                string waitText = $"{"MapGenAI_Waiting".Tr()}{dots}";
+                string waitText = $"{"MapGenAI_Waiting".Translate()}{dots}";
                 float waitH = Text.CalcHeight(waitText, msgTextWidth) + 12f;
                 var waitColor = new Color(0.3f, 0.3f, 0.3f, 0.7f);
                 Widgets.DrawBoxSolid(new Rect(0f, y, msgRenderWidth, waitH), waitColor);
@@ -680,7 +732,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _inputText = "";
             _history.Add(new ChatMessage("user", text));
             _isWaiting = true;
-            _statusText = "MapGenAI_Requesting".Tr();
+            _statusText = "MapGenAI_Requesting".Translate();
             _paramsReady = false;
 
             ILLMClient client;
@@ -691,7 +743,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             catch (Exception e)
             {
                 Log.Error($"[MapGenAI] 클라이언트 생성 실패: {e}");
-                _statusText = "MapGenAI_Error".Tr(e.Message);
+                _statusText = "MapGenAI_Error".Translate(e.Message);
                 _isWaiting = false;
                 return;
             }
@@ -731,7 +783,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _isWaiting = false;
             if (response == null)
             {
-                _statusText = "MapGenAI_NoResponse".Tr();
+                _statusText = "MapGenAI_NoResponse".Translate();
                 return;
             }
 
@@ -768,7 +820,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
                     MapGenParams.Apply(data);
                     _paramsReady = true;
-                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Tr().ToString();
+                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Translate().ToString();
 
                     // 경고 메시지가 있으면 채팅에 추가
                     string warningText = "";
@@ -779,7 +831,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                     }
 
                     _history.Add(new ChatMessage("assistant",
-                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Tr()}"));
+                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
                     _statusText = "";
                 }
             }
@@ -837,7 +889,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 var mutDef = DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
                 if (mutDef == null)
                 {
-                    warnings.Add("MapGenAI_MutatorNotFound".Tr(defName));
+                    warnings.Add("MapGenAI_MutatorNotFound".Translate(defName));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -848,7 +900,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 검증 2: Coast 카테고리인데 해안 아닌 타일
                 if (!isCoastal && hasCats && mutDef.categories.Contains("Coast"))
                 {
-                    warnings.Add("MapGenAI_MutatorCoastalOnly".Tr(label));
+                    warnings.Add("MapGenAI_MutatorCoastalOnly".Translate(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -856,7 +908,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 검증 3: River 카테고리인데 강 없는 타일
                 if (!hasRiver && hasCats && mutDef.categories.Contains("River"))
                 {
-                    warnings.Add("MapGenAI_MutatorRiverOnly".Tr(label));
+                    warnings.Add("MapGenAI_MutatorRiverOnly".Translate(label));
                     data.mutators.RemoveAt(i);
                     continue;
                 }
@@ -1118,7 +1170,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             };
 
             PresetManager.Save(presetName, data);
-            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Tr(presetName)));
+            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Translate(presetName)));
         }
 
         private void DoUndo()
@@ -1155,7 +1207,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             }
 
             _history.Clear();
-            _history.Add(new ChatMessage("assistant", "MapGenAI_Welcome".Tr()));
+            _history.Add(new ChatMessage("assistant", "MapGenAI_Welcome".Translate()));
         }
 
         private void ShowPresetLoadMenu()
@@ -1163,7 +1215,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             var presets = PresetManager.ListPresets();
             if (presets.Count == 0)
             {
-                _history.Add(new ChatMessage("assistant", "MapGenAI_NoPresets".Tr()));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_NoPresets".Translate()));
                 return;
             }
 
@@ -1189,7 +1241,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                     if (Widgets.ButtonInvisible(xRect))
                     {
                         PresetManager.Delete(presetName);
-                        _history.Add(new ChatMessage("assistant", "MapGenAI_PresetDeletedMsg".Tr(presetName)));
+                        _history.Add(new ChatMessage("assistant", "MapGenAI_PresetDeletedMsg".Translate(presetName)));
                         return true; // 메뉴 닫기
                     }
                     return false;
@@ -1205,7 +1257,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             var data = PresetManager.Load(presetName);
             if (data == null)
             {
-                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Tr(presetName)));
+                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Translate(presetName)));
                 return;
             }
 
@@ -1213,12 +1265,12 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             _paramsReady = true;
             _statusText = "";
             _history.Add(new ChatMessage("assistant",
-                "MapGenAI_PresetLoadedMsg".Tr(
+                "MapGenAI_PresetLoadedMsg".Translate(
                     presetName, data.hills, data.hill_amount.ToString("F2"),
                     data.vegetation_density.ToString("F1"), data.animal_density.ToString("F1"),
                     (data.river?.present ?? false).ToString(), data.caves.ToString(),
                     data.geysers.ToString())
-                + "\n\n" + "MapGenAI_ModifyHint".Tr()));
+                + "\n\n" + "MapGenAI_ModifyHint".Translate()));
         }
 
         private void GenerateMap()
@@ -1226,7 +1278,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
             // "이 설정으로 맵 생성" 클릭 시: 파라미터 유지한 채로 닫기
             _keepParams = true;
             Close();
-            Messages.Message("MapGenAI_ParamsSaved".Tr(),
+            Messages.Message("MapGenAI_ParamsSaved".Translate(),
                 MessageTypeDefOf.PositiveEvent);
         }
 
@@ -1241,7 +1293,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
                 // 대화 취소/닫기 → 파라미터 리셋 + Map Preview 원래대로
                 MapGenParams.Reset();
                 MapGenParams.RefreshMapPreview();
-                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Tr()}");
+                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Translate()}");
             }
         }
     }
@@ -1268,7 +1320,7 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Small;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "MapGenAI_PresetNamePrompt".Tr());
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 28f), "MapGenAI_PresetNamePrompt".Translate());
 
             GUI.SetNextControlName("PresetNameInput");
             _name = Widgets.TextField(new Rect(inRect.x, inRect.y + 34f, inRect.width, 30f), _name);
@@ -1283,9 +1335,9 @@ Response: {""action"":""generate"",""description"":""A natural landscape map sui
 
             float btnW = 80f;
             float btnY = inRect.yMax - 36f;
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "MapGenAI_Save".Tr()))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f - btnW - 4f, btnY, btnW, 30f), "MapGenAI_Save".Translate()))
                 TrySave();
-            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "MapGenAI_Cancel".Tr()))
+            if (Widgets.ButtonText(new Rect(inRect.width / 2f + 4f, btnY, btnW, 30f), "MapGenAI_Cancel".Translate()))
                 Close();
         }
 

@@ -215,7 +215,7 @@ namespace MapGenAI.MapGen
         {
             // 유효성 검증 + 클램핑
             Hills = ValidHills.Contains(data.hills ?? "") ? data.hills : "none";
-            HillAmount = Mathf.Clamp(data.hill_amount, 0.5f, 1.6f);
+            HillAmount = Mathf.Clamp(data.hill_amount, 0.1f, 1.6f);
             VegetationDensity = Mathf.Clamp(data.vegetation_density, 0f, 2f);
             AnimalDensity = Mathf.Clamp(data.animal_density, 0f, 2f);
             FertilityOffset = Mathf.Clamp(data.fertility_offset, -1f, 1f);
@@ -226,12 +226,13 @@ namespace MapGenAI.MapGen
             if (RiverDirectionAngle < 0f && data.river != null)
             {
                 string dir = data.river.direction?.ToLower();
-                if (dir == "horizontal") RiverDirectionAngle = 0f;    // 수평 (좌-우)
+                // RimWorld 각도: 0=북(위), 90=동(오른쪽), 180=남(아래), 270=서(왼쪽)
+                if (dir == "horizontal") RiverDirectionAngle = 90f;    // 수평 (좌→우)
                 else if (dir == "vertical") RiverDirectionAngle = -1f; // 바닐라 자동
-                else if (dir == "left") RiverDirectionAngle = 0f;
-                else if (dir == "up") RiverDirectionAngle = 90f;
-                else if (dir == "right") RiverDirectionAngle = 180f;
-                else if (dir == "down") RiverDirectionAngle = 270f;
+                else if (dir == "left") RiverDirectionAngle = 270f;    // 서쪽으로 흐름
+                else if (dir == "up") RiverDirectionAngle = 0f;        // 북쪽으로 흐름
+                else if (dir == "right") RiverDirectionAngle = 90f;    // 동쪽으로 흐름
+                else if (dir == "down") RiverDirectionAngle = 180f;    // 남쪽으로 흐름
                 else if (float.TryParse(dir, System.Globalization.NumberStyles.Float,
                     System.Globalization.CultureInfo.InvariantCulture, out float parsed))
                 {

@@ -23,6 +23,25 @@ namespace MapGenAI.Patches
     static class Patch_MountainSettings
     {
         /// <summary>
+        /// Map Designer가 로드된 경우 이 Transpiler를 스킵.
+        /// 두 Transpiler가 동일한 IL 상수(0.021, 2.0)를 교체하려 해서
+        /// 먼저 실행된 쪽이 상수를 메서드 호출로 바꾸면 나중 쪽이 index=-1 → crash.
+        /// Map Designer가 있으면 Map Designer의 슬라이더로 해당 기능을 대체.
+        /// </summary>
+        static bool Prepare()
+        {
+            foreach (var asm in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (asm.GetName().Name == "MapDesigner")
+                {
+                    Log.Message("[MapGenAI] Map Designer 감지 — hill_size/hill_smoothness Transpiler 비활성화 (충돌 방지). Map Designer 슬라이더를 대신 사용하세요.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Transpiler: IL에서 hillSize(0.021)와 hillSmoothness(2.0) 상수를
         /// 런타임 메서드 호출로 교체.
         /// </summary>
