@@ -85,7 +85,7 @@ namespace MapGenAI.UI
         /// <summary>키로 번역 문자열 조회 + string.Format 적용</summary>
         public static string Tr(this string key, params object[] args)
         {
-            string template = key.Tr();
+            string template = key.Translate();
             try { return string.Format(template, args); }
             catch { return template; }
         }

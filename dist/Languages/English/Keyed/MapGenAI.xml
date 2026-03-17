@@ -4,8 +4,8 @@
   <MapGenAI_Title>MapGen AI</MapGenAI_Title>
   <MapGenAI_Button>✦ AI Map Gen</MapGenAI_Button>
   <MapGenAI_Send>Send</MapGenAI_Send>
-  <MapGenAI_PresetSave>Save Preset</MapGenAI_PresetSave>
-  <MapGenAI_PresetLoad>Load Preset</MapGenAI_PresetLoad>
+  <MapGenAI_PresetSave>Save</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>Load</MapGenAI_PresetLoad>
   <MapGenAI_Undo>Undo</MapGenAI_Undo>
   <MapGenAI_Reset>Reset</MapGenAI_Reset>
   <MapGenAI_Generate>Generate with these settings</MapGenAI_Generate>
@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>Dialog cancelled — parameters reset, preview restored</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>Describe your ideal map in natural language!\n\nExamples:\n  - "Diagonal mountain range with central lake"\n  - "Mountain fortress with hot springs"\n  - "Straight river on the left side"\n  - "Clean flatland with marble only"\n  - "Just recommend something"</MapGenAI_Welcome>
+  <MapGenAI_Welcome>Describe the map you want!\n\nExamples:\n  - "Diagonal mountain range with central lake"\n  - "Mountain fortress with hot springs"\n  - "Straight river on the left side"\n  - "Clean flatland with marble only"\n  - "Just recommend something"</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>Loaded preset "{0}".\nHills={1}, Amount={2}, Trees={3}, Animals={4}, River={5}, Caves={6}, Geysers={7}</MapGenAI_PresetLoadedMsg>
@@ -53,4 +53,17 @@
   <MapGenAI_MutatorNotFound>[!] '{0}' is not a valid terrain feature and was removed.</MapGenAI_MutatorNotFound>
   <MapGenAI_MutatorCoastalOnly>[!] [{0}] is only available on coastal tiles and was removed.</MapGenAI_MutatorCoastalOnly>
   <MapGenAI_MutatorRiverOnly>[!] [{0}] is only available on tiles with a river and was removed.</MapGenAI_MutatorRiverOnly>
+
+  <!-- Settings window -->
+  <MapGenAI_Settings_Provider>LLM Provider</MapGenAI_Settings_Provider>
+  <MapGenAI_Settings_LocalProvider>Local (Ollama / LM Studio)</MapGenAI_Settings_LocalProvider>
+  <MapGenAI_Settings_GeminiKey>Gemini API Key</MapGenAI_Settings_GeminiKey>
+  <MapGenAI_Settings_OpenAIKey>OpenAI API Key</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_Loading>Loading...</MapGenAI_Settings_Loading>
+  <MapGenAI_Settings_Collapse>▲ Collapse (current: {0})</MapGenAI_Settings_Collapse>
+  <MapGenAI_Settings_SelectModel>▼ Select model (current: {0})</MapGenAI_Settings_SelectModel>
+  <MapGenAI_Settings_FetchModels>Fetch model list</MapGenAI_Settings_FetchModels>
+  <MapGenAI_Settings_ModelsLoaded>✓ {0} models loaded</MapGenAI_Settings_ModelsLoaded>
+  <MapGenAI_Settings_FetchError>Error: {0}</MapGenAI_Settings_FetchError>
+  <MapGenAI_Settings_LocalUrl>Local server URL</MapGenAI_Settings_LocalUrl>
 </LanguageData>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- UI -->
+  <MapGenAI_Title>MapGen AI</MapGenAI_Title>
+  <MapGenAI_Button>✦ AI マップ生成</MapGenAI_Button>
+  <MapGenAI_Send>送信</MapGenAI_Send>
+  <MapGenAI_PresetSave>保存</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>読み込み</MapGenAI_PresetLoad>
+  <MapGenAI_Undo>元に戻す</MapGenAI_Undo>
+  <MapGenAI_Reset>リセット</MapGenAI_Reset>
+  <MapGenAI_Generate>この設定でマップ生成</MapGenAI_Generate>
+  <MapGenAI_PresetNamePrompt>プリセット名を入力してください：</MapGenAI_PresetNamePrompt>
+  <MapGenAI_Save>保存</MapGenAI_Save>
+  <MapGenAI_Cancel>キャンセル</MapGenAI_Cancel>
+
+  <!-- Messages -->
+  <MapGenAI_Error>[エラー] {0}</MapGenAI_Error>
+  <MapGenAI_NoResponse>応答なし。APIキーを確認してください。</MapGenAI_NoResponse>
+  <MapGenAI_ParamsSaved>MapGen AI：パラメータを保存しました。マップ開始時に適用されます。</MapGenAI_ParamsSaved>
+  <MapGenAI_NoPresets>保存されたプリセットがありません。</MapGenAI_NoPresets>
+  <MapGenAI_PresetSavedMsg>プリセット「{0}」を保存しました。</MapGenAI_PresetSavedMsg>
+  <MapGenAI_PresetDeletedMsg>プリセット「{0}」を削除しました。</MapGenAI_PresetDeletedMsg>
+  <MapGenAI_PresetLoadFailed>プリセット「{0}」の読み込みに失敗しました。</MapGenAI_PresetLoadFailed>
+  <MapGenAI_ModifyHint>下のボタンで生成するか、チャットで修正できます。</MapGenAI_ModifyHint>
+  <MapGenAI_DialogCancelled>ダイアログをキャンセル — パラメータをリセット、プレビューを復元</MapGenAI_DialogCancelled>
+
+  <!-- Welcome -->
+  <MapGenAI_Welcome>理想のマップを自由に説明してください！\n\n例：\n  - 「斜めの山脈と中央の湖」\n  - 「温泉のある山岳要塞」\n  - 「左側にまっすぐな川」\n  - 「大理石だけの平坦な地形」\n  - 「おすすめを教えて」</MapGenAI_Welcome>
+
+  <!-- Preset loaded details -->
+  <MapGenAI_PresetLoadedMsg>プリセット「{0}」を読み込みました。\n丘={1}、量={2}、木={3}、動物={4}、川={5}、洞窟={6}、間欠泉={7}</MapGenAI_PresetLoadedMsg>
+
+  <!-- Tile context labels -->
+  <MapGenAI_Unknown>不明</MapGenAI_Unknown>
+  <MapGenAI_RiverNone>なし</MapGenAI_RiverNone>
+  <MapGenAI_RiverPresent>あり</MapGenAI_RiverPresent>
+  <MapGenAI_RiverOceanLink> （海/湖に接続）</MapGenAI_RiverOceanLink>
+  <MapGenAI_Yes>はい</MapGenAI_Yes>
+  <MapGenAI_No>いいえ</MapGenAI_No>
+
+  <!-- Status messages -->
+  <MapGenAI_Requesting>LLMにリクエスト中...</MapGenAI_Requesting>
+  <MapGenAI_Waiting>AI応答を待機中</MapGenAI_Waiting>
+  <MapGenAI_ParamsSet>マップパラメータが設定されました。</MapGenAI_ParamsSet>
+
+  <!-- Mutator list labels -->
+  <MapGenAI_MutatorLabel>{0}（ラベル：{1}{2}）</MapGenAI_MutatorLabel>
+  <MapGenAI_OdysseyRequired>  （特殊地形機能にはOdyssey DLCが必要です。Odysseyなしでは湖/温泉/フィヨルドなどのmutatorは使用できません。）</MapGenAI_OdysseyRequired>
+  <MapGenAI_NoMutatorsAvailable>  （このタイルで利用可能な特殊地形機能はありません）</MapGenAI_NoMutatorsAvailable>
+  <MapGenAI_MutatorLoadFailed>  （mutatorリストの読み込みに失敗しました）</MapGenAI_MutatorLoadFailed>
+
+  <!-- Mutator validation warnings -->
+  <MapGenAI_MutatorNotFound>[!] 「{0}」は有効な地形機能ではなく、削除されました。</MapGenAI_MutatorNotFound>
+  <MapGenAI_MutatorCoastalOnly>[!] [{0}]は沿岸タイルでのみ利用可能で、削除されました。</MapGenAI_MutatorCoastalOnly>
+  <MapGenAI_MutatorRiverOnly>[!] [{0}]は川のあるタイルでのみ利用可能で、削除されました。</MapGenAI_MutatorRiverOnly>
+
+  <!-- Settings window -->
+  <MapGenAI_Settings_Provider>LLMプロバイダー</MapGenAI_Settings_Provider>
+  <MapGenAI_Settings_LocalProvider>ローカル（Ollama / LM Studio）</MapGenAI_Settings_LocalProvider>
+  <MapGenAI_Settings_GeminiKey>Gemini APIキー</MapGenAI_Settings_GeminiKey>
+  <MapGenAI_Settings_OpenAIKey>OpenAI APIキー</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_Loading>読み込み中...</MapGenAI_Settings_Loading>
+  <MapGenAI_Settings_Collapse>▲ 折りたたむ（現在：{0}）</MapGenAI_Settings_Collapse>
+  <MapGenAI_Settings_SelectModel>▼ モデル選択（現在：{0}）</MapGenAI_Settings_SelectModel>
+  <MapGenAI_Settings_FetchModels>モデルリストを取得</MapGenAI_Settings_FetchModels>
+  <MapGenAI_Settings_ModelsLoaded>✓ {0}個のモデルを読み込みました</MapGenAI_Settings_ModelsLoaded>
+  <MapGenAI_Settings_FetchError>エラー：{0}</MapGenAI_Settings_FetchError>
+  <MapGenAI_Settings_LocalUrl>ローカルサーバーURL</MapGenAI_Settings_LocalUrl>
+</LanguageData>

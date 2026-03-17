@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- UI -->
+  <MapGenAI_Title>MapGen AI</MapGenAI_Title>
+  <MapGenAI_Button>✦ AI 地图生成</MapGenAI_Button>
+  <MapGenAI_Send>发送</MapGenAI_Send>
+  <MapGenAI_PresetSave>保存</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>加载</MapGenAI_PresetLoad>
+  <MapGenAI_Undo>撤销</MapGenAI_Undo>
+  <MapGenAI_Reset>重置</MapGenAI_Reset>
+  <MapGenAI_Generate>使用这些设置生成</MapGenAI_Generate>
+  <MapGenAI_PresetNamePrompt>输入预设名称：</MapGenAI_PresetNamePrompt>
+  <MapGenAI_Save>保存</MapGenAI_Save>
+  <MapGenAI_Cancel>取消</MapGenAI_Cancel>
+
+  <!-- Messages -->
+  <MapGenAI_Error>[错误] {0}</MapGenAI_Error>
+  <MapGenAI_NoResponse>无响应。请检查您的 API 密钥。</MapGenAI_NoResponse>
+  <MapGenAI_ParamsSaved>MapGen AI：参数已保存。开始地图时将应用。</MapGenAI_ParamsSaved>
+  <MapGenAI_NoPresets>没有已保存的预设。</MapGenAI_NoPresets>
+  <MapGenAI_PresetSavedMsg>预设"{0}"已保存。</MapGenAI_PresetSavedMsg>
+  <MapGenAI_PresetDeletedMsg>预设"{0}"已删除。</MapGenAI_PresetDeletedMsg>
+  <MapGenAI_PresetLoadFailed>无法加载预设"{0}"。</MapGenAI_PresetLoadFailed>
+  <MapGenAI_ModifyHint>点击下方按钮生成，或通过聊天修改。</MapGenAI_ModifyHint>
+  <MapGenAI_DialogCancelled>对话取消 — 参数已重置，预览已恢复</MapGenAI_DialogCancelled>
+
+  <!-- Welcome -->
+  <MapGenAI_Welcome>用文字描述你想要的地图！\n\n示例：\n  - "斜角山脉，中央湖泊"\n  - "带温泉的山地要塞"\n  - "笔直的河流在左侧"\n  - "只有大理石的干净平原"\n  - "随便推荐一个"</MapGenAI_Welcome>
+
+  <!-- Preset loaded details -->
+  <MapGenAI_PresetLoadedMsg>已加载预设"{0}"。\n山丘={1}，数量={2}，树木={3}，动物={4}，河流={5}，洞穴={6}，间歇泉={7}</MapGenAI_PresetLoadedMsg>
+
+  <!-- Tile context labels -->
+  <MapGenAI_Unknown>未知</MapGenAI_Unknown>
+  <MapGenAI_RiverNone>无</MapGenAI_RiverNone>
+  <MapGenAI_RiverPresent>有</MapGenAI_RiverPresent>
+  <MapGenAI_RiverOceanLink> （连接到海洋/湖泊）</MapGenAI_RiverOceanLink>
+  <MapGenAI_Yes>是</MapGenAI_Yes>
+  <MapGenAI_No>否</MapGenAI_No>
+
+  <!-- Status messages -->
+  <MapGenAI_Requesting>正在请求 LLM...</MapGenAI_Requesting>
+  <MapGenAI_Waiting>等待 AI 响应</MapGenAI_Waiting>
+  <MapGenAI_ParamsSet>地图参数已设置。</MapGenAI_ParamsSet>
+
+  <!-- Mutator list labels -->
+  <MapGenAI_MutatorLabel>{0}（标签：{1}{2}）</MapGenAI_MutatorLabel>
+  <MapGenAI_OdysseyRequired>  （特殊地形功能需要 Odyssey DLC。没有 Odyssey，无法使用湖泊/温泉/峡湾等 mutator。）</MapGenAI_OdysseyRequired>
+  <MapGenAI_NoMutatorsAvailable>  （此地块没有可用的特殊地形功能）</MapGenAI_NoMutatorsAvailable>
+  <MapGenAI_MutatorLoadFailed>  （无法加载 mutator 列表）</MapGenAI_MutatorLoadFailed>
+
+  <!-- Mutator validation warnings -->
+  <MapGenAI_MutatorNotFound>[!] "{0}"不是有效的地形功能，已被移除。</MapGenAI_MutatorNotFound>
+  <MapGenAI_MutatorCoastalOnly>[!] [{0}]仅在沿海地块可用，已被移除。</MapGenAI_MutatorCoastalOnly>
+  <MapGenAI_MutatorRiverOnly>[!] [{0}]仅在有河流的地块可用，已被移除。</MapGenAI_MutatorRiverOnly>
+
+  <!-- Settings window -->
+  <MapGenAI_Settings_Provider>LLM 提供商</MapGenAI_Settings_Provider>
+  <MapGenAI_Settings_LocalProvider>本地（Ollama / LM Studio）</MapGenAI_Settings_LocalProvider>
+  <MapGenAI_Settings_GeminiKey>Gemini API 密钥</MapGenAI_Settings_GeminiKey>
+  <MapGenAI_Settings_OpenAIKey>OpenAI API 密钥</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_Loading>加载中...</MapGenAI_Settings_Loading>
+  <MapGenAI_Settings_Collapse>▲ 收起（当前：{0}）</MapGenAI_Settings_Collapse>
+  <MapGenAI_Settings_SelectModel>▼ 选择模型（当前：{0}）</MapGenAI_Settings_SelectModel>
+  <MapGenAI_Settings_FetchModels>获取模型列表</MapGenAI_Settings_FetchModels>
+  <MapGenAI_Settings_ModelsLoaded>✓ 已加载 {0} 个模型</MapGenAI_Settings_ModelsLoaded>
+  <MapGenAI_Settings_FetchError>错误：{0}</MapGenAI_Settings_FetchError>
+  <MapGenAI_Settings_LocalUrl>本地服务器 URL</MapGenAI_Settings_LocalUrl>
+</LanguageData>

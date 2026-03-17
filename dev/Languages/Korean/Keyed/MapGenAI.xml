@@ -4,8 +4,8 @@
   <MapGenAI_Title>MapGen AI</MapGenAI_Title>
   <MapGenAI_Button>✦ AI 맵 생성</MapGenAI_Button>
   <MapGenAI_Send>전송</MapGenAI_Send>
-  <MapGenAI_PresetSave>프리셋 저장</MapGenAI_PresetSave>
-  <MapGenAI_PresetLoad>프리셋 불러오기</MapGenAI_PresetLoad>
+  <MapGenAI_PresetSave>저장</MapGenAI_PresetSave>
+  <MapGenAI_PresetLoad>불러오기</MapGenAI_PresetLoad>
   <MapGenAI_Undo>되돌리기</MapGenAI_Undo>
   <MapGenAI_Reset>초기화</MapGenAI_Reset>
   <MapGenAI_Generate>이 설정으로 맵 생성</MapGenAI_Generate>
@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>대화 취소 — 파라미터 리셋, 미리보기 원래대로</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>맵을 자연어로 설명해 보세요!\n\n예시:\n  - "대각선 산맥에 중앙 호수"\n  - "온천이 있는 산악 요새"\n  - "강을 일자로, 왼쪽에 배치"\n  - "대리석으로만 된 깨끗한 평지"\n  - "그냥 추천해줘"</MapGenAI_Welcome>
+  <MapGenAI_Welcome>원하는 맵을 자유롭게 설명해 보세요!\n\n예시:\n  - "대각선 산맥에 중앙 호수"\n  - "온천이 있는 산악 요새"\n  - "강을 일자로, 왼쪽에 배치"\n  - "대리석으로만 된 깨끗한 평지"\n  - "그냥 추천해줘"</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>프리셋 "{0}" 을(를) 불러왔습니다.\n언덕={1}, 산양={2}, 나무={3}, 동물={4}, 강={5}, 동굴={6}, 간헐천={7}</MapGenAI_PresetLoadedMsg>
@@ -53,4 +53,17 @@
   <MapGenAI_MutatorNotFound>[!] '{0}'은(는) 존재하지 않는 지형 변형이어서 제거되었습니다.</MapGenAI_MutatorNotFound>
   <MapGenAI_MutatorCoastalOnly>[!] [{0}]은(는) 해안 타일에서만 가능하여 제거되었습니다.</MapGenAI_MutatorCoastalOnly>
   <MapGenAI_MutatorRiverOnly>[!] [{0}]은(는) 강이 있는 타일에서만 가능하여 제거되었습니다.</MapGenAI_MutatorRiverOnly>
+
+  <!-- Settings window -->
+  <MapGenAI_Settings_Provider>LLM 제공자</MapGenAI_Settings_Provider>
+  <MapGenAI_Settings_LocalProvider>로컬 (Ollama / LM Studio)</MapGenAI_Settings_LocalProvider>
+  <MapGenAI_Settings_GeminiKey>Gemini API 키</MapGenAI_Settings_GeminiKey>
+  <MapGenAI_Settings_OpenAIKey>OpenAI API 키</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_Loading>불러오는 중...</MapGenAI_Settings_Loading>
+  <MapGenAI_Settings_Collapse>▲ 접기 (현재: {0})</MapGenAI_Settings_Collapse>
+  <MapGenAI_Settings_SelectModel>▼ 모델 선택 (현재: {0})</MapGenAI_Settings_SelectModel>
+  <MapGenAI_Settings_FetchModels>모델 목록 불러오기</MapGenAI_Settings_FetchModels>
+  <MapGenAI_Settings_ModelsLoaded>✓ {0}개 모델 로드됨</MapGenAI_Settings_ModelsLoaded>
+  <MapGenAI_Settings_FetchError>오류: {0}</MapGenAI_Settings_FetchError>
+  <MapGenAI_Settings_LocalUrl>로컬 서버 URL</MapGenAI_Settings_LocalUrl>
 </LanguageData>
