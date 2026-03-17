@@ -13,7 +13,8 @@ Type anything like "mountain fortress with hot springs", "straight river on the 
 [*] [b]Odyssey DLC Support[/b] — 60+ tile mutators (hot springs, fjords, oasis, animal habitats, etc.)
 [*] [b]Preset System[/b] — Save and load your favorite map configurations
 [*] [b]Iterative Refinement[/b] — Keep chatting to tweak your map until it's perfect
-[*] [b]Korean / English[/b] — Full bilingual UI and AI responses
+[*] [b]Undo & Reset[/b] — Made a wrong turn? [b]Undo[/b] reverts to before your last message. [b]Reset[/b] restores the tile to its original state. Both are one click.
+[*] [b]Korean / English / Japanese / Chinese (Simplified)[/b] — Full multilingual UI and AI responses
 [/list]
 
 [h2]Quick Start[/h2]
@@ -42,6 +43,8 @@ Type anything like "mountain fortress with hot springs", "straight river on the 
 [list]
 [*] [b]Describe everything in one message[/b] — For best results, put all your requirements in a single prompt rather than adding them one by one. For example, instead of "add mountains" → "now add a river" → "make it straight", try: "Mountains on the right with a straight river on the left". LLMs perform significantly better with single comprehensive instructions ([url=https://arxiv.org/abs/2505.06120]research shows up to 39% accuracy drop in multi-turn conversations[/url]).
 [*] If you do need to tweak, the AI will try to preserve your previous settings — but a fresh single prompt is always more reliable.
+[*] [b]Not sure what features are available?[/b] Just ask! Type things like "what ancient ruins are there?", "what special terrain features can I add here?", or "what rock types are available?" and the AI will list the options for your current tile. Great for browsing Odyssey DLC terrain features without having to look anything up.
+[*] [b]Undo and Reset are your safety net[/b] — If the AI generates something you don't like, hit [b]Undo[/b] to go back one step, or [b]Reset[/b] to wipe everything and start fresh. No need to re-open the dialog.
 [/list]
 
 [h2]Requirements[/h2]

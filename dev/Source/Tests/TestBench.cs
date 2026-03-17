@@ -570,9 +570,9 @@ class TestBench
     static async Task Main(string[] args)
     {
         // API 키 로드
-        var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "dev_config.json");
+        var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "docs", "dev_config.json");
         if (!File.Exists(configPath))
-            configPath = "F:\\Projects\\Rimworld\\mapgen_ai\\dev_config.json";
+            configPath = "F:\\Projects\\Rimworld\\mapgen_ai\\docs\\dev_config.json";
 
         var config = JsonDocument.Parse(File.ReadAllText(configPath));
         ApiKey = config.RootElement.GetProperty("gemini_api_key").GetString();

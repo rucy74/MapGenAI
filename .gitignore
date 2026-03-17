@@ -5,7 +5,7 @@ dev/Source/Tests/bin/
 dev/Assemblies/
 
 # API key
-dev/dev_config.json
+docs/dev_config.json
 
 # IDE
 .vs/
