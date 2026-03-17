@@ -46,8 +46,6 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 
 ## Tips
 
-- **Describe everything in one message** — For best results, put all your requirements in a single prompt rather than adding them one by one. LLMs perform significantly better with single comprehensive instructions ([research shows up to 39% accuracy drop in multi-turn conversations](https://arxiv.org/abs/2505.06120)).
-- If you do need to tweak, the AI will try to preserve your previous settings — but a fresh single prompt is always more reliable.
 - **Not sure what features are available?** Just ask! Type things like *"what ancient ruins are there?"*, *"what special terrain features can I add here?"*, or *"what rock types are available?"* and the AI will list the options for your current tile.
 - **Undo and Reset are your safety net** — If the AI generates something you don't like, hit **Undo** to go back one step, or **Reset** to wipe everything and start fresh.
 
