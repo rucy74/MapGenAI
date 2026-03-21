@@ -23,6 +23,8 @@ namespace MapGenAI
         public string openRouterApiKey = "";
         public string openRouterModel = "openai/gpt-4o-mini";
 
+        public bool useSimpleMode = true;
+
         // 동적으로 불러온 모델 목록 (저장 안 함)
         private List<string> _geminiModels = new List<string>();
         private List<string> _openAiModels = new List<string>();
@@ -60,16 +62,66 @@ namespace MapGenAI
             Scribe_Values.Look(ref localModel, "localModel", "llama3");
             Scribe_Values.Look(ref openRouterApiKey, "openRouterApiKey", "");
             Scribe_Values.Look(ref openRouterModel, "openRouterModel", "openai/gpt-4o-mini");
+            Scribe_Values.Look(ref useSimpleMode, "useSimpleMode", true);
             base.ExposeData();
         }
 
         public void DoWindowContents(Rect inRect)
         {
-            // 백그라운드 스레드에서 결과가 도착했으면 메인 스레드에서 적용
             ApplyPendingModels();
 
             var listing = new Listing_Standard();
             listing.Begin(inRect);
+
+            if (useSimpleMode)
+                DrawSimpleSettings(listing);
+            else
+                DrawAdvancedSettings(listing, inRect);
+
+            listing.End();
+        }
+
+        private void DrawSimpleSettings(Listing_Standard listing)
+        {
+            // API 키 라벨
+            listing.Label("MapGenAI_Settings_GeminiKey".Translate());
+
+            // API 키 입력 + "무료 API 키 받기" 버튼 (같은 줄)
+            const float btnWidth = 160f;
+            const float gap = 6f;
+            Rect rowRect = listing.GetRect(30f);
+            Rect fieldRect = new Rect(rowRect.x, rowRect.y, rowRect.width - btnWidth - gap, rowRect.height);
+            Rect freeBtnRect = new Rect(fieldRect.xMax + gap, rowRect.y, btnWidth, rowRect.height);
+
+            geminiApiKey = Widgets.TextField(fieldRect, geminiApiKey);
+            if (Widgets.ButtonText(freeBtnRect, "MapGenAI_Settings_GetFreeKey".Translate()))
+                Application.OpenURL("https://aistudio.google.com/app/apikey");
+
+            // 설명 텍스트 (소자, 회색)
+            Text.Font = GameFont.Tiny;
+            GUI.color = Color.gray;
+            Rect descRect = listing.GetRect(Text.LineHeight);
+            Widgets.Label(descRect, "MapGenAI_Settings_SimpleDesc".Translate());
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+
+            listing.Gap(12f);
+
+            // 고급 설정으로 전환
+            if (listing.ButtonText("MapGenAI_Settings_SwitchAdvanced".Translate()))
+                useSimpleMode = false;
+        }
+
+        private void DrawAdvancedSettings(Listing_Standard listing, Rect inRect)
+        {
+            // 간단한 설정으로 전환
+            if (listing.ButtonText("MapGenAI_Settings_SwitchSimple".Translate()))
+            {
+                useSimpleMode = true;
+                activeProvider = LLMProvider.Gemini;
+            }
+
+            listing.Gap(8f);
 
             listing.Label("MapGenAI_Settings_Provider".Translate());
             if (listing.RadioButton("Google Gemini", activeProvider == LLMProvider.Gemini))
@@ -88,23 +140,18 @@ namespace MapGenAI
                     ref geminiApiKey, "MapGenAI_Settings_GeminiKey".Translate(),
                     ref geminiModel, _geminiModels,
                     ref _showGeminiList);
-
             else if (activeProvider == LLMProvider.OpenAI)
                 DrawProviderSection(listing, inRect, LLMProvider.OpenAI,
                     ref openAiApiKey, "MapGenAI_Settings_OpenAIKey".Translate(),
                     ref openAiModel, _openAiModels,
                     ref _showOpenAiList);
-
             else if (activeProvider == LLMProvider.Local)
                 DrawLocalSection(listing, inRect);
-
             else if (activeProvider == LLMProvider.OpenRouter)
                 DrawProviderSection(listing, inRect, LLMProvider.OpenRouter,
                     ref openRouterApiKey, "MapGenAI_Settings_OpenRouterKey".Translate(),
                     ref openRouterModel, _openRouterModels,
                     ref _showOpenRouterList);
-
-            listing.End();
         }
 
         private void DrawProviderSection(Listing_Standard listing, Rect inRect, LLMProvider provider,

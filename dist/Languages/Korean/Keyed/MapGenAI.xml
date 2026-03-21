@@ -67,4 +67,8 @@
   <MapGenAI_Settings_ModelsLoaded>✓ {0}개 모델 로드됨</MapGenAI_Settings_ModelsLoaded>
   <MapGenAI_Settings_FetchError>오류: {0}</MapGenAI_Settings_FetchError>
   <MapGenAI_Settings_LocalUrl>로컬 서버 URL</MapGenAI_Settings_LocalUrl>
+  <MapGenAI_Settings_GetFreeKey>무료 API 키 받기</MapGenAI_Settings_GetFreeKey>
+  <MapGenAI_Settings_SimpleDesc>기본으로 gemini-2.5-flash를 사용합니다. 무료 티어 사용 가능.</MapGenAI_Settings_SimpleDesc>
+  <MapGenAI_Settings_SwitchAdvanced>고급 설정으로 전환</MapGenAI_Settings_SwitchAdvanced>
+  <MapGenAI_Settings_SwitchSimple>간단한 설정으로 전환</MapGenAI_Settings_SwitchSimple>
 </LanguageData>

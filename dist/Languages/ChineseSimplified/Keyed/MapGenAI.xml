@@ -67,4 +67,8 @@
   <MapGenAI_Settings_ModelsLoaded>✓ 已加载 {0} 个模型</MapGenAI_Settings_ModelsLoaded>
   <MapGenAI_Settings_FetchError>错误：{0}</MapGenAI_Settings_FetchError>
   <MapGenAI_Settings_LocalUrl>本地服务器 URL</MapGenAI_Settings_LocalUrl>
+  <MapGenAI_Settings_GetFreeKey>获取免费 API 密钥</MapGenAI_Settings_GetFreeKey>
+  <MapGenAI_Settings_SimpleDesc>默认使用 gemini-2.5-flash。支持免费套餐。</MapGenAI_Settings_SimpleDesc>
+  <MapGenAI_Settings_SwitchAdvanced>切换到高级设置</MapGenAI_Settings_SwitchAdvanced>
+  <MapGenAI_Settings_SwitchSimple>切换到简单设置</MapGenAI_Settings_SwitchSimple>
 </LanguageData>

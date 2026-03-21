@@ -67,4 +67,8 @@
   <MapGenAI_Settings_ModelsLoaded>✓ {0} models loaded</MapGenAI_Settings_ModelsLoaded>
   <MapGenAI_Settings_FetchError>Error: {0}</MapGenAI_Settings_FetchError>
   <MapGenAI_Settings_LocalUrl>Local server URL</MapGenAI_Settings_LocalUrl>
+  <MapGenAI_Settings_GetFreeKey>Get Free API Key</MapGenAI_Settings_GetFreeKey>
+  <MapGenAI_Settings_SimpleDesc>Uses gemini-2.5-flash by default. Free tier available.</MapGenAI_Settings_SimpleDesc>
+  <MapGenAI_Settings_SwitchAdvanced>Switch to Advanced Settings</MapGenAI_Settings_SwitchAdvanced>
+  <MapGenAI_Settings_SwitchSimple>Switch to Simple Settings</MapGenAI_Settings_SwitchSimple>
 </LanguageData>

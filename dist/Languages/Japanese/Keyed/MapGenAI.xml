@@ -67,4 +67,8 @@
   <MapGenAI_Settings_ModelsLoaded>✓ {0}個のモデルを読み込みました</MapGenAI_Settings_ModelsLoaded>
   <MapGenAI_Settings_FetchError>エラー：{0}</MapGenAI_Settings_FetchError>
   <MapGenAI_Settings_LocalUrl>ローカルサーバーURL</MapGenAI_Settings_LocalUrl>
+  <MapGenAI_Settings_GetFreeKey>無料APIキーを取得</MapGenAI_Settings_GetFreeKey>
+  <MapGenAI_Settings_SimpleDesc>デフォルトでgemini-2.5-flashを使用します。無料枠あり。</MapGenAI_Settings_SimpleDesc>
+  <MapGenAI_Settings_SwitchAdvanced>詳細設定に切り替え</MapGenAI_Settings_SwitchAdvanced>
+  <MapGenAI_Settings_SwitchSimple>簡易設定に切り替え</MapGenAI_Settings_SwitchSimple>
 </LanguageData>
