@@ -236,11 +236,11 @@ namespace MapGenAI.Patches
             float posX = pos.x * mapW;
             float posZ = pos.y * mapH;
 
-            // 호수(fill=water)는 맵의 일부만 차지해야 함 — 스케일 축소
-            // small=15셀, medium=30셀, large=50셀 (맵 250기준 6-20%)
-            // 일반 bump(언덕)은 더 넓게 — small=30, medium=60, large=90
-            float radiusScale = fillWater ? 0.15f : 0.5f;
-            float minRadius = fillWater ? 10f : 20f;
+            // 호수(fill=water): small=10셀, medium=19셀, large=28셀 sigma (맵250기준)
+            // 일반 bump(언덕):  small=19셀, medium=38셀, large=56셀 sigma
+            // 언덕 3-sigma 범위: small=56, medium=113, large=169셀 (맵 전체 대비 22-68%)
+            float radiusScale = fillWater ? 0.15f : 0.3f;
+            float minRadius = fillWater ? 10f : 8f;
             float radius = Mathf.Max(size * Mathf.Min(mapW, mapH) * radiusScale, minRadius);
             float radiusSq2 = 2f * radius * radius;
 
