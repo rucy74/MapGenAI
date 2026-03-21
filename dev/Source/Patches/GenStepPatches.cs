@@ -332,9 +332,9 @@ namespace MapGenAI.Patches
 
         /// <summary>
         /// ring: 도넛 형태 산맥 (중심에서 일정 거리에 링 모양 능선).
-        /// Map Designer의 Donut 모드 참조:
-        /// distance = |sqrt((x-cx)^2+(z-cz)^2) - ringRadius| * 3.5
-        /// elevation += strength * (distance - ringRadius) / mapSize
+        /// Gaussian 프로파일: 링 능선만 높이고 주변 지형은 건드리지 않음.
+        /// 이전 Map Designer Donut 공식은 링에서 멀어질수록 큰 음수를 적용해
+        /// 기존 산 지형이 사라지고 초승달 형태가 생기는 버그 있었음.
         /// position으로 중심, size로 링 반경, strength로 높이 조절.
         /// </summary>
         private static void ApplyRing(ElevationShape shape, Map map, MapGenFloatGrid grid)
@@ -348,22 +348,24 @@ namespace MapGenAI.Patches
             float centerX = pos.x * mapW;
             float centerZ = pos.y * mapH;
 
-            int mapHalf = (int)(Mathf.Min(mapW, mapH) / 2f);
-            // Map Designer: donutSize = size * mapHalf * 0.78
+            float mapHalf = Mathf.Min(mapW, mapH) / 2f;
             float ringRadius = size * mapHalf * 0.78f;
+            // 링 너비: 반경의 20% (좁은 능선)
+            float bandwidth = Mathf.Max(ringRadius * 0.2f, 5f);
+            float bw2 = 2f * bandwidth * bandwidth;
+            // 링에서 3 sigma 밖은 기여 < 0.01 → 스킵
+            float maxDist = ringRadius + bandwidth * 3f;
 
             foreach (var cell in CellRect.WholeMap(map))
             {
                 float dx = cell.x - centerX;
                 float dz = cell.z - centerZ;
-                float distance = Mathf.Sqrt(dx * dx + dz * dz);
-                // Map Designer Donut: hillDonutAmt 기본값이 -0.9 (음수 = 링에 산)
-                // 유저는 "strong"(양수)으로 요청하므로 부호 반전 필요
-                distance -= ringRadius;
-                distance *= 3.5f;
-                distance = Mathf.Abs(distance);
-                // 부호 반전: 양수 strength → 링에 산 (Map Designer -0.9와 동일 효과)
-                grid[cell] += -strength * (distance - ringRadius) / mapHalf;
+                float dist = Mathf.Sqrt(dx * dx + dz * dz);
+                if (dist > maxDist) continue;
+                float offset = dist - ringRadius;
+                // Gaussian: 링 능선에서 최대, 멀어질수록 0으로 수렴 (음수 없음)
+                float gaussian = Mathf.Exp(-(offset * offset) / bw2);
+                grid[cell] += strength * gaussian;
             }
         }
     }
