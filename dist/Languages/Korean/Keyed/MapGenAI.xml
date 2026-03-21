@@ -81,5 +81,5 @@
   <MapGenAI_Settings_ColApiKey>API 키 / URL</MapGenAI_Settings_ColApiKey>
   <MapGenAI_Settings_ColModel>모델</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>활성화됨</MapGenAI_Settings_ColEnabled>
-  <MapGenAI_Settings_NoModels>모델을 찾을 수 없음 — API 키를 확인하세요</MapGenAI_Settings_NoModels>
+
 </LanguageData>

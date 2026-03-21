@@ -81,5 +81,5 @@
   <MapGenAI_Settings_ColApiKey>API 密钥 / URL</MapGenAI_Settings_ColApiKey>
   <MapGenAI_Settings_ColModel>模型</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>已启用</MapGenAI_Settings_ColEnabled>
-  <MapGenAI_Settings_NoModels>未找到模型 — 请检查 API 密钥</MapGenAI_Settings_NoModels>
+
 </LanguageData>

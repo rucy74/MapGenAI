@@ -510,7 +510,7 @@ namespace MapGenAI
             else
             {
                 // 목록이 비어있거나 오류 — 에러 메시지 저장
-                _fetchErrors[_fetchDoneProvider] = "MapGenAI_Settings_NoModels".Translate();
+                _fetchErrors[_fetchDoneProvider] = "No API key";
             }
 
             _fetchDoneConfig = null;
