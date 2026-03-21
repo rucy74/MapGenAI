@@ -52,16 +52,38 @@ namespace MapGenAI.LLM
 
         private string ExtractContent(string json)
         {
-            var marker = "\"content\": \"";
-            var start = json.IndexOf(marker);
+            // 공백 있는 포맷("content": "...") 과 compact 포맷("content":"...") 모두 처리
+            string marker = "\"content\": \"";
+            int start = json.IndexOf(marker);
+            if (start < 0)
+            {
+                marker = "\"content\":\"";
+                start = json.IndexOf(marker);
+            }
             if (start < 0) return null;
             start += marker.Length;
+
             var sb = new StringBuilder();
             for (int i = start; i < json.Length; i++)
             {
-                if (json[i] == '"' && json[i - 1] != '\\') break;
-                sb.Append(json[i] == '\\' && i + 1 < json.Length && json[i + 1] == 'n' ? '\n' : json[i]);
-                if (json[i] == '\\') i++;
+                if (json[i] == '\\' && i + 1 < json.Length)
+                {
+                    char next = json[i + 1];
+                    if (next == 'n')       { sb.Append('\n'); i++; }
+                    else if (next == 'r')  { i++; }
+                    else if (next == 't')  { sb.Append('\t'); i++; }
+                    else if (next == '"')  { sb.Append('"');  i++; }
+                    else if (next == '\\') { sb.Append('\\'); i++; }
+                    else                   { sb.Append(json[i]); }
+                }
+                else if (json[i] == '"')
+                {
+                    break;
+                }
+                else
+                {
+                    sb.Append(json[i]);
+                }
             }
             return sb.ToString();
         }
