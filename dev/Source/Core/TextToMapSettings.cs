@@ -20,15 +20,20 @@ namespace MapGenAI
         public string localBaseUrl = "http://localhost:11434";
         public string localModel = "llama3";
 
+        public string openRouterApiKey = "";
+        public string openRouterModel = "openai/gpt-4o-mini";
+
         // 동적으로 불러온 모델 목록 (저장 안 함)
         private List<string> _geminiModels = new List<string>();
         private List<string> _openAiModels = new List<string>();
         private List<string> _localModels = new List<string>();
+        private List<string> _openRouterModels = new List<string>();
 
         // 토글 상태
         private bool _showGeminiList = false;
         private bool _showOpenAiList = false;
         private bool _showLocalList = false;
+        private bool _showOpenRouterList = false;
 
         // 스크롤 위치
         private Vector2 _modelScrollPos = Vector2.zero;
@@ -53,6 +58,8 @@ namespace MapGenAI
             Scribe_Values.Look(ref openAiModel, "openAiModel", "gpt-4o-mini");
             Scribe_Values.Look(ref localBaseUrl, "localBaseUrl", "http://localhost:11434");
             Scribe_Values.Look(ref localModel, "localModel", "llama3");
+            Scribe_Values.Look(ref openRouterApiKey, "openRouterApiKey", "");
+            Scribe_Values.Look(ref openRouterModel, "openRouterModel", "openai/gpt-4o-mini");
             base.ExposeData();
         }
 
@@ -71,6 +78,8 @@ namespace MapGenAI
                 activeProvider = LLMProvider.OpenAI;
             if (listing.RadioButton("MapGenAI_Settings_LocalProvider".Translate(), activeProvider == LLMProvider.Local))
                 activeProvider = LLMProvider.Local;
+            if (listing.RadioButton("OpenRouter", activeProvider == LLMProvider.OpenRouter))
+                activeProvider = LLMProvider.OpenRouter;
 
             listing.GapLine();
 
@@ -88,6 +97,12 @@ namespace MapGenAI
 
             else if (activeProvider == LLMProvider.Local)
                 DrawLocalSection(listing, inRect);
+
+            else if (activeProvider == LLMProvider.OpenRouter)
+                DrawProviderSection(listing, inRect, LLMProvider.OpenRouter,
+                    ref openRouterApiKey, "MapGenAI_Settings_OpenRouterKey".Translate(),
+                    ref openRouterModel, _openRouterModels,
+                    ref _showOpenRouterList);
 
             listing.End();
         }
@@ -244,6 +259,7 @@ namespace MapGenAI
             {
                 if (_fetchedProvider == LLMProvider.Gemini) _geminiModels = models;
                 else if (_fetchedProvider == LLMProvider.OpenAI) _openAiModels = models;
+                else if (_fetchedProvider == LLMProvider.OpenRouter) _openRouterModels = models;
                 else _localModels = models;
             }
 
@@ -265,6 +281,7 @@ namespace MapGenAI
                         LLMProvider.Gemini => await FetchGeminiModels(),
                         LLMProvider.OpenAI => await FetchOpenAIModels(),
                         LLMProvider.Local => await FetchLocalModels(),
+                        LLMProvider.OpenRouter => await FetchOpenRouterModels(),
                         _ => new List<string>()
                     };
 
@@ -329,6 +346,20 @@ namespace MapGenAI
             return models.OrderBy(m => m).ToList();
         }
 
+        private async Task<List<string>> FetchOpenRouterModels()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://openrouter.ai/api/v1/models");
+            request.Headers.Add("Authorization", $"Bearer {openRouterApiKey}");
+            var resp = await Http.SendAsync(request);
+            var json = await resp.Content.ReadAsStringAsync();
+            var models = new List<string>();
+            var parts = json.Split('"');
+            for (int i = 0; i < parts.Length - 2; i++)
+                if (parts[i] == "id")
+                    models.Add(parts[i + 2]);
+            return models.OrderBy(m => m).ToList();
+        }
+
         private async Task<List<string>> FetchLocalModels()
         {
             var models = new List<string>();
@@ -354,5 +385,5 @@ namespace MapGenAI
         }
     }
 
-    public enum LLMProvider { Gemini, OpenAI, Local }
+    public enum LLMProvider { Gemini, OpenAI, Local, OpenRouter }
 }

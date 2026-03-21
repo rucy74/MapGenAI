@@ -59,6 +59,7 @@
   <MapGenAI_Settings_LocalProvider>Local (Ollama / LM Studio)</MapGenAI_Settings_LocalProvider>
   <MapGenAI_Settings_GeminiKey>Gemini API Key</MapGenAI_Settings_GeminiKey>
   <MapGenAI_Settings_OpenAIKey>OpenAI API Key</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_OpenRouterKey>OpenRouter API Key</MapGenAI_Settings_OpenRouterKey>
   <MapGenAI_Settings_Loading>Loading...</MapGenAI_Settings_Loading>
   <MapGenAI_Settings_Collapse>▲ Collapse (current: {0})</MapGenAI_Settings_Collapse>
   <MapGenAI_Settings_SelectModel>▼ Select model (current: {0})</MapGenAI_Settings_SelectModel>

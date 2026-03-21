@@ -32,6 +32,7 @@ namespace MapGenAI.LLM
                 LLMProvider.Gemini => new GeminiClient(settings.geminiApiKey, settings.geminiModel),
                 LLMProvider.OpenAI => new OpenAIClient(settings.openAiApiKey, settings.openAiModel),
                 LLMProvider.Local => new LocalClient(settings.localBaseUrl, settings.localModel),
+                LLMProvider.OpenRouter => new OpenAIClient(settings.openRouterApiKey, settings.openRouterModel, "https://openrouter.ai"),
                 _ => new GeminiClient(settings.geminiApiKey, settings.geminiModel)
             };
         }

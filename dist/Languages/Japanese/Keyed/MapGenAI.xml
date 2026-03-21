@@ -59,6 +59,7 @@
   <MapGenAI_Settings_LocalProvider>ローカル（Ollama / LM Studio）</MapGenAI_Settings_LocalProvider>
   <MapGenAI_Settings_GeminiKey>Gemini APIキー</MapGenAI_Settings_GeminiKey>
   <MapGenAI_Settings_OpenAIKey>OpenAI APIキー</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_OpenRouterKey>OpenRouter APIキー</MapGenAI_Settings_OpenRouterKey>
   <MapGenAI_Settings_Loading>読み込み中...</MapGenAI_Settings_Loading>
   <MapGenAI_Settings_Collapse>▲ 折りたたむ（現在：{0}）</MapGenAI_Settings_Collapse>
   <MapGenAI_Settings_SelectModel>▼ モデル選択（現在：{0}）</MapGenAI_Settings_SelectModel>

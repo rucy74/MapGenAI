@@ -59,6 +59,7 @@
   <MapGenAI_Settings_LocalProvider>本地（Ollama / LM Studio）</MapGenAI_Settings_LocalProvider>
   <MapGenAI_Settings_GeminiKey>Gemini API 密钥</MapGenAI_Settings_GeminiKey>
   <MapGenAI_Settings_OpenAIKey>OpenAI API 密钥</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_OpenRouterKey>OpenRouter API 密钥</MapGenAI_Settings_OpenRouterKey>
   <MapGenAI_Settings_Loading>加载中...</MapGenAI_Settings_Loading>
   <MapGenAI_Settings_Collapse>▲ 收起（当前：{0}）</MapGenAI_Settings_Collapse>
   <MapGenAI_Settings_SelectModel>▼ 选择模型（当前：{0}）</MapGenAI_Settings_SelectModel>

@@ -59,6 +59,7 @@
   <MapGenAI_Settings_LocalProvider>로컬 (Ollama / LM Studio)</MapGenAI_Settings_LocalProvider>
   <MapGenAI_Settings_GeminiKey>Gemini API 키</MapGenAI_Settings_GeminiKey>
   <MapGenAI_Settings_OpenAIKey>OpenAI API 키</MapGenAI_Settings_OpenAIKey>
+  <MapGenAI_Settings_OpenRouterKey>OpenRouter API 키</MapGenAI_Settings_OpenRouterKey>
   <MapGenAI_Settings_Loading>불러오는 중...</MapGenAI_Settings_Loading>
   <MapGenAI_Settings_Collapse>▲ 접기 (현재: {0})</MapGenAI_Settings_Collapse>
   <MapGenAI_Settings_SelectModel>▼ 모델 선택 (현재: {0})</MapGenAI_Settings_SelectModel>
