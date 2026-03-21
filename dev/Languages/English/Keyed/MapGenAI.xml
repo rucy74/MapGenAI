@@ -81,4 +81,5 @@
   <MapGenAI_Settings_ColApiKey>API Key / URL</MapGenAI_Settings_ColApiKey>
   <MapGenAI_Settings_ColModel>Model</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>Enabled</MapGenAI_Settings_ColEnabled>
+  <MapGenAI_Settings_NoModels>No models found — check API key</MapGenAI_Settings_NoModels>
 </LanguageData>

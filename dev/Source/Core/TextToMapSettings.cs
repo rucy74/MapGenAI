@@ -34,6 +34,10 @@ namespace MapGenAI
         private List<string> _fetchDoneList;
         private ApiConfig _fetchDoneConfig;
 
+        // 프로바이더별 에러 메시지
+        private readonly Dictionary<LLMProvider, string> _fetchErrors
+            = new Dictionary<LLMProvider, string>();
+
         private static readonly HttpClient Http = new HttpClient();
 
         // ── ExposeData ───────────────────────────────────────────────────────
@@ -410,20 +414,34 @@ namespace MapGenAI
             }
 
             bool fetching = _fetchingProviders.Contains(config.Provider);
-            string label = fetching
-                ? "..."
-                : (string.IsNullOrWhiteSpace(config.SelectedModel) ? "▼ Select" : config.SelectedModel);
+            bool hasError = _fetchErrors.TryGetValue(config.Provider, out string errMsg);
+            bool hasCached = _cachedModels.TryGetValue(config.Provider, out var cached) && cached.Count > 0;
 
-            if (fetching) GUI.color = Color.gray;
+            string label;
+            if (fetching)
+                label = "...";
+            else if (hasError)
+                label = errMsg;
+            else if (!string.IsNullOrWhiteSpace(config.SelectedModel))
+                label = config.SelectedModel;
+            else
+                label = "▼ Select";
+
+            if (fetching)       GUI.color = Color.gray;
+            else if (hasError)  GUI.color = new Color(1f, 0.55f, 0.15f);  // 주황색
             bool clicked = Widgets.ButtonText(rect, label);
-            if (fetching) GUI.color = Color.white;
+            GUI.color = Color.white;
 
             if (clicked && !fetching)
             {
-                if (_cachedModels.TryGetValue(config.Provider, out var cached) && cached.Count > 0)
+                if (hasCached)
                     ShowModelFloatMenu(config, cached);
                 else
+                {
+                    // 에러 상태에서 클릭 → 재시도
+                    _fetchErrors.Remove(config.Provider);
                     FetchModelsForConfig(config);
+                }
             }
         }
 
@@ -485,8 +503,14 @@ namespace MapGenAI
             if (_fetchDoneList != null && _fetchDoneList.Count > 0)
             {
                 _cachedModels[_fetchDoneProvider] = _fetchDoneList;
+                _fetchErrors.Remove(_fetchDoneProvider);
                 if (_fetchDoneConfig != null)
                     ShowModelFloatMenu(_fetchDoneConfig, _fetchDoneList);
+            }
+            else
+            {
+                // 목록이 비어있거나 오류 — 에러 메시지 저장
+                _fetchErrors[_fetchDoneProvider] = "MapGenAI_Settings_NoModels".Translate();
             }
 
             _fetchDoneConfig = null;

@@ -81,4 +81,5 @@
   <MapGenAI_Settings_ColApiKey>APIキー / URL</MapGenAI_Settings_ColApiKey>
   <MapGenAI_Settings_ColModel>モデル</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>有効</MapGenAI_Settings_ColEnabled>
+  <MapGenAI_Settings_NoModels>モデルが見つかりません — APIキーを確認してください</MapGenAI_Settings_NoModels>
 </LanguageData>
