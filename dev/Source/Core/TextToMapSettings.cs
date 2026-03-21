@@ -33,6 +33,7 @@ namespace MapGenAI
         private LLMProvider _fetchDoneProvider;
         private List<string> _fetchDoneList;
         private ApiConfig _fetchDoneConfig;
+        private System.Exception _fetchException;
 
         // 프로바이더별 에러 메시지
         private readonly Dictionary<LLMProvider, string> _fetchErrors
@@ -482,9 +483,10 @@ namespace MapGenAI
 
                     _fetchDoneList = models;
                 }
-                catch
+                catch (System.Exception ex)
                 {
                     _fetchDoneList = new List<string>();
+                    _fetchException = ex;
                 }
                 _fetchDoneProvider = provider;
                 _modelsFetchDone = true;
@@ -508,10 +510,15 @@ namespace MapGenAI
             }
             else
             {
-                // 목록이 비어있거나 오류 — 에러 메시지 저장
-                _fetchErrors[_fetchDoneProvider] = "No API key";
+                var ex = _fetchException;
+                bool isAuthError = ex != null && (
+                    ex.Message.Contains("401") || ex.Message.Contains("403") ||
+                    ex.Message.Contains("Unauthorized") || ex.Message.Contains("Forbidden"));
+                _fetchErrors[_fetchDoneProvider] = isAuthError ? "No API key" : "Model error";
+                Verse.Log.Warning($"[MapGenAI] 모델 목록 fetch 실패 ({_fetchDoneProvider}): {(ex != null ? ex.Message : "empty list")}");
             }
 
+            _fetchException = null;
             _fetchDoneConfig = null;
             _fetchDoneList = null;
         }
@@ -555,6 +562,8 @@ namespace MapGenAI
                 request.Headers.Add("Authorization", $"Bearer {apiKey}");
             var resp = await Http.SendAsync(request);
             var json = await resp.Content.ReadAsStringAsync();
+            if (!resp.IsSuccessStatusCode)
+                throw new System.Exception($"HTTP {(int)resp.StatusCode}: {json}");
             var models = new List<string>();
             var parts = json.Split('"');
             for (int i = 0; i < parts.Length - 2; i++)

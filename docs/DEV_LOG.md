@@ -2,6 +2,41 @@
 
 ---
 
+## 2026-03-21 (2차)
+
+### 프로젝트 리뷰 문서 생성
+
+`review/` 디렉토리에 4개 문서 생성:
+- `project_brief.md` — 프로젝트 목적, 기술 스택, 주요 기능 요약
+- `project_structure.md` — 전체 디렉토리 트리 + 각 파일 역할 주석
+- `project_flow.md` — 데이터 흐름, 맵 생성 파이프라인, LLM 클라이언트 구조, Undo/Reset 상태 다이어그램 (Mermaid)
+- `quick_start.md` — 개발 환경 설정, 빌드, API 테스트, 트러블슈팅
+
+---
+
+## 2026-03-21
+
+### Settings UI 개편 (RimTalk 스타일)
+- Simple/Advanced 모드 분리 — Simple은 Gemini 키 하나만 입력
+- 11개 LLM 프로바이더 지원: Gemini, OpenAI, DeepSeek, Grok, GLM, GLMCoding, AlibabaIntl, AlibabaCN, OpenRouter, Local, Custom
+- 멀티 API 키 리스트 + 우선순위 fallback (실패 시 자동 다음 키 시도)
+- 모델 선택 드롭다운 — API fetch 후 FloatMenu로 선택
+
+### 버그 수정: OpenRouter 연동
+- base URL 오류: `/v1` → `/api/v1`
+- compact JSON 파싱 실패: `"content":"..."` (공백 없음) 형태 처리 추가
+- HTTP 오류 시 `return null` → `throw Exception` — fallback이 실제로 동작하지 않던 문제 수정
+- 프로바이더 변경 시 모델명 자동 리셋
+
+### 버그 수정: Ring 지형 버그
+**현상**: ring 모양 요청 시 기존 산이 사라지고 초승달 형태가 됨.
+
+**근본 원인**: Map Designer Donut 공식은 평평한 베이스 지형 전제. 링에서 멀어질수록 큰 음수 elevation을 적용해 기존 산을 파괴. center가 맵 중앙에서 벗어나면 한쪽만 보이는 초승달 형태 발생.
+
+**수정**: `ApplyRing()` 공식을 Gaussian 프로파일로 교체. 링 능선만 올리고 나머지 지형은 건드리지 않음.
+
+---
+
 ## 2026-03-17 (3차)
 
 ### 버그 수정: 강 방향 역전

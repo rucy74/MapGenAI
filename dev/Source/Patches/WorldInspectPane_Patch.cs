@@ -236,7 +236,7 @@ namespace MapGenAI.Patches
         [DebugAction("TextToMap", "API 연결 테스트", allowedGameStates = AllowedGameStates.Playing)]
         static void TestAPI()
         {
-            var client = LLM.LLMClientFactory.Create(MapGenAIMod.Settings);
+            var client = LLM.LLMClientFactory.Create(MapGenAIMod.Settings.GetActiveConfig(), MapGenAIMod.Settings.localBaseUrl);
             System.Threading.Tasks.Task.Run(async () =>
             {
                 var response = await client.SendChatAsync(

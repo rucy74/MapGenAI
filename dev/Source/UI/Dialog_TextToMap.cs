@@ -246,15 +246,28 @@ params 스키마:
 {""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes 가이드:
-- slope: 한쪽이 높은 경사면. direction으로 높은 방향 지정. 예: direction=left → 왼쪽이 높음.
-- radial: 가장자리가 높고 중심이 낮음(분지/요새). size로 산맥 두께 조절. 산악 요새=radial(strong).
-- split: 축 방향 분할. positive strength=협곡(양쪽 산+가운데 골짜기), negative strength=산맥(가운데 산+양쪽 평지). direction으로 축 방향, gap으로 폭.
-- bump: 가우시안 돌출/함몰. position으로 위치, size로 크기. negative strength=함몰. fill=water로 호수 생성.
-- noise: 펄린 노이즈로 불규칙 지형. size가 클수록 큰 덩어리.
-- ring: 도넛 형태 산맥. position으로 중심, size로 링 반경, strength로 높이. 분화구/원형 요새 지형에 적합.
-- 여러 shape를 조합 가능 (additive). 복잡한 지형에는 elevation_shapes를, 단순 요청에는 hills를 사용.
-- hills와 elevation_shapes를 동시에 쓰지 마세요. elevation_shapes가 있으면 hills는 무시됩니다.
-- 산맥=split+negative strength(가운데 높음). 협곡=split+positive strength(가운데 낮음). 대각선 산맥=split(direction=top_left, strength=negative_strong, gap=tiny).
+모든 shape는 가산 적용(additive)된다. 여러 개를 조합하면 어떤 모양이든 표현 가능.
+좌표계: x=0 왼쪽, x=1 오른쪽, z=0 아래, z=1 위. position=""[x,z]""로 정밀 지정.
+
+primitive:
+- slope: 전체 맵 경사. direction=높은 쪽(left→왼쪽 높음). 단순 경사에 사용.
+- radial: 가장자리 높고 중심 낮음(분지). negative_strength=반전(중심 높음, 주변 낮음).
+- split: 축 분할. negative_strength=중앙 산맥, positive_strength=중앙 협곡. direction=축 방향, gap=폭.
+- bump: ★핵심 도구★ 원하는 위치에 언덕 또는 호수를 배치. position=""[x,z]""로 정확한 위치 지정.
+  negative_strength=움푹한 지형. fill=""water""=호수(크기/위치 자유).
+- noise: 펄린 노이즈. 불규칙 자연 지형. size 클수록 큰 덩어리.
+- ring: 원형 산맥(도넛). position=중심, size=반경. 분화구/원형 요새.
+
+★복잡한 모양은 bump 여러 개로 조합하라. 좌표를 직접 계산해서 배치.★
+별 모양 언덕(5봉): bump x5, 72도 간격 배치
+  [0.5,0.85] [0.79,0.41] [0.65,0.09] [0.35,0.09] [0.21,0.41]
+U자형 산: bump([0.15,0.5],strong) + bump([0.5,0.15],medium) + bump([0.85,0.5],strong)
+L자형 산: bump([0.2,0.8]) + bump([0.2,0.5]) + bump([0.2,0.2]) + bump([0.5,0.2])
+초승달 호수: bump([0.5,0.5],fill=water,large) + bump([0.6,0.6],negative_strong,medium)
+여러 호수: bump([0.3,0.7],fill=water,small) + bump([0.7,0.3],fill=water,small)
+분화구 호수: ring(medium) + bump([0.5,0.5],fill=water,small)
+산 위 호수: bump([0.5,0.7],strong) + bump([0.5,0.75],fill=water,small)
+hills와 elevation_shapes를 동시에 쓰지 마세요. elevation_shapes가 있으면 hills는 무시됩니다.
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
@@ -277,15 +290,24 @@ params schema:
 {""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes guide:
-- slope: A slope where one side is higher. Use direction to set the high side. Example: direction=left means left side is higher.
-- radial: Edges are high, center is low (basin/fortress). Use size to control mountain thickness. Mountain fortress=radial(strong).
-- split: Axis-based split. Positive strength=canyon (mountains on both sides, valley in center). Negative strength=mountain range (mountain in center, plains on sides). Use direction for axis, gap for width.
-- bump: Gaussian bump/depression. Use position for location, size for extent. Negative strength=depression. fill=water to create a lake.
-- noise: Perlin noise for irregular terrain. Larger size means bigger clusters.
-- ring: Donut-shaped mountain range. Use position for center, size for ring radius, strength for height. Suitable for craters/circular fortress terrain.
-- Multiple shapes can be combined (additive). Use elevation_shapes for complex terrain, hills for simple requests.
-- Do not use hills and elevation_shapes together. If elevation_shapes is present, hills is ignored.
-- Mountain range=split+negative strength (center high). Canyon=split+positive strength (center low). Diagonal range=split(direction=top_left, strength=negative_strong, gap=tiny).
+All shapes are applied additively. Combine multiple shapes to express any terrain.
+Coordinate system: x=0 left, x=1 right, z=0 bottom, z=1 top. Use position=""[x,z]"" for precise placement.
+Primitives:
+- slope: Full-map slope. direction=high side (left→left side higher).
+- radial: Edges high, center low (basin). Use negative_strength to invert.
+- split: Axis split. negative_strength=center mountain range, positive_strength=center canyon.
+- bump: ★KEY TOOL★ Place a hill or lake anywhere. position=""[x,z]"". fill=""water""=lake.
+- noise: Perlin noise for irregular natural terrain.
+- ring: Circular mountain range (donut). For craters/circular fortresses.
+★For complex shapes, combine multiple bumps with calculated coordinates.★
+Star-shaped hills (5 peaks): bump x5 at 72° intervals: [0.5,0.85][0.79,0.41][0.65,0.09][0.35,0.09][0.21,0.41]
+U-shaped mountain: bump([0.15,0.5]) + bump([0.5,0.15]) + bump([0.85,0.5])
+L-shaped mountain: bump([0.2,0.8]) + bump([0.2,0.5]) + bump([0.2,0.2]) + bump([0.5,0.2])
+Crescent lake: bump([0.5,0.5],fill=water,large) + bump([0.6,0.6],negative_strong,medium)
+Multiple lakes: bump([0.3,0.7],fill=water,small) + bump([0.7,0.3],fill=water,small)
+Crater lake: ring(medium) + bump([0.5,0.5],fill=water,small)
+Lake on mountain: bump([0.5,0.7],strong) + bump([0.5,0.75],fill=water,small)
+Do not use hills and elevation_shapes together. If elevation_shapes is present, hills is ignored.
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]

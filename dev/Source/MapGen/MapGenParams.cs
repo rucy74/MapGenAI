@@ -623,12 +623,12 @@ namespace MapGenAI.MapGen
                 string shapesJson = $"[{string.Join(",", shapeJsonList)}]";
                 if (isKo)
                 {
-                    sb.AppendLine($"- [중요] elevation_shapes (이 목록을 반드시 output에 포함하고 새 shape는 추가하세요. 전체 제거 시 elevation_shapes:[]):");
+                    sb.AppendLine($"- [중요] elevation_shapes — 기존 shape를 절대 삭제하거나 변경하지 마세요. 새 shape만 추가하세요. 이 목록 전체를 output에 반드시 포함. 전체 제거 시에만 elevation_shapes:[]:");
                     sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
                 }
                 else
                 {
-                    sb.AppendLine($"- [IMPORTANT] elevation_shapes (MUST include this list in output; append new shapes. To clear all: elevation_shapes:[]):");
+                    sb.AppendLine($"- [IMPORTANT] elevation_shapes — NEVER delete or modify existing shapes. ONLY append new shapes. MUST include ALL of these in output. To clear all: elevation_shapes:[]:");
                     sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
                 }
             }
