@@ -331,8 +331,7 @@ namespace MapGenAI
                     options.Add(new FloatMenuOption(LLMProviderRegistry.GetLabel(pCopy), () =>
                     {
                         cfg.Provider = pCopy;
-                        if (string.IsNullOrWhiteSpace(cfg.SelectedModel))
-                            cfg.SelectedModel = LLMProviderRegistry.GetDefaultModel(pCopy);
+                        cfg.SelectedModel = LLMProviderRegistry.GetDefaultModel(pCopy);
                     }));
                 }
                 Find.WindowStack.Add(new FloatMenu(options));
