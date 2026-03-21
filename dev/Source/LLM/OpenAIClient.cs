@@ -44,7 +44,7 @@ namespace MapGenAI.LLM
             if (!response.IsSuccessStatusCode)
             {
                 Log.Error($"[MapGenAI] OpenAI error: {json}");
-                return null;
+                throw new System.Exception($"HTTP {(int)response.StatusCode}: {json}");
             }
 
             return ExtractContent(json);

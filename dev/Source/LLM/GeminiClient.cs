@@ -42,7 +42,7 @@ namespace MapGenAI.LLM
             if (!response.IsSuccessStatusCode)
             {
                 Log.Error($"[MapGenAI] Gemini error: {json}");
-                return null;
+                throw new System.Exception($"HTTP {(int)response.StatusCode}: {json}");
             }
 
             // 간단한 JSON 파싱 (text 필드 추출)
