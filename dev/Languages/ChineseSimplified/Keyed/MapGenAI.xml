@@ -71,4 +71,14 @@
   <MapGenAI_Settings_SimpleDesc>默认使用 gemini-2.5-flash。支持免费套餐。</MapGenAI_Settings_SimpleDesc>
   <MapGenAI_Settings_SwitchAdvanced>切换到高级设置</MapGenAI_Settings_SwitchAdvanced>
   <MapGenAI_Settings_SwitchSimple>切换到简单设置</MapGenAI_Settings_SwitchSimple>
+  <MapGenAI_Settings_CloudService>云端服务</MapGenAI_Settings_CloudService>
+  <MapGenAI_Settings_CloudServiceDesc>使用 Google AI、OpenAI 等在线 AI 服务。需要网络连接和 API 密钥。</MapGenAI_Settings_CloudServiceDesc>
+  <MapGenAI_Settings_LocalService>本地服务</MapGenAI_Settings_LocalService>
+  <MapGenAI_Settings_LocalServiceDesc>使用在本机运行的本地 AI 服务器（Ollama、LM Studio 等）。需要支持 OpenAI API。</MapGenAI_Settings_LocalServiceDesc>
+  <MapGenAI_Settings_CloudConfig>云端 API 配置</MapGenAI_Settings_CloudConfig>
+  <MapGenAI_Settings_CloudConfigDesc>若启用多个 API，系统将按顺序尝试。某个 API 失败时，自动尝试下一个已启用的 API。</MapGenAI_Settings_CloudConfigDesc>
+  <MapGenAI_Settings_ColService>服务</MapGenAI_Settings_ColService>
+  <MapGenAI_Settings_ColApiKey>API 密钥 / URL</MapGenAI_Settings_ColApiKey>
+  <MapGenAI_Settings_ColModel>模型</MapGenAI_Settings_ColModel>
+  <MapGenAI_Settings_ColEnabled>已启用</MapGenAI_Settings_ColEnabled>
 </LanguageData>

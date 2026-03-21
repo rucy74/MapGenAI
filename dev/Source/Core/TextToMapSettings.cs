@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Verse;
 using UnityEngine;
 
@@ -9,84 +6,116 @@ namespace MapGenAI
 {
     public class MapGenAISettings : ModSettings
     {
-        public LLMProvider activeProvider = LLMProvider.Gemini;
+        // ── 저장 필드 ───────────────────────────────────────────────────────
+        public bool useSimpleMode = true;
+        public string geminiApiKey = "";            // Simple 모드 전용 키
 
-        public string geminiApiKey = "";
-        public string geminiModel = "gemini-2.5-flash";
-
-        public string openAiApiKey = "";
-        public string openAiModel = "gpt-4o-mini";
+        public bool useCloudProviders = true;       // Advanced: Cloud vs Local 토글
+        public List<ApiConfig> cloudConfigs = new List<ApiConfig>();
+        public int currentConfigIndex = 0;
 
         public string localBaseUrl = "http://localhost:11434";
         public string localModel = "llama3";
 
-        public string openRouterApiKey = "";
-        public string openRouterModel = "openai/gpt-4o-mini";
+        // ── UI 상태 (저장 안 함) ─────────────────────────────────────────────
+        private Vector2 _configScrollPos = Vector2.zero;
 
-        public bool useSimpleMode = true;
-
-        // 동적으로 불러온 모델 목록 (저장 안 함)
-        private List<string> _geminiModels = new List<string>();
-        private List<string> _openAiModels = new List<string>();
-        private List<string> _localModels = new List<string>();
-        private List<string> _openRouterModels = new List<string>();
-
-        // 토글 상태
-        private bool _showGeminiList = false;
-        private bool _showOpenAiList = false;
-        private bool _showLocalList = false;
-        private bool _showOpenRouterList = false;
-
-        // 스크롤 위치
-        private Vector2 _modelScrollPos = Vector2.zero;
-
-        private bool _isFetchingModels = false;
-        private string _fetchStatus = "";
-
-        // LongEventHandler 대신 직접 메인 스레드 전달용 (volatile)
-        private volatile bool _modelsFetched = false;
-        private volatile string _fetchedStatus = "";
-        private List<string> _fetchedModels = null;
-        private LLMProvider _fetchedProvider;
-
-        private static readonly HttpClient Http = new HttpClient();
-
+        // ── ExposeData ───────────────────────────────────────────────────────
         public override void ExposeData()
         {
-            Scribe_Values.Look(ref activeProvider, "activeProvider", LLMProvider.Gemini);
+            Scribe_Values.Look(ref useSimpleMode, "useSimpleMode", true);
             Scribe_Values.Look(ref geminiApiKey, "geminiApiKey", "");
-            Scribe_Values.Look(ref geminiModel, "geminiModel", "gemini-2.5-flash");
-            Scribe_Values.Look(ref openAiApiKey, "openAiApiKey", "");
-            Scribe_Values.Look(ref openAiModel, "openAiModel", "gpt-4o-mini");
+            Scribe_Values.Look(ref useCloudProviders, "useCloudProviders", true);
+            Scribe_Collections.Look(ref cloudConfigs, "cloudConfigs", LookMode.Deep);
+            Scribe_Values.Look(ref currentConfigIndex, "currentConfigIndex", 0);
             Scribe_Values.Look(ref localBaseUrl, "localBaseUrl", "http://localhost:11434");
             Scribe_Values.Look(ref localModel, "localModel", "llama3");
-            Scribe_Values.Look(ref openRouterApiKey, "openRouterApiKey", "");
-            Scribe_Values.Look(ref openRouterModel, "openRouterModel", "openai/gpt-4o-mini");
-            Scribe_Values.Look(ref useSimpleMode, "useSimpleMode", true);
+
+            if (cloudConfigs == null) cloudConfigs = new List<ApiConfig>();
             base.ExposeData();
         }
 
+        // ── Active Config 로직 ───────────────────────────────────────────────
+        /// <summary>현재 활성 API 설정 반환. Simple 모드이면 Gemini 설정 반환.</summary>
+        public ApiConfig GetActiveConfig()
+        {
+            if (useSimpleMode)
+            {
+                return new ApiConfig
+                {
+                    IsEnabled = true,
+                    Provider = LLMProvider.Gemini,
+                    ApiKey = geminiApiKey,
+                    SelectedModel = "gemini-2.5-flash"
+                };
+            }
+
+            if (!useCloudProviders)
+            {
+                return new ApiConfig
+                {
+                    IsEnabled = true,
+                    Provider = LLMProvider.Local,
+                    CustomBaseUrl = localBaseUrl,
+                    SelectedModel = localModel
+                };
+            }
+
+            if (cloudConfigs == null || cloudConfigs.Count == 0) return null;
+
+            for (int i = 0; i < cloudConfigs.Count; i++)
+            {
+                int idx = (currentConfigIndex + i) % cloudConfigs.Count;
+                if (cloudConfigs[idx].IsValid())
+                {
+                    currentConfigIndex = idx;
+                    return cloudConfigs[idx];
+                }
+            }
+            return null;
+        }
+
+        /// <summary>다음 유효한 config로 이동. 성공 시 true 반환.</summary>
+        public bool TryNextConfig()
+        {
+            if (useSimpleMode || !useCloudProviders) return false;
+            if (cloudConfigs == null || cloudConfigs.Count <= 1) return false;
+
+            int original = currentConfigIndex;
+            for (int i = 1; i < cloudConfigs.Count; i++)
+            {
+                int next = (original + i) % cloudConfigs.Count;
+                if (cloudConfigs[next].IsValid())
+                {
+                    currentConfigIndex = next;
+                    Write();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ── DoWindowContents ─────────────────────────────────────────────────
         public void DoWindowContents(Rect inRect)
         {
-            ApplyPendingModels();
-
             var listing = new Listing_Standard();
             listing.Begin(inRect);
 
             if (useSimpleMode)
-                DrawSimpleSettings(listing);
+                DrawSimpleSettings(listing, inRect);
             else
                 DrawAdvancedSettings(listing, inRect);
 
             listing.End();
         }
 
-        private void DrawSimpleSettings(Listing_Standard listing)
+        // ═══════════════════════════════════════════════════════════════════
+        // Simple Mode
+        // ═══════════════════════════════════════════════════════════════════
+        private void DrawSimpleSettings(Listing_Standard listing, Rect inRect)
         {
-            // API 키 라벨
             listing.Label("MapGenAI_Settings_GeminiKey".Translate());
 
-            // API 키 입력 + "무료 API 키 받기" 버튼 (같은 줄)
             const float btnWidth = 160f;
             const float gap = 6f;
             Rect rowRect = listing.GetRect(30f);
@@ -97,340 +126,268 @@ namespace MapGenAI
             if (Widgets.ButtonText(freeBtnRect, "MapGenAI_Settings_GetFreeKey".Translate()))
                 Application.OpenURL("https://aistudio.google.com/app/apikey");
 
-            // 설명 텍스트 (소자, 회색)
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
-            Rect descRect = listing.GetRect(Text.LineHeight);
-            Widgets.Label(descRect, "MapGenAI_Settings_SimpleDesc".Translate());
+            Widgets.Label(listing.GetRect(Text.LineHeight), "MapGenAI_Settings_SimpleDesc".Translate());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
 
             listing.Gap(12f);
 
-            // 고급 설정으로 전환
             if (listing.ButtonText("MapGenAI_Settings_SwitchAdvanced".Translate()))
                 useSimpleMode = false;
         }
 
+        // ═══════════════════════════════════════════════════════════════════
+        // Advanced Mode
+        // ═══════════════════════════════════════════════════════════════════
         private void DrawAdvancedSettings(Listing_Standard listing, Rect inRect)
         {
-            // 간단한 설정으로 전환
             if (listing.ButtonText("MapGenAI_Settings_SwitchSimple".Translate()))
             {
                 useSimpleMode = true;
-                activeProvider = LLMProvider.Gemini;
+                return;
             }
 
-            listing.Gap(8f);
+            listing.Gap(6f);
 
-            listing.Label("MapGenAI_Settings_Provider".Translate());
-            if (listing.RadioButton("Google Gemini", activeProvider == LLMProvider.Gemini))
-                activeProvider = LLMProvider.Gemini;
-            if (listing.RadioButton("OpenAI (ChatGPT)", activeProvider == LLMProvider.OpenAI))
-                activeProvider = LLMProvider.OpenAI;
-            if (listing.RadioButton("MapGenAI_Settings_LocalProvider".Translate(), activeProvider == LLMProvider.Local))
-                activeProvider = LLMProvider.Local;
-            if (listing.RadioButton("OpenRouter", activeProvider == LLMProvider.OpenRouter))
-                activeProvider = LLMProvider.OpenRouter;
+            // Cloud / Local 토글
+            DrawServiceToggle(listing, inRect);
 
-            listing.GapLine();
+            listing.GapLine(6f);
 
-            if (activeProvider == LLMProvider.Gemini)
-                DrawProviderSection(listing, inRect, LLMProvider.Gemini,
-                    ref geminiApiKey, "MapGenAI_Settings_GeminiKey".Translate(),
-                    ref geminiModel, _geminiModels,
-                    ref _showGeminiList);
-            else if (activeProvider == LLMProvider.OpenAI)
-                DrawProviderSection(listing, inRect, LLMProvider.OpenAI,
-                    ref openAiApiKey, "MapGenAI_Settings_OpenAIKey".Translate(),
-                    ref openAiModel, _openAiModels,
-                    ref _showOpenAiList);
-            else if (activeProvider == LLMProvider.Local)
-                DrawLocalSection(listing, inRect);
-            else if (activeProvider == LLMProvider.OpenRouter)
-                DrawProviderSection(listing, inRect, LLMProvider.OpenRouter,
-                    ref openRouterApiKey, "MapGenAI_Settings_OpenRouterKey".Translate(),
-                    ref openRouterModel, _openRouterModels,
-                    ref _showOpenRouterList);
-        }
+            float usedY = listing.CurHeight;
+            listing.End();
 
-        private void DrawProviderSection(Listing_Standard listing, Rect inRect, LLMProvider provider,
-            ref string apiKey, string apiKeyLabel,
-            ref string currentModel, List<string> modelList,
-            ref bool showList)
-        {
-            listing.Label(apiKeyLabel);
-            apiKey = listing.TextEntry(apiKey);
+            var remainRect = new Rect(inRect.x, inRect.y + usedY, inRect.width, inRect.height - usedY);
 
-            // 버튼: 접기/펼치기 토글
-            string btnText;
-            if (_isFetchingModels && _fetchedProvider == provider)
-                btnText = "MapGenAI_Settings_Loading".Translate();
-            else if (showList)
-                btnText = "MapGenAI_Settings_Collapse".Translate(currentModel);
-            else if (modelList.Count > 0)
-                btnText = "MapGenAI_Settings_SelectModel".Translate(currentModel);
+            if (useCloudProviders)
+                DrawCloudConfigPanel(remainRect);
             else
-                btnText = "MapGenAI_Settings_FetchModels".Translate();
+                DrawLocalPanel(remainRect);
+        }
 
-            if (listing.ButtonText(btnText) && !_isFetchingModels)
+        // ── Service Toggle (Cloud / Local) ───────────────────────────────────
+        private void DrawServiceToggle(Listing_Standard listing, Rect inRect)
+        {
+            Rect cloudRow = listing.GetRect(54f);
+            DrawServiceRow(cloudRow, "MapGenAI_Settings_CloudService".Translate(),
+                "MapGenAI_Settings_CloudServiceDesc".Translate(), useCloudProviders);
+            if (Widgets.ButtonInvisible(cloudRow)) useCloudProviders = true;
+
+            listing.Gap(2f);
+
+            Rect localRow = listing.GetRect(54f);
+            DrawServiceRow(localRow, "MapGenAI_Settings_LocalService".Translate(),
+                "MapGenAI_Settings_LocalServiceDesc".Translate(), !useCloudProviders);
+            if (Widgets.ButtonInvisible(localRow)) useCloudProviders = false;
+        }
+
+        private static void DrawServiceRow(Rect row, string title, string desc, bool selected)
+        {
+            if (selected) Widgets.DrawHighlight(row);
+            else if (Mouse.IsOver(row)) Widgets.DrawLightHighlight(row);
+
+            Text.Font = GameFont.Small;
+            Widgets.Label(new Rect(row.x + 8f, row.y + 6f, row.width - 40f, 22f), title);
+
+            Text.Font = GameFont.Tiny;
+            GUI.color = new Color(0.65f, 0.65f, 0.65f);
+            Widgets.Label(new Rect(row.x + 8f, row.y + 30f, row.width - 40f, 18f), desc);
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+
+            // 인디케이터 점 (오른쪽)
+            float dotSize = 16f;
+            Rect dotRect = new Rect(row.xMax - dotSize - 8f, row.y + (row.height - dotSize) / 2f, dotSize, dotSize);
+            Widgets.DrawBoxSolid(dotRect, selected ? new Color(0.2f, 0.75f, 0.25f) : new Color(0.35f, 0.35f, 0.35f));
+        }
+
+        // ── Cloud Config Panel ───────────────────────────────────────────────
+        private void DrawCloudConfigPanel(Rect panel)
+        {
+            float x = panel.x;
+            float w = panel.width;
+            float y = panel.y;
+
+            // 헤더: "클라우드 API 구성"  [+]
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(new Rect(x + 2f, y, w - 34f, 28f), "MapGenAI_Settings_CloudConfig".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+
+            if (Widgets.ButtonText(new Rect(x + w - 30f, y + 2f, 28f, 24f), "+"))
             {
-                if (modelList.Count == 0)
+                cloudConfigs.Add(new ApiConfig
                 {
-                    // 목록 없으면 먼저 불러오기
-                    _fetchedProvider = provider;
-                    FetchModelsAsync(provider);
-                    showList = true;
-                }
-                else
-                {
-                    showList = !showList;
-                }
+                    Provider = LLMProvider.Gemini,
+                    SelectedModel = LLMProviderRegistry.GetDefaultModel(LLMProvider.Gemini)
+                });
+            }
+            y += 30f;
+
+            // 설명 텍스트
+            Text.Font = GameFont.Tiny;
+            GUI.color = new Color(0.6f, 0.6f, 0.6f);
+            Widgets.Label(new Rect(x + 2f, y, w, 18f), "MapGenAI_Settings_CloudConfigDesc".Translate());
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+            y += 20f;
+
+            // 열 헤더
+            DrawColumnHeaders(new Rect(x, y, w, 20f));
+            y += 22f;
+
+            // config 행 목록 (스크롤)
+            float listH = panel.yMax - y;
+            Rect outRect = new Rect(x, y, w, listH);
+            const float rowH = 32f;
+            const float rowGap = 2f;
+            float contentH = cloudConfigs.Count * (rowH + rowGap);
+            bool needScroll = contentH > listH;
+            Rect viewRect = new Rect(0, 0, w - (needScroll ? 16f : 0f), Mathf.Max(contentH, listH));
+
+            Widgets.BeginScrollView(outRect, ref _configScrollPos, viewRect);
+
+            int removeIdx = -1, swapIdx = -1;
+            bool swapUp = false;
+
+            for (int i = 0; i < cloudConfigs.Count; i++)
+            {
+                Rect rowRect = new Rect(0, i * (rowH + rowGap), viewRect.width, rowH);
+                if (i % 2 == 1) Widgets.DrawLightHighlight(rowRect);
+                DrawConfigRow(rowRect, cloudConfigs[i], i, cloudConfigs.Count,
+                    ref removeIdx, ref swapIdx, ref swapUp);
             }
 
-            // 목록 표시 (스크롤 영역)
-            if (showList)
+            Widgets.EndScrollView();
+
+            // 지연 적용 (EndScrollView 이후)
+            if (removeIdx >= 0)
             {
-                if (_isFetchingModels)
+                cloudConfigs.RemoveAt(removeIdx);
+                if (currentConfigIndex >= cloudConfigs.Count)
+                    currentConfigIndex = Mathf.Max(0, cloudConfigs.Count - 1);
+            }
+            if (swapIdx >= 0)
+            {
+                int other = swapUp ? swapIdx - 1 : swapIdx + 1;
+                if (other >= 0 && other < cloudConfigs.Count)
                 {
-                    listing.Label("  " + "MapGenAI_Settings_Loading".Translate());
-                }
-                else if (modelList.Count == 0 && !string.IsNullOrEmpty(_fetchStatus))
-                {
-                    listing.Label("  " + _fetchStatus);
-                }
-                else if (modelList.Count > 0)
-                {
-                    float curY = listing.CurHeight;
-                    listing.End();
-
-                    float maxH = inRect.height - curY - 10f;
-                    float scrollH = Mathf.Min(maxH, 300f);
-                    float itemH = 30f;
-                    float contentH = modelList.Count * itemH;
-                    var outRect = new Rect(inRect.x, inRect.y + curY, inRect.width, scrollH);
-                    var viewRect = new Rect(0f, 0f, outRect.width - 16f, contentH);
-
-                    Widgets.BeginScrollView(outRect, ref _modelScrollPos, viewRect);
-                    float y = 0f;
-                    foreach (var m in modelList)
-                    {
-                        var row = new Rect(0f, y, viewRect.width, itemH);
-                        if (Widgets.RadioButtonLabeled(row, "  " + m, currentModel == m))
-                            currentModel = m;
-                        y += itemH;
-                    }
-                    Widgets.EndScrollView();
-
-                    // listing 재개 (스크롤 영역 아래부터)
-                    var remainRect = new Rect(inRect.x, outRect.yMax, inRect.width, inRect.height - outRect.yMax + inRect.y);
-                    listing.Begin(remainRect);
+                    var tmp = cloudConfigs[swapIdx];
+                    cloudConfigs[swapIdx] = cloudConfigs[other];
+                    cloudConfigs[other] = tmp;
                 }
             }
         }
 
-        private void DrawLocalSection(Listing_Standard listing, Rect inRect)
+        private static void DrawColumnHeaders(Rect rect)
         {
+            GetColumnRects(rect, out var provR, out var keyR, out var modelR,
+                out var checkR, out _, out _, out _);
+
+            Text.Font = GameFont.Tiny;
+            GUI.color = new Color(0.55f, 0.55f, 0.55f);
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(provR, "MapGenAI_Settings_ColService".Translate());
+            Widgets.Label(keyR, "MapGenAI_Settings_ColApiKey".Translate());
+            Widgets.Label(modelR, "MapGenAI_Settings_ColModel".Translate());
+            // "활성화됨" 헤더 — checkbox 중앙 위
+            Widgets.Label(new Rect(checkR.x - 8f, rect.y, 55f, rect.height),
+                "MapGenAI_Settings_ColEnabled".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+        }
+
+        private void DrawConfigRow(Rect row, ApiConfig config, int idx, int total,
+            ref int removeIdx, ref int swapIdx, ref bool swapUp)
+        {
+            GetColumnRects(row, out var provR, out var keyR, out var modelR,
+                out var checkR, out var upR, out var downR, out var delR);
+
+            // 프로바이더 드롭다운 버튼
+            if (Widgets.ButtonText(provR, LLMProviderRegistry.GetLabel(config.Provider)))
+            {
+                var options = new List<FloatMenuOption>();
+                foreach (var p in LLMProviderRegistry.All)
+                {
+                    var pCopy = p;
+                    var cfg = config;
+                    options.Add(new FloatMenuOption(LLMProviderRegistry.GetLabel(pCopy), () =>
+                    {
+                        cfg.Provider = pCopy;
+                        if (string.IsNullOrWhiteSpace(cfg.SelectedModel))
+                            cfg.SelectedModel = LLMProviderRegistry.GetDefaultModel(pCopy);
+                    }));
+                }
+                Find.WindowStack.Add(new FloatMenu(options));
+            }
+
+            // API 키 또는 URL 입력
+            bool isUrl = config.Provider == LLMProvider.Local || config.Provider == LLMProvider.Custom;
+            if (isUrl)
+                config.CustomBaseUrl = Widgets.TextField(keyR, config.CustomBaseUrl ?? "");
+            else
+                config.ApiKey = Widgets.TextField(keyR, config.ApiKey ?? "");
+
+            // 모델 이름 입력
+            config.SelectedModel = Widgets.TextField(modelR, config.SelectedModel ?? "");
+
+            // 활성화 체크박스
+            bool en = config.IsEnabled;
+            Widgets.Checkbox(checkR.x, checkR.y, ref en);
+            config.IsEnabled = en;
+
+            // ▲
+            if (idx > 0 && Widgets.ButtonText(upR, "▲")) { swapIdx = idx; swapUp = true; }
+
+            // ▼
+            if (idx < total - 1 && Widgets.ButtonText(downR, "▼")) { swapIdx = idx; swapUp = false; }
+
+            // ✕ (빨간색)
+            var prev = GUI.color;
+            GUI.color = new Color(0.9f, 0.3f, 0.3f);
+            if (Widgets.ButtonText(delR, "✕")) removeIdx = idx;
+            GUI.color = prev;
+        }
+
+        private static void GetColumnRects(Rect row,
+            out Rect provR, out Rect keyR, out Rect modelR,
+            out Rect checkR, out Rect upR, out Rect downR, out Rect delR)
+        {
+            const float gap = 3f;
+            const float provW = 110f;
+            const float modelW = 130f;
+            const float checkW = 28f;
+            const float arrowW = 22f;
+            const float delW = 24f;
+            float keyW = row.width - provW - modelW - checkW - arrowW * 2f - delW - gap * 6f;
+
+            float x = row.x;
+            float y = row.y;
+            float h = row.height;
+
+            provR  = new Rect(x, y, provW, h); x += provW + gap;
+            keyR   = new Rect(x, y, keyW, h);  x += keyW + gap;
+            modelR = new Rect(x, y, modelW, h); x += modelW + gap;
+            checkR = new Rect(x + 2f, y + (h - 24f) / 2f, 24f, 24f); x += checkW + gap;
+            upR    = new Rect(x, y, arrowW, h); x += arrowW + gap;
+            downR  = new Rect(x, y, arrowW, h); x += arrowW + gap;
+            delR   = new Rect(x, y, delW, h);
+        }
+
+        // ── Local Panel ──────────────────────────────────────────────────────
+        private void DrawLocalPanel(Rect panel)
+        {
+            var listing = new Listing_Standard();
+            listing.Begin(panel);
             listing.Label("MapGenAI_Settings_LocalUrl".Translate());
             localBaseUrl = listing.TextEntry(localBaseUrl);
-
-            string btnText;
-            if (_isFetchingModels && _fetchedProvider == LLMProvider.Local)
-                btnText = "MapGenAI_Settings_Loading".Translate();
-            else if (_showLocalList)
-                btnText = "MapGenAI_Settings_Collapse".Translate(localModel);
-            else if (_localModels.Count > 0)
-                btnText = "MapGenAI_Settings_SelectModel".Translate(localModel);
-            else
-                btnText = "MapGenAI_Settings_FetchModels".Translate();
-
-            if (listing.ButtonText(btnText) && !_isFetchingModels)
-            {
-                if (_localModels.Count == 0)
-                {
-                    _fetchedProvider = LLMProvider.Local;
-                    FetchModelsAsync(LLMProvider.Local);
-                    _showLocalList = true;
-                }
-                else
-                {
-                    _showLocalList = !_showLocalList;
-                }
-            }
-
-            if (_showLocalList)
-            {
-                if (_isFetchingModels)
-                {
-                    listing.Label("  " + "MapGenAI_Settings_Loading".Translate());
-                }
-                else if (_localModels.Count > 0)
-                {
-                    float curY = listing.CurHeight;
-                    listing.End();
-
-                    float maxH = inRect.height - curY - 10f;
-                    float scrollH = Mathf.Min(maxH, 300f);
-                    float itemH = 30f;
-                    float contentH = _localModels.Count * itemH;
-                    var outRect = new Rect(inRect.x, inRect.y + curY, inRect.width, scrollH);
-                    var viewRect = new Rect(0f, 0f, outRect.width - 16f, contentH);
-
-                    Widgets.BeginScrollView(outRect, ref _modelScrollPos, viewRect);
-                    float y = 0f;
-                    foreach (var m in _localModels)
-                    {
-                        var row = new Rect(0f, y, viewRect.width, itemH);
-                        if (Widgets.RadioButtonLabeled(row, "  " + m, localModel == m))
-                            localModel = m;
-                        y += itemH;
-                    }
-                    Widgets.EndScrollView();
-
-                    var remainRect = new Rect(inRect.x, outRect.yMax, inRect.width, inRect.height - outRect.yMax + inRect.y);
-                    listing.Begin(remainRect);
-                }
-            }
-        }
-
-        // 백그라운드 결과를 메인 스레드에서 안전하게 적용
-        private void ApplyPendingModels()
-        {
-            if (!_modelsFetched) return;
-            _modelsFetched = false;
-
-            var models = _fetchedModels;
-            _fetchedModels = null;
-
-            if (models != null)
-            {
-                if (_fetchedProvider == LLMProvider.Gemini) _geminiModels = models;
-                else if (_fetchedProvider == LLMProvider.OpenAI) _openAiModels = models;
-                else if (_fetchedProvider == LLMProvider.OpenRouter) _openRouterModels = models;
-                else _localModels = models;
-            }
-
-            _fetchStatus = _fetchedStatus;
-            _isFetchingModels = false;
-        }
-
-        private void FetchModelsAsync(LLMProvider provider)
-        {
-            _isFetchingModels = true;
-            _fetchStatus = "MapGenAI_Settings_Loading".Translate();
-
-            Task.Run(async () =>
-            {
-                try
-                {
-                    var models = provider switch
-                    {
-                        LLMProvider.Gemini => await FetchGeminiModels(),
-                        LLMProvider.OpenAI => await FetchOpenAIModels(),
-                        LLMProvider.Local => await FetchLocalModels(),
-                        LLMProvider.OpenRouter => await FetchOpenRouterModels(),
-                        _ => new List<string>()
-                    };
-
-                    _fetchedModels = models;
-                    _fetchedStatus = "MapGenAI_Settings_ModelsLoaded".Translate(models.Count);
-                    _modelsFetched = true; // 마지막에 set
-                }
-                catch (System.Exception e)
-                {
-                    _fetchedModels = new List<string>();
-                    _fetchedStatus = "MapGenAI_Settings_FetchError".Translate(e.Message);
-                    _modelsFetched = true;
-                }
-            });
-        }
-
-        private async Task<List<string>> FetchGeminiModels()
-        {
-            var models = new List<string>();
-            string pageToken = null;
-            do
-            {
-                var url = $"https://generativelanguage.googleapis.com/v1beta/models?key={geminiApiKey}&pageSize=100";
-                if (pageToken != null) url += $"&pageToken={pageToken}";
-                var response = await Http.GetStringAsync(url);
-                var parts = response.Split('"');
-                pageToken = null;
-                for (int i = 0; i < parts.Length - 2; i++)
-                {
-                    if (parts[i] == "name" && parts[i + 2].StartsWith("models/"))
-                    {
-                        var name = parts[i + 2].Substring("models/".Length);
-                        if ((name.StartsWith("gemini-") || name.StartsWith("gemma-"))
-                            && !name.Contains("embedding") && !name.Contains("imagen")
-                            && !name.Contains("veo") && !name.Contains("tts")
-                            && !name.Contains("audio"))
-                            models.Add(name);
-                    }
-                    if (parts[i] == "nextPageToken")
-                        pageToken = parts[i + 2];
-                }
-            } while (pageToken != null);
-            return models;
-        }
-
-        private async Task<List<string>> FetchOpenAIModels()
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.openai.com/v1/models");
-            request.Headers.Add("Authorization", $"Bearer {openAiApiKey}");
-            var resp = await Http.SendAsync(request);
-            var json = await resp.Content.ReadAsStringAsync();
-            var models = new List<string>();
-            var parts = json.Split('"');
-            for (int i = 0; i < parts.Length - 2; i++)
-                if (parts[i] == "id")
-                {
-                    var id = parts[i + 2];
-                    if (id.StartsWith("gpt-") || id.StartsWith("o1") || id.StartsWith("o3") || id.StartsWith("o4")
-                        || id.StartsWith("chatgpt-"))
-                        models.Add(id);
-                }
-            return models.OrderBy(m => m).ToList();
-        }
-
-        private async Task<List<string>> FetchOpenRouterModels()
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://openrouter.ai/api/v1/models");
-            request.Headers.Add("Authorization", $"Bearer {openRouterApiKey}");
-            var resp = await Http.SendAsync(request);
-            var json = await resp.Content.ReadAsStringAsync();
-            var models = new List<string>();
-            var parts = json.Split('"');
-            for (int i = 0; i < parts.Length - 2; i++)
-                if (parts[i] == "id")
-                    models.Add(parts[i + 2]);
-            return models.OrderBy(m => m).ToList();
-        }
-
-        private async Task<List<string>> FetchLocalModels()
-        {
-            var models = new List<string>();
-            try
-            {
-                var json = await Http.GetStringAsync($"{localBaseUrl.TrimEnd('/')}/api/tags");
-                var parts = json.Split('"');
-                for (int i = 0; i < parts.Length - 2; i++)
-                    if (parts[i] == "name") models.Add(parts[i + 2]);
-            }
-            catch
-            {
-                try
-                {
-                    var json = await Http.GetStringAsync($"{localBaseUrl.TrimEnd('/')}/v1/models");
-                    var parts = json.Split('"');
-                    for (int i = 0; i < parts.Length - 2; i++)
-                        if (parts[i] == "id") models.Add(parts[i + 2]);
-                }
-                catch { }
-            }
-            return models;
+            listing.Gap(4f);
+            listing.Label("MapGenAI_Settings_ColModel".Translate());
+            localModel = listing.TextEntry(localModel);
+            listing.End();
         }
     }
-
-    public enum LLMProvider { Gemini, OpenAI, Local, OpenRouter }
 }

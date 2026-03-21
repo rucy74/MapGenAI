@@ -71,4 +71,14 @@
   <MapGenAI_Settings_SimpleDesc>デフォルトでgemini-2.5-flashを使用します。無料枠あり。</MapGenAI_Settings_SimpleDesc>
   <MapGenAI_Settings_SwitchAdvanced>詳細設定に切り替え</MapGenAI_Settings_SwitchAdvanced>
   <MapGenAI_Settings_SwitchSimple>簡易設定に切り替え</MapGenAI_Settings_SwitchSimple>
+  <MapGenAI_Settings_CloudService>クラウドサービス</MapGenAI_Settings_CloudService>
+  <MapGenAI_Settings_CloudServiceDesc>Google AI、OpenAIなどのオンラインAIサービスを使用します。インターネット接続とAPIキーが必要です。</MapGenAI_Settings_CloudServiceDesc>
+  <MapGenAI_Settings_LocalService>ローカルサービス</MapGenAI_Settings_LocalService>
+  <MapGenAI_Settings_LocalServiceDesc>自分のPCで動作するローカルAIサーバー（Ollama、LM Studioなど）を使用します。OpenAI APIをサポートする必要があります。</MapGenAI_Settings_LocalServiceDesc>
+  <MapGenAI_Settings_CloudConfig>クラウドAPI設定</MapGenAI_Settings_CloudConfig>
+  <MapGenAI_Settings_CloudConfigDesc>複数のAPIが有効な場合、システムは順番に試みます。一つが失敗すると、次の有効なAPIを自動的に試みます。</MapGenAI_Settings_CloudConfigDesc>
+  <MapGenAI_Settings_ColService>サービス</MapGenAI_Settings_ColService>
+  <MapGenAI_Settings_ColApiKey>APIキー / URL</MapGenAI_Settings_ColApiKey>
+  <MapGenAI_Settings_ColModel>モデル</MapGenAI_Settings_ColModel>
+  <MapGenAI_Settings_ColEnabled>有効</MapGenAI_Settings_ColEnabled>
 </LanguageData>

@@ -735,10 +735,18 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             _statusText = "MapGenAI_Requesting".Translate();
             _paramsReady = false;
 
+            var settings = MapGenAIMod.Settings;
             ILLMClient client;
             try
             {
-                client = LLMClientFactory.Create(MapGenAIMod.Settings);
+                var config = settings.GetActiveConfig();
+                if (config == null)
+                {
+                    _statusText = "MapGenAI_Error".Translate("No API configured");
+                    _isWaiting = false;
+                    return;
+                }
+                client = LLMClientFactory.Create(config, settings.localBaseUrl);
             }
             catch (Exception e)
             {
@@ -748,7 +756,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 return;
             }
 
-            Log.Message($"[MapGenAI] LLM 요청 시작 (provider={MapGenAIMod.Settings.activeProvider})");
+            Log.Message($"[MapGenAI] LLM 요청 시작");
 
             // 전송 전 현재 파라미터 스냅샷 저장 (undo용)
             if (MapGenParams.HasParams)
@@ -761,20 +769,44 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
 
             Task.Run(async () =>
             {
+                string result = null;
+                string error = null;
                 try
                 {
                     Log.Message("[MapGenAI] Task.Run 시작");
-                    var response = await client.SendChatAsync(singleMessage, systemPrompt);
-                    Log.Message($"[MapGenAI] 응답 수신: {(response == null ? "null" : response.Length + "자")}");
-                    _pendingResponse = response;
-                    _responseReady = true;
+                    result = await client.SendChatAsync(singleMessage, systemPrompt);
+                    Log.Message($"[MapGenAI] 응답 수신: {(result == null ? "null" : result.Length + "자")}");
                 }
                 catch (Exception e)
                 {
                     Log.Error($"[MapGenAI] API 오류: {e}");
-                    _pendingError = e.Message;
-                    _responseReady = true;
+                    // Fallback: 다음 유효한 config 시도
+                    if (settings.TryNextConfig())
+                    {
+                        try
+                        {
+                            var nextClient = LLMClientFactory.Create(settings.GetActiveConfig(), settings.localBaseUrl);
+                            if (nextClient != null)
+                            {
+                                Log.Message("[MapGenAI] Fallback API 시도");
+                                result = await nextClient.SendChatAsync(singleMessage, systemPrompt);
+                            }
+                            else error = e.Message;
+                        }
+                        catch (Exception e2)
+                        {
+                            Log.Error($"[MapGenAI] Fallback 오류: {e2}");
+                            error = e2.Message;
+                        }
+                    }
+                    else
+                    {
+                        error = e.Message;
+                    }
                 }
+                _pendingResponse = result;
+                _pendingError = error;
+                _responseReady = true;
             });
         }
 

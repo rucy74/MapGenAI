@@ -71,4 +71,14 @@
   <MapGenAI_Settings_SimpleDesc>Uses gemini-2.5-flash by default. Free tier available.</MapGenAI_Settings_SimpleDesc>
   <MapGenAI_Settings_SwitchAdvanced>Switch to Advanced Settings</MapGenAI_Settings_SwitchAdvanced>
   <MapGenAI_Settings_SwitchSimple>Switch to Simple Settings</MapGenAI_Settings_SwitchSimple>
+  <MapGenAI_Settings_CloudService>Cloud Service</MapGenAI_Settings_CloudService>
+  <MapGenAI_Settings_CloudServiceDesc>Use online AI services such as Google AI and OpenAI. Requires internet and an API key.</MapGenAI_Settings_CloudServiceDesc>
+  <MapGenAI_Settings_LocalService>Local Service</MapGenAI_Settings_LocalService>
+  <MapGenAI_Settings_LocalServiceDesc>Use a local AI server (Ollama, LM Studio, etc.) running on your computer. Must support OpenAI API.</MapGenAI_Settings_LocalServiceDesc>
+  <MapGenAI_Settings_CloudConfig>Cloud API Configuration</MapGenAI_Settings_CloudConfig>
+  <MapGenAI_Settings_CloudConfigDesc>If multiple APIs are enabled, the system tries them in order. If one fails, the next is tried automatically.</MapGenAI_Settings_CloudConfigDesc>
+  <MapGenAI_Settings_ColService>Service</MapGenAI_Settings_ColService>
+  <MapGenAI_Settings_ColApiKey>API Key / URL</MapGenAI_Settings_ColApiKey>
+  <MapGenAI_Settings_ColModel>Model</MapGenAI_Settings_ColModel>
+  <MapGenAI_Settings_ColEnabled>Enabled</MapGenAI_Settings_ColEnabled>
 </LanguageData>
