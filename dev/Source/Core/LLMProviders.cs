@@ -63,7 +63,7 @@ namespace MapGenAI
                 case LLMProvider.GLMCoding:   return "https://api.z.ai/api/coding/paas";
                 case LLMProvider.AlibabaIntl: return "https://dashscope-intl.aliyuncs.com/compatible-mode";
                 case LLMProvider.AlibabaCN:   return "https://dashscope.aliyuncs.com/compatible-mode";
-                case LLMProvider.OpenRouter:  return "https://openrouter.ai";
+                case LLMProvider.OpenRouter:  return "https://openrouter.ai/api";
                 default:                      return "";
             }
         }
