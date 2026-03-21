@@ -258,7 +258,8 @@ primitive:
 - noise: 펄린 노이즈. 불규칙 자연 지형. size 클수록 큰 덩어리.
 - ring: 원형 산맥(도넛). position=중심, size=반경. 분화구/원형 요새.
 
-★복잡한 모양은 bump 여러 개로 조합하라. 좌표를 직접 계산해서 배치.★
+단순 요청=single shape로 충분: 언덕 하나=bump(center,medium), 호수 하나=bump(center,fill=water,medium).
+★사용자가 특정 모양을 요청할 때만 bump 여러 개를 조합하라.★
 별 모양 언덕(5봉): bump x5, 72도 간격 배치
   [0.5,0.85] [0.79,0.41] [0.65,0.09] [0.35,0.09] [0.21,0.41]
 U자형 산: bump([0.15,0.5],strong) + bump([0.5,0.15],medium) + bump([0.85,0.5],strong)
@@ -299,7 +300,8 @@ Primitives:
 - bump: ★KEY TOOL★ Place a hill or lake anywhere. position=""[x,z]"". fill=""water""=lake.
 - noise: Perlin noise for irregular natural terrain.
 - ring: Circular mountain range (donut). For craters/circular fortresses.
-★For complex shapes, combine multiple bumps with calculated coordinates.★
+Simple requests use one shape: one hill=bump(center,medium), one lake=bump(center,fill=water,medium).
+★Only combine multiple bumps when user explicitly requests a specific complex shape.★
 Star-shaped hills (5 peaks): bump x5 at 72° intervals: [0.5,0.85][0.79,0.41][0.65,0.09][0.35,0.09][0.21,0.41]
 U-shaped mountain: bump([0.15,0.5]) + bump([0.5,0.15]) + bump([0.85,0.5])
 L-shaped mountain: bump([0.2,0.8]) + bump([0.2,0.5]) + bump([0.2,0.2]) + bump([0.5,0.2])
