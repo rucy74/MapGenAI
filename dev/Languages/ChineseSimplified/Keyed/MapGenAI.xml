@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>对话取消 — 参数已重置，预览已恢复</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>用文字描述你想要的地图！\n\n示例：\n  - "斜角山脉，中央湖泊"\n  - "带温泉的山地要塞"\n  - "笔直的河流在左侧"\n  - "只有大理石的干净平原"\n  - "随便推荐一个"</MapGenAI_Welcome>
+  <MapGenAI_Welcome>用文字描述你想要的地图！\n\n示例：\n  - "对角峡谷中有大型中央湖泊"\n  - "有温泉且南面有出口的山地要塞"\n  - "两侧山脉之间的肥沃土地"\n  - "峡湾"（沿海地块）\n  - "巨大环形山脉内有绿洲，环上有出口"\n  - "上方星形山丘，下方新月形湖泊"\n  - "河流拉直、横向、放在下方。上方加山，中央大湖。温泉和洞穴，动植物增加，古代发射场，铁矿丰富，古代遗迹多，只要大理石"</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>已加载预设"{0}"。\n山丘={1}，数量={2}，树木={3}，动物={4}，河流={5}，洞穴={6}，间歇泉={7}</MapGenAI_PresetLoadedMsg>

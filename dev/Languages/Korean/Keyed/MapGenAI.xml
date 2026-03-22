@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>대화 취소 — 파라미터 리셋, 미리보기 원래대로</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>원하는 맵을 자유롭게 설명해 보세요!\n\n예시:\n  - "대각선 산맥에 중앙 호수"\n  - "온천이 있는 산악 요새"\n  - "강을 일자로, 왼쪽에 배치"\n  - "대리석으로만 된 깨끗한 평지"\n  - "그냥 추천해줘"</MapGenAI_Welcome>
+  <MapGenAI_Welcome>원하는 맵을 자유롭게 설명해 보세요!\n\n예시:\n  - "대각선 계곡에 큰 중앙 호수"\n  - "온천이 있고 남쪽에 출구가 있는 산악 요새"\n  - "양쪽 산맥 사이에 있는 비옥한 땅"\n  - "피요르드" (해안 타일)\n  - "거대한 링 모양 산맥 안에 오아시스, 링에는 출구가 있음"\n  - "별 모양 언덕을 위쪽에, 아래에 초승달 모양 호수"\n  - "강을 일자로, 가로로 흐르게 하고 아래쪽에 배치. 위쪽에 산, 중앙에 거대 호수. 온천, 동굴 추가. 동물 식물 증가, 고대 발사장, 철 광맥 풍부, 고대 유적 많게, 대리석 only"</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>프리셋 "{0}" 을(를) 불러왔습니다.\n언덕={1}, 산양={2}, 나무={3}, 동물={4}, 강={5}, 동굴={6}, 간헐천={7}</MapGenAI_PresetLoadedMsg>

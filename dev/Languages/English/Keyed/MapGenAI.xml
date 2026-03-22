@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>Dialog cancelled — parameters reset, preview restored</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>Describe the map you want!\n\nExamples:\n  - "Diagonal mountain range with central lake"\n  - "Mountain fortress with hot springs"\n  - "Straight river on the left side"\n  - "Clean flatland with marble only"\n  - "Just recommend something"</MapGenAI_Welcome>
+  <MapGenAI_Welcome>Describe the map you want!\n\nExamples:\n  - "Diagonal canyon with a large central lake"\n  - "Mountain fortress with hot springs and a southern exit"\n  - "Fertile land between two mountain ranges"\n  - "Fjord" (coastal tile)\n  - "Giant ring mountain with oasis inside and an exit"\n  - "Star-shaped hill on top, crescent lake on the bottom"\n  - "Straight river, horizontal, at the bottom. Mountains on top, huge lake in center. Hot springs, caves, more animals and plants, ancient launch site, lots of iron, lots of ruins, marble only"</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>Loaded preset "{0}".\nHills={1}, Amount={2}, Trees={3}, Animals={4}, River={5}, Caves={6}, Geysers={7}</MapGenAI_PresetLoadedMsg>

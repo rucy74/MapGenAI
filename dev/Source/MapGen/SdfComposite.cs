@@ -357,7 +357,16 @@ namespace MapGenAI.MapGen
                     }
                     else
                     {
-                        elevGrid[cell] += t * elevation;
+                        if (elevation > 0f && elevation < 0.1f)
+                        {
+                            // 통로/깎기: 작은 양수 = 이 영역을 강제로 평지로
+                            if (t > 0.3f)
+                                elevGrid[cell] = elevation;
+                        }
+                        else
+                        {
+                            elevGrid[cell] += t * elevation;
+                        }
                     }
                 }
             }

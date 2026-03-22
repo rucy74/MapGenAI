@@ -252,7 +252,7 @@ elevation_shapes 가이드:
   ""산맥"" = ridge(fade=small, noise_amount=high).
 - split: 축 방향 분할. positive strength=협곡(양쪽 산+가운데 골짜기), negative strength=산맥(가운데 산+양쪽 평지). direction으로 축 방향, gap으로 폭.
   대각선 산맥=split(direction=top_left, strength=negative_strong, gap=medium). 대각선 협곡=split(direction=top_left, strength=strong, gap=small).
-- radial: 가장자리가 높고 중심이 낮음(분지/요새). size로 산맥 두께 조절. 산악 요새=radial(strong).
+- radial: 가장자리가 높고 중심이 낮음(분지/요새). size=small이면 두꺼운 산벽(좁은 분지), size=large면 얇은 산벽(넓은 분지). 산악 요새=radial(strong, size:small).
 - bump: 가우시안 돌출/함몰. position으로 위치, size로 크기. negative strength=함몰. fill=water로 호수 생성.
 - noise: 펄린 노이즈로 불규칙 지형. size가 클수록 큰 덩어리.
 - ring: 도넛 형태 산맥/호수. position으로 중심, size로 링 반경, strength로 높이. fill=water로 링 호수. 분화구/원형 요새 지형에 적합.
@@ -264,7 +264,8 @@ elevation_shapes 가이드:
   연산: add(단일), union(합치기, k>0이면 매끄럽게), sub(빼기, 구멍)
   예: 별 언덕: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
   예: 하트 호수: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
-  예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.3},{id:""b"",prim:""circle"",center:[0.6,0.55],r:0.28}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  초승달 팁: 빼는 원(b)의 중심을 크게 이동시키고 반지름을 같거나 비슷하게. 중심 차이가 클수록 얇은 초승달.
 - 여러 shape를 조합 가능 (additive). ""왼쪽에 산 + 오른쪽에도 산"" = [ridge(left), ridge(right)].
 - 현재 맵에 elevation_shapes가 있으면 반드시 elevation_shapes로 전체 목록을 출력하세요. 유지할 기존 shape + 추가/수정할 새 shape 모두 포함.
 - 현재 맵에 elevation_shapes가 없으면(첫 요청) hills만 사용해도 됩니다.
@@ -297,7 +298,7 @@ elevation_shapes guide:
   ""mountain range"" = ridge(fade=small, noise_amount=high).
 - split: Axis-based split. Positive strength=canyon (mountains on both sides, valley in center). Negative strength=mountain range (mountain in center, plains on sides). Use direction for axis, gap for width.
   Diagonal mountain range=split(direction=top_left, strength=negative_strong, gap=medium). Diagonal canyon=split(direction=top_left, strength=strong, gap=small).
-- radial: Edges are high, center is low (basin/fortress). Use size to control mountain thickness. Mountain fortress=radial(strong).
+- radial: Edges high, center low (basin/fortress). size=small means thick walls (small basin), size=large means thin walls (large basin). Fortress=radial(strong, size:small).
 - bump: Gaussian bump/depression. Use position for location, size for extent. Negative strength=depression. fill=water to create a lake.
 - noise: Perlin noise for irregular terrain. Larger size means bigger clusters.
 - ring: Donut-shaped mountain range/lake. Use position for center, size for ring radius, strength for height. fill=water for ring lake. Suitable for craters/circular fortress terrain.
@@ -309,7 +310,8 @@ elevation_shapes guide:
   Operations: add(single), union(combine, k>0 for smooth), sub(subtract, hole)
   Ex: Star hill: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
   Ex: Heart lake: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
-  Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.3},{id:""b"",prim:""circle"",center:[0.6,0.55],r:0.28}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  Crescent tip: move b's center far from a, keep radius similar. Bigger center gap = thinner crescent.
 - Multiple shapes can be combined (additive). ""mountains left + right"" = [ridge(left), ridge(right)].
 - If current map has elevation_shapes, you MUST output the complete elevation_shapes list. Include existing shapes to keep + new/modified shapes.
 - If current map has no elevation_shapes (first request), you may use hills alone.
@@ -349,54 +351,22 @@ Additional parameters:
 [Available mutators] Use only defNames from this list.
 {mutatorList}";
 
-            // 섹션 4: 규칙
+            // 섹션 4: 규칙 (코드 검증 대상은 제외, 기능 안내만)
             string rules = isKo
                 ? @"규칙:
-- [최우선] elevation_shapes 수정 시: ①추가=기존 목록 전체 복사+새 항목 추가 ②특정 항목 제거=제거할 항목을 빼고 나머지만 출력 ③전체 제거=elevation_shapes:[] ※출력에 없는 항목은 삭제됩니다.
-- 완전 평지/언덕 없애/산 없애 요청(평평하게, 언덕 없애, 민둥하게, 평지로): hills:none + hill_amount:0.1 + elevation_shapes:[] 조합을 반드시 사용하세요. hills:none만으로는 기반 지형 노이즈가 남아 실제로 평평하지 않습니다.
-- ""바위"" 요청 구분: 돌덩어리/바위조각(지면에 흩어진 바위) = rock_chunks:false / 바위 지형/언덕/산(솟아오른 지형) = hill_amount:0.5 + hills:none
-- 지형 형태 요청(링 형태, 대각선, 산맥, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
-  링/도넛=ring, 산맥=ridge(fade=small, noise_amount=high), 대각선 산맥=split(direction=대각선, strength=negative), 한쪽에 산=ridge, 양쪽 산=ridge 2개 조합, 호수=bump+fill:water, 링 호수=ring+fill:water
-- mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
-- 목록에 없는 동물/특수 지형을 요청받으면, 비슷한 것으로 대체하지 말고 action=ask로 해당 기능이 없다고 솔직하게 안내하세요.
-- 유저에게 설명할 때는 반드시 모든 내용을 한국어로 설명하세요. defName, 영어 파라미터명, 영어 label을 그대로 보여주지 마세요.
-- 유저가 한국어로 요청하면 영어 defName/label과 매칭하세요 (예: 오아시스→Oasis, 코코아 나무→WildTropicalPlants).
-- 불가능한 요청에는 action=ask로 솔직하게 안내하세요.
-- 타일에 강이 없으면(강=없음) 강 관련 요청(river_direction, river_position, straight_river, 강 추가 등)은 action=ask로 '이 타일에는 강이 없습니다. 세계지도에서 강이 있는 타일을 선택하세요.'라고 안내하세요.
-- generate 시 description에 유저가 이해할 수 있는 한국어 맵 설명을 포함하세요.
-- 유저가 요청하지 않은 파라미터는 JSON에 포함하지 마세요. 기본값을 유지하려면 해당 키를 생략하세요. 특히 rock_types, ore_density, ruin_density, danger_density 등은 요청 시에만 포함.
-- 동굴 추가=caves:true, 동굴 제거=caves:false (명시적으로 설정).
-- 석재 요청(대리석으로만, 화강암 많이 등)은 rock_types로 처리. rock_count와 rock_types를 동시에 쓸 수 있음.
-- 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.
-- 온천(HotSprings 특성) 추가는 mutators:[""HotSprings""]를 사용하세요. 간헐천 개수 지정은 geysers 파라미터를 사용하세요 (예: geysers:5). 온천 특성과 간헐천 개수는 동시에 쓸 수 있음.
-- 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
-- fill 파라미터로 지형 종류 지정 가능: water(물), sand(모래), soil(토양), rich_soil(비옥한 토양), marsh(습지), mud(진흙), ice(얼음).
-  예: fill:""sand"" → 모래 지형으로 채움. fill:""rich_soil"" → 비옥한 토양으로 채움.
-  bump/ring/composite 모두에서 사용 가능. ""중앙에 비옥한 토양"" = bump(position:center, size:large, fill:""rich_soil""). ""하트 모양 모래밭"" = composite+heart+fill:""sand"".
-- 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
+- 요청하지 않은 파라미터는 생략하세요. 기본값이 유지됩니다.
+- 완전 평지 = hills:none + hill_amount:0.1 + elevation_shapes:[]
+- 통로/출구 = bump(negative_strong, position=맵 가장자리)로 산벽을 자연스럽게 깎기. 예: 남쪽 통로=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), 남동쪽=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
+- fill로 지형 종류 지정: water/sand/soil/rich_soil/marsh/mud/ice. bump/ring/composite에서 사용.
+- 온천=mutators:[""HotSprings""], 간헐천 개수=geysers:N.
+- 한국어로 답변하세요."
                 : @"Rules:
-- [TOP PRIORITY] When modifying elevation_shapes: ①Add=copy entire existing list + append new items ②Remove specific item=output list WITHOUT that item ③Remove all=elevation_shapes:[] Items not in output are deleted.
-- For flat/no-hills/no-mountains requests (make flat, remove hills, remove mountains, no mountains): use hills:none + hill_amount:0.1 + elevation_shapes:[] combination. hills:none alone leaves the base terrain noise — the map is NOT actually flat without hill_amount:0.1.
-- ""rock"" disambiguation: loose rocks/boulders (scattered stones on ground) = rock_chunks:false / rocky terrain/hills/mountains (elevated ground) = hill_amount:0.5 + hills:none
-- For terrain shape requests (ring, diagonal, mountain range, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
-  Ring/donut=ring, mountain range=ridge(fade=small, noise_amount=high), diagonal range=split(direction=diagonal, strength=negative), one-side mountain=ridge, both-sides mountain=2 ridges combo, lake=bump+fill:water, ring lake=ring+fill:water
-- Only use defNames from the above list in the mutators array. You cannot add anything not in the list.
-- If the user requests animals/special terrain not in the list, do not substitute something similar. Use action=ask to honestly inform them the feature is unavailable.
-- Always respond to the user in English. Do not show raw defNames, parameter names, or labels directly.
-- Match the user's natural language to the correct English defName/label (e.g., hot springs=HotSprings, marble=Marble).
-- For impossible requests, use action=ask to honestly inform the user.
-- If the tile has no river (River=None), reject river-related requests (river_direction, river_position, straight_river, add river, etc.) with action=ask: 'This tile has no river. Please select a tile with a river on the world map.'
-- When generating, include a user-friendly English map description in the description field.
-- Do not include parameters the user did not request. Omit keys to keep defaults. Especially rock_types, ore_density, ruin_density, danger_density should only be included when requested.
-- Add caves=caves:true, remove caves=caves:false (set explicitly).
-- Rock requests (marble only, lots of granite, etc.) use rock_types. rock_count and rock_types can be used together.
-- More/fewer ruins=ruin_density, ancient dangers=danger_density.
-- To add hot springs (HotSprings feature), use mutators:[""HotSprings""]. To set geyser count, use geysers parameter (e.g., geysers:5). Both can be used together.
-- Rich soil (fertile soil) adjustments use fertility_offset. Positive=more rich soil, negative=less.
-- fill parameter specifies terrain type: water, sand, soil, rich_soil, marsh, mud, ice.
-  Ex: fill:""sand"" fills with sand terrain. fill:""rich_soil"" fills with rich soil.
-  Works with bump/ring/composite. ""rich soil in center"" = bump(position:center, size:large, fill:""rich_soil""). ""heart-shaped sand"" = composite+heart+fill:""sand"".
-- For vague requests (""add animal habitat"", ""add special terrain"", etc.), use action=ask to ask the user to specify exactly what they want from the list.";
+- Omit parameters not requested. Defaults are kept.
+- Flat terrain = hills:none + hill_amount:0.1 + elevation_shapes:[]
+- Passage/exit = bump(negative_strong, position=map edge) to naturally carve through mountains. Ex: south=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), southeast=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
+- fill specifies terrain type: water/sand/soil/rich_soil/marsh/mud/ice. Works with bump/ring/composite.
+- Hot springs=mutators:[""HotSprings""], geyser count=geysers:N.
+- Respond in English.";
 
             // 섹션 5: few-shot 예시
             string fewShot;
@@ -405,82 +375,24 @@ Additional parameters:
                 // 내륙 타일: elevation_shapes 예시 + 해안 거절 예시
                 fewShot = isKo
                     ? @"
-예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
-응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
-
-예시2) 유저: ""온천이 있는 산악 요새""
-응답: {""action"":""generate"",""description"":""산으로 둘러싸인 요새 형태에 온천이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
-
-예시3) 유저: ""가운데 호수 있는 맵""
-응답: {""action"":""generate"",""description"":""중앙에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""bump"",""position"":""center"",""size"":""large"",""strength"":""negative_strong"",""fill"":""water""}]}}
-
-예시4) 유저: ""대리석으로만 된 맵, 폐허 많이""
-응답: {""action"":""generate"",""description"":""대리석만 있고 폐허가 많은 맵"",""params"":{""rock_types"":[""Marble""],""ruin_density"":2.0}}
-
-예시5) 유저: ""왼쪽에 산 있는 맵""
-응답: {""action"":""generate"",""description"":""왼쪽에 산이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium"",""fade"":""medium"",""noise_amount"":""medium""}]}}
-
-예시6) 유저: ""완전 평지로 만들어줘""
-응답: {""action"":""generate"",""description"":""완전히 평평한 맵"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
-
-예시7) 유저: ""피요르드 있는 맵 만들어줘""
-응답: {""action"":""ask"",""message"":""현재 타일은 해안가가 아닙니다. 피요르드를 원하시면 세계지도에서 해안가 타일을 선택해주세요.""}"
+예시1) 유저: ""산악 요새에 호수"" → {""action"":""generate"",""description"":""산악 요새에 호수"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
+예시2) 유저: ""왼쪽에 산, 완전 평지"" → {""action"":""generate"",""description"":""왼쪽에 산"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
+예시3) 유저: ""남쪽에 통로 뚫어줘"" → {""action"":""generate"",""description"":""남쪽 통로"",""params"":{""elevation_shapes"":[..기존shapes..,{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}]}}"
                     : @"
-Ex1) User: ""Make a map with lots of mountains and hot springs""
-Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
-
-Ex2) User: ""Mountain fortress with hot springs""
-Response: {""action"":""generate"",""description"":""A fortress surrounded by mountains with hot springs"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
-
-Ex3) User: ""Map with a lake in the center""
-Response: {""action"":""generate"",""description"":""A map with a lake in the center"",""params"":{""elevation_shapes"":[{""type"":""bump"",""position"":""center"",""size"":""large"",""strength"":""negative_strong"",""fill"":""water""}]}}
-
-Ex4) User: ""Marble only map with lots of ruins""
-Response: {""action"":""generate"",""description"":""A map with only marble and lots of ruins"",""params"":{""rock_types"":[""Marble""],""ruin_density"":2.0}}
-
-Ex5) User: ""Map with mountains on the left""
-Response: {""action"":""generate"",""description"":""A map with mountains on the left side"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium"",""fade"":""medium"",""noise_amount"":""medium""}]}}
-
-Ex6) User: ""Make it completely flat""
-Response: {""action"":""generate"",""description"":""A completely flat map"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
-
-Ex7) User: ""Make a map with fjords""
-Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjords, please select a coastal tile on the world map.""}";
+Ex1) ""Mountain fortress with lake"" → {""action"":""generate"",""description"":""fortress with lake"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
+Ex2) ""Mountains on the left"" → {""action"":""generate"",""description"":""left mountains"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
+Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""south passage"",""params"":{""elevation_shapes"":[..existing..,{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}]}}";
             }
             else
             {
                 // 해안 타일: 기본 + elevation_shapes 예시
                 fewShot = isKo
                     ? @"
-예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
-응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
-
-예시2) 유저: ""왼쪽에 산, 오른쪽 아래에 호수""
-응답: {""action"":""generate"",""description"":""왼쪽에 산이 있고 오른쪽 아래에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong"",""fade"":""medium"",""noise_amount"":""medium""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-
-예시3) 유저: ""그냥 추천해줘""
-응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
-
-예시4) 유저: ""완전 평지로 만들어줘""
-응답: {""action"":""generate"",""description"":""완전히 평평한 맵"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
-
-예시5) 유저: ""바위 없애줘""
-응답: {""action"":""generate"",""description"":""돌덩어리 없는 깨끗한 맵"",""params"":{""rock_chunks"":false}}"
+예시1) 유저: ""왼쪽에 산, 오른쪽 아래에 호수"" → {""action"":""generate"",""description"":""왼쪽 산+오른쪽 아래 호수"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
+예시2) 유저: ""추천해줘"" → {""action"":""generate"",""description"":""해안가 자연 경관"",""params"":{""hills"":""edges"",""vegetation_density"":1.3,""coast_direction"":""auto""}}"
                     : @"
-Ex1) User: ""Make a map with lots of mountains and hot springs""
-Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
-
-Ex2) User: ""Mountains on the left, lake on the bottom right""
-Response: {""action"":""generate"",""description"":""A map with mountains on the left and a lake in the bottom right"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong"",""fade"":""medium"",""noise_amount"":""medium""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-
-Ex3) User: ""Just recommend something""
-Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
-
-Ex4) User: ""Make it completely flat""
-Response: {""action"":""generate"",""description"":""A completely flat map"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
-
-Ex5) User: ""Remove the rocks""
-Response: {""action"":""generate"",""description"":""A clean map with no scattered boulders"",""params"":{""rock_chunks"":false}}";
+Ex1) ""Mountains left, lake bottom-right"" → {""action"":""generate"",""description"":""left mountains + lake"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
+Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coastal landscape"",""params"":{""hills"":""edges"",""vegetation_density"":1.3,""coast_direction"":""auto""}}";
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
@@ -906,6 +818,9 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                     // --- Layer 3: 출력 검증 ---
                     var warnings = ValidateMutators(data);
 
+                    // 강 없는 타일에서 river 파라미터 차단
+                    ValidateRiver(data, warnings);
+
                     MapGenParams.Apply(data);
                     _paramsReady = true;
                     var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Translate().ToString();
@@ -935,6 +850,45 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
         /// Layer 3: LLM 응답의 mutator 유효성 검증.
         /// 잘못된 mutator는 data에서 제거하고, 경고 메시지 목록을 반환.
         /// </summary>
+        /// <summary>강 없는 타일에서 river 파라미터 차단.</summary>
+        private void ValidateRiver(MapParamsData data, List<string> warnings)
+        {
+            // 타일에 실제 강이 있는지 확인
+            int tileId = Find.WorldSelector?.SelectedTile ?? -1;
+            bool tileHasRiver = false;
+            if (tileId >= 0)
+            {
+                try
+                {
+                    var tile = Find.WorldGrid[tileId];
+                    tileHasRiver = tile?.Rivers != null && tile.Rivers.Count > 0;
+                }
+                catch { }
+            }
+
+            if (!tileHasRiver)
+            {
+                // river 관련 explicitKeys 제거
+                if (data.explicitKeys.Contains("river_direction") ||
+                    data.explicitKeys.Contains("river_position") ||
+                    data.explicitKeys.Contains("river_present"))
+                {
+                    data.explicitKeys.Remove("river_direction");
+                    data.explicitKeys.Remove("river_position");
+                    data.explicitKeys.Remove("river_present");
+                    data.river = null;
+                    if (data.explicitKeys.Contains("straight_river"))
+                    {
+                        data.explicitKeys.Remove("straight_river");
+                        data.straight_river = false;
+                    }
+                    warnings.Add(IsKorean()
+                        ? "이 타일에는 강이 없어 강 관련 설정은 무시되었습니다."
+                        : "This tile has no river. River settings were ignored.");
+                }
+            }
+        }
+
         private List<string> ValidateMutators(MapParamsData data)
         {
             var warnings = new List<string>();
