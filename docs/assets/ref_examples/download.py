@@ -1,0 +1,62 @@
+import urllib.request
+import os
+
+urls = [
+    "https://images.steamusercontent.com/ugc/1866184367599887405/F7FE760DEBD793A7A34A678719E9B45DD41CD408/",
+    "https://images.steamusercontent.com/ugc/2504654287502136719/43F5CF7BEF786DB08E1353136007ACC2F4D31A22/",
+    "https://images.steamusercontent.com/ugc/2504654287502138174/0F1168DF79065E1EE97A43C593B60983DBEAD3A8/",
+    "https://images.steamusercontent.com/ugc/2504654287502139643/06B606D451140C2A84BB03815D92370D8E8C0863/",
+    "https://images.steamusercontent.com/ugc/2504654287502141019/C15F6D99BE3F0C7D58005F1E4E7817C1503E6457/",
+    "https://images.steamusercontent.com/ugc/2504654287502142214/0502E1F105B47D7B2D032F4C2685A527C93AB588/",
+    "https://images.steamusercontent.com/ugc/2504654287502143623/79990373E831A1A0E653AAA7C0F412FE5217207E/",
+    "https://images.steamusercontent.com/ugc/2504654287502144809/DB1B2EF575D2DD6DCFF8F0A858B9EC8F22BEB75C/",
+    "https://images.steamusercontent.com/ugc/1866184367599824887/E231B9C7A0E42FDBA0E2C612738E7A7A91AB8B7A/",
+    "https://images.steamusercontent.com/ugc/1866184367599827532/513E8C01FB95669AF540D9034E98C642D3C28C02/",
+    "https://images.steamusercontent.com/ugc/1866184367599832335/B463099289C2015DA47472B96E466BB12C8D3524/",
+    "https://images.steamusercontent.com/ugc/1866184367599836734/1E0BF3AB5769A7100265A0D249B0E1EC949C4876/",
+    "https://images.steamusercontent.com/ugc/1866184367599837573/FDDBFE5B6956C9019394ED55454FE1EBC52E4154/",
+    "https://images.steamusercontent.com/ugc/1866184367599839287/1CA84E74E48D6C04A8D35E77053F52FFF6A889E4/",
+    "https://images.steamusercontent.com/ugc/1866184367599842183/A2666994CC67A8E5FBC6592C41A8554B7343E822/",
+    "https://images.steamusercontent.com/ugc/2054247397455104556/42E9614B3A29E381626A6A9BE8D7602F57EF95F6/",
+    "https://images.steamusercontent.com/ugc/1866184367599845125/32CCE68CE8D2D80878BFE9214A5737E00E924894/",
+    "https://images.steamusercontent.com/ugc/1866184367599846043/C548E8FCE1CD2B85938517E23B3F1C6B27164125/",
+    "https://images.steamusercontent.com/ugc/1866184367599847911/A148C72DE7649E8A79B4F898B023B48F86E7995D/",
+    "https://images.steamusercontent.com/ugc/1861688073981054287/FA97F12DAF8F29D1BEDC02958FBE0EFFF8D21FA3/",
+    "https://images.steamusercontent.com/ugc/1866184367599849762/C25D286609838CD40B5F03ADD2E3F60BA89F0DE9/",
+    "https://images.steamusercontent.com/ugc/1866184367599870629/33730F3F998FE1CB1C7D6C5BDB2F70F04D052048/",
+    "https://images.steamusercontent.com/ugc/1866184367599851158/90B1CBBF37C59D272E6B5932EC90088C641171B7/",
+    "https://images.steamusercontent.com/ugc/1866184367599851870/7913EC73D6511F2BC53877FD24D632CF61673427/",
+    "https://images.steamusercontent.com/ugc/1866184367599852750/CC5405DEB88F4160DC9399562F04C743571AD8A4/",
+    "https://images.steamusercontent.com/ugc/1866184367599860435/56482A7D809847C1785C923CE4378CE6E97BCB49/",
+    "https://images.steamusercontent.com/ugc/1866184367599853594/8B52E34EEA6249632F1227EB11E76E2C4D0C259A/",
+    "https://images.steamusercontent.com/ugc/1866184367599868417/6DF4F03FA8D96ACCADEF5677F3EF70E1CC2A2AAE/",
+    "https://images.steamusercontent.com/ugc/1866184367599854247/31B3FA0528B2401FF9CDB1E97FF6FFCBADE40800/",
+    "https://images.steamusercontent.com/ugc/1866184367599855286/CB972EC6A65028B2D1A742FA01A206A3D1B03F1E/",
+    "https://images.steamusercontent.com/ugc/1866184367599857485/6ACC97BAA99E94B6A771712C5D1CD96EF37B9014/",
+    "https://images.steamusercontent.com/ugc/1866184367599862174/6A502CAF6CF4F23DDEFF3FFF7D850B7B435AB447/",
+    "https://images.steamusercontent.com/ugc/1866184367599863071/1B3A09C6AAEF5CA8FCDB96FA4B4E7AB4A50CB255/",
+    "https://images.steamusercontent.com/ugc/1866184367599865012/6EC9771082AAC67CF5FFCFFB0D91BB740DCAFCE6/",
+    "https://images.steamusercontent.com/ugc/1866184367599859592/168A2413EA37C86D4C7AF1597FA2096767A62CA6/",
+    "https://images.steamusercontent.com/ugc/1861682720203198870/6EF736C4FA0F36AFAE983DEA0F041C8E7647B7A6/",
+    "https://images.steamusercontent.com/ugc/1861682720203200906/90D318560DCD04B372D361A2D0D237514C41F5EE/",
+    "https://images.steamusercontent.com/ugc/1861682720203202519/1512884086481899F81599DD3D26A4CD1A41AD9F/",
+    "https://images.steamusercontent.com/ugc/1886459883162082391/3E38EF14B668ADE2D28C02C9DCBD2B0DE50194AC/",
+    "https://images.steamusercontent.com/ugc/1886459883175563411/F691F030EE8730A507B246C71A2B05E810A860E1/",
+    "https://images.steamusercontent.com/ugc/2054247397455086307/AADF7ADE1635FDF6FB08BB86E07962E6F7BE7BFF/",
+    "https://images.steamusercontent.com/ugc/2054247397455088197/C8FF61E1E96C871381B5201F7917296462D9233C/",
+    "https://images.steamusercontent.com/ugc/2054247397455089720/67909EF35DB8607A96A1DB0AE4675DE9F5A0C649/",
+    "https://images.steamusercontent.com/ugc/2054247397455090463/E02E0A7EF647A2ED53932D608F1B0235AAFC53E8/",
+    "https://images.steamusercontent.com/ugc/1861682720203203892/A07C1A575A6B844B1D2A6F7159F5407D5A6E7D84/",
+]
+
+os.makedirs(".", exist_ok=True)
+for i, url in enumerate(urls, 1):
+    fname = f"landform_{i:02d}.jpg"
+    try:
+        urllib.request.urlretrieve(url, fname)
+        sz = os.path.getsize(fname)
+        print(f"OK {fname} ({sz} bytes)")
+    except Exception as e:
+        print(f"FAIL {fname}: {e}")
+
+print(f"\nTotal: {len(urls)} files")

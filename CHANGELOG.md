@@ -4,6 +4,22 @@
 
 ---
 
+## v1.5 (2026-03-22) — 프롬프트 최적화 + 통로 + UI
+
+**롤백**: `git checkout v1.5 && dotnet build`
+
+- 프롬프트 50% 축소 (예외처리 → 코드로 이동)
+- ValidateRiver: 강 없는 타일에서 river 파라미터 자동 차단
+- 통로: bump(negative)로 산벽 자연스럽게 깎기
+- composite 통로 덮어쓰기 (e < 0.1 → elevation 강제 대입)
+- radial 요새: size=small로 두꺼운 산벽
+- 초승달: 원 중심 간격 확대
+- 환영 예시 업데이트 (4개 언어)
+- 온천 defName 안내 복원
+- docs 정리: deprecated 폴더로 이동
+
+---
+
 ## v1.2 (2026-03-22) — MDP + WorldComponent
 
 **롤백**: `git checkout v1.2 && dotnet build`
