@@ -111,9 +111,8 @@ namespace MapGenAI.Patches
                 case "bump":   ApplyBump(shape, map, grid);   break;
                 case "noise":  ApplyNoise(shape, map, grid);  break;
                 case "ring":   ApplyRing(shape, map, grid);   break;
-                // 하위 호환: 이전 세이브/프리셋에서 slope/split이 올 수 있음
-                case "slope":  ApplyRidgeFromLegacySlope(shape, map, grid); break;
-                case "split":  ApplyRidgeFromLegacySplit(shape, map, grid); break;
+                case "slope":  ApplySlope(shape, map, grid); break;
+                case "split":  ApplySplit(shape, map, grid); break;
                 default:
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;
@@ -190,78 +189,70 @@ namespace MapGenAI.Patches
             return t * t * (3f - 2f * t);
         }
 
-        /// <summary>레거시 slope -> ridge 자동 변환.</summary>
-        private static void ApplyRidgeFromLegacySlope(ElevationShape shape, Map map, MapGenFloatGrid grid)
-        {
-            var ridgeShape = new ElevationShape
-            {
-                type = "ridge",
-                direction = shape.direction,
-                strength = shape.strength,
-                fade = shape.fade ?? "medium",
-                noise_amount = shape.noise_amount ?? "medium"
-            };
-            ApplyRidge(ridgeShape, map, grid);
-        }
-
-        /// <summary>레거시 split -> ridge 쌍 자동 변환.</summary>
-        private static void ApplyRidgeFromLegacySplit(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        /// <summary>
+        /// slope: 선형 경사면. direction 방향이 높고 반대가 낮음.
+        /// 워크샵 버전과 동일: elevation += (x*cos + z*sin) * 0.006 * strength
+        /// </summary>
+        private static void ApplySlope(ElevationShape shape, Map map, MapGenFloatGrid grid)
         {
             float strength = ElevationShape.ParseStrength(shape.strength);
-            float angleDeg = ElevationShape.ParseDirection(shape.direction);
-            float absStrength = Mathf.Abs(strength);
-            string gap = shape.gap;
+            float angleRad = ElevationShape.ParseDirection(shape.direction) * Mathf.Deg2Rad;
+            float cosA = Mathf.Cos(angleRad);
+            float sinA = Mathf.Sin(angleRad);
+            float centerX = map.Center.x;
+            float centerZ = map.Center.z;
+            float mult = 0.006f * strength;
 
-            // split의 direction은 축 방향 → 축에 수직인 양쪽에 ridge 배치
-            float perpAngle1 = (angleDeg + 90f) % 360f;
-            float perpAngle2 = (angleDeg + 270f) % 360f;
-
-            if (strength < 0)
+            foreach (var cell in CellRect.WholeMap(map))
             {
-                // 산맥 모드: 양쪽에 산
-                float fadeVal = 0.5f - ElevationShape.ParseGap(gap);
-                string fadeStr = fadeVal.ToString(CultureInfo.InvariantCulture);
-
-                var ridge1 = new ElevationShape
-                {
-                    type = "ridge",
-                    direction = perpAngle1.ToString(CultureInfo.InvariantCulture),
-                    strength = absStrength.ToString(CultureInfo.InvariantCulture),
-                    fade = fadeStr,
-                    noise_amount = "high"
-                };
-                var ridge2 = new ElevationShape
-                {
-                    type = "ridge",
-                    direction = perpAngle2.ToString(CultureInfo.InvariantCulture),
-                    strength = absStrength.ToString(CultureInfo.InvariantCulture),
-                    fade = fadeStr,
-                    noise_amount = "high"
-                };
-                ApplyRidge(ridge1, map, grid);
-                ApplyRidge(ridge2, map, grid);
+                float dx = cell.x - centerX;
+                float dz = cell.z - centerZ;
+                float t = dx * cosA + dz * sinA;
+                grid[cell] += t * mult;
             }
-            else
+        }
+
+        /// <summary>
+        /// split: 축 방향 분할. 워크샵 원본 로직 복원.
+        /// negative strength = 산맥 (축을 따라 산, Max + Perlin 노이즈)
+        /// positive strength = 협곡 (축이 낮고 양쪽이 높음)
+        /// </summary>
+        private static void ApplySplit(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        {
+            float strength = ElevationShape.ParseStrength(shape.strength);
+            float gap = ElevationShape.ParseGap(shape.gap);
+            float angleRad = ElevationShape.ParseDirection(shape.direction) * Mathf.Deg2Rad;
+            float cosA = Mathf.Cos(angleRad);
+            float sinA = Mathf.Sin(angleRad);
+            float centerX = map.Center.x;
+            float centerZ = map.Center.z;
+            float mapSize = Mathf.Max(map.Size.x, map.Size.z);
+            float gapSize = gap * mapSize;
+
+            foreach (var cell in CellRect.WholeMap(map))
             {
-                // 협곡 모드: 양쪽을 높여서 가운데 낮은 곳 형성
-                var ridge1 = new ElevationShape
+                float dx = cell.x - centerX;
+                float dz = cell.z - centerZ;
+                float dist = Mathf.Abs(dx * cosA + dz * sinA);
+
+                if (strength < 0f)
                 {
-                    type = "ridge",
-                    direction = perpAngle1.ToString(CultureInfo.InvariantCulture),
-                    strength = strength.ToString(CultureInfo.InvariantCulture),
-                    fade = "medium",
-                    noise_amount = "medium"
-                };
-                var ridge2 = new ElevationShape
+                    // 산맥 모드: 축을 따라 산 (Perlin 노이즈로 자연스러운 외곽)
+                    float noise = Mathf.PerlinNoise(
+                        cell.x * 0.03f + cell.z * 0.02f + 500f,
+                        cell.z * 0.03f + cell.x * 0.02f + 300f) * gapSize * 0.6f;
+                    float normalized = (dist + noise - gapSize * 0.3f) / Mathf.Max(gapSize, 1f);
+                    if (normalized < 1f)
+                    {
+                        grid[cell] = Mathf.Max(grid[cell], 0.85f - Mathf.Max(normalized, 0f) * 0.3f);
+                    }
+                }
+                else
                 {
-                    type = "ridge",
-                    direction = perpAngle2.ToString(CultureInfo.InvariantCulture),
-                    strength = strength.ToString(CultureInfo.InvariantCulture),
-                    fade = "medium",
-                    noise_amount = "medium"
-                };
-                ApplyRidge(ridge1, map, grid);
-                ApplyRidge(ridge2, map, grid);
+                    // 협곡 모드: 축에서 멀수록 높음
+                    float val = strength * 2f * (dist - gapSize) / mapSize;
+                    grid[cell] += val;
+                }
             }
         }
 
