@@ -5,6 +5,140 @@
 
 ---
 
+## 2026-03-21 -- Elevation 아키텍처 재설계 과정 (ridge shape)
+
+### 접근법 D(sigmoid) 실패 분석
+
+처음에 가장 간단한 해법으로 slope의 선형 함수를 sigmoid로 바꾸면 될 것으로 예상했으나:
+```
+sigmoid(x) + sigmoid(-x) = 1 / (1 + e^(-x)) + 1 / (1 + e^x) = 1.0
+```
+대칭 sigmoid의 합은 항상 상수 1. 즉 slope(left) + slope(right)가 "0으로 상쇄"되는 대신 "1로 상쇄"될 뿐, 여전히 평지(균일한 오프셋). 이 성질은 모든 대칭 단조함수 f(x)에 대해 f(x) + f(-x) = const가 성립하는 수학적 불변량.
+
+교훈: 상쇄 문제의 근본 원인은 선형/비선형이 아니라 "부호가 반전되는 함수를 사용하는 것". 비음수 함수(0~1)만 사용하면 상쇄가 구조적으로 불가능.
+
+### smoothstep 프로파일이 핵심인 이유
+
+ridge의 smoothstep: 0~1 범위의 비음수 함수. 방향이 다른 2개 ridge를 더하면:
+- 각각 0~1 범위의 양수를 더하므로 절대 0이 될 수 없음
+- smoothstep(t) + smoothstep(-t)은 t=0에서 최소값 0.5+0.5=1.0, 양 끝에서 1+0=1 또는 0+1=1
+- 결과: U자 모양의 골짜기
+
+smoothstep의 transitionWidth=0.3 결정: 너무 좁으면 산과 평지의 경계가 부자연스럽고, 너무 넓으면 산 자체가 뭉개짐. 0.3은 mapHalf 기준이므로 250셀 맵에서 약 37셀의 전환 구간.
+
+### Map Designer와의 비교
+
+Map Designer의 Side 패턴: AxisAsValueX + Rotate. 이것은 우리 slope과 비슷하지만, 실제로는 Verse.Noise.AxisAsValueX (노이즈 모듈)을 사용하므로 Perlin과 결합 가능. 그러나 여전히 선형 축 값이므로 반대 방향 조합 시 상쇄 가능성 있음.
+
+Map Designer의 Split 패턴: abs(axis) - gap. abs()를 취하므로 양쪽이 모두 양수가 되어 상쇄 문제 없음. 이것이 ridge의 영감 원천. 하지만 Map Designer는 gap으로 중앙 골짜기 폭을 조절하는 반면, ridge는 fade로 산 범위를 조절.
+
+### Perlin noise freq=0.035 결정
+
+바닐라 base noise: freq=0.021. ridge 디테일 noise: freq=0.035.
+- 0.021과 동일하면 base noise와 위상이 겹쳐 간섭이 생길 수 있음
+- 0.035는 0.021의 약 1.67배로, 약간 더 세밀한 패턴
+- 4옥타브 (base는 6옥타브): 계산 비용 절감 + base보다 약간 단순한 패턴으로 산 윤곽만 변조
+
+---
+
+## 2026-03-21 — 바닐라 vs MapGenAI 지형 feature 전수 비교 분석
+
+### 분석하면서 발견한 것들
+
+**GeyserCount 미구현 발견**: MapGenParams에 GeyserCount 프로퍼티가 있고, Apply()에서 값을 저장하고, Dialog에서 LLM에게 geysers 파라미터를 노출하지만, Patches/ 폴더에 GenStep_ScatterGeysers를 패치하는 코드가 없음. `grep -r "Geyser\|geyser" Patches/` 결과 0건. 즉 사용자가 "간헐천 5개"를 요청하면 LLM이 `geysers:5`를 생성하고, MapGenParams.GeyserCount=5가 되지만, 실제 맵 생성에 아무 영향 없음.
+
+**OreDensityPatch 원본 미복원**: RuinDangerDensityPatch는 Prefix에서 countPer10kCellsRange를 수정하고 Postfix에서 원본 복원하는 깔끔한 패턴인데, OreDensityPatch는 Prefix만 있고 Postfix가 없음. GenStep_ScatterLumpsMineable의 instance가 GenStepDef의 genStep 필드에서 오므로, 한 번 수정하면 해당 GenStepDef에 영구 반영. 다음 맵 생성 시 MapGenParams가 없어도 수정된 값이 남아있음. 실제로는 MapGenParams.HasParams 체크가 있어서 MapGenParams가 없으면 Prefix가 스킵되지만, 이전에 곱해진 값은 이미 적용됨. 복원 Postfix 추가 필요.
+
+**slope 상쇄의 정확한 메커니즘**: slope(left) + slope(right)가 정확히 상쇄되는 이유:
+- slope(left, medium): elevation += 0.7 * 0.006 * (dx * cos(180) + dz * sin(180)) = -0.0042 * dx
+- slope(right, medium): elevation += 0.7 * 0.006 * (dx * cos(0) + dz * sin(0)) = +0.0042 * dx
+- 합계: 0. 완벽한 상쇄.
+- 바닐라 Perlin은 이런 상쇄가 구조적으로 불가능 (비선형 노이즈).
+
+**split 산맥 모드의 문제**: strength < 0일 때 `grid[cell] = Mathf.Max(grid[cell], 0.85f - falloff * 0.3f)`. 이건 기존 값과 0.85f 중 큰 것을 취하므로, 이미 높은 곳은 유지하지만 Perlin 패턴의 계곡 부분이 0.85로 채워져서 자연스러운 봉우리-계곡 변화가 소실됨. 바닐라 DistFromAxis는 Add로 기존 패턴에 산맥을 더하므로 계곡이 보존됨.
+
+**VegetationDensity > 1의 빈 효과**: Patch_GenStep_Plants에서 density >= 1이면 early return. 주석에 "fertility 조정으로 이미 반영됨"이라 써있지만, FertilityOffset은 별도 파라미터이고 VegetationDensity와 연동되지 않음. 즉 VegetationDensity=2.0을 설정해도 식물이 더 늘지 않음.
+
+**AnimalDensity > 1도 동일**: `if (Mathf.Approximately(density, 1f) || density >= 1f) return;` — 1 이상이면 아무것도 안 함.
+
+**TileMutator 비활성 코드**: GenStepPatches.cs 435-672행, 약 240줄이 `/* ... */` 주석으로 비활성화. 기존 TileMutator 패치(GenerateMap/GenerateContentsIntoMap Prefix/Postfix + TileMutatorHelper)가 통째로 남아있음. MapGenParams.Apply()에서 직접 월드 타일에 mutator를 적용하는 방식으로 전환된 후 불필요해진 코드.
+
+### 바닐라 코드 참조 소스
+- GenStep_ElevationFertility: github.com/josh-m/RW-Decompile + raw file fetch
+- GenStep_RocksFromGrid: raw file fetch (elevation 0.7 임계값, roof 0.728/0.798)
+- GenStep_Caves: raw file fetch (HasCaves check, 300셀 minimum)
+- GenStep_Terrain: WebSearch 요약 (TerrainFrom 0.55~0.61 gravel, >=0.61 rock)
+- MapGenTuning: raw file fetch (ElevationFactor 상수 5종)
+- World.CoastAngleAt: Dyyrlysh/RimworldDecompile (RW 1.6)
+- World.NaturalRockTypesIn: Dyyrlysh/RimworldDecompile (RW 1.6, PlanetTile 시그니처)
+- Map Designer: Zylleon/MapDesigner raw file fetch (MountainSettingsPatch Transpiler + Postfix 구조)
+
+---
+
+## 2026-03-21 — 자연 산 vs MapGenAI 산 구조 분석
+
+### 바닐라 코드 디컴파일 결과
+
+GenStep_ElevationFertility.Generate():
+1. Perlin(freq=0.021, lacunarity=2.0, persistence=0.5, octaves=6, randomSeed)
+2. ScaleBias(scale=0.5, bias=0.5) -> 출력 0~1
+3. switch(tile.hilliness): Flat->*0.8, SmallHills->*0.9, LargeHills->*1.0, Mountainous->*1.1, Impassable->*1.2
+4. Mountainous/Impassable: DistFromAxis(span=0.42) + Clamp(0,1) + Invert -> 한쪽 사면에 산맥 Add
+
+이 과정이 전부 끝난 후 Postfix 실행. 즉 postfix가 보는 grid에는 이미 자연 산이 포함되어 있음.
+
+### Case B 실패의 정확한 메커니즘
+
+Turn 1: shapes=[slope(left)] -> Apply() -> ElevationShapes=[slope(left)] -> RefreshMapPreview()
+Turn 2: shapes=[slope(right)] -> Apply() -> ElevationShapes.Clear() -> ElevationShapes=[slope(right)]
+Generate() 재실행 -> Flat*0.8 (산 없음) + slope(right)만 = 왼쪽 사라짐
+
+핵심: ElevationShapes.Clear()가 이전 상태를 날림. 자연 산은 base에 내재라 Clear 영향 없음.
+
+### Map Designer와의 비교
+
+Map Designer (MountainSettingsPatch.cs)도 동일한 additive postfix 패턴. 하지만 Map Designer는:
+- 설정 UI가 있어서 사용자가 직접 모든 설정을 동시에 관리
+- "이전 설정 유지" 문제가 없음 (설정 전체가 항상 유지됨)
+- LLM은 이것을 할 수 없음 -> 코드 측 안전장치 필요
+
+### Option E가 기존 유닛 테스트와 충돌하는지
+
+DEV_LOG의 유닛 테스트 결과에서:
+- #2 FAIL: hills=left->right, shapes=null -> slope(left) 잔존
+  -> Option E에서: null=유지이므로 slope(left) 잔존은 정상. 하지만 hills=right이면 slope(right)가 되어야?
+  -> 이건 hills 자동 변환 로직과 충돌. hills 변경 시 자동 shapes도 업데이트해야 함.
+  -> 결론: Option E 구현 시 "hills 변경 + shapes null"인 경우의 처리가 추가로 필요.
+
+---
+
+## 2026-03-21 — Apply() 버그 분석
+
+### 버그가 원래 예상보다 넓었음
+
+원래 보고된 건 #2 (hills 변경 시 shapes 안 바뀜) 하나였는데, 테스트 돌려보니 관련 버그가 2개 더 나옴.
+
+Apply() line 310-348 코드 흐름:
+```
+1. if (data.elevation_shapes != null) → Clear + 교체
+2. if (Hills != "none" && ElevationShapes.Count == 0) → 자동 변환
+```
+
+null이면 1번을 통째로 스킵하고, 2번은 Count>0이면 스킵. 그래서 한번이라도 shapes가 생기면 null로는 절대 못 바꿈.
+
+#6이 특히 나쁨 — hills를 "none"으로 바꿨는데 이전 산이 남아있음. 사용자 입장에서 "산 없애줘" 했는데 그대로인 거.
+
+### #5 설계 이슈
+
+elevation_shapes=[] (빈 배열)은 "평지로 만들어줘" 의도인데, hills="left"가 같이 오면 자동변환이 발동해서 slope(left) 재생성됨. 이건 LLM이 elevation_shapes:[]와 hills:"none"을 같이 보내게 프롬프트를 조정하거나, Apply()에서 명시적 빈 배열이면 자동변환을 억제해야 함.
+
+수정 방향:
+1. 이전 Hills 값을 `_previousHills` 같은 필드에 저장
+2. `elevation_shapes==null && hills != _previousHills` 이면 shapes Clear 후 자동 변환
+3. `elevation_shapes`가 non-null이고 Count==0이면 (빈 배열 명시) 자동 변환 스킵하는 플래그
+
+---
+
 ## 2026-03-14
 
 ### 처음 모딩 시작할 때 막혔던 것들

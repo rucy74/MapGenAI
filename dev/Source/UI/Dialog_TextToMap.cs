@@ -12,7 +12,8 @@ namespace MapGenAI.UI
 {
     public class Dialog_TextToMap : Window
     {
-        private readonly List<ChatMessage> _history = new List<ChatMessage>();
+        private readonly List<ChatMessage> _history = new List<ChatMessage>(); // UI 표시용
+        private readonly List<ChatMessage> _llmContext = new List<ChatMessage>(); // LLM 전송용 (generate 후 초기화)
         private string _inputText = "";
         private string _statusText = "";
         private bool _isWaiting = false;
@@ -243,18 +244,22 @@ namespace MapGenAI.UI
 맵 생성: {""action"":""generate"",""description"":""맵 설명"",""params"":{...}}
 
 params 스키마:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes 가이드:
-- slope: 한쪽이 높은 경사면. direction으로 높은 방향 지정. 예: direction=left → 왼쪽이 높음.
-- radial: 가장자리가 높고 중심이 낮음(분지/요새). size로 산맥 두께 조절. 산악 요새=radial(strong).
+- ridge: 한 방향에 산맥. direction으로 산이 높은 방향. fade로 산 범위(small=가장자리만, medium=절반, large=맵 대부분). noise_amount로 자연스러움 조절(none=깨끗한 경계, high=매우 불규칙). fade와 noise_amount는 생략 가능(기본값=medium).
+  ""양쪽에 산"" = [ridge(left), ridge(right)] → 양쪽 높고 가운데 골짜기.
+  ""산맥"" = ridge(fade=small, noise_amount=high).
 - split: 축 방향 분할. positive strength=협곡(양쪽 산+가운데 골짜기), negative strength=산맥(가운데 산+양쪽 평지). direction으로 축 방향, gap으로 폭.
+  대각선 산맥=split(direction=top_left, strength=negative_strong, gap=medium). 대각선 협곡=split(direction=top_left, strength=strong, gap=small).
+- radial: 가장자리가 높고 중심이 낮음(분지/요새). size로 산맥 두께 조절. 산악 요새=radial(strong).
 - bump: 가우시안 돌출/함몰. position으로 위치, size로 크기. negative strength=함몰. fill=water로 호수 생성.
 - noise: 펄린 노이즈로 불규칙 지형. size가 클수록 큰 덩어리.
-- ring: 도넛 형태 산맥. position으로 중심, size로 링 반경, strength로 높이. 분화구/원형 요새 지형에 적합.
-- 여러 shape를 조합 가능 (additive). 복잡한 지형에는 elevation_shapes를, 단순 요청에는 hills를 사용.
-- hills와 elevation_shapes를 동시에 쓰지 마세요. elevation_shapes가 있으면 hills는 무시됩니다.
-- 산맥=split+negative strength(가운데 높음). 협곡=split+positive strength(가운데 낮음). 대각선 산맥=split(direction=top_left, strength=negative_strong, gap=tiny).
+- ring: 도넛 형태 산맥/호수. position으로 중심, size로 링 반경, strength로 높이. fill=water로 링 호수. 분화구/원형 요새 지형에 적합.
+- 여러 shape를 조합 가능 (additive). ""왼쪽에 산 + 오른쪽에도 산"" = [ridge(left), ridge(right)].
+- 현재 맵에 elevation_shapes가 있으면 반드시 elevation_shapes로 전체 목록을 출력하세요. 유지할 기존 shape + 추가/수정할 새 shape 모두 포함.
+- 현재 맵에 elevation_shapes가 없으면(첫 요청) hills만 사용해도 됩니다.
+- 산맥=ridge(fade=small, noise_amount=high). 대각선 산맥=split(direction=대각선, strength=negative). ""양쪽 산맥""=2개 ridge 조합. 협곡=2개 ridge + bump(negative strength, center).
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
@@ -263,7 +268,7 @@ elevation_shapes 가이드:
 - rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"", ""돌 없애줘"", ""바위 없애줘"", ""돌덩어리 없애"", ""깔끔하게"" 요청 시 사용.
 - hill_size: 산맥 크기 (small=잘게 쪼개짐, medium=기본, large=거대 산맥). 또는 숫자(0.005~0.1, 기본 0.021).
 - hill_smoothness: 산 표면 거칠기 (rough=울퉁불퉁, normal=기본, smooth=매끄러움). 또는 숫자(0.5~6.0, 기본 2.0).
-- hill_amount: 전체 고도 오프셋 (0.1~1.6, 기본 1.0). 0.1=완전 평지(강제), 0.5=완만한 평지, 1.6=전체를 높임(산이 많아짐). ""완전 평지"" 요청 시 0.1 사용. 1.0은 기본값(변화 없음).
+- hill_amount: 전체 고도 오프셋 (0.1~1.3, 기본 1.0). 0.1=완전 평지(강제), 0.5=완만한 평지, 1.2=산이 많아짐. 1.3 이상은 맵 대부분이 산으로 뒤덮이므로 주의. ""완전 평지"" 요청 시 0.1, ""산 많이"" 요청 시 1.2 사용. 1.0은 기본값(변화 없음).
 - river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=위(북), 90=오른쪽(동), 180=아래(남), 270=왼쪽(서). 미지정시 자동.
 - river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
 - straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
@@ -274,18 +279,22 @@ Question/guide: {""action"":""ask"",""message"":""content""}
 Map generation: {""action"":""generate"",""description"":""map description"",""params"":{...}}
 
 params schema:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""slope|radial|split|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes guide:
-- slope: A slope where one side is higher. Use direction to set the high side. Example: direction=left means left side is higher.
-- radial: Edges are high, center is low (basin/fortress). Use size to control mountain thickness. Mountain fortress=radial(strong).
+- ridge: Mountains on one side. Use direction to set which side is high. fade controls range (small=edge only, medium=half, large=most of map). noise_amount controls naturalness (none=clean, high=very rough). fade and noise_amount are optional (default=medium).
+  ""mountains on both sides"" = [ridge(left), ridge(right)] -> both sides high, valley in center.
+  ""mountain range"" = ridge(fade=small, noise_amount=high).
 - split: Axis-based split. Positive strength=canyon (mountains on both sides, valley in center). Negative strength=mountain range (mountain in center, plains on sides). Use direction for axis, gap for width.
+  Diagonal mountain range=split(direction=top_left, strength=negative_strong, gap=medium). Diagonal canyon=split(direction=top_left, strength=strong, gap=small).
+- radial: Edges are high, center is low (basin/fortress). Use size to control mountain thickness. Mountain fortress=radial(strong).
 - bump: Gaussian bump/depression. Use position for location, size for extent. Negative strength=depression. fill=water to create a lake.
 - noise: Perlin noise for irregular terrain. Larger size means bigger clusters.
-- ring: Donut-shaped mountain range. Use position for center, size for ring radius, strength for height. Suitable for craters/circular fortress terrain.
-- Multiple shapes can be combined (additive). Use elevation_shapes for complex terrain, hills for simple requests.
-- Do not use hills and elevation_shapes together. If elevation_shapes is present, hills is ignored.
-- Mountain range=split+negative strength (center high). Canyon=split+positive strength (center low). Diagonal range=split(direction=top_left, strength=negative_strong, gap=tiny).
+- ring: Donut-shaped mountain range/lake. Use position for center, size for ring radius, strength for height. fill=water for ring lake. Suitable for craters/circular fortress terrain.
+- Multiple shapes can be combined (additive). ""mountains left + right"" = [ridge(left), ridge(right)].
+- If current map has elevation_shapes, you MUST output the complete elevation_shapes list. Include existing shapes to keep + new/modified shapes.
+- If current map has no elevation_shapes (first request), you may use hills alone.
+- Mountain range=ridge(fade=small, noise_amount=high). Diagonal range=split(direction=diagonal, strength=negative). ""both sides mountain""=2 ridge combo. Canyon=2 ridges + bump(negative strength, center).
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
@@ -294,7 +303,7 @@ Additional parameters:
 - rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"", ""remove rocks"", ""no rocks"", ""remove boulders"", ""clear terrain"" requests.
 - hill_size: Mountain size (small=fragmented, medium=default, large=huge mountains). Or a number (0.005~0.1, default 0.021).
 - hill_smoothness: Mountain surface roughness (rough=jagged, normal=default, smooth=smooth). Or a number (0.5~6.0, default 2.0).
-- hill_amount: Global elevation offset (0.1~1.6, default 1.0). 0.1=completely flat (forced), 0.5=gently flattened, 1.6=raises entire terrain (more mountains). Use 0.1 for ""completely flat"", ""flat terrain"", ""remove hills"", ""no mountains"" requests. 1.0 is default (no change).
+- hill_amount: Global elevation offset (0.1~1.3, default 1.0). 0.1=completely flat (forced), 0.5=gently flattened, 1.2=more mountains. Values above 1.3 will cover most of the map with mountains — use with caution. Use 0.1 for ""completely flat"", 1.2 for ""lots of mountains"". 1.0 is default (no change).
 - river_direction: River direction. left/right/up/down or 0-360 degree angle. 0=up(north), 90=right(east), 180=down(south), 270=left(west). Auto if unspecified.
 - river_position: River position. left/right/up/down/center or 0.0~1.0 number. Left/right moves on x-axis, up/down on z-axis. Center if unspecified.
 - straight_river: Straight river (true/false). If true, the river flows in a straight line without meandering. Use for 'straight river', 'canal' requests.
@@ -326,8 +335,8 @@ Additional parameters:
 - [최우선] elevation_shapes 수정 시: ①추가=기존 목록 전체 복사+새 항목 추가 ②특정 항목 제거=제거할 항목을 빼고 나머지만 출력 ③전체 제거=elevation_shapes:[] ※출력에 없는 항목은 삭제됩니다.
 - 완전 평지/언덕 없애/산 없애 요청(평평하게, 언덕 없애, 민둥하게, 평지로): hills:none + hill_amount:0.1 + elevation_shapes:[] 조합을 반드시 사용하세요. hills:none만으로는 기반 지형 노이즈가 남아 실제로 평평하지 않습니다.
 - ""바위"" 요청 구분: 돌덩어리/바위조각(지면에 흩어진 바위) = rock_chunks:false / 바위 지형/언덕/산(솟아오른 지형) = hill_amount:0.5 + hills:none
-- 지형 형태 요청(링 형태, 대각선, 경사면, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
-  링/도넛=ring, 산맥=split+negative_strong+gap:medium(산 폭), 협곡=split+strong+gap:small(골짜기 폭), 호수=bump+fill:water, 경사면=slope
+- 지형 형태 요청(링 형태, 대각선, 산맥, 호수 등)에는 반드시 elevation_shapes를 사용하세요. hills는 단순 요청에만.
+  링/도넛=ring, 산맥=ridge(fade=small, noise_amount=high), 대각선 산맥=split(direction=대각선, strength=negative), 한쪽에 산=ridge, 양쪽 산=ridge 2개 조합, 호수=bump+fill:water, 링 호수=ring+fill:water
 - mutators 배열에는 위 목록의 defName만 사용하세요. 목록에 없는 것은 추가할 수 없습니다.
 - 목록에 없는 동물/특수 지형을 요청받으면, 비슷한 것으로 대체하지 말고 action=ask로 해당 기능이 없다고 솔직하게 안내하세요.
 - 유저에게 설명할 때는 반드시 모든 내용을 한국어로 설명하세요. defName, 영어 파라미터명, 영어 label을 그대로 보여주지 마세요.
@@ -339,15 +348,15 @@ Additional parameters:
 - 동굴 추가=caves:true, 동굴 제거=caves:false (명시적으로 설정).
 - 석재 요청(대리석으로만, 화강암 많이 등)은 rock_types로 처리. rock_count와 rock_types를 동시에 쓸 수 있음.
 - 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.
-- 온천/간헐천 추가는 반드시 mutators:[""HotSprings""]를 사용하세요. geysers 파라미터는 사용하지 마세요.
+- 온천(HotSprings 특성) 추가는 mutators:[""HotSprings""]를 사용하세요. 간헐천 개수 지정은 geysers 파라미터를 사용하세요 (예: geysers:5). 온천 특성과 간헐천 개수는 동시에 쓸 수 있음.
 - 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
 - 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
                 : @"Rules:
 - [TOP PRIORITY] When modifying elevation_shapes: ①Add=copy entire existing list + append new items ②Remove specific item=output list WITHOUT that item ③Remove all=elevation_shapes:[] Items not in output are deleted.
 - For flat/no-hills/no-mountains requests (make flat, remove hills, remove mountains, no mountains): use hills:none + hill_amount:0.1 + elevation_shapes:[] combination. hills:none alone leaves the base terrain noise — the map is NOT actually flat without hill_amount:0.1.
 - ""rock"" disambiguation: loose rocks/boulders (scattered stones on ground) = rock_chunks:false / rocky terrain/hills/mountains (elevated ground) = hill_amount:0.5 + hills:none
-- For terrain shape requests (ring, diagonal, slope, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
-  Ring/donut=ring, mountain range=split+negative_strong+gap:medium(mountain width), canyon=split+strong+gap:small(valley width), lake=bump+fill:water, slope=slope
+- For terrain shape requests (ring, diagonal, mountain range, lake, etc.), always use elevation_shapes. Use hills only for simple requests.
+  Ring/donut=ring, mountain range=ridge(fade=small, noise_amount=high), diagonal range=split(direction=diagonal, strength=negative), one-side mountain=ridge, both-sides mountain=2 ridges combo, lake=bump+fill:water, ring lake=ring+fill:water
 - Only use defNames from the above list in the mutators array. You cannot add anything not in the list.
 - If the user requests animals/special terrain not in the list, do not substitute something similar. Use action=ask to honestly inform them the feature is unavailable.
 - Always respond to the user in English. Do not show raw defNames, parameter names, or labels directly.
@@ -359,7 +368,7 @@ Additional parameters:
 - Add caves=caves:true, remove caves=caves:false (set explicitly).
 - Rock requests (marble only, lots of granite, etc.) use rock_types. rock_count and rock_types can be used together.
 - More/fewer ruins=ruin_density, ancient dangers=danger_density.
-- To add hot springs/geysers, always use mutators:[""HotSprings""]. Do not use a geysers parameter.
+- To add hot springs (HotSprings feature), use mutators:[""HotSprings""]. To set geyser count, use geysers parameter (e.g., geysers:5). Both can be used together.
 - Rich soil (fertile soil) adjustments use fertility_offset. Positive=more rich soil, negative=less.
 - For vague requests (""add animal habitat"", ""add special terrain"", etc.), use action=ask to ask the user to specify exactly what they want from the list.";
 
@@ -371,7 +380,7 @@ Additional parameters:
                 fewShot = isKo
                     ? @"
 예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
-응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
 
 예시2) 유저: ""온천이 있는 산악 요새""
 응답: {""action"":""generate"",""description"":""산으로 둘러싸인 요새 형태에 온천이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
@@ -382,8 +391,8 @@ Additional parameters:
 예시4) 유저: ""대리석으로만 된 맵, 폐허 많이""
 응답: {""action"":""generate"",""description"":""대리석만 있고 폐허가 많은 맵"",""params"":{""rock_types"":[""Marble""],""ruin_density"":2.0}}
 
-예시5) 유저: ""대각선 산맥 하나 있는 맵""
-응답: {""action"":""generate"",""description"":""좌상-우하 방향으로 대각선 산맥이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
+예시5) 유저: ""왼쪽에 산 있는 맵""
+응답: {""action"":""generate"",""description"":""왼쪽에 산이 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium"",""fade"":""medium"",""noise_amount"":""medium""}]}}
 
 예시6) 유저: ""완전 평지로 만들어줘""
 응답: {""action"":""generate"",""description"":""완전히 평평한 맵"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
@@ -392,7 +401,7 @@ Additional parameters:
 응답: {""action"":""ask"",""message"":""현재 타일은 해안가가 아닙니다. 피요르드를 원하시면 세계지도에서 해안가 타일을 선택해주세요.""}"
                     : @"
 Ex1) User: ""Make a map with lots of mountains and hot springs""
-Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
 
 Ex2) User: ""Mountain fortress with hot springs""
 Response: {""action"":""generate"",""description"":""A fortress surrounded by mountains with hot springs"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""}],""mutators"":[""HotSprings""]}}
@@ -403,8 +412,8 @@ Response: {""action"":""generate"",""description"":""A map with a lake in the ce
 Ex4) User: ""Marble only map with lots of ruins""
 Response: {""action"":""generate"",""description"":""A map with only marble and lots of ruins"",""params"":{""rock_types"":[""Marble""],""ruin_density"":2.0}}
 
-Ex5) User: ""Map with a diagonal mountain range""
-Response: {""action"":""generate"",""description"":""A map with a diagonal mountain range from top-left to bottom-right"",""params"":{""elevation_shapes"":[{""type"":""split"",""direction"":""top_left"",""strength"":""negative_strong"",""gap"":""medium""}]}}
+Ex5) User: ""Map with mountains on the left""
+Response: {""action"":""generate"",""description"":""A map with mountains on the left side"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium"",""fade"":""medium"",""noise_amount"":""medium""}]}}
 
 Ex6) User: ""Make it completely flat""
 Response: {""action"":""generate"",""description"":""A completely flat map"",""params"":{""hills"":""none"",""hill_amount"":0.1,""elevation_shapes"":[]}}
@@ -418,10 +427,10 @@ Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjo
                 fewShot = isKo
                     ? @"
 예시1) 유저: ""산 많고 온천 있는 맵 만들어줘""
-응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+응답: {""action"":""generate"",""description"":""산이 많고 온천이 있는 맵"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
 
 예시2) 유저: ""왼쪽에 산, 오른쪽 아래에 호수""
-응답: {""action"":""generate"",""description"":""왼쪽에 산이 있고 오른쪽 아래에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
+응답: {""action"":""generate"",""description"":""왼쪽에 산이 있고 오른쪽 아래에 호수가 있는 맵"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong"",""fade"":""medium"",""noise_amount"":""medium""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
 
 예시3) 유저: ""그냥 추천해줘""
 응답: {""action"":""generate"",""description"":""해안가 바이옴에 어울리는 자연 경관 맵"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
@@ -433,10 +442,10 @@ Response: {""action"":""ask"",""message"":""This tile is not coastal. To use fjo
 응답: {""action"":""generate"",""description"":""돌덩어리 없는 깨끗한 맵"",""params"":{""rock_chunks"":false}}"
                     : @"
 Ex1) User: ""Make a map with lots of mountains and hot springs""
-Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.4,""caves"":true,""mutators"":[""HotSprings""]}}
+Response: {""action"":""generate"",""description"":""A mountainous map with hot springs"",""params"":{""hills"":""center"",""hill_amount"":1.2,""caves"":true,""mutators"":[""HotSprings""]}}
 
 Ex2) User: ""Mountains on the left, lake on the bottom right""
-Response: {""action"":""generate"",""description"":""A map with mountains on the left and a lake in the bottom right"",""params"":{""elevation_shapes"":[{""type"":""slope"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
+Response: {""action"":""generate"",""description"":""A map with mountains on the left and a lake in the bottom right"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong"",""fade"":""medium"",""noise_amount"":""medium""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
 
 Ex3) User: ""Just recommend something""
 Response: {""action"":""generate"",""description"":""A natural landscape map suited for a coastal biome"",""params"":{""hills"":""edges"",""hill_amount"":1.0,""vegetation_density"":1.3,""coast_direction"":""auto""}}
@@ -458,11 +467,13 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 var firstShape = existingShapes[0];
                 // 첫 번째 shape JSON 직렬화
                 var fp = new System.Collections.Generic.List<string>();
-                if (!string.IsNullOrEmpty(firstShape.type))      fp.Add($"\"type\":\"{firstShape.type}\"");
-                if (!string.IsNullOrEmpty(firstShape.direction)) fp.Add($"\"direction\":\"{firstShape.direction}\"");
-                if (!string.IsNullOrEmpty(firstShape.strength))  fp.Add($"\"strength\":\"{firstShape.strength}\"");
-                if (!string.IsNullOrEmpty(firstShape.position))  fp.Add($"\"position\":\"{firstShape.position}\"");
-                if (!string.IsNullOrEmpty(firstShape.size))      fp.Add($"\"size\":\"{firstShape.size}\"");
+                if (!string.IsNullOrEmpty(firstShape.type))         fp.Add($"\"type\":\"{firstShape.type}\"");
+                if (!string.IsNullOrEmpty(firstShape.direction))    fp.Add($"\"direction\":\"{firstShape.direction}\"");
+                if (!string.IsNullOrEmpty(firstShape.strength))     fp.Add($"\"strength\":\"{firstShape.strength}\"");
+                if (!string.IsNullOrEmpty(firstShape.fade))         fp.Add($"\"fade\":\"{firstShape.fade}\"");
+                if (!string.IsNullOrEmpty(firstShape.noise_amount)) fp.Add($"\"noise_amount\":\"{firstShape.noise_amount}\"");
+                if (!string.IsNullOrEmpty(firstShape.position))     fp.Add($"\"position\":\"{firstShape.position}\"");
+                if (!string.IsNullOrEmpty(firstShape.size))         fp.Add($"\"size\":\"{firstShape.size}\"");
                 string firstJson = "{" + string.Join(",", fp) + "}";
 
                 // 제거 예시: 첫 번째 shape를 뺀 나머지 목록
@@ -475,11 +486,13 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 {
                     var others = existingShapes.Skip(1).Select(s => {
                         var p = new System.Collections.Generic.List<string>();
-                        if (!string.IsNullOrEmpty(s.type))      p.Add($"\"type\":\"{s.type}\"");
-                        if (!string.IsNullOrEmpty(s.direction)) p.Add($"\"direction\":\"{s.direction}\"");
-                        if (!string.IsNullOrEmpty(s.strength))  p.Add($"\"strength\":\"{s.strength}\"");
-                        if (!string.IsNullOrEmpty(s.position))  p.Add($"\"position\":\"{s.position}\"");
-                        if (!string.IsNullOrEmpty(s.size))      p.Add($"\"size\":\"{s.size}\"");
+                        if (!string.IsNullOrEmpty(s.type))         p.Add($"\"type\":\"{s.type}\"");
+                        if (!string.IsNullOrEmpty(s.direction))    p.Add($"\"direction\":\"{s.direction}\"");
+                        if (!string.IsNullOrEmpty(s.strength))     p.Add($"\"strength\":\"{s.strength}\"");
+                        if (!string.IsNullOrEmpty(s.fade))         p.Add($"\"fade\":\"{s.fade}\"");
+                        if (!string.IsNullOrEmpty(s.noise_amount)) p.Add($"\"noise_amount\":\"{s.noise_amount}\"");
+                        if (!string.IsNullOrEmpty(s.position))     p.Add($"\"position\":\"{s.position}\"");
+                        if (!string.IsNullOrEmpty(s.size))         p.Add($"\"size\":\"{s.size}\"");
                         return "{" + string.Join(",", p) + "}";
                     });
                     removalShapesJson = "[" + string.Join(",", others) + "]";
@@ -516,6 +529,9 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             // 의도적으로 비움: Enter는 DoWindowContents에서 메시지 전송으로 처리
         }
 
+        // WorldComponent의 대화 시작 시점 스냅샷 (닫기=취소 시 복원용)
+        private TileMapState _wcSnapshot;
+
         public Dialog_TextToMap()
         {
             doCloseButton = false;
@@ -527,7 +543,15 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             layer = WindowLayer.Super;
 
             _openedTileId = Find.WorldSelector.SelectedTile;
+            MapGenParams.CurrentTileId = _openedTileId;
+
+            // WorldComponent에서 기존 타일 상태 로드
+            MapGenParams.LoadFromTile(_openedTileId);
             _initialSnapshot = MapGenParams.HasParams ? MapGenParams.ToSnapshot() : null;
+
+            // WorldComponent의 현재 상태 스냅샷 (닫기=취소 시 복원용)
+            var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
+            _wcSnapshot = wc?.GetState(_openedTileId)?.Clone();
 
             _history.Add(new ChatMessage("assistant",
                 "MapGenAI_Welcome".Translate()));
@@ -762,10 +786,13 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             if (MapGenParams.HasParams)
                 _paramStack.Push(MapGenParams.ToSnapshot());
 
-            // 현재 user 메시지 1개만 전달 (현재 파라미터 상태는 system prompt에 포함)
-            var singleMessage = new List<ChatMessage> { new ChatMessage("user", text) };
+            // LLM 컨텍스트: generate 후 초기화, ask 후 유지
+            // 맵 상태는 system prompt에 MDP로 포함
             int tileId = Find.WorldSelector?.SelectedTile ?? -1;
             var systemPrompt = BuildSystemPrompt(tileId);
+
+            _llmContext.Add(new ChatMessage("user", text));
+            var historySnapshot = new List<ChatMessage>(_llmContext);
 
             Task.Run(async () =>
             {
@@ -774,7 +801,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 try
                 {
                     Log.Message("[MapGenAI] Task.Run 시작");
-                    result = await client.SendChatAsync(singleMessage, systemPrompt);
+                    result = await client.SendChatAsync(historySnapshot, systemPrompt);
                     Log.Message($"[MapGenAI] 응답 수신: {(result == null ? "null" : result.Length + "자")}");
                 }
                 catch (Exception e)
@@ -789,7 +816,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                             if (nextClient != null)
                             {
                                 Log.Message("[MapGenAI] Fallback API 시도");
-                                result = await nextClient.SendChatAsync(singleMessage, systemPrompt);
+                                result = await nextClient.SendChatAsync(historySnapshot, systemPrompt);
                             }
                             else error = e.Message;
                         }
@@ -840,11 +867,14 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
 
                 if (action == "ask")
                 {
-                    _history.Add(new ChatMessage("assistant", parsed.GetString("message")));
+                    string askMsg = parsed.GetString("message");
+                    _history.Add(new ChatMessage("assistant", askMsg));
+                    _llmContext.Add(new ChatMessage("assistant", askMsg)); // ask는 컨텍스트 유지
                     _statusText = "";
                 }
                 else if (action == "generate")
                 {
+                    _llmContext.Clear(); // 맵 변경 → 컨텍스트 초기화 (맵 상태는 system prompt에)
                     var data = ParseParams(parsed.GetObject("params"));
 
                     // --- Layer 3: 출력 검증 ---
@@ -951,27 +981,28 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
 
         private MapParamsData ParseParams(SimpleJsonObject obj)
         {
-            var data = new MapParamsData
-            {
-                hills = obj.GetString("hills") ?? "none",
-                hill_amount = obj.GetFloat("hill_amount", 1f),
-                vegetation_density = obj.GetFloat("vegetation_density", 1f),
-                animal_density = obj.GetFloat("animal_density", 1f),
-                fertility_offset = obj.GetFloat("fertility_offset", 0f),
-                roads = obj.GetBool("roads"),
-                caves = obj.GetBool("caves"),
-                caves_explicit = obj.GetString("caves") != null,
-                geysers = obj.GetInt("geysers", -1),
-                coast_direction = obj.GetString("coast_direction") ?? "auto",
-                rock_count = obj.GetInt("rock_count", -1),
-                ore_density = obj.GetFloat("ore_density", 1f),
-                ruin_density = obj.GetFloat("ruin_density", 1f),
-                danger_density = obj.GetFloat("danger_density", 1f),
-                rock_chunks = obj.GetString("rock_chunks") != null ? obj.GetBool("rock_chunks") : true,
-                hill_size = ParseHillSize(obj.GetString("hill_size")),
-                hill_smoothness = ParseHillSmoothness(obj.GetString("hill_smoothness")),
-                straight_river = obj.GetBool("straight_river")
-            };
+            var data = new MapParamsData();
+
+            // --- explicitKeys 추적: JSON에 키가 존재하면 기록 ---
+            void Track(string key) { data.explicitKeys.Add(key); }
+
+            if (obj.GetString("hills") != null)            { data.hills = obj.GetString("hills"); Track("hills"); }
+            if (obj.GetString("hill_amount") != null)      { data.hill_amount = obj.GetFloat("hill_amount", 1f); Track("hill_amount"); }
+            if (obj.GetString("vegetation_density") != null){ data.vegetation_density = obj.GetFloat("vegetation_density", 1f); Track("vegetation_density"); }
+            if (obj.GetString("animal_density") != null)   { data.animal_density = obj.GetFloat("animal_density", 1f); Track("animal_density"); }
+            if (obj.GetString("fertility_offset") != null) { data.fertility_offset = obj.GetFloat("fertility_offset", 0f); Track("fertility_offset"); }
+            if (obj.GetString("roads") != null)            { data.roads = obj.GetBool("roads"); Track("roads"); }
+            if (obj.GetString("caves") != null)            { data.caves = obj.GetBool("caves"); data.caves_explicit = true; Track("caves"); }
+            if (obj.GetString("geysers") != null)          { data.geysers = obj.GetInt("geysers", -1); Track("geysers"); }
+            if (obj.GetString("coast_direction") != null)  { data.coast_direction = obj.GetString("coast_direction"); Track("coast_direction"); }
+            if (obj.GetString("rock_count") != null)       { data.rock_count = obj.GetInt("rock_count", -1); Track("rock_count"); }
+            if (obj.GetString("ore_density") != null)      { data.ore_density = obj.GetFloat("ore_density", 1f); Track("ore_density"); }
+            if (obj.GetString("ruin_density") != null)     { data.ruin_density = obj.GetFloat("ruin_density", 1f); Track("ruin_density"); }
+            if (obj.GetString("danger_density") != null)   { data.danger_density = obj.GetFloat("danger_density", 1f); Track("danger_density"); }
+            if (obj.GetString("rock_chunks") != null)      { data.rock_chunks = obj.GetBool("rock_chunks"); Track("rock_chunks"); }
+            if (obj.GetString("hill_size") != null)        { data.hill_size = ParseHillSize(obj.GetString("hill_size")); Track("hill_size"); }
+            if (obj.GetString("hill_smoothness") != null)  { data.hill_smoothness = ParseHillSmoothness(obj.GetString("hill_smoothness")); Track("hill_smoothness"); }
+            if (obj.GetString("straight_river") != null)   { data.straight_river = obj.GetBool("straight_river"); Track("straight_river"); }
 
             // rock_types 배열 파싱
             var rockTypesArr = obj.GetArray("rock_types");
@@ -980,39 +1011,46 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 data.rock_types = new System.Collections.Generic.List<string>();
                 foreach (var item in rockTypesArr)
                     data.rock_types.Add(item);
+                Track("rock_types");
             }
 
+            // river 객체 파싱 — 세부 키별로 추적 (MDP: 방향만 보내도 위치 유지, 위치만 보내도 방향 유지)
             var riverObj = obj.GetObject("river");
             if (riverObj != null)
-                data.river = new RiverData
-                {
-                    present = riverObj.GetBool("present"),
-                    direction = riverObj.GetString("direction") ?? "vertical",
-                    direction_angle = riverObj.GetFloat("direction_angle", -1f),
-                    x_position = riverObj.GetFloat("x_position", 0.5f),
-                    z_position = riverObj.GetFloat("z_position", 0.5f)
-                };
+            {
+                data.river = new RiverData();
+                if (riverObj.GetString("present") != null) { data.river.present = riverObj.GetBool("present"); Track("river_present"); }
+                if (riverObj.GetString("direction") != null) { data.river.direction = riverObj.GetString("direction"); Track("river_direction"); }
+                if (riverObj.GetString("direction_angle") != null) { data.river.direction_angle = riverObj.GetFloat("direction_angle", -1f); Track("river_direction"); }
+                if (riverObj.GetString("x_position") != null) { data.river.x_position = riverObj.GetFloat("x_position", 0.5f); Track("river_position"); }
+                if (riverObj.GetString("z_position") != null) { data.river.z_position = riverObj.GetFloat("z_position", 0.5f); Track("river_position"); }
+            }
 
             // river_direction / river_position 단축키 지원 (river 객체 없이 직접 지정 가능)
             {
                 string rdStr = obj.GetString("river_direction");
                 string rpStr = obj.GetString("river_position");
-                if (rdStr != null || rpStr != null)
+                if (rdStr != null)
                 {
-                    if (data.river == null)
-                        data.river = new RiverData { present = true };
-                    if (rdStr != null) data.river.direction = rdStr;
-                    if (rpStr != null)
-                    {
-                        string rp = rpStr.Trim().ToLower();
-                        // up/down은 z축 이동
-                        if (rp == "up" || rp == "top")
-                            data.river.z_position = 0.8f;
-                        else if (rp == "down" || rp == "bottom")
-                            data.river.z_position = 0.2f;
-                        else
-                            data.river.x_position = ParseRiverPosition(rpStr);
-                    }
+                    if (data.river == null) data.river = new RiverData();
+                    data.river.present = true;
+                    data.river.direction = rdStr;
+                    Track("river_direction");
+                    Track("river_present");
+                }
+                if (rpStr != null)
+                {
+                    if (data.river == null) data.river = new RiverData();
+                    data.river.present = true;
+                    string rp = rpStr.Trim().ToLower();
+                    if (rp == "up" || rp == "top")
+                        data.river.z_position = 0.8f;
+                    else if (rp == "down" || rp == "bottom")
+                        data.river.z_position = 0.2f;
+                    else
+                        data.river.x_position = ParseRiverPosition(rpStr);
+                    Track("river_position");
+                    Track("river_present");
                 }
             }
 
@@ -1023,6 +1061,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 data.mutators = new System.Collections.Generic.List<string>();
                 foreach (var item in mutatorsArr)
                     data.mutators.Add(item);
+                Track("mutators");
             }
 
             // remove_mutators 배열 파싱 (기존 특징 제거용)
@@ -1032,6 +1071,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 data.remove_mutators = new System.Collections.Generic.List<string>();
                 foreach (var item in removeArr)
                     data.remove_mutators.Add(item);
+                Track("remove_mutators");
             }
 
             // elevation_shapes 오브젝트 배열 파싱
@@ -1046,73 +1086,19 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                         type = s.GetString("type"),
                         direction = s.GetString("direction"),
                         strength = s.GetString("strength"),
+                        fade = s.GetString("fade"),
+                        noise_amount = s.GetString("noise_amount"),
                         position = s.GetString("position"),
                         size = s.GetString("size"),
                         gap = s.GetString("gap"),
                         fill = s.GetString("fill")
                     });
                 }
+                Track("elevation_shapes");
             }
 
-            // --- 기존 파라미터 병합: JSON에 없는 필드는 이전 값 유지 ---
-            if (MapGenParams.HasParams)
-            {
-                if (obj.GetString("hills") == null && data.elevation_shapes == null)
-                    data.hills = MapGenParams.Hills;
-                if (obj.GetString("hill_amount") == null)
-                    data.hill_amount = MapGenParams.HillAmount;
-                if (obj.GetString("vegetation_density") == null)
-                    data.vegetation_density = MapGenParams.VegetationDensity;
-                if (obj.GetString("animal_density") == null)
-                    data.animal_density = MapGenParams.AnimalDensity;
-                if (obj.GetString("fertility_offset") == null)
-                    data.fertility_offset = MapGenParams.FertilityOffset;
-                if (!data.caves_explicit)
-                    data.caves = MapGenParams.HasCaves;
-                if (obj.GetString("coast_direction") == null)
-                    data.coast_direction = MapGenParams.CoastDirection;
-                if (obj.GetString("rock_count") == null)
-                    data.rock_count = MapGenParams.RockCount;
-                if (obj.GetString("ore_density") == null)
-                    data.ore_density = MapGenParams.OreDensity;
-                if (obj.GetString("ruin_density") == null)
-                    data.ruin_density = MapGenParams.RuinDensity;
-                if (obj.GetString("danger_density") == null)
-                    data.danger_density = MapGenParams.DangerDensity;
-                if (obj.GetString("rock_chunks") == null)
-                    data.rock_chunks = MapGenParams.HasRockChunks;
-                if (obj.GetString("hill_size") == null)
-                    data.hill_size = MapGenParams.HillSize;
-                if (obj.GetString("hill_smoothness") == null)
-                    data.hill_smoothness = MapGenParams.HillSmoothness;
-                if (obj.GetString("straight_river") == null)
-                    data.straight_river = MapGenParams.StraightRiver;
-
-                // 강: JSON에 river 관련 키가 하나도 없으면 이전 값 유지
-                if (data.river == null && obj.GetString("river_direction") == null
-                    && obj.GetString("river_position") == null && obj.GetObject("river") == null)
-                {
-                    data.river = new RiverData
-                    {
-                        present = MapGenParams.HasRiver,
-                        direction_angle = MapGenParams.RiverDirectionAngle,
-                        x_position = MapGenParams.RiverXPosition,
-                        z_position = MapGenParams.RiverZPosition
-                    };
-                }
-
-                // 석재: JSON에 없으면 이전 값 유지
-                if (data.rock_types == null && MapGenParams.RockTypes.Count > 0)
-                    data.rock_types = new List<string>(MapGenParams.RockTypes);
-
-                // elevation_shapes: JSON에 없으면 이전 값 유지
-                if (data.elevation_shapes == null && MapGenParams.ElevationShapes.Count > 0)
-                    data.elevation_shapes = new List<ElevationShape>(MapGenParams.ElevationShapes);
-
-                // mutators: JSON에 없으면 이전 값 유지
-                if (data.mutators == null && MapGenParams.Mutators.Count > 0)
-                    data.mutators = new List<string>(MapGenParams.Mutators);
-            }
+            // 병합은 MapGenParams.Apply()에서 WorldComponent 기반으로 수행 (MDP)
+            // ParseParams는 LLM이 보낸 것만 data에 넣고 explicitKeys로 추적
 
             return data;
         }
@@ -1210,7 +1196,8 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             if (_paramStack.Count == 0 || _isWaiting) return;
 
             var prev = _paramStack.Pop();
-            MapGenParams.Apply(prev);
+            // Undo는 전체 적용 (explicitKeys 비어있음 → fullApply)
+            MapGenParams.Apply(prev, _openedTileId);
             _paramsReady = true;
 
             // 마지막 user + assistant 메시지 쌍 제거 (환영 메시지는 유지)
@@ -1226,6 +1213,16 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
         private void DoReset()
         {
             _paramStack.Clear();
+
+            // WorldComponent도 대화 시작 시점으로 복원
+            var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
+            if (wc != null)
+            {
+                if (_wcSnapshot != null)
+                    wc.SetState(_openedTileId, _wcSnapshot);
+                else
+                    wc.RemoveState(_openedTileId);
+            }
 
             if (_initialSnapshot != null)
             {
@@ -1320,9 +1317,18 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
         {
             base.PostClose();
 
-            if (!_keepParams && MapGenParams.HasParams)
+            if (!_keepParams)
             {
-                // 대화 취소/닫기 → 파라미터 리셋 + Map Preview 원래대로
+                // 대화 취소/닫기 → WorldComponent를 대화 시작 시점으로 복원
+                var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
+                if (wc != null)
+                {
+                    if (_wcSnapshot != null)
+                        wc.SetState(_openedTileId, _wcSnapshot);
+                    else
+                        wc.RemoveState(_openedTileId);
+                }
+
                 MapGenParams.Reset();
                 MapGenParams.RefreshMapPreview();
                 Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Translate()}");

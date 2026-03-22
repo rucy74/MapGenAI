@@ -569,6 +569,13 @@ class TestBench
     // === 메인 ===
     static async Task Main(string[] args)
     {
+        // 서브커맨드: dotnet run -- mdp → MdpApplyTests 실행
+        if (args.Length > 0 && args[0].Equals("mdp", StringComparison.OrdinalIgnoreCase))
+        {
+            MdpApplyTests.RunAll();
+            return;
+        }
+
         // API 키 로드
         var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "docs", "dev_config.json");
         if (!File.Exists(configPath))

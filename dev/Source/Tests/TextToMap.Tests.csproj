@@ -12,5 +12,7 @@
 
   <ItemGroup>
     <Compile Remove="InGameTestRunner.cs" />
+    <!-- MapGenParams.cs 소스 링크 (Apply/Reset/ElevationShape/MapParamsData 전부 포함) -->
+    <Compile Include="../MapGen/MapGenParams.cs" Link="MapGenParams.cs" />
   </ItemGroup>
 </Project>

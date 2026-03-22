@@ -2,6 +2,110 @@
 
 ---
 
+## 2026-03-21
+
+### ridge shape 구현 완료
+
+설계대로 ApplyRidge (smoothstep + Verse.Noise.Perlin) 구현. slope/split 메서드 삭제, 레거시 디스패처 추가.
+- `GenStepPatches.cs`: ApplyRidge, Smoothstep, ApplyRidgeFromLegacySlope, ApplyRidgeFromLegacySplit 추가
+- `MapGenParams.cs`: fade/noise_amount 필드 + 파서, GetAutoShapeForHills ridge 전환, IsHillsSlotShape 업데이트
+- `Dialog_TextToMap.cs`: LLM 프롬프트에서 slope/split → ridge 교체 (JSON schema, 가이드, few-shot, 규칙 전부)
+
+---
+
+### 치명적 버그 3건 수정
+
+**간헐천 패치 구현** (신규: `GeyserPatch.cs`):
+- GeyserCount에 따라 GenStepDef `SteamGeysers`의 countPer10kCellsRange를 Prefix/Postfix 패턴으로 조정+복원
+
+**광석 밀도 원본 복원** (재작성: `OreDensityPatch.cs`):
+- 기존: Prefix에서 곱셈만 하고 복원 없음 → GenStepDef 오염
+- 수정: MapGenerator.GenerateContentsIntoMap Prefix/Postfix 패턴으로 전환
+
+**식생/동물 밀도 > 1 효과** (신규: `BiomeDensityPatch.cs` + GenStepPatches 수정):
+- BiomeDef.plantDensity 곱셈 + wildPlantRegrowDays 역비례 조정
+- BiomeDef.animalDensity 곱셈
+
+---
+
+### Elevation 아키텍처 재설계: ridge shape 도입
+
+slope 상쇄, split Max 덮어쓰기, 바닐라 비유사성 3대 문제 해결을 위한 elevation 시스템 재설계 완료.
+
+**결정 사항**:
+- slope, split 제거 -> 새로운 `ridge` shape 하나로 대체
+- ridge = smoothstep 프로파일(비음수, 상쇄 불가) + Perlin noise 디테일
+- 레거시 slope/split은 자동 변환 디스패처로 하위 호환 보장
+- 접근법 C(하이브리드: DistFromEdge + Perlin) 선택
+
+**새 파라미터**: fade (산 범위), noise_amount (디테일 정도)
+
+**산출물**: `docs/PLAN_ELEVATION_REDESIGN.md`
+
+---
+
+### 바닐라 vs MapGenAI 지형 feature 전수 비교 분석
+
+12개 feature를 바닐라 디컴파일 코드와 비교 분석. 결과 요약:
+
+| Feature | 바닐라 방식 | MapGenAI 방식 | 일치 | 문제점 |
+|---------|------------|--------------|------|--------|
+| 산/언덕 | Perlin+hilliness factor+DistFromAxis | slope/bump/radial additive postfix | X | slope 상쇄, split Max 덮어쓰기 |
+| 호수 | 바이옴 TerrainThreshold / TileMutator | bump(fill=water)+fertility 마법값 | 삼각 | 동작하지만 바닐라와 다른 접근 |
+| 강 | TileMutatorWorker_River | Prefix/Postfix 파라미터 교체 | O | 없음 |
+| 해안 | World.CoastAngleAt | Postfix 각도 교체 | O | 없음 |
+| 간헐천 | GenStep_ScatterGeysers | **미구현** (파라미터만 존재) | X | 패치 없음 |
+| 동굴 | TileMutatorDef Caves | AddMutator/RemoveMutator | O | 없음 |
+| 광석 | countPer10kCellsRange | Prefix 곱셈 | 삼각 | 원본 미복원 |
+| 비옥도 | Perlin + TerrainThreshold | FertilityOffset 가산 | O | VegDensity>1 미미 |
+| 석재 | NaturalRockTypesIn | Finalizer 교체 | O | 없음 |
+| 폐허/위험 | countPer10kCellsRange | Prefix/Postfix 곱셈+복원 | O | 없음 |
+| 돌덩어리 | GenStep_RockChunks | Prefix on/off | O | 없음 |
+| TileMutator | Odyssey 시스템 | AddMutator 직접 적용 | 삼각 | 카테고리 충돌체크 누락 |
+
+**수정 필요 없음 (6)**: 강, 해안, 동굴, 석재, 폐허/위험, 돌덩어리
+**부분 수정 필요 (4)**: 호수, 광석, 비옥도, TileMutator
+**전면 재설계 필요 (1)**: 산/언덕 (elevation)
+**미구현 (1)**: 간헐천
+
+---
+
+### 자연 산 vs MapGenAI 산 구조 분석
+
+**분석 결과**: Case A (자연 산 타일 + 추가 요청 = 동작) vs Case B (평지 + 연속 생성 = 실패) 원인 규명.
+
+**바닐라 elevation 파이프라인**:
+- Perlin(0.021) -> ScaleBias(0.5,0.5) -> hilliness factor 곱셈 (Flat=0.8, Mountainous=1.1)
+- Mountainous 이상: DistFromAxis(0.42)로 한쪽 사면에 산맥 추가
+- 이 산맥이 "자연 산" -- base elevation에 내재
+
+**근본 원인**: 자연 산은 base elevation에 내재 (Postfix와 무관), MapGenAI 산은 ElevationShapes에만 존재 (Apply Clear로 소멸). 비대칭 구조.
+
+**권장 해법 (Option E 하이브리드)**:
+- `elevation_shapes == null` -> 이전 shapes 유지
+- `elevation_shapes == []` -> 의도적 제거
+- `elevation_shapes`에 값 있음 -> 전체 교체 (MDP)
+- LLM 프롬프트에 현재 shapes 상태 포함
+
+---
+
+### MapGenParams.Apply() 유닛 테스트 인프라 구축
+
+**구현**: Unity/Verse shim 기반 테스트 인프라 + 7개 시나리오 테스트
+- `Tests/UnityShim.cs` — Mathf, Vector2 스텁
+- `Tests/VerseShim.cs` — Log, Find, DefDatabase, Tile, MapPreview 스텁
+- `Tests/MdpApplyTests.cs` — hills/elevation_shapes 조합 7개 시나리오
+- 실행: `dotnet run -- mdp`
+
+**버그 재현 결과**: 4 PASS / 3 FAIL
+- #2 FAIL: hills=left->right, shapes=null -> slope(left) 잔존 (slope(right)여야 함)
+- #5 FAIL: elevation_shapes=[] + hills=left -> 자동변환이 빈 배열 덮어씀
+- #6 FAIL: hills=left->none, shapes=null -> slope(left) 잔존 (비어있어야 함)
+
+**근본 원인**: Apply()에서 elevation_shapes==null이면 기존 shapes를 무조건 유지하지만, hills가 변경된 경우 자동 변환을 다시 해야 함.
+
+---
+
 ## 2026-03-17 (3차)
 
 ### 버그 수정: 강 방향 역전

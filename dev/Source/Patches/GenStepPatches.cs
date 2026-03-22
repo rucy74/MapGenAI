@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using HarmonyLib;
 using RimWorld;
@@ -19,9 +20,6 @@ namespace MapGenAI.Patches
     [HarmonyPatch(typeof(GenStep_ElevationFertility), "Generate")]
     static class Patch_GenStep_ElevationFertility
     {
-        // Slope 모드의 기본 승수: Map Designer 기본값 참조
-        private const float SlopeMultiplier = 0.006f;
-
         // Noise 기본 주파수
         private const float NoiseBaseFreq = 0.05f;
 
@@ -108,12 +106,14 @@ namespace MapGenAI.Patches
         {
             switch (shape.type)
             {
-                case "slope":  ApplySlope(shape, map, grid);  break;
+                case "ridge":  ApplyRidge(shape, map, grid);  break;
                 case "radial": ApplyRadial(shape, map, grid); break;
-                case "split":  ApplySplit(shape, map, grid);  break;
                 case "bump":   ApplyBump(shape, map, grid);   break;
                 case "noise":  ApplyNoise(shape, map, grid);  break;
                 case "ring":   ApplyRing(shape, map, grid);   break;
+                // 하위 호환: 이전 세이브/프리셋에서 slope/split이 올 수 있음
+                case "slope":  ApplyRidgeFromLegacySlope(shape, map, grid); break;
+                case "split":  ApplyRidgeFromLegacySplit(shape, map, grid); break;
                 default:
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;
@@ -121,14 +121,19 @@ namespace MapGenAI.Patches
         }
 
         /// <summary>
-        /// slope: 한쪽이 높고 반대쪽이 낮은 경사면.
-        /// elevation += strength * (dx * cos(angle) + dz * sin(angle)) / mapSize
-        /// Map Designer의 AxisAsValueX + Rotate 패턴 참조.
+        /// ridge: 한 방향에 산맥. smoothstep 프로파일 + Perlin noise 디테일.
+        /// 기존 slope(선형 상쇄)와 split(Max 덮어쓰기)를 모두 대체.
+        ///
+        /// 핵심: profile은 0~1이므로 strength * profile은 항상 같은 부호.
+        ///        ridge(left) + ridge(right)는 양쪽 다 양수 -> 골짜기 형성.
+        ///        기존 slope(left) + slope(right)의 상쇄 문제가 구조적으로 불가능.
         /// </summary>
-        private static void ApplySlope(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        private static void ApplyRidge(ElevationShape shape, Map map, MapGenFloatGrid grid)
         {
             float strength = ElevationShape.ParseStrength(shape.strength);
             float angleDeg = ElevationShape.ParseDirection(shape.direction);
+            float fade = ElevationShape.ParseFade(shape.fade);
+            float noiseAmt = ElevationShape.ParseNoiseAmount(shape.noise_amount);
 
             float thetaRad = angleDeg * Mathf.Deg2Rad;
             float cosTheta = Mathf.Cos(thetaRad);
@@ -136,14 +141,127 @@ namespace MapGenAI.Patches
 
             float centerX = map.Center.x;
             float centerZ = map.Center.z;
-            float multiplier = SlopeMultiplier * strength;
+            float mapHalf = Mathf.Max(map.Size.x, map.Size.z) * 0.5f;
+
+            // smoothstep 경계: fade가 클수록 산이 맵 안쪽까지 들어옴
+            // fade=0.3 -> profileStart=0.7 (가장자리 20~30%만 산)
+            // fade=0.5 -> profileStart=0.5 (가장자리 ~40%가 산, 중앙은 평지)
+            // fade=0.7 -> profileStart=0.3 (맵 대부분이 산)
+            float profileStart = 1.0f - fade;
+            float transitionWidth = 0.15f;
+            float edgeLow = profileStart - transitionWidth;
+            float edgeHigh = profileStart + transitionWidth;
+
+            // Perlin noise (디테일용) -- Verse.Noise.Perlin 사용 (RimWorld 동일 엔진)
+            Verse.Noise.ModuleBase noiseModule = null;
+            if (noiseAmt > 0.01f)
+            {
+                noiseModule = new Verse.Noise.Perlin(
+                    0.035, 2.0, 0.5, 4, Rand.Range(0, 2147483647),
+                    Verse.Noise.QualityMode.Medium);
+            }
 
             foreach (var cell in CellRect.WholeMap(map))
             {
-                float dx = cell.x - centerX;
-                float dz = cell.z - centerZ;
-                float slope = dx * cosTheta + dz * sinTheta;
-                grid[cell] += slope * multiplier;
+                // 1. 방향 벡터로 정규화된 위치 계산 (-1 ~ +1)
+                float dx = (cell.x - centerX) / mapHalf;
+                float dz = (cell.z - centerZ) / mapHalf;
+                float t = dx * cosTheta + dz * sinTheta;
+
+                // 2. smoothstep 프로파일 (0 ~ 1)
+                float profile = Smoothstep(edgeLow, edgeHigh, t);
+
+                // 3. Perlin noise 디테일
+                if (noiseModule != null && profile > 0.01f)
+                {
+                    float noise = (float)noiseModule.GetValue(cell); // approx -1~1
+                    profile *= Mathf.Max(0f, 1f + noiseAmt * noise);
+                }
+
+                // 4. additive 적용
+                grid[cell] += strength * profile;
+            }
+        }
+
+        /// <summary>Hermite smoothstep: edge0에서 0, edge1에서 1, 매끄러운 전환.</summary>
+        private static float Smoothstep(float edge0, float edge1, float x)
+        {
+            float t = Mathf.Clamp01((x - edge0) / (edge1 - edge0));
+            return t * t * (3f - 2f * t);
+        }
+
+        /// <summary>레거시 slope -> ridge 자동 변환.</summary>
+        private static void ApplyRidgeFromLegacySlope(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        {
+            var ridgeShape = new ElevationShape
+            {
+                type = "ridge",
+                direction = shape.direction,
+                strength = shape.strength,
+                fade = shape.fade ?? "medium",
+                noise_amount = shape.noise_amount ?? "medium"
+            };
+            ApplyRidge(ridgeShape, map, grid);
+        }
+
+        /// <summary>레거시 split -> ridge 쌍 자동 변환.</summary>
+        private static void ApplyRidgeFromLegacySplit(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        {
+            float strength = ElevationShape.ParseStrength(shape.strength);
+            float angleDeg = ElevationShape.ParseDirection(shape.direction);
+            float absStrength = Mathf.Abs(strength);
+            string gap = shape.gap;
+
+            // split의 direction은 축 방향 → 축에 수직인 양쪽에 ridge 배치
+            float perpAngle1 = (angleDeg + 90f) % 360f;
+            float perpAngle2 = (angleDeg + 270f) % 360f;
+
+            if (strength < 0)
+            {
+                // 산맥 모드: 양쪽에 산
+                float fadeVal = 0.5f - ElevationShape.ParseGap(gap);
+                string fadeStr = fadeVal.ToString(CultureInfo.InvariantCulture);
+
+                var ridge1 = new ElevationShape
+                {
+                    type = "ridge",
+                    direction = perpAngle1.ToString(CultureInfo.InvariantCulture),
+                    strength = absStrength.ToString(CultureInfo.InvariantCulture),
+                    fade = fadeStr,
+                    noise_amount = "high"
+                };
+                var ridge2 = new ElevationShape
+                {
+                    type = "ridge",
+                    direction = perpAngle2.ToString(CultureInfo.InvariantCulture),
+                    strength = absStrength.ToString(CultureInfo.InvariantCulture),
+                    fade = fadeStr,
+                    noise_amount = "high"
+                };
+                ApplyRidge(ridge1, map, grid);
+                ApplyRidge(ridge2, map, grid);
+            }
+            else
+            {
+                // 협곡 모드: 양쪽을 높여서 가운데 낮은 곳 형성
+                var ridge1 = new ElevationShape
+                {
+                    type = "ridge",
+                    direction = perpAngle1.ToString(CultureInfo.InvariantCulture),
+                    strength = strength.ToString(CultureInfo.InvariantCulture),
+                    fade = "medium",
+                    noise_amount = "medium"
+                };
+                var ridge2 = new ElevationShape
+                {
+                    type = "ridge",
+                    direction = perpAngle2.ToString(CultureInfo.InvariantCulture),
+                    strength = strength.ToString(CultureInfo.InvariantCulture),
+                    fade = "medium",
+                    noise_amount = "medium"
+                };
+                ApplyRidge(ridge1, map, grid);
+                ApplyRidge(ridge2, map, grid);
             }
         }
 
@@ -172,52 +290,9 @@ namespace MapGenAI.Patches
             }
         }
 
-        /// <summary>
-        /// split: 특정 방향 축을 따라 양쪽에 산, 중앙에 골짜기.
-        /// elevation += strength * (|projected| - gap) / mapSize
-        /// Map Designer의 Split 모드 참조.
-        /// </summary>
-        private static void ApplySplit(ElevationShape shape, Map map, MapGenFloatGrid grid)
-        {
-            float strength = ElevationShape.ParseStrength(shape.strength);
-            float gap = ElevationShape.ParseGap(shape.gap);
-            float angleDeg = ElevationShape.ParseDirection(shape.direction);
-
-            float thetaRad = angleDeg * Mathf.Deg2Rad;
-            float cosTheta = Mathf.Cos(thetaRad);
-            float sinTheta = Mathf.Sin(thetaRad);
-
-            float centerX = map.Center.x;
-            float centerZ = map.Center.z;
-            float mapSize = Mathf.Max(map.Size.x, map.Size.z);
-            float gapCells = gap * mapSize;
-
-            foreach (var cell in CellRect.WholeMap(map))
-            {
-                float dx = cell.x - centerX;
-                float dz = cell.z - centerZ;
-                // 축에 수직 방향으로 투영
-                float projected = dx * cosTheta + dz * sinTheta;
-                float absDist = Mathf.Abs(projected);
-                if (strength < 0)
-                {
-                    // 산맥 모드: 중심 축에 산을 직접 배치 + Perlin 노이즈로 자연스러운 가장자리
-                    float noise = Mathf.PerlinNoise(
-                        cell.x * 0.03f + cell.z * 0.02f + 500f,
-                        cell.z * 0.03f + cell.x * 0.02f + 300f) * gapCells * 0.6f;
-                    float noisyDist = absDist + noise - gapCells * 0.3f;
-                    float falloff = noisyDist / Mathf.Max(gapCells, 1f);
-                    if (falloff < 1f)
-                        grid[cell] = Mathf.Max(grid[cell], 0.85f - Mathf.Max(falloff, 0f) * 0.3f);
-                }
-                else
-                {
-                    // 협곡 모드 (positive strength): 중심 축을 낮추고 양쪽을 높임
-                    float val = strength * 2f * (absDist - gapCells) / mapSize;
-                    grid[cell] += val;
-                }
-            }
-        }
+        /* ApplySplit 제거됨 — ridge 쌍으로 대체 (ApplyRidgeFromLegacySplit).
+           산맥 모드의 Max 덮어쓰기 문제 해결. 롤백 필요 시 git history 참조.
+        */
 
         /// <summary>
         /// bump: 가우시안 돌출 (산봉우리 또는 움푹 패인 지형).
@@ -239,7 +314,7 @@ namespace MapGenAI.Patches
             // 호수(fill=water)는 맵의 일부만 차지해야 함 — 스케일 축소
             // small=15셀, medium=30셀, large=50셀 (맵 250기준 6-20%)
             // 일반 bump(언덕)은 더 넓게 — small=30, medium=60, large=90
-            float radiusScale = fillWater ? 0.15f : 0.5f;
+            float radiusScale = fillWater ? 0.15f : 0.3f;
             float minRadius = fillWater ? 10f : 20f;
             float radius = Mathf.Max(size * Mathf.Min(mapW, mapH) * radiusScale, minRadius);
             float radiusSq2 = 2f * radius * radius;
@@ -342,6 +417,7 @@ namespace MapGenAI.Patches
             float strength = ElevationShape.ParseStrength(shape.strength);
             float size = ElevationShape.ParseSize(shape.size);
             Vector2 pos = ElevationShape.ParsePosition(shape.position);
+            bool fillWater = shape.fill == "water";
 
             float mapW = map.Size.x;
             float mapH = map.Size.z;
@@ -356,6 +432,12 @@ namespace MapGenAI.Patches
             // 링에서 3 sigma 밖은 기여 < 0.01 → 스킵
             float maxDist = ringRadius + bandwidth * 3f;
 
+            MapGenFloatGrid fertilityGrid = null;
+            if (fillWater)
+            {
+                try { fertilityGrid = MapGenerator.Fertility; } catch { }
+            }
+
             foreach (var cell in CellRect.WholeMap(map))
             {
                 float dx = cell.x - centerX;
@@ -365,68 +447,36 @@ namespace MapGenAI.Patches
                 float offset = dist - ringRadius;
                 // Gaussian: 링 능선에서 최대, 멀어질수록 0으로 수렴 (음수 없음)
                 float gaussian = Mathf.Exp(-(offset * offset) / bw2);
-                grid[cell] += strength * gaussian;
-            }
-        }
-    }
 
-    /// <summary>
-    /// GenStep_Plants Postfix: VegetationDensity에 따라 식물 수 조절.
-    /// 밀도 < 1이면 일부 식물 제거, > 1이면 추가 스폰 시도.
-    /// </summary>
-    [HarmonyPatch(typeof(GenStep_Plants), "Generate")]
-    static class Patch_GenStep_Plants
-    {
-        static void Postfix(Map map)
-        {
-            if (!MapGenParams.HasParams) return;
-            float density = MapGenParams.VegetationDensity;
-            if (Mathf.Approximately(density, 1f)) return;
-
-            if (density < 1f)
-            {
-                // 밀도 감소: 확률적으로 식물 제거
-                float removeChance = 1f - density;
-                var plants = map.listerThings?.ThingsInGroup(ThingRequestGroup.Plant)?.ToList();
-                if (plants != null)
+                if (fillWater && fertilityGrid != null)
                 {
-                    foreach (var plant in plants)
+                    // 링 호수: 링 능선 부분을 물로 채움
+                    if (gaussian > 0.5f)
                     {
-                        if (Rand.Value < removeChance)
-                            plant.Destroy();
+                        fertilityGrid[cell] = -2005f;     // 깊은 물
+                        grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                    }
+                    else if (gaussian > 0.1f)
+                    {
+                        fertilityGrid[cell] = -1025f;     // 얕은 물
+                        grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                    }
+                    else if (gaussian > 0.05f)
+                    {
+                        fertilityGrid[cell] = 1f;         // 해변
                     }
                 }
-            }
-            // density > 1은 fertility 조정으로 이미 반영됨 (더 비옥한 토양 → 더 많은 식물 자연 성장)
-        }
-    }
-
-    /// <summary>
-    /// GenStep_Animals Postfix: AnimalDensity에 따라 동물 수 조절.
-    /// density &lt; 1이면 스폰된 동물 일부 제거.
-    /// </summary>
-    [HarmonyPatch(typeof(GenStep_Animals), "Generate")]
-    static class Patch_GenStep_Animals
-    {
-        static void Postfix(Map map)
-        {
-            if (!MapGenParams.HasParams) return;
-            float density = MapGenParams.AnimalDensity;
-            if (Mathf.Approximately(density, 1f) || density >= 1f) return;
-
-            // 밀도 감소: 스폰된 동물을 확률적으로 제거
-            float removeChance = 1f - density;
-            var pawns = map.mapPawns?.AllPawnsSpawned?.Where(p => p.RaceProps?.Animal == true)?.ToList();
-            if (pawns != null)
-            {
-                foreach (var animal in pawns)
+                else
                 {
-                    if (Rand.Value < removeChance && !animal.Dead)
-                        animal.Destroy();
+                    grid[cell] += strength * gaussian;
                 }
             }
         }
     }
+
+    // Patch_GenStep_Plants / Patch_GenStep_Animals 제거됨.
+    // 식생/동물 밀도는 BiomeDensityPatch에서 BiomeDef 수정으로 전 범위(0~2) 처리.
+    // 이전: BiomeDensityPatch(plantDensity 감소) + 여기(식물 확률 제거) = 이중 감소 버그.
 
     // TileMutator 패치 제거됨 — MapGenParams.Apply()에서 월드 타일에 직접 적용 (Map Designer 방식).
     // GenStep 시점에서 하면 복원 문제, Map Preview 충돌 등 버그 발생.
