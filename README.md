@@ -12,8 +12,11 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 
 - **Natural Language Map Generation** — Describe terrain in plain text, AI converts it to map parameters
 - **Live Map Preview** — See changes instantly through Map Preview integration
-- **Elevation Shapes** — Diagonal mountain ranges, central lakes, ring fortresses, canyons, slopes, and more
+- **Elevation Shapes** — Diagonal mountain ranges, central lakes, ring fortresses, canyons, ridges, passages, and more
+- **Free-form Shapes** — Star, heart, crescent, and custom shapes via CSG/SDF composite system
+- **Terrain Fill** — Paint areas with sand, rich soil, marsh, mud, or ice
 - **River Control** — Direction, position, and straight river mode
+- **MDP State** — Previous settings preserved across requests (add mountains, then lakes, then caves — nothing gets lost)
 - **Terrain Tuning** — Rich soil density, vegetation, animals, ore, ruins, rock types, caves, geysers
 - **Odyssey DLC Support** — 60+ tile mutators (hot springs, fjords, oasis, animal habitats, etc.)
 - **Preset System** — Save and load your favorite map configurations
@@ -33,16 +36,17 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 | Provider | Notes |
 |----------|-------|
 | Google Gemini | Free tier available |
+| OpenRouter | Access to 100+ models (Gemini, Claude, etc.) |
 | OpenAI | GPT-4o, etc. |
 | Local LLMs | Ollama, LM Studio, or any OpenAI-compatible API |
 
 ## Example Prompts
 
-- *"Diagonal mountain range with a central lake"*
-- *"Mountain fortress with hot springs"*
-- *"Straight river on the left, marble only, no rock chunks"*
-- *"Clean flatland with lots of rich soil"*
-- *"Just recommend something"*
+- *"Diagonal canyon with a large central lake"*
+- *"Mountain fortress with hot springs and a southern exit"*
+- *"Fertile land between two mountain ranges"*
+- *"Star-shaped hill on top, crescent lake on the bottom"*
+- *"Straight river, horizontal, at the bottom. Mountains on top, huge lake in center. Hot springs, caves, more animals and plants, marble only"*
 
 ## Tips
 
