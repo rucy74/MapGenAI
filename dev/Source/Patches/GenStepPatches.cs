@@ -296,6 +296,7 @@ namespace MapGenAI.Patches
             float strength = ElevationShape.ParseStrength(shape.strength);
             float size = ElevationShape.ParseSize(shape.size);
             Vector2 pos = ElevationShape.ParsePosition(shape.position);
+            bool hasFill = !string.IsNullOrEmpty(shape.fill);
             bool fillWater = shape.fill == "water";
 
             float mapW = map.Size.x;
@@ -303,11 +304,9 @@ namespace MapGenAI.Patches
             float posX = pos.x * mapW;
             float posZ = pos.y * mapH;
 
-            // 호수(fill=water)는 맵의 일부만 차지해야 함 — 스케일 축소
-            // small=15셀, medium=30셀, large=50셀 (맵 250기준 6-20%)
-            // 일반 bump(언덕)은 더 넓게 — small=30, medium=60, large=90
-            float radiusScale = fillWater ? 0.15f : 0.3f;
-            float minRadius = fillWater ? 10f : 20f;
+            // fill이 있으면 맵 일부만 차지 (스케일 축소)
+            float radiusScale = hasFill ? 0.15f : 0.3f;
+            float minRadius = hasFill ? 10f : 20f;
             float radius = Mathf.Max(size * Mathf.Min(mapW, mapH) * radiusScale, minRadius);
             float radiusSq2 = 2f * radius * radius;
 
@@ -315,15 +314,15 @@ namespace MapGenAI.Patches
             float maxRange = radius * 3f;
 
             MapGenFloatGrid fertilityGrid = null;
-            if (fillWater)
+            if (hasFill)
             {
                 try { fertilityGrid = MapGenerator.Fertility; } catch { }
             }
 
-            // 호수용 노이즈 — Verse.Noise.Perlin 사용 (RimWorld/Map Designer와 동일 엔진)
+            // fill용 노이즈 — Verse.Noise.Perlin 사용 (RimWorld/Map Designer와 동일 엔진)
             Verse.Noise.ModuleBase lakeNoise = null;
             float noiseRoundness = 1.5f;
-            if (fillWater)
+            if (hasFill)
             {
                 lakeNoise = new Verse.Noise.Perlin(
                     0.021, 2.0, 0.5, 6, Rand.Range(0, 2147483647),
@@ -341,27 +340,26 @@ namespace MapGenAI.Patches
 
                 float gaussian = Mathf.Exp(-distSq / radiusSq2); // 0~1 마스크
 
-                if (fillWater)
+                if (hasFill)
                 {
-                    // 호수 모드: Perlin 노이즈로 불규칙한 해안선 + fertility 음수 → 물 지형
-                    // elevation 체크 제거: 산맥 위에도 호수가 올바르게 생성됨 (물이 지형을 깎음)
+                    // fill 모드: Perlin 노이즈로 불규칙한 경계 + fertility 마법값으로 terrain 교체
                     if (fertilityGrid != null)
                     {
                         float dist = Mathf.Sqrt(distSq);
                         float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) : 0f;
                         float lakeVal = noiseRoundness * noise + 0.1f * (radius - dist);
 
-                        if (lakeVal > radius * 0.05f)       // 깊은 물 (중심)
+                        if (lakeVal > radius * 0.05f)
                         {
-                            fertilityGrid[cell] = -2005f;
-                            grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                            fertilityGrid[cell] = SdfComposite.FillToFertility(shape.fill, true);
+                            if (fillWater) grid[cell] = Mathf.Min(grid[cell], 0.3f);
                         }
-                        else if (lakeVal > 0f)               // 얕은 물 (가장자리)
+                        else if (lakeVal > 0f)
                         {
-                            fertilityGrid[cell] = -1025f;
-                            grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                            fertilityGrid[cell] = SdfComposite.FillToFertility(shape.fill, false);
+                            if (fillWater) grid[cell] = Mathf.Min(grid[cell], 0.3f);
                         }
-                        else if (lakeVal > -radius * 0.03f)  // 해변
+                        else if (lakeVal > -radius * 0.03f && fillWater)
                             fertilityGrid[cell] = 1f;
                     }
                 }
@@ -409,6 +407,7 @@ namespace MapGenAI.Patches
             float strength = ElevationShape.ParseStrength(shape.strength);
             float size = ElevationShape.ParseSize(shape.size);
             Vector2 pos = ElevationShape.ParsePosition(shape.position);
+            bool hasFill = !string.IsNullOrEmpty(shape.fill);
             bool fillWater = shape.fill == "water";
 
             float mapW = map.Size.x;
@@ -426,7 +425,7 @@ namespace MapGenAI.Patches
 
             MapGenFloatGrid fertilityGrid = null;
             Verse.Noise.ModuleBase lakeNoise = null;
-            if (fillWater)
+            if (hasFill)
             {
                 try { fertilityGrid = MapGenerator.Fertility; } catch { }
                 lakeNoise = new Verse.Noise.Perlin(
@@ -444,24 +443,24 @@ namespace MapGenAI.Patches
                 // Gaussian: 링 능선에서 최대, 멀어질수록 0으로 수렴 (음수 없음)
                 float gaussian = Mathf.Exp(-(offset * offset) / bw2);
 
-                if (fillWater && fertilityGrid != null)
+                if (hasFill && fertilityGrid != null)
                 {
-                    // Perlin 노이즈로 해안선 불규칙하게
+                    // Perlin 노이즈로 경계 불규칙하게
                     float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) * bandwidth * 0.4f : 0f;
                     float noisyOffset = offset + noise;
                     float noisyGaussian = Mathf.Exp(-(noisyOffset * noisyOffset) / bw2);
 
                     if (noisyGaussian > 0.5f)
                     {
-                        fertilityGrid[cell] = -2005f;
-                        grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                        fertilityGrid[cell] = SdfComposite.FillToFertility(shape.fill, true);
+                        if (fillWater) grid[cell] = Mathf.Min(grid[cell], 0.3f);
                     }
                     else if (noisyGaussian > 0.1f)
                     {
-                        fertilityGrid[cell] = -1025f;
-                        grid[cell] = Mathf.Min(grid[cell], 0.3f);
+                        fertilityGrid[cell] = SdfComposite.FillToFertility(shape.fill, false);
+                        if (fillWater) grid[cell] = Mathf.Min(grid[cell], 0.3f);
                     }
-                    else if (noisyGaussian > 0.05f)
+                    else if (noisyGaussian > 0.05f && fillWater)
                     {
                         fertilityGrid[cell] = 1f;
                     }

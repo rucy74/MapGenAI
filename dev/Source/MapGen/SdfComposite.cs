@@ -161,6 +161,34 @@ namespace MapGenAI.MapGen
             return -OpSmoothUnion(a, -from, k);
         }
 
+        // ========== Terrain Fill ==========
+
+        /// <summary>
+        /// fill 문자열 → fertility 마법값 변환.
+        /// TerrainFromPatch의 인코딩에 맞춤.
+        /// -2000대: 강보다 우선 (호수), -1000대: 강 다음.
+        /// </summary>
+        public static float FillToFertility(string fill, bool deep = true)
+        {
+            switch (fill)
+            {
+                case "water":        return deep ? -2005f : -1025f;  // 깊은물/얕은물
+                case "marsh":        return -2045f;                   // 습지
+                case "mud":          return -2055f;                   // 진흙
+                case "ice":          return -2065f;                   // 얼음
+                case "sand":         return -2075f;                   // 모래
+                case "soil":         return -2085f;                   // 일반 토양
+                case "rich_soil":    return -2095f;                   // 비옥한 토양
+                default:             return deep ? -2005f : -1025f;
+            }
+        }
+
+        /// <summary>fill이 terrain 교체 대상인지 (물 포함)</summary>
+        public static bool IsFillTerrain(string fill)
+        {
+            return !string.IsNullOrEmpty(fill);
+        }
+
         // ========== 유틸 ==========
 
         private static float Cross(Vector2 a, Vector2 b) => a.x * b.y - a.y * b.x;
@@ -208,7 +236,7 @@ namespace MapGenAI.MapGen
 
             // 2. compose 체인 실행 — 각 add를 독립 래스터라이즈
             // add가 여러 개면 각각 별도로 맵에 적용 (하트+별 동시 등)
-            var renderQueue = new List<System.Tuple<Func<Vector2, float>, float, float>>();
+            var renderQueue = new List<RenderItem>();
 
             foreach (var op in compose)
             {
@@ -255,12 +283,13 @@ namespace MapGenAI.MapGen
                     if (!string.IsNullOrEmpty(op.outId))
                         sdfFuncs[op.outId] = result;
 
-                    // e가 있는 add = 최종 래스터라이즈 대상
-                    if (op.e != 0f)
+                    // e가 있거나 fill이 있으면 래스터라이즈 대상
+                    if (op.e != 0f || !string.IsNullOrEmpty(op.fill))
                     {
                         float elev = op.e;
                         float fall = op.f > 0f ? op.f : 0.05f;
-                        renderQueue.Add(System.Tuple.Create(result, elev, fall));
+                        string fill = op.fill;
+                        renderQueue.Add(new RenderItem { sdf = result, elevation = elev, falloff = fall, fill = fill });
                     }
                 }
             }
@@ -273,10 +302,12 @@ namespace MapGenAI.MapGen
 
             foreach (var item in renderQueue)
             {
-                var sdf = item.Item1;
-                float elevation = item.Item2;
-                float falloff = item.Item3;
-                bool isWater = elevation < 0f;
+                var sdf = item.sdf;
+                float elevation = item.elevation;
+                float falloff = item.falloff;
+                string fill = item.fill;
+                bool hasFill = !string.IsNullOrEmpty(fill);
+                bool isWater = fill == "water" || (!hasFill && elevation < 0f);
 
                 foreach (var cell in CellRect.WholeMap(map))
                 {
@@ -286,7 +317,28 @@ namespace MapGenAI.MapGen
 
                     if (t < 0.01f) continue;
 
-                    if (isWater && fertilityGrid != null)
+                    if (hasFill && fertilityGrid != null)
+                    {
+                        // terrain fill: fertility 마법값으로 terrain 교체
+                        if (t > 0.5f)
+                        {
+                            fertilityGrid[cell] = FillToFertility(fill, true);
+                            if (isWater) elevGrid[cell] = Mathf.Min(elevGrid[cell], 0.3f);
+                        }
+                        else if (t > 0.1f)
+                        {
+                            fertilityGrid[cell] = FillToFertility(fill, false);
+                            if (isWater) elevGrid[cell] = Mathf.Min(elevGrid[cell], 0.3f);
+                        }
+                        else if (t > 0.05f && isWater)
+                        {
+                            fertilityGrid[cell] = 1f; // 해변
+                        }
+                        // elevation도 있으면 적용
+                        if (elevation != 0f && !isWater)
+                            elevGrid[cell] += t * elevation;
+                    }
+                    else if (isWater && fertilityGrid != null)
                     {
                         if (t > 0.5f)
                         {
@@ -309,6 +361,14 @@ namespace MapGenAI.MapGen
                     }
                 }
             }
+        }
+
+        private struct RenderItem
+        {
+            public Func<Vector2, float> sdf;
+            public float elevation;
+            public float falloff;
+            public string fill;
         }
 
         private static bool GetSdf(string id, Dictionary<string, Func<Vector2, float>> funcs, out Func<Vector2, float> func)
@@ -403,5 +463,6 @@ namespace MapGenAI.MapGen
         public float k;        // smooth blending radius
         public float e;        // elevation (final op)
         public float f = 0.05f;// falloff radius
+        public string fill;    // terrain fill: water, sand, soil, rich_soil, marsh, mud, ice
     }
 }

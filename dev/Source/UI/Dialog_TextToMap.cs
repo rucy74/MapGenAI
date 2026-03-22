@@ -370,6 +370,9 @@ Additional parameters:
 - 폐허 많이/적게 요청은 ruin_density, 고대 위험은 danger_density로 조절.
 - 온천(HotSprings 특성) 추가는 mutators:[""HotSprings""]를 사용하세요. 간헐천 개수 지정은 geysers 파라미터를 사용하세요 (예: geysers:5). 온천 특성과 간헐천 개수는 동시에 쓸 수 있음.
 - 기름진 토양(비옥한 토양) 증감 요청은 fertility_offset으로 처리. 양수=기름진 토양 증가, 음수=감소.
+- fill 파라미터로 지형 종류 지정 가능: water(물), sand(모래), soil(토양), rich_soil(비옥한 토양), marsh(습지), mud(진흙), ice(얼음).
+  예: fill:""sand"" → 모래 지형으로 채움. fill:""rich_soil"" → 비옥한 토양으로 채움.
+  bump/ring/composite 모두에서 사용 가능. ""중앙에 비옥한 토양"" = bump(position:center, size:large, fill:""rich_soil""). ""하트 모양 모래밭"" = composite+heart+fill:""sand"".
 - 구체적이지 않은 요청(""동물 서식지 추가"", ""특수 지형 추가"" 등)에는 action=ask로 구체적으로 어떤 것을 원하는지 목록에서 골라달라고 물어보세요."
                 : @"Rules:
 - [TOP PRIORITY] When modifying elevation_shapes: ①Add=copy entire existing list + append new items ②Remove specific item=output list WITHOUT that item ③Remove all=elevation_shapes:[] Items not in output are deleted.
@@ -390,6 +393,9 @@ Additional parameters:
 - More/fewer ruins=ruin_density, ancient dangers=danger_density.
 - To add hot springs (HotSprings feature), use mutators:[""HotSprings""]. To set geyser count, use geysers parameter (e.g., geysers:5). Both can be used together.
 - Rich soil (fertile soil) adjustments use fertility_offset. Positive=more rich soil, negative=less.
+- fill parameter specifies terrain type: water, sand, soil, rich_soil, marsh, mud, ice.
+  Ex: fill:""sand"" fills with sand terrain. fill:""rich_soil"" fills with rich soil.
+  Works with bump/ring/composite. ""rich soil in center"" = bump(position:center, size:large, fill:""rich_soil""). ""heart-shaped sand"" = composite+heart+fill:""sand"".
 - For vague requests (""add animal habitat"", ""add special terrain"", etc.), use action=ask to ask the user to specify exactly what they want from the list.";
 
             // 섹션 5: few-shot 예시
@@ -1188,7 +1194,8 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                     outId = c.GetString("out") ?? c.GetString("id"),  // out 대신 id
                     k = c.GetFloat("k", 0f),
                     e = c.GetFloat("e", 0f),
-                    f = c.GetFloat("f", 0.05f)
+                    f = c.GetFloat("f", 0.05f),
+                    fill = c.GetString("fill")
                 };
 
                 // sub 연산: LLM이 {op:"sub", s:"c1", s2:"c2"} 형태로 보내면
