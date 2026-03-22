@@ -27,6 +27,10 @@ namespace MapGenAI.MapGen
         public string fade;         // ridge용: small(0.3)/medium(0.5)/large(0.7) 또는 0~1
         public string noise_amount; // ridge용: none(0)/low(0.3)/medium(0.6)/high(1.0) 또는 0~1.5
 
+        // composite (CSG/SDF) 전용 — type="composite"일 때 사용
+        public List<ShapePrimitive> compositeShapes;
+        public List<ComposeOp> compositeOps;
+
         public void ExposeData()
         {
             Scribe_Values.Look(ref type, "type");
@@ -46,7 +50,9 @@ namespace MapGenAI.MapGen
             {
                 type = type, direction = direction, strength = strength,
                 position = position, size = size, gap = gap, fill = fill,
-                fade = fade, noise_amount = noise_amount
+                fade = fade, noise_amount = noise_amount,
+                compositeShapes = compositeShapes,  // 참조 공유 OK (읽기 전용)
+                compositeOps = compositeOps
             };
         }
 
@@ -324,10 +330,6 @@ namespace MapGenAI.MapGen
             var existingState = wc?.GetState(tileId);
             TileMapState state = existingState?.Clone() ?? new TileMapState();
             var keys = data.explicitKeys;
-
-            Verse.Log.Message($"[MapGenAI] Apply 병합: wc={wc != null}, tileId={tileId}, " +
-                $"existingState={existingState != null}, hasRiver={state.hasRiver}, " +
-                $"riverAngle={state.riverDirectionAngle}, explicitKeys=[{string.Join(",", keys)}]");
 
             // explicitKeys가 비어있으면 (프리셋 로드, undo 등) 전체 적용 (기존 동작)
             bool fullApply = keys.Count == 0;

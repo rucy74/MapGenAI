@@ -111,8 +111,9 @@ namespace MapGenAI.Patches
                 case "bump":   ApplyBump(shape, map, grid);   break;
                 case "noise":  ApplyNoise(shape, map, grid);  break;
                 case "ring":   ApplyRing(shape, map, grid);   break;
-                case "slope":  ApplySlope(shape, map, grid); break;
-                case "split":  ApplySplit(shape, map, grid); break;
+                case "slope":     ApplySlope(shape, map, grid); break;
+                case "split":     ApplySplit(shape, map, grid); break;
+                case "composite": ApplyCompositeShape(shape, map, grid); break;
                 default:
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;
@@ -424,9 +425,13 @@ namespace MapGenAI.Patches
             float maxDist = ringRadius + bandwidth * 3f;
 
             MapGenFloatGrid fertilityGrid = null;
+            Verse.Noise.ModuleBase lakeNoise = null;
             if (fillWater)
             {
                 try { fertilityGrid = MapGenerator.Fertility; } catch { }
+                lakeNoise = new Verse.Noise.Perlin(
+                    0.025, 2.0, 0.5, 6, Rand.Range(0, 2147483647),
+                    Verse.Noise.QualityMode.High);
             }
 
             foreach (var cell in CellRect.WholeMap(map))
@@ -441,20 +446,24 @@ namespace MapGenAI.Patches
 
                 if (fillWater && fertilityGrid != null)
                 {
-                    // 링 호수: 링 능선 부분을 물로 채움
-                    if (gaussian > 0.5f)
+                    // Perlin 노이즈로 해안선 불규칙하게
+                    float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) * bandwidth * 0.4f : 0f;
+                    float noisyOffset = offset + noise;
+                    float noisyGaussian = Mathf.Exp(-(noisyOffset * noisyOffset) / bw2);
+
+                    if (noisyGaussian > 0.5f)
                     {
-                        fertilityGrid[cell] = -2005f;     // 깊은 물
+                        fertilityGrid[cell] = -2005f;
                         grid[cell] = Mathf.Min(grid[cell], 0.3f);
                     }
-                    else if (gaussian > 0.1f)
+                    else if (noisyGaussian > 0.1f)
                     {
-                        fertilityGrid[cell] = -1025f;     // 얕은 물
+                        fertilityGrid[cell] = -1025f;
                         grid[cell] = Mathf.Min(grid[cell], 0.3f);
                     }
-                    else if (gaussian > 0.05f)
+                    else if (noisyGaussian > 0.05f)
                     {
-                        fertilityGrid[cell] = 1f;         // 해변
+                        fertilityGrid[cell] = 1f;
                     }
                 }
                 else
@@ -462,6 +471,20 @@ namespace MapGenAI.Patches
                     grid[cell] += strength * gaussian;
                 }
             }
+        }
+
+        /// <summary>
+        /// composite: CSG+SDF 자유 형태. shapes[] + compose[] → SdfComposite.ApplyComposite.
+        /// ElevationShape.compositeShapes/compositeOps에서 파싱된 데이터를 사용.
+        /// </summary>
+        private static void ApplyCompositeShape(ElevationShape shape, Map map, MapGenFloatGrid grid)
+        {
+            if (shape.compositeShapes == null || shape.compositeOps == null)
+            {
+                Log.Warning("[MapGenAI] composite shape에 shapes/compose 데이터 없음");
+                return;
+            }
+            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid);
         }
     }
 

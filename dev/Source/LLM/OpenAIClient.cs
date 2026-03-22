@@ -32,7 +32,7 @@ namespace MapGenAI.LLM
                 messages.Append($",{{\"role\":\"{msg.Role}\",\"content\":{EscapeJson(msg.Content)}}}");
             }
 
-            var body = $"{{\"model\":\"{_model}\",\"messages\":[{messages}]}}";
+            var body = $"{{\"model\":\"{_model}\",\"temperature\":0.7,\"messages\":[{messages}]}}";
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);

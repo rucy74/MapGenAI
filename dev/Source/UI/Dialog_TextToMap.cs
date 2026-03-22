@@ -256,10 +256,20 @@ elevation_shapes 가이드:
 - bump: 가우시안 돌출/함몰. position으로 위치, size로 크기. negative strength=함몰. fill=water로 호수 생성.
 - noise: 펄린 노이즈로 불규칙 지형. size가 클수록 큰 덩어리.
 - ring: 도넛 형태 산맥/호수. position으로 중심, size로 링 반경, strength로 높이. fill=water로 링 호수. 분화구/원형 요새 지형에 적합.
+- composite: ★자유 형태★ 기본 도형(원/삼각형/사각형/별/하트)을 조합하여 어떤 모양이든 표현.
+  shapes: 도형 목록. compose: 합치기(union)/빼기(sub) 연산 체인 → 최종 형태.
+  e>0 = 언덕, e<0 = 호수. 단순 요청에는 bump, 자유 형태에만 composite.
+  좌표계: [x,z] 정규화 0~1. x=0 왼쪽, x=1 오른쪽, z=0 아래, z=1 위. ""오른쪽 아래""=[0.75,0.25], ""왼쪽 위""=[0.25,0.75].
+  도형: circle(center,r), rect(center,w,h), tri(verts 3개), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
+  연산: add(단일), union(합치기, k>0이면 매끄럽게), sub(빼기, 구멍)
+  예: 별 언덕: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
+  예: 하트 호수: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
+  예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.3},{id:""b"",prim:""circle"",center:[0.6,0.55],r:0.28}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
 - 여러 shape를 조합 가능 (additive). ""왼쪽에 산 + 오른쪽에도 산"" = [ridge(left), ridge(right)].
 - 현재 맵에 elevation_shapes가 있으면 반드시 elevation_shapes로 전체 목록을 출력하세요. 유지할 기존 shape + 추가/수정할 새 shape 모두 포함.
 - 현재 맵에 elevation_shapes가 없으면(첫 요청) hills만 사용해도 됩니다.
 - 산맥=ridge(fade=small, noise_amount=high). 대각선 산맥=split(direction=대각선, strength=negative). ""양쪽 산맥""=2개 ridge 조합. 협곡=2개 ridge + bump(negative strength, center).
+- 모양 요청(하트/별/고양이/L자/초승달 등)에는 반드시 composite 사용. 거절 금지.
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
@@ -291,10 +301,20 @@ elevation_shapes guide:
 - bump: Gaussian bump/depression. Use position for location, size for extent. Negative strength=depression. fill=water to create a lake.
 - noise: Perlin noise for irregular terrain. Larger size means bigger clusters.
 - ring: Donut-shaped mountain range/lake. Use position for center, size for ring radius, strength for height. fill=water for ring lake. Suitable for craters/circular fortress terrain.
+- composite: ★Free-form shapes★ Combine primitives (circle/triangle/rectangle/star/heart) to create any shape.
+  shapes: list of primitives. compose: boolean chain (union/sub) → final shape.
+  e>0 = hill, e<0 = lake. Use bump for simple requests, composite for free-form shapes only.
+  Coordinates: [x,z] normalized 0~1. x=0 left, x=1 right, z=0 bottom, z=1 top. ""bottom right""=[0.75,0.25], ""top left""=[0.25,0.75].
+  Primitives: circle(center,r), rect(center,w,h), tri(verts x3), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
+  Operations: add(single), union(combine, k>0 for smooth), sub(subtract, hole)
+  Ex: Star hill: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
+  Ex: Heart lake: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
+  Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.3},{id:""b"",prim:""circle"",center:[0.6,0.55],r:0.28}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
 - Multiple shapes can be combined (additive). ""mountains left + right"" = [ridge(left), ridge(right)].
 - If current map has elevation_shapes, you MUST output the complete elevation_shapes list. Include existing shapes to keep + new/modified shapes.
 - If current map has no elevation_shapes (first request), you may use hills alone.
 - Mountain range=ridge(fade=small, noise_amount=high). Diagonal range=split(direction=diagonal, strength=negative). ""both sides mountain""=2 ridge combo. Canyon=2 ridges + bump(negative strength, center).
+- For shape requests (heart/star/cat/L-shape/crescent etc.), MUST use composite. Never refuse.
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
@@ -1081,7 +1101,7 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                 data.elevation_shapes = new List<ElevationShape>();
                 foreach (var s in shapesArr)
                 {
-                    data.elevation_shapes.Add(new ElevationShape
+                    var es = new ElevationShape
                     {
                         type = s.GetString("type"),
                         direction = s.GetString("direction"),
@@ -1092,7 +1112,16 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
                         size = s.GetString("size"),
                         gap = s.GetString("gap"),
                         fill = s.GetString("fill")
-                    });
+                    };
+
+                    // composite: shapes[] + compose[] 파싱
+                    if (es.type == "composite")
+                    {
+                        es.compositeShapes = ParseCompositeShapes(s);
+                        es.compositeOps = ParseCompositeOps(s);
+                    }
+
+                    data.elevation_shapes.Add(es);
                 }
                 Track("elevation_shapes");
             }
@@ -1101,6 +1130,78 @@ Response: {""action"":""generate"",""description"":""A clean map with no scatter
             // ParseParams는 LLM이 보낸 것만 data에 넣고 explicitKeys로 추적
 
             return data;
+        }
+
+        /// <summary>composite shapes[] 파싱</summary>
+        private static List<ShapePrimitive> ParseCompositeShapes(SimpleJsonObject shapeObj)
+        {
+            var arr = shapeObj.GetObjectArray("shapes");
+            if (arr == null) return null;
+
+            var result = new List<ShapePrimitive>();
+            foreach (var s in arr)
+            {
+                var sp = new ShapePrimitive
+                {
+                    id = s.GetString("id"),
+                    prim = s.GetString("prim"),
+                    r = s.GetFloat("r", 0f),
+                    r2 = s.GetFloat("r2", 0f),
+                    n = s.GetInt("n", 0),
+                    w = s.GetFloat("w", 0f),
+                    h = s.GetFloat("h", 0f),
+                    size = s.GetFloat("size", 0f),
+                    rot = s.GetFloat("rot", 0f)
+                };
+
+                // center: [x, z]
+                var centerArr = s.GetFloatArray("center");
+                if (centerArr != null && centerArr.Length >= 2)
+                    sp.center = centerArr;
+
+                // verts: [[x,z], [x,z], ...] — 중첩 배열
+                var vertsData = s.GetNestedFloatArray("verts");
+                if (vertsData != null)
+                    sp.verts = vertsData;
+
+                result.Add(sp);
+            }
+            return result;
+        }
+
+        /// <summary>composite compose[] 파싱. LLM이 다양한 필드명을 쓸 수 있으므로 방어적으로 처리.</summary>
+        private static List<ComposeOp> ParseCompositeOps(SimpleJsonObject shapeObj)
+        {
+            var arr = shapeObj.GetObjectArray("compose");
+            if (arr == null) return null;
+
+            var result = new List<ComposeOp>();
+            foreach (var c in arr)
+            {
+                var op = new ComposeOp
+                {
+                    op = c.GetString("op"),
+                    s = c.GetString("s") ?? c.GetString("s1"),        // LLM이 s1으로 보낼 수 있음
+                    a = c.GetString("a") ?? c.GetString("s1"),        // sub에서 a 대신 s1
+                    b = c.GetString("b") ?? c.GetString("s2"),        // union에서 b 대신 s2
+                    from = c.GetString("from") ?? c.GetString("s1"),  // sub에서 from 대신 s1
+                    outId = c.GetString("out") ?? c.GetString("id"),  // out 대신 id
+                    k = c.GetFloat("k", 0f),
+                    e = c.GetFloat("e", 0f),
+                    f = c.GetFloat("f", 0.05f)
+                };
+
+                // sub 연산: LLM이 {op:"sub", s:"c1", s2:"c2"} 형태로 보내면
+                // a=c2(빼는 도형), from=c1(빼기 대상)으로 매핑
+                if (op.op == "sub" && c.GetString("s2") != null)
+                {
+                    op.from = c.GetString("s") ?? c.GetString("s1");  // 큰 도형 (빼기 대상)
+                    op.a = c.GetString("s2");                          // 빼는 도형
+                }
+
+                result.Add(op);
+            }
+            return result;
         }
 
         /// <summary>hill_size 시맨틱 파싱. small/medium/large 또는 숫자.</summary>

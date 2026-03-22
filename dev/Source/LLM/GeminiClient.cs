@@ -33,7 +33,7 @@ namespace MapGenAI.LLM
                 var role = history[i].Role == "assistant" ? "model" : "user";
                 contents.Append($"{{\"role\":\"{role}\",\"parts\":[{{\"text\":{EscapeJson(history[i].Content)}}}]}}");
             }
-            contents.Append("]}");
+            contents.Append("],\"generationConfig\":{\"temperature\":0.7}}");
 
             var response = await Http.PostAsync(url,
                 new StringContent(contents.ToString(), Encoding.UTF8, "application/json"));
