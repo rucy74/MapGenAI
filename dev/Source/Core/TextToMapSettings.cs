@@ -337,12 +337,28 @@ namespace MapGenAI
                 Find.WindowStack.Add(new FloatMenu(options));
             }
 
-            // API 키 또는 URL
-            bool isUrl = config.Provider == LLMProvider.Local || config.Provider == LLMProvider.Custom;
-            if (isUrl)
+            // API 키 또는 URL (Custom은 둘 다 필요)
+            if (config.Provider == LLMProvider.Custom)
+            {
+                const float splitGap = 3f;
+                float halfW = (keyR.width - splitGap) / 2f;
+                Rect urlRect = new Rect(keyR.x, keyR.y, halfW, keyR.height);
+                Rect apiKeyRect = new Rect(keyR.x + halfW + splitGap, keyR.y, halfW, keyR.height);
+                config.CustomBaseUrl = Widgets.TextField(urlRect, config.CustomBaseUrl ?? "");
+                if (string.IsNullOrEmpty(config.CustomBaseUrl))
+                    DrawPlaceholder(urlRect, "URL");
+                config.ApiKey = Widgets.TextField(apiKeyRect, config.ApiKey ?? "");
+                if (string.IsNullOrEmpty(config.ApiKey))
+                    DrawPlaceholder(apiKeyRect, "API Key");
+            }
+            else if (config.Provider == LLMProvider.Local)
+            {
                 config.CustomBaseUrl = Widgets.TextField(keyR, config.CustomBaseUrl ?? "");
+            }
             else
+            {
                 config.ApiKey = Widgets.TextField(keyR, config.ApiKey ?? "");
+            }
 
             // 모델 선택 버튼
             DrawModelButton(modelR, config);
@@ -359,6 +375,17 @@ namespace MapGenAI
             GUI.color = new Color(0.9f, 0.3f, 0.3f);
             if (Widgets.ButtonText(delR, "✕")) removeIdx = idx;
             GUI.color = prev;
+        }
+
+        private static void DrawPlaceholder(Rect rect, string text)
+        {
+            var oldColor = GUI.color;
+            var oldAnchor = Text.Anchor;
+            GUI.color = new Color(0.5f, 0.5f, 0.5f, 0.6f);
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(new Rect(rect.x + 4f, rect.y, rect.width - 8f, rect.height), text);
+            Text.Anchor = oldAnchor;
+            GUI.color = oldColor;
         }
 
         private static void GetColumnRects(Rect row,
