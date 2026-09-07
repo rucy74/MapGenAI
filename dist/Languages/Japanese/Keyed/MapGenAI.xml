@@ -25,7 +25,7 @@
   <MapGenAI_DialogCancelled>ダイアログをキャンセル — パラメータをリセット、プレビューを復元</MapGenAI_DialogCancelled>
 
   <!-- Welcome -->
-  <MapGenAI_Welcome>理想のマップを自由に説明してください！\n\n例：\n  - 「斜めの山脈と中央の湖」\n  - 「温泉のある山岳要塞」\n  - 「左側にまっすぐな川」\n  - 「大理石だけの平坦な地形」\n  - 「おすすめを教えて」</MapGenAI_Welcome>
+  <MapGenAI_Welcome>理想のマップを自由に説明してください！\n\n例：\n  - 「斜めの峡谷に大きな中央湖」\n  - 「温泉があり南に出口がある山岳要塞」\n  - 「両側の山脈の間にある肥沃な土地」\n  - 「フィヨルド」（沿岸タイル）\n  - 「巨大なリング山脈の中にオアシス、出口あり」\n  - 「上に星型の丘、下に三日月型の湖」\n  - 「川をまっすぐ横に下に配置。上に山、中央に巨大湖。温泉と洞窟追加。動植物増加、古代発射場、鉄鉱脈豊富、遺跡多め、大理石のみ」</MapGenAI_Welcome>
 
   <!-- Preset loaded details -->
   <MapGenAI_PresetLoadedMsg>プリセット「{0}」を読み込みました。\n丘={1}、量={2}、木={3}、動物={4}、川={5}、洞窟={6}、間欠泉={7}</MapGenAI_PresetLoadedMsg>
