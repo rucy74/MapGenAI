@@ -416,20 +416,29 @@ namespace MapGenAI.MapGen
                         if (!string.IsNullOrEmpty(rt)) state.rockTypes.Add(rt);
             }
 
-            // TileMutator
+            // TileMutator — additive 병합.
+            // "추가"는 기존 특징에 더하기(union)로, "제거"는 remove_mutators로만.
+            // 구버전은 mutators 키가 오면 clear+reset(full-replace)이라, "오로라 추가"처럼
+            // 새 것 하나만 보내면 기존 별관측 등이 지워지는 버그가 있었음 → union으로 교체.
+            // fullApply(프리셋/undo)는 완전한 스냅샷이므로 clear 후 대입(교체 의미 유지).
             if (fullApply || keys.Contains("mutators"))
             {
-                state.mutators.Clear();
+                if (fullApply) state.mutators.Clear();
                 if (data.mutators != null)
                     foreach (var m in data.mutators)
-                        if (!string.IsNullOrEmpty(m)) state.mutators.Add(m);
+                        if (!string.IsNullOrEmpty(m) && !state.mutators.Contains(m))
+                            state.mutators.Add(m);
             }
             if (fullApply || keys.Contains("remove_mutators"))
             {
                 state.removeMutators.Clear();
                 if (data.remove_mutators != null)
                     foreach (var m in data.remove_mutators)
-                        if (!string.IsNullOrEmpty(m)) state.removeMutators.Add(m);
+                        if (!string.IsNullOrEmpty(m))
+                        {
+                            state.removeMutators.Add(m);
+                            state.mutators.Remove(m);  // desired-set에서도 빼야 재적용 때 안 살아남
+                        }
             }
 
             // ElevationShapes: 키가 있으면 전체 교체, 없으면 기존 유지

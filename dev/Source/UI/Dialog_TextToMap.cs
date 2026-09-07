@@ -274,8 +274,8 @@ elevation_shapes 가이드:
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
-- ruin_density: 폐허 밀도 (0.0~2.5, 기본 1.0). 0=폐허 없음, 2.5=매우 많음.
-- danger_density: 고대 위험 밀도 (0.0~2.5, 기본 1.0). 0=위험 없음, 2.5=매우 많음.
+- danger_density: 고대 위협/위험 밀도 (0.0~2.5, 기본 1.0). 고대 위협·고대 위험·위협·위험은 전부 이 파라미터 — 정상 맵의 고대 위협 구조물(사원·잠든 기계·매장 위험)이 이것. 0=없음, 2.5=매우 많음.
+- ruin_density: 폐허/고대 유적 밀도 (부서진 벽·오래된 잔해. 폐허·고대 유적·유적은 여기. 단 정상 맵엔 효과 거의 없음 — 특수 맵 전용).
 - rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"", ""돌 없애줘"", ""바위 없애줘"", ""돌덩어리 없애"", ""깔끔하게"" 요청 시 사용.
 - hill_size: 산맥 크기 (small=잘게 쪼개짐, medium=기본, large=거대 산맥). 또는 숫자(0.005~0.1, 기본 0.021).
 - hill_smoothness: 산 표면 거칠기 (rough=울퉁불퉁, normal=기본, smooth=매끄러움). 또는 숫자(0.5~6.0, 기본 2.0).
@@ -320,8 +320,8 @@ elevation_shapes guide:
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
-- ruin_density: Ruin density (0.0~2.5, default 1.0). 0=no ruins, 2.5=very many.
-- danger_density: Ancient danger density (0.0~2.5, default 1.0). 0=no dangers, 2.5=very many.
+- danger_density: Ancient danger/threat density (0.0~2.5, default 1.0). 고대 위협 / 고대 위험 / ancient danger / ancient threat / 위협 / 위험 all map here — ancient threat structures (shrines, sleeping mechanoids, buried dangers) on normal maps. 0=none, 2.5=very many.
+- ruin_density: Rubble/old-ruins density (broken walls, old debris. 폐허 / 고대 유적 / ruins map here. But little effect on normal maps — special maps only).
 - rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"", ""remove rocks"", ""no rocks"", ""remove boulders"", ""clear terrain"" requests.
 - hill_size: Mountain size (small=fragmented, medium=default, large=huge mountains). Or a number (0.005~0.1, default 0.021).
 - hill_smoothness: Mountain surface roughness (rough=jagged, normal=default, smooth=smooth). Or a number (0.5~6.0, default 2.0).
@@ -355,6 +355,7 @@ Additional parameters:
             string rules = isKo
                 ? @"규칙:
 - 요청하지 않은 파라미터는 생략하세요. 기본값이 유지됩니다.
+- 맵 특징(mutators): 추가할 것만 mutators에, 제거할 것만 remove_mutators에 넣으세요. 이미 있는 특징(active_mutators)은 다시 안 적어도 유지됩니다. 특징을 교체할 땐 remove_mutators로 뺀 뒤 mutators로 추가.
 - 완전 평지 = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - 통로/출구 = bump(negative_strong, position=맵 가장자리)로 산벽을 자연스럽게 깎기. 예: 남쪽 통로=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), 남동쪽=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
 - fill로 지형 종류 지정: water/sand/soil/rich_soil/marsh/mud/ice. bump/ring/composite에서 사용.
@@ -362,6 +363,7 @@ Additional parameters:
 - 한국어로 답변하세요."
                 : @"Rules:
 - Omit parameters not requested. Defaults are kept.
+- Map features (mutators): put only what to ADD in mutators, only what to REMOVE in remove_mutators. Existing features (active_mutators) are kept even if you don't re-list them. To replace a feature, remove it via remove_mutators then add via mutators.
 - Flat terrain = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - Passage/exit = bump(negative_strong, position=map edge) to naturally carve through mountains. Ex: south=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), southeast=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
 - fill specifies terrain type: water/sand/soil/rich_soil/marsh/mud/ice. Works with bump/ring/composite.
@@ -568,7 +570,9 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             float resetBtnW = 80f;
             float presetBtnW = 90f;
 
-            if (_paramsReady)
+            // 질문(ask) 후에도 이미 만든 맵(HasParams)이 있으면 생성 버튼 유지 —
+            // 안 그러면 맵 만든 뒤 질문 한 번에 버튼이 사라져 마무리(맵 확정)를 못 함.
+            if (_paramsReady || MapGenParams.HasParams)
             {
                 float generateBtnW = inRect.width - undoBtnW - resetBtnW - presetBtnW * 2 - sp * 4;
                 var generateRect   = new Rect(inRect.x, bottomY, generateBtnW, 36f);

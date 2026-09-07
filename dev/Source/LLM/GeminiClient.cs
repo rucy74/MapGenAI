@@ -33,7 +33,10 @@ namespace MapGenAI.LLM
                 var role = history[i].Role == "assistant" ? "model" : "user";
                 contents.Append($"{{\"role\":\"{role}\",\"parts\":[{{\"text\":{EscapeJson(history[i].Content)}}}]}}");
             }
-            contents.Append("],\"generationConfig\":{\"temperature\":0.7}}");
+            // temperature 0.2: 이 LLM 작업은 "말→파라미터 추출"이라 결정론적이어야 함
+            // (맵 다양성은 코드의 seed/noise가 만듦, LLM 온도가 아님). 고온도는 되물음·변동성 유발.
+            // responseMimeType: 모델이 평문/마크다운 대신 항상 유효 JSON을 내도록 강제 → "말로만 됐다는데 안 바뀜" 방지.
+            contents.Append("],\"generationConfig\":{\"temperature\":0.2,\"responseMimeType\":\"application/json\"}}");
 
             var response = await Http.PostAsync(url,
                 new StringContent(contents.ToString(), Encoding.UTF8, "application/json"));
