@@ -75,4 +75,3 @@ static class SpatialRelationTests
         });
     }
 }
-

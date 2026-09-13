@@ -50,4 +50,3 @@ static class SpatialTextBench
         return all?0:1;
     }
 }
-
