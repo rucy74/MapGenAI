@@ -25,6 +25,7 @@ def package(output: Path) -> Path:
     ET.SubElement(ET.SubElement(root, 'incompatibleWith'), 'li').text = 'Choco.MapGenAI'
     root.find('description').text = (
         'Development preview: cumulative terrain edits and image terrain workspace.\n'
+        'Precise circles/stars/hearts by default; request natural/irregular outlines to soften their geometry.\n'
         'Enable this package instead of MapGen AI. Test in a new world.\n'
         'Image interpretation is experimental; region correction currently changes terrain labels only.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
@@ -57,6 +58,8 @@ def package(output: Path) -> Path:
             '새 테스트 월드에서 시작하고 모드 설정에 API 키를 직접 입력하세요.\n'
             '기존 배포판·설정·세이브는 이 패키지에 포함하지 않습니다.\n'
             'Image terrain에서 배치가 읽히는 Map Preview/탑다운/AI 맵 PNG/JPEG를 불러옵니다. 설명은 선택 사항입니다.\n'
+            '원형/별/하트는 정확한 형태이며, 자연스러운/울퉁불퉁한 윤곽을 요청하면 선택적으로 굴곡을 추가합니다.\n'
+            '살짝/많이로 강도를 바꾸거나 다시 정확한 원형으로 요청해 되돌릴 수 있습니다.\n'
             '기본 해석은 원본 윤곽을 보존하고 AI가 지형 종류를 분류합니다. 높이 우선 옵션으로 월드 지형과의 적용 순서를 선택합니다.\n'
             '분류도에서 영역 클릭 후 팔레트/채팅으로 지형 종류를 바꾸고 적용합니다.\n'
             '이 분류도는 실제 맵 미리보기가 아닙니다. 적용 후 Map Preview를 확인하세요.\n'

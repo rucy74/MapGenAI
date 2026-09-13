@@ -66,6 +66,7 @@ static class CoreRegressionTests
         });
         MdpApplyTests.RunAll();
         ShapeEditTests.RunAll();
+        NaturalShapeTests.RunAll();
         WorldStateTests.RunAll();
         ImageMapTests.RunAll();
         Console.WriteLine($"CoreRegressionTests: {passed} PASS / {failed} FAIL");

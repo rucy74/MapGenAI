@@ -25,6 +25,9 @@ namespace MapGenAI.MapGen
             Semantic(shape.gap, "tiny,small,medium,large", .001f, .5f, "gap");
             Semantic(shape.fade, "small,medium,large", .001f, 1, "fade");
             Semantic(shape.noise_amount, "none,low,medium,high", 0, 1.5f, "noise_amount");
+            Semantic(shape.edge_roughness, "none,low,medium,high", 0, 1, "edge_roughness");
+            if (shape.edge_roughness != null && shape.type != "composite")
+                throw new FormatException("edge_roughness requires composite geometry");
             if (shape.position != null && !Positions.Split(',').Contains(shape.position))
             {
                 var pair = shape.position.Trim('[',']',' ').Split(',');

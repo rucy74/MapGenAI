@@ -1,0 +1,1 @@
+{"action":"generate","description":"왼쪽 산맥을 유지하면서 맵 중앙에 원형 호수를 추가했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"center_lake","type":"composite","shapes":[{"id":"c","prim":"circle","center":[0.5,0.5],"r":0.2}],"compose":[{"op":"add","s":"c","fill":"water","e":-0.5}]}}]}}

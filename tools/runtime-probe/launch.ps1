@@ -5,6 +5,7 @@ param(
     [string]$ProbeMod='',
     [switch]$Render,
     [switch]$Settings,
+    [switch]$NaturalShapes,
     [string]$SourceDll='',
     [string]$ModelConfig='',
     [string]$Language='',
@@ -58,6 +59,7 @@ $arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','64
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
+if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}

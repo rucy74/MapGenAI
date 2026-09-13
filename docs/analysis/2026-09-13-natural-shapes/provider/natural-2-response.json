@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 원형 호수의 윤곽을 자연스러운 형태로 변경했습니다.","params":{"shape_ops":[{"op":"update","id":"center_lake","changes":{"edge_roughness":"medium"}}]}}

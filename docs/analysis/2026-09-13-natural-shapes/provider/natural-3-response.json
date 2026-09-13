@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 원형 호수의 윤곽 가장자리를 살짝 울퉁불퉁하고 자연스럽게 조정했습니다.","params":{"shape_ops":[{"op":"update","id":"center_lake","changes":{"edge_roughness":"low"}}]}}

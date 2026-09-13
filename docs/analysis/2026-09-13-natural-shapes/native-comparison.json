@@ -1,0 +1,38 @@
+{
+  "nativeChecks": 33,
+  "rows": [
+    {
+      "shape": "circle",
+      "preciseArea": 8230,
+      "naturalArea": 8189,
+      "changedCells": 399,
+      "intersectionOverUnion": 0.952550838387442,
+      "preciseCrossRunChangedCells": 1
+    },
+    {
+      "shape": "star",
+      "preciseArea": 4168,
+      "naturalArea": 3843,
+      "changedCells": 577,
+      "intersectionOverUnion": 0.8656264555193293,
+      "preciseCrossRunChangedCells": 0
+    },
+    {
+      "shape": "heart",
+      "preciseArea": 5763,
+      "naturalArea": 5958,
+      "changedCells": 683,
+      "intersectionOverUnion": 0.8898742341180265,
+      "preciseCrossRunChangedCells": 0
+    },
+    {
+      "shape": "donut",
+      "preciseArea": 4912,
+      "naturalArea": 4691,
+      "changedCells": 857,
+      "intersectionOverUnion": 0.8361376673040153,
+      "preciseCrossRunChangedCells": 1
+    }
+  ],
+  "scope": "Same native map, paired column footprints aligned by 256 cells; exact half also compared to previous native run. Visual judgment required for naturalness."
+}

@@ -1,0 +1,11 @@
+# Natural shape boundary design consultation
+
+User wants ordinary circle/star/heart to remain geometric, and explicit Korean modifiers 자연스러운/울퉁불퉁한 (natural/irregular) to opt into coherent irregular boundaries. Existing filled bump/ring already use Verse Perlin noise; leave legacy behavior intact. Lava fill and placing ruins on an island are deferred, water island works per user.
+
+Please inspect dev/Source/MapGen/{SdfComposite,MapGenParams,ShapeEdits,ShapeValidation,ShapeEditPrompt}.cs and Patches/GenStepPatches.cs. Read only, no modifications. Give a bounded design review (P0/P1 issues + recommendation).
+
+Proposed: optional composite-level string edge_roughness = none/low/medium/high or 0..1, absent=0. Add to parsing, validation, Clone/Scribe and prompt/current-state via ShapeEdits.TextFields. Prompt routes explicit circle/star/heart/donut requests to composite geometry and uses edge_roughness=medium only for natural modifiers, none for exact. Updating only the field preserves all other geometry. Existing ridge noise_amount is distinct. Legacy bump/ring unchanged.
+
+Renderer: warp the sampling point through a deterministic smooth vector noise field shared by all primitives in a composite, before evaluating final CSG render operands. Bound amplitude relative to geometry size; low-frequency contours with small secondary octave, no per-cell random noise; seed from stable shape ID (not runtime GetHashCode / Rand). Shape-local coordinates so translation preserves contour; no extra RNG consumption affecting other map terrain. Default zero bypasses entire new path exactly. Do not promise topology preservation beyond tested cases; narrow passages must be tested. Review amplitude/scale, tiny operands in boolean subtraction, holes and recognizability. Is domain warp better than adding scalar noise to each primitive SDF here? Avoid speculative expansion.
+
+Tests planned: exact previous raster unchanged; deterministic repeated render; natural circle/star/heart have differing smooth outlines, preserve one component/heart notch/star tips; donut hole remains; move/clone/preset/undo/Scribe preserve choice; live Gemini prompt responses and native map render comparison. Need practical minimal solution, not engine rewrite.

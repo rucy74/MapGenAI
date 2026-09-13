@@ -104,7 +104,7 @@ namespace MapGenAI.RuntimeProbe
         {
             if(string.IsNullOrEmpty(value)||value.Length>80||value.Any(c=>!char.IsLetterOrDigit(c)&&c!='_'&&c!='-'))throw new FormatException("Invalid fixture ID");return value;
         }
-        sealed class CaptureStep:GenStep
+        internal sealed class CaptureStep:GenStep
         {
             public string output,id;
             public override int SeedPart=>13717;

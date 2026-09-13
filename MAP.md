@@ -10,6 +10,7 @@
 - `dev/Source/LLM/`: 공급자별 HTTP 요청, 엄격한 JSON 응답 경계, 취소/늦은 응답 폐기. 이미지 입력은 선택한 모델의 vision 지원이 필요하다.
 - `dev/Source/MapGen/MapParameterParser.cs`, `MapStateEditor.cs`: 입력 파싱과 변경 키만 병합하는 순수 계산.
 - `dev/Source/MapGen/ShapeEdits.cs`, `ShapeValidation.cs`, `SdfComposite.cs`: 도형 ID 편집, 기하/연산 제한, 실제 SDF 격자 계산.
+- `dev/Source/MapGen/ContourWarp.cs`: composite 전용 `edge_roughness`(생략/none=0, low=.35, medium=.65, high=1). 도형 로컬 좌표와 안정 ID 해시로 공유 좌표장을 세 번 변형하며 전역 Rand를 소비하지 않는다. `noise_amount`/기존 bump·ring과 구별한다. `tools/runtime-probe/launch.ps1 -Render -NaturalShapes -Language Korean`은 실제 저장·Undo·생성 비교를 수행한다. 근거는 `docs/analysis/2026-09-13-natural-shapes/`.
 - `dev/Source/MapGen/MapGenParams.cs`, `WorldTileEditor.cs`, `MapGenAIWorldComponent.cs`: 타일 상태 적용, 원래 월드 특징과 외부 변경 보존, 타일별 상태 저장.
 - `dev/Source/MapGen/GenerationContext.cs`, `dev/Source/Patches/`: 생성할 타일의 고정 스냅샷과 RimWorld 생성 단계 연결. 공유 정의 변경은 finalizer에서도 복원한다.
 - `dev/Source/ImageInput/`, `dev/Source/UI/Dialog_ImageMap.cs`: PNG/JPEG/EXIF, 원본 색상 그룹/마스크를 AI가 분류하는 기본 경로, 선택 가능한 다각형 추론/팔레트, 영역 교정. 대상은 배치를 읽을 수 있는 참고 맵이며 설명은 선택 사항이다. 새 이미지 높이 우선 옵션은 토양의 기존 산을 지우고 이미지+SDF 높이를 Odyssey elevation mutator 뒤 복원한다. 기존 저장(false)·N칸은 원래 의미를 유지한다. 얇은 지형/비슷한 색상/삽입 그림 오분류는 남았다.

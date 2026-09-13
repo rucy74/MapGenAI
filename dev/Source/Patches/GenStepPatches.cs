@@ -46,6 +46,11 @@ namespace MapGenAI.Patches
 
             // 2. 각 ElevationShape 적용 (비-물 먼저, 물 나중 → 산맥 위 호수 정상 생성)
             var shapes = MapGenParams.ElevationShapes;
+            if (shapes.Any(s => s.id == null && ContourWarp.Amount(s.edge_roughness) > 0))
+            {
+                shapes = shapes.Select(s => s.Clone()).ToList();
+                ShapeEdits.AssignIds(shapes); // Same legacy IDs used by the edit/current-state path.
+            }
             float fertOffset = MapGenParams.FertilityOffset;
             if (shapes.Count == 0 && Mathf.Abs(fertOffset) < 0.01f)
             {GenerationContext.CaptureImageElevation(map,elevGrid);return;}
@@ -488,7 +493,7 @@ namespace MapGenAI.Patches
                 Log.Warning("[MapGenAI] composite shape에 shapes/compose 데이터 없음");
                 return;
             }
-            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid);
+            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id);
         }
     }
 

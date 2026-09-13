@@ -71,6 +71,7 @@ namespace MapGenAI.RuntimeProbe
             Require(explicitConfig.GetActiveConfig().SelectedModel=="custom-existing-model","advanced explicit model choice is preserved");
             var state = MapStateEditor.Merge(null,MapParameterParser.Parse(SimpleJson.Parse("{\"fertility_offset\":0.6,\"straight_river\":true,\"elevation_shapes\":[{\"id\":\"triangle\",\"type\":\"composite\",\"shapes\":[{\"id\":\"p\",\"prim\":\"poly\",\"verts\":[[0.1,0.2],[0.8,0.2],[0.5,0.8]]}],\"compose\":[{\"op\":\"add\",\"s\":\"p\",\"e\":0.8}]}]}")));
             state.imageMap=new ImageMapData{width=3,height=2,cells="MWNSGI",note="이미지 저장 😀",replaceElevation=true};
+            state.elevationShapes[0].edge_roughness="medium";
             var fixture = new ProbeEnvelope { state=state, component=new MapGenAIWorldComponent(null),settings=new MapGenAISettings{simpleGeminiModel="gemini-2.5-flash"} };
             fixture.component.SetState(42,state);
             fixture.component.SetBaseline(42,new TileWorldSnapshot {mutators=new List<string>{"Caves"},hilliness=Hilliness.LargeHills});
@@ -181,6 +182,21 @@ namespace MapGenAI.RuntimeProbe
                 }
                 finally {UnityEngine.Object.Destroy(source);}
                 dialog.PostClose();
+
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAINaturalShapes",out _))
+                {
+                    // Exercise production dialog undo with the newly persisted field.
+                    Invoke(dialog,"HandleResponse","{\"action\":\"generate\",\"params\":{\"shape_ops\":[{\"op\":\"add\",\"shape\":{\"id\":\"round\",\"type\":\"composite\",\"shapes\":[{\"id\":\"c\",\"prim\":\"circle\",\"r\":0.2}],\"compose\":[{\"op\":\"add\",\"s\":\"c\",\"fill\":\"water\"}]}}]}}");
+                    var precise=MapStateCodec.Serialize(MapGenParams.CaptureState(tile));
+                    Invoke(dialog,"HandleResponse","{\"action\":\"generate\",\"params\":{\"shape_ops\":[{\"op\":\"update\",\"id\":\"round\",\"changes\":{\"edge_roughness\":\"medium\"}}]}}");
+                    Require(MapGenParams.CaptureState(tile).elevationShapes.Single().edge_roughness=="medium","actual dialog applies natural contour only");
+                    Invoke(dialog,"DoUndo");
+                    Require(MapStateCodec.Serialize(MapGenParams.CaptureState(tile))==precise,"actual dialog undo restores precise contour and full prior state");
+                    NaturalShapeProbe.Generate(output);
+                    Require(!GenerationContext.Active,"natural full generation closes its scope");
+                    File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks}}));
+                    Application.Quit();return;
+                }
 
                 var neighbors=new List<PlanetTile>(); Find.WorldGrid.GetTileNeighbors(tile,neighbors);
                 var target=neighbors.First(t=>Find.WorldGrid[t].PrimaryBiome?.canBuildBase==true && !Find.WorldGrid[t].WaterCovered);

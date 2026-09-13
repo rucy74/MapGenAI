@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 지형을 유지하고 오른쪽 위에 자연스러운 윤곽의 별 모양 호수를 추가했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"star_lake_ne","type":"composite","edge_roughness":"medium","shapes":[{"id":"s1","prim":"star","center":[0.75,0.75],"r":0.2,"r2":0.09,"n":5}],"compose":[{"op":"add","s":"s1","e":-0.5,"fill":"water"}]}}]}}

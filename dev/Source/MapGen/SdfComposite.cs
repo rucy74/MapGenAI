@@ -217,7 +217,7 @@ namespace MapGenAI.MapGen
             List<ShapePrimitive> shapes,
             List<ComposeOp> compose,
             Map map,
-            MapGenFloatGrid elevGrid)
+            MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null)
         {
             if (shapes == null || shapes.Count == 0 || compose == null || compose.Count == 0)
                 return;
@@ -295,6 +295,8 @@ namespace MapGenAI.MapGen
             }
 
             if (renderQueue.Count == 0) return;
+            float roughness = ContourWarp.Amount(edgeRoughness);
+            var warp = roughness > 0 ? new ContourWarp(shapes, shapeId, roughness) : null;
 
             // 3. 래스터라이즈 — 각 대상을 독립적으로 적용
             MapGenFloatGrid fertilityGrid = null;
@@ -312,6 +314,7 @@ namespace MapGenAI.MapGen
                 foreach (var cell in CellRect.WholeMap(map))
                 {
                     Vector2 p = new Vector2(cell.x / mapW, cell.z / mapH);
+                    if (warp != null) p = warp.Sample(p);
                     float d = sdf(p);
                     float t = Smoothstep(falloff, 0f, d);
 

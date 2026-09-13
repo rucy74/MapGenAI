@@ -1,0 +1,1 @@
+{"action":"generate","description":"오른쪽 아래에 가장자리가 자연스러운 하트 모양 호수를 추가했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"heart_lake_se","type":"composite","edge_roughness":"medium","shapes":[{"id":"h1","prim":"heart","center":[0.75,0.25],"size":0.2}],"compose":[{"op":"add","s":"h1","e":-0.5,"f":0.05,"fill":"water"}]}}]}}
