@@ -49,7 +49,10 @@ namespace MapGenAI.MapGen
                 if(key=="imageMap" && before.imageMap!=null && after.imageMap!=null && before.imageMap.width==after.imageMap.width && before.imageMap.height==after.imageMap.height)
                 {
                     int cells=before.imageMap.cells.Zip(after.imageMap.cells,(a,b)=>a==b?0:1).Sum();
-                    text.Append("\n• ").Append(korean?"이미지 지형: ":"Image terrain: ").Append(cells).Append(korean?"칸 변경":" cells changed");continue;
+                    text.Append("\n• ").Append(korean?"이미지 지형: ":"Image terrain: ").Append(cells).Append(korean?"칸 변경":" cells changed");
+                    if(before.imageMap.replaceElevation!=after.imageMap.replaceElevation)text.Append(korean?" · 이미지 높이 우선 ":" · image elevation priority ").Append(Value(before.imageMap.replaceElevation,korean)).Append(" → ").Append(Value(after.imageMap.replaceElevation,korean));
+                    if(before.imageMap.note!=after.imageMap.note)text.Append(korean?" · 해석 설명 변경":" · interpretation notes changed");
+                    continue;
                 }
                 var field=typeof(TileMapState).GetField(key);
                 string label=korean && Korean.TryGetValue(key,out var name) ? name : key;

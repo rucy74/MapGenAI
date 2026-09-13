@@ -1,0 +1,22 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "좌측 및 상단 일대의 암벽/산악 지형, 중앙의 토양 지형, 우측 하단의 호수와 하천(깊은 물/얕은 물)으로 구성되어 있습니다. 식생 및 토양 세부 색상군은 일반 토양(soil)으로 분류했습니다.",
+  "clusters": [
+    {"id": 0, "label": "soil"},
+    {"id": 1, "label": "mountain"},
+    {"id": 2, "label": "soil"},
+    {"id": 3, "label": "soil"},
+    {"id": 4, "label": "mountain"},
+    {"id": 5, "label": "soil"},
+    {"id": 6, "label": "soil"},
+    {"id": 7, "label": "sand"},
+    {"id": 8, "label": "soil"},
+    {"id": 9, "label": "soil"},
+    {"id": 10, "label": "water"},
+    {"id": 11, "label": "water"},
+    {"id": 12, "label": "shallow_water"},
+    {"id": 13, "label": "shallow_water"},
+    {"id": 14, "label": "soil"},
+    {"id": 15, "label": "mountain"}
+  ]
+}

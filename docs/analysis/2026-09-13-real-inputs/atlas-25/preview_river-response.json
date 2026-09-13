@@ -1,0 +1,70 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "일부 색상 그룹은 흙과 산악 지형의 그림자 또는 가장자리 색상으로 인해 모호할 수 있습니다. 물 색상은 옅은 파란색, 회색 또는 청록색으로 나타날 수 있습니다. 나무 잎은 일반적으로 일반 흙을 의미하며, 땅이 비옥해 보이지 않는 한 비옥한 흙을 의미하지 않습니다. 모든 어두운 그림자를 산악 지형으로 분류하지 않았습니다. 텍스처가 있는 그림의 경우, 색상 그룹의 지배적인 지형 의미를 사용하고 모호성을 공개했습니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "soil"
+    },
+    {
+      "id": 2,
+      "label": "water"
+    },
+    {
+      "id": 3,
+      "label": "mountain"
+    },
+    {
+      "id": 4,
+      "label": "soil"
+    },
+    {
+      "id": 5,
+      "label": "mountain"
+    },
+    {
+      "id": 6,
+      "label": "mountain"
+    },
+    {
+      "id": 7,
+      "label": "soil"
+    },
+    {
+      "id": 8,
+      "label": "water"
+    },
+    {
+      "id": 9,
+      "label": "mountain"
+    },
+    {
+      "id": 10,
+      "label": "soil"
+    },
+    {
+      "id": 11,
+      "label": "water"
+    },
+    {
+      "id": 12,
+      "label": "soil"
+    },
+    {
+      "id": 13,
+      "label": "mountain"
+    },
+    {
+      "id": 14,
+      "label": "mountain"
+    },
+    {
+      "id": 15,
+      "label": "soil"
+    }
+  ]
+}

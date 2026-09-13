@@ -1,0 +1,70 @@
+{
+  "title": "협곡 지형",
+  "notes": "일부 색상 그룹은 텍스처의 그림자 또는 하이라이트일 수 있습니다. 미니맵의 텍스트와 테두리 색상은 지형으로 분류되지 않았습니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "shallow_water"
+    },
+    {
+      "id": 2,
+      "label": "sand"
+    },
+    {
+      "id": 3,
+      "label": "soil"
+    },
+    {
+      "id": 4,
+      "label": "mountain"
+    },
+    {
+      "id": 5,
+      "label": "shallow_water"
+    },
+    {
+      "id": 6,
+      "label": "soil"
+    },
+    {
+      "id": 7,
+      "label": "sand"
+    },
+    {
+      "id": 8,
+      "label": "mountain"
+    },
+    {
+      "id": 9,
+      "label": "water"
+    },
+    {
+      "id": 10,
+      "label": "sand"
+    },
+    {
+      "id": 11,
+      "label": "rich_soil"
+    },
+    {
+      "id": 12,
+      "label": "shallow_water"
+    },
+    {
+      "id": 13,
+      "label": "sand"
+    },
+    {
+      "id": 14,
+      "label": "natural"
+    },
+    {
+      "id": 15,
+      "label": "natural"
+    }
+  ]
+}

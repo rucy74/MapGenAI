@@ -1,0 +1,70 @@
+{
+  "title": "협곡 지형 분석",
+  "notes": "그룹 1, 4, 5, 8, 9는 강 주변의 어두운 그림자 또는 바위 지형으로 보이며, 'mountain'으로 분류했습니다. 그룹 10, 12, 15는 강가의 밝은 바위 또는 자갈로 보이며, 'natural'로 분류했습니다. 그룹 14는 마스크의 텍스트와 겹쳐져 있어 'natural'로 분류했지만, 불확실합니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "mountain"
+    },
+    {
+      "id": 2,
+      "label": "sand"
+    },
+    {
+      "id": 3,
+      "label": "sand"
+    },
+    {
+      "id": 4,
+      "label": "mountain"
+    },
+    {
+      "id": 5,
+      "label": "mountain"
+    },
+    {
+      "id": 6,
+      "label": "shallow_water"
+    },
+    {
+      "id": 7,
+      "label": "shallow_water"
+    },
+    {
+      "id": 8,
+      "label": "mountain"
+    },
+    {
+      "id": 9,
+      "label": "mountain"
+    },
+    {
+      "id": 10,
+      "label": "natural"
+    },
+    {
+      "id": 11,
+      "label": "water"
+    },
+    {
+      "id": 12,
+      "label": "natural"
+    },
+    {
+      "id": 13,
+      "label": "sand"
+    },
+    {
+      "id": 14,
+      "label": "natural"
+    },
+    {
+      "id": 15,
+      "label": "natural"
+    }
+  ]
+}

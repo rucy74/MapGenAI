@@ -1,0 +1,12 @@
+{
+  "credentialFindings": [],
+  "examinedFiles": 787,
+  "hashes": {
+    "dev": "128fe3ddf76c14c7cb9e823b67d8e95b61df40c50a47298c183c05d761067411",
+    "dist": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6",
+    "installed": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6"
+  },
+  "localReportLinks": 21,
+  "remainingTemporaryModFolders": [],
+  "scope": "Exact configured key plus Google/private-key patterns; not all secret formats. Stable installed/dist hashes verified."
+}

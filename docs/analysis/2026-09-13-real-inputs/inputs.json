@@ -1,0 +1,1 @@
+{"inputs":[{"id":"preview_river","path":"../../assets/before.png","kind":"actual_map_preview"},{"id":"gorge","path":"../../assets/ref_examples/landform_07.jpg","kind":"existing_web_terrain_example"},{"id":"ai_map","path":"ai-map.png","kind":"generated_map_reference"}]}

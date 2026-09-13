@@ -1,0 +1,22 @@
+{
+  "title": "림월드 지형 분석",
+  "notes": "어두운 암석 벽체 및 그림자 영역은 산(mountain)으로 분류하였으며, 하천 및 호수 내부의 깊은 물은 water, 얕은 가장자리 물은 shallow_water로 구분하였습니다. 초목 및 기본 지면은 토양(soil)으로 분류되었습니다.",
+  "clusters": [
+    {"id": 0, "label": "soil"},
+    {"id": 1, "label": "mountain"},
+    {"id": 2, "label": "soil"},
+    {"id": 3, "label": "mountain"},
+    {"id": 4, "label": "soil"},
+    {"id": 5, "label": "mountain"},
+    {"id": 6, "label": "mountain"},
+    {"id": 7, "label": "water"},
+    {"id": 8, "label": "shallow_water"},
+    {"id": 9, "label": "mountain"},
+    {"id": 10, "label": "soil"},
+    {"id": 11, "label": "soil"},
+    {"id": 12, "label": "mountain"},
+    {"id": 13, "label": "soil"},
+    {"id": 14, "label": "mountain"},
+    {"id": 15, "label": "soil"}
+  ]
+}

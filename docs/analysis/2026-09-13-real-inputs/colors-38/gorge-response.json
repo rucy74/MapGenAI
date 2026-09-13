@@ -1,0 +1,22 @@
+{
+  "title": "협곡 협소 지형 맵 프리뷰 지형 분석",
+  "notes": "맵의 대부분을 차지하는 거대한 산악 암반벽(id 0) 사이로 좁은 협곡 수로와 흙/모래 퇴적지가 흐르고 있습니다. 우측 하단에는 UI 인셋 창('Gorge')이 포함되어 있으며, 일부 색상 그룹(id 9, 10, 14, 15)은 UI 텍스트 및 프레임과 중첩되어 있습니다.",
+  "clusters": [
+    {"id": 0, "label": "mountain"},
+    {"id": 1, "label": "water"},
+    {"id": 2, "label": "soil"},
+    {"id": 3, "label": "soil"},
+    {"id": 4, "label": "mountain"},
+    {"id": 5, "label": "shallow_water"},
+    {"id": 6, "label": "soil"},
+    {"id": 7, "label": "soil"},
+    {"id": 8, "label": "mountain"},
+    {"id": 9, "label": "natural"},
+    {"id": 10, "label": "natural"},
+    {"id": 11, "label": "soil"},
+    {"id": 12, "label": "soil"},
+    {"id": 13, "label": "sand"},
+    {"id": 14, "label": "natural"},
+    {"id": 15, "label": "natural"}
+  ]
+}

@@ -984,7 +984,8 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         {
             _requests.Cancel(); _isWaiting=false; _statusText="";
             var current=MapGenParams.CaptureState(_openedTileId);
-            Find.WindowStack.Add(new Dialog_ImageMap(current.imageMap,current.elevationShapes.Count,ApplyImageMap));
+            var features=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.LabelCap.ToString());
+            Find.WindowStack.Add(new Dialog_ImageMap(current.imageMap,current.elevationShapes.Count,ApplyImageMap,string.Join(", ",features)));
         }
         private bool ApplyImageMap(MapGenAI.ImageInput.ImageMapData image)
         {

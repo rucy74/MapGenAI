@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Verse;
 
 namespace MapGenAI.MapGen
 {
@@ -11,6 +12,29 @@ namespace MapGenAI.MapGen
         public static bool Active => current != null;
         public static TileMapState State => current?.State;
         public static int TileId => current?.TileId ?? -1;
+
+        // Capture AFTER this mod's image and SDF layers; reapplying just the raw image would erase edits.
+        public static void CaptureImageElevation(Map map,MapGenFloatGrid elevation)
+        {
+            var image=current?.State?.imageMap;if(image==null || !image.replaceElevation)return;
+            current.ImageMap=map;current.ImageElevation=new float[map.Size.x*map.Size.z];
+            current.ImageAuthored=new bool[current.ImageElevation.Length];
+            foreach(var cell in CellRect.WholeMap(map))
+            {
+                int index=cell.z*map.Size.x+cell.x;
+                current.ImageAuthored[index]=image.At(cell.x*image.width/map.Size.x,cell.z*image.height/map.Size.z)!='N';
+                current.ImageElevation[index]=elevation[cell];
+            }
+        }
+        public static void RestoreImageElevation(Map map,MapGenFloatGrid elevation)
+        {
+            if(current?.ImageMap!=map || current.ImageElevation==null)return;
+            foreach(var cell in CellRect.WholeMap(map))
+            {
+                int index=cell.z*map.Size.x+cell.x;
+                if(current.ImageAuthored[index])elevation[cell]=current.ImageElevation[index];
+            }
+        }
 
         public static IDisposable Enter(int tileId, TileMapState state)
         {
@@ -26,6 +50,9 @@ namespace MapGenAI.MapGen
             public Scope Previous;
             public int TileId;
             public TileMapState State;
+            public Map ImageMap;
+            public float[] ImageElevation;
+            public bool[] ImageAuthored;
             bool disposed;
             public void Dispose()
             {

@@ -56,10 +56,11 @@ def package(output: Path) -> Path:
             'Harmony와 Map Preview가 필요합니다. 기존 MapGen AI를 끄고 MapGen AI [DEV]를 켭니다.\n'
             '새 테스트 월드에서 시작하고 모드 설정에 API 키를 직접 입력하세요.\n'
             '기존 배포판·설정·세이브는 이 패키지에 포함하지 않습니다.\n'
-            '지도 편집 창의 Image terrain에서 PNG/JPEG를 불러와 범례를 설명한 뒤 해석합니다.\n'
+            'Image terrain에서 배치가 읽히는 Map Preview/탑다운/AI 맵 PNG/JPEG를 불러옵니다. 설명은 선택 사항입니다.\n'
+            '기본 해석은 원본 윤곽을 보존하고 AI가 지형 종류를 분류합니다. 높이 우선 옵션으로 월드 지형과의 적용 순서를 선택합니다.\n'
             '분류도에서 영역 클릭 후 팔레트/채팅으로 지형 종류를 바꾸고 적용합니다.\n'
             '이 분류도는 실제 맵 미리보기가 아닙니다. 적용 후 Map Preview를 확인하세요.\n'
-            '외곽선 이동·브러시·임의 사진 재현 품질은 아직 완료되지 않았습니다.\n')
+            '외곽선 이동·브러시는 미지원이며, 비슷한 색상/가는 지형/삽입 그림은 오해할 수 있습니다.\n')
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         assert len(z.namelist()) == len(set(z.namelist()))

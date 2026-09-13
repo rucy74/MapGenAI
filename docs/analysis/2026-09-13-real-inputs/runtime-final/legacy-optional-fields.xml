@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MapGenAIProbe>
+  <fixture>
+    <state>
+      <fertilityOffset>0.600000024</fertilityOffset>
+      <straightRiver>True</straightRiver>
+      <elevationShapes>
+        <li>
+          <type>composite</type>
+        </li>
+      </elevationShapes>
+      <mutators />
+      <removeMutators />
+      <rockTypes />
+    </state>
+    <component>
+      <tileStates>
+        <keys>
+          <li>42</li>
+        </keys>
+        <values>
+          <li>
+            <fertilityOffset>0.600000024</fertilityOffset>
+            <straightRiver>True</straightRiver>
+            <elevationShapes>
+              <li>
+                <type>composite</type>
+              </li>
+            </elevationShapes>
+            <mutators />
+            <removeMutators />
+            <rockTypes />
+          </li>
+        </values>
+      </tileStates>
+    </component>
+    <settings>
+      <simpleGeminiModel>gemini-2.5-flash</simpleGeminiModel>
+      <cloudConfigs />
+    </settings>
+  </fixture>
+</MapGenAIProbe>

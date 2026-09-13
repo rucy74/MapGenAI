@@ -1,0 +1,12 @@
+  복원할 프로젝트를 확인하는 중...
+  복원할 모든 프로젝트가 최신 상태입니다.
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\obj\Debug\MapGenAI.AssemblyInfo.cs(15,59): warning CS7035: 지정한 버전 문자열 '1.0.*'이(가) 권장 형식 major.minor.build.revision을 따르지 않습니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGenAI.csproj]
+  MapGenAI -> F:\Projects\Rimworld\active\mapgen_ai\dev\Assemblies\MapGenAI.dll
+
+빌드했습니다.
+
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\obj\Debug\MapGenAI.AssemblyInfo.cs(15,59): warning CS7035: 지정한 버전 문자열 '1.0.*'이(가) 권장 형식 major.minor.build.revision을 따르지 않습니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGenAI.csproj]
+    경고 1개
+    오류 0개
+
+경과 시간: 00:00:00.93

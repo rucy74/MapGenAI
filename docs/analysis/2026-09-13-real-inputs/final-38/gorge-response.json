@@ -1,0 +1,22 @@
+{
+  "title": "림월드 협곡 지형 분석",
+  "notes": "대부분의 영역(id 0)을 차지하는 어두운 갈색 영역은 림월드 맵 프리뷰의 솔리드 암석 내부(mountain)입니다. 중앙의 협곡을 따라 흐르는 회청색 수로는 물(water)이며, 가장자리의 옅은 물은 shallow_water, 협곡 바닥의 흙과 모래 지형은 각각 soil 및 sand로 분류되었습니다. 우측 하단의 인셋 맵 프레임 및 텍스트 픽셀(id 9, 10, 14, 15)은 UI 요소가 포함되어 있습니다.",
+  "clusters": [
+    {"id": 0, "label": "mountain"},
+    {"id": 1, "label": "water"},
+    {"id": 2, "label": "sand"},
+    {"id": 3, "label": "soil"},
+    {"id": 4, "label": "mountain"},
+    {"id": 5, "label": "shallow_water"},
+    {"id": 6, "label": "soil"},
+    {"id": 7, "label": "sand"},
+    {"id": 8, "label": "mountain"},
+    {"id": 9, "label": "natural"},
+    {"id": 10, "label": "natural"},
+    {"id": 11, "label": "soil"},
+    {"id": 12, "label": "water"},
+    {"id": 13, "label": "sand"},
+    {"id": 14, "label": "natural"},
+    {"id": 15, "label": "natural"}
+  ]
+}

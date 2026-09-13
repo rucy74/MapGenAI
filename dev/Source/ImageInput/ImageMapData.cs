@@ -10,6 +10,7 @@ namespace MapGenAI.ImageInput
         public int width, height;
         public string cells;
         public string note;
+        public bool replaceElevation;
         public const int MaxSide = 256;
         static readonly int[][] Neighbors = {new[]{-1,0},new[]{1,0},new[]{0,-1},new[]{0,1}};
         public static readonly Dictionary<string,char> Names = new Dictionary<string,char> {
@@ -23,11 +24,12 @@ namespace MapGenAI.ImageInput
             foreach(char label in cells) if (!Names.ContainsValue(label)) throw new FormatException("Unknown image terrain label");
             if (note != null && note.Length > 4096) throw new FormatException("Image interpretation note is too long");
         }
-        public ImageMapData Clone() => new ImageMapData {width=width,height=height,cells=cells,note=note};
+        public ImageMapData Clone() => new ImageMapData {width=width,height=height,cells=cells,note=note,replaceElevation=replaceElevation};
         public void ExposeData()
         {
             Scribe_Values.Look(ref width,"width",0); Scribe_Values.Look(ref height,"height",0);
             Scribe_Values.Look(ref cells,"cells"); Scribe_Values.Look(ref note,"note");
+            Scribe_Values.Look(ref replaceElevation,"replaceElevation",false);
             if (Scribe.mode == LoadSaveMode.PostLoadInit) RepairLoadedData();
         }
         public void RepairLoadedData()
@@ -94,6 +96,7 @@ namespace MapGenAI.ImageInput
                 if(label=='N') continue;
                 if(label=='M')elevation[cell]=.85f;
                 else if(label=='W' || label=='S')elevation[cell]=.2f;
+                else if(replaceElevation)elevation[cell]=Math.Min(elevation[cell],.55f);
                 switch(label)
                 {
                     case 'W': fertility[cell]=-2005; break;

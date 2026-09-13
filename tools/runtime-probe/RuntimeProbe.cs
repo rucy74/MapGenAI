@@ -40,6 +40,8 @@ namespace MapGenAI.RuntimeProbe
             try
             {
                 Directory.CreateDirectory(output);
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageInputs",out var inputs))
+                {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 SaveLoadProbe();
                 var catalog = DefDatabase<TileMutatorDef>.AllDefsListForReading.Select(d => new Dictionary<string,object> {
                     {"def",d.defName},{"categories",d.categories},{"overrideCategories",d.overrideCategories},{"priority",d.priority}
@@ -66,7 +68,7 @@ namespace MapGenAI.RuntimeProbe
             var explicitConfig=new MapGenAISettings{useSimpleMode=false,cloudConfigs=new List<ApiConfig>{new ApiConfig{ApiKey="fixture-only",SelectedModel="custom-existing-model"}}};
             Require(explicitConfig.GetActiveConfig().SelectedModel=="custom-existing-model","advanced explicit model choice is preserved");
             var state = MapStateEditor.Merge(null,MapParameterParser.Parse(SimpleJson.Parse("{\"fertility_offset\":0.6,\"straight_river\":true,\"elevation_shapes\":[{\"id\":\"triangle\",\"type\":\"composite\",\"shapes\":[{\"id\":\"p\",\"prim\":\"poly\",\"verts\":[[0.1,0.2],[0.8,0.2],[0.5,0.8]]}],\"compose\":[{\"op\":\"add\",\"s\":\"p\",\"e\":0.8}]}]}")));
-            state.imageMap=new ImageMapData{width=3,height=2,cells="MWNSGI",note="이미지 저장 😀"};
+            state.imageMap=new ImageMapData{width=3,height=2,cells="MWNSGI",note="이미지 저장 😀",replaceElevation=true};
             var fixture = new ProbeEnvelope { state=state, component=new MapGenAIWorldComponent(null),settings=new MapGenAISettings{simpleGeminiModel="gemini-2.5-flash"} };
             fixture.component.SetState(42,state);
             fixture.component.SetBaseline(42,new TileWorldSnapshot {mutators=new List<string>{"Caves"},hilliness=Hilliness.LargeHills});
@@ -83,6 +85,12 @@ namespace MapGenAI.RuntimeProbe
             Require(MapStateCodec.Serialize(state)==MapStateCodec.Serialize(loaded.component.GetState(42)),"real WorldComponent state roundtrip");
             Require(loaded.component.GetBaseline(42)?.mutators.Single()=="Caves" && loaded.component.GetLastApplied(42)?.hilliness==Hilliness.LargeHills,"real per-tile baseline and applied metadata roundtrip");
             Require(loaded.settings.GetActiveConfig().SelectedModel=="gemini-2.5-flash","explicit simple model selection survives Scribe roundtrip");
+
+            var oldImage=new System.Xml.XmlDocument();oldImage.Load(path);
+            foreach(System.Xml.XmlNode node in oldImage.SelectNodes("//imageMap/replaceElevation"))node.ParentNode.RemoveChild(node);
+            string oldImagePath=Path.Combine(output,"legacy-image-mode.xml");oldImage.Save(oldImagePath);
+            loaded=null;Scribe.loader.InitLoading(oldImagePath);Scribe_Deep.Look(ref loaded,"fixture");Scribe.loader.FinalizeLoading();
+            Require(!loaded.state.imageMap.replaceElevation && !loaded.component.GetState(42).imageMap.replaceElevation,"legacy image Scribe data retains elevation overlay semantics");
 
             var legacy=new System.Xml.XmlDocument(); legacy.Load(path);
             foreach(System.Xml.XmlNode node in legacy.SelectNodes("//id|//autoHills|//compositeJson|//imageMap|//tileBaselines|//lastAppliedTiles")) node.ParentNode.RemoveChild(node);
@@ -106,6 +114,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageStates",out var states))
+                {RealImageProbe.Generate(states,output);Application.Quit();return;}
                 int tile = Find.CurrentMap.Tile;
                 Find.WorldSelector.SelectedTile=tile;
                 var dialog=new Dialog_TextToMap();
@@ -132,6 +142,9 @@ namespace MapGenAI.RuntimeProbe
                 var pixels=new ImageMapData{width=2,height=2,cells="MWGI",note="probe"};
                 Invoke(dialog,"ApplyImageMap",pixels);
                 Require(history.Count==1 && MapGenParams.CaptureState(tile).imageMap.cells=="MWGI","actual dialog image apply creates one undo entry");
+                var baseImage=pixels.Clone();baseImage.replaceElevation=true;Invoke(dialog,"ApplyImageMap",baseImage);
+                Require(history.Count==2 && MapGenParams.CaptureState(tile).imageMap.replaceElevation,"image elevation mode alone is an actionable change");
+                Invoke(dialog,"DoUndo");Require(!MapGenParams.CaptureState(tile).imageMap.replaceElevation,"actual dialog undo restores legacy image elevation mode");
                 Invoke(dialog,"DoUndo");
                 Require(!MapGenAIWorldComponent.Get().HasState(tile),"actual image undo restores absent state");
                 var texture=ImageTextureCodec.Preview(pixels);
@@ -139,7 +152,11 @@ namespace MapGenAI.RuntimeProbe
                 {
                     var texturePath=Path.Combine(output,"palette-fixture.png");File.WriteAllBytes(texturePath,ImageConversion.EncodeToPNG(texture));
                     var reloaded=ImageTextureCodec.Load(texturePath);
-                    try {Require(ImageTextureCodec.FromPalette(reloaded).cells==pixels.cells,"real Unity PNG load and palette preserve orientation");Require(ImageTextureCodec.ForVision(reloaded).bytes.Length>24,"real Unity image encoding for vision");}
+                    try {
+                        Require(ImageTextureCodec.FromPalette(reloaded).cells==pixels.cells,"real Unity PNG load and palette preserve orientation");Require(ImageTextureCodec.ForVision(reloaded).bytes.Length>24,"real Unity image encoding for vision");
+                        var colors=ImageTextureCodec.AnalyzeColors(reloaded);Require(colors.Width==2 && colors.Height==2 && colors.Groups.Distinct().Count()==4,"Unity color analysis retains a tiny four-terrain reference");
+                        var sheet=ImageTextureCodec.ForColorVision(reloaded,colors);Require(sheet.bytes.Length<=1024*1024 && sheet.width<=768,"Unity color mask sheet respects vision payload bounds");
+                    }
                     finally {UnityEngine.Object.Destroy(reloaded);}
                 }
                 finally {UnityEngine.Object.Destroy(texture);}

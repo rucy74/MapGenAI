@@ -16,20 +16,23 @@ namespace MapGenAI.UI
         readonly Stack<ImageMapData> undo=new Stack<ImageMapData>();
         readonly int overlays;
         readonly int gridLimit;
+        readonly string worldFeatures;
         Texture2D reference,preview;
         ImageMapData draft;
         List<ImageCandidate> candidates;
+        ColorTerrainPlan pendingColors;
         List<int> selection=new List<int>();
         string path="",input="",status="",referenceNotes="";
-        bool waiting,correcting;
+        bool waiting,correcting,inferContours;
         int outputWidth=128,outputHeight=128;
         Vector2 notesScroll;
         public override Vector2 InitialSize => new Vector2(1000,780);
         static string T(string ko,string en) => L10n.IsKorean()?ko:en;
 
-        public Dialog_ImageMap(ImageMapData existing,int overlayCount,Func<ImageMapData,bool> onApply)
+        public Dialog_ImageMap(ImageMapData existing,int overlayCount,Func<ImageMapData,bool> onApply,string worldFeatureSummary=null)
         {
             apply=onApply;overlays=overlayCount;draft=existing?.Clone();
+            worldFeatures=worldFeatureSummary;
             gridLimit=Math.Max(1,Math.Min(128,Find.GameInitData?.mapSize??128));
             doCloseX=true;closeOnAccept=false;absorbInputAroundWindow=true;forcePause=false;layer=WindowLayer.Super;
             if(draft!=null)Refresh();
@@ -51,7 +54,7 @@ namespace MapGenAI.UI
                     }
                     else
                     {
-                        candidates=ImageInterpretation.Parse(reply.Text,outputWidth,outputHeight);
+                        candidates=pendingColors==null?ImageInterpretation.Parse(reply.Text,outputWidth,outputHeight):new List<ImageCandidate>{pendingColors.Interpret(reply.Text)};
                         SelectCandidate(0);status=T("AI 해석을 원본과 비교하고 필요한 영역을 고치세요.","Compare the AI interpretation with the reference and correct regions.");
                     }
                 }
@@ -64,7 +67,7 @@ namespace MapGenAI.UI
             TooltipHandler.TipRegion(new Rect(0,32,rect.width-130,28),T("PNG/JPEG 파일 경로를 붙여넣으세요.","Paste a PNG/JPEG file path."));
             Widgets.Label(new Rect(0,63,126,26),T("이미지 설명 (선택)","Image notes"));
             GUI.enabled=!waiting;referenceNotes=Widgets.TextField(new Rect(130,63,rect.width-130,26),referenceNotes);GUI.enabled=true;
-            TooltipHandler.TipRegion(new Rect(130,63,rect.width-130,26),T("예: 갈색은 산, 파란색은 물입니다. 모호한 색상·기호를 설명할 수 있습니다.","Example: brown means mountains, blue means water. Explain ambiguous colors or symbols."));
+            TooltipHandler.TipRegion(new Rect(130,63,rect.width-130,26),T("맵의 배치가 읽히는 참고 이미지를 사용하세요. 추가 설명은 없어도 됩니다. 글자·작은 삽입 그림은 지형으로 섞일 수 있습니다.","Use a reference with readable map layout. Notes are optional. Labels and inset pictures may be mixed with terrain."));
             GUI.enabled=reference!=null && !waiting;
             if(Widgets.ButtonText(new Rect(0,92,180,30),T("AI로 해석","Interpret with AI")))Interpret();
             if(Widgets.ButtonText(new Rect(186,92,190,30),T("팔레트 색상 가져오기","Import palette colors")))
@@ -76,7 +79,9 @@ namespace MapGenAI.UI
             if(candidates!=null && !waiting)
                 for(int i=0;i<candidates.Count;i++)
                     if(Widgets.ButtonText(new Rect(382+i*150,92,144,30),T("후보 ","Candidate ")+(i+1)))SelectCandidate(i);
-            float side=Math.Min(300,Math.Min((rect.width-30)/2,Math.Max(100,rect.height-390))),left=(rect.width-2*side-20)/2;
+            GUI.enabled=!waiting;Widgets.CheckboxLabeled(new Rect(rect.width-220,94,216,26),T("윤곽을 AI가 다시 추론","Ask AI to redraw contours"),ref inferContours);GUI.enabled=true;
+            TooltipHandler.TipRegion(new Rect(rect.width-220,94,216,26),T("기본은 원본 픽셀의 배치를 유지합니다. 이 옵션은 더 단순한 도형으로 해석하므로 작은 지형을 놓칠 수 있습니다.","Default preserves sampled source contours. This option asks for simpler shapes and can miss small features."));
+            float side=Math.Min(300,Math.Min((rect.width-30)/2,Math.Max(100,rect.height-416))),left=(rect.width-2*side-20)/2;
             Widgets.Label(new Rect(left,126,side,24),T("원본 (위쪽 = 북쪽)","Reference (top = north)"));
             Widgets.Label(new Rect(left+side+20,126,side,24),T("지형 분류도 · 클릭해서 영역 선택","Terrain labels · click a region"));
             var sourceRect=new Rect(left,151,side,side);var planRect=new Rect(left+side+20,151,side,side);
@@ -96,6 +101,13 @@ namespace MapGenAI.UI
             Text.Font=GameFont.Tiny;
             Widgets.Label(new Rect(0,y,rect.width,34),T("분류도는 실제 맵 미리보기가 아닙니다. 적용 후 Map Preview에서 확인하세요. 기존 지형 도형 ","This is a terrain plan. After applying, inspect the generated Map Preview. Existing terrain shapes: ")+overlays+T("개가 그 위에 적용됩니다."," (applied on top)."));
             y+=36;Text.Font=GameFont.Small;
+            if(draft!=null)
+            {
+                bool flatten=draft.replaceElevation;GUI.enabled=!waiting;
+                Widgets.CheckboxLabeled(new Rect(0,y,rect.width,24),T("이미지·추가 도형의 높이를 월드 지형보다 우선","Prioritize image and added shapes over world elevation"),ref flatten);GUI.enabled=true;
+                if(flatten!=draft.replaceElevation){var updated=draft.Clone();updated.replaceElevation=flatten;Edit(updated);}
+            }
+            y+=26;
             int n=0;float buttonW=(rect.width-4*5)/5;
             GUI.enabled=draft!=null && selection.Count>0 && !waiting;
             foreach(var entry in ImageMapData.Names)
@@ -113,8 +125,9 @@ namespace MapGenAI.UI
             Widgets.Label(new Rect(0,y,rect.width,24),T("채팅은 선택 영역의 지형 종류를 바꿉니다. 외곽 이동·변형과 건물 재현은 아직 지원하지 않습니다.","Chat changes the selected region's terrain type. Moving/reshaping contours and reconstructing buildings are not supported yet."));
             y+=24;
             var noteRect=new Rect(0,y,rect.width,Math.Max(40,rect.height-y-40));
-            var note=status+(draft?.note==null?"":"\n"+draft.note)+"\n"+T("산·물은 높이도 바꿉니다. 토양 종류는 고도를 유지합니다. 맵을 줄이면 가는 통로가 사라질 수 있습니다.","Mountains/water change elevation; soil labels retain it. Smaller maps may lose thin passages.");
+            var note=status+(draft?.note==null?"":"\n"+draft.note)+"\n"+T("높이 우선: 이미지의 평지에서 기존 산을 제거합니다. 자연 지형 칸은 월드 지형을 유지합니다. 옵션을 끄면 토양은 기존 높이를 유지하며, 월드 지형이 이미지의 산·물 높이도 바꿀 수 있습니다. 작은 맵은 가는 통로를 놓칠 수 있습니다.","Elevation priority clears old mountains from image ground; natural cells retain world terrain. With it off, ground keeps its height and world landforms can also change image mountain/water heights. Small maps may lose thin passages.");
             if(draft!=null && Find.GameInitData!=null)note+="\n"+draft.SamplingWarning(Find.GameInitData.mapSize,Find.GameInitData.mapSize);
+            if(!string.IsNullOrWhiteSpace(worldFeatures))note+="\n"+T("월드 지형 특징도 결과를 바꿀 수 있습니다: ","World terrain features can also change the result: ")+worldFeatures+T(". 필요하면 메인 대화창에서 해당 특징을 수정하세요.",". Adjust these features in the main conversation if needed.");
             var view=new Rect(0,0,noteRect.width-20,Math.Max(noteRect.height,Text.CalcHeight(note,noteRect.width-20)));
             Widgets.BeginScrollView(noteRect,ref notesScroll,view);Widgets.Label(view,note);Widgets.EndScrollView();
             Text.Font=GameFont.Small;float bottom=rect.height-34;
@@ -159,10 +172,11 @@ namespace MapGenAI.UI
             try
             {
                 var client=Client() as IVisionClient;if(client==null)throw new Exception("Selected provider does not support image input");
-                var payload=ImageTextureCodec.ForVision(reference);
+                pendingColors=inferContours?null:ImageTextureCodec.AnalyzeColors(reference,gridLimit);
+                var payload=pendingColors==null?ImageTextureCodec.ForVision(reference):ImageTextureCodec.ForColorVision(reference,pendingColors);
                 float ratio=(float)gridLimit/Math.Max(reference.width,reference.height);
                 outputWidth=Math.Max(1,(int)(reference.width*ratio));outputHeight=Math.Max(1,(int)(reference.height*ratio));
-                string prompt=ImageInterpretation.BuildPrompt(L10n.IsKorean(),referenceNotes);
+                string prompt=pendingColors==null?ImageInterpretation.BuildPrompt(L10n.IsKorean(),referenceNotes):pendingColors.BuildPrompt(L10n.IsKorean(),referenceNotes);
                 Start(token=>client.SendImageAsync(payload.bytes,payload.mimeType,prompt,token),false);
             }
             catch(Exception e){status=e.Message;}
@@ -190,7 +204,7 @@ namespace MapGenAI.UI
         void SelectCandidate(int i) {Edit(candidates[i].map.Clone());selection.Clear();Refresh();}
         void Edit(ImageMapData updated)
         {
-            if(draft!=null && draft.cells==updated.cells && draft.width==updated.width && draft.height==updated.height && draft.note==updated.note)return;
+            if(draft!=null && draft.cells==updated.cells && draft.width==updated.width && draft.height==updated.height && draft.note==updated.note && draft.replaceElevation==updated.replaceElevation)return;
             if(draft!=null)undo.Push(draft.Clone());
             if(draft==null || draft.width!=updated.width || draft.height!=updated.height)selection.Clear();
             draft=updated;Refresh();

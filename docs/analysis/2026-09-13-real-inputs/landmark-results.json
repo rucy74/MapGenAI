@@ -1,0 +1,2470 @@
+[
+  {
+    "method": "baseline-38",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 17,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "baseline-38",
+    "id": "gorge",
+    "valid": true,
+    "correct": 16,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "baseline-38",
+    "id": "ai_map",
+    "valid": false
+  },
+  {
+    "method": "atlas-38",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 15,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "R",
+        "match": false
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "R",
+        "match": false
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "R",
+        "match": false
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "R",
+        "match": false
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "atlas-38",
+    "id": "gorge",
+    "valid": true,
+    "correct": 15,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "atlas-38",
+    "id": "ai_map",
+    "valid": true,
+    "correct": 18,
+    "total": 24,
+    "samples": [
+      {
+        "x": 0.08,
+        "z": 0.9,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.76,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.25,
+        "z": 0.89,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.66,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.05,
+        "z": 0.52,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.42,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.03,
+        "z": 0.14,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.09,
+        "z": 0.055,
+        "expected": "M",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.42,
+        "z": 0.92,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.71,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.36,
+        "z": 0.59,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.33,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.32,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.58,
+        "z": 0.11,
+        "expected": "G",
+        "actual": "S",
+        "match": false
+      },
+      {
+        "x": 0.83,
+        "z": 0.84,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.84,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.79,
+        "z": 0.3,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.49,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.61,
+        "z": 0.83,
+        "expected": "W",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.59,
+        "z": 0.65,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.75,
+        "z": 0.29,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.2,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.76,
+        "z": 0.16,
+        "expected": "W",
+        "actual": "B",
+        "match": false
+      }
+    ]
+  },
+  {
+    "method": "final-38",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 18,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "final-38",
+    "id": "gorge",
+    "valid": true,
+    "correct": 15,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "final-38",
+    "id": "ai_map",
+    "valid": true,
+    "correct": 18,
+    "total": 24,
+    "samples": [
+      {
+        "x": 0.08,
+        "z": 0.9,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.76,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.25,
+        "z": 0.89,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.66,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.05,
+        "z": 0.52,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.42,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.03,
+        "z": 0.14,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.09,
+        "z": 0.055,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.42,
+        "z": 0.92,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.71,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.36,
+        "z": 0.59,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.33,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.32,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.58,
+        "z": 0.11,
+        "expected": "G",
+        "actual": "S",
+        "match": false
+      },
+      {
+        "x": 0.83,
+        "z": 0.84,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.84,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.79,
+        "z": 0.3,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.49,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.61,
+        "z": 0.83,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.59,
+        "z": 0.65,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.75,
+        "z": 0.29,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.2,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.76,
+        "z": 0.16,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      }
+    ]
+  },
+  {
+    "method": "baseline-25",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 10,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "H",
+        "match": false
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "baseline-25",
+    "id": "gorge",
+    "valid": true,
+    "correct": 8,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      }
+    ]
+  },
+  {
+    "method": "baseline-25",
+    "id": "ai_map",
+    "valid": true,
+    "correct": 19,
+    "total": 24,
+    "samples": [
+      {
+        "x": 0.08,
+        "z": 0.9,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.76,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.25,
+        "z": 0.89,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.66,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.05,
+        "z": 0.52,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.42,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.03,
+        "z": 0.14,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.09,
+        "z": 0.055,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.42,
+        "z": 0.92,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.71,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.36,
+        "z": 0.59,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.33,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.48,
+        "z": 0.32,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.58,
+        "z": 0.11,
+        "expected": "G",
+        "actual": "W",
+        "match": false
+      },
+      {
+        "x": 0.83,
+        "z": 0.84,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.84,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.79,
+        "z": 0.3,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.49,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.61,
+        "z": 0.83,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.59,
+        "z": 0.65,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.75,
+        "z": 0.29,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.2,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.76,
+        "z": 0.16,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "atlas-25",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 18,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "atlas-25",
+    "id": "gorge",
+    "valid": true,
+    "correct": 0,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "M",
+        "match": false
+      }
+    ]
+  },
+  {
+    "method": "atlas-25",
+    "id": "ai_map",
+    "valid": true,
+    "correct": 18,
+    "total": 24,
+    "samples": [
+      {
+        "x": 0.08,
+        "z": 0.9,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.76,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.25,
+        "z": 0.89,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.66,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.05,
+        "z": 0.52,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.42,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.03,
+        "z": 0.14,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.09,
+        "z": 0.055,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.42,
+        "z": 0.92,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.71,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.36,
+        "z": 0.59,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.33,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.32,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.58,
+        "z": 0.11,
+        "expected": "G",
+        "actual": "W",
+        "match": false
+      },
+      {
+        "x": 0.83,
+        "z": 0.84,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.84,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.79,
+        "z": 0.3,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.49,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.61,
+        "z": 0.83,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.59,
+        "z": 0.65,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.75,
+        "z": 0.29,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.2,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.76,
+        "z": 0.16,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      }
+    ]
+  },
+  {
+    "method": "final-25",
+    "id": "preview_river",
+    "valid": true,
+    "correct": 18,
+    "total": 19,
+    "samples": [
+      {
+        "x": 0.19,
+        "z": 0.88,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.23,
+        "z": 0.96,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.56,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.15,
+        "z": 0.16,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.57,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.8,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.62,
+        "z": 0.64,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.46,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.51,
+        "z": 0.26,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.47,
+        "z": 0.04,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.13,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.35,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "M",
+        "match": false
+      },
+      {
+        "x": 0.85,
+        "z": 0.91,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.69,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.3,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.31,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.44,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.82,
+        "z": 0.09,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "final-25",
+    "id": "gorge",
+    "valid": true,
+    "correct": 6,
+    "total": 16,
+    "samples": [
+      {
+        "x": 0.15,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.45,
+        "z": 0.85,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.7,
+        "z": 0.95,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.12,
+        "z": 0.48,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.4,
+        "z": 0.57,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.65,
+        "z": 0.35,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.8,
+        "z": 0.5,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.3,
+        "z": 0.1,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.6,
+        "z": 0.12,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.12,
+        "z": 0.23,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.27,
+        "z": 0.32,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.41,
+        "z": 0.39,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.55,
+        "z": 0.51,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.71,
+        "z": 0.62,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.85,
+        "z": 0.73,
+        "expected": "W",
+        "actual": "B",
+        "match": false
+      },
+      {
+        "x": 0.96,
+        "z": 0.82,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      }
+    ]
+  },
+  {
+    "method": "final-25",
+    "id": "ai_map",
+    "valid": true,
+    "correct": 18,
+    "total": 24,
+    "samples": [
+      {
+        "x": 0.08,
+        "z": 0.9,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.12,
+        "z": 0.76,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.25,
+        "z": 0.89,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.66,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.05,
+        "z": 0.52,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.1,
+        "z": 0.42,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.03,
+        "z": 0.14,
+        "expected": "M",
+        "actual": "M",
+        "match": true
+      },
+      {
+        "x": 0.09,
+        "z": 0.055,
+        "expected": "M",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.42,
+        "z": 0.92,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.71,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.36,
+        "z": 0.59,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.33,
+        "z": 0.33,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.48,
+        "z": 0.32,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.58,
+        "z": 0.11,
+        "expected": "G",
+        "actual": "S",
+        "match": false
+      },
+      {
+        "x": 0.83,
+        "z": 0.84,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.84,
+        "z": 0.56,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.79,
+        "z": 0.3,
+        "expected": "G",
+        "actual": "G",
+        "match": true
+      },
+      {
+        "x": 0.49,
+        "z": 0.98,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.61,
+        "z": 0.83,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.59,
+        "z": 0.65,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.64,
+        "z": 0.48,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      },
+      {
+        "x": 0.75,
+        "z": 0.29,
+        "expected": "W",
+        "actual": "S",
+        "match": true
+      },
+      {
+        "x": 0.86,
+        "z": 0.2,
+        "expected": "W",
+        "actual": "W",
+        "match": true
+      },
+      {
+        "x": 0.76,
+        "z": 0.16,
+        "expected": "W",
+        "actual": "G",
+        "match": false
+      }
+    ]
+  }
+]

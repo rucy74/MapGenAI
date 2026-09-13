@@ -1,0 +1,70 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "일부 색상 그룹은 흙과 바위 지형의 혼합을 나타낼 수 있습니다. 물 색상은 옅은 파란색 또는 회색으로 나타날 수 있습니다. 풍부한 흙은 명확하게 비옥한 땅으로 보이지 않는 한 일반 흙으로 분류됩니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "mountain"
+    },
+    {
+      "id": 2,
+      "label": "soil"
+    },
+    {
+      "id": 3,
+      "label": "mountain"
+    },
+    {
+      "id": 4,
+      "label": "soil"
+    },
+    {
+      "id": 5,
+      "label": "soil"
+    },
+    {
+      "id": 6,
+      "label": "soil"
+    },
+    {
+      "id": 7,
+      "label": "water"
+    },
+    {
+      "id": 8,
+      "label": "water"
+    },
+    {
+      "id": 9,
+      "label": "mountain"
+    },
+    {
+      "id": 10,
+      "label": "soil"
+    },
+    {
+      "id": 11,
+      "label": "soil"
+    },
+    {
+      "id": 12,
+      "label": "soil"
+    },
+    {
+      "id": 13,
+      "label": "rich_soil"
+    },
+    {
+      "id": 14,
+      "label": "natural"
+    },
+    {
+      "id": 15,
+      "label": "rich_soil"
+    }
+  ]
+}

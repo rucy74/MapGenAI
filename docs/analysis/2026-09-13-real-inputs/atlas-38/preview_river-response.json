@@ -1,0 +1,22 @@
+{
+  "title": "림월드 지형 분석",
+  "notes": "강줄기(water, shallow_water)와 주변의 토양(soil), 암석/진흙/산지 패치들을 구분하였습니다. 11번 클러스터는 이미지 왼쪽 가장자리의 테두리 선(interface)을 포함하고 있습니다.",
+  "clusters": [
+    {"id": 0, "label": "soil"},
+    {"id": 1, "label": "soil"},
+    {"id": 2, "label": "shallow_water"},
+    {"id": 3, "label": "soil"},
+    {"id": 4, "label": "soil"},
+    {"id": 5, "label": "soil"},
+    {"id": 6, "label": "rich_soil"},
+    {"id": 7, "label": "mountain"},
+    {"id": 8, "label": "water"},
+    {"id": 9, "label": "mountain"},
+    {"id": 10, "label": "mountain"},
+    {"id": 11, "label": "natural"},
+    {"id": 12, "label": "mountain"},
+    {"id": 13, "label": "mountain"},
+    {"id": 14, "label": "rich_soil"},
+    {"id": 15, "label": "soil"}
+  ]
+}

@@ -16,6 +16,56 @@ static class ImageMapTests
     static string Input(string regions)=>"{\"view\":\"top_down\",\"candidates\":["+Candidate(regions)+"]}";
     public static void RunAll()
     {
+        Check("Image priority preserves later SDF edits against world elevation and respects natural cells and nested scopes",()=>
+        {
+            var map=new Map{Size=new IntVec3(3,1,1)};var e=new MapGenFloatGrid();var f=new MapGenFloatGrid();
+            var state=new TileMapState{imageMap=new ImageMapData{width=3,height=1,cells="GGN",replaceElevation=true}};
+            using(GenerationContext.Enter(1,state))
+            {
+                state.imageMap.Apply(map,e,f);e[new IntVec3(0,0,0)]=.85f; // A later SDF mountain on image soil.
+                GenerationContext.CaptureImageElevation(map,e);
+                foreach(var c in CellRect.WholeMap(map))e[c]=.95f;
+                using(GenerationContext.Enter(2,new TileMapState())){GenerationContext.RestoreImageElevation(map,e);Equal(.95f,e[new IntVec3(1,0,0)]);}
+                GenerationContext.RestoreImageElevation(map,e);
+                Equal(.85f,e[new IntVec3(0,0,0)]);Equal(0f,e[new IntVec3(1,0,0)]);Equal(.95f,e[new IntVec3(2,0,0)]);
+            }
+            state.imageMap.replaceElevation=false;
+            using(GenerationContext.Enter(1,state)){GenerationContext.CaptureImageElevation(map,e);e[new IntVec3(0,0,0)]=.25f;GenerationContext.RestoreImageElevation(map,e);Equal(.25f,e[new IntVec3(0,0,0)]);}
+            Equal(false,GenerationContext.Active);
+        });
+        Check("Image base clears unwanted hills while legacy overlays and natural cells retain them",()=>
+        {
+            var map=new Map{Size=new IntVec3(4,1,2)};var e=new MapGenFloatGrid();var f=new MapGenFloatGrid();
+            foreach(var c in CellRect.WholeMap(map)){e[c]=.9f;f[c]=.6f;}
+            var data=new ImageMapData{width=4,height=2,cells="GRBHDINW",replaceElevation=true};data.Apply(map,e,f);
+            Equal(true,CellRect.WholeMap(map).Where(c=>c.z==0 || c.x<2).All(c=>e[c]==.55f));
+            Equal(.9f,e[new IntVec3(2,0,1)]);Equal(.6f,f[new IntVec3(2,0,1)]);Equal(.2f,e[new IntVec3(3,0,1)]);
+            Equal(true,data.Clone().replaceElevation);
+            Equal(true,MapStateCodec.Deserialize(MapStateCodec.Serialize(new TileMapState{imageMap=data})).imageMap.replaceElevation);
+            var legacy=MapStateCodec.Deserialize("{\"schema_version\":2,\"state\":{\"imageMap\":{\"width\":1,\"height\":1,\"cells\":\"G\"}}}");Equal(false,legacy.imageMap.replaceElevation);
+            var after=legacy.Clone();after.imageMap.replaceElevation=true;
+            Equal(true,MapStateDescription.Describe(legacy,after,false).Contains("off → on"));
+        });
+        Check("Color classification preserves winding one-cell channels, islands and isolated terrain",()=>
+        {
+            const int w=12,h=10;var wanted=Enumerable.Repeat('G',w*h).ToArray();
+            for(int z=0;z<h;z++){int x=2+z/3;wanted[z*w+x]='W';if(z>0)wanted[z*w+2+(z-1)/3]='W';}
+            for(int z=2;z<7;z++)for(int x=7;x<12;x++)wanted[z*w+x]='W';wanted[4*w+9]='G';wanted[0]='M';wanted[8*w+10]='M';
+            var rgb=new byte[w*h*3];for(int i=0;i<wanted.Length;i++){var color=wanted[i]=='M'?new byte[]{80,60,40}:wanted[i]=='W'?new byte[]{30,120,200}:new byte[]{100,170,80};Array.Copy(color,0,rgb,i*3,3);}
+            var plan=ColorTerrainPlan.Create(rgb,w,h);var other=ColorTerrainPlan.Create(rgb,w,h);Equal(string.Join(",",plan.Groups),string.Join(",",other.Groups));
+            var entries=new List<object>();for(int i=0;i<plan.Colors.Length;i++)entries.Add(new Dictionary<string,object>{{"id",i},{"label",plan.Colors[i][2]>150?"water":plan.Colors[i][1]>100?"soil":"mountain"}});
+            string response=SimpleJson.Serialize(new Dictionary<string,object>{{"title","test"},{"notes","fixed RGB annotation, no model involved"},{"clusters",entries}});
+            var result=plan.Interpret(response).map;Equal(new string(wanted),result.cells);Equal(true,result.replaceElevation);
+            Equal(1,result.RegionAt(9,4).Count);Equal('M',result.At(0,0));Equal(true,result.RegionAt(2,0).Count>=h);
+        });
+        Check("Color responses reject missing, duplicate, fractional IDs and unknown labels",()=>
+        {
+            var plan=ColorTerrainPlan.Create(new byte[]{0,0,0,255,255,255},2,1);
+            foreach(string groups in new[]{"[]","[{\"id\":0,\"label\":\"soil\"},{\"id\":0,\"label\":\"water\"}]","[{\"id\":0.5,\"label\":\"soil\"},{\"id\":1,\"label\":\"water\"}]","[{\"id\":0,\"label\":\"soil\"},{\"id\":2,\"label\":\"water\"}]","[{\"id\":0,\"label\":\"city\"},{\"id\":1,\"label\":\"water\"}]"})
+                Throws(()=>plan.Interpret("{\"title\":\"test\",\"notes\":\"test\",\"clusters\":"+groups+"}"));
+            Throws(()=>ColorTerrainPlan.Create(new byte[3],257,1));Throws(()=>plan.BuildPrompt(true,new string('a',2001)));
+            Equal(true,plan.BuildPrompt(false,"river through center").Contains("river through center"));
+        });
         Check("Observed top-level shape shorthand is normalized without accepting ambiguous edits",()=>
         {
             var command=MapGenAI.LLM.ProviderResponse.Command("{\"action\":\"generate\",\"shape_ops\":[{\"op\":\"add\",\"shape\":{\"type\":\"bump\"}}]}");

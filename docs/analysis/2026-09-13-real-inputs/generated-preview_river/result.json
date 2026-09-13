@@ -1,0 +1,1 @@
+{"ok":true,"results":[{"id":"preview_river","tile":53950,"biome":"TemperateForest","hilliness":"Flat","waterWanted":1028,"waterMatched":1028,"mountainWanted":1355,"mountainMatched":1355,"waterExtra":0,"mountainExtra":33,"groundWanted":14001,"groundMatched":13968}],"scope":"Actual full map generation and native Map Preview colors; success flag means execution, not image fidelity"}

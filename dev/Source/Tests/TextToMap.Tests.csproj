@@ -28,6 +28,7 @@
     <Compile Include="../ImageInput/ImageInterpretation.cs" Link="ImageInterpretation.cs" />
     <Compile Include="../ImageInput/ImageRegionCorrection.cs" Link="ImageRegionCorrection.cs" />
     <Compile Include="../ImageInput/ImageHeader.cs" Link="ImageHeader.cs" />
+    <Compile Include="../ImageInput/ColorTerrainPlan.cs" Link="ColorTerrainPlan.cs" />
     <Compile Include="../MapGen/MapStateDescription.cs" Link="MapStateDescription.cs" />
     <Compile Include="../MapGen/ShapeEditPrompt.cs" Link="ShapeEditPrompt.cs" />
     <Compile Include="../MapGen/WorldTileEditor.cs" Link="WorldTileEditor.cs" />

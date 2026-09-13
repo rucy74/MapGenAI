@@ -1,0 +1,25 @@
+System.InvalidOperationException: Expected disposable MapGenAI probe generation failure
+[Ref 794CB522]
+  at MapGenAI.RuntimeProbe.RuntimeProbe.ThrowInGeneration () [0x00039] in <7a9751646b4a4e1aadd1adf219f5b696>:0 
+  at Verse.MapGenerator.GenerateContentsIntoMap (System.Collections.Generic.IEnumerable`1[T] genStepDefs, Verse.Map map, System.Int32 seed, System.Boolean stepDebugger) [0x003a3] in <61e4173561894da49d210260257b5097>:0 
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Contents:Prefix(Map map, IDisposable& __state)
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Prefix()
+    - PREFIX mapgenai.disposable.failure.probe: Void MapGenAI.RuntimeProbe.RuntimeProbe:ThrowInGeneration()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Postfix()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Contents:Finalizer(IDisposable __state)
+  at Verse.MapGenerator.GenerateMap (Verse.IntVec3 mapSize, RimWorld.Planet.MapParent parent, Verse.MapGeneratorDef mapGenerator, System.Collections.Generic.IEnumerable`1[T] extraGenStepDefs, System.Action`1[T] extraInitBeforeContentGen, System.Boolean isPocketMap, System.Boolean stepDebugger) [0x0077a] in <61e4173561894da49d210260257b5097>:0 
+    - TRANSPILER MapPreview.Main: IEnumerable`1 MapPreview.Patches.Patch_Verse_MapGenerator:GenerateMap_Transpiler(IEnumerable`1 instructions)
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Map:Prefix(MapParent parent, IDisposable& __state)
+    - PREFIX MapPreview.Main: Void MapPreview.Patches.Patch_Verse_MapGenerator:GenerateMap()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Map:Finalizer(IDisposable __state)
+  at MapGenAI.RuntimeProbe.RuntimeProbe.FailureCleanupProbe (RimWorld.Planet.MapParent parent, MapGenAI.MapGen.TileMapState state) [0x0015f] in <7a9751646b4a4e1aadd1adf219f5b696>:0 

@@ -1,0 +1,70 @@
+{
+  "title": "협곡 지형 분석",
+  "notes": "그룹 14와 15는 매우 작은 영역을 차지하며, 텍스트 또는 인터페이스 요소의 일부일 가능성이 있습니다. 그러나 지형으로 분류해야 하므로 가장 가까운 지형인 'soil'로 대체했습니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "shallow_water"
+    },
+    {
+      "id": 2,
+      "label": "sand"
+    },
+    {
+      "id": 3,
+      "label": "sand"
+    },
+    {
+      "id": 4,
+      "label": "water"
+    },
+    {
+      "id": 5,
+      "label": "shallow_water"
+    },
+    {
+      "id": 6,
+      "label": "sand"
+    },
+    {
+      "id": 7,
+      "label": "sand"
+    },
+    {
+      "id": 8,
+      "label": "water"
+    },
+    {
+      "id": 9,
+      "label": "water"
+    },
+    {
+      "id": 10,
+      "label": "shallow_water"
+    },
+    {
+      "id": 11,
+      "label": "soil"
+    },
+    {
+      "id": 12,
+      "label": "shallow_water"
+    },
+    {
+      "id": 13,
+      "label": "sand"
+    },
+    {
+      "id": 14,
+      "label": "soil"
+    },
+    {
+      "id": 15,
+      "label": "soil"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "림월드 지형 분석",
+  "notes": "강줄기 중심부는 깊은 물(water), 가장자리는 얕은 물(shallow_water)로 분류되었습니다. RGB(54,39,28) 및 그 음영/가장자리 색상은 산(mountain) 지형에 해당하며, 주변의 밝은 회색 및 갈색조 패치들은 자갈/바위 지면(soil)입니다. 11번 그룹은 맵의 테두리/인터페이스 선이 일부 포함되어 있으나 지형 기준 soil로 분류되었습니다.",
+  "clusters": [
+    {"id": 0, "label": "soil"},
+    {"id": 1, "label": "soil"},
+    {"id": 2, "label": "shallow_water"},
+    {"id": 3, "label": "mountain"},
+    {"id": 4, "label": "soil"},
+    {"id": 5, "label": "soil"},
+    {"id": 6, "label": "mountain"},
+    {"id": 7, "label": "soil"},
+    {"id": 8, "label": "water"},
+    {"id": 9, "label": "mountain"},
+    {"id": 10, "label": "soil"},
+    {"id": 11, "label": "soil"},
+    {"id": 12, "label": "soil"},
+    {"id": 13, "label": "mountain"},
+    {"id": 14, "label": "mountain"},
+    {"id": 15, "label": "soil"}
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "title": "림월드 지형 분석",
+  "notes": "일부 색상 그룹은 흙과 산악 지형의 그림자 또는 가장자리를 나타내어 구분이 모호할 수 있습니다. 물 색상은 다양하게 나타납니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "mountain"
+    },
+    {
+      "id": 2,
+      "label": "soil"
+    },
+    {
+      "id": 3,
+      "label": "soil"
+    },
+    {
+      "id": 4,
+      "label": "mountain"
+    },
+    {
+      "id": 5,
+      "label": "soil"
+    },
+    {
+      "id": 6,
+      "label": "soil"
+    },
+    {
+      "id": 7,
+      "label": "soil"
+    },
+    {
+      "id": 8,
+      "label": "rich_soil"
+    },
+    {
+      "id": 9,
+      "label": "soil"
+    },
+    {
+      "id": 10,
+      "label": "water"
+    },
+    {
+      "id": 11,
+      "label": "water"
+    },
+    {
+      "id": 12,
+      "label": "water"
+    },
+    {
+      "id": 13,
+      "label": "water"
+    },
+    {
+      "id": 14,
+      "label": "rich_soil"
+    },
+    {
+      "id": 15,
+      "label": "mountain"
+    }
+  ]
+}

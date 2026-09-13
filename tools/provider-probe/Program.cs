@@ -20,6 +20,7 @@ class Program
         string modelOverride=Environment.GetEnvironmentVariable("MAPGENAI_PROBE_MODEL");
         if(!string.IsNullOrWhiteSpace(modelOverride))config.SetString("gemini_model",modelOverride);
         var client=new GeminiClient(config.GetString("gemini_api_key"),config.GetString("gemini_model"));
+        if(args[2]=="real")return await RealImageBench.Run(client,args[3],output,config.GetString("gemini_model"));
         var results=new List<object>();
         if(args[2]=="vision")
         {

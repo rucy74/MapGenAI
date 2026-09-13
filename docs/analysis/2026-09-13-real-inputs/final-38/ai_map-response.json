@@ -1,0 +1,22 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "산악 지형(어두운 갈색 암석 내부 및 암벽), 일반 토양(초원 바닥 및 수목), 하천 및 호수의 깊은 물과 얕은 물/물가 지형을 색상 클러스터 기반으로 분류하였습니다.",
+  "clusters": [
+    {"id": 0, "label": "soil"},
+    {"id": 1, "label": "mountain"},
+    {"id": 2, "label": "soil"},
+    {"id": 3, "label": "soil"},
+    {"id": 4, "label": "mountain"},
+    {"id": 5, "label": "soil"},
+    {"id": 6, "label": "soil"},
+    {"id": 7, "label": "soil"},
+    {"id": 8, "label": "soil"},
+    {"id": 9, "label": "soil"},
+    {"id": 10, "label": "water"},
+    {"id": 11, "label": "water"},
+    {"id": 12, "label": "shallow_water"},
+    {"id": 13, "label": "shallow_water"},
+    {"id": 14, "label": "soil"},
+    {"id": 15, "label": "mountain"}
+  ]
+}

@@ -3,7 +3,9 @@ param(
     [string]$Output='',
     [string]$Profile='',
     [string]$ProbeMod='',
-    [switch]$Render
+    [switch]$Render,
+    [string]$ImageInputs='',
+    [string]$ImageStates=''
 )
 $ErrorActionPreference='Stop'
 $probeStamp=Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -46,7 +48,11 @@ $config='<?xml version="1.0" encoding="utf-8"?><ModsConfigData><version>'+$versi
 $arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','640',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
+if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
+if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}
 $process=Start-Process -FilePath $gameExe -ArgumentList $arguments -WindowStyle Hidden -PassThru
 $manifest=@{pid=$process.Id;profile=$probeProfile;mod=$probeModPath;output=$probeOutput;sourceDllSha256=(Get-FileHash -LiteralPath $mainDll -Algorithm SHA256).Hash;probeDllSha256=(Get-FileHash -LiteralPath $probeDll -Algorithm SHA256).Hash;created=(Get-Date).ToString('o')}
 $manifest|ConvertTo-Json | Set-Content -LiteralPath (Join-Path $probeOutput 'launch.json') -Encoding utf8
+$cleanupArgs=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"'+(Join-Path $PSScriptRoot 'cleanup.ps1')+'"'),'-Manifest',('"'+(Join-Path $probeOutput 'launch.json')+'"'),'-GameRoot',('"'+$GameRoot+'"'),'-WaitForExit')
+Start-Process -FilePath 'powershell.exe' -ArgumentList $cleanupArgs -WindowStyle Hidden | Out-Null
 $manifest|ConvertTo-Json

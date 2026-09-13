@@ -1,0 +1,70 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "일반적인 흙과 바위 지형이 혼합되어 있으며, 물과 산악 지형이 명확하게 구분됩니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "mountain"
+    },
+    {
+      "id": 2,
+      "label": "soil"
+    },
+    {
+      "id": 3,
+      "label": "soil"
+    },
+    {
+      "id": 4,
+      "label": "mountain"
+    },
+    {
+      "id": 5,
+      "label": "soil"
+    },
+    {
+      "id": 6,
+      "label": "soil"
+    },
+    {
+      "id": 7,
+      "label": "soil"
+    },
+    {
+      "id": 8,
+      "label": "soil"
+    },
+    {
+      "id": 9,
+      "label": "soil"
+    },
+    {
+      "id": 10,
+      "label": "water"
+    },
+    {
+      "id": 11,
+      "label": "shallow_water"
+    },
+    {
+      "id": 12,
+      "label": "shallow_water"
+    },
+    {
+      "id": 13,
+      "label": "shallow_water"
+    },
+    {
+      "id": 14,
+      "label": "soil"
+    },
+    {
+      "id": 15,
+      "label": "soil"
+    }
+  ]
+}

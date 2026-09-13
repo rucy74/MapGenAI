@@ -1,0 +1,62 @@
+[
+  {
+    "id": "preview_river",
+    "run": "generated-preview_river",
+    "scope": "Plan to actual generation, not original-image fidelity",
+    "comparedCells": 16384,
+    "M": {
+      "intersection": 1355,
+      "union": 1355,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    },
+    "W": {
+      "intersection": 1028,
+      "union": 1028,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    }
+  },
+  {
+    "id": "gorge",
+    "run": "generated-gorge",
+    "scope": "Plan to actual generation, not original-image fidelity",
+    "comparedCells": 16227,
+    "M": {
+      "intersection": 14227,
+      "union": 14227,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    },
+    "W": {
+      "intersection": 868,
+      "union": 868,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    }
+  },
+  {
+    "id": "ai_map",
+    "run": "generated-valley-fixed",
+    "scope": "Plan to actual generation, not original-image fidelity",
+    "comparedCells": 16384,
+    "M": {
+      "intersection": 3984,
+      "union": 3984,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    },
+    "W": {
+      "intersection": 1717,
+      "union": 1717,
+      "iou": 1.0,
+      "missing": 0,
+      "extra": 0
+    }
+  }
+]

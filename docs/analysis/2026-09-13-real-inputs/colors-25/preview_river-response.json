@@ -1,0 +1,70 @@
+{
+  "title": "림월드 지형 분류",
+  "notes": "일부 어두운 갈색은 흙으로 분류되었지만, 그림자 또는 매우 어두운 흙일 수 있습니다. 회색조는 산으로 분류되었지만, 일반적인 돌 지형일 수도 있습니다. 물의 색조는 옅은 파란색 또는 회색으로 나타나며, 깊은 물과 얕은 물을 구분하기 어려울 수 있습니다.",
+  "clusters": [
+    {
+      "id": 0,
+      "label": "soil"
+    },
+    {
+      "id": 1,
+      "label": "soil"
+    },
+    {
+      "id": 2,
+      "label": "water"
+    },
+    {
+      "id": 3,
+      "label": "soil"
+    },
+    {
+      "id": 4,
+      "label": "soil"
+    },
+    {
+      "id": 5,
+      "label": "soil"
+    },
+    {
+      "id": 6,
+      "label": "soil"
+    },
+    {
+      "id": 7,
+      "label": "shallow_water"
+    },
+    {
+      "id": 8,
+      "label": "mountain"
+    },
+    {
+      "id": 9,
+      "label": "soil"
+    },
+    {
+      "id": 10,
+      "label": "mountain"
+    },
+    {
+      "id": 11,
+      "label": "water"
+    },
+    {
+      "id": 12,
+      "label": "mountain"
+    },
+    {
+      "id": 13,
+      "label": "soil"
+    },
+    {
+      "id": 14,
+      "label": "soil"
+    },
+    {
+      "id": 15,
+      "label": "soil"
+    }
+  ]
+}

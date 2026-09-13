@@ -47,7 +47,8 @@ namespace MapGenAI.Patches
             // 2. 각 ElevationShape 적용 (비-물 먼저, 물 나중 → 산맥 위 호수 정상 생성)
             var shapes = MapGenParams.ElevationShapes;
             float fertOffset = MapGenParams.FertilityOffset;
-            if (shapes.Count == 0 && Mathf.Abs(fertOffset) < 0.01f) return;
+            if (shapes.Count == 0 && Mathf.Abs(fertOffset) < 0.01f)
+            {GenerationContext.CaptureImageElevation(map,elevGrid);return;}
 
             foreach (var shape in shapes)
             {
@@ -80,6 +81,7 @@ namespace MapGenAI.Patches
             {
                 elevGrid[cell] = Mathf.Clamp(elevGrid[cell], -1f, 1f);
             }
+            GenerationContext.CaptureImageElevation(map,elevGrid);
 
             // 4. 자동 진단 (개발 모드에서만)
             if (Prefs.DevMode && shapes.Count > 0)

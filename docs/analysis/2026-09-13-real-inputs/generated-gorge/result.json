@@ -1,0 +1,1 @@
+{"ok":true,"results":[{"id":"gorge","tile":114301,"biome":"Tundra","hilliness":"Flat","waterWanted":868,"waterMatched":868,"mountainWanted":14227,"mountainMatched":14227,"waterExtra":0,"mountainExtra":7,"groundWanted":1132,"groundMatched":1129}],"scope":"Actual full map generation and native Map Preview colors; success flag means execution, not image fidelity"}
