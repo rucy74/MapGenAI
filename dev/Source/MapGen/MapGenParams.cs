@@ -311,8 +311,16 @@ namespace MapGenAI.MapGen
         {
             LastApplyWarning = null;
             LastWorldChanges = null;
+            WorldTileEditor.ValidateFeatureRequest(data);
             var previous = MapGenAIWorldComponent.Get()?.GetState(tileId);
             var candidate = MapStateEditor.Merge(previous, data);
+            if (data.mutators != null)
+                foreach (var name in data.mutators)
+                {
+                    var feature = DefDatabase<TileMutatorDef>.GetNamedSilentFail(name);
+                    if (feature != null && feature.categories.Any(candidate.removeFeatureCategories.Contains))
+                        throw new System.FormatException("Feature category is suppressed. Include restore_categories to enable: " + name);
+                }
             if (MapStateCodec.ChangedFields(previous ?? new TileMapState(), candidate).Count == 0) return;
             CommitState(candidate, tileId);
         }
@@ -486,6 +494,7 @@ namespace MapGenAI.MapGen
                 rock_types = new List<string>(RockTypes),
                 mutators = new List<string>(Mutators),
                 remove_mutators = new List<string>(RemoveMutators),
+                remove_categories = new List<string>(ReadState.removeFeatureCategories),
                 elevation_shapes = ElevationShapes.Select(s => s.Clone()).ToList()
             };
         }
@@ -527,11 +536,15 @@ namespace MapGenAI.MapGen
             // 강: 설정된 경우에만 표시 (미설정 시 생략 → LLM이 타일 정보에서 강 유무 확인)
             if (HasRiver)
                 sb.AppendLine($"- river: present (direction_angle={RiverDirectionAngle:F0}, x={RiverXPosition:F2}, z={RiverZPosition:F2}, straight={StraightRiver})");
+            if (ReadState.removeFeatureCategories.Count > 0)
+                sb.AppendLine("- suppressed_feature_categories: [" + string.Join(", ", ReadState.removeFeatureCategories) + "] (restore_categories to restore)");
+            if (RemoveMutators.Count > 0)
+                sb.AppendLine("- removed_mutators: [" + string.Join(", ", RemoveMutators) + "]");
 
             if (HasCaves) sb.AppendLine("- caves: true");
             if (CoastDirection != "auto") sb.AppendLine($"- coast_direction: {CoastDirection}");
             if (RockTypes.Count > 0) sb.AppendLine($"- rock_types: [{string.Join(", ", RockTypes)}]");
-            if (Mutators.Count > 0) sb.AppendLine($"- active_mutators: [{string.Join(", ", Mutators)}]");
+            if (Mutators.Count > 0) sb.AppendLine($"- added_mutators: [{string.Join(", ", Mutators)}]");
             if (RockCount > 0) sb.AppendLine($"- rock_count: {RockCount}");
             if (OreDensity != 1f) sb.AppendLine($"- ore_density: {OreDensity:F2}");
             if (RuinDensity != 1f) sb.AppendLine($"- ruin_density: {RuinDensity:F2}");
@@ -579,6 +592,8 @@ namespace MapGenAI.MapGen
         public List<string> rock_types;            // 원하는 석재 defName 목록 (Granite, Limestone, Marble, Sandstone, Slate)
         public List<string> mutators;           // 추가할 TileMutator defName 목록
         public List<string> remove_mutators;    // 제거할 TileMutator defName 목록
+        public List<string> remove_categories; // Suppress all mutators in these categories on this map.
+        public List<string> restore_categories; // Restore category generation from this tile's baseline.
         public List<ElevationShape> elevation_shapes;  // Elevation 프리미티브 목록
         public List<ShapeEdit> shape_ops;
         public bool replace_shapes;

@@ -39,6 +39,7 @@ namespace MapGenAI.MapGen
         // TileMutator
         public List<string> mutators = new List<string>();
         public List<string> removeMutators = new List<string>();
+        public List<string> removeFeatureCategories = new List<string>();
 
         // 해안/석재/광석/폐허
         public string coastDirection = "auto";
@@ -80,6 +81,7 @@ namespace MapGenAI.MapGen
             Scribe_Deep.Look(ref imageMap, "imageMap");
             Scribe_Collections.Look(ref mutators, "mutators", LookMode.Value);
             Scribe_Collections.Look(ref removeMutators, "removeMutators", LookMode.Value);
+            Scribe_Collections.Look(ref removeFeatureCategories, "removeFeatureCategories", LookMode.Value);
             Scribe_Collections.Look(ref rockTypes, "rockTypes", LookMode.Value);
 
             // 로드 시 null 방지
@@ -88,6 +90,7 @@ namespace MapGenAI.MapGen
                 if (elevationShapes == null) elevationShapes = new List<ElevationShape>();
                 if (mutators == null) mutators = new List<string>();
                 if (removeMutators == null) removeMutators = new List<string>();
+                if (removeFeatureCategories == null) removeFeatureCategories = new List<string>();
                 if (rockTypes == null) rockTypes = new List<string>();
             }
         }
@@ -117,6 +120,7 @@ namespace MapGenAI.MapGen
                 hillSmoothness = hillSmoothness,
                 mutators = new List<string>(mutators),
                 removeMutators = new List<string>(removeMutators),
+                removeFeatureCategories = new List<string>(removeFeatureCategories),
                 coastDirection = coastDirection,
                 rockCount = rockCount,
                 oreDensity = oreDensity,
@@ -134,7 +138,7 @@ namespace MapGenAI.MapGen
                 && vegetationDensity == 1f && animalDensity == 1f && fertilityOffset == 0f
                 && !hasRiver && !hasCaves && !hasRoads
                 && geyserCount == -1 && hasRockChunks
-                && mutators.Count == 0 && removeMutators.Count == 0
+                && mutators.Count == 0 && removeMutators.Count == 0 && removeFeatureCategories.Count == 0
                 && coastDirection == "auto" && rockCount == -1
                 && oreDensity == 1f && rockTypes.Count == 0
                 && ruinDensity == 1f && dangerDensity == 1f;

@@ -150,6 +150,32 @@ namespace MapGenAI.MapGen
                         }
             }
 
+            if (data.remove_categories != null && data.restore_categories != null && data.remove_categories.Intersect(data.restore_categories).Any())
+                throw new FormatException("Feature category cannot be removed and restored in one request");
+            if (data.remove_mutators?.Contains("River") == true &&
+                (data.restore_categories?.Contains("River") == true || (keys.Contains("river_present") && data.river?.present == true)))
+                throw new FormatException("Contradictory river removal and restoration");
+            if (fullApply) state.removeFeatureCategories.Clear();
+            if (data.remove_categories != null)
+                foreach (var category in data.remove_categories)
+                    if (!state.removeFeatureCategories.Contains(category)) state.removeFeatureCategories.Add(category);
+            if (data.restore_categories != null)
+                foreach (var category in data.restore_categories) state.removeFeatureCategories.Remove(category);
+            // Legacy snapshots used false for 'unspecified'. Only a new explicit request suppresses rivers.
+            if (!fullApply && keys.Contains("river_present"))
+            {
+                bool off = data.river?.present == false;
+                if ((!off && data.remove_categories?.Contains("River") == true) || (off && data.restore_categories?.Contains("River") == true))
+                    throw new FormatException("Contradictory river presence and category request");
+                if (off) { if (!state.removeFeatureCategories.Contains("River")) state.removeFeatureCategories.Add("River"); }
+                else { state.removeFeatureCategories.Remove("River"); state.removeMutators.Remove("River"); }
+            }
+            // Compatibility for existing prompts which use the base River def as 'all rivers'.
+            if (!fullApply && data.remove_mutators?.Contains("River") == true && !state.removeFeatureCategories.Contains("River"))
+                state.removeFeatureCategories.Add("River");
+            if (data.restore_categories?.Contains("River") == true) state.removeMutators.Remove("River");
+            if (state.removeFeatureCategories.Contains("River")) state.hasRiver = false;
+
             // ElevationShapes: 키가 있으면 전체 교체, 없으면 기존 유지
             if (fullApply || keys.Contains("elevation_shapes"))
             {

@@ -33,6 +33,7 @@
     <Compile Include="../ImageInput/ColorTerrainPlan.cs" Link="ColorTerrainPlan.cs" />
     <Compile Include="../MapGen/MapStateDescription.cs" Link="MapStateDescription.cs" />
     <Compile Include="../MapGen/ShapeEditPrompt.cs" Link="ShapeEditPrompt.cs" />
+    <Compile Include="../MapGen/FeatureEditPrompt.cs" Link="FeatureEditPrompt.cs" />
     <Compile Include="../MapGen/WorldTileEditor.cs" Link="WorldTileEditor.cs" />
     <Compile Include="../MapGen/MapStateCodec.cs" Link="MapStateCodec.cs" />
     <Compile Include="../LLM/ProviderResponse.cs" Link="ProviderResponse.cs" />

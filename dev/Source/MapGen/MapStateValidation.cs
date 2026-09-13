@@ -23,6 +23,8 @@ namespace MapGenAI.MapGen
             ShapeValidation.Range(state.ruinDensity,0,2.5f,"ruin_density");
             ShapeValidation.Range(state.dangerDensity,0,2.5f,"danger_density");
             if (state.elevationShapes.Count > ShapeEdits.MaxShapes) throw new FormatException("Too many terrain shapes");
+            if (state.removeFeatureCategories.Count > 64 || state.removeFeatureCategories.Exists(string.IsNullOrWhiteSpace))
+                throw new FormatException("Invalid suppressed feature categories");
             foreach (var shape in state.elevationShapes) ShapeValidation.Validate(shape);
             var ids = new System.Collections.Generic.HashSet<string>();
             foreach (var shape in state.elevationShapes)

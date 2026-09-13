@@ -72,6 +72,7 @@ namespace MapGenAI.RuntimeProbe
             var state = MapStateEditor.Merge(null,MapParameterParser.Parse(SimpleJson.Parse("{\"fertility_offset\":0.6,\"straight_river\":true,\"elevation_shapes\":[{\"id\":\"triangle\",\"type\":\"composite\",\"shapes\":[{\"id\":\"p\",\"prim\":\"poly\",\"verts\":[[0.1,0.2],[0.8,0.2],[0.5,0.8]]}],\"compose\":[{\"op\":\"add\",\"s\":\"p\",\"e\":0.8}]}]}")));
             state.imageMap=new ImageMapData{width=3,height=2,cells="MWNSGI",note="이미지 저장 😀",replaceElevation=true};
             state.elevationShapes[0].edge_roughness="medium";
+            state.removeFeatureCategories.Add("River");
             var fixture = new ProbeEnvelope { state=state, component=new MapGenAIWorldComponent(null),settings=new MapGenAISettings{simpleGeminiModel="gemini-2.5-flash"} };
             fixture.component.SetState(42,state);
             fixture.component.SetBaseline(42,new TileWorldSnapshot {mutators=new List<string>{"Caves"},hilliness=Hilliness.LargeHills});
@@ -96,10 +97,11 @@ namespace MapGenAI.RuntimeProbe
             Require(!loaded.state.imageMap.replaceElevation && !loaded.component.GetState(42).imageMap.replaceElevation,"legacy image Scribe data retains elevation overlay semantics");
 
             var legacy=new System.Xml.XmlDocument(); legacy.Load(path);
-            foreach(System.Xml.XmlNode node in legacy.SelectNodes("//id|//autoHills|//compositeJson|//imageMap|//tileBaselines|//lastAppliedTiles")) node.ParentNode.RemoveChild(node);
+            foreach(System.Xml.XmlNode node in legacy.SelectNodes("//id|//autoHills|//compositeJson|//imageMap|//tileBaselines|//lastAppliedTiles|//removeFeatureCategories")) node.ParentNode.RemoveChild(node);
             var legacyPath=Path.Combine(output,"legacy-optional-fields.xml"); legacy.Save(legacyPath);
             loaded=null; Scribe.loader.InitLoading(legacyPath); Scribe_Deep.Look(ref loaded,"fixture"); Scribe.loader.FinalizeLoading();
             Require(loaded.state.elevationShapes[0].id==null && loaded.component.GetBaseline(42)==null,"real Scribe missing optional fields compatibility fixture");
+            Require(loaded.state.removeFeatureCategories.Count==0,"legacy Scribe data does not suppress rivers by default");
             var damaged=new System.Xml.XmlDocument();damaged.Load(path);
             foreach(System.Xml.XmlNode node in damaged.SelectNodes("//imageMap/cells"))node.InnerText="QWNSGI";
             var damagedPath=Path.Combine(output,"damaged-image.xml");damaged.Save(damagedPath);
@@ -119,6 +121,12 @@ namespace MapGenAI.RuntimeProbe
             {
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageStates",out var states))
                 {RealImageProbe.Generate(states,output);Application.Quit();return;}
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeatureRemoval",out _))
+                {
+                    FeatureRemovalProbe.Generate(output,Require);
+                    File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks}}));
+                    Application.Quit();return;
+                }
                 int tile = Find.CurrentMap.Tile;
                 Find.WorldSelector.SelectedTile=tile;
                 var dialog=new Dialog_TextToMap();

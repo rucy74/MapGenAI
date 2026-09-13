@@ -111,6 +111,11 @@ namespace MapGenAI.MapGen
                 Track("remove_mutators");
             }
 
+            var removedCategories = obj.GetArray("remove_categories");
+            if (removedCategories != null) { data.remove_categories = new List<string>(removedCategories); Track("remove_categories"); }
+            var restoredCategories = obj.GetArray("restore_categories");
+            if (restoredCategories != null) { data.restore_categories = new List<string>(restoredCategories); Track("restore_categories"); }
+
             // elevation_shapes 오브젝트 배열 파싱
             var shapesArr = obj.GetObjectArray("elevation_shapes");
             if (shapesArr != null)
@@ -261,7 +266,7 @@ namespace MapGenAI.MapGen
 
         private static void ValidateTypes(SimpleJsonObject obj)
         {
-            var arrays = new HashSet<string> { "rock_types", "mutators", "remove_mutators" };
+            var arrays = new HashSet<string> { "rock_types", "mutators", "remove_mutators", "remove_categories", "restore_categories" };
             var scalars = new HashSet<string> { "hills", "hill_amount", "vegetation_density", "animal_density", "fertility_offset", "roads", "caves", "geysers", "coast_direction", "rock_count", "ore_density", "ruin_density", "danger_density", "rock_chunks", "hill_size", "hill_smoothness", "straight_river", "river_direction", "river_position" };
             foreach (string key in obj.Keys)
             {

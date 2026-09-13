@@ -1,0 +1,1 @@
+{"action":"generate","description":"삼각주 특징을 제거하고 일반 강과 기존 호수는 유지합니다.","params":{"remove_mutators":["RiverDelta"]}}

@@ -1,0 +1,1 @@
+{"action":"ask","message":"현재 모드에서는 지형 채우기(fill) 기능으로 용암(lava)을 지원하지 않습니다. (지원되는 지질: water, sand, soil, rich_soil, marsh, mud, ice)\n\n대신 맵의 mutators에 '용암 동굴(LavaCaves)' 특징을 추가하여 자연 용암 지형을 유도하거나, 다른 지질(예: 모래밭, 진흙 등)로 채우는 대안이 가능합니다. 어떻게 진행해 드릴까요?"}

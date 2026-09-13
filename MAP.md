@@ -12,6 +12,7 @@
 - `dev/Source/MapGen/ShapeEdits.cs`, `ShapeValidation.cs`, `SdfComposite.cs`: 도형 ID 편집, 기하/연산 제한, 실제 SDF 격자 계산.
 - `dev/Source/MapGen/ContourWarp.cs`: composite 전용 `edge_roughness`(생략/none=0, low=.35, medium=.65, high=1). 도형 로컬 좌표와 안정 ID 해시로 공유 좌표장을 세 번 변형하며 전역 Rand를 소비하지 않는다. `noise_amount`/기존 bump·ring과 구별한다. `tools/runtime-probe/launch.ps1 -Render -NaturalShapes -Language Korean`은 실제 저장·Undo·생성 비교를 수행한다. 근거는 `docs/analysis/2026-09-13-natural-shapes/`.
 - `dev/Source/MapGen/MapGenParams.cs`, `WorldTileEditor.cs`, `MapGenAIWorldComponent.cs`: 타일 상태 적용, 원래 월드 특징과 외부 변경 보존, 타일별 상태 저장.
+- `dev/Source/MapGen/FeatureEditPrompt.cs`: 실제 타일/원래 특징 카탈로그, 이름별 제거와 카테고리 억제·복원. 새 `river.present:false`는 River 전체 억제, 구형 snapshot의 false는 미지정 의미다. `-FeatureRemoval -Language Korean` 실제 5맵 검증과 provider-probe `features` 평가를 제공한다. [텍스트 우선 계획](docs/text-first-plan-ko.md), [검증 보고서](docs/analysis/2026-09-13-text-first/report.md).
 - `dev/Source/MapGen/GenerationContext.cs`, `dev/Source/Patches/`: 생성할 타일의 고정 스냅샷과 RimWorld 생성 단계 연결. 공유 정의 변경은 finalizer에서도 복원한다.
 - `dev/Source/ImageInput/`, `dev/Source/UI/Dialog_ImageMap.cs`: PNG/JPEG/EXIF, 원본 색상 그룹/마스크를 AI가 분류하는 기본 경로, 선택 가능한 다각형 추론/팔레트, 영역 교정. 대상은 배치를 읽을 수 있는 참고 맵이며 설명은 선택 사항이다. 새 이미지 높이 우선 옵션은 토양의 기존 산을 지우고 이미지+SDF 높이를 Odyssey elevation mutator 뒤 복원한다. 기존 저장(false)·N칸은 원래 의미를 유지한다. 얇은 지형/비슷한 색상/삽입 그림 오분류는 남았다.
 - `GenerationContext.CaptureImageElevation/RestoreImageElevation`, `Patches/ImageElevationPriorityPatch.cs`: 생성별 높이 스냅샷. raw image 재적용으로 후속 SDF 편집을 지우지 않도록 주의한다. 고도 이외 mutator 효과·광물 덩어리는 유지된다.

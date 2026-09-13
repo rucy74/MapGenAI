@@ -6,6 +6,7 @@ param(
     [switch]$Render,
     [switch]$Settings,
     [switch]$NaturalShapes,
+    [switch]$FeatureRemoval,
     [string]$SourceDll='',
     [string]$ModelConfig='',
     [string]$Language='',
@@ -60,6 +61,7 @@ if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
 if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
+if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}

@@ -1,0 +1,14 @@
+{
+  "baseCommit": "6b386b7c31640fa2eb87c634be4da695d71b9491",
+  "dllSha256": "ac66a054efc773f3662657d7e1123c1ef1f8663879e9f0b12679f7b5b8db7317",
+  "offlinePass": 75,
+  "nativeChecks": 60,
+  "nativeMaps": 5,
+  "providerCases": 6,
+  "sensitiveHits": 0,
+  "secretScanScope": "Changed/untracked non-ignored files; configured API key and Google/private-key patterns, not all possible secrets",
+  "checkedFiles": 129,
+  "missingDocumentLinks": 0,
+  "temporaryProbeMods": 0,
+  "mainAndPreservedTagUnchanged": true
+}

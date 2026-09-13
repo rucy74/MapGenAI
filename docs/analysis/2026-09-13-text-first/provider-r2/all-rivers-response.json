@@ -1,0 +1,1 @@
+{"action":"generate","description":"삼각주를 포함한 강 관련 지형을 모두 제거하고 기존 호수는 유지합니다.","params":{"river":{"present":false},"remove_categories":["River"]}}

@@ -61,6 +61,7 @@ namespace Verse
     public static class DefDatabase<T> where T : class
     {
         public static Dictionary<string, T> Definitions = new Dictionary<string, T>();
+        public static List<T> AllDefsListForReading => Definitions.Values.ToList();
         public static T GetNamedSilentFail(string defName) => Definitions.TryGetValue(defName, out var def) ? def : null;
     }
 

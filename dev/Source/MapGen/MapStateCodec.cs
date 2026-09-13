@@ -30,6 +30,7 @@ namespace MapGenAI.MapGen
             state.elevationShapes = state.elevationShapes ?? new List<ElevationShape>();
             state.mutators = state.mutators ?? new List<string>();
             state.removeMutators = state.removeMutators ?? new List<string>();
+            state.removeFeatureCategories = state.removeFeatureCategories ?? new List<string>();
             state.rockTypes = state.rockTypes ?? new List<string>();
             if (state.elevationShapes.Exists(s => s == null)) throw new FormatException("Null terrain shape in preset");
             MapStateValidation.Validate(state);

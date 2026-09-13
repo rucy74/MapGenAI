@@ -23,6 +23,15 @@ namespace MapGenAI.MapGen
 
     public static class WorldTileEditor
     {
+        // Validate new commands, not old stored removals whose supplying mod may have been disabled.
+        public static void ValidateFeatureRequest(MapParamsData data)
+        {
+            if (data.remove_mutators != null) foreach (string name in data.remove_mutators) Resolve(name);
+            foreach (var category in (data.remove_categories ?? new List<string>()).Concat(data.restore_categories ?? new List<string>()))
+                if (string.IsNullOrWhiteSpace(category) || !DefDatabase<TileMutatorDef>.AllDefsListForReading.Any(d => d.categories.Contains(category)))
+                    throw new FormatException("Unknown feature category: " + category);
+        }
+
         public static TileWorldSnapshot Rebase(TileWorldSnapshot baseline, TileWorldSnapshot applied, TileWorldSnapshot current)
         {
             if (baseline == null) return current;
@@ -37,7 +46,9 @@ namespace MapGenAI.MapGen
 
         public static List<TileMutatorDef> Plan(Tile tile, TileWorldSnapshot baseline, TileMapState state)
         {
-            var additions = state.mutators.Select(Resolve).ToList();
+            var suppressed = new HashSet<string>(state.removeFeatureCategories);
+            if (state.removeMutators.Contains("River")) suppressed.Add("River");
+            var additions = state.mutators.Select(Resolve).Where(d => !d.categories.Any(suppressed.Contains)).ToList();
             if (state.hasCaves && !additions.Any(d => d.defName == "Caves")) additions.Add(Resolve("Caves"));
             for (int i = 0; i < additions.Count; i++)
                 for (int j = i + 1; j < additions.Count; j++)
@@ -45,7 +56,7 @@ namespace MapGenAI.MapGen
                         throw new FormatException("함께 적용할 수 없는 특징 / Incompatible features: " + additions[i].defName + ", " + additions[j].defName + ". remove_mutators로 교체할 대상을 지정하세요.");
             var removals = new HashSet<string>(state.removeMutators);
             if (state.cavesExplicitlySet && !state.hasCaves) removals.Add("Caves");
-            var result = ResolveExisting(baseline.mutators).Where(d => !removals.Contains(d.defName)).ToList();
+            var result = ResolveExisting(baseline.mutators).Where(d => !removals.Contains(d.defName) && !d.categories.Any(suppressed.Contains)).ToList();
             foreach (var added in additions)
             {
                 if (removals.Contains(added.defName)) throw new FormatException("Feature both enabled and removed: " + added.defName);
@@ -64,7 +75,15 @@ namespace MapGenAI.MapGen
                 }
                 if (!result.Contains(added)) result.Add(added);
             }
-            return result;
+            // Removing only a river variant means a normal river remains; world links stay intact.
+            bool removedRiverVariant = ResolveExisting(removals).Any(d => d.defName != "River" && d.categories.Contains("River"));
+            if (!suppressed.Contains("River") && !result.Any(d => d.categories.Contains("River")) && (state.hasRiver || removedRiverVariant))
+            {
+                if (tile is SurfaceTile riverTile && riverTile.Rivers?.Count > 0) result.Add(Resolve("River"));
+                else if (state.hasRiver) throw new FormatException("This tile has no world river to restore; use a water shape for a custom channel.");
+            }
+            // Explicit category suppression also wins over convenience flags such as caves.
+            return result.Where(d => !d.categories.Any(suppressed.Contains)).ToList();
         }
 
         static bool Conflict(TileMutatorDef a, TileMutatorDef b) => a.categories.Any(b.categories.Contains)

@@ -1,0 +1,1 @@
+{"action":"generate","description":"해안(Coast) 특징을 제거하고 강과 기존 호수는 그대로 유지했습니다.","params":{"remove_mutators":["Coast"]}}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"삼각주를 포함한 맵 내의 모든 강 지형을 제거했습니다. 기존에 만드신 호수는 그대로 유지됩니다.","params":{"river":{"present":false},"remove_categories":["River"]}}

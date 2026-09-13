@@ -1,0 +1,1 @@
+{"action":"generate","description":"강과 기존 호수는 유지하고 바다 해안 지형만 제거합니다.","params":{"remove_mutators":["Coast"]}}

@@ -1,0 +1,105 @@
+PASS Unicode escapes decode
+PASS Truncated root rejected
+PASS Empty object array preserved
+PASS Duplicate keys rejected
+PASS Malformed array terminates
+PASS JSON grammar boundaries
+PASS Escaped text roundtrip
+PASS Gemini envelope preserves escaped Korean
+PASS Provider incomplete output rejected
+PASS OpenAI envelope ignores unrelated content
+PASS Command fences preserve completeness
+PASS Reset rejects pending and late replies
+PASS Generated parser corpus terminates and accepts only valid JSON
+PASS Adding hills preserves earlier hills
+PASS Unrelated edits preserve complete geometry
+PASS Empty and unknown patches are no-op
+PASS Explicit empty shapes clear without regeneration
+PASS Null and wrong-type patches rejected
+PASS River X and Z edits remain independent
+PASS Removed features persist and can be re-added
+PASS Contradictory feature patch leaves original intact
+PASS Composite clone does not share nested arrays or ops
+PASS Preset v2 preserves every state field and composite vertices
+PASS Legacy preset loads without inventing explicitly empty shapes
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Apply targets supplied tile and snapshot restores exactly
+PASS Targeted edits preserve unrelated geometry through repeated changes
+PASS Unknown target rejects entire multi-operation patch
+PASS Whole-list omission cannot accidentally delete existing terrain
+PASS Legacy IDs remain stable after the first targeted edit and preset reload
+PASS Auto hills removal keeps a custom lake
+PASS Prompt geometry uses parser-compatible composite fields
+PASS Relative positions are bounded and preserve target size
+PASS Invalid geometry cannot silently become default terrain
+PASS Exponential SDF operand reuse is rejected before rendering
+PASS SDF lake changes intended cells and leaves the distant terrain unchanged
+PASS Natural contour patch is reversible and preserves unrelated geometry/preset/clone
+PASS Contour bounds reject malformed values and unsupported terrain types atomically
+PASS circle precise/default equality, natural deterministic outline and connected shape
+PASS star precise/default equality, natural deterministic outline and connected shape
+PASS heart precise/default equality, natural deterministic outline and connected shape
+PASS donut precise/default equality, natural deterministic outline and connected shape
+PASS Moving a natural composite translates its contour without rerolling
+PASS Narrow donut retains a hole and bridge across seeds at high roughness
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[RiverDelta]
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[RiverDelta] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[RiverDelta]
+PASS Explicit river deletion from default state suppresses delta, preserves links and custom lake
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[River] −[RiverDelta]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[River]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[River] −[]
+PASS Deleting only a river variant retains plain river and reset restores delta
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[Lake]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+PASS Generic category suppression restores baseline and requires explicit re-enable for additions
+PASS Unknown removal targets and category contradictions reject the whole patch
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Legacy false river snapshots remain unspecified and missing removed mods allow unrelated edits
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 2; 실제 타일 특징 / Tile features: +[B] −[]
+PASS Editing tile B and clearing cache do not revert tile A
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Island] −[Lake]
+PASS Rejected category conflict preserves state and actual features
+PASS World add failure restores metadata and leaves no successful state
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[B] −[A]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Original tile features survive edit remove undo and clear
+PASS Invalid tile cannot report an applied state
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS External feature additions and hilliness changes survive edits and clear
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Disabled baseline definitions do not lock tile editing
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 2
+PASS Generation uses its own tile snapshot despite UI selection changes
+PASS Image priority preserves later SDF edits against world elevation and respects natural cells and nested scopes
+PASS Image base clears unwanted hills while legacy overlays and natural cells retain them
+PASS Color classification preserves winding one-cell channels, islands and isolated terrain
+PASS Color responses reject missing, duplicate, fractional IDs and unknown labels
+PASS Observed top-level shape shorthand is normalized without accepting ambiguous edits
+PASS Soil image labels preserve existing mountain elevation
+[WRN] [MapGenAI] 이미지 지형을 작은 맵으로 축소하므로 가는 통로나 작은 섬이 사라질 수 있습니다. / Downsampling image terrain may lose thin passages or small islands.
+PASS Downsampling limitation is detected for subcell corridors
+PASS Malformed named settings reject instead of silently becoming defaults
+PASS Shape prompt examples are complete applicable response envelopes
+[WRN] [MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[WRN] [MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+PASS Corrupt saved image repairs explicitly while new presets stay strict
+PASS Shape difference identifies removals by stable ID
+PASS Image polygons preserve north/south and island ordering
+PASS Image geometry rejects malformed, intersecting and subcell regions
+PASS Oblique interpretation requires two alternatives with explanations
+PASS Region relabel affects only one connected component and undo is exact
+PASS Image presets retain label cells and interpretation notes
+PASS Image grid applies exact footprints and leaves natural cells unchanged
+PASS Image headers reject huge dimensions before texture decoding
+PASS Composite rotation changes the sampled long axis
+CoreRegressionTests: 75 PASS / 0 FAIL

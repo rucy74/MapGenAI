@@ -223,6 +223,15 @@ namespace MapGenAI.UI
 
             // --- Layer 1: 필터링된 mutator 목록 ---
             string mutatorList = BuildMutatorList(tileId);
+            string featureContext = "";
+            if (tileId >= 0 && Find.WorldGrid != null)
+            {
+                var actual = Find.WorldGrid[tileId].Mutators.Select(d => new Dictionary<string,object>{{"defName",d.defName},{"label",d.label},{"categories",d.categories}}).ToList();
+                featureContext = "actual_tile_features: " + SimpleJson.Serialize(actual);
+                var baseline = MapGenAIWorldComponent.Get()?.GetBaseline(tileId);
+                if (baseline != null) featureContext += "\noriginal_tile_features: " + SimpleJson.Serialize(baseline.mutators);
+                featureContext += "\nfeature_categories: " + string.Join(", ",DefDatabase<TileMutatorDef>.AllDefsListForReading.SelectMany(d=>d.categories).Distinct().OrderBy(c=>c));
+            }
 
             // --- 석재 목록 (동적) ---
             string rockList = BuildRockTypeList();
@@ -241,7 +250,7 @@ namespace MapGenAI.UI
 맵 생성: {""action"":""generate"",""description"":""맵 설명"",""params"":{...}}
 
 params 스키마:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes 가이드:
 - ridge: 한 방향에 산맥. direction으로 산이 높은 방향. fade로 산 범위(small=가장자리만, medium=절반, large=맵 대부분). noise_amount로 자연스러움 조절(none=깨끗한 경계, high=매우 불규칙). fade와 noise_amount는 생략 가능(기본값=medium).
@@ -287,7 +296,7 @@ Question/guide: {""action"":""ask"",""message"":""content""}
 Map generation: {""action"":""generate"",""description"":""map description"",""params"":{...}}
 
 params schema:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes guide:
 - ridge: Mountains on one side. Use direction to set which side is high. fade controls range (small=edge only, medium=half, large=most of map). noise_amount controls naturalness (none=clean, high=very rough). fade and noise_amount are optional (default=medium).
@@ -352,7 +361,7 @@ Additional parameters:
             string rules = isKo
                 ? @"규칙:
 - 요청하지 않은 파라미터는 생략하세요. 현재 값이 유지됩니다.
-- 맵 특징(mutators): 추가할 것만 mutators에, 제거할 것만 remove_mutators에 넣으세요. 이미 있는 특징(active_mutators)은 다시 안 적어도 유지됩니다. 특징을 교체할 땐 remove_mutators로 뺀 뒤 mutators로 추가.
+- 맵 특징(mutators): 추가할 것만 mutators에, 제거할 것만 remove_mutators에 넣으세요. 이미 있는 특징(actual_tile_features)은 다시 안 적어도 유지됩니다. 특징을 교체할 땐 remove_mutators로 뺀 뒤 mutators로 추가.
 - 완전 평지 = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - 통로/출구 = bump(negative_strong, position=맵 가장자리)로 산벽을 자연스럽게 깎기. 예: 남쪽 통로=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), 남동쪽=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
 - fill로 지형 종류 지정: water/sand/soil/rich_soil/marsh/mud/ice. bump/ring/composite에서 사용.
@@ -360,7 +369,7 @@ Additional parameters:
 - 한국어로 답변하세요."
                 : @"Rules:
 - Omit parameters not requested. Current values are kept.
-- Map features (mutators): put only what to ADD in mutators, only what to REMOVE in remove_mutators. Existing features (active_mutators) are kept even if you don't re-list them. To replace a feature, remove it via remove_mutators then add via mutators.
+- Map features (mutators): put only what to ADD in mutators, only what to REMOVE in remove_mutators. Existing features (actual_tile_features) are kept even if you don't re-list them. To replace a feature, remove it via remove_mutators then add via mutators.
 - Flat terrain = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - Passage/exit = bump(negative_strong, position=map edge) to naturally carve through mountains. Ex: south=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), southeast=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
 - fill specifies terrain type: water/sand/soil/rich_soil/marsh/mud/ice. Works with bump/ring/composite.
@@ -396,7 +405,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
 
-            string modExample = ShapeEditPrompt.Rules(isKo);
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo);
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
@@ -404,6 +413,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
 {schema}
 {tileContext}
+{featureContext}
 {currentParams}
 {rules}
 {fewShot}{modExample}";
@@ -762,6 +772,8 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         /// <summary>강 없는 타일에서 river 파라미터 차단.</summary>
         private void ValidateRiver(MapParamsData data, List<string> warnings)
         {
+            // Suppression is valid even when no natural river exists; it must remain explicit.
+            if (data.explicitKeys.Contains("river_present") && data.river?.present == false) return;
             // 타일에 실제 강이 있는지 확인
             int tileId = _openedTileId;
             bool tileHasRiver = false;

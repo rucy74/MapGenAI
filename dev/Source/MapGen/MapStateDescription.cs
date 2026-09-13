@@ -16,7 +16,7 @@ namespace MapGenAI.MapGen
             {"hasRiver","강 설정"},{"riverDirectionAngle","강 각도"},{"riverXPosition","강 좌우 위치"},{"riverZPosition","강 상하 위치"},{"straightRiver","직선 강"},
             {"hasRoads","도로"},{"hasCaves","동굴"},{"cavesExplicitlySet","동굴 지정"},{"geyserCount","간헐천 수"},
             {"hasRockChunks","돌덩어리"},{"hillSize","산 크기"},{"hillSmoothness","산 부드러움"},
-            {"mutators","추가 특징"},{"removeMutators","제거 특징"},{"coastDirection","해안 방향"},
+            {"mutators","추가 특징"},{"removeMutators","제거 특징"},{"removeFeatureCategories","생성에서 제외할 특징 종류"},{"coastDirection","해안 방향"},
             {"rockCount","석재 종류 수"},{"oreDensity","광석 밀도"},{"rockTypes","석재 종류"},
             {"ruinDensity","폐허 밀도"},{"dangerDensity","고대 위협 밀도"}
         };
