@@ -82,4 +82,6 @@
   <MapGenAI_Settings_ColModel>模型</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>已启用</MapGenAI_Settings_ColEnabled>
 
+  <MapGenAI_Settings_ModelRequestFailed>无法加载模型列表。请检查 API 密钥、连接和访问权限后重试。也可以直接输入模型 ID。</MapGenAI_Settings_ModelRequestFailed>
+  <MapGenAI_Settings_NoModels>可用模型列表为空。</MapGenAI_Settings_NoModels>
 </LanguageData>

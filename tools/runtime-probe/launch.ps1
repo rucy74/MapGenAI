@@ -4,6 +4,10 @@ param(
     [string]$Profile='',
     [string]$ProbeMod='',
     [switch]$Render,
+    [switch]$Settings,
+    [string]$SourceDll='',
+    [string]$ModelConfig='',
+    [string]$Language='',
     [string]$ImageInputs='',
     [string]$ImageStates=''
 )
@@ -19,7 +23,7 @@ $probeModPath=[IO.Path]::GetFullPath($ProbeMod)
 if (Test-Path -LiteralPath $probeProfile) {throw 'Use a fresh isolated profile.'}
 if (Test-Path -LiteralPath $probeModPath) {throw 'Use a fresh probe mod folder.'}
 $gameExe=Join-Path $GameRoot 'RimWorldWin64.exe'
-$mainDll=Join-Path $probeRepo 'dev/Assemblies/MapGenAI.dll'
+$mainDll=if($SourceDll){[IO.Path]::GetFullPath($SourceDll)}else{Join-Path $probeRepo 'dev/Assemblies/MapGenAI.dll'}
 $probeDll=Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.RuntimeProbe.dll'
 foreach($required in @($gameExe,$mainDll,$probeDll)) {if(-not (Test-Path -LiteralPath $required)) {throw "Missing required file: $required"}}
 New-Item -ItemType Directory -Path $probeOutput,(Join-Path $probeProfile 'Config'),(Join-Path $probeModPath 'About'),(Join-Path $probeModPath 'Assemblies') -Force | Out-Null
@@ -43,11 +47,18 @@ $active=@('brrainz.harmony')+@($expansionOrder | Where-Object { $known -contains
 $version=(Get-Content -LiteralPath (Join-Path $GameRoot 'Version.txt') -Raw).Trim()
 $config='<?xml version="1.0" encoding="utf-8"?><ModsConfigData><version>'+$version+'</version><activeMods>'+ (($active|ForEach-Object {'<li>'+$_+'</li>'}) -join '') + '</activeMods><knownExpansions>'+ (($known|ForEach-Object {'<li>'+$_+'</li>'}) -join '') +'</knownExpansions></ModsConfigData>'
 [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/ModsConfig.xml'),$config,[Text.UTF8Encoding]::new($false))
+if($Language){
+    if($Language -notin @('English','Korean','Japanese','ChineseSimplified')){throw 'Unsupported probe language'}
+    $probeLanguageName=if($Language -eq 'Korean'){'Korean (한국어)'}else{$Language}
+    [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/Prefs.xml'),('<Prefs><langFolderName>'+$probeLanguageName+'</langFolderName><screenWidth>1280</screenWidth><screenHeight>800</screenHeight><fullscreen>false</fullscreen></Prefs>'),[Text.UTF8Encoding]::new($false))
+}
 [IO.File]::WriteAllText((Join-Path $probeProfile 'MAPGENAI_DISPOSABLE'),'new test world only; never load a user save')
 [IO.File]::WriteAllText((Join-Path $probeModPath 'MAPGENAI_PROBE_OWNED'),$probeProfile)
 $arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','640',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
+if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
+if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}
 $process=Start-Process -FilePath $gameExe -ArgumentList $arguments -WindowStyle Hidden -PassThru

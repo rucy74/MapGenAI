@@ -82,4 +82,6 @@
   <MapGenAI_Settings_ColModel>Model</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>Enabled</MapGenAI_Settings_ColEnabled>
 
+  <MapGenAI_Settings_ModelRequestFailed>Could not load models. Check credentials, connection and access, then retry. You can also enter a model ID directly.</MapGenAI_Settings_ModelRequestFailed>
+  <MapGenAI_Settings_NoModels>The available model list is empty.</MapGenAI_Settings_NoModels>
 </LanguageData>

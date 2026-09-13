@@ -1,0 +1,27 @@
+# Claude consultation
+
+Requested: claude-fable-5-1
+
+Observed modelUsage: ["claude-haiku-4-5-20251001", "claude-fable-5-1"]
+
+검토 결과: 지적된 GUIClip 결함은 해소됐고, P0/P1은 발견하지 못했습니다. 구체적 P2 세 건과 회귀 사례를 아래에 정리합니다.
+
+**판단 항목별 결론**
+
+1. **GUI group/scroll 균형**: `DoWindowContents`에서 Begin/End가 try/finally로 한 번만 호출됩니다. 고급→간편 전환 버튼의 조기 return도 `advanced && !useSimpleMode` 가드로 패널 렌더를 막아 이중 End가 없습니다. `DrawCloudConfigPanel`은 BeginScrollView 이전에 조기 return하므로 스크롤도 균형입니다. `DrawLocalPanel`의 Begin/End는 try/finally가 없지만 내부에 예외 경로가 없어 실질 문제는 아닙니다.
+2. **간편 선택의 저장**: FloatMenu의 select가 `simpleGeminiModel` 필드에 쓰고, `GetActiveConfig`가 그 필드를 읽습니다. 빈 값은 기본 모델로 대체됩니다. IsCurrent의 키 비교도 `_simpleConfig`와 GetActiveConfig 결과가 Provider/URL/키 모두 동일해 정상 통과합니다.
+3. **잘못된 대상 적용**: 결과마다 Select/IsCurrent를 싣고, 키가 provider+URL+API키이며, 고급 행은 `cloudConfigs.Contains(config)`로 삭제된 행을 걸러냅니다. 같은 키의 동시 요청은 fetching 플래그로 차단됩니다. 교차 적용 경로는 찾지 못했습니다.
+
+**P2 결함**
+
+- **P2: 창을 닫은 뒤 도착한 결과가 다음 열 때 메뉴를 띄움** (`dev/Source/Core/TextToMapSettings.cs:535`). 조회 중 설정 창을 닫으면 큐에 결과가 남고, 다음에 설정을 열 때 `ApplyPendingModels`가 IsCurrent 통과 시 FloatMenu를 예고 없이 띄웁니다. 캐시 갱신만 하고 메뉴 표시는 요청을 시작한 창 세션에서만 하도록 세션 토큰을 결과에 넣는 것이 최소 수정입니다.
+- **P2: 타임아웃과 취소 없음, Local 행의 빈 URL 오류 메시지 오도** (`TextToMapSettings.cs:46, 507, 589`). 정적 HttpClient 기본 타임아웃이 100초라 응답 없는 엔드포인트에서 버튼이 최대 100초 회색으로 잠깁니다. 또 클라우드 목록의 Local 행에 URL이 비면 `"/api/tags"`가 되어 양쪽 catch로 빈 목록이 반환되고 "목록이 비어 있음"으로 표시됩니다. URL 누락은 요청 전에 별도 오류로 분기해야 합니다.
+- **P2: 프로브가 비동기 경로를 검증하지 않고 실패 원인을 삼킴** (`tools/runtime-probe/SettingsProbe.cs:69, 89`). CheckMenus는 `ShowModelFloatMenu`를 직접 호출하므로 큐/ApplyPendingModels/키 검증 경로는 증거가 없습니다. 실패 시 catch가 예외 메시지를 버려 어느 Require가 깨졌는지 result.json에 남지 않습니다.
+
+**추가 회귀 사례 (최소)**
+
+- 간편 모드에서 조회 시작 후 완료 전에 고급으로 전환. 메뉴가 뜨지 않아야 하고 캐시는 남아야 합니다.
+- 고급 행에서 조회 중 provider 드롭다운 변경. 메뉴가 뜨지 않고 결과는 이전 키로만 캐시되어야 합니다.
+- 조회 중 설정 창 닫고 재오픈. 현재는 메뉴가 뜨므로 위 P2 수정 후 통과 기준으로 삼으면 됩니다.
+
+번역 키 3종은 4개 언어 파일 모두에 존재합니다. 이 검토는 claude-fable-5-1로 수행했습니다.

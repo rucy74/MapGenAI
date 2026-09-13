@@ -1,5 +1,7 @@
 # MapGen AI
 
+> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers the existing features and new image-to-map, region correction, and iterative editing improvements on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
+
 ![Preview](docs/assets/preview_composite.png)
 
 **Describe your map in natural language — AI generates it for you.**

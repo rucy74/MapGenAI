@@ -2,6 +2,10 @@
 
 2026-09-13 개발 브랜치: `dev`. 보존판: `v1.6` (`1439bbd`). 규칙은 Rimworld 루트의 `CLAUDE.md`와 `.claude/rules/`를 참조한다.
 
+- [사용자용 모드 소개·사용법](docs/description-ko.md): 기존 기능, dev 추가·개선 사항, 이미지 사용 흐름과 현재 한계. 기능 변경 시 함께 갱신한다.
+
+- `dev/Source/Core/TextToMapSettings.cs`: 간편 모델명 입력/API 목록 조회, 고급 공급자 설정. GUI listing Begin/End는 `DoWindowContents`에서 한 번만 수행하고 고급 본문은 그룹 밖에서 그린다. 모델 결과는 요청별 큐·계정/주소별 캐시·대상 유효성 검사로 전달한다. `tools/runtime-probe/launch.ps1 -Render -Settings`로 설정 화면을 검증한다.
+
 - `dev/Source/UI/Dialog_TextToMap.cs`: 타일에 고정된 대화, 실제 변경 안내, Undo/Reset/프리셋. `ShapeEditPrompt`가 대상 ID 편집 예시를 제공한다.
 - `dev/Source/LLM/`: 공급자별 HTTP 요청, 엄격한 JSON 응답 경계, 취소/늦은 응답 폐기. 이미지 입력은 선택한 모델의 vision 지원이 필요하다.
 - `dev/Source/MapGen/MapParameterParser.cs`, `MapStateEditor.cs`: 입력 파싱과 변경 키만 병합하는 순수 계산.

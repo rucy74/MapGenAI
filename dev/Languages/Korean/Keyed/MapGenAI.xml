@@ -82,4 +82,6 @@
   <MapGenAI_Settings_ColModel>모델</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>활성화됨</MapGenAI_Settings_ColEnabled>
 
+  <MapGenAI_Settings_ModelRequestFailed>목록을 가져오지 못했습니다. API 키·연결·사용 권한을 확인하고 다시 시도하세요. 모델명은 직접 입력할 수도 있습니다.</MapGenAI_Settings_ModelRequestFailed>
+  <MapGenAI_Settings_NoModels>사용 가능한 모델 목록이 비어 있습니다.</MapGenAI_Settings_NoModels>
 </LanguageData>

@@ -1,0 +1,5 @@
+System.NullReferenceException: Object reference not set to an instance of an object
+[Ref ABF0A29F]
+  at MapGenAI.RuntimeProbe.SettingsProbe.Open () [0x00017] in <b25ec1271d584c66aec308b0c192a0ea>:0 
+  at MapGenAI.RuntimeProbe.SettingsProbe.Start (System.String output) [0x0002c] in <b25ec1271d584c66aec308b0c192a0ea>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.Start () [0x00025] in <b25ec1271d584c66aec308b0c192a0ea>:0 

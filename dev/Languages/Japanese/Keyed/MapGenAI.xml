@@ -82,4 +82,6 @@
   <MapGenAI_Settings_ColModel>モデル</MapGenAI_Settings_ColModel>
   <MapGenAI_Settings_ColEnabled>有効</MapGenAI_Settings_ColEnabled>
 
+  <MapGenAI_Settings_ModelRequestFailed>モデル一覧を取得できませんでした。APIキー・接続・権限を確認して再試行してください。モデルIDを直接入力することもできます。</MapGenAI_Settings_ModelRequestFailed>
+  <MapGenAI_Settings_NoModels>利用可能なモデル一覧は空です。</MapGenAI_Settings_NoModels>
 </LanguageData>

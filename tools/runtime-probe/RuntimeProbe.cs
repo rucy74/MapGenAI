@@ -40,6 +40,8 @@ namespace MapGenAI.RuntimeProbe
             try
             {
                 Directory.CreateDirectory(output);
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAISettingsProbe",out _))
+                {SettingsProbe.Start(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageInputs",out var inputs))
                 {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 SaveLoadProbe();

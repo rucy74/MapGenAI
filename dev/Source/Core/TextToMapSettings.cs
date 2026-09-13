@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -25,19 +27,21 @@ namespace MapGenAI
         private Vector2 _configScrollPos = Vector2.zero;
 
         // ── 모델 목록 캐시 ───────────────────────────────────────────────────
-        private readonly Dictionary<LLMProvider, List<string>> _cachedModels
-            = new Dictionary<LLMProvider, List<string>>();
-        private readonly HashSet<LLMProvider> _fetchingProviders = new HashSet<LLMProvider>();
-
-        // 백그라운드 → 메인 스레드 전달 (volatile)
-        private volatile bool _modelsFetchDone = false;
-        private LLMProvider _fetchDoneProvider;
-        private List<string> _fetchDoneList;
-        private ApiConfig _fetchDoneConfig;
+        private readonly Dictionary<string, List<string>> _cachedModels = new Dictionary<string, List<string>>();
+        private readonly HashSet<string> _fetchingProviders = new HashSet<string>();
+        private readonly ConcurrentQueue<ModelFetchResult> _modelResults = new ConcurrentQueue<ModelFetchResult>();
+        private readonly ApiConfig _simpleConfig = new ApiConfig();
+        private sealed class ModelFetchResult
+        {
+            public string Key, Error;
+            public List<string> Models;
+            public Action<string> Select;
+            public Func<bool> IsCurrent;
+            public Action Refresh;
+        }
 
         // 프로바이더별 에러 메시지
-        private readonly Dictionary<LLMProvider, string> _fetchErrors
-            = new Dictionary<LLMProvider, string>();
+        private readonly Dictionary<string, string> _fetchErrors = new Dictionary<string, string>();
 
         private static readonly HttpClient Http = new HttpClient();
 
@@ -118,17 +122,30 @@ namespace MapGenAI
         // ── DoWindowContents ─────────────────────────────────────────────────
         public void DoWindowContents(Rect inRect)
         {
-            ApplyPendingModels();
-
-            var listing = new Listing_Standard();
-            listing.Begin(inRect);
-
-            if (useSimpleMode)
-                DrawSimpleSettings(listing, inRect);
-            else
-                DrawAdvancedSettings(listing, inRect);
-
-            listing.End();
+            var oldColor=GUI.color;var oldFont=Text.Font;var oldAnchor=Text.Anchor;
+            try
+            {
+                ApplyPendingModels();
+                bool advanced=!useSimpleMode;
+                var listing = new Listing_Standard();
+                listing.Begin(inRect);
+                float usedY;
+                try
+                {
+                    if (advanced) DrawAdvancedSettings(listing, inRect);
+                    else DrawSimpleSettings(listing, inRect);
+                    usedY=listing.CurHeight;
+                }
+                finally { listing.End(); }
+                // Draw the remainder only after closing the header's GUI group, exactly once.
+                if (advanced && !useSimpleMode && inRect.height > usedY)
+                {
+                    var panel=new Rect(inRect.x,inRect.y+usedY,inRect.width,inRect.height-usedY);
+                    if(useCloudProviders) DrawCloudConfigPanel(panel);
+                    else DrawLocalPanel(panel);
+                }
+            }
+            finally {GUI.color=oldColor;Text.Font=oldFont;Text.Anchor=oldAnchor;}
         }
 
         // ═══════════════════════════════════════════════════════════════════
@@ -150,15 +167,21 @@ namespace MapGenAI
 
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
-            Widgets.Label(listing.GetRect(Text.LineHeight), "MapGenAI_Settings_SimpleDesc".Translate());
+            listing.Label("MapGenAI_Settings_SimpleDesc".Translate());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
 
-            if(listing.ButtonText("Gemini: "+simpleGeminiModel))
-                Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>{
-                    new FloatMenuOption("gemini-3.8-flash",()=>simpleGeminiModel="gemini-3.8-flash"),
-                    new FloatMenuOption("gemini-2.5-flash",()=>simpleGeminiModel="gemini-2.5-flash")
-                }));
+            listing.Gap(8f);
+            listing.Label("MapGenAI_Settings_ColModel".Translate());
+            var modelRow=listing.GetRect(30f);
+            float loadWidth=Math.Min(210f,modelRow.width*.4f);
+            simpleGeminiModel=Widgets.TextField(new Rect(modelRow.x,modelRow.y,modelRow.width-loadWidth-gap,30f),simpleGeminiModel??"");
+            _simpleConfig.ApiKey=geminiApiKey;
+            _simpleConfig.SelectedModel=simpleGeminiModel;
+            string context=ModelKey(_simpleConfig);
+            DrawModelButton(new Rect(modelRow.xMax-loadWidth,modelRow.y,loadWidth,30f),_simpleConfig,
+                model=>simpleGeminiModel=model,()=>useSimpleMode && ModelKey(GetActiveConfig())==context,
+                "MapGenAI_Settings_FetchModels".Translate());
 
             listing.Gap(12f);
 
@@ -181,15 +204,6 @@ namespace MapGenAI
             DrawServiceToggle(listing, inRect);
             listing.GapLine(6f);
 
-            float usedY = listing.CurHeight;
-            listing.End();
-
-            var remainRect = new Rect(inRect.x, inRect.y + usedY, inRect.width, inRect.height - usedY);
-
-            if (useCloudProviders)
-                DrawCloudConfigPanel(remainRect);
-            else
-                DrawLocalPanel(remainRect);
         }
 
         // ── Service Toggle ───────────────────────────────────────────────────
@@ -253,10 +267,12 @@ namespace MapGenAI
             // 설명
             Text.Font = GameFont.Tiny;
             GUI.color = new Color(0.6f, 0.6f, 0.6f);
-            Widgets.Label(new Rect(x + 2f, y, w, 18f), "MapGenAI_Settings_CloudConfigDesc".Translate());
+            string description="MapGenAI_Settings_CloudConfigDesc".Translate();
+            float descriptionHeight=Text.CalcHeight(description,w-4f);
+            Widgets.Label(new Rect(x + 2f, y, w-4f, descriptionHeight),description);
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
-            y += 20f;
+            y += descriptionHeight+4f;
 
             // 열 헤더
             DrawColumnHeaders(new Rect(x, y, w, 20f));
@@ -264,6 +280,7 @@ namespace MapGenAI
 
             // config 행 목록 (스크롤)
             float listH = panel.yMax - y;
+            if(listH<=0f)return;
             Rect outRect = new Rect(x, y, w, listH);
             const float rowH = 32f;
             const float rowGap = 2f;
@@ -369,7 +386,9 @@ namespace MapGenAI
             }
 
             // 모델 선택 버튼
-            DrawModelButton(modelR, config);
+            string context=ModelKey(config);
+            DrawModelButton(modelR, config, model=>config.SelectedModel=model,
+                ()=>!useSimpleMode && useCloudProviders && cloudConfigs.Contains(config) && ModelKey(config)==context);
 
             // 활성화 체크박스
             bool en = config.IsEnabled;
@@ -438,117 +457,85 @@ namespace MapGenAI
         // 모델 선택 버튼 & Fetch 로직
         // ═══════════════════════════════════════════════════════════════════
 
-        /// <summary>모델 컬럼: Custom이면 텍스트 입력, 나머지는 드롭다운 버튼</summary>
-        private void DrawModelButton(Rect rect, ApiConfig config)
+        // A catalog belongs to an endpoint/account, not every configuration of a provider.
+        private static string ModelKey(ApiConfig config) => config.Provider+"\n"+config.CustomBaseUrl+"\n"+config.ApiKey;
+
+        private void DrawModelButton(Rect rect, ApiConfig config, Action<string> select, Func<bool> isCurrent, string buttonLabel=null)
         {
             if (config.Provider == LLMProvider.Custom)
             {
                 config.SelectedModel = Widgets.TextField(rect, config.SelectedModel ?? "");
                 return;
             }
-
-            bool fetching = _fetchingProviders.Contains(config.Provider);
-            bool hasError = _fetchErrors.TryGetValue(config.Provider, out string errMsg);
-            bool hasCached = _cachedModels.TryGetValue(config.Provider, out var cached) && cached.Count > 0;
-
-            string label;
-            if (fetching)
-                label = "...";
-            else if (hasError)
-                label = errMsg;
-            else if (!string.IsNullOrWhiteSpace(config.SelectedModel))
-                label = config.SelectedModel;
-            else
-                label = "▼ Select";
-
-            if (fetching)       GUI.color = Color.gray;
-            else if (hasError)  GUI.color = new Color(1f, 0.55f, 0.15f);  // 주황색
-            bool clicked = Widgets.ButtonText(rect, label);
-            GUI.color = Color.white;
-
-            if (clicked && !fetching)
+            string key=ModelKey(config);
+            bool fetching=_fetchingProviders.Contains(key);
+            bool hasError=_fetchErrors.TryGetValue(key,out var error);
+            string label=fetching?"MapGenAI_Settings_Loading".Translate().ToString():
+                buttonLabel??(string.IsNullOrWhiteSpace(config.SelectedModel)?"MapGenAI_Settings_FetchModels".Translate().ToString():config.SelectedModel);
+            var oldColor=GUI.color;
+            if(fetching)GUI.color=Color.gray;
+            else if(hasError)GUI.color=new Color(1f,.55f,.15f);
+            bool clicked=Widgets.ButtonText(rect,label);
+            GUI.color=oldColor;
+            if(hasError)TooltipHandler.TipRegion(rect,"MapGenAI_Settings_FetchError".Translate(error));
+            if(clicked && !fetching)
             {
-                if (hasCached)
-                    ShowModelFloatMenu(config, cached);
-                else
-                {
-                    // 에러 상태에서 클릭 → 재시도
-                    _fetchErrors.Remove(config.Provider);
-                    FetchModelsForConfig(config);
-                }
+                Action refresh=()=> {if(isCurrent())FetchModelsForConfig(config,select,isCurrent);};
+                if(_cachedModels.TryGetValue(key,out var cached) && cached.Count>0)
+                    ShowModelFloatMenu(cached,select,isCurrent,refresh);
+                else refresh();
             }
         }
 
-        private static void ShowModelFloatMenu(ApiConfig config, List<string> models)
+        private static void ShowModelFloatMenu(List<string> models, Action<string> select, Func<bool> isCurrent, Action refresh)
         {
-            var options = new List<FloatMenuOption>();
-            foreach (var m in models)
+            var options=new List<FloatMenuOption>();
+            foreach(string model in models.Distinct().OrderBy(m=>m))
             {
-                var mCopy = m;
-                var cfg = config;
-                options.Add(new FloatMenuOption(mCopy, () => cfg.SelectedModel = mCopy));
+                string selected=model;
+                options.Add(new FloatMenuOption(selected,()=> {if(isCurrent())select(selected);}));
             }
+            options.Add(new FloatMenuOption("MapGenAI_Settings_FetchModels".Translate(),()=> {if(isCurrent())refresh();}));
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
-        /// <summary>백그라운드에서 모델 목록 fetch. 완료 시 자동으로 드롭다운 표시.</summary>
-        private void FetchModelsForConfig(ApiConfig config)
+        private void FetchModelsForConfig(ApiConfig config, Action<string> select, Func<bool> isCurrent)
         {
-            var provider = config.Provider;
-            var apiKey = config.ApiKey;
-            var baseUrl = !string.IsNullOrWhiteSpace(config.CustomBaseUrl)
-                ? config.CustomBaseUrl
-                : LLMProviderRegistry.GetBaseUrl(provider);
-
-            _fetchingProviders.Add(provider);
-            _fetchDoneConfig = config;
-
-            Task.Run(async () =>
+            string key=ModelKey(config);
+            var provider=config.Provider;
+            string apiKey=config.ApiKey;
+            string baseUrl=!string.IsNullOrWhiteSpace(config.CustomBaseUrl)?config.CustomBaseUrl:LLMProviderRegistry.GetBaseUrl(provider);
+            if(!_fetchingProviders.Add(key))return;
+            _fetchErrors.Remove(key);
+            Action refresh=()=> {if(isCurrent())FetchModelsForConfig(config,select,isCurrent);};
+            Task.Run(async()=>
             {
+                var result=new ModelFetchResult{Key=key,Select=select,IsCurrent=isCurrent,Refresh=refresh};
                 try
                 {
-                    List<string> models;
-                    if (provider == LLMProvider.Gemini)
-                        models = await FetchGeminiModels(apiKey);
-                    else if (provider == LLMProvider.Local)
-                        models = await FetchLocalModels(baseUrl);
-                    else
-                        models = await FetchOpenAICompatibleModels(baseUrl, apiKey);
-
-                    _fetchDoneList = models;
+                    result.Models=provider==LLMProvider.Gemini?await FetchGeminiModels(apiKey):
+                        provider==LLMProvider.Local?await FetchLocalModels(baseUrl):await FetchOpenAICompatibleModels(baseUrl,apiKey);
+                    if(result.Models==null || result.Models.Count==0)result.Error="MapGenAI_Settings_NoModels";
                 }
-                catch
-                {
-                    _fetchDoneList = new List<string>();
-                }
-                _fetchDoneProvider = provider;
-                _modelsFetchDone = true;
+                catch {result.Error="MapGenAI_Settings_ModelRequestFailed";}
+                // Each request carries its own result and target; concurrent requests cannot cross-apply.
+                _modelResults.Enqueue(result);
             });
         }
 
-        /// <summary>메인 스레드에서 호출 — 백그라운드 결과를 적용하고 드롭다운 표시</summary>
         private void ApplyPendingModels()
         {
-            if (!_modelsFetchDone) return;
-            _modelsFetchDone = false;
-
-            _fetchingProviders.Remove(_fetchDoneProvider);
-
-            if (_fetchDoneList != null && _fetchDoneList.Count > 0)
+            while(_modelResults.TryDequeue(out var result))
             {
-                _cachedModels[_fetchDoneProvider] = _fetchDoneList;
-                _fetchErrors.Remove(_fetchDoneProvider);
-                if (_fetchDoneConfig != null)
-                    ShowModelFloatMenu(_fetchDoneConfig, _fetchDoneList);
+                _fetchingProviders.Remove(result.Key);
+                if(result.Error==null)
+                {
+                    _cachedModels[result.Key]=result.Models;
+                    _fetchErrors.Remove(result.Key);
+                    if(result.IsCurrent())ShowModelFloatMenu(result.Models,result.Select,result.IsCurrent,result.Refresh);
+                }
+                else _fetchErrors[result.Key]=result.Error.Translate();
             }
-            else
-            {
-                // 목록이 비어있거나 오류 — 에러 메시지 저장
-                _fetchErrors[_fetchDoneProvider] = "No API key";
-            }
-
-            _fetchDoneConfig = null;
-            _fetchDoneList = null;
         }
 
         // ── 프로바이더별 Fetch 구현 ─────────────────────────────────────────
@@ -560,7 +547,7 @@ namespace MapGenAI
             do
             {
                 var url = $"https://generativelanguage.googleapis.com/v1beta/models?key={apiKey}&pageSize=100";
-                if (pageToken != null) url += $"&pageToken={pageToken}";
+                if (pageToken != null) url += $"&pageToken={Uri.EscapeDataString(pageToken)}";
                 var response = await Http.GetStringAsync(url);
                 var parts = response.Split('"');
                 pageToken = null;
@@ -589,6 +576,7 @@ namespace MapGenAI
             if (!string.IsNullOrEmpty(apiKey))
                 request.Headers.Add("Authorization", $"Bearer {apiKey}");
             var resp = await Http.SendAsync(request);
+            resp.EnsureSuccessStatusCode();
             var json = await resp.Content.ReadAsStringAsync();
             var models = new List<string>();
             var parts = json.Split('"');
