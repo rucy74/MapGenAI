@@ -9,6 +9,8 @@ param(
     [switch]$FeatureRemoval,
     [switch]$FeaturePolicy,
     [switch]$TextRegions,
+    [switch]$Spatial,
+    [string]$SpatialResponses='',
     [switch]$PreviewOnly,
     [string]$TextResponses='',
     [string]$CompoundResponses='',
@@ -73,6 +75,8 @@ if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
 if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}
 if($FeaturePolicy){$arguments+='-mapgenAIFeaturePolicy=true'}
 if($TextRegions){$arguments+='-mapgenAITextRegions=true'}
+if($Spatial){$arguments+='-mapgenAISpatial=true'}
+if($SpatialResponses){$arguments+=('-mapgenAISpatialResponses="'+[IO.Path]::GetFullPath($SpatialResponses)+'"')}
 if($CompoundResponses){$arguments+=('-mapgenAICompoundResponses="'+[IO.Path]::GetFullPath($CompoundResponses)+'"')}
 if($PreviewOnly){$arguments+='-mapgenAIPreviewOnly=true'}
 if($TextResponses){$arguments+=('-mapgenAITextResponses="'+[IO.Path]::GetFullPath($TextResponses)+'"')}

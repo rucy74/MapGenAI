@@ -36,6 +36,12 @@ namespace MapGenAI.MapGen
                         text.Append("\n• ").Append(korean?"폐허 ":"Ruin ").Append(id).Append(": ").Append(verb);
                         if(b.TryGetValue(id,out var p))text.Append(" · ").Append(p.width).Append('×').Append(p.height).Append(" · ").Append(p.count).Append(korean?"개":" instances")
                             .Append(p.region==null?"":" · "+p.region).Append(p.position==null?"":" · ["+string.Join(",",p.position.Select(n=>n.ToString("0.###",CultureInfo.InvariantCulture)))+"]");
+                        if(p!=null)
+                        {
+                            if(p.rotation!=0)text.Append(" · ").Append(p.rotation).Append('°');
+                            if(p.spacing>1)text.Append(korean?" · 최소 간격 ":" · minimum gap ").Append(p.spacing);
+                            if(p.relation!=null)text.Append(" · ").Append(p.relation.target).Append(" ").Append(p.relation.min_distance).Append('~').Append(p.relation.max_distance).Append(korean?"칸 ":" cells ").Append(p.relation.side);
+                        }
                     }
                     text.Append(korean?"\n실제 배치 여부는 미리보기 생성 결과에서 확인합니다.":"\nPlacement is checked during preview generation.");
                     continue;

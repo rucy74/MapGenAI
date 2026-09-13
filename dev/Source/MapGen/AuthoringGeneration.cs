@@ -67,6 +67,7 @@ namespace MapGenAI.MapGen
             var occupied=new bool[cols*rows];
             var jobs=new List<Tuple<StructurePlan,PlannedRect>>();
             var regions=GenerationContext.Regions(map);
+            var distances=new Dictionary<string,SpatialDistance>();
             var used=MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
             foreach(var r in used)
                 foreach(var cell in r.ExpandedBy(1).ClipInsideMap(map))occupied[cell.z*cols+cell.x]=true;
@@ -90,7 +91,27 @@ namespace MapGenAI.MapGen
                 }
                 float targetX=p.position==null?(float)(sumX/Math.Max(1,area)):p.position[0]*cols;
                 float targetZ=p.position==null?(float)(sumZ/Math.Max(1,area)):p.position[1]*rows;
-                var positions=PlacementPlanner.Find(cols,rows,allowed,occupied,p.width,p.height,p.count,targetX,targetZ);
+                Func<PlannedRect,bool> relation=null;
+                if(p.relation!=null)
+                {
+                    string key=p.relation.target+":"+(p.relation.target=="region_edge"?p.region:"");
+                    if(!distances.TryGetValue(key,out var distance))
+                    {
+                        var target=new bool[cols*rows];
+                        foreach(var cell in map.AllCells)
+                        {
+                            var terrain=map.terrainGrid.TerrainAtIgnoreTemp(map.cellIndices.CellToIndex(cell));
+                            target[cell.z*cols+cell.x]=p.relation.target=="river"?terrain.IsRiver:p.relation.target=="water"?terrain.IsWater:
+                                p.relation.target=="mountain"?(cell.GetEdifice(map)?.def.building.isNaturalRock==true || MapGenerator.Elevation[cell]>.7f && MapGenerator.Caves[cell]<=0):regions.Contains(p.region,cell.x,cell.z);
+                        }
+                        if(p.relation.target=="region_edge")target=SpatialDistance.InteriorEdge(cols,rows,target);
+                        distances[key]=distance=new SpatialDistance(cols,rows,target);
+                    }
+                    relation=distance.Constrain(allowed,p.relation);
+                }
+                bool Constraint(PlannedRect r)=> (relation==null || relation(r)) && jobs.All(j=>Separated(r,j.Item2,Math.Max(p.spacing,j.Item1.spacing)));
+                int width=p.rotation%180==0?p.width:p.height,height=p.rotation%180==0?p.height:p.width;
+                var positions=PlacementPlanner.Find(cols,rows,allowed,occupied,width,height,p.count,targetX,targetZ,p.spacing,Constraint);
                 if(positions==null)throw new InvalidOperationException("유적 배치 실패 / Ruin placement failed ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.");
                 jobs.AddRange(positions.Select(r=>Tuple.Create(p,r)));
             }
@@ -104,6 +125,7 @@ namespace MapGenAI.MapGen
                 used.Add(new CellRect(r.x,r.z,r.width,r.height));
             }
         }
+        static bool Separated(PlannedRect a,PlannedRect b,int gap)=>a.x>=b.x+b.width+gap || b.x>=a.x+a.width+gap || a.z>=b.z+b.height+gap || b.z>=a.z+a.height+gap;
         static StructurePlacement SpawnRuin(Map map,StructurePlan plan,PlannedRect r,int ordinal)
         {
             var result=new StructurePlacement{id=plan.id,rect=r};
@@ -111,12 +133,16 @@ namespace MapGenAI.MapGen
             var floor=TerrainDef.Named("TileGranite");
             uint seed=2166136261;foreach(char c in plan.id)seed=unchecked((seed^c)*16777619);seed^=unchecked((uint)plan.seed);
             seed=unchecked(seed+(uint)ordinal*2654435761);
-            for(int z=0;z<r.height;z++)for(int x=0;x<r.width;x++)
+            for(int z=0;z<plan.height;z++)for(int x=0;x<plan.width;x++)
             {
-                var cell=new IntVec3(r.x+x,0,r.z+z);
+                int rx=x,rz=z;
+                if(plan.rotation==90){rx=plan.height-1-z;rz=x;}
+                else if(plan.rotation==180){rx=plan.width-1-x;rz=plan.height-1-z;}
+                else if(plan.rotation==270){rx=z;rz=plan.width-1-x;}
+                var cell=new IntVec3(r.x+rx,0,r.z+rz);
                 uint h=unchecked((seed^(uint)(x*374761393)^(uint)(z*668265263))*1274126177);
-                bool edge=x==0 || z==0 || x==r.width-1 || z==r.height-1;
-                bool doorway=(x==r.width/2 && (z==0 || z==r.height-1));
+                bool edge=x==0 || z==0 || x==plan.width-1 || z==plan.height-1;
+                bool doorway=(x==plan.width/2 && (z==0 || z==plan.height-1));
                 if(!edge && h%7!=0){map.terrainGrid.SetTerrain(cell,floor);result.floors++;}
                 if(edge && !doorway && h%5!=0)
                 {

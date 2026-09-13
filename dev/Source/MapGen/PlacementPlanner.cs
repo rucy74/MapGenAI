@@ -12,7 +12,7 @@ namespace MapGenAI.MapGen
     {
         // Integral image makes every full-footprint feasibility check O(1), including holes.
         public static List<PlannedRect> Find(int cols, int rows, bool[] allowed, bool[] occupied,
-            int width, int height, int count, float preferredX, float preferredZ)
+            int width, int height, int count, float preferredX, float preferredZ, int spacing=1, Func<PlannedRect,bool> constraint=null)
         {
             if (allowed.Length != cols*rows || occupied.Length != allowed.Length) throw new ArgumentException("Mask dimensions differ");
             var reserved = (bool[])occupied.Clone();
@@ -28,14 +28,16 @@ namespace MapGenAI.MapGen
                 {
                     int blocked=integral[(z+height)*stride+x+width]-integral[z*stride+x+width]-integral[(z+height)*stride+x]+integral[z*stride+x];
                     if(blocked!=0)continue;
+                    var candidate=new PlannedRect{x=x,z=z,width=width,height=height};
+                    if(constraint!=null && !constraint(candidate))continue;
                     double dx=x+(width-1)*.5-preferredX, dz=z+(height-1)*.5-preferredZ, score=dx*dx+dz*dz;
                     if(score>=best)continue;
-                    best=score; chosen=new PlannedRect{x=x,z=z,width=width,height=height};
+                    best=score; chosen=candidate;
                 }
                 if(!chosen.HasValue)return null; // Atomic batch: caller must not spawn a partial count.
                 var r=chosen.Value;result.Add(r);
-                for(int z=Math.Max(0,r.z-1);z<Math.Min(rows,r.z+r.height+1);z++)
-                    for(int x=Math.Max(0,r.x-1);x<Math.Min(cols,r.x+r.width+1);x++) reserved[z*cols+x]=true;
+                for(int z=Math.Max(0,r.z-spacing);z<Math.Min(rows,r.z+r.height+spacing);z++)
+                    for(int x=Math.Max(0,r.x-spacing);x<Math.Min(cols,r.x+r.width+spacing);x++) reserved[z*cols+x]=true;
             }
             Array.Copy(reserved,occupied,reserved.Length);
             return result;

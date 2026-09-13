@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Spatial>
+	<fixture>
+		<state>
+			<hillAmount>0.100000001</hillAmount>
+			<vegetationDensity>0</vegetationDensity>
+			<animalDensity>0</animalDensity>
+			<geyserCount>0</geyserCount>
+			<hasRockChunks>False</hasRockChunks>
+			<ruinDensity>0</ruinDensity>
+			<dangerDensity>0</dangerDensity>
+			<elevationShapes />
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":2,"height":7,"id":"east","kind":"ruin","position":null,"region":null,"relation":{"max_distance":12,"min_distance":2,"side":"east","target":"river"},"rotation":90,"seed":0,"spacing":18,"width":11}</plan>
+				</li>
+				<li>
+					<plan>{"bounds":null,"count":2,"height":7,"id":"west","kind":"ruin","position":null,"region":null,"relation":{"max_distance":12,"min_distance":2,"side":"west","target":"river"},"rotation":90,"seed":0,"spacing":18,"width":11}</plan>
+				</li>
+			</structures>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+	</fixture>
+</Spatial>

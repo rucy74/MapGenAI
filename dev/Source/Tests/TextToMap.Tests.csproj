@@ -20,6 +20,7 @@
     <Compile Include="../MapGen/AuthoringResult.cs" Link="AuthoringResult.cs" />
     <Compile Include="../MapGen/StructurePlans.cs" Link="StructurePlans.cs" />
     <Compile Include="../MapGen/PlacementPlanner.cs" Link="PlacementPlanner.cs" />
+    <Compile Include="../MapGen/SpatialRelation.cs" Link="SpatialRelation.cs" />
     <Compile Include="../MapGen/MapGenAIWorldComponent.cs" Link="MapGenAIWorldComponent.cs" />
     <Compile Include="../MapGen/SdfComposite.cs" Link="SdfComposite.cs" />
     <Compile Include="../MapGen/ContourWarp.cs" Link="ContourWarp.cs" />

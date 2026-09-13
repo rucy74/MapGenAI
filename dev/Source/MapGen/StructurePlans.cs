@@ -11,8 +11,11 @@ namespace MapGenAI.MapGen
         public string id, kind = "ruin", region;
         public float[] position, bounds;
         public int width = 11, height = 9, count = 1, seed;
+        public int rotation, spacing=1;
+        public SpatialRelation relation;
         public StructurePlan Clone() => new StructurePlan { id=id, kind=kind, region=region,
-            position=(float[])position?.Clone(), bounds=(float[])bounds?.Clone(), width=width, height=height, count=count, seed=seed };
+            position=(float[])position?.Clone(), bounds=(float[])bounds?.Clone(), width=width, height=height, count=count, seed=seed,
+            rotation=rotation,spacing=spacing,relation=relation?.Clone() };
         public void ExposeData()
         {
             string json = SimpleJson.Serialize(this);
@@ -22,13 +25,14 @@ namespace MapGenAI.MapGen
                 var p = SimpleJson.ConvertTo<StructurePlan>(SimpleJson.Parse(json));
                 id=p.id; kind=p.kind; region=p.region; position=p.position; bounds=p.bounds;
                 width=p.width; height=p.height; count=p.count; seed=p.seed;
+                rotation=p.rotation;spacing=p.spacing;relation=p.relation;
             }
         }
     }
     public sealed class StructureEdit { public string op, id; public SimpleJsonObject values; }
     public static class StructurePlans
     {
-        static readonly HashSet<string> Fields = new HashSet<string> { "id","kind","region","position","bounds","width","height","count","seed" };
+        static readonly HashSet<string> Fields = new HashSet<string> { "id","kind","region","position","bounds","width","height","count","seed","rotation","spacing","relation" };
         public static List<StructureEdit> Parse(SimpleJsonObject root)
         {
             var items = root.GetObjectArray("structure_ops");
@@ -58,11 +62,24 @@ namespace MapGenAI.MapGen
             foreach (var key in obj.Keys)
             {
                 if (!Fields.Contains(key)) throw new FormatException("Unsupported structure field: " + key);
+                if(key=="relation")
+                {
+                    if(obj.IsNull(key))continue;
+                    var value=obj.GetObject(key)??throw new FormatException("relation must be an object or null");
+                    foreach(var field in value.Keys)
+                    {
+                        if(field!="target" && field!="side" && field!="min_distance" && field!="max_distance")throw new FormatException("Unsupported relation field: "+field);
+                        if(value.GetString(field)==null)throw new FormatException("Invalid relation "+field);
+                        if(field=="min_distance" || field=="max_distance")
+                            if(!int.TryParse(value.GetString(field),out _))throw new FormatException("Relation distance must be integer cells");
+                    }
+                    continue;
+                }
                 if ((key == "position" || key == "bounds") && !obj.IsNull(key))
                 { if (obj.GetFloatArray(key) == null) throw new FormatException("Invalid structure " + key); }
                 else if (key != "region" && key != "position" && key != "bounds" && obj.GetString(key) == null)
                     throw new FormatException("Invalid structure " + key);
-                if (key == "width" || key == "height" || key == "count" || key == "seed")
+                if (key == "width" || key == "height" || key == "count" || key == "seed" || key=="rotation" || key=="spacing")
                     if (!int.TryParse(obj.GetString(key), System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out _))
                         throw new FormatException("Structure " + key + " must be an integer");
             }
@@ -104,7 +121,17 @@ namespace MapGenAI.MapGen
                 if (p.bounds.Length != 4 || p.bounds[0] >= p.bounds[2] || p.bounds[1] >= p.bounds[3]) throw new FormatException("bounds must be [west,south,east,north]");
                 foreach (var v in p.bounds) ShapeValidation.Range(v,0,1,"structure bounds");
             }
-            if (p.position == null && p.region == null && p.bounds == null) throw new FormatException("Specify structure position, region or bounds");
+            if(p.relation!=null)
+            {
+                var r=p.relation;
+                if(r.target!="river" && r.target!="water" && r.target!="mountain" && r.target!="region_edge")throw new FormatException("Relation target must be river/water/mountain/region_edge");
+                if(r.side!="any" && r.side!="north" && r.side!="south" && r.side!="east" && r.side!="west")throw new FormatException("Relation side must be any/north/south/east/west");
+                ShapeValidation.Range(r.min_distance,0,64,"minimum distance");ShapeValidation.Range(r.max_distance,r.min_distance,64,"maximum distance");
+                if(r.target=="region_edge" && p.region==null)throw new FormatException("region_edge requires a region ID");
+            }
+            if (p.position == null && p.region == null && p.bounds == null && p.relation==null) throw new FormatException("Specify structure position, region, bounds or relation");
+            if(p.rotation!=0 && p.rotation!=90 && p.rotation!=180 && p.rotation!=270)throw new FormatException("Structure rotation must be 0/90/180/270 degrees");
+            ShapeValidation.Range(p.spacing,1,60,"structure spacing");
             ShapeValidation.Range(p.width,5,31,"structure width"); ShapeValidation.Range(p.height,5,31,"structure height");
             ShapeValidation.Range(p.count,1,8,"structure count");
         }

@@ -126,6 +126,7 @@ namespace MapGenAI.RuntimeProbe
                     TextRegionProbe.Run(output,Require);
                     return; // Actual background Map Preview completes asynchronously.
                 }
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAISpatial",out _)){SpatialProbe.Run(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAICompoundResponses",out var compoundResponses))
                 {
                     CompoundProbe.Run(output,compoundResponses,Require);
@@ -299,6 +300,7 @@ namespace MapGenAI.RuntimeProbe
         public static void Update()
         {
             TextRegionProbe.Tick();
+            SpatialProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
             if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));

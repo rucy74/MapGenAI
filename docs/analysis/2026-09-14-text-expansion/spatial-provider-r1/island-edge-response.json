@@ -1,0 +1,26 @@
+{
+  "action": "generate",
+  "description": "가운데 섬(island)의 안쪽 가장자리에서 2~5칸 떨어진 위치에 9x7 크기의 폐허 3개를 최소 8칸 간격으로 배치하도록 설정했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ruins",
+          "kind": "ruin",
+          "region": "island",
+          "width": 9,
+          "height": 7,
+          "count": 3,
+          "spacing": 8,
+          "relation": {
+            "target": "region_edge",
+            "side": "any",
+            "min_distance": 2,
+            "max_distance": 5
+          }
+        }
+      }
+    ]
+  }
+}

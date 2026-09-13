@@ -14,7 +14,7 @@
 - `dev/Source/MapGen/MapGenParams.cs`, `WorldTileEditor.cs`, `MapGenAIWorldComponent.cs`: 타일 상태 적용, 원래 월드 특징과 외부 변경 보존, 타일별 상태 저장.
 - `dev/Source/MapGen/FeaturePolicy.cs`, `FeatureEditPrompt.cs`: 실제 Odyssey/외부 모드 정의·worker 조건을 프롬프트 후보와 적용/프리셋에 공유. 월드 River/Coast 연결은 보존하며 개별 변형 제거는 기본 연결로 복귀한다. 기존 저장의 전체 억제는 Load/생성 진입에서 이전한다. 확률·랜드마크 추첨 조건과 환경 조건을 구별한다. `-FeaturePolicy [-Landmarks] [-FeatureResponses 응답폴더]`로 실제 생성·Gemini 응답 재생을 검증한다. 이전 `-FeatureRemoval`도 현행 정책 검증으로 연결한다. [검증 보고서](docs/analysis/2026-09-13-feature-policy/report.md), [텍스트 우선 계획](docs/text-first-plan-ko.md).
 - `dev/Source/MapGen/RegionGrid.cs`, `TerrainMaterials.cs`: 기존 SDF/bump/ring이 산출한 내부 마스크·재료 층 공유, 활성 영구 TerrainDef 해석. 합성 도형의 최상위 fill은 렌더 영역 재료 override다. 강/바다/도로는 최종 채움에서 보호한다.
-- `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적의 적분 격자 탐색, 좌표/영역/경계 제약, 현재 ruin 생성기. 공간 부족 시 위치 지정 batch는 미생성·실패 보고. 향후 다른 구조물은 이 배치 경로에 별도 생성기를 연결한다.
+- `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적 탐색, 좌표/영역/경계·회전·최소 간격 제약, 현재 ruin 생성기. `SpatialRelation.cs`는 실제 강/물/산/영역 안쪽 경계의 정확한 유클리드 거리와 방향을 계산한다. 공간 부족/대상 부재 시 위치 지정 batch는 미생성·실패 보고. 다른 구조물은 같은 배치 경로에 생성기를 연결한다.
 - `Patches/AuthoringGenerationPatch.cs`: 생성별 추가 단계400(지형/도로 이후 재료),800(기존 구조물 이후·시작 지점 이전 폐허). `StructurePreviewPatch.cs`는 GenSpawn을 막는 Map Preview의 텍스처에 같은 벽 계획을 그린다. 실제 맵 건물과 별도로 검사하며 preview와 완성 맵의 충돌 조건은 다를 수 있다.
 - `ImageInput/ImageFeatureGate.cs`: 사용자 결정에 따라 false. UI 진입/적용과 생성 스냅샷에서 차단하며 저장 데이터를 삭제하지 않는다. 아래 이미지 경로는 재활성화 전까지 보관 코드다.
 - `dev/Source/MapGen/GenerationContext.cs`, `dev/Source/Patches/`: 생성할 타일의 고정 스냅샷과 RimWorld 생성 단계 연결. 공유 정의 변경은 finalizer에서도 복원한다.
