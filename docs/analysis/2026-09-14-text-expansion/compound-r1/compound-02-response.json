@@ -1,0 +1,1 @@
+{"action":"generate","description":"섬과 용암 해자를 [0.62, 0.58] 위치로 이동했습니다. 지정된 폐허 3개는 섬 영역 설정을 그대로 유지하여 함께 이동된 섬 내부에 배치됩니다.","params":{"shape_ops":[{"op":"move","id":"moat","position":[0.62,0.58]},{"op":"move","id":"island","position":[0.62,0.58]}]}}

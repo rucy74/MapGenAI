@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "용암 해자의 경계를 많이 울퉁불퉁하고 자연스럽게 변경했습니다. 섬과 내부 폐허, 위치 및 재료는 그대로 유지됩니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "moat",
+        "changes": {
+          "edge_roughness": "high"
+        }
+      }
+    ]
+  }
+}

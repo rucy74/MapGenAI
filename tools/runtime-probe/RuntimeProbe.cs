@@ -126,6 +126,12 @@ namespace MapGenAI.RuntimeProbe
                     TextRegionProbe.Run(output,Require);
                     return; // Actual background Map Preview completes asynchronously.
                 }
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAICompoundResponses",out var compoundResponses))
+                {
+                    CompoundProbe.Run(output,compoundResponses,Require);
+                    File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks}}));
+                    Application.Quit();return;
+                }
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageStates",out var states))
                 {RealImageProbe.Generate(states,output);Application.Quit();return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeatureRemoval",out _))

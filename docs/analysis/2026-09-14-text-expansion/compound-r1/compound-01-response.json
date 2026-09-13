@@ -1,0 +1,39 @@
+{
+  "action": "generate",
+  "description": "해자의 물을 깊은 용암(lava)으로 변경하고, 섬 내부 폐허를 9x7 크기 3개로 수정했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "moat",
+        "changes": {
+          "compose": [
+            {
+              "op": "sub",
+              "from": "outer",
+              "a": "inner",
+              "b": null,
+              "outId": null,
+              "s": null,
+              "e": 0,
+              "fill": "lava",
+              "f": 0.002,
+              "k": 0
+            }
+          ]
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "update",
+        "id": "ruins_1",
+        "changes": {
+          "width": 9,
+          "height": 7,
+          "count": 3
+        }
+      }
+    ]
+  }
+}

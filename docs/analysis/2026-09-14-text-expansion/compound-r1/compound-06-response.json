@@ -1,0 +1,18 @@
+{
+  "action": "generate",
+  "description": "가운데 섬 지형과 해당 영역에 지정되었던 유적을 삭제하고, 식은 용암 해자와 환경 설정을 유지했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "remove",
+        "id": "island"
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "remove",
+        "id": "ruins_1"
+      }
+    ]
+  }
+}

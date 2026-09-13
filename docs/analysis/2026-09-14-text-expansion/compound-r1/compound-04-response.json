@@ -1,0 +1,37 @@
+{
+  "action": "generate",
+  "description": "해자의 용암을 식은 용암으로 변경하고, 섬의 폐허 개수를 1개로 줄였습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "moat",
+        "changes": {
+          "compose": [
+            {
+              "op": "sub",
+              "from": "outer",
+              "a": "inner",
+              "b": null,
+              "outId": null,
+              "s": null,
+              "fill": "cooled_lava",
+              "e": 0.0,
+              "f": 0.002,
+              "k": 0.0
+            }
+          ]
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "update",
+        "id": "ruins_1",
+        "changes": {
+          "count": 1
+        }
+      }
+    ]
+  }
+}

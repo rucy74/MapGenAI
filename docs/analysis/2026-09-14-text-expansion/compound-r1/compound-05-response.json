@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 지형과 폐허 배치는 그대로 유지하고, 식생 밀도를 0.7, 동물 밀도를 0.4로 변경합니다.","params":{"vegetation_density":0.7,"animal_density":0.4}}
