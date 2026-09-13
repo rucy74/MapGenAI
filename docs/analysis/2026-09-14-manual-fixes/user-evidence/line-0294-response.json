@@ -1,0 +1,35 @@
+{
+  "action": "generate",
+  "description": "왼쪽 산맥 중앙(z=0.5)을 동서로 관통하는 너비 약 8%의 협곡 통로를 파냈습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "west_canyon_pass",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "canyon_cut",
+              "prim": "rect",
+              "center": [
+                0.25,
+                0.5
+              ],
+              "w": 0.6,
+              "h": 0.08
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "canyon_cut",
+              "e": -1.2,
+              "f": 0.03
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

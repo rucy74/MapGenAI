@@ -1,0 +1,33 @@
+{
+  "action": "generate",
+  "description": "왼쪽 산맥 중앙(z=0.5)을 동서로 관통하는 너비 8%의 평탄한 마른 통로를 추가했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "west_canyon_pass",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "cut_pass",
+              "prim": "rect",
+              "center": [0.2, 0.5],
+              "w": 0.45,
+              "h": 0.08
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "cut_pass",
+              "fill": "soil",
+              "e": 0.05,
+              "f": 0.01
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "기존 해자의 형태와 중앙 섬, 폐허 배치를 그대로 유지하고 해자의 물을 실제 깊은 용암(LavaDeep)으로 변경했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "water_moat",
+        "changes": {
+          "fill": "LavaDeep"
+        }
+      }
+    ]
+  }
+}

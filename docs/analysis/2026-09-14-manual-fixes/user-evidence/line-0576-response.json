@@ -1,0 +1,40 @@
+{
+  "action": "generate",
+  "description": "해자의 물을 깊은 용암(LavaDeep)으로 변경했습니다. 중앙 섬과 폐허 구조물은 그대로 유지됩니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "water_moat",
+        "changes": {
+          "compose": [
+            {
+              "a": "inner",
+              "b": null,
+              "e": 0,
+              "f": 0.05,
+              "fill": null,
+              "from": "outer",
+              "k": 0,
+              "op": "sub",
+              "outId": "moat",
+              "s": null
+            },
+            {
+              "a": null,
+              "b": null,
+              "e": 0,
+              "f": 0.05,
+              "fill": "LavaDeep",
+              "from": null,
+              "k": 0,
+              "op": "add",
+              "outId": null,
+              "s": "moat"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

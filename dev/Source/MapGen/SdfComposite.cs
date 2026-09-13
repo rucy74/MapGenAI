@@ -348,8 +348,13 @@ namespace MapGenAI.MapGen
                         {
                             fertilityGrid[cell] = 1f; // 해변
                         }
-                        // elevation도 있으면 적용
-                        if (elevation != 0f && !isWater)
+                        // A dry cut has the same absolute target with or without a fill.
+                        // Adding 0.05 to the old mountain leaves rocks until the late terrain pass.
+                        if (!isWater && elevation > 0f && elevation < 0.1f)
+                        {
+                            if (t > 0.3f) elevGrid[cell] = elevation;
+                        }
+                        else if (elevation != 0f && !isWater)
                             elevGrid[cell] += t * elevation;
                     }
                     else if (isWater && fertilityGrid != null)

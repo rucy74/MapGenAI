@@ -1,0 +1,37 @@
+{
+  "action": "generate",
+  "description": "왼쪽의 남북 산맥과 오른쪽 아래 작은 원형 호수 생성",
+  "params": {
+    "elevation_shapes": [
+      {
+        "type": "ridge",
+        "direction": "left",
+        "strength": "strong",
+        "fade": "small",
+        "noise_amount": "high"
+      },
+      {
+        "type": "composite",
+        "shapes": [
+          {
+            "id": "lake_circle",
+            "prim": "circle",
+            "center": [
+              0.75,
+              0.25
+            ],
+            "r": 0.15
+          }
+        ],
+        "compose": [
+          {
+            "op": "add",
+            "s": "lake_circle",
+            "fill": "water",
+            "e": -0.5
+          }
+        ]
+      }
+    ]
+  }
+}

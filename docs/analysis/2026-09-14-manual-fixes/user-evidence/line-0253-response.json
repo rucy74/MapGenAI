@@ -1,0 +1,32 @@
+{
+  "action": "generate",
+  "description": "오른쪽 아래 호수(terrain_2)의 크기를 약 30% 확대했습니다 (반지름 0.15 -> 0.195). 양쪽 산 지형은 그대로 유지됩니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "terrain_2",
+        "changes": {
+          "shapes": [
+            {
+              "center": [
+                0.75,
+                0.25
+              ],
+              "h": 0,
+              "id": "lake_circle",
+              "n": 0,
+              "prim": "circle",
+              "r": 0.195,
+              "r2": 0,
+              "rot": 0,
+              "size": 0,
+              "verts": null,
+              "w": 0
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "기존 해자의 형태와 내부 섬, 유적 배치는 유지하고 해자의 채움 재료를 깊은 용암(LavaDeep)으로 변경했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "water_moat",
+        "changes": {
+          "fill": "LavaDeep"
+        }
+      }
+    ]
+  }
+}

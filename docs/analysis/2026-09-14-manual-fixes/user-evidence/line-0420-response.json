@@ -1,0 +1,20 @@
+{
+  "action": "generate",
+  "description": "중앙 흙 섬(center_island) 내부에 가로 11칸, 세로 9칸 크기의 폐허 2개를 서로 최소 8칸 이상 떨어지도록 배치했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ruins",
+          "kind": "ruin",
+          "region": "center_island",
+          "width": 11,
+          "height": 9,
+          "count": 2,
+          "spacing": 8
+        }
+      }
+    ]
+  }
+}

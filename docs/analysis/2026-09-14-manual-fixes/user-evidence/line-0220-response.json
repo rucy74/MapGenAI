@@ -1,0 +1,33 @@
+{
+  "action": "generate",
+  "description": "왼쪽 산맥과 오른쪽 아래 호수를 유지한 채, 오른쪽 위에 원형 산을 추가했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "mountain_top_right",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "c_mountain",
+              "prim": "circle",
+              "center": [
+                0.75,
+                0.75
+              ],
+              "r": 0.15
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "c_mountain",
+              "e": 0.7
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

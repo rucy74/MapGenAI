@@ -1,0 +1,20 @@
+{
+  "action": "generate",
+  "description": "중앙의 흙 섬(soil_island) 내부에 가로 11, 세로 9 크기의 폐허 2개를 서로 최소 8칸 이상 떨어지도록 배치했습니다. 섬의 실제 가용 공간에 맞춰 생성 시 전체가 섬 안에 들어가도록 시도됩니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ruins_new",
+          "kind": "ruin",
+          "region": "soil_island",
+          "width": 11,
+          "height": 9,
+          "count": 2,
+          "spacing": 8
+        }
+      }
+    ]
+  }
+}

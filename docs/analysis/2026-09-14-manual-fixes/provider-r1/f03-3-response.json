@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 섬과 폐허 배치는 그대로 유지하고, 해자의 채움 재료를 물에서 깊은 용암(LavaDeep)으로 변경했습니다.","params":{"shape_ops":[{"op":"update","id":"water_moat","changes":{"fill":"LavaDeep"}}]}}

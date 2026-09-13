@@ -1,0 +1,75 @@
+{
+  "action": "generate",
+  "description": "중앙에 바깥지름 65%, 안쪽 섬 지름 28%인 도넛형 물 해자와 평평한 원형 흙 섬 생성",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "moat",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "outer_water",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.325
+            },
+            {
+              "id": "inner_hole",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.14
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner_hole",
+              "from": "outer_water",
+              "out": "ring_moat"
+            },
+            {
+              "op": "add",
+              "s": "ring_moat",
+              "fill": "water",
+              "e": 0
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "center_island",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "island_circle",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.14
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "island_circle",
+              "fill": "soil",
+              "e": 0.05
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

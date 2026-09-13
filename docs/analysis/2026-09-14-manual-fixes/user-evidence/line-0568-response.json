@@ -1,0 +1,31 @@
+{
+  "action": "generate",
+  "description": "해자와 흙 섬을 오른쪽으로 10%(x=0.6) 이동시키고, 해자의 윤곽을 자연스럽게 조정했습니다. 섬 내부의 폐허는 이동한 영역을 그대로 따라갑니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "water_moat",
+        "changes": {
+          "edge_roughness": "medium"
+        }
+      },
+      {
+        "op": "move",
+        "id": "water_moat",
+        "position": [
+          0.6,
+          0.5
+        ]
+      },
+      {
+        "op": "move",
+        "id": "soil_island",
+        "position": [
+          0.6,
+          0.5
+        ]
+      }
+    ]
+  }
+}

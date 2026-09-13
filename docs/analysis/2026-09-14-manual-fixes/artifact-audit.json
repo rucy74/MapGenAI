@@ -1,0 +1,19 @@
+{
+  "created": "2026-09-14T01:45:36.649559+09:00",
+  "baseCommit": "4401841c6f6ba442138101790f36e327de0ec26c",
+  "sourceDllSha256": "0759f7031d699212f47d334d57122556c4fda11d5a356c6f1c2c3d0fac7a4b14",
+  "offlineTests": 103,
+  "fullMaps": 12,
+  "backgroundPreviews": 2,
+  "nativeChecks": 82,
+  "providerIndependentFirstAttempts": 9,
+  "temporaryModsRemoved": true,
+  "checkedFiles": 201,
+  "secretMatches": 0,
+  "preservedRefs": [
+    "main",
+    "v1.6",
+    "dev-text-baseline-2026-09-14"
+  ],
+  "limits": "Known configured keys and Google/private-key patterns only. F03 first failure not identified; nine repeated requests do not establish universal success."
+}

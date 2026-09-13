@@ -1,0 +1,1 @@
+{"action":"generate","description":"왼쪽 산맥의 중앙을 가로지르는 너비 8%의 동서 방향 마른 협곡 통로를 추가했습니다. 기존 호수와 오른쪽 위 산맥은 그대로 유지됩니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"west_pass","type":"composite","shapes":[{"id":"pass_rect","prim":"rect","center":[0.25,0.5],"w":0.55,"h":0.08}],"compose":[{"op":"add","s":"pass_rect","fill":"soil","e":0.05,"f":0.01}]}}]}}

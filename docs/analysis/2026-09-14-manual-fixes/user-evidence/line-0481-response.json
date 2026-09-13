@@ -1,0 +1,89 @@
+{
+  "action": "generate",
+  "description": "중앙 도넛 모양 물 해자와 내부 흙 섬, 섬 내부 폐허 2개 배치",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "water_moat",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "outer",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.325
+            },
+            {
+              "id": "inner",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.14
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner",
+              "from": "outer",
+              "out": "moat"
+            },
+            {
+              "op": "add",
+              "s": "moat",
+              "fill": "water",
+              "e": 0
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "soil_island",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "island_circle",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.14
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "island_circle",
+              "fill": "soil",
+              "e": 0.05
+            }
+          ]
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ruins",
+          "kind": "ruin",
+          "region": "soil_island",
+          "width": 11,
+          "height": 9,
+          "count": 2,
+          "spacing": 8
+        }
+      }
+    ]
+  }
+}

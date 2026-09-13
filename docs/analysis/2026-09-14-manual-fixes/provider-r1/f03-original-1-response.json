@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "중앙 섬과 폐허의 형태를 유지한 채, 둘러싼 해자의 물을 깊은 용암(LavaDeep)으로 변경했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "moat",
+        "changes": {
+          "fill": "LavaDeep"
+        }
+      }
+    ]
+  }
+}

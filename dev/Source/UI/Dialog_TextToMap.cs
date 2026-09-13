@@ -183,13 +183,13 @@ elevation_shapes 가이드:
 - ring: 도넛 형태 산맥/호수. position으로 중심, size로 링 반경, strength로 높이. fill=water로 링 호수. 분화구/원형 요새 지형에 적합.
 - composite: ★자유 형태★ 기본 도형(원/삼각형/사각형/별/하트)을 조합하여 어떤 모양이든 표현.
   shapes: 도형 목록. compose: 합치기(union)/빼기(sub) 연산 체인 → 최종 형태.
-  e>0 = 언덕, e<0 = 호수. 원·별·하트·도넛 등 모양을 명시하면 composite. 모양 없는 일반 호수/언덕은 기존 bump. composite의 edge_roughness는 생략/none=정확, low/medium/high 또는0~1=자연스러운 윤곽.
+  e>=0.1 = 언덕 추가, 0<e<0.1 = 기존 높이를 평지로 교체(마른 통로는 fill:soil + e:0.05). 호수는 fill:water를 명시하세요. fill 없는 e<0는 구버전 호수 표기이므로 통로에 사용하지 마세요. 원·별·하트·도넛 등 모양을 명시하면 composite. 모양 없는 일반 호수/언덕은 기존 bump. composite의 edge_roughness는 생략/none=정확, low/medium/high 또는0~1=자연스러운 윤곽.
   좌표계: [x,z] 정규화 0~1. x=0 왼쪽, x=1 오른쪽, z=0 아래, z=1 위. ""오른쪽 아래""=[0.75,0.25], ""왼쪽 위""=[0.25,0.75].
   도형: circle(center,r), rect(center,w,h), tri(verts 3개), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
   연산: add(단일), union(합치기, k>0이면 매끄럽게), sub(빼기, 구멍)
   예: 별 언덕: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
-  예: 하트 호수: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
-  예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  예: 하트 호수: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",fill:""water"",e:0}]
+  예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",fill:""water"",e:0}]
   초승달 팁: 빼는 원(b)의 중심을 크게 이동시키고 반지름을 같거나 비슷하게. 중심 차이가 클수록 얇은 초승달.
 - 여러 shape를 조합 가능 (additive). ""왼쪽에 산 + 오른쪽에도 산"" = [ridge(left), ridge(right)].
 - 기존 지형 편집은 아래 shape_ops 계약을 따릅니다. 요청한 대상만 수정하고 다른 지형은 생략하세요.
@@ -229,13 +229,13 @@ elevation_shapes guide:
 - ring: Donut-shaped mountain range/lake. Use position for center, size for ring radius, strength for height. fill=water for ring lake. Suitable for craters/circular fortress terrain.
 - composite: ★Free-form shapes★ Combine primitives (circle/triangle/rectangle/star/heart) to create any shape.
   shapes: list of primitives. compose: boolean chain (union/sub) → final shape.
-  e>0 = hill, e<0 = lake. Explicit circle/star/heart/donut shapes use composite; generic lakes/hills use legacy bump. Composite edge_roughness omitted/none=precise, low/medium/high or0..1=natural outline.
+  e>=0.1 adds a hill; 0<e<0.1 sets an absolute flat height (dry passage: fill:soil + e:0.05). Lakes must explicitly use fill:water. Negative e without fill is legacy lake notation, never a dry cut. Explicit circle/star/heart/donut shapes use composite; generic lakes/hills use legacy bump. Composite edge_roughness omitted/none=precise, low/medium/high or0..1=natural outline.
   Coordinates: [x,z] normalized 0~1. x=0 left, x=1 right, z=0 bottom, z=1 top. ""bottom right""=[0.75,0.25], ""top left""=[0.25,0.75].
   Primitives: circle(center,r), rect(center,w,h), tri(verts x3), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
   Operations: add(single), union(combine, k>0 for smooth), sub(subtract, hole)
   Ex: Star hill: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
-  Ex: Heart lake: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",e:-0.5}]
-  Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
+  Ex: Heart lake: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",fill:""water"",e:0}]
+  Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",fill:""water"",e:0}]
   Crescent tip: move b's center far from a, keep radius similar. Bigger center gap = thinner crescent.
 - Multiple shapes can be combined (additive). ""mountains left + right"" = [ridge(left), ridge(right)].
 - For existing terrain use the shape_ops contract below. Edit requested targets only; omit other terrain.
