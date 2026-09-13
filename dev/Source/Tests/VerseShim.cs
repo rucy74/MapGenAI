@@ -40,7 +40,10 @@ namespace Verse
     public class WorldGrid
     {
         public Dictionary<int, RimWorld.Planet.Tile> Tiles = new Dictionary<int, RimWorld.Planet.Tile>();
-        public RimWorld.Planet.Tile this[int index] => Tiles.TryGetValue(index, out var tile) ? tile : null;
+        public Dictionary<int, List<RimWorld.Planet.PlanetTile>> Neighbors = new Dictionary<int, List<RimWorld.Planet.PlanetTile>>();
+        public RimWorld.Planet.Tile this[int index] { get { if (!Tiles.TryGetValue(index, out var tile)) return null; tile.tile=index; return tile; } }
+        public void GetTileNeighbors(RimWorld.Planet.PlanetTile tile, List<RimWorld.Planet.PlanetTile> result)
+        { if(Neighbors.TryGetValue(tile, out var list)) result.AddRange(list); }
     }
 
     public static class Find
@@ -83,11 +86,38 @@ namespace RimWorld.Planet
         public List<string> categories = new List<string>();
         public List<string> overrideCategories = new List<string>();
         public int priority;
+        public List<RimWorld.BiomeDef> biomeWhitelist, biomeBlacklist;
+        public Verse.FloatRange animalDensityRange = new Verse.FloatRange(0, float.MaxValue), plantDensityRange = new Verse.FloatRange(0, float.MaxValue),
+            pollutionRange = new Verse.FloatRange(0,float.MaxValue), averageTemperatureRange = new Verse.FloatRange(float.MinValue,float.MaxValue);
+        public Verse.IntRange coastSidesRange = Verse.IntRange.Invalid;
+        public RimWorld.Hilliness minHilliness, maxHilliness;
+        public bool canSpawnOnRiver=true, canSpawnOnRoad=true;
+        public TileMutatorWorker Worker;
+        public bool everValid=true;
+        public bool EverValid() => everValid;
+    }
+
+    public class TileMutatorWorker
+    {
+        public Func<PlanetTile, bool> Eligibility = _ => true;
+        public bool IsValidTile(PlanetTile tile, Verse.WorldGrid layer) => Eligibility(tile);
+    }
+    public struct PlanetTile
+    {
+        public int tileId;
+        public Tile Tile => Verse.Find.WorldGrid[tileId];
+        public Verse.WorldGrid Layer => Verse.Find.WorldGrid;
+        public static implicit operator int(PlanetTile value) => value.tileId;
+        public static implicit operator PlanetTile(int value) => new PlanetTile{tileId=value};
     }
 
     public class Tile
     {
         public Hilliness hilliness;
+        public PlanetTile tile;
+        public RimWorld.BiomeDef PrimaryBiome = new RimWorld.BiomeDef{defName="TemperateForest"};
+        public float pollution, temperature=20;
+        public bool WaterCovered;
         public List<TileMutatorDef> Mutators { get; set; } = new List<TileMutatorDef>();
         public bool IsCoastal => false;
         public Action<TileMutatorDef> BeforeAdd;
@@ -104,7 +134,9 @@ namespace RimWorld.Planet
 
     public class SurfaceTile : Tile
     {
-        public List<object> Rivers { get; set; } = new List<object>();
+        public struct RiverLink { public PlanetTile neighbor; }
+        public List<RiverLink> Rivers { get; set; } = new List<RiverLink>();
+        public List<object> Roads { get; set; } = new List<object>();
     }
 }
 
@@ -113,12 +145,31 @@ namespace RimWorld.Planet
 // ============================================================
 namespace RimWorld
 {
+    public class BiomeDef { public string defName, label; public float animalDensity=1, plantDensity=1; }
+    public static class BiomeDefOf
+    {
+        public static BiomeDef Ocean = new BiomeDef{defName="Ocean"}, Lake = new BiomeDef{defName="Lake"};
+    }
     public enum Hilliness { Undefined, Flat, SmallHills, LargeHills, Mountainous, Impassable }
 }
 
 // Serialization calls are compile-only here. Actual save/load is checked in the game probe.
 namespace Verse
 {
+    public struct FloatRange
+    {
+        public float min,max; public FloatRange(float min,float max){this.min=min;this.max=max;}
+        public bool Includes(float value) => value >= min && value <= max;
+    }
+    public struct IntRange
+    {
+        public int min,max; public IntRange(int min,int max){this.min=min;this.max=max;}
+        public static IntRange Invalid => new IntRange(int.MinValue,int.MinValue);
+        public static bool operator ==(IntRange a,IntRange b)=>a.min==b.min&&a.max==b.max;
+        public static bool operator !=(IntRange a,IntRange b)=>!(a==b);
+        public override bool Equals(object obj)=>obj is IntRange other&&this==other;
+        public override int GetHashCode()=>min^max;
+    }
     public interface IExposable { void ExposeData(); }
     public struct IntVec3 { public int x, y, z; public IntVec3(int x, int y, int z) { this.x=x; this.y=y; this.z=z; } }
     public class Map { public IntVec3 Size; }

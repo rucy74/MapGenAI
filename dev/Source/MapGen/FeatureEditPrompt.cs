@@ -3,23 +3,25 @@ namespace MapGenAI.MapGen
     public static class FeatureEditPrompt
     {
         public static string Rules(bool korean) => korean ? @"
-기존 특징 편집:
-- actual_tile_features는 현재 타일의 실제 특징입니다(원래 특징 포함). added_mutators만 보고 기존 특징을 없다고 판단하지 마세요. 이름을 추측하지 말고 defName을 사용합니다.
-- 한 특징만 제거: params.remove_mutators:[""RiverDelta""]. 삼각주만 제거하면 일반 강은 유지합니다. 다른 강 변형도 같은 방식입니다. 현재 추가 후보 목록에서 숨겨진 기본 River/Coast/Mountain/Caves도 제거할 수 있습니다.
-- 강 전체 제거: params.river:{""present"":false} 또는 params.remove_categories:[""River""]. 삼각주·합류·강 섬 등 River 카테고리 전체를 생성하지 않습니다. 사용자 도형으로 만든 호수는 그대로입니다.
-- 다시 원래 강 계열을 복원: params.restore_categories:[""River""]. 이는 카테고리 억제를 해제하며 별도로 remove_mutators로 제거한 변형은 계속 제외합니다. 특정 변형을 다시 추가하려면 mutators에 이름을 보내세요.
-- remove_categories/restore_categories는 아래 실제 카테고리 이름을 사용합니다. 다른 카테고리에도 동일하게 작동합니다. 특정 특징 하나만 삭제할 때는 remove_mutators를 사용하세요. 억제된 카테고리에 새 특징을 추가하려면 같은 응답에 restore_categories도 보냅니다.
-- 강 제거는 선택한 정착지 맵 생성에 적용됩니다. 월드맵 강 연결선과 이웃 타일은 유지됩니다. river.present:true는 원래 강이 있는 타일의 생성 복원이며 강 없는 타일에 월드 강을 만드는 기능은 아닙니다. 사용자 물 도형은 별도의 shape_ops로 편집합니다.
-- 현재 모드는 용암 fill과 구조물의 좌표/영역 배치를 지원하지 않습니다. 물이나 밀도 설정으로 바꾸고 완료했다고 설명하지 마세요. action:ask로 현재 모드의 미지원 기능임을 설명합니다. 게임 엔진상 불가능하다고 단정하지 마세요. 대안은 사용자가 선택한 뒤 적용합니다.
+기존 특징 편집과 월드 지리 조건:
+- actual_tile_features는 원래 특징을 포함한 현재 실제 특징입니다. added_mutators만 보고 기존 특징을 없다고 판단하지 마세요. 정확한 defName을 사용합니다.
+- 월드의 바다·호수 해안 연결과 강 연결은 보존합니다. 내륙에 해안, 강 없는 타일에 월드 강을 추가하거나 기존 강·해안을 통째로 지우는 요청은 action:ask로 제한을 설명합니다. river.present:false, remove_categories:[""River""], [""Coast""]로 연결을 삭제하지 마세요.
+- 삼각주만 제거: params.remove_mutators:[""RiverDelta""]. 일반 강과 해안은 남습니다. 다른 강·해안 변형도 개별 제거하며, 원래 연결을 대신할 기본 강·해안은 자동 유지합니다. 기존 강의 direction_angle/x_position/z_position과 기존 해안의 coast_direction 변경은 가능합니다.
+- 삼각주는 강과 해안 하구가 모두 필요합니다. 합류점·발원지·호숫가는 각각 실제 강 연결 수·월드 호수 인접 조건을 따릅니다. Available 목록은 현재 설치된 Odyssey/확장 모드의 바이옴·언덕·온도·강·도로·해안 접면·생성기 조건을 반영합니다.
+- 내부 호수·오아시스·분화구 등은 해안이 없어도 해당 특징의 조건이 맞으면 mutators로 추가할 수 있습니다. 월드 지형을 바꾸어 조건을 억지로 맞추지 마세요. Unavailable 목록의 특징 요청은 이유를 설명하고 action:ask를 사용합니다. 지원되지 않는 요청을 다른 특징으로 바꾸거나 성공했다고 말하지 마세요.
+- 다른 내부 특징은 remove_mutators로 하나씩, remove_categories로 해당 종류 전체를 제거할 수 있습니다. restore_categories는 종류 억제만 해제합니다. 개별 remove_mutators로 제거했던 특징은 mutators로 다시 추가합니다. 억제 중인 종류에 추가하려면 같은 응답에 restore_categories도 보냅니다.
+- mutators는 실제 타일의 지형 특징을 바꾸지만 월드 랜드마크의 이름·아이콘을 새로 배치하는 명령은 아닙니다. 사용자 물 도형은 shape_ops로 따로 수정합니다.
+- 현재 모드는 용암 fill과 구조물의 좌표/영역 배치를 지원하지 않습니다. 물이나 밀도로 대신 적용하지 말고 action:ask로 현재 미지원임을 설명합니다. 게임 엔진상 불가능하다는 뜻은 아닙니다.
 " : @"
-Existing feature edits:
-- actual_tile_features lists actual current tile features including originals. Do not infer absence from added_mutators. Use exact defName values, never invented names.
-- Remove one feature with params.remove_mutators:[""RiverDelta""]. Removing a river variant retains an ordinary river. Base River/Coast/Mountain/Caves may be removed even if hidden in the addition catalog.
-- Remove all river generation: params.river:{""present"":false} or params.remove_categories:[""River""]. This suppresses all River-category variants, preserving custom shape lakes.
-- Restore original river-category generation with params.restore_categories:[""River""]. Named variants separately removed via remove_mutators remain excluded; re-add those through mutators when requested.
-- remove_categories/restore_categories use exact category names listed below, and apply to other categories as well. Use remove_mutators for a single feature. To add a feature in a suppressed category, include restore_categories in that request.
-- River removal affects the selected settlement's map generation; world river links and neighboring tiles remain. river.present:true restores generation on a natural river tile, not new world river links. Custom water shapes use shape_ops separately.
-- This mod currently does not support lava fill or coordinate/region-based structure placement. Never substitute water or density and claim success. Use action:ask to explain this mod's current limitation, not an impossibility in the game engine. Apply alternatives only after the user chooses one.
+Feature editing and world geography:
+- actual_tile_features includes original and current features. Use exact defName values, not guessed names or just added_mutators.
+- Preserve world river and ocean/lake shore connections. No inland coast, new world river on a riverless tile, or complete removal of an existing river/shore. Explain with action:ask. Do not delete connections with river.present:false or remove_categories:[""River""]/[""Coast""].
+- Remove a variant with remove_mutators:[""RiverDelta""]. Ordinary river and shore remain automatically. Other river/coast variants work similarly. Existing river direction_angle/x_position/z_position and coast_direction may be changed.
+- Delta requires both a world river and coastal outlet. Confluence, headwater and lakeshore require appropriate river links or an adjacent world lake. The Available catalog uses resolved Odyssey/mod biome, hilliness, temperature, river, road, coastal-side and worker conditions.
+- Internal lakes, oases and craters can be added via mutators on inland tiles when their own requirements match. Do not alter world geography to force eligibility. For an Unavailable feature explain its reason with action:ask, never silently substitute or claim success.
+- Remove an internal feature with remove_mutators, or its whole category with remove_categories. restore_categories only clears category suppression; named removed features require re-adding through mutators. To add in a suppressed category also include restore_categories.
+- Feature edits update actual tile mutators, not the world's named landmark identity/icon. Custom water shapes are edited separately with shape_ops.
+- Lava fill and coordinate/region-based structure placement are currently unsupported in this mod. Explain with action:ask, never substitute water/density. This is not a game engine impossibility.
 ";
     }
 }

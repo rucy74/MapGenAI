@@ -312,6 +312,8 @@ namespace MapGenAI.MapGen
             LastApplyWarning = null;
             LastWorldChanges = null;
             WorldTileEditor.ValidateFeatureRequest(data);
+            FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
+            UpgradeStoredFeaturePolicy(tileId);
             var previous = MapGenAIWorldComponent.Get()?.GetState(tileId);
             var candidate = MapStateEditor.Merge(previous, data);
             if (data.mutators != null)
@@ -402,6 +404,7 @@ namespace MapGenAI.MapGen
         /// <summary>WorldComponent에서 타일 상태를 로드하여 정적 필드에 적용.</summary>
         public static void LoadFromTile(int tileId)
         {
+            UpgradeStoredFeaturePolicy(tileId);
             var wc = MapGenAIWorldComponent.Get();
             var state = wc?.GetState(tileId);
             if (state != null)
@@ -415,6 +418,23 @@ namespace MapGenAI.MapGen
                 Reset();
                 CurrentTileId = tileId;
             }
+        }
+
+        public static void UpgradeStoredFeaturePolicy(int tileId)
+        {
+            var wc = MapGenAIWorldComponent.Get();
+            var state = wc?.GetState(tileId);
+            var tile = tileId < 0 ? null : Find.WorldGrid?[tileId];
+            if (state == null || tile == null || !FeaturePolicy.UpgradeStoredConnections(tile, state)) return;
+            var before = TileWorldSnapshot.Capture(tile);
+            var desired = tile.Mutators.ToList();
+            WorldTileEditor.EnsureConnections(tile, desired);
+            try { WorldTileEditor.Replace(tile, desired); }
+            catch { WorldTileEditor.Restore(tile, before); throw; }
+            wc.SetState(tileId, state);
+            wc.SetLastApplied(tileId, TileWorldSnapshot.Capture(tile));
+            LastApplyWarning = "이전 개발판의 강·해안 제거 설정을 해제하고 월드 연결을 복원했습니다 / Restored world connections suppressed by an older dev build.";
+            Log.Warning("[MapGenAI] " + LastApplyWarning);
         }
 
         /// <summary>Explicitly discard this tile's settings and restore its saved metadata baseline.</summary>

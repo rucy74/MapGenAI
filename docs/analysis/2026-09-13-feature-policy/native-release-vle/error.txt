@@ -1,0 +1,5 @@
+System.InvalidOperationException: full generation RiverDelta has river terrain and flow
+[Ref 27F7370C]
+  at MapGenAI.RuntimeProbe.RuntimeProbe.Require (System.Boolean condition, System.String label) [0x00009] in <43ac329895694048a25fbdc5544ac0fd>:0 
+  at MapGenAI.RuntimeProbe.FeaturePolicyProbe.Generate (System.String output, System.Action`2[T1,T2] check) [0x00ed8] in <43ac329895694048a25fbdc5544ac0fd>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.RunInWorld () [0x000b6] in <43ac329895694048a25fbdc5544ac0fd>:0 

@@ -1,0 +1,1 @@
+{"action":"generate","description":"삼각주 특징을 제거하고 기본 강과 해안 지형을 유지합니다.","params":{"remove_mutators":["RiverDelta"]}}

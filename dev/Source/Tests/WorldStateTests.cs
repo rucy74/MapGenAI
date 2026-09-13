@@ -23,27 +23,54 @@ static class WorldStateTests
     }
     public static void RunAll()
     {
-        Check("Explicit river deletion from default state suppresses delta, preserves links and custom lake",()=>
+        Check("World river deletion rejects the whole request and keeps map edits unchanged",()=>
         {
-            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new object());tile.AddMutator(DefDatabase<TileMutatorDef>.Definitions["RiverDelta"]);
-            var neighbor=TileWorldSnapshot.Capture(Find.WorldGrid[2]);
-            Apply(1,"{\"river\":{\"present\":false},\"shape_ops\":[{\"op\":\"add\",\"shape\":{\"id\":\"lake\",\"type\":\"bump\",\"fill\":\"water\"}}]}");
-            Equal(0,tile.Mutators.Count);Equal(1,tile.Rivers.Count);
-            var off=MapGenParams.CaptureState(1);Equal(true,off.removeFeatureCategories.Contains("River"));Equal(false,off.IsDefault());Equal(1,off.elevationShapes.Count);
-            Equal(true,MapStateCodec.Deserialize(MapStateCodec.Serialize(off)).removeFeatureCategories.Contains("River"));
-            Apply(1,"{\"animal_density\":1.2}");Equal(0,tile.Mutators.Count);
-            Apply(1,"{\"restore_categories\":[\"River\"]}");Equal("RiverDelta",tile.Mutators.Single().defName);
-            MapGenParams.RestoreSnapshot(off,1);Equal(0,tile.Mutators.Count);
-            MapGenParams.ClearTile(1);Equal("RiverDelta",tile.Mutators.Single().defName);
-            Equal(SimpleJson.Serialize(neighbor),SimpleJson.Serialize(TileWorldSnapshot.Capture(Find.WorldGrid[2])));
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});tile.AddMutator(DefDatabase<TileMutatorDef>.Definitions["RiverDelta"]);
+            var before=MapStateCodec.Serialize(MapGenParams.CaptureState(1));
+            foreach(string json in new[]{"{\"river\":{\"present\":false},\"animal_density\":1.2}","{\"remove_categories\":[\"River\"]}","{\"remove_mutators\":[\"River\"]}"}) Throws(()=>Apply(1,json));
+            Equal(before,MapStateCodec.Serialize(MapGenParams.CaptureState(1)));Equal("RiverDelta",tile.Mutators.Single().defName);Equal(1,tile.Rivers.Count);
         });
-        Check("Deleting only a river variant retains plain river and reset restores delta",()=>
+        Check("Deleting a river variant retains plain river and Undo restores delta",()=>
         {
-            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new object());tile.AddMutator(DefDatabase<TileMutatorDef>.Definitions["RiverDelta"]);
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});tile.AddMutator(DefDatabase<TileMutatorDef>.Definitions["RiverDelta"]);
             Apply(1,"{\"remove_mutators\":[\"RiverDelta\"]}");Equal("River",tile.Mutators.Single().defName);
-            Apply(1,"{\"river\":{\"present\":false}}");Equal(0,tile.Mutators.Count);
-            Apply(1,"{\"river\":{\"present\":true}}");Equal("River",tile.Mutators.Single().defName);
+            Apply(1,"{\"river\":{\"present\":true,\"direction_angle\":90}}");Equal("River",tile.Mutators.Single().defName);
             MapGenParams.ClearTile(1);Equal("RiverDelta",tile.Mutators.Single().defName);
+        });
+        Check("Resolved biome road hilliness and third-party worker conditions reject atomically",()=>
+        {
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];var def=DefDatabase<TileMutatorDef>.Definitions["Lake"];
+            Action reject=()=>{Throws(()=>Apply(1,"{\"mutators\":[\"Lake\"],\"animal_density\":1.7}"));Equal(0,tile.Mutators.Count);Equal(false,MapGenAIWorldComponent.Get().HasState(1));};
+            def.biomeBlacklist=new List<RimWorld.BiomeDef>{tile.PrimaryBiome};reject();def.biomeBlacklist=null;
+            def.minHilliness=RimWorld.Hilliness.Mountainous;reject();def.minHilliness=RimWorld.Hilliness.Undefined;
+            tile.Roads.Add(new object());def.canSpawnOnRoad=false;reject();def.canSpawnOnRoad=true;
+            def.Worker=new TileMutatorWorker{Eligibility=_=>false};reject();def.Worker.Eligibility=_=>true;
+            Apply(1,"{\"mutators\":[\"Lake\"]}");Equal("Lake",tile.Mutators.Single().defName);
+            MapGenParams.ClearTile(1);
+        });
+        Check("Inland coast and unavailable presets reject; internal lakes remain allowed",()=>
+        {
+            Setup();DefDatabase<TileMutatorDef>.Definitions["Coast"]=new TileMutatorDef{defName="Coast",categories=new List<string>{"Coast"}};
+            Throws(()=>Apply(1,"{\"mutators\":[\"Coast\"]}"));Throws(()=>Apply(1,"{\"coast_direction\":\"east\"}"));
+            var preset=new TileMapState();preset.mutators.Add("Coast");Throws(()=>MapGenParams.RestoreSnapshot(preset,1));
+            var riverPreset=new TileMapState{riverDirectionAngle=90};Throws(()=>MapGenParams.RestoreSnapshot(riverPreset,1));
+            Apply(1,"{\"mutators\":[\"Lake\"]}");Equal("Lake",Find.WorldGrid[1].Mutators.Single().defName);
+        });
+        Check("Stored legacy river suppression upgrades while imported suppression is rejected",()=>
+        {
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});
+            var old=new TileMapState();old.removeFeatureCategories.Add("River");old.animalDensity=1.3f;
+            Throws(()=>MapGenParams.RestoreSnapshot(old,1));
+            MapGenAIWorldComponent.Get().SetState(1,old);MapGenParams.LoadFromTile(1);
+            Equal("River",tile.Mutators.Single().defName);Equal(0,MapGenParams.CaptureState(1).removeFeatureCategories.Count);Equal(1.3f,MapGenParams.AnimalDensity);
+        });
+        Check("Pollution side effect rolls back on failed feature transaction and Reset",()=>
+        {
+            Setup();var tile=Find.WorldGrid[1];tile.pollution=.15f;
+            tile.BeforeAdd=d=>{tile.pollution+=.2f;if(d.defName=="B")throw new InvalidOperationException("injected");};
+            bool failed=false;try{Apply(1,"{\"mutators\":[\"A\",\"B\"]}");}catch(InvalidOperationException){failed=true;}
+            Equal(true,failed);Equal(.15f,tile.pollution);Equal(0,tile.Mutators.Count);
+            Apply(1,"{\"mutators\":[\"A\"]}");Equal(true,Math.Abs(.35f-tile.pollution)<.00001f);MapGenParams.ClearTile(1);Equal(.15f,tile.pollution);
         });
         Check("Generic category suppression restores baseline and requires explicit re-enable for additions",()=>
         {

@@ -1,0 +1,5 @@
+System.InvalidOperationException: twelve coastal river delta generations with direction overrides
+[Ref 83261573]
+  at MapGenAI.RuntimeProbe.RuntimeProbe.Require (System.Boolean condition, System.String label) [0x00009] in <f025bb354e8041ee92eed2b5b033bb17>:0 
+  at MapGenAI.RuntimeProbe.FeaturePolicyProbe.Generate (System.String output, System.Action`2[T1,T2] check) [0x00305] in <f025bb354e8041ee92eed2b5b033bb17>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.RunInWorld () [0x000b6] in <f025bb354e8041ee92eed2b5b033bb17>:0 

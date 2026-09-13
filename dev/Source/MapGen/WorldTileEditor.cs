@@ -12,13 +12,15 @@ namespace MapGenAI.MapGen
     {
         public List<string> mutators = new List<string>();
         public Hilliness hilliness;
+        public float pollution = -1f; // -1: snapshots from before pollution tracking.
         public void ExposeData()
         {
             Scribe_Collections.Look(ref mutators, "mutators", LookMode.Value);
             Scribe_Values.Look(ref hilliness, "hilliness", Hilliness.Undefined);
+            Scribe_Values.Look(ref pollution, "pollution", -1f);
             if (mutators == null) mutators = new List<string>();
         }
-        public static TileWorldSnapshot Capture(Tile tile) => new TileWorldSnapshot { mutators = tile.Mutators.Select(m => m.defName).ToList(), hilliness = tile.hilliness };
+        public static TileWorldSnapshot Capture(Tile tile) => new TileWorldSnapshot { mutators = tile.Mutators.Select(m => m.defName).ToList(), hilliness = tile.hilliness, pollution = tile.pollution };
     }
 
     public static class WorldTileEditor
@@ -41,11 +43,13 @@ namespace MapGenAI.MapGen
                 names.RemoveAll(n => applied.mutators.Contains(n) && !current.mutators.Contains(n));
                 foreach (var added in current.mutators.Except(applied.mutators)) if (!names.Contains(added)) names.Add(added);
             }
-            return new TileWorldSnapshot { mutators = names, hilliness = current.hilliness };
+            return new TileWorldSnapshot { mutators = names, hilliness = current.hilliness,
+                pollution = applied != null && applied.pollution == current.pollution && baseline.pollution >= 0 ? baseline.pollution : current.pollution };
         }
 
         public static List<TileMutatorDef> Plan(Tile tile, TileWorldSnapshot baseline, TileMapState state)
         {
+            FeaturePolicy.ValidateState(tile, state);
             var suppressed = new HashSet<string>(state.removeFeatureCategories);
             if (state.removeMutators.Contains("River")) suppressed.Add("River");
             var additions = state.mutators.Select(Resolve).Where(d => !d.categories.Any(suppressed.Contains)).ToList();
@@ -60,10 +64,6 @@ namespace MapGenAI.MapGen
             foreach (var added in additions)
             {
                 if (removals.Contains(added.defName)) throw new FormatException("Feature both enabled and removed: " + added.defName);
-                if (added.categories.Contains("River") && (!(tile is SurfaceTile surface) || surface.Rivers == null || surface.Rivers.Count == 0))
-                    throw new FormatException("River feature requires a natural river tile: " + added.defName);
-                if (added.categories.Contains("Coast") && !tile.IsCoastal && !baseline.mutators.Contains("Coast"))
-                    throw new FormatException("Coast feature requires a coastal tile: " + added.defName);
                 foreach (var old in result.ToList())
                 {
                     if (old == added) continue;
@@ -75,15 +75,31 @@ namespace MapGenAI.MapGen
                 }
                 if (!result.Contains(added)) result.Add(added);
             }
-            // Removing only a river variant means a normal river remains; world links stay intact.
-            bool removedRiverVariant = ResolveExisting(removals).Any(d => d.defName != "River" && d.categories.Contains("River"));
-            if (!suppressed.Contains("River") && !result.Any(d => d.categories.Contains("River")) && (state.hasRiver || removedRiverVariant))
+            result = result.Where(d => !d.categories.Any(suppressed.Contains)).ToList();
+            EnsureConnections(tile, result);
+            // Existing natural features stay editable even if another mod has changed their spawn rules.
+            // Newly added AND restored features use exactly the same policy as the prompt catalog.
+            foreach (var feature in result.Where(d => !tile.Mutators.Contains(d)))
             {
-                if (tile is SurfaceTile riverTile && riverTile.Rivers?.Count > 0) result.Add(Resolve("River"));
-                else if (state.hasRiver) throw new FormatException("This tile has no world river to restore; use a water shape for a custom channel.");
+                string reason = FeaturePolicy.UnavailableReason(feature, tile);
+                if (reason != null) throw new FormatException(feature.defName + ": " + reason);
             }
-            // Explicit category suppression also wins over convenience flags such as caves.
-            return result.Where(d => !d.categories.Any(suppressed.Contains)).ToList();
+            return result;
+        }
+
+        public static void EnsureConnections(Tile tile, List<TileMutatorDef> result)
+        {
+            var water = FeaturePolicy.WaterNeighbors(tile);
+            foreach (string name in new[] { FeaturePolicy.HasRiver(tile) ? "River" : null,
+                water.Count == 0 ? null : water.Any(t => t.PrimaryBiome == BiomeDefOf.Ocean) ? "Coast" : "Lakeshore" })
+            {
+                if (name == null) continue;
+                var connection = Resolve(name);
+                if (result.Any(d => d.categories.Any(connection.categories.Contains))) continue;
+                if (result.Any(d => d.overrideCategories.Any(connection.categories.Contains)))
+                    throw new FormatException("Feature would remove a protected world connection: " + name);
+                result.Add(connection);
+            }
         }
 
         static bool Conflict(TileMutatorDef a, TileMutatorDef b) => a.categories.Any(b.categories.Contains)
@@ -107,6 +123,7 @@ namespace MapGenAI.MapGen
         {
             Replace(tile, ResolveExisting(snapshot.mutators));
             if (restoreHilliness) tile.hilliness = snapshot.hilliness;
+            if (snapshot.pollution >= 0) tile.pollution = snapshot.pollution;
         }
     }
 }

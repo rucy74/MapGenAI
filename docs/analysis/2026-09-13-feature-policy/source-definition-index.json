@@ -1,0 +1,3334 @@
+{
+  "scope": "Raw installed XML, before inheritance and mod patches; runtime catalog is authoritative",
+  "definitions": [
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientStructureMutBase",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "AncientStructure"
+      ],
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "Desert",
+        "ExtremeDesert",
+        "Glowforest",
+        "Grasslands",
+        "GlacialPlain",
+        "LavaField",
+        "Scarlands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientGarrison",
+      "parent": "AncientStructureMutBase",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientStructure"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientWarehouse",
+      "parent": "AncientStructureMutBase",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientStructure"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientChemfuelRefinery",
+      "parent": "AncientStructureMutBase",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientStructure"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientInfestedSettlement",
+      "parent": "AncientStructureMutBase",
+      "abstract": false,
+      "categories": null,
+      "workerClass": "TileMutatorWorker_AncientStructure",
+      "requiresFactionOfDef": "Insect"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_AncientStructures.xml",
+      "name": "AncientLaunchSite",
+      "parent": "AncientStructureMutBase",
+      "abstract": false,
+      "categories": [
+        "AncientStructure"
+      ],
+      "workerClass": "TileMutatorWorker_AncientStructure",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ],
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientRuins",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientRuins",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientRuins_Frozen",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientRuins_Frozen",
+      "biomeWhitelist": [
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientQuarry",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientQuarry",
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "BaseAncientVentMut",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "AncientVent"
+      ],
+      "biomeWhitelist": [
+        "Scarlands",
+        "BorealForest",
+        "TemperateForest",
+        "TropicalRainforest",
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "Grasslands"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientSmokeVent",
+      "parent": "BaseAncientVentMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientSmokeVent"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientToxVent",
+      "parent": "BaseAncientVentMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientToxVent"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientHeatVent",
+      "parent": "BaseAncientVentMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientHeatVent",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AbandonedColonyMutatorBase",
+      "parent": null,
+      "abstract": true,
+      "biomeBlacklist": [
+        "Scarlands",
+        "SeaIce",
+        "IceSheet"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AbandonedColonyTribal",
+      "parent": "AbandonedColonyMutatorBase",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AbandonedColonyTribal"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AbandonedColonyOutlander",
+      "parent": "AbandonedColonyMutatorBase",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AbandonedColonyOutlander"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "Harbor",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Harbor",
+      "biomeBlacklist": [
+        "Scarlands",
+        "SeaIce",
+        "IceSheet"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "Stockpile",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Stockpile",
+      "biomeBlacklist": [
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "AncientUplink",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AncientUplink"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "AnimalLife_Increased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "AnimalLife"
+      ],
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~4"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "AnimalLife_Decreased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "AnimalLife"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "AnimalHabitat",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_AnimalHabitat",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "PlantLife_Increased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "PlantLife"
+      ],
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ],
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0.0001~0.7"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "PlantLife_Decreased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "PlantLife"
+      ],
+      "plantDensityRange": "0.3~4"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "PlantGrove",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "WildPlants"
+      ],
+      "workerClass": "TileMutatorWorker_PlantGrove",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "ColdBog",
+        "BorealForest",
+        "TropicalSwamp",
+        "TropicalRainforest",
+        "Glowforest"
+      ],
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0.3~4"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "WildPlants_Base",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "WildPlants"
+      ],
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0.3~4"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "WildPlants",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "GlacialPlain",
+        "Grasslands",
+        "LavaField",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "WildTropicalPlants",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeWhitelist": [
+        "TropicalRainforest",
+        "TropicalSwamp"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "Junkyard",
+      "parent": null,
+      "abstract": false,
+      "maxHilliness": "SmallHills"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "SteamGeysers_Increased",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "Grasslands",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "MineralRich",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_MineralRich",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "ArcheanTrees",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_ArcheanTrees",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "GlacialPlain",
+        "Grasslands",
+        "LavaField",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "pollutionRange": "0~0.25"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "FoggyMutator",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Grasslands",
+        "Glowforest",
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "SunnyMutator",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeBlacklist": [
+        "Glowforest"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "WetClimate",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "IceSheet",
+        "SeaIce",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Glowforest"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "WindyMutator",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "IceSheet",
+        "SeaIce",
+        "Tundra",
+        "Grasslands",
+        "GlacialPlain",
+        "LavaField",
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "Pollution_Increased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Pollution"
+      ],
+      "workerClass": "TileMutatorWorker_IncreasedPollution"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "Fish_Increased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Fish"
+      ],
+      "biomeBlacklist": [
+        "Scarlands",
+        "Desert",
+        "ExtremeDesert"
+      ],
+      "pollutionRange": "0~0.25"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "Fish_Decreased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Fish"
+      ],
+      "biomeBlacklist": [
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "DryGround",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Groundwater"
+      ],
+      "biomeWhitelist": [
+        "Scarlands",
+        "BorealForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Modifiers.xml",
+      "name": "ObsidianDeposits",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_ObsidianDeposits",
+      "biomeWhitelist": [
+        "LavaField"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Headwater",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River",
+        "Lake"
+      ],
+      "workerClass": "TileMutatorWorker_Headwater"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "RiverConfluence",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "TileMutatorWorker_RiverConfluence"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "RiverIsland",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "TileMutatorWorker_RiverIsland",
+      "canSpawnOnLandmark": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "RiverDelta",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "TileMutatorWorker_RiverDelta",
+      "canSpawnOnRoad": "false",
+      "canSpawnOnLandmark": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "BaseLakeMut",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "Lake"
+      ],
+      "biomeWhitelist": [
+        "BorealForest",
+        "GlacialPlain",
+        "Glowforest",
+        "TemperateForest",
+        "TropicalRainforest",
+        "Grasslands",
+        "Tundra"
+      ],
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Lake",
+      "parent": "BaseLakeMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Lake"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LakeWithIsland",
+      "parent": "BaseLakeMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_LakeWithIsland",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LakeWithIslands",
+      "parent": "LakeWithIslandMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_LakeWithIslands"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Pond",
+      "parent": "BaseLakeMut",
+      "abstract": false,
+      "categories": [
+        "Groundwater"
+      ],
+      "workerClass": "TileMutatorWorker_Pond",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "GlacialPlain",
+        "Glowforest",
+        "Grasslands",
+        "TemperateForest",
+        "TropicalRainforest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Oasis",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake",
+        "Groundwater"
+      ],
+      "workerClass": "TileMutatorWorker_Oasis",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert"
+      ],
+      "canSpawnOnRiver": "false",
+      "averageTemperatureRange": "20~60"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "DryLake",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "TileMutatorWorker_DryLake",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert",
+        "Tundra",
+        "AridShrubland",
+        "Grasslands"
+      ],
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "ToxicLake",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "TileMutatorWorker_ToxicLake",
+      "biomeWhitelist": [
+        "Glowforest",
+        "Scarlands"
+      ],
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Wetland",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Wetland",
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "Glowforest",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "HotSprings",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "TileMutatorWorker_HotSprings",
+      "biomeWhitelist": [
+        "BorealForest",
+        "LavaField",
+        "TemperateForest",
+        "Tundra",
+        "GlacialPlain"
+      ],
+      "minHilliness": "Mountainous",
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Valley",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Valley",
+      "minHilliness": "Mountainous",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Cavern",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves",
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Cavern",
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Chasm",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Chasm",
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Crevasse",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "TileMutatorWorker_Crevasse",
+      "biomeWhitelist": [
+        "GlacialPlain"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Plateau",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Plateau",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Grasslands",
+        "Glowforest",
+        "Desert",
+        "Tundra"
+      ],
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "IceDunes",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_IceDunes",
+      "biomeWhitelist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Cliffs",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Cliffs",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "Desert",
+        "ExtremeDesert",
+        "Glowforest",
+        "Grasslands",
+        "IceSheet",
+        "LavaField",
+        "SeaIce",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Hollow",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Hollow",
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Basin",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain",
+        "Groundwater"
+      ],
+      "workerClass": "TileMutatorWorker_Basin",
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "GlacialPlain",
+        "Glowforest",
+        "Grasslands",
+        "LavaField",
+        "Scarlands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "TerraformingScar",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_TerraformingScar",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "Desert",
+        "ExtremeDesert",
+        "Glowforest",
+        "Grasslands",
+        "LavaField",
+        "Scarlands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Lakeshore",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "workerClass": "TileMutatorWorker_Lakeshore"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "BaseCoastMut",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "Desert",
+        "ExtremeDesert",
+        "GlacialPlain",
+        "Glowforest",
+        "Grasslands",
+        "LavaField",
+        "Scarlands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "coastSidesRange": "1~5"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Archipelago",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Archipelago",
+      "biomeBlacklist": [
+        "SeaIce"
+      ],
+      "coastSidesRange": "2~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "CoastalIsland",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_CoastalIsland",
+      "biomeBlacklist": [
+        "SeaIce"
+      ],
+      "coastSidesRange": "3~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Peninsula",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Peninsula",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Bay",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Bay",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Cove",
+      "parent": "Bay",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Cove"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "CoastalAtoll",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_CoastalAtoll",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "Grasslands",
+        "TemperateForest",
+        "TropicalRainforest"
+      ],
+      "maxHilliness": "SmallHills",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Iceberg",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Iceberg",
+      "biomeWhitelist": [
+        "SeaIce",
+        "IceSheet",
+        "Tundra",
+        "ColdBog",
+        "BorealForest"
+      ],
+      "coastSidesRange": "3~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false",
+      "averageTemperatureRange": "-100~0"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Fjord",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Fjord",
+      "minHilliness": "Mountainous",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "BaseLavaLakeMut",
+      "parent": null,
+      "abstract": true,
+      "categories": [
+        "Lake"
+      ],
+      "biomeWhitelist": [
+        "LavaField"
+      ],
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LavaLake",
+      "parent": "BaseLavaLakeMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_LavaLake"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LavaCrater",
+      "parent": "BaseLavaLakeMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_LavaCrater"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LavaFlow",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake",
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_LavaFlow",
+      "biomeWhitelist": [
+        "LavaField"
+      ],
+      "maxHilliness": "SmallHills",
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "LavaCaves",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves"
+      ],
+      "workerClass": "TileMutatorWorker_LavaCaves"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "IceCaves",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves"
+      ],
+      "workerClass": "TileMutatorWorker_IceCaves"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "CaveLakes",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves",
+        "Groundwater"
+      ],
+      "workerClass": "TileMutatorWorker_CaveLakes"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "BasePatch",
+      "parent": null,
+      "abstract": true,
+      "workerClass": "TileMutatorWorker_Patches"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Marshy",
+      "parent": "BasePatch",
+      "abstract": false,
+      "categories": [
+        "Groundwater"
+      ],
+      "biomeWhitelist": [
+        "Grasslands",
+        "TemperateForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Sandy",
+      "parent": "BasePatch",
+      "abstract": false,
+      "biomeWhitelist": [
+        "TropicalRainforest",
+        "TemperateForest",
+        "Tundra",
+        "Grasslands",
+        "LavaField",
+        "Glowforest",
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Fertile",
+      "parent": "BasePatch",
+      "abstract": false,
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "Glowforest",
+        "Grasslands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp"
+      ],
+      "pollutionRange": "0~0.25"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Muddy",
+      "parent": "BasePatch",
+      "abstract": false,
+      "categories": [
+        "Groundwater"
+      ],
+      "biomeWhitelist": [
+        "Grasslands",
+        "TemperateForest",
+        "Tundra",
+        "ColdBog",
+        "TemperateSwamp",
+        "TropicalSwamp"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "MixedBiome",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_MixedBiome",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "BorealForest",
+        "ColdBog",
+        "Desert",
+        "ExtremeDesert",
+        "GlacialPlain",
+        "Grasslands",
+        "IceSheet",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Natural.xml",
+      "name": "Dunes",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Dunes",
+      "biomeWhitelist": [
+        "ExtremeDesert"
+      ],
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "game",
+      "file": "Odyssey/Defs/TileMutators/TileMutators_Special.xml",
+      "name": "InsectMegahive",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_InsectMegahive",
+      "minHilliness": "Mountainous",
+      "requiresFactionOfDef": "Insect"
+    },
+    {
+      "origin": "game",
+      "file": "Core/Defs/MapGeneration/TileMutators.xml",
+      "name": "Mountain",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Mountain"
+    },
+    {
+      "origin": "game",
+      "file": "Core/Defs/MapGeneration/TileMutators.xml",
+      "name": "Caves",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves",
+        "BaseCaves"
+      ],
+      "workerClass": "TileMutatorWorker_Caves"
+    },
+    {
+      "origin": "game",
+      "file": "Core/Defs/MapGeneration/TileMutators.xml",
+      "name": "Coast",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "workerClass": "TileMutatorWorker_Coast"
+    },
+    {
+      "origin": "game",
+      "file": "Core/Defs/MapGeneration/TileMutators.xml",
+      "name": "River",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "TileMutatorWorker_River"
+    },
+    {
+      "origin": "game",
+      "file": "Core/Defs/MapGeneration/TileMutators.xml",
+      "name": "UndergroundCave",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Caves"
+      ],
+      "workerClass": "TileMutatorWorker_UndergroundCave"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_AbundantPredators",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Predators",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_ReducedPredators",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ReducedPredators",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_AbundantPrey",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Prey",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_ReducedPrey",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ReducedPrey",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_NaturalAerie",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Aerie",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_MarineSanctuary",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_MarineSanctuary",
+      "coastSidesRange": "1~5",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_NocturnalFauna",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Nocturnal",
+      "biomeWhitelist": [
+        "BorealForest",
+        "TemperateForest",
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "TropicalRainforest",
+        "TropicalSwamp"
+      ],
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_RodentPlagues",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "biomeBlacklist": [
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_VenomousEcosystem",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Venomous",
+      "pollutionRange": "0~0.25",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_ColossalFauna",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalSize"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_Microfauna",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalSize"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_Alphabeavers",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "Tundra",
+        "AridShrubland"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_MigratoryHerds",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "Tundra",
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_FeralKinship",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalWildness"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_DistressedWildlife",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalWildness"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_AggressiveHerds",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalWildness"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_DomesticatedEscapees",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "biomeBlacklist": [
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_NobleSteeds",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "biomeBlacklist": [
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_WanderingCompanions",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_WastelandFauna",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_AnimalDensities"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "pollutionRange": "0.5~1",
+      "animalDensityRange": "0.3~7"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_IncreasedInfestations",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Animals.xml",
+      "name": "VEE_Megafauna",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "biomeBlacklist": [
+        "SeaIce",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Biological.xml",
+      "name": "VEE_NoDiseases",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Diseases"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Biological.xml",
+      "name": "VEE_ReducedDiseases",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Diseases"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Biological.xml",
+      "name": "VEE_IncreasedDiseases",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Diseases"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_SteamGeysers_Decreased",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Geothermal_GeyserAmount",
+        "VEE_Geothermal_NotHigh"
+      ],
+      "biomeBlacklist": [
+        "Grasslands",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_RotstinkVents",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_GenericPrefabSpawner",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_ToxicVents",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_GenericPrefabSpawner",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_SmokeVents",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_GenericPrefabSpawner",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_DeadlifeVents",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_GenericPrefabSpawner",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_MineralDevoid",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Minerals"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_MineralDevoid",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_Fertility_Reduced",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Fertility"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveFertileSoils",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert",
+        "Desert",
+        "Scarlands",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_VolcanicRichSoil",
+      "parent": "BasePatch",
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_DeepOreRich",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_DeepOres"
+      ],
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_DeepOrePoor",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_DeepOres"
+      ],
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_DeepOreDevoid",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_DeepOres"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_HardToTraverse",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Traversability"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_EasyToTraverse",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Traversability"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_EltexDeposits",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_EltexDeposits"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_Sinkholes",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_UndergroundGasDeposits",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_StrongerTides",
+      "parent": null,
+      "abstract": false,
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_LargeRiverBanks",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LargeRiverBanks_NoInherit"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_MineableComponentSpacer",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_AdvancedComponentDeposits"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Geological.xml",
+      "name": "VEE_DeepSnow",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_DeepSnow",
+      "biomeWhitelist": [
+        "IceSheet",
+        "SeaIce",
+        "Tundra"
+      ],
+      "averageTemperatureRange": "-100~5"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_ManMade.xml",
+      "name": "VEE_AbandonedFarmland",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_GenericPrefabSpawner",
+      "biomeWhitelist": [
+        "Grasslands"
+      ],
+      "coastSidesRange": "0~2",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_MeteorCrater",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Crater",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ResurgentCaldera",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ResurgentCaldera",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_CraterLake",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_CraterLake",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ToxicCrater",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ToxicCrater",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_Volcano",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Volcano",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "LavaField"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_CalmBasin",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_CalmBasin",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LoneIsland",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LoneIsland",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_DetachedIceberg",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_DetachedIceberg",
+      "biomeWhitelist": [
+        "SeaIce",
+        "IceSheet",
+        "Tundra",
+        "ColdBog",
+        "BorealForest"
+      ],
+      "coastSidesRange": "3~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false",
+      "averageTemperatureRange": "-100~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_IceAndFire",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_IceAndFire",
+      "biomeWhitelist": [
+        "SeaIce",
+        "IceSheet",
+        "Tundra",
+        "ColdBog",
+        "BorealForest"
+      ],
+      "coastSidesRange": "3~5",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false",
+      "averageTemperatureRange": "-100~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LoneIslandWithLake",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LoneIslandWithLake",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LoneIslandWithMountain",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LoneIslandWithMountain",
+      "maxHilliness": "Flat",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_CoralReef",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_CoralReef",
+      "maxHilliness": "Flat",
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_SaltPlains",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_SaltPlains",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert",
+        "Tundra",
+        "AridShrubland",
+        "Grasslands"
+      ],
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_RockRidge",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Ridge",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "LavaField"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_JaggedRocks",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_JaggedRocks",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet",
+        "LavaField"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_DryRiver",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_DryRiver",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert",
+        "Tundra",
+        "AridShrubland",
+        "Grasslands",
+        "TemperateForest",
+        "BorealForest"
+      ],
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_MangroveTerrain",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Wetland",
+      "biomeWhitelist": [
+        "BorealForest",
+        "ColdBog",
+        "Glowforest",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp",
+        "Tundra"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_SerpentineCanyons",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_SerpentineCanyons",
+      "minHilliness": "Mountainous"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_DustBowl",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_DustBowl",
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_SulfuricLake",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_SulfuricLake",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_SulfuricRiver",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_SulfuricRiver",
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_BurnedForest",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_BurnedForest",
+      "biomeWhitelist": [
+        "BorealForest",
+        "TemperateForest",
+        "TropicalRainforest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_FloodPlains",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LargeRiverBanks",
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ContaminatedReservoir",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ContaminatedReservoir",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ContaminatedRiver",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ContaminatedRiver",
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ContaminatedCoast",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_ContaminatedCoast",
+      "maxHilliness": "Flat",
+      "coastSidesRange": "1~6",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_QuicksandPits",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Lake"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_QuicksandPits",
+      "biomeWhitelist": [
+        "Desert",
+        "AridShrubland",
+        "ExtremeDesert"
+      ],
+      "coastSidesRange": "0~0",
+      "canSpawnOnRiver": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_DriftwoodShore",
+      "parent": "BaseCoastMut",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_Coast",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "coastSidesRange": "1~6",
+      "canSpawnOnRiver": "false",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_AlluvialFan",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_AlluvialFan",
+      "maxHilliness": "Flat",
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_RelictDelta",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RelictDelta",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert",
+        "AridShrubland",
+        "Grasslands",
+        "TemperateForest"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_StagnantRivulet",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "River"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_StagnantRivulet",
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_AnimaSoils",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_AnimaSoils",
+      "biomeWhitelist": [
+        "TemperateForest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_AnimaSoils_Coast",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_AnimaSoils",
+      "biomeWhitelist": [
+        "TemperateForest"
+      ],
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_JadeChunks",
+      "parent": null,
+      "abstract": false,
+      "biomeWhitelist": [
+        "TemperateForest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_AnimaFlora",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "TemperateForest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_AnimaFauna",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_ExtraAnimal",
+      "biomeWhitelist": [
+        "TemperateForest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_JadeiteMountains",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_JadeiteMountains"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_StoneForest",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_StoneForest",
+      "biomeBlacklist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_GravelBeach",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Coast",
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_Cenotes",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "Desert",
+        "ExtremeDesert",
+        "AridShrubland",
+        "Grasslands",
+        "LavaField",
+        "SeaIce",
+        "IceSheet",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_BasaltCape",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Peninsula",
+      "biomeBlacklist": [
+        "LavaField",
+        "SeaIce",
+        "IceSheet"
+      ],
+      "coastSidesRange": "3~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_ObsidianChunks",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_RedDesert",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RedDesert",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_RedDesertPlants",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_VolcanicSandDesert",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_VolcanicSandDesert",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_VolcanicSandDesertFlora",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "Desert",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_PermafrostBasin",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_PermafrostBasin",
+      "biomeWhitelist": [
+        "Tundra"
+      ],
+      "maxHilliness": "Flat",
+      "averageTemperatureRange": "-100~5"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_QuicksandDunes",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_QuicksandDunes",
+      "biomeWhitelist": [
+        "ExtremeDesert"
+      ],
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_PebbleDunes",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_PebbleDunes",
+      "biomeWhitelist": [
+        "ExtremeDesert",
+        "Desert",
+        "AridShrubland",
+        "Grasslands"
+      ],
+      "maxHilliness": "Flat"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LittoralDunes",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_LittoralDunes",
+      "biomeWhitelist": [
+        "ExtremeDesert",
+        "Desert"
+      ],
+      "coastSidesRange": "1~5"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_RisingWaters",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "workerClass": "TileMutatorWorker_Coast",
+      "maxHilliness": "Flat",
+      "coastSidesRange": "1~5"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_FleshPits",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_Fleshpits"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_IceSpires",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_IceSpires",
+      "biomeWhitelist": [
+        "SeaIce",
+        "IceSheet"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_GlacialMoraine",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Mountain"
+      ],
+      "overrideCategories": [
+        "BaseCaves"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_GlacialMoraine",
+      "biomeWhitelist": [
+        "IceSheet",
+        "GlacialPlain"
+      ],
+      "maxHilliness": "Flat",
+      "coastSidesRange": "0~0"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_TropicalBeach",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Coast"
+      ],
+      "overrideCategories": [
+        "Mountain"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_TropicalBeach",
+      "biomeWhitelist": [
+        "TropicalRainforest"
+      ],
+      "coastSidesRange": "1~5",
+      "canSpawnOnRoad": "false"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_TropicalBeachFlora",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "TropicalRainforest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_Mossy",
+      "parent": "BasePatch",
+      "abstract": false,
+      "biomeWhitelist": [
+        "TropicalRainforest"
+      ],
+      "pollutionRange": "0~0.25"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LaurelForest",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "TropicalRainforest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_Moor",
+      "parent": "BasePatch",
+      "abstract": false,
+      "biomeWhitelist": [
+        "ColdBog"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_MoorFlora",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "ColdBog"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_LushLavaFields",
+      "parent": "BasePatch",
+      "abstract": false,
+      "biomeWhitelist": [
+        "LavaField"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Landmarks_Natural.xml",
+      "name": "VEE_FirewoodTrees",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveSpecificFlora",
+      "biomeWhitelist": [
+        "LavaField"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "VEE_BombardedSurface",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_ManMade.xml",
+      "name": "VEE_MechanoidShipChunks",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_MapSize.xml",
+      "name": "VEE_LargerRegion",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_MapSize"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_MapSize.xml",
+      "name": "VEE_SmallerRegion",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_MapSize"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_PlantLife_Overgrown",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "PlantLife"
+      ],
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert",
+        "Scarlands"
+      ],
+      "pollutionRange": "0~0.01",
+      "plantDensityRange": "0.0001~1"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_PlantLife_Decimated",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "PlantLife"
+      ],
+      "plantDensityRange": "0.3~4"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildRice",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildWheat",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildCereals",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_NoTrees",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_FruitTreesAndNoTrees",
+        "VEE_GroveAndNoTrees",
+        "VEE_MangroveAndNoTrees",
+        "VEE_AuburnTree_OaksAndNoTrees",
+        "VEE_AuburnTree_PoplarsAndNoTrees",
+        "VEE_AuburnTree_MaplesAndNoTrees",
+        "VEE_AuburnTree_BirchesAndNoTrees"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_RemoveTrees",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert",
+        "Glowforest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_PoisonousFlora",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_PoisonousFlora",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_MangroveTrees",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_MangroveAndNoTrees"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert"
+      ],
+      "coastSidesRange": "1~6"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildFruitTrees",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_FruitTreesAndNoTrees"
+      ],
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildFlowers_Base",
+      "parent": null,
+      "abstract": true,
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0.3~4"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Blooming_Buttercup",
+      "parent": "VEE_WildFlowers_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "Grasslands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Blooming_ForgetMeNot",
+      "parent": "VEE_WildFlowers_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "Grasslands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Blooming_Knapweed",
+      "parent": "VEE_WildFlowers_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "Grasslands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Blooming_Loosestrife",
+      "parent": "VEE_WildFlowers_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "Grasslands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildCacti_Base",
+      "parent": null,
+      "abstract": true,
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0~4"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Cactus_Barrel",
+      "parent": "VEE_WildCacti_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "Desert",
+        "AridShrubland"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Cactus_Beavertail",
+      "parent": "VEE_WildCacti_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "Desert",
+        "AridShrubland"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Cactus_Hedgehog",
+      "parent": "VEE_WildCacti_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "Desert",
+        "AridShrubland"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Cactus_OrganPipe",
+      "parent": "VEE_WildCacti_Base",
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "Desert",
+        "AridShrubland"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_WildSucculents",
+      "parent": "WildPlants_Base",
+      "abstract": false,
+      "workerClass": "TileMutatorWorker_WildPlants",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "Tundra",
+        "BorealForest",
+        "ColdBog",
+        "GlacialPlain"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_AuburnTrees_Base",
+      "parent": null,
+      "abstract": true,
+      "pollutionRange": "0~0.25",
+      "plantDensityRange": "0~4"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_AuburnTree_Oaks",
+      "parent": "VEE_AuburnTrees_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_AuburnTree_OaksAndNoTrees"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "BorealForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_AuburnTree_Poplars",
+      "parent": "VEE_AuburnTrees_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_AuburnTree_PoplarsAndNoTrees"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "BorealForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_AuburnTree_Maples",
+      "parent": "VEE_AuburnTrees_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_AuburnTree_MaplesAndNoTrees"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "BorealForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_AuburnTree_Birches",
+      "parent": "VEE_AuburnTrees_Base",
+      "abstract": false,
+      "categories": [
+        "VEE_AuburnTree_BirchesAndNoTrees"
+      ],
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeWhitelist": [
+        "TemperateForest",
+        "TemperateSwamp",
+        "BorealForest",
+        "Tundra"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_Mycelium",
+      "parent": null,
+      "abstract": false,
+      "workerClass": "VEF.Maps.TileMutatorWorker_PlantsWithCommonality",
+      "biomeBlacklist": [
+        "IceSheet",
+        "SeaIce",
+        "ExtremeDesert",
+        "Glowforest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Plants.xml",
+      "name": "VEE_PlentifulGrass",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_LowPlantPlentifulGrass"
+      ],
+      "workerClass": "VanillaExplorationExpanded.TileMutatorWorker_PlentifulGrass",
+      "biomeWhitelist": [
+        "TemperateForest"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_NoWind",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather",
+        "VEE_Windy"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_RagingWind",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather",
+        "VEE_Windy"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "IceSheet",
+        "SeaIce",
+        "Tundra",
+        "Grasslands",
+        "GlacialPlain",
+        "LavaField",
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_GeomagneticStorm",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_SkygazingSpot",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_TornadoAlley",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_Sandstorms",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "Grasslands",
+        "TemperateForest",
+        "TemperateSwamp",
+        "TropicalRainforest",
+        "TropicalSwamp"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_RottenStench",
+      "parent": null,
+      "abstract": false
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_FertileRains",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "Grasslands"
+      ],
+      "averageTemperatureRange": "0~80"
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_DustStorms",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "Weather"
+      ],
+      "workerClass": "TileMutatorWorker_IncreaseWeatherFrequency",
+      "biomeWhitelist": [
+        "AridShrubland",
+        "Desert",
+        "ExtremeDesert",
+        "Grasslands",
+        "LavaField",
+        "Scarlands"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_MoreSolarPower",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Solar"
+      ],
+      "biomeBlacklist": [
+        "Glowforest",
+        "AB_RockyCrags"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_LessSolarPower",
+      "parent": null,
+      "abstract": false,
+      "categories": [
+        "VEE_Solar"
+      ],
+      "biomeBlacklist": [
+        "Glowforest",
+        "AB_RockyCrags"
+      ]
+    },
+    {
+      "origin": "VLE",
+      "file": "Defs/TileMutators/TileMutators_Weather.xml",
+      "name": "VEE_FrequentAuroras",
+      "parent": null,
+      "abstract": false,
+      "biomeBlacklist": [
+        "Glowforest",
+        "AB_RockyCrags"
+      ]
+    }
+  ]
+}

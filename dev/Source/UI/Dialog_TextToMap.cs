@@ -44,106 +44,23 @@ namespace MapGenAI.UI
         /// </summary>
         private static bool IsKorean() => L10n.IsKorean();
 
-        /// <summary>
-        /// DefDatabase에서 TileMutatorDef를 읽어 LLM용 목록 생성.
-        /// Layer 1: 현재 타일 조건에 맞는 mutator만 포함 (사전 필터링).
-        /// - Odyssey 비활성 → 바닐라 4개 외 전부 제거
-        /// - 강 없는 타일 → River 카테고리 제거
-        /// - 해안 아닌 타일 → Coast 카테고리 제거
-        /// - biomeWhitelist 불일치 → 제거
-        /// - 바닐라 기본(Mountain/Caves/Coast/River) → 자동 관리이므로 제거
-        /// </summary>
+        // The model sees both eligible features and concise reasons for unavailable requests.
         private static string BuildMutatorList(int tileId)
         {
-            try
+            var tile = tileId < 0 ? null : Find.WorldGrid?[tileId];
+            var available = new System.Text.StringBuilder();
+            var unavailable = new System.Text.StringBuilder();
+            foreach (var feature in DefDatabase<TileMutatorDef>.AllDefsListForReading)
             {
-                var allMutators = DefDatabase<TileMutatorDef>.AllDefsListForReading;
-                var categories = new Dictionary<string, List<string>>();
-
-                // 타일 정보 수집
-                bool hasRiver = false;
-                bool isCoastal = false;
-                string currentBiomeDef = "";
-                bool odysseyActive = ModsConfig.OdysseyActive;
-
-                if (tileId >= 0)
-                {
-                    try
-                    {
-                        var tile = Find.WorldGrid[tileId];
-                        if (tile != null)
-                        {
-                            hasRiver = tile.Rivers != null && tile.Rivers.Count > 0;
-                            currentBiomeDef = tile.PrimaryBiome?.defName ?? "";
-
-                            // 해안 감지: 이웃 타일 중 Ocean/Lake 확인 (BuildSystemPrompt와 동일 로직)
-                            var neighbors = new List<RimWorld.Planet.PlanetTile>();
-                            Find.WorldGrid.GetTileNeighbors(tileId, neighbors);
-                            foreach (var nTile in neighbors)
-                            {
-                                var nb = Find.WorldGrid[nTile];
-                                if (nb?.PrimaryBiome?.defName == "Ocean" || nb?.PrimaryBiome?.defName == "Lake")
-                                { isCoastal = true; break; }
-                            }
-                        }
-                    }
-                    catch { /* 타일 정보 읽기 실패 시 필터링 없이 진행 */ }
-                }
-
-                foreach (var mut in allMutators)
-                {
-                    if (mut.label == "none" || string.IsNullOrEmpty(mut.label)) continue;
-                    if (string.IsNullOrEmpty(mut.defName)) continue;
-
-                    // 필터 1: 바닐라 기본 mutator는 자동 관리이므로 목록에서 제외
-                    if (VanillaAutoMutators.Contains(mut.defName)) continue;
-
-                    // 필터 2: Odyssey 비활성 → 바닐라 기본 외 전부 제거 (이미 위에서 바닐라 제외했으므로 전부 스킵)
-                    if (!odysseyActive) continue;
-
-                    bool hasCats = mut.categories != null && mut.categories.Count > 0;
-
-                    // 필터 3: 강 없는 타일 → River 카테고리 mutator 제거
-                    if (!hasRiver && hasCats && mut.categories.Contains("River")) continue;
-
-                    // 필터 4: 해안 아닌 타일 → Coast 카테고리 mutator 제거
-                    if (!isCoastal && hasCats && mut.categories.Contains("Coast")) continue;
-
-                    // 필터 5: biomeWhitelist가 있으면 현재 바이옴이 목록에 있어야 함
-                    if (mut.biomeWhitelist != null && mut.biomeWhitelist.Count > 0
-                        && !string.IsNullOrEmpty(currentBiomeDef))
-                    {
-                        if (!mut.biomeWhitelist.Any(b => b?.defName == currentBiomeDef))
-                            continue;
-                    }
-
-                    string catKey = hasCats ? mut.categories[0] : "Other";
-                    if (!categories.ContainsKey(catKey))
-                        categories[catKey] = new List<string>();
-
-                    // defName=내부용, label=유저 표시용, description=설명
-                    string desc = !string.IsNullOrEmpty(mut.description) ? $" - {mut.description}" : "";
-                    categories[catKey].Add("MapGenAI_MutatorLabel".Translate(mut.defName, mut.label, desc));
-                }
-
-                if (categories.Count == 0)
-                {
-                    if (!ModsConfig.OdysseyActive)
-                        return "MapGenAI_OdysseyRequired".Translate();
-                    return "MapGenAI_NoMutatorsAvailable".Translate();
-                }
-
-                var sb = new System.Text.StringBuilder();
-                foreach (var kv in categories)
-                {
-                    sb.AppendLine($"  [{kv.Key}] {string.Join(", ", kv.Value)}");
-                }
-                return sb.ToString();
+                if (string.IsNullOrEmpty(feature.defName) || string.IsNullOrEmpty(feature.label) || feature.label == "none") continue;
+                string reason = FeaturePolicy.UnavailableReason(feature, tile);
+                string identity = feature.defName + " (" + feature.label + ")";
+                if (reason != null) unavailable.AppendLine(identity + ": " + reason);
+                else if (!VanillaAutoMutators.Contains(feature.defName))
+                    available.AppendLine(identity + " [" + string.Join(",", feature.categories) + "]: " + feature.description);
             }
-            catch
-            {
-                return "MapGenAI_MutatorLoadFailed".Translate();
-            }
+            return "Available feature additions (category replacement may require remove_mutators):\n" + available
+                + "\nUnavailable additions on this tile — explain the reason with action:ask; never substitute silently:\n" + unavailable;
         }
 
         /// <summary>
@@ -718,22 +635,19 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 {
                     var data = ParseParams(parsed.GetObject("params"));
 
-                    // --- Layer 3: 출력 검증 ---
-                    var warnings = ValidateMutators(data);
-
-                    // 강 없는 타일에서 river 파라미터 차단
-                    ValidateRiver(data, warnings);
+                    var warnings = new List<string>();
 
                     var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
                     var before = previous ?? new TileMapState();
                     var proposed = MapStateEditor.Merge(before,data);
                     var changes = MapStateCodec.ChangedFields(before,proposed);
+                    // Backend rejects the whole response before any state or undo history changes.
+                    MapGenParams.ApplyPatch(data, _openedTileId);
                     string desc;
                     if (changes.Count == 0)
                         desc = IsKorean() ? "변경된 설정이 없습니다. 지원되는 항목과 요청 내용을 확인해 주세요." : "No settings changed. Check the request and supported features.";
                     else
                     {
-                        MapGenParams.ApplyPatch(data,_openedTileId);
                         _paramStack.Push(previous);
                         _paramsReady = true;
                         _llmContext.Clear();
@@ -763,124 +677,6 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";
             }
-        }
-
-        /// <summary>
-        /// Layer 3: LLM 응답의 mutator 유효성 검증.
-        /// 잘못된 mutator는 data에서 제거하고, 경고 메시지 목록을 반환.
-        /// </summary>
-        /// <summary>강 없는 타일에서 river 파라미터 차단.</summary>
-        private void ValidateRiver(MapParamsData data, List<string> warnings)
-        {
-            // Suppression is valid even when no natural river exists; it must remain explicit.
-            if (data.explicitKeys.Contains("river_present") && data.river?.present == false) return;
-            // 타일에 실제 강이 있는지 확인
-            int tileId = _openedTileId;
-            bool tileHasRiver = false;
-            if (tileId >= 0)
-            {
-                try
-                {
-                    var tile = Find.WorldGrid[tileId];
-                    tileHasRiver = tile?.Rivers != null && tile.Rivers.Count > 0;
-                }
-                catch { }
-            }
-
-            if (!tileHasRiver)
-            {
-                // river 관련 explicitKeys 제거
-                if (data.explicitKeys.Contains("river_direction") ||
-                    data.explicitKeys.Contains("river_position") ||
-                    data.explicitKeys.Contains("river_x") || data.explicitKeys.Contains("river_z") || data.explicitKeys.Contains("straight_river") ||
-                    data.explicitKeys.Contains("river_present"))
-                {
-                    data.explicitKeys.Remove("river_direction");
-                    data.explicitKeys.Remove("river_position");
-                    data.explicitKeys.Remove("river_x");
-                    data.explicitKeys.Remove("river_z");
-                    data.explicitKeys.Remove("river_present");
-                    data.river = null;
-                    if (data.explicitKeys.Contains("straight_river"))
-                    {
-                        data.explicitKeys.Remove("straight_river");
-                        data.straight_river = false;
-                    }
-                    warnings.Add(IsKorean()
-                        ? "이 타일에는 강이 없어 강 관련 설정은 무시되었습니다."
-                        : "This tile has no river. River settings were ignored.");
-                }
-            }
-        }
-
-        private List<string> ValidateMutators(MapParamsData data)
-        {
-            var warnings = new List<string>();
-            if (data.mutators == null || data.mutators.Count == 0)
-                return warnings;
-
-            int tileId = _openedTileId;
-
-            // 타일 정보 수집
-            bool hasRiver = false;
-            bool isCoastal = false;
-            if (tileId >= 0)
-            {
-                try
-                {
-                    var tile = Find.WorldGrid[tileId];
-                    if (tile != null)
-                    {
-                        hasRiver = tile.Rivers != null && tile.Rivers.Count > 0;
-
-                        var neighbors = new List<RimWorld.Planet.PlanetTile>();
-                        Find.WorldGrid.GetTileNeighbors(tileId, neighbors);
-                        foreach (var nTile in neighbors)
-                        {
-                            var nb = Find.WorldGrid[nTile];
-                            if (nb?.PrimaryBiome?.defName == "Ocean" || nb?.PrimaryBiome?.defName == "Lake")
-                            { isCoastal = true; break; }
-                        }
-                    }
-                }
-                catch { }
-            }
-
-            // 역순으로 순회하여 제거 (인덱스 안전)
-            for (int i = data.mutators.Count - 1; i >= 0; i--)
-            {
-                var defName = data.mutators[i];
-
-                // 검증 1: DefDatabase에 존재하는지
-                var mutDef = DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
-                if (mutDef == null)
-                {
-                    warnings.Add("MapGenAI_MutatorNotFound".Translate(defName));
-                    data.mutators.RemoveAt(i);
-                    continue;
-                }
-
-                bool hasCats = mutDef.categories != null && mutDef.categories.Count > 0;
-                string label = mutDef.label ?? defName;
-
-                // 검증 2: Coast 카테고리인데 해안 아닌 타일
-                if (!isCoastal && hasCats && mutDef.categories.Contains("Coast"))
-                {
-                    warnings.Add("MapGenAI_MutatorCoastalOnly".Translate(label));
-                    data.mutators.RemoveAt(i);
-                    continue;
-                }
-
-                // 검증 3: River 카테고리인데 강 없는 타일
-                if (!hasRiver && hasCats && mutDef.categories.Contains("River"))
-                {
-                    warnings.Add("MapGenAI_MutatorRiverOnly".Translate(label));
-                    data.mutators.RemoveAt(i);
-                    continue;
-                }
-            }
-
-            return warnings;
         }
 
         private MapParamsData ParseParams(SimpleJsonObject obj) => MapParameterParser.Parse(obj);

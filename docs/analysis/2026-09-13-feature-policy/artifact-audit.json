@@ -1,0 +1,22 @@
+{
+  "dllSha256": "14be3840bce485953256a87b8c9a727db64ddfec5ac1ab3353cc77ce2b408b05",
+  "baseCommit": "848a390",
+  "offlinePass": 79,
+  "nativeChecks": {
+    "native-verified-core": 54,
+    "native-verified-vle": 82,
+    "delta-verified": 12
+  },
+  "generatedMaps": 23,
+  "providerRequests": 11,
+  "loadedDefinitions": {
+    "withoutVLE": 87,
+    "withVLE": 226
+  },
+  "policyMatrixRows": {
+    "withoutVLE": 348,
+    "withVLE": 904
+  },
+  "thirdPartySourceRedistributed": false,
+  "fableCalls": 0
+}

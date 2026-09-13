@@ -7,6 +7,10 @@ param(
     [switch]$Settings,
     [switch]$NaturalShapes,
     [switch]$FeatureRemoval,
+    [switch]$FeaturePolicy,
+    [switch]$Landmarks,
+    [string]$FeatureResponses='',
+    [switch]$DeltaDiagnostics,
     [string]$SourceDll='',
     [string]$ModelConfig='',
     [string]$Language='',
@@ -46,6 +50,7 @@ foreach($dlc in Get-ChildItem -LiteralPath (Join-Path $GameRoot 'Data') -Directo
 }
 $expansionOrder=@('ludeon.rimworld','ludeon.rimworld.royalty','ludeon.rimworld.ideology','ludeon.rimworld.biotech','ludeon.rimworld.anomaly','ludeon.rimworld.odyssey')
 $active=@('brrainz.harmony')+@($expansionOrder | Where-Object { $known -contains $_ })+@('m00nl1ght.mappreview',$probePackage)
+if($Landmarks){$active=@('brrainz.harmony')+@($expansionOrder | Where-Object { $known -contains $_ })+@('oskarpotocki.vanillafactionsexpanded.core','vanillaexpanded.vexploratione','m00nl1ght.mappreview',$probePackage)}
 $version=(Get-Content -LiteralPath (Join-Path $GameRoot 'Version.txt') -Raw).Trim()
 $config='<?xml version="1.0" encoding="utf-8"?><ModsConfigData><version>'+$version+'</version><activeMods>'+ (($active|ForEach-Object {'<li>'+$_+'</li>'}) -join '') + '</activeMods><knownExpansions>'+ (($known|ForEach-Object {'<li>'+$_+'</li>'}) -join '') +'</knownExpansions></ModsConfigData>'
 [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/ModsConfig.xml'),$config,[Text.UTF8Encoding]::new($false))
@@ -62,6 +67,9 @@ if($Render){$arguments+='-mapgenAIProbeRender=true'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
 if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
 if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}
+if($FeaturePolicy){$arguments+='-mapgenAIFeaturePolicy=true'}
+if($FeatureResponses){$arguments+=('-mapgenAIFeatureResponses="'+[IO.Path]::GetFullPath($FeatureResponses)+'"')}
+if($DeltaDiagnostics){$arguments+='-mapgenAIDeltaDiagnostics=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}

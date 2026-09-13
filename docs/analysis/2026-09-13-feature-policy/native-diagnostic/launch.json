@@ -1,0 +1,9 @@
+{
+  "created": "2026-09-13T22:45:44.6846891+09:00",
+  "sourceDllSha256": "14BE3840BCE485953256A87B8C9A727DB64DDFEC5AC1AB3353CC77CE2B408B05",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-224544",
+  "probeDllSha256": "33993A2BEC698FE5D8E67FE9AA3D668E5968BB00389BC1B876155CD0497D3640",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-224544",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-feature-policy\\native-diagnostic",
+  "pid": 99784
+}

@@ -19,6 +19,7 @@ namespace MapGenAI.Patches
         static void Postfix(PlanetTile tile, ref float? __result)
         {
             if (!MapGenParams.HasParams) return;
+            if ((int)tile != MapGenParams.CurrentTileId) return;
             if (MapGenParams.CoastDirection == "auto") return;
 
             // 원래 해안이 아닌 타일(result == null)에는 적용하지 않음

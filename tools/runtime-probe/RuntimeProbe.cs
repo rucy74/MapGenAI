@@ -123,7 +123,13 @@ namespace MapGenAI.RuntimeProbe
                 {RealImageProbe.Generate(states,output);Application.Quit();return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeatureRemoval",out _))
                 {
-                    FeatureRemovalProbe.Generate(output,Require);
+                    FeaturePolicyProbe.Generate(output,Require);
+                    File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks}}));
+                    Application.Quit();return;
+                }
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeaturePolicy",out _))
+                {
+                    FeaturePolicyProbe.Generate(output,Require);
                     File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks}}));
                     Application.Quit();return;
                 }
