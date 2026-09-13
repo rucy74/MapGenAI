@@ -1,6 +1,6 @@
 # MapGen AI
 
-> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers the existing features and native lava/material fills, positioned ruins, and iterative text editing improvements (image generation is temporarily paused) on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
+> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers native material fills, terrain-relative ruins and ancient dangers, and cumulative text editing (image generation is temporarily paused) on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
 
 ![Preview](docs/assets/preview_composite.png)
 
@@ -18,6 +18,8 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 - **Free-form Shapes** — Star, heart, crescent, and custom shapes via CSG/SDF composite system
 - **Terrain Fill** — Paint areas with loaded permanent terrain materials, including Odyssey lava, cooled lava, soil, sand, gravel, mud, or ice
 - **Positioned Ruins** — Place small ruined walls/floors inside a named shape or bounded location; full footprints and available space are checked
+- **Terrain-relative Placement** — Place structures near river banks, water, mountain foothills or inner region edges, with minimum spacing; simple ruins support 90-degree rotations
+- **Native Ancient Dangers** — Position the game's native temples, including difficulty-aware contents; previews show an orange reservation outline, while interiors generate in the full map
 - **Images Paused** — Image entry and generation are disabled during text-first development; existing data is retained
 - **River Control** — Direction, position, and straight river mode
 - **MDP State** — Previous settings preserved across requests (add mountains, then lakes, then caves — nothing gets lost)

@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 지형과 섬 내부의 temple 고대 위협 배치를 유지하고, 맵 전역의 자연 고대 위협 밀도를 0.6으로 설정합니다.","params":{"danger_density":0.6}}

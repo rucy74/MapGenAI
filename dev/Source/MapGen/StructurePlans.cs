@@ -113,7 +113,7 @@ namespace MapGenAI.MapGen
         {
             if (p == null) throw new FormatException("Null structure plan");
             Id(p.id);
-            if (p.kind != "ruin") throw new FormatException("현재 위치 지정 지원 구조물: ruin (벽·바닥 폐허). 고대 위협/임의 모드 건물은 미지원. / Supported placement kind: ruin; ancient dangers and arbitrary mod buildings require separate adapters.");
+            if (p.kind != "ruin" && p.kind!="ancient_danger") throw new FormatException("현재 위치 지정 지원 구조물: ruin / ancient_danger. 임의 모드 건물은 별도 생성기가 필요합니다. / Supported kinds: ruin and ancient_danger; other structures require an adapter.");
             if (p.region != null) Id(p.region);
             if (p.position != null) ShapeEdits.ValidatePair(p.position);
             if (p.bounds != null)
@@ -134,6 +134,12 @@ namespace MapGenAI.MapGen
             ShapeValidation.Range(p.spacing,1,60,"structure spacing");
             ShapeValidation.Range(p.width,5,31,"structure width"); ShapeValidation.Range(p.height,5,31,"structure height");
             ShapeValidation.Range(p.count,1,8,"structure count");
+            if(p.kind=="ancient_danger")
+            {
+                ShapeValidation.Range(p.width,15,20,"ancient danger width");ShapeValidation.Range(p.height,15,20,"ancient danger height");
+                ShapeValidation.Range(p.count,1,2,"ancient danger count per plan");
+                if(p.rotation!=0)throw new FormatException("고대 위협은 내부 배치를 게임 생성기가 결정하며 회전 지정은 아직 지원하지 않습니다. / Native ancient danger rotation is not supported.");
+            }
         }
         public static void Validate(TileMapState state)
         {
@@ -151,6 +157,7 @@ namespace MapGenAI.MapGen
                 }
             }
             if (total > 24) throw new FormatException("Maximum 24 positioned structures");
+            if(state.structures.Where(p=>p.kind=="ancient_danger").Sum(p=>p.count)>4)throw new FormatException("Maximum 4 positioned ancient dangers");
         }
     }
 }

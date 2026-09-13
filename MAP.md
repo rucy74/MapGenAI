@@ -1,6 +1,6 @@
 # MapGenAI 개발 지도
 
-2026-09-13 개발 브랜치: `dev`. 보존판: `v1.6` (`1439bbd`). 규칙은 Rimworld 루트의 `CLAUDE.md`와 `.claude/rules/`를 참조한다.
+2026-09-14 개발 브랜치: `dev`. 보존판: `v1.6` (`1439bbd`), 텍스트 확장 전 복구 태그: `dev-text-baseline-2026-09-14` (`f9f6aaa`). 규칙은 Rimworld 루트의 `CLAUDE.md`와 `.claude/rules/`를 참조한다.
 
 - [사용자용 모드 소개·사용법](docs/description-ko.md): 기존 기능, dev 추가·개선 사항, 텍스트 영역·재료·폐허 위치 지정과 이미지 일시 중단. 기능 변경 시 함께 갱신한다.
 
@@ -14,7 +14,8 @@
 - `dev/Source/MapGen/MapGenParams.cs`, `WorldTileEditor.cs`, `MapGenAIWorldComponent.cs`: 타일 상태 적용, 원래 월드 특징과 외부 변경 보존, 타일별 상태 저장.
 - `dev/Source/MapGen/FeaturePolicy.cs`, `FeatureEditPrompt.cs`: 실제 Odyssey/외부 모드 정의·worker 조건을 프롬프트 후보와 적용/프리셋에 공유. 월드 River/Coast 연결은 보존하며 개별 변형 제거는 기본 연결로 복귀한다. 기존 저장의 전체 억제는 Load/생성 진입에서 이전한다. 확률·랜드마크 추첨 조건과 환경 조건을 구별한다. `-FeaturePolicy [-Landmarks] [-FeatureResponses 응답폴더]`로 실제 생성·Gemini 응답 재생을 검증한다. 이전 `-FeatureRemoval`도 현행 정책 검증으로 연결한다. [검증 보고서](docs/analysis/2026-09-13-feature-policy/report.md), [텍스트 우선 계획](docs/text-first-plan-ko.md).
 - `dev/Source/MapGen/RegionGrid.cs`, `TerrainMaterials.cs`: 기존 SDF/bump/ring이 산출한 내부 마스크·재료 층 공유, 활성 영구 TerrainDef 해석. 합성 도형의 최상위 fill은 렌더 영역 재료 override다. 강/바다/도로는 최종 채움에서 보호한다.
-- `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적 탐색, 좌표/영역/경계·회전·최소 간격 제약, 현재 ruin 생성기. `SpatialRelation.cs`는 실제 강/물/산/영역 안쪽 경계의 정확한 유클리드 거리와 방향을 계산한다. 공간 부족/대상 부재 시 위치 지정 batch는 미생성·실패 보고. 다른 구조물은 같은 배치 경로에 생성기를 연결한다.
+- `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적 탐색, 좌표/영역/경계·최소 간격 제약, ruin/ancient_danger 분기. `SpatialRelation.cs`는 실제 강/물/산/영역 안쪽 경계의 정확한 유클리드 거리와 방향을 계산한다. 폐허는0/90/180/270도 회전한다. 공간 부족/대상 부재 시 위치 지정 batch는 미생성·실패 보고.
+- `AncientDangerGeneration.cs`: 기본 ancientTemple BaseGen 경로, 실제 지붕/내부/전리품/경고와 peacefulTemples 규칙. BaseGen 공유 객체는 finally 복원하며 내부 예외를 삼키는 생성기의 실제 결과를 검사한다. 크기15~20·계획별1~2·전체최대4·회전0만 허용한다. 미리보기는 주황색 예약 테두리만, native pawn/내부 생성은 full map만 수행한다. 임의 모드·퀘스트 구조물 adapter는 후속이다.
 - `Patches/AuthoringGenerationPatch.cs`: 생성별 추가 단계400(지형/도로 이후 재료),800(기존 구조물 이후·시작 지점 이전 폐허). `StructurePreviewPatch.cs`는 GenSpawn을 막는 Map Preview의 텍스처에 같은 벽 계획을 그린다. 실제 맵 건물과 별도로 검사하며 preview와 완성 맵의 충돌 조건은 다를 수 있다.
 - `ImageInput/ImageFeatureGate.cs`: 사용자 결정에 따라 false. UI 진입/적용과 생성 스냅샷에서 차단하며 저장 데이터를 삭제하지 않는다. 아래 이미지 경로는 재활성화 전까지 보관 코드다.
 - `dev/Source/MapGen/GenerationContext.cs`, `dev/Source/Patches/`: 생성할 타일의 고정 스냅샷과 RimWorld 생성 단계 연결. 공유 정의 변경은 finalizer에서도 복원한다.
@@ -24,6 +25,7 @@
 - `dev/Source/Tests/`: production 소스를 링크하는 오프라인 회귀. Verse/Unity shim은 순수 계산용이며 Scribe/실제 생성 검증을 대신하지 않는다.
 - `tools/runtime-probe/`: 별도 모드·새 프로필의 실제 RimWorld 테스트. 설치된 MapGenAI나 사용자 세이브를 교체하지 않는다. `-TextRegions [-TextResponses 응답폴더]`는 실제 용암/폐허/이미지 중단/Scribe/Dialog/배경 Map Preview를 검증한다. `-PreviewOnly`는 배경 미리보기만 검사한다. 이전 이미지 전용 실행은 보관된 도구이며 현재 기능 검증의 성공 근거로 사용하지 않는다. `-ImageInputs/-ImageStates`는 실제 Unity 전처리/전체 생성/단계 추적을 수행한다. 종료 후 `cleanup.ps1`이 검증된 임시 모드 폴더를 자동 삭제하며, 결과와 프로필은 남긴다.
 - `tools/provider-probe/`: 저장된 테스트 설정으로 실제 Gemini 호출, 응답·상태·정답 마스크 비교. 비용이 발생하므로 기본 오프라인 테스트에 포함하지 않는다.
+- `tools/runtime-probe/CompoundProbe.cs`, `SpatialProbe.cs`, `AncientProbe.cs`: 각각 연속 복합 요청, 실제 지형 관계, native 고대 위협 생성 검사. launch의 `-CompoundResponses`, `-Spatial [-SpatialResponses]`, `-Ancient [-AncientResponses]`로 실제 모델 응답을 Dialog/Undo에 재생한다. [최종 검증](docs/analysis/2026-09-14-text-expansion/report.md).
 - `docs/analysis/2026-09-13-implementation/`: Fable 요청·답변, 실제 실패/성공 증거, 개발판 결과 보고.
 - `docs/analysis/2026-09-13-real-inputs/`: 범례 없는 실제 입력 3종·두 모델·실제 생성 비교, Fable 자문, 원본 실패·제한. `tools/real-image-report.py`로 저장된 결과 비교 그림을 재생성한다.
 

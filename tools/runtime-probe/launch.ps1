@@ -10,6 +10,8 @@ param(
     [switch]$FeaturePolicy,
     [switch]$TextRegions,
     [switch]$Spatial,
+    [switch]$Ancient,
+    [string]$AncientResponses='',
     [string]$SpatialResponses='',
     [switch]$PreviewOnly,
     [string]$TextResponses='',
@@ -76,6 +78,8 @@ if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}
 if($FeaturePolicy){$arguments+='-mapgenAIFeaturePolicy=true'}
 if($TextRegions){$arguments+='-mapgenAITextRegions=true'}
 if($Spatial){$arguments+='-mapgenAISpatial=true'}
+if($Ancient){$arguments+='-mapgenAIAncient=true'}
+if($AncientResponses){$arguments+=('-mapgenAIAncientResponses="'+[IO.Path]::GetFullPath($AncientResponses)+'"')}
 if($SpatialResponses){$arguments+=('-mapgenAISpatialResponses="'+[IO.Path]::GetFullPath($SpatialResponses)+'"')}
 if($CompoundResponses){$arguments+=('-mapgenAICompoundResponses="'+[IO.Path]::GetFullPath($CompoundResponses)+'"')}
 if($PreviewOnly){$arguments+='-mapgenAIPreviewOnly=true'}

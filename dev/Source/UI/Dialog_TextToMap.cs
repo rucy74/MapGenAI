@@ -199,7 +199,7 @@ elevation_shapes 가이드:
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
-- danger_density: 고대 위협/위험 밀도 (0.0~2.5, 기본 1.0). 고대 위협·고대 위험·위협·위험은 전부 이 파라미터 — 정상 맵의 고대 위협 구조물(사원·잠든 기계·매장 위험)이 이것. 0=없음, 2.5=매우 많음.
+- danger_density: 고대 위협/위험 밀도 (0.0~2.5, 기본 1.0). 고대 위협의 무작위 생성 밀도입니다. 특정 위치/개수 지정은 아래 structure_ops의 ancient_danger를 사용하며 밀도와 혼동하지 마세요. 0=없음, 2.5=매우 많음.
 - ruin_density: 폐허/고대 유적 밀도 (부서진 벽·오래된 잔해. 폐허·고대 유적·유적은 여기. 단 정상 맵엔 효과 거의 없음 — 특수 맵 전용).
 - rock_chunks: 돌덩어리 생성 여부 (기본 true). false로 설정하면 맵에 돌덩어리가 없음. ""깨끗한 맵"", ""돌 없애줘"", ""바위 없애줘"", ""돌덩어리 없애"", ""깔끔하게"" 요청 시 사용.
 - hill_size: 산맥 크기 (small=잘게 쪼개짐, medium=기본, large=거대 산맥). 또는 숫자(0.005~0.1, 기본 0.021).
@@ -245,7 +245,7 @@ elevation_shapes guide:
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
-- danger_density: Ancient danger/threat density (0.0~2.5, default 1.0). 고대 위협 / 고대 위험 / ancient danger / ancient threat / 위협 / 위험 all map here — ancient threat structures (shrines, sleeping mechanoids, buried dangers) on normal maps. 0=none, 2.5=very many.
+- danger_density: Ancient danger/threat density (0.0~2.5, default 1.0). Controls random ancient danger density. For a specified location/count use structure_ops with ancient_danger below; position and density are separate. 0=none, 2.5=very many.
 - ruin_density: Rubble/old-ruins density (broken walls, old debris. 폐허 / 고대 유적 / ruins map here. But little effect on normal maps — special maps only).
 - rock_chunks: Whether to generate rock chunks (default true). Set false for no rock chunks on the map. Use for ""clean map"", ""remove rocks"", ""no rocks"", ""remove boulders"", ""clear terrain"" requests.
 - hill_size: Mountain size (small=fragmented, medium=default, large=huge mountains). Or a number (0.005~0.1, default 0.021).
@@ -393,9 +393,12 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 {
                     _shownAuthoringResult = result;
                     if (result.issues.Count > 0) _history.Add(new ChatMessage("assistant", string.Join("\n",result.issues)));
-                    else if (result.placements.Count > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"폐허 배치 계획: ":"Planned ruins: ") + result.placements.Count +
+                    else if (result.placements.Count > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"구조물 배치 계획: ":"Planned structures: ") + result.placements.Count +
                         (IsKorean()?". 실제 맵의 다른 건물에 따라 위치가 달라질 수 있으며, 생성 때 다시 검사합니다.":". Other buildings in the full map can affect placement; generation checks again.")));
                     if (result.protectedCells > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"기존 강·바다·도로를 유지해 채움에서 제외한 칸: ":"Fill cells excluded to preserve existing rivers, ocean or roads: ") + result.protectedCells));
+                    if(result.preview && result.placements.Any(p=>p.kind=="ancient_danger")) _history.Add(new ChatMessage("assistant",IsKorean()?
+                        "고대 위협의 주황 테두리는 배치할 영역입니다. 실제 건물 내부·적·전리품은 맵 생성 때 난이도와 활성 콘텐츠에 따라 결정됩니다.":
+                        "The orange ancient-danger outline reserves an area. The actual interior, occupants and loot are generated according to difficulty and active content."));
                 }
             }
 

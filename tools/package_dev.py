@@ -24,12 +24,14 @@ def package(output: Path) -> Path:
     ET.SubElement(versions, 'li').text = '1.6'
     ET.SubElement(ET.SubElement(root, 'incompatibleWith'), 'li').text = 'Choco.MapGenAI'
     root.find('description').text = (
-        'Development preview: cumulative text edits, native material fills and positioned ruins.\n'
+        'Development preview: cumulative text edits, native material fills, positioned ruins and ancient dangers.\n'
         'Precise circles/stars/hearts by default; request natural/irregular outlines to soften their geometry.\n'
         'Preserve world rivers and shores; remove variants while keeping ordinary connections.\n'
         'Add inland lakes/oases and loaded landmark features only when their biome and generator requirements match.\n'
         'Enable this package instead of MapGen AI. Test in a new world.\n'
         'Fill regions with real Odyssey lava or other loaded permanent terrains. Place simple ruined walls/floors inside an area.\n'
+        'Place structures near rivers, water, mountains or inner region edges with minimum gaps; rotate simple ruins in 90-degree steps.\n'
+        'Native ancient temples follow game content and difficulty rules. Their orange preview outline reserves space; interiors generate in the full map.\n'
         'Image input, interpretation and generation are temporarily paused; stored image data is retained but inactive.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
     )
@@ -66,9 +68,12 @@ def package(output: Path) -> Path:
             '월드 강·해안 연결을 보존합니다. 삼각주/피오르드만 제거하면 일반 강/해안이 남습니다.\n'
             '내륙 해안은 만들 수 없으며, 호수·오아시스·확장 모드 특징은 바이옴과 실제 생성 조건에 맞으면 추가할 수 있습니다.\n'
             '용암은 Odyssey의 실제 깊은 용암입니다. 식은 용암·화산암·자갈 등 활성 영구 지형도 채울 수 있습니다.\n'
-            '섬/영역/위치 안에 손상된 벽과 바닥의 작은 폐허를 배치할 수 있습니다. 고대 위협 시설 위치는 아직 미지원입니다.\n'
-            '건물 전체 면적과 공간을 검사하며, 부족하면 위치 지정 폐허를 일부만 놓지 않고 실패를 표시합니다.\n'
-            '미리보기는 벽의 배치 계획을 보여 줍니다. 실제 맵의 다른 건물에 따라 위치가 달라질 수 있어 생성 때 다시 검사합니다.\n')
+            '섬/영역/위치 안에 작은 폐허나 게임 기본 고대 위협을 배치할 수 있습니다.\n'
+            '강가·물가·산기슭·섬 안쪽 가장자리와의 거리/방향, 구조물 사이 최소 간격을 지정할 수 있습니다.\n'
+            '단순 폐허는 90도 단위 회전이 가능합니다. 고대 위협은 회전 미지원이며 가로·세로15~20칸, 계획별1~2개, 전체최대4개입니다.\n'
+            '건물 전체 면적과 공간을 검사하며, 부족하면 위치 지정 구조물을 일부만 놓지 않고 실패를 표시합니다.\n'
+            '미리보기는 폐허 벽 계획과 고대 위협의 주황색 예약 테두리를 보여 줍니다. 실제 건물에 따라 최종 위치가 달라질 수 있습니다.\n'
+            '고대 위협 내부 내용물은 실제 맵에서 게임의 무작위/DLC/난이도 규칙에 따라 생성됩니다. 임의 모드·퀘스트 단지는 미지원입니다.\n')
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         assert len(z.namelist()) == len(set(z.namelist()))

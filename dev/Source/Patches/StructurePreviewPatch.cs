@@ -18,7 +18,7 @@ namespace MapGenAI.Patches
             if(plan==null || plan.placements.Count==0)return;
             var result=Traverse.Create(__instance).Field("_result").GetValue<MapPreview.MapPreviewResult>();
             foreach(var placement in plan.placements)
-                foreach(var cell in placement.wallCells)result.SetPixel(cell[0],cell[1],new Color(.7f,.68f,.60f));
+                foreach(var cell in placement.wallCells)result.SetPixel(cell[0],cell[1],placement.kind=="ancient_danger"?new Color(.9f,.6f,.25f):new Color(.7f,.68f,.60f));
         }
     }
 }

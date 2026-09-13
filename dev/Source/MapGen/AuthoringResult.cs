@@ -12,9 +12,10 @@ namespace MapGenAI.MapGen
     }
     public sealed class StructurePlacement
     {
-        public string id;
+        public string id,kind="ruin";
         public PlannedRect rect;
         public int walls, floors, spawnedWalls;
+        public int roofCells,caskets,containedThings,lootThings,defenders,warningThings;
         public readonly List<int[]> wallCells = new List<int[]>();
     }
 }

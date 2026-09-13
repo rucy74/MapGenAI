@@ -33,7 +33,8 @@ namespace MapGenAI.MapGen
                     {
                         if(a.ContainsKey(id) && b.ContainsKey(id) && SimpleJson.Serialize(a[id])==SimpleJson.Serialize(b[id]))continue;
                         string verb=!a.ContainsKey(id)?(korean?"추가":"added"):!b.ContainsKey(id)?(korean?"삭제":"removed"):(korean?"변경":"changed");
-                        text.Append("\n• ").Append(korean?"폐허 ":"Ruin ").Append(id).Append(": ").Append(verb);
+                        var kind=b.ContainsKey(id)?b[id].kind:a[id].kind;
+                        text.Append("\n• ").Append(kind=="ancient_danger"?(korean?"고대 위협 ":"Ancient danger "):(korean?"폐허 ":"Ruin ")).Append(id).Append(": ").Append(verb);
                         if(b.TryGetValue(id,out var p))text.Append(" · ").Append(p.width).Append('×').Append(p.height).Append(" · ").Append(p.count).Append(korean?"개":" instances")
                             .Append(p.region==null?"":" · "+p.region).Append(p.position==null?"":" · ["+string.Join(",",p.position.Select(n=>n.ToString("0.###",CultureInfo.InvariantCulture)))+"]");
                         if(p!=null)

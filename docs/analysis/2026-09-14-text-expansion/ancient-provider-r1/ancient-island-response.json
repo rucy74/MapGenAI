@@ -1,0 +1,19 @@
+{
+  "action": "generate",
+  "description": "가운데 흙 섬(island) 내부에 가로 18칸, 세로 18칸 크기의 기본 고대 위협을 배치하도록 예약했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ancient_danger",
+          "kind": "ancient_danger",
+          "region": "island",
+          "width": 18,
+          "height": 18,
+          "count": 1
+        }
+      }
+    ]
+  }
+}

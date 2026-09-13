@@ -1,0 +1,24 @@
+{
+  "action": "generate",
+  "description": "산 서쪽 기슭에 산 바위로부터 2~12칸 거리를 유지하는 기본 고대 위협(18x16칸)을 배치하도록 예약했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "ancient_danger_west",
+          "kind": "ancient_danger",
+          "width": 18,
+          "height": 16,
+          "count": 1,
+          "relation": {
+            "target": "mountain",
+            "side": "west",
+            "min_distance": 2,
+            "max_distance": 12
+          }
+        }
+      }
+    ]
+  }
+}

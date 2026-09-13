@@ -72,6 +72,7 @@ static class CoreRegressionTests
         ImageMapTests.RunAll();
         TextRegionTests.RunAll();
         SpatialRelationTests.RunAll();
+        AncientPlanTests.RunAll();
         Console.WriteLine($"CoreRegressionTests: {passed} PASS / {failed} FAIL");
         if (failed > 0) throw new Exception($"{failed} regression tests failed");
     }

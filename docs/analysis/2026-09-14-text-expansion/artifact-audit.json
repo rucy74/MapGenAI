@@ -1,0 +1,54 @@
+{
+  "created": "2026-09-14T00:57:31.138386+09:00",
+  "baseCommit": "09e25d1b6c06039f298c20806422894c1659bc93",
+  "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+  "offlineTests": 100,
+  "fullMaps": 37,
+  "backgroundPreviews": 3,
+  "nativeChecks": 377,
+  "native": [
+    {
+      "folder": "ancient-native-verified",
+      "fullMaps": 5,
+      "checks": 56,
+      "ok": true,
+      "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+      "temporaryModRemoved": true
+    },
+    {
+      "folder": "spatial-final",
+      "fullMaps": 9,
+      "checks": 88,
+      "ok": true,
+      "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+      "temporaryModRemoved": true
+    },
+    {
+      "folder": "compound-final",
+      "fullMaps": 6,
+      "checks": 56,
+      "ok": true,
+      "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+      "temporaryModRemoved": true
+    },
+    {
+      "folder": "geography-final-vle",
+      "fullMaps": 6,
+      "checks": 60,
+      "ok": true,
+      "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+      "temporaryModRemoved": true
+    },
+    {
+      "folder": "regions-final",
+      "fullMaps": 11,
+      "checks": 117,
+      "ok": true,
+      "sourceDllSha256": "4d02a121cd5b58cef52f9454c73650d622815dba8646b47a400d571db8a2e8df",
+      "temporaryModRemoved": true
+    }
+  ],
+  "knownKeyAndGooglePrivateKeyPatternScanFiles": 381,
+  "matches": 0,
+  "limitations": "Known configured keys and listed patterns only; not every possible secret format. Documentation links checked for edited Markdown; semantic requirements reviewed separately."
+}

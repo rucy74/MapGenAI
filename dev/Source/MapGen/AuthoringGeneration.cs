@@ -112,7 +112,7 @@ namespace MapGenAI.MapGen
                 bool Constraint(PlannedRect r)=> (relation==null || relation(r)) && jobs.All(j=>Separated(r,j.Item2,Math.Max(p.spacing,j.Item1.spacing)));
                 int width=p.rotation%180==0?p.width:p.height,height=p.rotation%180==0?p.height:p.width;
                 var positions=PlacementPlanner.Find(cols,rows,allowed,occupied,width,height,p.count,targetX,targetZ,p.spacing,Constraint);
-                if(positions==null)throw new InvalidOperationException("유적 배치 실패 / Ruin placement failed ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.");
+                if(positions==null)throw new InvalidOperationException("구조물 배치 실패 / Structure placement failed ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.");
                 jobs.AddRange(positions.Select(r=>Tuple.Create(p,r)));
             }
             // All plans are feasible before any positioned structure is spawned.
@@ -121,7 +121,8 @@ namespace MapGenAI.MapGen
             {
                 var r=job.Item2;
                 ordinals.TryGetValue(job.Item1.id,out int ordinal);ordinals[job.Item1.id]=ordinal+1;
-                var result=SpawnRuin(map,job.Item1,r,ordinal);working?.placements.Add(result);
+                var result=job.Item1.kind=="ancient_danger"?AncientDangerGeneration.Generate(map,job.Item1,r,working?.preview==true):SpawnRuin(map,job.Item1,r,ordinal);
+                working?.placements.Add(result);
                 used.Add(new CellRect(r.x,r.z,r.width,r.height));
             }
         }

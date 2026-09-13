@@ -71,7 +71,7 @@ static class TextRegionTests
         });
         Check("Invalid structure kinds references sizes fractions bounds and duplicate IDs reject",()=>
         {
-            foreach(var fields in new[]{@"""kind"":""ancient_danger""",@"""region"":""missing""",@"""width"":32",@"""width"":5.5",@"""count"":0",@"""bounds"":[0.8,0,0.2,1]",@"""position"":[2,0.3]",@"""unknown"":true"})
+            foreach(var fields in new[]{@"""kind"":""quest_complex""",@"""region"":""missing""",@"""width"":32",@"""width"":5.5",@"""count"":0",@"""bounds"":[0.8,0,0.2,1]",@"""position"":[2,0.3]",@"""unknown"":true"})
                 Throws(()=>Edit(Island(),"{\"structure_ops\":[{\"op\":\"add\",\"structure\":{\"id\":\"r2\",\"position\":[0.5,0.5],"+fields+"}}]}"));
             Throws(()=>Edit(Edit(Island(),Add),Add));
             Throws(()=>Edit(Island(),@"{""structure_ops"":null}"));

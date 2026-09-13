@@ -1,0 +1,549 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.077 seconds
+- Finished resetting the current domain, in  0.001 seconds
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.482200 ms
+Command line arguments: -batchmode -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260914-004956 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-14-text-expansion\ancient-native-verified -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-14-text-expansion\ancient-native-verified\Player.log -mapgenAIAncient=true -mapgenAIAncientResponses=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-14-text-expansion\ancient-provider-r1
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260914-004956
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001E519FAD660.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001E51DB22C80.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001E51E9EF080.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.05 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26487.
+Total: 157.119300 ms (FindLiveObjects: 1.884000 ms CreateObjectMapping: 0.635900 ms MarkObjects: 154.296700 ms  DeleteObjects: 0.302100 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 1.729200 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26666.
+Total: 163.692400 ms (FindLiveObjects: 1.146800 ms CreateObjectMapping: 0.302700 ms MarkObjects: 162.195600 ms  DeleteObjects: 0.046900 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260914004956
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 20
+[MapGenAI] Applied state to tile 20
+[MapGenAI] HandleResponse 원문: {
+  "action": "generate",
+  "description": "가운데 흙 섬(island) 내부에 가로 18칸, 세로 18칸 크기의 기본 고대 위협을 배치하도록 예약했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "island_ancient_danger",
+          "kind": "ancient_danger",
+          "region": "island",
+          "width": 18,
+          "height": 18,
+          "count": 1
+        }
+      }
+    ]
+  }
+}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 20
+[AncientProbe] ancient-island: actual model state matches
+[MapGenAI] Applied state to tile 20
+[AncientProbe] ancient-island: actual Undo/ask preserves state
+[MapGenAI] Applied state to tile 20
+[MapGenAI] Applied state to tile 20
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[AncientProbe] ancient-island: native generation completed requested count
+[AncientProbe] ancient-island: actual temple walls floors roof and warning signals
+[AncientProbe] ancient-island: native cryptosleep contents and loot
+[AncientProbe] ancient-island: recorded walls exist in full map
+[AncientProbe] ancient-island: whole casket footprints stay reserved
+[AncientProbe] ancient-island: independent native container and roof counts
+[AncientProbe] ancient-island: whole native temple stays on soil island outside lava
+[AncientProbe] ancient-island: BaseGen shared state restored
+[AncientProbe] ancient-island: plan/world/difficulty scope preserved
+[MapGenAI] Applied state to tile 23
+[MapGenAI] Applied state to tile 23
+[MapGenAI] HandleResponse 원문: {
+  "action": "generate",
+  "description": "산 서쪽 기슭에 산 바위로부터 2~12칸 거리를 유지하는 기본 고대 위협(18x16칸)을 배치하도록 예약했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "ancient_danger_west",
+          "kind": "ancient_danger",
+          "width": 18,
+          "height": 16,
+          "count": 1,
+          "relation": {
+            "target": "mountain",
+            "side": "west",
+            "min_distance": 2,
+            "max_distance": 12
+          }
+        }
+      }
+    ]
+  }
+}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 23
+[AncientProbe] ancient-foothill: actual model state matches
+[MapGenAI] Applied state to tile 23
+[AncientProbe] ancient-foothill: actual Undo/ask preserves state
+[MapGenAI] Applied state to tile 23
+[MapGenAI] Applied state to tile 23
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[AncientProbe] ancient-foothill: native generation completed requested count
+[AncientProbe] ancient-foothill: actual temple walls floors roof and warning signals
+[AncientProbe] ancient-foothill: native cryptosleep contents and loot
+[AncientProbe] ancient-foothill: recorded walls exist in full map
+[AncientProbe] ancient-foothill: whole casket footprints stay reserved
+[AncientProbe] ancient-foothill: independent native container and roof counts
+[AncientProbe] ancient-foothill: BaseGen shared state restored
+[AncientProbe] ancient-foothill: plan/world/difficulty scope preserved
+[MapGenAI] Applied state to tile 24
+[MapGenAI] Applied state to tile 24
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[AncientProbe] ancient-pair: native generation completed requested count
+[AncientProbe] ancient-pair: actual temple walls floors roof and warning signals
+[AncientProbe] ancient-pair: native cryptosleep contents and loot
+[AncientProbe] ancient-pair: recorded walls exist in full map
+[AncientProbe] ancient-pair: whole casket footprints stay reserved
+[AncientProbe] ancient-pair: independent native container and roof counts
+[AncientProbe] ancient-pair: actual temple walls floors roof and warning signals
+[AncientProbe] ancient-pair: native cryptosleep contents and loot
+[AncientProbe] ancient-pair: recorded walls exist in full map
+[AncientProbe] ancient-pair: whole casket footprints stay reserved
+[AncientProbe] ancient-pair: independent native container and roof counts
+[AncientProbe] ancient-pair: BaseGen shared state restored
+[AncientProbe] ancient-pair: plan/world/difficulty scope preserved
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[AncientProbe] ancient-peaceful: native generation completed requested count
+[AncientProbe] ancient-peaceful: actual temple walls floors roof and warning signals
+[AncientProbe] ancient-peaceful: native cryptosleep contents and loot
+[AncientProbe] ancient-peaceful: recorded walls exist in full map
+[AncientProbe] ancient-peaceful: whole casket footprints stay reserved
+[AncientProbe] ancient-peaceful: independent native container and roof counts
+[AncientProbe] peaceful difficulty retains non-hostile temple occupants
+[AncientProbe] ancient-peaceful: BaseGen shared state restored
+[AncientProbe] ancient-peaceful: plan/world/difficulty scope preserved
+[MapGenAI] Applied state to tile 44
+[MapGenAI] Applied state to tile 44
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] Authored generation: 구조물 배치 실패 / Structure placement failed [temple]: 지정 영역에 전체 크기 18×18, 1개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.
+[AncientProbe] ancient capacity failure spawns no positioned jobs
+[AncientProbe] ancient-capacity: BaseGen shared state restored
+[AncientProbe] ancient-capacity: plan/world/difficulty scope preserved
+[MapGenAI] Applied state to tile 59
+[MapGenAI] Applied state to tile 59
+[MapGenAI] HandleResponse 원문: {"action":"ask","message":"고대 위협(ancient_danger)은 게임 엔진의 기본 사원 생성기를 사용하므로 내부 형상과 방향이 게임 시스템에 의해 무작위로 결정되며 회전(rotation)을 지원하지 않습니다(rotation은 0도만 허용됩니다). 따라서 요청하신 90도 회전은 적용할 수 없으며 현재 맵 상태를 그대로 유지합니다."}
+[MapGenAI] 파싱된 action: ask
+[AncientProbe] ancient-rotation: model explains supported limits
+[AncientProbe] ancient-rotation: actual Undo/ask preserves state
+[MapGenAI] Applied state to tile 59
+[MapGenAI] Applied state to tile 59
+[MapGenAI] Applied state to tile 59
+[MapGenAI] HandleResponse 원문: {"action":"ask","message":"아노말리 DLC의 퀘스트 전용 복합 연구 단지나 특정 퀘스트 맵 시설은 직접 지정하여 생성하는 기능이 지원되지 않습니다.\n\n현재 구조물 지정 배치(structure_ops) 기능은 게임 기본의 '손상된 일반 폐허(ruin)'와 '기본 고대 위협 사원(ancient_danger)' 형태만 지원하며, 특정 퀘스트 시설·퀘스트 단지·모드 전용 특수 복합 시설의 배치는 시스템상 불가능합니다.\n\n대체로 고대 콘크리트/공허 금속/초구조체 등의 특수 바닥 재료(fill)를 사용한 연구소 형태의 맞춤형 구역을 지형으로 구현하거나, 고대 시설 관련 mutators(고대 주둔지, 고대 창고, 고대 화학연료 정제소 등)를 추가하는 방법은 가능합니다. 원하시는 대체 방식이 있으신가요?"}
+[MapGenAI] 파싱된 action: ask
+[AncientProbe] ancient-unknown: model explains supported limits
+[AncientProbe] ancient-unknown: actual Undo/ask preserves state
+[MapGenAI] Applied state to tile 59
+[MapGenAI] Applied state to tile 59
+[MapGenAI] Applied state to tile 59
+[MapGenAI] HandleResponse 원문: {"action":"generate","description":"기존 지형과 섬 내부의 temple 고대 위협 배치를 유지하고, 맵 전역의 자연 고대 위협 밀도를 0.6으로 설정합니다.","params":{"danger_density":0.6}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 59
+[AncientProbe] ancient-density: actual model state matches
+[MapGenAI] Applied state to tile 59
+[AncientProbe] ancient-density: actual Undo/ask preserves state
+[MapGenAI] Applied state to tile 59
+[AncientProbe] actual Scribe retains ancient kind, size and region
+[MapGenAI] Applied state to tile 81
+[MapGenAI] 식생 밀도 적용: 0.00
+[MapGenAI] 동물 밀도 적용: 0.00
+[MapGenAI] 간헐천 수 적용: 0개, range=0.00~0.00 (원본=0.70~1.00)
+[MapGenAI] 폐허 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[MapGenAI] 위험 밀도 적용: 0.00 (보정=0.00), range=0.0~0.0
+[AncientProbe] actual ancient preview completes without native pawn generation
+[AncientProbe] ancient preview is an explicit reservation outline only
+[AncientProbe] actual preview displays orange ancient reservation
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 47049.
+Total: 219.753600 ms (FindLiveObjects: 2.054300 ms CreateObjectMapping: 1.165600 ms MarkObjects: 216.460400 ms  DeleteObjects: 0.073000 ms)
+
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 637 frames, [1.0 KB-2.0 KB]: 1 frames, [2.0 KB-4.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 1 frames, [32.0 KB-64.0 KB]: 1 frames, [128.0 KB-256.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 3 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 7.1 MB
+      Peak Allocated Bytes 7.1 MB
+      Overflow Count 1
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 120.0 KB
+      Peak Allocated Bytes 117.2 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 3.8 KB
+      Overflow Count 8
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 128 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 138 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 507 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 288 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 31954
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26293
+        32B: 33 Subsections = 16896 buckets. Failed count: 40808
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32549
+        80B: 85 Subsections = 17408 buckets. Failed count: 22085
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9816
+        128B: 6 Subsections = 768 buckets. Failed count: 8059
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 348 frames, [128.0 MB-256.0 MB]: 296 frames, [0.50 GB-1.00 GB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 59
+      Peak Allocated memory 0.91 GB
+      Peak Large allocation bytes 11.3 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 1 frames, [8.0 MB-16.0 MB]: 376 frames, [16.0 MB-32.0 MB]: 4 frames, [32.0 MB-64.0 MB]: 263 frames, [64.0 MB-128.0 MB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 8
+      Peak Allocated memory 110.9 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26293
+        32B: 33 Subsections = 16896 buckets. Failed count: 40808
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32549
+        80B: 85 Subsections = 17408 buckets. Failed count: 22085
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9816
+        128B: 6 Subsections = 768 buckets. Failed count: 8059
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [64.0 KB-128.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 642 frames, [128.0 MB-256.0 MB]: 2 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 10
+      Peak Allocated memory 216.6 MB
+      Peak Large allocation bytes 213.1 MB
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 644 frames, [1.0 KB-2.0 KB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 1.2 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 101
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26293
+        32B: 33 Subsections = 16896 buckets. Failed count: 40808
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32549
+        80B: 85 Subsections = 17408 buckets. Failed count: 22085
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9816
+        128B: 6 Subsections = 768 buckets. Failed count: 8059
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 348 frames, [8.0 MB-16.0 MB]: 297 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 5
+      Peak Allocated memory 15.8 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 599 frames, [32.0 KB-64.0 KB]: 1 frames, [64.0 KB-128.0 KB]: 43 frames, [256.0 KB-0.5 MB]: 1 frames, [0.5 MB-1.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 0.6 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26293
+        32B: 33 Subsections = 16896 buckets. Failed count: 40808
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32549
+        80B: 85 Subsections = 17408 buckets. Failed count: 22085
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9816
+        128B: 6 Subsections = 768 buckets. Failed count: 8059
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 347 frames, [32.0 KB-64.0 KB]: 297 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 50.0 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 645 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B
