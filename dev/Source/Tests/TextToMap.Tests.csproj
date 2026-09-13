@@ -15,6 +15,11 @@
     <!-- MapGenParams.cs 소스 링크 (Apply/Reset/ElevationShape/MapParamsData 전부 포함) -->
     <Compile Include="../MapGen/MapGenParams.cs" Link="MapGenParams.cs" />
     <Compile Include="../MapGen/TileMapState.cs" Link="TileMapState.cs" />
+    <Compile Include="../MapGen/TerrainMaterials.cs" Link="TerrainMaterials.cs" />
+    <Compile Include="../MapGen/RegionGrid.cs" Link="RegionGrid.cs" />
+    <Compile Include="../MapGen/AuthoringResult.cs" Link="AuthoringResult.cs" />
+    <Compile Include="../MapGen/StructurePlans.cs" Link="StructurePlans.cs" />
+    <Compile Include="../MapGen/PlacementPlanner.cs" Link="PlacementPlanner.cs" />
     <Compile Include="../MapGen/MapGenAIWorldComponent.cs" Link="MapGenAIWorldComponent.cs" />
     <Compile Include="../MapGen/SdfComposite.cs" Link="SdfComposite.cs" />
     <Compile Include="../MapGen/ContourWarp.cs" Link="ContourWarp.cs" />
@@ -27,6 +32,7 @@
     <Compile Include="../MapGen/GenerationContext.cs" Link="GenerationContext.cs" />
     <Compile Include="../MapGen/MapStateValidation.cs" Link="MapStateValidation.cs" />
     <Compile Include="../ImageInput/ImageMapData.cs" Link="ImageMapData.cs" />
+    <Compile Include="../ImageInput/ImageFeatureGate.cs" Link="ImageFeatureGate.cs" />
     <Compile Include="../ImageInput/ImageInterpretation.cs" Link="ImageInterpretation.cs" />
     <Compile Include="../ImageInput/ImageRegionCorrection.cs" Link="ImageRegionCorrection.cs" />
     <Compile Include="../ImageInput/ImageHeader.cs" Link="ImageHeader.cs" />

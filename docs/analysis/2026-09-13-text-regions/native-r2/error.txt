@@ -1,0 +1,4 @@
+System.NullReferenceException: Object reference not set to an instance of an object
+[Ref B062D1E7]
+  at MapGenAI.RuntimeProbe.TextRegionProbe.Run (System.String output, System.Action`2[T1,T2] require) [0x01223] in <d6695a2423f94cff914c127a2ce85efc>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.RunInWorld () [0x00015] in <d6695a2423f94cff914c127a2ce85efc>:0 

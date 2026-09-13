@@ -26,6 +26,7 @@ namespace MapGenAI.MapGen
             if (state.removeFeatureCategories.Count > 64 || state.removeFeatureCategories.Exists(string.IsNullOrWhiteSpace))
                 throw new FormatException("Invalid suppressed feature categories");
             foreach (var shape in state.elevationShapes) ShapeValidation.Validate(shape);
+            StructurePlans.Validate(state);
             var ids = new System.Collections.Generic.HashSet<string>();
             foreach (var shape in state.elevationShapes)
                 if (!string.IsNullOrEmpty(shape.id) && !ids.Add(shape.id)) throw new FormatException("Duplicate terrain ID");

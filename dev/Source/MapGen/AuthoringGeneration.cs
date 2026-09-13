@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
+using Verse;
+
+namespace MapGenAI.MapGen
+{
+    public static class AuthoringGeneration
+    {
+        static readonly ConcurrentDictionary<int,AuthoringResult> Results = new ConcurrentDictionary<int,AuthoringResult>();
+        // Accessed only while the generation scope holds the shared generator lock.
+        static AuthoringResult working { get => GenerationContext.Report; set => GenerationContext.Report=value; }
+        public static AuthoringResult Current => working;
+        public static AuthoringResult Latest(int tile, TileMapState state)
+        {
+            return Results.TryGetValue(tile,out var r) && r.state == Fingerprint(state) ? r : null;
+        }
+        static string Fingerprint(TileMapState state)
+        {
+            var copy=state?.Clone(); if(copy!=null && !ImageInput.ImageFeatureGate.Enabled)copy.imageMap=null;
+            return MapStateCodec.Serialize(copy);
+        }
+        public static void Begin(bool preview) { working=new AuthoringResult { state=Fingerprint(GenerationContext.State),preview=preview }; }
+        public static void Finish(int tile)
+        {
+            if(working==null)return;
+            if(Results.Count>128)Results.Clear();
+            Results[tile]=working;working=null;
+        }
+        public static void Fail(Exception error)
+        {
+            working?.issues.Add(error.Message); Log.Warning("[MapGenAI] Authored generation: " + error.Message);
+        }
+        public static void ApplyTerrain(Map map)
+        {
+            var regions=GenerationContext.Regions(map);if(regions==null)return;
+            var definitions=new Dictionary<string,TerrainDef>();
+            foreach(var name in regions.Materials.Where(n=>n!=null).Distinct()) definitions[name]=TerrainMaterials.Resolve(name);
+            var removed=new List<IntVec3>();
+            using(map.pathing.DisableIncrementalScope())
+            foreach(var cell in map.AllCells)
+            {
+                var name=regions.Materials[regions.Index(cell)];if(name==null)continue;
+                var before=map.terrainGrid.TerrainAt(cell);
+                // Never paint across world river/ocean connections or roads after their workers run.
+                if(before.IsRiver || before.HasTag("Road") || before.defName.IndexOf("Ocean",StringComparison.OrdinalIgnoreCase)>=0)
+                {if(working!=null)working.protectedCells++;continue;}
+                var def=definitions[name];
+                if(!def.supportsRock || regions.Flatten[regions.Index(cell)])
+                    MapGenerator.Elevation[cell]=Math.Min(MapGenerator.Elevation[cell],.3f);
+                var rock=cell.GetEdifice(map);
+                if(rock!=null && rock.def.building.isNaturalRock && (!def.supportsRock || regions.Flatten[regions.Index(cell)]))
+                {rock.Destroy(); removed.Add(cell); map.roofGrid.SetRoof(cell,null);}
+                map.terrainGrid.SetTerrain(cell,def);
+                if(working!=null)working.terrainCells++;
+            }
+            RoofCollapseCellsFinder.RemoveBulkCollapsingRoofs(removed,map);
+        }
+        public static void PlaceStructures(Map map)
+        {
+            if(working?.issues.Count>0)return;
+            var plans=GenerationContext.State?.structures;
+            if(plans==null || plans.Count==0)return;
+            int cols=map.Size.x,rows=map.Size.z;
+            var occupied=new bool[cols*rows];
+            var jobs=new List<Tuple<StructurePlan,PlannedRect>>();
+            var regions=GenerationContext.Regions(map);
+            var used=MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
+            foreach(var r in used)
+                foreach(var cell in r.ExpandedBy(1).ClipInsideMap(map))occupied[cell.z*cols+cell.x]=true;
+            foreach(var p in plans)
+            {
+                var allowed=new bool[cols*rows];double sumX=0,sumZ=0;int area=0;
+                foreach(var cell in map.AllCells)
+                {
+                    float x=(cell.x+.5f)/cols,z=(cell.z+.5f)/rows;
+                    bool inside=p.region==null || regions.Contains(p.region,cell.x,cell.z);
+                    if(p.bounds!=null)inside &= x>=p.bounds[0] && z>=p.bounds[1] && x<=p.bounds[2] && z<=p.bounds[3];
+                    // A point request has a bounded neighborhood; it never relocates to a distant open field.
+                    if(p.region==null && p.bounds==null && p.position!=null)
+                        inside &= Math.Abs(x-p.position[0])<=.10f && Math.Abs(z-p.position[1])<=.10f;
+                    if(!inside)continue;
+                    sumX+=cell.x;sumZ+=cell.z;area++;
+                    var terrain=map.terrainGrid.TerrainAt(cell);
+                    bool solidRock=MapGenerator.Elevation[cell]>.7f && MapGenerator.Caves[cell]<=0f;
+                    allowed[cell.z*cols+cell.x]=!solidRock && !terrain.dangerous && !terrain.IsWater && !terrain.IsRiver && !terrain.HasTag("Road")
+                        && cell.GetEdifice(map)==null && GenConstruct.CanBuildOnTerrain(ThingDefOf.Wall,cell,map,Rot4.North);
+                }
+                float targetX=p.position==null?(float)(sumX/Math.Max(1,area)):p.position[0]*cols;
+                float targetZ=p.position==null?(float)(sumZ/Math.Max(1,area)):p.position[1]*rows;
+                var positions=PlacementPlanner.Find(cols,rows,allowed,occupied,p.width,p.height,p.count,targetX,targetZ);
+                if(positions==null)throw new InvalidOperationException("유적 배치 실패 / Ruin placement failed ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.");
+                jobs.AddRange(positions.Select(r=>Tuple.Create(p,r)));
+            }
+            // All plans are feasible before any positioned structure is spawned.
+            var ordinals=new Dictionary<string,int>();
+            foreach(var job in jobs)
+            {
+                var r=job.Item2;
+                ordinals.TryGetValue(job.Item1.id,out int ordinal);ordinals[job.Item1.id]=ordinal+1;
+                var result=SpawnRuin(map,job.Item1,r,ordinal);working?.placements.Add(result);
+                used.Add(new CellRect(r.x,r.z,r.width,r.height));
+            }
+        }
+        static StructurePlacement SpawnRuin(Map map,StructurePlan plan,PlannedRect r,int ordinal)
+        {
+            var result=new StructurePlacement{id=plan.id,rect=r};
+            var stuff=ThingDef.Named("BlocksGranite");
+            var floor=TerrainDef.Named("TileGranite");
+            uint seed=2166136261;foreach(char c in plan.id)seed=unchecked((seed^c)*16777619);seed^=unchecked((uint)plan.seed);
+            seed=unchecked(seed+(uint)ordinal*2654435761);
+            for(int z=0;z<r.height;z++)for(int x=0;x<r.width;x++)
+            {
+                var cell=new IntVec3(r.x+x,0,r.z+z);
+                uint h=unchecked((seed^(uint)(x*374761393)^(uint)(z*668265263))*1274126177);
+                bool edge=x==0 || z==0 || x==r.width-1 || z==r.height-1;
+                bool doorway=(x==r.width/2 && (z==0 || z==r.height-1));
+                if(!edge && h%7!=0){map.terrainGrid.SetTerrain(cell,floor);result.floors++;}
+                if(edge && !doorway && h%5!=0)
+                {
+                    result.wallCells.Add(new[]{cell.x,cell.z});result.walls++;
+                    if(working?.preview!=true)
+                    {
+                        var wall=ThingMaker.MakeThing(ThingDefOf.Wall,stuff);
+                        wall.HitPoints=Math.Max(1,(int)(wall.MaxHitPoints*(.3f+(h%50)/100f)));
+                        GenSpawn.Spawn(wall,cell,map);
+                        if(!wall.Spawned || cell.GetEdifice(map)!=wall)throw new InvalidOperationException("Failed to spawn positioned ruin wall: "+plan.id);
+                        result.spawnedWalls++;
+                    }
+                }
+            }
+            return result;
+        }
+    }
+}

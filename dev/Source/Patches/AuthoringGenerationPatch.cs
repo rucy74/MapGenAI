@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using HarmonyLib;
+using MapGenAI.MapGen;
+using Verse;
+
+namespace MapGenAI.Patches
+{
+    // Add after terrain/mutators/roads, and after native structures but before the player start.
+    // Injecting into this entry also covers Map Preview's filtered list of gensteps.
+    [HarmonyPatch(typeof(MapGenerator),nameof(MapGenerator.GenerateContentsIntoMap))]
+    static class Patch_AuthoredGeneration
+    {
+        [HarmonyPriority(Priority.Last)]
+        static void Prefix(ref IEnumerable<GenStepWithParams> genStepDefs)
+        {
+            var steps=genStepDefs.ToList();genStepDefs=steps;
+            AuthoringGeneration.Begin(steps.Any(s=>s.def.genStep.GetType().FullName=="MapPreview.MapPreviewGenerator+PreviewTextureGenStep"));
+            var state=GenerationContext.State;
+            if(state==null || (state.elevationShapes.Count==0 && state.structures.Count==0))return;
+            genStepDefs=genStepDefs.Concat(new [] {
+                new GenStepWithParams(new GenStepDef {defName="MapGenAI_AuthoredTerrain",order=400,genStep=new AuthoredTerrainStep()},default),
+                new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
+            }).ToList();
+        }
+        static void Postfix(Map map) => AuthoringGeneration.Finish((int)map.Tile);
+    }
+    sealed class AuthoredTerrainStep : GenStep
+    {
+        public override int SeedPart => 214536710;
+        public override void Generate(Map map,GenStepParams parms)
+        {try {AuthoringGeneration.ApplyTerrain(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
+    }
+    sealed class PositionedStructureStep : GenStep
+    {
+        public override int SeedPart => 214536711;
+        public override void Generate(Map map,GenStepParams parms)
+        {try {AuthoringGeneration.PlaceStructures(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
+    }
+}

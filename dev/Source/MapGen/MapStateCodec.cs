@@ -28,6 +28,7 @@ namespace MapGenAI.MapGen
                 state = MapStateEditor.FromLegacySnapshot(MapParameterParser.Parse(root));
             }
             state.elevationShapes = state.elevationShapes ?? new List<ElevationShape>();
+            state.structures = state.structures ?? new List<StructurePlan>();
             state.mutators = state.mutators ?? new List<string>();
             state.removeMutators = state.removeMutators ?? new List<string>();
             state.removeFeatureCategories = state.removeFeatureCategories ?? new List<string>();

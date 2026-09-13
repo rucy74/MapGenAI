@@ -191,6 +191,7 @@ namespace MapGenAI.MapGen
             if (keys.Contains("hills") && state.hills == "none")
                 state.elevationShapes.RemoveAll(shape => shape.autoHills);
             ShapeEdits.Apply(state.elevationShapes, data.shape_ops);
+            StructurePlans.Apply(state, data.structure_ops);
 
             // Automatic hills only run for an explicit hills edit, never for unrelated edits.
             // hills shape 누적: 같은 type+direction이 없으면 추가
@@ -215,6 +216,7 @@ namespace MapGenAI.MapGen
             if ((data.elevation_shapes != null || keys.Contains("hills")) && state.elevationShapes.Count > 0)
                 ShapeEdits.AssignIds(state.elevationShapes);
             if (state.elevationShapes.Count > ShapeEdits.MaxShapes) throw new FormatException("Too many terrain shapes");
+            StructurePlans.Validate(state);
             return state;
         }
     }

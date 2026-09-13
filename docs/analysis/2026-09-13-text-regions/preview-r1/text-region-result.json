@@ -1,0 +1,1 @@
+{"ok":false,"maps":0,"checks":[{"pass":true,"name":"actual background Map Preview with minimal components generates both ruins"},{"pass":false,"name":"actual Map Preview texture includes positioned wall overlay"},{"pass":true,"name":"background preview leaves main-thread generation scope clear"}]}

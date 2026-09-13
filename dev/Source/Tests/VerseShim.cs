@@ -156,6 +156,17 @@ namespace RimWorld
 // Serialization calls are compile-only here. Actual save/load is checked in the game probe.
 namespace Verse
 {
+    public class TerrainDef
+    {
+        public string defName,label;
+        public bool temporary,bridge,isFoundation,dontRender,exposesToVacuum,IsRiver;
+        public object designationCategory;
+        public List<object> costList;
+        public int costStuffCount;
+        public float fertility;
+        public List<string> tags=new List<string>();
+        public bool HasTag(string tag)=>tags.Contains(tag);
+    }
     public struct FloatRange
     {
         public float min,max; public FloatRange(float min,float max){this.min=min;this.max=max;}

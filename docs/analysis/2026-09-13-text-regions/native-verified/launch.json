@@ -1,0 +1,9 @@
+{
+  "pid": 71088,
+  "created": "2026-09-13T23:50:32.3028317+09:00",
+  "probeDllSha256": "26CD5B6179818096CA9C5EE9E7234938EB5250D0B816E7F63EFDC21EDD148D7B",
+  "sourceDllSha256": "DBF21AFCE52D912137310C9A91C5914C794B50F208CF98D15F16B0A64883BB8F",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-235032",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-235032",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-text-regions\\native-verified"
+}

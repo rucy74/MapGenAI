@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 섬 지형은 그대로 유지하고, 해자(moat)의 물을 깊은 용암(lava)으로 변경했습니다.","params":{"shape_ops":[{"op":"update","id":"moat","changes":{"compose":[{"a":"inner","b":null,"e":0,"f":0.002,"fill":"lava","from":"outer","k":0,"op":"sub","outId":null,"s":null}]}}]}}

@@ -179,7 +179,7 @@ namespace MapGenAI.MapGen
                 case "sand":         return -2075f;                   // 모래
                 case "soil":         return -2085f;                   // 일반 토양
                 case "rich_soil":    return -2095f;                   // 비옥한 토양
-                default:             return deep ? -2005f : -1025f;
+                default:             return TerrainMaterials.Resolve(fill, deep).fertility;
             }
         }
 
@@ -217,7 +217,7 @@ namespace MapGenAI.MapGen
             List<ShapePrimitive> shapes,
             List<ComposeOp> compose,
             Map map,
-            MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null)
+            MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null, string fillOverride = null)
         {
             if (shapes == null || shapes.Count == 0 || compose == null || compose.Count == 0)
                 return;
@@ -238,8 +238,9 @@ namespace MapGenAI.MapGen
             // add가 여러 개면 각각 별도로 맵에 적용 (하트+별 동시 등)
             var renderQueue = new List<RenderItem>();
 
-            foreach (var op in compose)
+            for (int operationIndex = 0; operationIndex < compose.Count; operationIndex++)
             {
+                var op = compose[operationIndex];
                 Func<Vector2, float> result = null;
 
                 switch (op.op)
@@ -284,11 +285,11 @@ namespace MapGenAI.MapGen
                         sdfFuncs[op.outId] = result;
 
                     // e가 있거나 fill이 있으면 래스터라이즈 대상
-                    if (op.e != 0f || !string.IsNullOrEmpty(op.fill))
+                    if (op.e != 0f || !string.IsNullOrEmpty(op.fill) || (operationIndex == compose.Count - 1 && !string.IsNullOrEmpty(fillOverride)))
                     {
                         float elev = op.e;
                         float fall = op.f > 0f ? op.f : 0.05f;
-                        string fill = op.fill;
+                        string fill = fillOverride ?? op.fill;
                         renderQueue.Add(new RenderItem { sdf = result, elevation = elev, falloff = fall, fill = fill });
                     }
                 }
@@ -317,6 +318,16 @@ namespace MapGenAI.MapGen
                     if (warp != null) p = warp.Sample(p);
                     float d = sdf(p);
                     float t = Smoothstep(falloff, 0f, d);
+
+                    // Region constraints use the interior, excluding the feathered outside edge.
+                    RegionGrid.Record(map, shapeId, cell, d <= 0,
+                        t > .1f ? (hasFill ? fill : isWater ? "water" : null) : null, t > .5f);
+                    if (GenerationContext.Active && Math.Abs(t*elevation) > .0001f)
+                    {
+                        var flags=GenerationContext.Regions(map).Flatten;int index=cell.z*map.Size.x+cell.x;
+                        if(elevation >= .1f || elevation < 0)flags[index]=false;
+                        else if(t > .3f)flags[index]=true;
+                    }
 
                     if (t < 0.01f) continue;
 

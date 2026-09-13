@@ -62,7 +62,7 @@ namespace MapGenAI.MapGen
                     default: throw new FormatException("Unknown primitive: " + part.prim);
                 }
             }
-            bool renders = false;
+            bool renders = !string.IsNullOrEmpty(shape.fill);
             foreach (var op in shape.compositeOps)
             {
                 if (op == null) throw new FormatException("Null composite operation");
@@ -127,7 +127,8 @@ namespace MapGenAI.MapGen
         }
         static void Fill(string fill)
         {
-            if (!string.IsNullOrEmpty(fill) && !Fills.Contains(fill)) throw new FormatException("Unknown terrain fill: " + fill);
+            if (!string.IsNullOrEmpty(fill) && !Fills.Contains(fill) && (fill.Length > 128 || fill.Any(c => !(char.IsLetterOrDigit(c) || c == '_' || c == '-' || c == '.'))))
+                throw new FormatException("Invalid terrain material name: " + fill);
         }
         static float Number(string value)
         {

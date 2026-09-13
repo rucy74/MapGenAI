@@ -12,6 +12,13 @@ namespace MapGenAI.MapGen
         public static bool Active => current != null;
         public static TileMapState State => current?.State;
         public static int TileId => current?.TileId ?? -1;
+        public static AuthoringResult Report { get => current?.Report; set { if(current!=null)current.Report=value; } }
+        public static RegionGrid Regions(Map map)
+        {
+            if (current == null) return null;
+            if (current.Regions == null || current.Regions.Map != map) current.Regions = new RegionGrid(map);
+            return current.Regions;
+        }
 
         // Capture AFTER this mod's image and SDF layers; reapplying just the raw image would erase edits.
         public static void CaptureImageElevation(Map map,MapGenFloatGrid elevation)
@@ -39,6 +46,7 @@ namespace MapGenAI.MapGen
         public static IDisposable Enter(int tileId, TileMapState state)
         {
             var frozen = state?.Clone();
+            if (frozen != null && !ImageInput.ImageFeatureGate.Enabled) frozen.imageMap = null;
             Monitor.Enter(GenerationLock);
             var scope = new Scope { Previous = current, TileId = tileId, State = frozen };
             current = scope;
@@ -50,6 +58,8 @@ namespace MapGenAI.MapGen
             public Scope Previous;
             public int TileId;
             public TileMapState State;
+            public RegionGrid Regions;
+            public AuthoringResult Report;
             public Map ImageMap;
             public float[] ImageElevation;
             public bool[] ImageAuthored;

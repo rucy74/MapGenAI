@@ -21,6 +21,7 @@ class Program
         if(!string.IsNullOrWhiteSpace(modelOverride))config.SetString("gemini_model",modelOverride);
         var client=new GeminiClient(config.GetString("gemini_api_key"),config.GetString("gemini_model"));
         if(args[2]=="natural")return await NaturalTextBench.Run(client,args[3],output);
+        if(args[2]=="regions")return await TextRegionBench.Run(client,args[3],output);
         if(args[2]=="features")return await FeaturePolicyTextBench.Run(client,args[3],output);
         if(args[2]=="real")return await RealImageBench.Run(client,args[3],output,config.GetString("gemini_model"));
         var results=new List<object>();

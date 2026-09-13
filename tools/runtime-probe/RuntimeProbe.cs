@@ -40,6 +40,8 @@ namespace MapGenAI.RuntimeProbe
             try
             {
                 Directory.CreateDirectory(output);
+                if(!ImageFeatureGate.Enabled && (GenCommandLine.TryGetCommandLineArg("mapgenAIImageInputs",out _) || GenCommandLine.TryGetCommandLineArg("mapgenAIImageStates",out _)))
+                    throw new InvalidOperationException(ImageFeatureGate.Message);
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAISettingsProbe",out _))
                 {SettingsProbe.Start(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageInputs",out var inputs))
@@ -119,6 +121,11 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAITextRegions",out _))
+                {
+                    TextRegionProbe.Run(output,Require);
+                    return; // Actual background Map Preview completes asynchronously.
+                }
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageStates",out var states))
                 {RealImageProbe.Generate(states,output);Application.Quit();return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeatureRemoval",out _))
@@ -157,6 +164,8 @@ namespace MapGenAI.RuntimeProbe
                 Invoke(dialog,"DoUndo");
                 Require(history.Count==0 && !MapGenAIWorldComponent.Get().HasState(tile),"actual dialog undo restores absent initial state");
                 var pixels=new ImageMapData{width=2,height=2,cells="MWGI",note="probe"};
+                if(ImageFeatureGate.Enabled)
+                {
                 Invoke(dialog,"ApplyImageMap",pixels);
                 Require(history.Count==1 && MapGenParams.CaptureState(tile).imageMap.cells=="MWGI","actual dialog image apply creates one undo entry");
                 var baseImage=pixels.Clone();baseImage.replaceElevation=true;Invoke(dialog,"ApplyImageMap",baseImage);
@@ -164,6 +173,12 @@ namespace MapGenAI.RuntimeProbe
                 Invoke(dialog,"DoUndo");Require(!MapGenParams.CaptureState(tile).imageMap.replaceElevation,"actual dialog undo restores legacy image elevation mode");
                 Invoke(dialog,"DoUndo");
                 Require(!MapGenAIWorldComponent.Get().HasState(tile),"actual image undo restores absent state");
+                }
+                else
+                {
+                    Invoke(dialog,"ApplyImageMap",pixels);
+                    Require(history.Count==0 && !MapGenAIWorldComponent.Get().HasState(tile),"paused image apply cannot create state or undo entries");
+                }
                 var texture=ImageTextureCodec.Preview(pixels);
                 try
                 {
@@ -231,13 +246,15 @@ namespace MapGenAI.RuntimeProbe
                 int imageMatches=0;
                 for(int x=10;x<30;x++)for(int z=10;z<30;z++)
                     if(generated.terrainGrid.TerrainAt(new IntVec3(x,0,z)).IsWater==(imageCells[z*100+x]=='W'))imageMatches++;
-                Require(imageMatches==400,"generated image lake and soil island match all 400 authored water/land cells");
+                if(ImageFeatureGate.Enabled)Require(imageMatches==400,"generated image lake and soil island match all 400 authored water/land cells");
+                else Require(MapGenParams.CaptureState(target).imageMap.cells==new string(imageCells),"dormant image data remains saved after text generation");
                 bool renderOnly=GenCommandLine.TryGetCommandLineArg("mapgenAIProbeRender",out _);
                 if(!renderOnly)FailureCleanupProbe(parent,combined);
                 File.WriteAllText(Path.Combine(output,"generated-map-observations.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"tile",(int)target},{"innerCells",inner},{"waterCells",water},{"imageMatches",imageMatches},{"imageTotal",400},{"size",100}}));
                 File.WriteAllText(Path.Combine(output,"result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"ok",true},{"checks",checks},{"limitations","Disposable world only. Legacy compatibility is a fixture. No live AI calls or visual UI interaction."}}));
                 Log.Message("[MapGenAI Probe] PASS "+checks.Count+" checks");
                 if(!renderOnly){Application.Quit();return;}
+                if(!ImageFeatureGate.Enabled){Find.WorldSelector.SelectedTile=target;Find.WindowStack.Add(new Dialog_TextToMap());captureFrame=Time.frameCount;return;}
                 var imageDialog=new Dialog_ImageMap(combined.imageMap,combined.elevationShapes.Count,_=>false);
                 Find.WindowStack.Add(imageDialog);
                 typeof(Dialog_ImageMap).GetField("path",BindingFlags.Instance|BindingFlags.NonPublic).SetValue(imageDialog,Path.Combine(output,"palette-fixture.png"));
@@ -275,9 +292,10 @@ namespace MapGenAI.RuntimeProbe
         }
         public static void Update()
         {
+            TextRegionProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
-            if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,"image-dialog.png"));
+            if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));
             if(frames>100){captureFrame=-1;Application.Quit();}
         }
         static void Require(bool condition,string label) {if(!condition) throw new InvalidOperationException(label);checks.Add("PASS: "+label);}

@@ -73,7 +73,7 @@ static class ShapeEditTests
         });
         Check("Invalid geometry cannot silently become default terrain", () =>
         {
-            foreach(string shape in new[]{"{\"type\":\"unknown\"}","{\"type\":\"bump\",\"fill\":\"lava\"}","{\"type\":\"bump\",\"position\":[1.2,0.2]}","{\"type\":\"bump\",\"size\":\"enormous\"}","{\"type\":\"composite\",\"shapes\":[],\"compose\":[]}"})
+            foreach(string shape in new[]{"{\"type\":\"unknown\"}","{\"type\":\"bump\",\"fill\":\"bad/fill\"}","{\"type\":\"bump\",\"position\":[1.2,0.2]}","{\"type\":\"bump\",\"size\":\"enormous\"}","{\"type\":\"composite\",\"shapes\":[],\"compose\":[]}"})
                 Throws(()=>ShapeEdits.ParseShape(SimpleJson.Parse(shape)));
             var invalid=Composite(); invalid.compositeOps[0].s="missing"; Throws(()=>ShapeValidation.Validate(invalid));
             invalid=Composite(); invalid.compositeShapes[0].r=0; Throws(()=>ShapeValidation.Validate(invalid));

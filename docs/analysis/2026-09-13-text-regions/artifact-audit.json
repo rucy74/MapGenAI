@@ -1,0 +1,15 @@
+{
+  "created": "2026-09-13T23:56:23.097022+09:00",
+  "dllSha256": "dbf21afce52d912137310c9a91c5914c794b50f208cf98d15f16b0a64883bb8f",
+  "nativeMaps": 11,
+  "nativeChecks": 117,
+  "actualBackgroundPreview": true,
+  "vleMaps": 6,
+  "vleChecks": 60,
+  "providerRequests": 10,
+  "offlineRegression": "90 PASS / 0 FAIL",
+  "filesScanned": 456,
+  "secretFindings": [],
+  "scanScope": "known ignored-config key values plus Google/private-key patterns; not all possible secret formats",
+  "baseCommit": "a9b1c38f86a07ae6629b9038d7c2dd2250af3bc0"
+}

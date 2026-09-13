@@ -16,7 +16,7 @@ static class ImageMapTests
     static string Input(string regions)=>"{\"view\":\"top_down\",\"candidates\":["+Candidate(regions)+"]}";
     public static void RunAll()
     {
-        Check("Image priority preserves later SDF edits against world elevation and respects natural cells and nested scopes",()=>
+        Check("Paused image layer stays saved but cannot capture or restore generation elevation",()=>
         {
             var map=new Map{Size=new IntVec3(3,1,1)};var e=new MapGenFloatGrid();var f=new MapGenFloatGrid();
             var state=new TileMapState{imageMap=new ImageMapData{width=3,height=1,cells="GGN",replaceElevation=true}};
@@ -27,7 +27,8 @@ static class ImageMapTests
                 foreach(var c in CellRect.WholeMap(map))e[c]=.95f;
                 using(GenerationContext.Enter(2,new TileMapState())){GenerationContext.RestoreImageElevation(map,e);Equal(.95f,e[new IntVec3(1,0,0)]);}
                 GenerationContext.RestoreImageElevation(map,e);
-                Equal(.85f,e[new IntVec3(0,0,0)]);Equal(0f,e[new IntVec3(1,0,0)]);Equal(.95f,e[new IntVec3(2,0,0)]);
+                Equal(.95f,e[new IntVec3(0,0,0)]);Equal(.95f,e[new IntVec3(1,0,0)]);Equal(.95f,e[new IntVec3(2,0,0)]);
+                Equal(null,GenerationContext.State.imageMap);Equal("GGN",state.imageMap.cells);
             }
             state.imageMap.replaceElevation=false;
             using(GenerationContext.Enter(1,state)){GenerationContext.CaptureImageElevation(map,e);e[new IntVec3(0,0,0)]=.25f;GenerationContext.RestoreImageElevation(map,e);Equal(.25f,e[new IntVec3(0,0,0)]);}

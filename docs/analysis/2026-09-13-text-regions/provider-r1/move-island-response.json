@@ -1,0 +1,13 @@
+{
+  "action": "generate",
+  "description": "island 영역을 [0.7, 0.65] 위치로 이동했습니다. 해당 영역(island)에 연결된 폐허(ruins_1)는 이동한 섬 위치를 따라 자동으로 함께 배치됩니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "move",
+        "id": "island",
+        "position": [0.7, 0.65]
+      }
+    ]
+  }
+}

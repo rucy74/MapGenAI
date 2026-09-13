@@ -31,6 +31,7 @@ namespace MapGenAI.UI
 
         public Dialog_ImageMap(ImageMapData existing,int overlayCount,Func<ImageMapData,bool> onApply,string worldFeatureSummary=null)
         {
+            ImageFeatureGate.RequireEnabled();
             apply=onApply;overlays=overlayCount;draft=existing?.Clone();
             worldFeatures=worldFeatureSummary;
             gridLimit=Math.Max(1,Math.Min(128,Find.GameInitData?.mapSize??128));

@@ -11,7 +11,7 @@ namespace MapGenAI.MapGen
 - 내부 호수·오아시스·분화구 등은 해안이 없어도 해당 특징의 조건이 맞으면 mutators로 추가할 수 있습니다. 월드 지형을 바꾸어 조건을 억지로 맞추지 마세요. Unavailable 목록의 특징 요청은 이유를 설명하고 action:ask를 사용합니다. 지원되지 않는 요청을 다른 특징으로 바꾸거나 성공했다고 말하지 마세요.
 - 다른 내부 특징은 remove_mutators로 하나씩, remove_categories로 해당 종류 전체를 제거할 수 있습니다. restore_categories는 종류 억제만 해제합니다. 개별 remove_mutators로 제거했던 특징은 mutators로 다시 추가합니다. 억제 중인 종류에 추가하려면 같은 응답에 restore_categories도 보냅니다.
 - mutators는 실제 타일의 지형 특징을 바꾸지만 월드 랜드마크의 이름·아이콘을 새로 배치하는 명령은 아닙니다. 사용자 물 도형은 shape_ops로 따로 수정합니다.
-- 현재 모드는 용암 fill과 구조물의 좌표/영역 배치를 지원하지 않습니다. 물이나 밀도로 대신 적용하지 말고 action:ask로 현재 미지원임을 설명합니다. 게임 엔진상 불가능하다는 뜻은 아닙니다.
+- 채움 재료와 구조물 위치는 아래 텍스트 영역 규칙을 따릅니다. 지형 특징 이름과 fill 재료 이름을 혼동하지 마세요.
 " : @"
 Feature editing and world geography:
 - actual_tile_features includes original and current features. Use exact defName values, not guessed names or just added_mutators.
@@ -21,7 +21,7 @@ Feature editing and world geography:
 - Internal lakes, oases and craters can be added via mutators on inland tiles when their own requirements match. Do not alter world geography to force eligibility. For an Unavailable feature explain its reason with action:ask, never silently substitute or claim success.
 - Remove an internal feature with remove_mutators, or its whole category with remove_categories. restore_categories only clears category suppression; named removed features require re-adding through mutators. To add in a suppressed category also include restore_categories.
 - Feature edits update actual tile mutators, not the world's named landmark identity/icon. Custom water shapes are edited separately with shape_ops.
-- Lava fill and coordinate/region-based structure placement are currently unsupported in this mod. Explain with action:ask, never substitute water/density. This is not a game engine impossibility.
+- Materials and structure placement follow the text-region rules below. Feature names and fill material names are different catalogs.
 ";
     }
 }

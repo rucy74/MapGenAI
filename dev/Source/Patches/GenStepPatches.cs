@@ -8,6 +8,7 @@ using RimWorld.Planet;
 using MapGenAI.MapGen;
 using UnityEngine;
 using Verse;
+using RegionGrid = MapGenAI.MapGen.RegionGrid;
 
 namespace MapGenAI.Patches
 {
@@ -114,6 +115,8 @@ namespace MapGenAI.Patches
         /// <summary>Shape 디스패처</summary>
         private static void ApplyShape(ElevationShape shape, Map map, MapGenFloatGrid grid)
         {
+            var regions=GenerationContext.Regions(map);
+            var flatBefore=shape.type!="composite" && string.IsNullOrEmpty(shape.fill) ? regions?.CaptureFlattened(grid) : null;
             switch (shape.type)
             {
                 case "ridge":  ApplyRidge(shape, map, grid);  break;
@@ -128,6 +131,7 @@ namespace MapGenAI.Patches
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;
             }
+            regions?.PreserveLaterHeightEdit(grid,flatBefore);
         }
 
         /// <summary>
@@ -358,6 +362,7 @@ namespace MapGenAI.Patches
                         float dist = Mathf.Sqrt(distSq);
                         float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) : 0f;
                         float lakeVal = noiseRoundness * noise + 0.1f * (radius - dist);
+                        RegionGrid.Record(map, shape.id, cell, lakeVal > 0, lakeVal > 0 ? shape.fill : null, lakeVal > radius * .05f);
 
                         if (lakeVal > radius * 0.05f)
                         {
@@ -376,6 +381,7 @@ namespace MapGenAI.Patches
                 else
                 {
                     // 일반 bump: elevation에 가산 (언덕/함몰)
+                    RegionGrid.Record(map, shape.id, cell, distSq <= radius * radius);
                     grid[cell] += strength * gaussian;
                 }
             }
@@ -459,6 +465,7 @@ namespace MapGenAI.Patches
                     float noise = lakeNoise != null ? (float)lakeNoise.GetValue(cell) * bandwidth * 0.4f : 0f;
                     float noisyOffset = offset + noise;
                     float noisyGaussian = Mathf.Exp(-(noisyOffset * noisyOffset) / bw2);
+                    RegionGrid.Record(map, shape.id, cell, noisyGaussian > .5f, noisyGaussian > .1f ? shape.fill : null, noisyGaussian > .5f);
 
                     if (noisyGaussian > 0.5f)
                     {
@@ -478,6 +485,7 @@ namespace MapGenAI.Patches
                 else
                 {
                     grid[cell] += strength * gaussian;
+                    RegionGrid.Record(map, shape.id, cell, gaussian > .5f);
                 }
             }
         }
@@ -493,7 +501,7 @@ namespace MapGenAI.Patches
                 Log.Warning("[MapGenAI] composite shape에 shapes/compose 데이터 없음");
                 return;
             }
-            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id);
+            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id, shape.fill);
         }
     }
 

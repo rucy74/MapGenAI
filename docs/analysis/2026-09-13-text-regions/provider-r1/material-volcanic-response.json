@@ -1,0 +1,1 @@
+{"action":"generate","description":"해자(moat)의 채움 재료를 화산암(VolcanicRock)으로 변경했습니다.","params":{"shape_ops":[{"op":"update","id":"moat","changes":{"fill":"VolcanicRock"}}]}}

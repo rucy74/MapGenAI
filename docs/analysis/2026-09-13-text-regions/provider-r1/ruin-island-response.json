@@ -1,0 +1,19 @@
+{
+  "action": "generate",
+  "description": "island 영역 내부에 작은 폐허 2개를 배치하도록 설정했습니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "ruins_island",
+          "kind": "ruin",
+          "region": "island",
+          "width": 7,
+          "height": 7,
+          "count": 2
+        }
+      }
+    ]
+  }
+}

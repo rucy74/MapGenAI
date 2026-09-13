@@ -1,0 +1,18 @@
+{
+  "action": "generate",
+  "description": "island 섬 영역과 해당 영역에 배치되었던 유적(ruins_1)을 삭제하고, 용암 해자(moat)는 그대로 유지합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "remove",
+        "id": "island"
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "remove",
+        "id": "ruins_1"
+      }
+    ]
+  }
+}

@@ -17,6 +17,8 @@ namespace MapGenAI.UI
         private string _inputText = "";
         private string _statusText = "";
         private bool _isWaiting = false;
+        private AuthoringResult _shownAuthoringResult;
+        private int _nextAuthoringCheck;
         private Vector2 _scrollPos = Vector2.zero;
         private bool _paramsReady = false;
         private int _lastMessageCount = 0; // 새 메시지 추가 시만 auto-scroll
@@ -321,8 +323,10 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
+            var outcome=AuthoringGeneration.Latest(tileId,MapGenParams.CaptureState(tileId));
+            if(outcome?.issues.Count>0)currentParams += "\nLast generation failed: " + string.Join("\n",outcome.issues);
 
-            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo);
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo);
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
@@ -381,6 +385,19 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             }
 
             var font = Text.Font;
+            if (Time.frameCount >= _nextAuthoringCheck)
+            {
+                _nextAuthoringCheck = Time.frameCount + 60;
+                var result = AuthoringGeneration.Latest(_openedTileId, MapGenParams.CaptureState(_openedTileId));
+                if (result != null && result != _shownAuthoringResult)
+                {
+                    _shownAuthoringResult = result;
+                    if (result.issues.Count > 0) _history.Add(new ChatMessage("assistant", string.Join("\n",result.issues)));
+                    else if (result.placements.Count > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"폐허 배치 계획: ":"Planned ruins: ") + result.placements.Count +
+                        (IsKorean()?". 실제 맵의 다른 건물에 따라 위치가 달라질 수 있으며, 생성 때 다시 검사합니다.":". Other buildings in the full map can affect placement; generation checks again.")));
+                    if (result.protectedCells > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"기존 강·바다·도로를 유지해 채움에서 제외한 칸: ":"Fill cells excluded to preserve existing rivers, ocean or roads: ") + result.protectedCells));
+                }
+            }
 
             // 타이틀 바
             var titleRect = new Rect(inRect.x, inRect.y, inRect.width, 28f);
@@ -393,8 +410,13 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             Widgets.Label(titleRect, "MapGen AI");
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
-            if (Widgets.ButtonText(new Rect(titleRect.xMax-125f,titleRect.y,120f,28f),IsKorean()?"이미지 지형":"Image terrain"))
+            var imageButton = new Rect(titleRect.xMax-145f,titleRect.y,140f,28f);
+            bool wasEnabled = GUI.enabled;
+            GUI.enabled = wasEnabled && MapGenAI.ImageInput.ImageFeatureGate.Enabled;
+            if (Widgets.ButtonText(imageButton,IsKorean()?"이미지 (일시 중단)":"Images (paused)"))
                 OpenImageMap();
+            GUI.enabled = wasEnabled;
+            TooltipHandler.TipRegion(imageButton, MapGenAI.ImageInput.ImageFeatureGate.Message);
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
@@ -778,6 +800,8 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         private void GenerateMap()
         {
+            var outcome = AuthoringGeneration.Latest(_openedTileId, MapGenParams.CaptureState(_openedTileId));
+            if (outcome?.issues.Count > 0) { _statusText = IsKorean()?"생성 실패 항목을 수정한 뒤 다시 미리보기를 확인해 주세요.":"Fix the generation issues and check the preview again."; return; }
             // "이 설정으로 맵 생성" 클릭 시: 파라미터 유지한 채로 닫기
             _keepParams = true;
             Close();
@@ -790,6 +814,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         private void OpenImageMap()
         {
+            if (!MapGenAI.ImageInput.ImageFeatureGate.Enabled) { _statusText = MapGenAI.ImageInput.ImageFeatureGate.Message; return; }
             _requests.Cancel(); _isWaiting=false; _statusText="";
             var current=MapGenParams.CaptureState(_openedTileId);
             var features=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.LabelCap.ToString());
@@ -797,6 +822,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         }
         private bool ApplyImageMap(MapGenAI.ImageInput.ImageMapData image)
         {
+            if (!MapGenAI.ImageInput.ImageFeatureGate.Enabled) { _statusText = MapGenAI.ImageInput.ImageFeatureGate.Message; return false; }
             if(_closed)return false;
             var before=MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
             var updated=(before??new TileMapState()).Clone();updated.imageMap=image?.Clone();

@@ -1,0 +1,1 @@
+{"ok":true,"maps":0,"checks":[{"pass":true,"name":"actual background Map Preview plans both ruins without unsupported Thing spawning"},{"pass":true,"name":"actual Map Preview texture includes positioned wall overlay"},{"pass":true,"name":"background preview leaves main-thread generation scope clear"}]}

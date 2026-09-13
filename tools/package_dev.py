@@ -24,12 +24,13 @@ def package(output: Path) -> Path:
     ET.SubElement(versions, 'li').text = '1.6'
     ET.SubElement(ET.SubElement(root, 'incompatibleWith'), 'li').text = 'Choco.MapGenAI'
     root.find('description').text = (
-        'Development preview: cumulative terrain edits and image terrain workspace.\n'
+        'Development preview: cumulative text edits, native material fills and positioned ruins.\n'
         'Precise circles/stars/hearts by default; request natural/irregular outlines to soften their geometry.\n'
         'Preserve world rivers and shores; remove variants while keeping ordinary connections.\n'
         'Add inland lakes/oases and loaded landmark features only when their biome and generator requirements match.\n'
         'Enable this package instead of MapGen AI. Test in a new world.\n'
-        'Image interpretation is experimental; region correction currently changes terrain labels only.\n'
+        'Fill regions with real Odyssey lava or other loaded permanent terrains. Place simple ruined walls/floors inside an area.\n'
+        'Image input, interpretation and generation are temporarily paused; stored image data is retained but inactive.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
     )
     manifest = {
@@ -59,16 +60,15 @@ def package(output: Path) -> Path:
             'Harmony와 Map Preview가 필요합니다. 기존 MapGen AI를 끄고 MapGen AI [DEV]를 켭니다.\n'
             '새 테스트 월드에서 시작하고 모드 설정에 API 키를 직접 입력하세요.\n'
             '기존 배포판·설정·세이브는 이 패키지에 포함하지 않습니다.\n'
-            'Image terrain에서 배치가 읽히는 Map Preview/탑다운/AI 맵 PNG/JPEG를 불러옵니다. 설명은 선택 사항입니다.\n'
+            '현재 이미지 입력·해석·팔레트·생성 효과는 일시 중단입니다. 저장된 이미지 데이터는 보존합니다.\n'
             '원형/별/하트는 정확한 형태이며, 자연스러운/울퉁불퉁한 윤곽을 요청하면 선택적으로 굴곡을 추가합니다.\n'
             '살짝/많이로 강도를 바꾸거나 다시 정확한 원형으로 요청해 되돌릴 수 있습니다.\n'
             '월드 강·해안 연결을 보존합니다. 삼각주/피오르드만 제거하면 일반 강/해안이 남습니다.\n'
             '내륙 해안은 만들 수 없으며, 호수·오아시스·확장 모드 특징은 바이옴과 실제 생성 조건에 맞으면 추가할 수 있습니다.\n'
-            '용암 영역 채움과 구조물 위치 지정은 아직 미지원입니다. 이미지 추가 개선은 보류하고 텍스트 편집을 우선 개발합니다.\n'
-            '기본 해석은 원본 윤곽을 보존하고 AI가 지형 종류를 분류합니다. 높이 우선 옵션으로 월드 지형과의 적용 순서를 선택합니다.\n'
-            '분류도에서 영역 클릭 후 팔레트/채팅으로 지형 종류를 바꾸고 적용합니다.\n'
-            '이 분류도는 실제 맵 미리보기가 아닙니다. 적용 후 Map Preview를 확인하세요.\n'
-            '외곽선 이동·브러시는 미지원이며, 비슷한 색상/가는 지형/삽입 그림은 오해할 수 있습니다.\n')
+            '용암은 Odyssey의 실제 깊은 용암입니다. 식은 용암·화산암·자갈 등 활성 영구 지형도 채울 수 있습니다.\n'
+            '섬/영역/위치 안에 손상된 벽과 바닥의 작은 폐허를 배치할 수 있습니다. 고대 위협 시설 위치는 아직 미지원입니다.\n'
+            '건물 전체 면적과 공간을 검사하며, 부족하면 위치 지정 폐허를 일부만 놓지 않고 실패를 표시합니다.\n'
+            '미리보기는 벽의 배치 계획을 보여 줍니다. 실제 맵의 다른 건물에 따라 위치가 달라질 수 있어 생성 때 다시 검사합니다.\n')
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         assert len(z.namelist()) == len(set(z.namelist()))

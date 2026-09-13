@@ -1,0 +1,1 @@
+{"action":"generate","description":"ruins_1 폐허의 개수를 1개로 줄였습니다. 다른 지형과 설정은 그대로 유지됩니다.","params":{"structure_ops":[{"changes":{"count":1},"id":"ruins_1","op":"update"}]}}

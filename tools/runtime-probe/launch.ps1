@@ -8,6 +8,9 @@ param(
     [switch]$NaturalShapes,
     [switch]$FeatureRemoval,
     [switch]$FeaturePolicy,
+    [switch]$TextRegions,
+    [switch]$PreviewOnly,
+    [string]$TextResponses='',
     [switch]$Landmarks,
     [string]$FeatureResponses='',
     [switch]$DeltaDiagnostics,
@@ -68,6 +71,9 @@ if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
 if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
 if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}
 if($FeaturePolicy){$arguments+='-mapgenAIFeaturePolicy=true'}
+if($TextRegions){$arguments+='-mapgenAITextRegions=true'}
+if($PreviewOnly){$arguments+='-mapgenAIPreviewOnly=true'}
+if($TextResponses){$arguments+=('-mapgenAITextResponses="'+[IO.Path]::GetFullPath($TextResponses)+'"')}
 if($FeatureResponses){$arguments+=('-mapgenAIFeatureResponses="'+[IO.Path]::GetFullPath($FeatureResponses)+'"')}
 if($DeltaDiagnostics){$arguments+='-mapgenAIDeltaDiagnostics=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}

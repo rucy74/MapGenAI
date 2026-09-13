@@ -26,6 +26,20 @@ namespace MapGenAI.MapGen
             foreach(string key in MapStateCodec.ChangedFields(before,after))
             {
                 if(key=="cavesExplicitlySet") continue;
+                if(key=="structures")
+                {
+                    var a=before.structures.ToDictionary(p=>p.id);var b=after.structures.ToDictionary(p=>p.id);
+                    foreach(var id in a.Keys.Union(b.Keys))
+                    {
+                        if(a.ContainsKey(id) && b.ContainsKey(id) && SimpleJson.Serialize(a[id])==SimpleJson.Serialize(b[id]))continue;
+                        string verb=!a.ContainsKey(id)?(korean?"추가":"added"):!b.ContainsKey(id)?(korean?"삭제":"removed"):(korean?"변경":"changed");
+                        text.Append("\n• ").Append(korean?"폐허 ":"Ruin ").Append(id).Append(": ").Append(verb);
+                        if(b.TryGetValue(id,out var p))text.Append(" · ").Append(p.width).Append('×').Append(p.height).Append(" · ").Append(p.count).Append(korean?"개":" instances")
+                            .Append(p.region==null?"":" · "+p.region).Append(p.position==null?"":" · ["+string.Join(",",p.position.Select(n=>n.ToString("0.###",CultureInfo.InvariantCulture)))+"]");
+                    }
+                    text.Append(korean?"\n실제 배치 여부는 미리보기 생성 결과에서 확인합니다.":"\nPlacement is checked during preview generation.");
+                    continue;
+                }
                 if(key=="elevationShapes")
                 {
                     var a=ShapeEdits.Describe(before.elevationShapes).ToDictionary(s=>(string)s["id"]);var b=ShapeEdits.Describe(after.elevationShapes).ToDictionary(s=>(string)s["id"]);

@@ -126,6 +126,7 @@ namespace MapGenAI.MapGen
             }
 
             if (obj.ContainsKey("shape_ops")) { data.shape_ops = ShapeEdits.Parse(obj); Track("shape_ops"); }
+            if (obj.ContainsKey("structure_ops")) { data.structure_ops = StructurePlans.Parse(obj); Track("structure_ops"); }
             if (obj.ContainsKey("replace_shapes")) { data.replace_shapes = obj.GetBool("replace_shapes"); Track("replace_shapes"); }
             if (data.shape_ops != null && data.elevation_shapes != null) throw new FormatException("Use shape_ops or elevation_shapes, not both");
 
@@ -272,7 +273,7 @@ namespace MapGenAI.MapGen
             {
                 bool invalid = scalars.Contains(key) && obj.GetString(key) == null
                     || arrays.Contains(key) && obj.GetArray(key) == null
-                    || (key == "elevation_shapes" || key == "shape_ops") && obj.GetObjectArray(key) == null
+                    || (key == "elevation_shapes" || key == "shape_ops" || key == "structure_ops") && obj.GetObjectArray(key) == null
                     || key == "river" && obj.GetObject(key) == null;
                 if (invalid) throw new FormatException("Invalid or null parameter: " + key);
             }

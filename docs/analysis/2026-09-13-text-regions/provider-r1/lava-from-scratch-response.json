@@ -1,0 +1,79 @@
+{
+  "action": "generate",
+  "description": "중앙의 평평한 토양 섬과 주변을 감싸는 도넛 형태의 용암 호수를 생성하고 섬 내부에 작은 유적을 배치합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "lava_moat",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "outer_circle",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.35
+            },
+            {
+              "id": "inner_circle",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.18
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "from": "outer_circle",
+              "a": "inner_circle",
+              "out": "ring_moat"
+            },
+            {
+              "op": "add",
+              "s": "ring_moat",
+              "fill": "LavaDeep",
+              "e": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "center_island",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "island_shape",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.17
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "island_shape",
+              "fill": "Soil",
+              "e": 0.05
+            }
+          ]
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "ruin_island",
+          "kind": "ruin",
+          "region": "center_island",
+          "width": 9,
+          "height": 9,
+          "count": 1
+        }
+      }
+    ]
+  }
+}

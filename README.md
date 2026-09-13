@@ -1,6 +1,6 @@
 # MapGen AI
 
-> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers the existing features and new image-to-map, region correction, and iterative editing improvements on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
+> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers the existing features and native lava/material fills, positioned ruins, and iterative text editing improvements (image generation is temporarily paused) on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
 
 ![Preview](docs/assets/preview_composite.png)
 
@@ -8,7 +8,7 @@
 
 A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type anything like *"mountain fortress with hot springs"*, *"straight river on the left side"*, or *"just surprise me"* and watch the AI configure your map in real-time with Map Preview.
 
-> This mod was 100% built by [Claude Code](https://claude.ai/claude-code) (AI coding agent). The author has zero C# experience — every line of code, every Harmony patch, and every UI element was written by AI through natural language conversation.
+> The original version was built by [Claude Code](https://claude.ai/claude-code) (AI coding agent). The author has zero C# experience. Development continues with AI-assisted implementation and validation.
 
 ## Features
 
@@ -16,7 +16,9 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 - **Live Map Preview** — See changes instantly through Map Preview integration
 - **Elevation Shapes** — Diagonal mountain ranges, central lakes, ring fortresses, canyons, ridges, passages, and more
 - **Free-form Shapes** — Star, heart, crescent, and custom shapes via CSG/SDF composite system
-- **Terrain Fill** — Paint areas with sand, rich soil, marsh, mud, or ice
+- **Terrain Fill** — Paint areas with loaded permanent terrain materials, including Odyssey lava, cooled lava, soil, sand, gravel, mud, or ice
+- **Positioned Ruins** — Place small ruined walls/floors inside a named shape or bounded location; full footprints and available space are checked
+- **Images Paused** — Image entry and generation are disabled during text-first development; existing data is retained
 - **River Control** — Direction, position, and straight river mode
 - **MDP State** — Previous settings preserved across requests (add mountains, then lakes, then caves — nothing gets lost)
 - **Terrain Tuning** — Rich soil density, vegetation, animals, ore, ruins, rock types, caves, geysers

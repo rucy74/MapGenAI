@@ -11,6 +11,7 @@ static class CoreRegressionTests
     // Each assertion protects externally observable behavior, not implementation text.
     public static void RunAll()
     {
+        TextRegionTests.SeedMaterials();
         Check("Unicode escapes decode", () => Equal("한글", SimpleJson.Parse("{\"message\":\"\\uD55C\\uAE00\"}").GetString("message")));
         Check("Truncated root rejected", () => Throws(() => SimpleJson.Parse("{\"action\":\"generate\",\"params\":{\"hill_amount\":1.2}")));
         Check("Empty object array preserved", () => Equal(0, SimpleJson.Parse("{\"elevation_shapes\":[]}").GetObjectArray("elevation_shapes")?.Count ?? -1));
@@ -69,6 +70,7 @@ static class CoreRegressionTests
         NaturalShapeTests.RunAll();
         WorldStateTests.RunAll();
         ImageMapTests.RunAll();
+        TextRegionTests.RunAll();
         Console.WriteLine($"CoreRegressionTests: {passed} PASS / {failed} FAIL");
         if (failed > 0) throw new Exception($"{failed} regression tests failed");
     }

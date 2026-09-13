@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MapGenAIProbe>
+  <fixture>
+    <state>
+      <fertilityOffset>0.600000024</fertilityOffset>
+      <straightRiver>True</straightRiver>
+      <elevationShapes>
+        <li>
+          <id>triangle</id>
+          <type>composite</type>
+          <edge_roughness>medium</edge_roughness>
+          <compositeJson>{"shapes":[{"center":null,"h":0,"id":"p","n":0,"prim":"poly","r":0,"r2":0,"rot":0,"size":0,"verts":[[0.1,0.2],[0.8,0.2],[0.5,0.8]],"w":0}],"compose":[{"a":null,"b":null,"e":0.8,"f":0.05,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"p"}]}</compositeJson>
+        </li>
+      </elevationShapes>
+      <structures />
+      <imageMap>
+        <width>3</width>
+        <height>2</height>
+        <cells>MWNSGI</cells>
+        <note>이미지 저장 😀</note>
+      </imageMap>
+      <mutators />
+      <removeMutators />
+      <removeFeatureCategories>
+        <li>River</li>
+      </removeFeatureCategories>
+      <rockTypes />
+    </state>
+    <component>
+      <tileStates>
+        <keys>
+          <li>42</li>
+        </keys>
+        <values>
+          <li>
+            <fertilityOffset>0.600000024</fertilityOffset>
+            <straightRiver>True</straightRiver>
+            <elevationShapes>
+              <li>
+                <id>triangle</id>
+                <type>composite</type>
+                <edge_roughness>medium</edge_roughness>
+                <compositeJson>{"shapes":[{"center":null,"h":0,"id":"p","n":0,"prim":"poly","r":0,"r2":0,"rot":0,"size":0,"verts":[[0.1,0.2],[0.8,0.2],[0.5,0.8]],"w":0}],"compose":[{"a":null,"b":null,"e":0.8,"f":0.05,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"p"}]}</compositeJson>
+              </li>
+            </elevationShapes>
+            <structures />
+            <imageMap>
+              <width>3</width>
+              <height>2</height>
+              <cells>MWNSGI</cells>
+              <note>이미지 저장 😀</note>
+            </imageMap>
+            <mutators />
+            <removeMutators />
+            <removeFeatureCategories>
+              <li>River</li>
+            </removeFeatureCategories>
+            <rockTypes />
+          </li>
+        </values>
+      </tileStates>
+      <tileBaselines>
+        <keys>
+          <li>42</li>
+        </keys>
+        <values>
+          <li>
+            <mutators>
+              <li>Caves</li>
+            </mutators>
+            <hilliness>LargeHills</hilliness>
+          </li>
+        </values>
+      </tileBaselines>
+      <lastAppliedTiles>
+        <keys>
+          <li>42</li>
+        </keys>
+        <values>
+          <li>
+            <mutators>
+              <li>Caves</li>
+            </mutators>
+            <hilliness>LargeHills</hilliness>
+          </li>
+        </values>
+      </lastAppliedTiles>
+    </component>
+    <settings>
+      <simpleGeminiModel>gemini-2.5-flash</simpleGeminiModel>
+      <cloudConfigs />
+    </settings>
+  </fixture>
+</MapGenAIProbe>

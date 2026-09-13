@@ -15,6 +15,7 @@ namespace MapGenAI.MapGen
         public string hills = "none";
         public float hillAmount = 1f;
         public List<ElevationShape> elevationShapes = new List<ElevationShape>();
+        public List<StructurePlan> structures = new List<StructurePlan>();
         public MapGenAI.ImageInput.ImageMapData imageMap;
         public float vegetationDensity = 1f;
         public float fertilityOffset = 0f;
@@ -78,6 +79,7 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref dangerDensity, "dangerDensity", 1f);
 
             Scribe_Collections.Look(ref elevationShapes, "elevationShapes", LookMode.Deep);
+            Scribe_Collections.Look(ref structures, "structures", LookMode.Deep);
             Scribe_Deep.Look(ref imageMap, "imageMap");
             Scribe_Collections.Look(ref mutators, "mutators", LookMode.Value);
             Scribe_Collections.Look(ref removeMutators, "removeMutators", LookMode.Value);
@@ -88,6 +90,7 @@ namespace MapGenAI.MapGen
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (elevationShapes == null) elevationShapes = new List<ElevationShape>();
+                if (structures == null) structures = new List<StructurePlan>();
                 if (mutators == null) mutators = new List<string>();
                 if (removeMutators == null) removeMutators = new List<string>();
                 if (removeFeatureCategories == null) removeFeatureCategories = new List<string>();
@@ -102,6 +105,7 @@ namespace MapGenAI.MapGen
             {
                 hills = hills,
                 imageMap = imageMap?.Clone(),
+                structures = structures.Select(p => p.Clone()).ToList(),
                 hillAmount = hillAmount,
                 vegetationDensity = vegetationDensity,
                 fertilityOffset = fertilityOffset,
@@ -134,7 +138,7 @@ namespace MapGenAI.MapGen
         /// <summary>기본값(빈 상태)인지 확인.</summary>
         public bool IsDefault()
         {
-            return imageMap == null && hills == "none" && hillAmount == 1f && elevationShapes.Count == 0
+            return imageMap == null && structures.Count == 0 && hills == "none" && hillAmount == 1f && elevationShapes.Count == 0
                 && vegetationDensity == 1f && animalDensity == 1f && fertilityOffset == 0f
                 && !hasRiver && !hasCaves && !hasRoads
                 && geyserCount == -1 && hasRockChunks
