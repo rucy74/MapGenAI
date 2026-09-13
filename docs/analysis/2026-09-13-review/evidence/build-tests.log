@@ -1,0 +1,21 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj을(를) 422밀리초 동안 복원했습니다.
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\UnityShim.cs(76,30): warning CS8765: 'obj' 매개 변수 형식의 null 허용 여부가 재정의된 멤버와 일치하지 않습니다(null 허용 여부 특성 때문일 수 있음). [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(18,35): error CS0246: 'IExposable' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(31,21): error CS0246: 'ShapePrimitive' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(32,21): error CS0246: 'ComposeOp' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(495,54): error CS0246: 'TileMapState' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(255,24): error CS0246: 'Hilliness' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+
+빌드하지 못했습니다.
+
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\UnityShim.cs(76,30): warning CS8765: 'obj' 매개 변수 형식의 null 허용 여부가 재정의된 멤버와 일치하지 않습니다(null 허용 여부 특성 때문일 수 있음). [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(18,35): error CS0246: 'IExposable' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(31,21): error CS0246: 'ShapePrimitive' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(32,21): error CS0246: 'ComposeOp' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(495,54): error CS0246: 'TileMapState' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGen\MapGenParams.cs(255,24): error CS0246: 'Hilliness' 형식 또는 네임스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인하세요. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\Tests\TextToMap.Tests.csproj]
+    경고 1개
+    오류 5개
+
+경과 시간: 00:00:01.29

@@ -73,6 +73,9 @@ namespace MapGenAI.Patches
             }
         }
 
+        [HarmonyPriority(Priority.Low)]
+        static void Finalizer() => Postfix();
+
         static void Postfix()
         {
             if (!_modified) return;

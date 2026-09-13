@@ -1,0 +1,37 @@
+{
+  "verified_at": "2026-09-13T14:40:57.484798+09:00",
+  "scope": "Artifact links, UTF-8, tagged-source identity, actual CLI metadata, source/DLL unchanged. Semantic review was performed separately; not an in-game test.",
+  "branch": "dev",
+  "head": "1439bbdfac7601f6c668be49681f7d8f6073af09",
+  "checked_links": 71,
+  "fable_consultations": [
+    {
+      "request": "fable-code-request.md",
+      "response": "fable-code-review.md",
+      "observed_models": [
+        "claude-haiku-4-5-20251001",
+        "claude-fable-5-1"
+      ],
+      "duration_ms": 133034,
+      "num_turns": 1,
+      "is_error": false,
+      "subagents_spawned": 0
+    },
+    {
+      "request": "fable-synthesis-request.md",
+      "response": "fable-synthesis-review.md",
+      "observed_models": [
+        "claude-haiku-4-5-20251001",
+        "claude-fable-5-1"
+      ],
+      "duration_ms": 119864,
+      "num_turns": 15,
+      "is_error": false,
+      "subagents_spawned": 0
+    }
+  ],
+  "source_and_dll_unchanged": true,
+  "untracked_analysis_files": 30,
+  "old_log_markers_retained": true,
+  "shared_memory": "pending due to concurrent edits by another session"
+}

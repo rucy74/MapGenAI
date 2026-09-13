@@ -1,0 +1,12 @@
+{
+  "examinedFiles": 471,
+  "credentialFindings": [],
+  "hashes": {
+    "dist": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6",
+    "installed": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6",
+    "dev": "cd6be84b7da0c7c694953941b65aebf456bbd3aa6a410ff109cd4e5e41d1713c"
+  },
+  "reportLocalLinks": 16,
+  "languageXmlFiles": 4,
+  "scope": "Exact configured development key plus Google/private-key patterns; not a guarantee against every possible secret format"
+}

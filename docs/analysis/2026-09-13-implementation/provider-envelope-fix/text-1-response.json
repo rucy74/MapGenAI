@@ -1,0 +1,1 @@
+{"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"mountain_top_right","type":"bump","position":[0.75,0.75],"strength":"strong","size":"medium"}}]}}

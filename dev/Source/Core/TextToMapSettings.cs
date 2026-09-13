@@ -12,6 +12,7 @@ namespace MapGenAI
         // ── 저장 필드 ───────────────────────────────────────────────────────
         public bool useSimpleMode = true;
         public string geminiApiKey = "";            // Simple 모드 전용 키
+        public string simpleGeminiModel = LLMProviderRegistry.GetDefaultModel(LLMProvider.Gemini);
 
         public bool useCloudProviders = true;       // Advanced: Cloud vs Local 토글
         public List<ApiConfig> cloudConfigs = new List<ApiConfig>();
@@ -45,6 +46,7 @@ namespace MapGenAI
         {
             Scribe_Values.Look(ref useSimpleMode, "useSimpleMode", true);
             Scribe_Values.Look(ref geminiApiKey, "geminiApiKey", "");
+            Scribe_Values.Look(ref simpleGeminiModel,"simpleGeminiModel",LLMProviderRegistry.GetDefaultModel(LLMProvider.Gemini));
             Scribe_Values.Look(ref useCloudProviders, "useCloudProviders", true);
             Scribe_Collections.Look(ref cloudConfigs, "cloudConfigs", LookMode.Deep);
             Scribe_Values.Look(ref currentConfigIndex, "currentConfigIndex", 0);
@@ -65,7 +67,7 @@ namespace MapGenAI
                     IsEnabled = true,
                     Provider = LLMProvider.Gemini,
                     ApiKey = geminiApiKey,
-                    SelectedModel = "gemini-2.5-flash"
+                    SelectedModel = string.IsNullOrWhiteSpace(simpleGeminiModel)?LLMProviderRegistry.GetDefaultModel(LLMProvider.Gemini):simpleGeminiModel
                 };
             }
 
@@ -151,6 +153,12 @@ namespace MapGenAI
             Widgets.Label(listing.GetRect(Text.LineHeight), "MapGenAI_Settings_SimpleDesc".Translate());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
+
+            if(listing.ButtonText("Gemini: "+simpleGeminiModel))
+                Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>{
+                    new FloatMenuOption("gemini-3.8-flash",()=>simpleGeminiModel="gemini-3.8-flash"),
+                    new FloatMenuOption("gemini-2.5-flash",()=>simpleGeminiModel="gemini-2.5-flash")
+                }));
 
             listing.Gap(12f);
 

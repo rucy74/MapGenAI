@@ -1,0 +1,1 @@
+{"action":"generate","description":"Add a circular mountain in the top right while keeping existing terrain.","params":{"shape_ops":[{"op":"add","shape":{"id":"mountain_top_right","type":"bump","position":"top_right","strength":"strong","size":"medium"}}]}}

@@ -33,19 +33,21 @@ namespace Verse
     /// <summary>WorldSelector 스텁. SelectedTile은 항상 -1 반환.</summary>
     public class WorldSelector
     {
-        public int SelectedTile => -1;
+        public int SelectedTile { get; set; } = -1;
     }
 
     /// <summary>WorldGrid 스텁. 인덱서는 항상 null 반환.</summary>
     public class WorldGrid
     {
-        public RimWorld.Planet.Tile this[int index] => null;
+        public Dictionary<int, RimWorld.Planet.Tile> Tiles = new Dictionary<int, RimWorld.Planet.Tile>();
+        public RimWorld.Planet.Tile this[int index] => Tiles.TryGetValue(index, out var tile) ? tile : null;
     }
 
     public static class Find
     {
-        public static WorldSelector WorldSelector => null;
-        public static WorldGrid WorldGrid => null;
+        public static WorldSelector WorldSelector { get; set; }
+        public static WorldGrid WorldGrid { get; set; }
+        public static RimWorld.Planet.World World { get; set; }
     }
 
     public static class Rand
@@ -58,7 +60,8 @@ namespace Verse
 
     public static class DefDatabase<T> where T : class
     {
-        public static T GetNamedSilentFail(string defName) => null;
+        public static Dictionary<string, T> Definitions = new Dictionary<string, T>();
+        public static T GetNamedSilentFail(string defName) => Definitions.TryGetValue(defName, out var def) ? def : null;
     }
 
     public static class ModsConfig
@@ -77,14 +80,24 @@ namespace RimWorld.Planet
         public string defName;
         public string label;
         public List<string> categories = new List<string>();
+        public List<string> overrideCategories = new List<string>();
+        public int priority;
     }
 
     public class Tile
     {
+        public Hilliness hilliness;
         public List<TileMutatorDef> Mutators { get; set; } = new List<TileMutatorDef>();
         public bool IsCoastal => false;
+        public Action<TileMutatorDef> BeforeAdd;
 
-        public void AddMutator(TileMutatorDef def) => Mutators.Add(def);
+        public void AddMutator(TileMutatorDef def)
+        {
+            BeforeAdd?.Invoke(def);
+            foreach(var old in Mutators.ToList())
+                if ((old.categories.Any(def.categories.Contains) && def.priority >= old.priority) || old.categories.Any(def.overrideCategories.Contains)) Mutators.Remove(old);
+            Mutators.Add(def);
+        }
         public void RemoveMutator(TileMutatorDef def) => Mutators.Remove(def);
     }
 
@@ -99,6 +112,60 @@ namespace RimWorld.Planet
 // ============================================================
 namespace RimWorld
 {
+    public enum Hilliness { Undefined, Flat, SmallHills, LargeHills, Mountainous, Impassable }
+}
+
+// Serialization calls are compile-only here. Actual save/load is checked in the game probe.
+namespace Verse
+{
+    public interface IExposable { void ExposeData(); }
+    public struct IntVec3 { public int x, y, z; public IntVec3(int x, int y, int z) { this.x=x; this.y=y; this.z=z; } }
+    public class Map { public IntVec3 Size; }
+    public class MapGenFloatGrid
+    {
+        private readonly Dictionary<(int,int), float> cells = new Dictionary<(int,int), float>();
+        public float this[IntVec3 cell] { get => cells.TryGetValue((cell.x,cell.z), out var value) ? value : 0f; set => cells[(cell.x,cell.z)] = value; }
+    }
+    public static class MapGenerator { public static MapGenFloatGrid Fertility; }
+    public static class CellRect
+    {
+        public static IEnumerable<IntVec3> WholeMap(Map map)
+        {
+            for (int z=0; z<map.Size.z; z++) for (int x=0; x<map.Size.x; x++) yield return new IntVec3(x,0,z);
+        }
+    }
+    public enum LoadSaveMode { Inactive, Saving, LoadingVars, ResolvingCrossRefs, PostLoadInit }
+    public enum LookMode { Undefined, Value, Deep }
+    public static class Scribe { public static LoadSaveMode mode; }
+    public static class Scribe_Values
+    {
+        public static void Look<T>(ref T value, string label, T defaultValue = default(T), bool forceSave = false) { }
+    }
+    public static class Scribe_Deep { public static void Look<T>(ref T value,string label,params object[] args) { } }
+    public static class Scribe_Collections
+    {
+        public static void Look<T>(ref List<T> values, string label, LookMode mode) { }
+        public static void Look<K,V>(ref Dictionary<K,V> values, string label, LookMode keyMode, LookMode valueMode) { }
+    }
+}
+
+namespace RimWorld.Planet
+{
+    public class WorldComponent
+    {
+        public WorldComponent(World world) { }
+        public virtual void ExposeData() { }
+    }
+    public class World
+    {
+        private readonly Dictionary<Type, object> components = new Dictionary<Type, object>();
+        public T GetComponent<T>() where T : WorldComponent
+        {
+            if (!components.TryGetValue(typeof(T), out var value))
+                components[typeof(T)] = value = Activator.CreateInstance(typeof(T), this);
+            return (T)value;
+        }
+    }
 }
 
 // ============================================================

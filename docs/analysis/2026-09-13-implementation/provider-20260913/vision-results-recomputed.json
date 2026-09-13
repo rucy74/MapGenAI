@@ -1,0 +1,64 @@
+{
+  "model": "gemini-2.5-flash",
+  "utc": "2026-09-13T07:12:41.8062657Z",
+  "results": [
+    {
+      "id": "topdown-1",
+      "candidateCount": 1,
+      "waterIoU": 0.4794745484400657,
+      "mountainIoU": 0,
+      "waterCentroid": [
+        0.75,
+        0.25
+      ],
+      "mountainCentroid": null
+    },
+    {
+      "id": "topdown-2",
+      "candidateCount": 1,
+      "waterIoU": 0.5517826825127334,
+      "mountainIoU": 0,
+      "waterCentroid": [
+        0.69921875,
+        0.30078125
+      ],
+      "mountainCentroid": null
+    },
+    {
+      "id": "sketch-1",
+      "candidateCount": 1,
+      "waterIoU": 0.26265060240963856,
+      "mountainIoU": 0,
+      "waterCentroid": [
+        0.7302186446925021,
+        0.39827295703454085
+      ],
+      "mountainCentroid": null
+    },
+    {
+      "id": "sketch-2",
+      "candidateCount": 1,
+      "waterIoU": 0.2912763466042155,
+      "mountainIoU": 0,
+      "waterCentroid": [
+        0.6669379078057033,
+        0.42674790055582407
+      ],
+      "mountainCentroid": null
+    },
+    {
+      "name": "topdown",
+      "waterRepeatIoU": 0.3921259842519685,
+      "mountainRepeatIoU": 1,
+      "warning": "An absent label in both outputs has repeat IoU 1 without indicating accuracy"
+    },
+    {
+      "name": "sketch",
+      "waterRepeatIoU": 0.5448539638386648,
+      "mountainRepeatIoU": 1,
+      "warning": "An absent label in both outputs has repeat IoU 1 without indicating accuracy"
+    }
+  ],
+  "scope": "Synthetic fixtures and captured production prompt; no claim for arbitrary photos or all providers",
+  "derivation": "Repeat metrics reconstructed from saved responses/states; no additional API call."
+}

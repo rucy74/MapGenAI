@@ -3,6 +3,10 @@ dev/Source/obj/
 dev/Source/Tests/obj/
 dev/Source/Tests/bin/
 dev/Assemblies/
+tools/**/bin/
+tools/**/obj/
+docs/analysis/**/bin/
+docs/analysis/**/obj/
 
 # API key
 docs/dev_config.json

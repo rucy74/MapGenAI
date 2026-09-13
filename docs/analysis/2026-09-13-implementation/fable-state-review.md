@@ -1,0 +1,44 @@
+# Claude consultation
+
+Requested: claude-fable-5-1
+
+Observed modelUsage: ["claude-haiku-4-5-20251001", "claude-fable-5-1"]
+
+코드만 읽고 검토했습니다. 중요 결함 3개와 최소 재현 순서입니다.
+
+## 1. baseline 이후 외부에서 추가된 특징이 Apply/Undo/Reset 때마다 조용히 삭제됨
+
+`Plan`은 항상 `baseline.mutators`에서 출발하고, `Replace`는 desired에 없는 mutator를 전부 `RemoveMutator`합니다. 그래서 baseline 캡처 이후 게임 이벤트나 다른 모드가 타일에 붙인 mutator는 이 모드가 손댈 때마다 제거됩니다. `ClearTile`도 같은 경로라 "원본 복원"이 실제로는 "baseline 시점으로 강제 되감기"가 됩니다. `Restore`가 `hilliness`까지 baseline 값으로 덮는 것도 같은 문제입니다.
+
+재현:
+1. 타일 A에서 식생만 바꿔 Apply (baseline = 당시 A).
+2. 개발자 모드나 다른 모드로 A에 mutator M 추가.
+3. 대화창에서 M과 무관한 파라미터 하나 변경 후 Apply.
+4. `LastWorldChanges`에 `−[M]`이 뜨고 M이 사라짐. Undo/Reset으로도 돌아오지 않음.
+
+수정안: desired를 "현재 타일 − 이 모드가 이전 state로 기여한 집합 + 새 계획"으로 계산하거나, 최소한 `beforeWorld`와 baseline의 차집합을 보존 대상으로 두고 `Replace`가 그 집합은 건드리지 않게 하세요. `Restore`의 hilliness 덮어쓰기는 이 모드가 hilliness를 바꾼 적이 없으므로 제거하거나 baseline 값과 현재 값이 같을 때만 적용하세요.
+
+## 2. baseline에 기록된 defName이 현재 모드 목록에 없으면 타일이 영구히 편집·해제 불능
+
+`Resolve`가 baseline/snapshot 문자열에도 그대로 쓰여 `FormatException`을 던집니다. `CommitState`는 `Plan`이 try 바깥이라 롤백 없이 실패하고, `ClearTile`은 `Restore`가 던지면 `RemoveState/RemoveBaseline`에 도달하지 못합니다. 롤백 경로의 `Restore(tile, beforeWorld)`도 같은 이유로 던져 `AggregateException`으로 끝나며 타일이 절반만 수정된 채 남습니다. 같은 원인으로 baseline이 같은 category 두 개를 동시에 담고 있으면(게임이 `Log.Error` 후 공존 허용, 모드 월드젠) `Replace`의 재추가 시 게임이 형제를 제거해 `SetEquals` 검사가 실패하고, `ClearTile`의 catch 안 `Restore(before)`가 다시 던지면 원래 예외도 유실됩니다.
+
+재현:
+1. 모드 X가 제공하는 mutator를 포함해 Apply 후 저장.
+2. 모드 X 비활성화 후 로드.
+3. 해당 타일에서 아무 Apply → 예외. Reset → 예외. state/baseline이 남아 이후 모든 시도가 같은 자리에서 실패.
+
+수정안: baseline/snapshot용 lenient resolve를 두고 미해결 이름은 건너뛰며 `LastApplyWarning`에 남기세요. `ClearTile`은 복원 실패 시에도 state/baseline 삭제와 `Reset`을 finally에서 수행하고, 복원 불가는 경고로 알리세요. `Replace`의 사후 검증은 "desired ⊆ 실제" 대신 실제 diff를 반환해 UI 표시에 쓰는 편이 안전합니다.
+
+## 3. 다른 타일이 선택된 상태의 Undo/Restore가 static 캐시를 가로챔
+
+`CommitState`는 무조건 `CurrentTileId = tileId; HasParams = true`로 캐시를 바꿉니다. 반면 `ClearTile`은 `CurrentTileId == tileId`일 때만 `Reset`합니다. 대화창이 타일 A로 열린 채 사용자가 월드에서 B를 선택해 캐시가 B로 로드된 뒤 A의 Undo를 누르면 캐시가 A로 바뀌고, 이어서 B에 정착하면 A의 파라미터로 맵이 생성됩니다. 롤백의 `LoadFromTile(previousCacheTile)`은 정확한데 정상 경로만 비대칭입니다.
+
+재현:
+1. 타일 A에서 Apply(Undo 스택 생성).
+2. 월드 화면에서 타일 B 선택 (캐시 B).
+3. A 대화창에서 Undo.
+4. B에 정착 → 생성 맵이 A의 state를 따름.
+
+수정안: `CommitState`에서 `tileId == CurrentTileId || !previousCacheActive`일 때만 `ApplyStateToStaticFields`와 `CurrentTileId/HasParams` 갱신을 하고, 아니면 WC state만 저장하세요. 정착 직전 `LoadFromTile(settleTile)`을 강제 호출하는 방어선도 추가하면 좋습니다.
+
+부수적으로 `ApplyPatch`의 no-change 조기 반환은 UI가 Undo를 push하기 전에 구분할 신호가 없어 빈 Undo 항목이 쌓일 수 있으니 bool 반환으로 바꾸는 것을 권합니다.

@@ -1,0 +1,1 @@
+{"action":"generate","description":"Moving the heart lake to the right by 10% of the map width.","params":{"shape_ops":[{"op":"update","id":"heart_lake_center","changes":{"shapes":[{"id":"h","prim":"heart","center":[0.6,0.48],"size":0.25}]}}]}}

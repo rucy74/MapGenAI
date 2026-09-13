@@ -10,7 +10,10 @@ namespace MapGenAI.MapGen
     /// </summary>
     public class MapGenAIWorldComponent : WorldComponent
     {
+        private readonly object stateLock = new object();
         private Dictionary<int, TileMapState> tileStates = new Dictionary<int, TileMapState>();
+        private Dictionary<int, TileWorldSnapshot> tileBaselines = new Dictionary<int, TileWorldSnapshot>();
+        private Dictionary<int, TileWorldSnapshot> lastAppliedTiles = new Dictionary<int, TileWorldSnapshot>();
 
         public MapGenAIWorldComponent(World world) : base(world) { }
 
@@ -18,6 +21,10 @@ namespace MapGenAI.MapGen
         {
             base.ExposeData();
             Scribe_Collections.Look(ref tileStates, "tileStates", LookMode.Value, LookMode.Deep);
+            Scribe_Collections.Look(ref tileBaselines, "tileBaselines", LookMode.Value, LookMode.Deep);
+            if (tileBaselines == null) tileBaselines = new Dictionary<int, TileWorldSnapshot>();
+            Scribe_Collections.Look(ref lastAppliedTiles, "lastAppliedTiles", LookMode.Value, LookMode.Deep);
+            if (lastAppliedTiles == null) lastAppliedTiles = new Dictionary<int, TileWorldSnapshot>();
             if (tileStates == null)
                 tileStates = new Dictionary<int, TileMapState>();
         }
@@ -25,25 +32,32 @@ namespace MapGenAI.MapGen
         /// <summary>타일의 현재 상태를 반환. 없으면 null.</summary>
         public TileMapState GetState(int tileId)
         {
-            return tileStates.TryGetValue(tileId, out var state) ? state : null;
+            lock (stateLock) return tileStates.TryGetValue(tileId, out var state) ? state.Clone() : null;
         }
 
         /// <summary>타일의 현재 상태를 설정.</summary>
         public void SetState(int tileId, TileMapState state)
         {
-            tileStates[tileId] = state;
+            lock (stateLock) tileStates[tileId] = state.Clone();
         }
+
+        public TileWorldSnapshot GetBaseline(int tileId) => tileBaselines.TryGetValue(tileId, out var value) ? value : null;
+        public void SetBaseline(int tileId, TileWorldSnapshot baseline) => tileBaselines[tileId] = baseline;
+        public void RemoveBaseline(int tileId) => tileBaselines.Remove(tileId);
+        public TileWorldSnapshot GetLastApplied(int tileId) => lastAppliedTiles.TryGetValue(tileId, out var value) ? value : null;
+        public void SetLastApplied(int tileId, TileWorldSnapshot snapshot) => lastAppliedTiles[tileId] = snapshot;
+        public void RemoveLastApplied(int tileId) => lastAppliedTiles.Remove(tileId);
 
         /// <summary>타일의 상태를 삭제 (리셋).</summary>
         public void RemoveState(int tileId)
         {
-            tileStates.Remove(tileId);
+            lock (stateLock) tileStates.Remove(tileId);
         }
 
         /// <summary>해당 타일에 상태가 있는지 확인.</summary>
         public bool HasState(int tileId)
         {
-            return tileStates.ContainsKey(tileId);
+            lock (stateLock) return tileStates.ContainsKey(tileId);
         }
 
         /// <summary>현재 월드의 WorldComponent 인스턴스를 가져옴.</summary>

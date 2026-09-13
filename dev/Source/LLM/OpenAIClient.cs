@@ -3,11 +3,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using MapGenAI.UI;
 using Verse;
 
 namespace MapGenAI.LLM
 {
-    public class OpenAIClient : ILLMClient
+    public class OpenAIClient : ILLMClient, IVisionClient
     {
         private readonly string _apiKey;
         private readonly string _model;
@@ -18,13 +20,13 @@ namespace MapGenAI.LLM
         {
             _apiKey = apiKey;
             _model = model;
-            _baseUrl = baseUrl.TrimEnd('/');
+            _baseUrl = (baseUrl ?? "").TrimEnd('/');
+            if (!System.Uri.TryCreate(_baseUrl, System.UriKind.Absolute, out var uri) || (uri.Scheme != "https" && uri.Scheme != "http"))
+                throw new System.ArgumentException("Expected an http(s) provider URL");
         }
 
-        public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt)
+        public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default)
         {
-            var url = $"{_baseUrl}/v1/chat/completions";
-
             var messages = new StringBuilder();
             messages.Append($"{{\"role\":\"system\",\"content\":{EscapeJson(systemPrompt)}}}");
             foreach (var msg in history)
@@ -32,66 +34,39 @@ namespace MapGenAI.LLM
                 messages.Append($",{{\"role\":\"{msg.Role}\",\"content\":{EscapeJson(msg.Content)}}}");
             }
 
-            var body = $"{{\"model\":\"{_model}\",\"temperature\":0.7,\"messages\":[{messages}]}}";
+            var body = $"{{\"model\":{EscapeJson(_model)},\"temperature\":0.7,\"messages\":[{messages}]}}";
 
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
-            request.Content = new StringContent(body, Encoding.UTF8, "application/json");
-
-            var response = await Http.SendAsync(request);
-            var json = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Log.Error($"[MapGenAI] OpenAI error: {json}");
-                throw new System.Exception($"HTTP {(int)response.StatusCode}: {json}");
-            }
-
-            return ExtractContent(json);
+            return await SendBodyAsync(body, cancellationToken);
         }
 
-        private string ExtractContent(string json)
+        public Task<string> SendImageAsync(byte[] image, string mimeType, string instruction, CancellationToken cancellationToken = default)
         {
-            // 공백 있는 포맷("content": "...") 과 compact 포맷("content":"...") 모두 처리
-            string marker = "\"content\": \"";
-            int start = json.IndexOf(marker);
-            if (start < 0)
-            {
-                marker = "\"content\":\"";
-                start = json.IndexOf(marker);
-            }
-            if (start < 0) return null;
-            start += marker.Length;
-
-            var sb = new StringBuilder();
-            for (int i = start; i < json.Length; i++)
-            {
-                if (json[i] == '\\' && i + 1 < json.Length)
-                {
-                    char next = json[i + 1];
-                    if (next == 'n')       { sb.Append('\n'); i++; }
-                    else if (next == 'r')  { i++; }
-                    else if (next == 't')  { sb.Append('\t'); i++; }
-                    else if (next == '"')  { sb.Append('"');  i++; }
-                    else if (next == '\\') { sb.Append('\\'); i++; }
-                    else                   { sb.Append(json[i]); }
-                }
-                else if (json[i] == '"')
-                {
-                    break;
-                }
-                else
-                {
-                    sb.Append(json[i]);
-                }
-            }
-            return sb.ToString();
+            VisionPayload.Validate(image, mimeType);
+            var body = "{\"model\":" + EscapeJson(_model) + ",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":" + EscapeJson(instruction) +
+                "},{\"type\":\"image_url\",\"image_url\":{\"url\":\"data:" + mimeType + ";base64," + System.Convert.ToBase64String(image) + "\"}}]}]}";
+            return SendBodyAsync(body, cancellationToken);
         }
 
-        private string EscapeJson(string s)
+        private async Task<string> SendBodyAsync(string body, CancellationToken cancellationToken)
         {
-            return "\"" + s.Replace("\\", "\\\\").Replace("\"", "\\\"")
-                           .Replace("\n", "\\n").Replace("\r", "\\r") + "\"";
+            var url = _baseUrl.EndsWith("/chat/completions") ? _baseUrl : _baseUrl.EndsWith("/v1") ? _baseUrl + "/chat/completions" : _baseUrl + "/v1/chat/completions";
+
+            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+                request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+                using (var response = await Http.SendAsync(request, cancellationToken))
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    cancellationToken.ThrowIfCancellationRequested();
+                    if (!response.IsSuccessStatusCode) throw new System.Exception("Provider HTTP " + (int)response.StatusCode + " (check URL, model, credentials and quota)");
+                    return ExtractContent(json);
+                }
+            }
         }
+
+        private string ExtractContent(string json) => ProviderResponse.OpenAI(json);
+
+        private string EscapeJson(string text) => SimpleJson.Serialize(text);
     }
 }

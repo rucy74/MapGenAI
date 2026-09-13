@@ -1,0 +1,12 @@
+  복원할 프로젝트를 확인하는 중...
+  C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGenAI.csproj을(를) 593밀리초 동안 복원했습니다.
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\obj\Debug\MapGenAI.AssemblyInfo.cs(15,59): warning CS7035: 지정한 버전 문자열 '1.0.*'이(가) 권장 형식 major.minor.build.revision을 따르지 않습니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGenAI.csproj]
+  MapGenAI -> C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Assemblies\MapGenAI.dll
+
+빌드했습니다.
+
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\obj\Debug\MapGenAI.AssemblyInfo.cs(15,59): warning CS7035: 지정한 버전 문자열 '1.0.*'이(가) 권장 형식 major.minor.build.revision을 따르지 않습니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-analysis\baseline\dev\Source\MapGenAI.csproj]
+    경고 1개
+    오류 0개
+
+경과 시간: 00:00:01.77

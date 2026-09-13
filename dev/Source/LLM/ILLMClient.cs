@@ -1,12 +1,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace MapGenAI.LLM
 {
     public interface ILLMClient
     {
         /// <summary>대화 히스토리를 포함한 멀티턴 메시지 전송</summary>
-        Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt);
+        Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default);
+    }
+
+    public interface IVisionClient
+    {
+        Task<string> SendImageAsync(byte[] image, string mimeType, string instruction, CancellationToken cancellationToken = default);
     }
 
     public class ChatMessage

@@ -25,13 +25,10 @@ namespace MapGenAI.UI
         private readonly int _openedTileId;
 
         // Undo / Reset
-        private readonly Stack<MapParamsData> _paramStack = new Stack<MapParamsData>();
-        private MapParamsData _initialSnapshot; // dialog 열릴 때 저장
+        private readonly Stack<TileMapState> _paramStack = new Stack<TileMapState>();
+        private TileMapState _initialSnapshot; // dialog 열릴 때 저장
 
-        // LongEventHandler 대신 volatile 필드로 백그라운드→메인 스레드 전달
-        private volatile bool _responseReady = false;
-        private string _pendingResponse = null;
-        private string _pendingError = null;
+        private readonly RequestGate _requests = new RequestGate();
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -267,10 +264,10 @@ elevation_shapes 가이드:
   예: 초승달 호수: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
   초승달 팁: 빼는 원(b)의 중심을 크게 이동시키고 반지름을 같거나 비슷하게. 중심 차이가 클수록 얇은 초승달.
 - 여러 shape를 조합 가능 (additive). ""왼쪽에 산 + 오른쪽에도 산"" = [ridge(left), ridge(right)].
-- 현재 맵에 elevation_shapes가 있으면 반드시 elevation_shapes로 전체 목록을 출력하세요. 유지할 기존 shape + 추가/수정할 새 shape 모두 포함.
+- 기존 지형 편집은 아래 shape_ops 계약을 따릅니다. 요청한 대상만 수정하고 다른 지형은 생략하세요.
 - 현재 맵에 elevation_shapes가 없으면(첫 요청) hills만 사용해도 됩니다.
 - 산맥=ridge(fade=small, noise_amount=high). 대각선 산맥=split(direction=대각선, strength=negative). ""양쪽 산맥""=2개 ridge 조합. 협곡=2개 ridge + bump(negative strength, center).
-- 모양 요청(하트/별/고양이/L자/초승달 등)에는 반드시 composite 사용. 거절 금지.
+- 모양 요청(하트/별/고양이/L자/초승달 등)에는 반드시 composite 사용. 표현 한계가 있으면 한계와 대안을 설명하세요.
 
 추가 파라미터:
 - rock_types: 원하는 석재 종류 지정. 바닐라 석재: Granite(화강암), Limestone(석회암), Marble(대리석), Sandstone(사암), Slate(점판암). 예: ""rock_types"":[""Marble"",""Granite""]
@@ -313,10 +310,10 @@ elevation_shapes guide:
   Ex: Crescent lake: shapes:[{id:""a"",prim:""circle"",center:[0.5,0.5],r:0.2},{id:""b"",prim:""circle"",center:[0.65,0.55],r:0.2}], compose:[{op:""sub"",a:""b"",from:""a"",out:""c""},{op:""add"",s:""c"",e:-0.4}]
   Crescent tip: move b's center far from a, keep radius similar. Bigger center gap = thinner crescent.
 - Multiple shapes can be combined (additive). ""mountains left + right"" = [ridge(left), ridge(right)].
-- If current map has elevation_shapes, you MUST output the complete elevation_shapes list. Include existing shapes to keep + new/modified shapes.
+- For existing terrain use the shape_ops contract below. Edit requested targets only; omit other terrain.
 - If current map has no elevation_shapes (first request), you may use hills alone.
 - Mountain range=ridge(fade=small, noise_amount=high). Diagonal range=split(direction=diagonal, strength=negative). ""both sides mountain""=2 ridge combo. Canyon=2 ridges + bump(negative strength, center).
-- For shape requests (heart/star/cat/L-shape/crescent etc.), MUST use composite. Never refuse.
+- For shape requests (heart/star/cat/L-shape/crescent etc.), MUST use composite. Explain representation limits and alternatives when needed.
 
 Additional parameters:
 - rock_types: Specify desired rock types. Vanilla rocks: Granite, Limestone, Marble, Sandstone, Slate. Example: ""rock_types"":[""Marble"",""Granite""]
@@ -354,7 +351,7 @@ Additional parameters:
             // 섹션 4: 규칙 (코드 검증 대상은 제외, 기능 안내만)
             string rules = isKo
                 ? @"규칙:
-- 요청하지 않은 파라미터는 생략하세요. 기본값이 유지됩니다.
+- 요청하지 않은 파라미터는 생략하세요. 현재 값이 유지됩니다.
 - 맵 특징(mutators): 추가할 것만 mutators에, 제거할 것만 remove_mutators에 넣으세요. 이미 있는 특징(active_mutators)은 다시 안 적어도 유지됩니다. 특징을 교체할 땐 remove_mutators로 뺀 뒤 mutators로 추가.
 - 완전 평지 = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - 통로/출구 = bump(negative_strong, position=맵 가장자리)로 산벽을 자연스럽게 깎기. 예: 남쪽 통로=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), 남동쪽=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
@@ -362,7 +359,7 @@ Additional parameters:
 - 온천=mutators:[""HotSprings""], 간헐천 개수=geysers:N.
 - 한국어로 답변하세요."
                 : @"Rules:
-- Omit parameters not requested. Defaults are kept.
+- Omit parameters not requested. Current values are kept.
 - Map features (mutators): put only what to ADD in mutators, only what to REMOVE in remove_mutators. Existing features (active_mutators) are kept even if you don't re-list them. To replace a feature, remove it via remove_mutators then add via mutators.
 - Flat terrain = hills:none + hill_amount:0.1 + elevation_shapes:[]
 - Passage/exit = bump(negative_strong, position=map edge) to naturally carve through mountains. Ex: south=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), southeast=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
@@ -379,11 +376,11 @@ Additional parameters:
                     ? @"
 예시1) 유저: ""산악 요새에 호수"" → {""action"":""generate"",""description"":""산악 요새에 호수"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
 예시2) 유저: ""왼쪽에 산, 완전 평지"" → {""action"":""generate"",""description"":""왼쪽에 산"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
-예시3) 유저: ""남쪽에 통로 뚫어줘"" → {""action"":""generate"",""description"":""남쪽 통로"",""params"":{""elevation_shapes"":[..기존shapes..,{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}]}}"
+예시3) 유저: ""남쪽에 통로 뚫어줘"" → {""action"":""generate"",""description"":""남쪽 통로"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}}]}}"
                     : @"
 Ex1) ""Mountain fortress with lake"" → {""action"":""generate"",""description"":""fortress with lake"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
 Ex2) ""Mountains on the left"" → {""action"":""generate"",""description"":""left mountains"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
-Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""south passage"",""params"":{""elevation_shapes"":[..existing..,{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}]}}";
+Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""south passage"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}}]}}";
             }
             else
             {
@@ -399,60 +396,9 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
 
-            // 수정 예시: 현재 elevation_shapes가 있으면 수정 방법을 구체적으로 보여줌
-            string modExample = "";
-            if (MapGenParams.ElevationShapes.Count > 0)
-            {
-                var existingShapes = MapGenParams.ElevationShapes;
-                var firstShape = existingShapes[0];
-                // 첫 번째 shape JSON 직렬화
-                var fp = new System.Collections.Generic.List<string>();
-                if (!string.IsNullOrEmpty(firstShape.type))         fp.Add($"\"type\":\"{firstShape.type}\"");
-                if (!string.IsNullOrEmpty(firstShape.direction))    fp.Add($"\"direction\":\"{firstShape.direction}\"");
-                if (!string.IsNullOrEmpty(firstShape.strength))     fp.Add($"\"strength\":\"{firstShape.strength}\"");
-                if (!string.IsNullOrEmpty(firstShape.fade))         fp.Add($"\"fade\":\"{firstShape.fade}\"");
-                if (!string.IsNullOrEmpty(firstShape.noise_amount)) fp.Add($"\"noise_amount\":\"{firstShape.noise_amount}\"");
-                if (!string.IsNullOrEmpty(firstShape.position))     fp.Add($"\"position\":\"{firstShape.position}\"");
-                if (!string.IsNullOrEmpty(firstShape.size))         fp.Add($"\"size\":\"{firstShape.size}\"");
-                string firstJson = "{" + string.Join(",", fp) + "}";
-
-                // 제거 예시: 첫 번째 shape를 뺀 나머지 목록
-                string removalShapesJson;
-                if (existingShapes.Count == 1)
-                {
-                    removalShapesJson = "[]";
-                }
-                else
-                {
-                    var others = existingShapes.Skip(1).Select(s => {
-                        var p = new System.Collections.Generic.List<string>();
-                        if (!string.IsNullOrEmpty(s.type))         p.Add($"\"type\":\"{s.type}\"");
-                        if (!string.IsNullOrEmpty(s.direction))    p.Add($"\"direction\":\"{s.direction}\"");
-                        if (!string.IsNullOrEmpty(s.strength))     p.Add($"\"strength\":\"{s.strength}\"");
-                        if (!string.IsNullOrEmpty(s.fade))         p.Add($"\"fade\":\"{s.fade}\"");
-                        if (!string.IsNullOrEmpty(s.noise_amount)) p.Add($"\"noise_amount\":\"{s.noise_amount}\"");
-                        if (!string.IsNullOrEmpty(s.position))     p.Add($"\"position\":\"{s.position}\"");
-                        if (!string.IsNullOrEmpty(s.size))         p.Add($"\"size\":\"{s.size}\"");
-                        return "{" + string.Join(",", p) + "}";
-                    });
-                    removalShapesJson = "[" + string.Join(",", others) + "]";
-                }
-                string firstDesc = firstShape.direction ?? firstShape.type ?? "해당";
-
-                modExample = isKo
-                    ? $"\n[추가 예시] elevation_shapes에 호수 추가:\n" +
-                      $"유저: \"왼쪽 아래에 호수 추가해줘\"\n" +
-                      $"응답: {{\"action\":\"generate\",\"description\":\"기존 지형에 왼쪽 아래 호수 추가\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}\n" +
-                      $"[제거 예시] '{firstDesc}' shape 제거:\n" +
-                      $"유저: \"{firstDesc} 지형 없애줘\"\n" +
-                      $"응답: {{\"action\":\"generate\",\"description\":\"{firstDesc} 지형 제거\",\"params\":{{\"elevation_shapes\":{removalShapesJson}}}}}"
-                    : $"\n[Addition example] Adding a lake to current elevation_shapes:\n" +
-                      $"User: \"Add a lake in the bottom left\"\n" +
-                      $"Response: {{\"action\":\"generate\",\"description\":\"Added a lake in bottom-left to existing terrain\",\"params\":{{\"elevation_shapes\":[{firstJson},{{\"type\":\"bump\",\"position\":\"bottom_left\",\"size\":\"medium\",\"strength\":\"negative_strong\",\"fill\":\"water\"}}]}}}}\n" +
-                      $"[Removal example] Removing '{firstDesc}' shape:\n" +
-                      $"User: \"Remove the {firstDesc} terrain\"\n" +
-                      $"Response: {{\"action\":\"generate\",\"description\":\"Removed {firstDesc} terrain\",\"params\":{{\"elevation_shapes\":{removalShapesJson}}}}}";
-            }
+            string modExample = ShapeEditPrompt.Rules(isKo);
+            // Whole-layout examples describe initial generation only.
+            if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
             return $@"{role}
 
@@ -470,7 +416,6 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         }
 
         // WorldComponent의 대화 시작 시점 스냅샷 (닫기=취소 시 복원용)
-        private TileMapState _wcSnapshot;
 
         public Dialog_TextToMap()
         {
@@ -487,11 +432,9 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
             // WorldComponent에서 기존 타일 상태 로드
             MapGenParams.LoadFromTile(_openedTileId);
-            _initialSnapshot = MapGenParams.HasParams ? MapGenParams.ToSnapshot() : null;
+            _initialSnapshot = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
+            _paramsReady = _initialSnapshot != null;
 
-            // WorldComponent의 현재 상태 스냅샷 (닫기=취소 시 복원용)
-            var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
-            _wcSnapshot = wc?.GetState(_openedTileId)?.Clone();
 
             _history.Add(new ChatMessage("assistant",
                 "MapGenAI_Welcome".Translate()));
@@ -500,24 +443,14 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         public override void DoWindowContents(Rect inRect)
         {
-            // 백그라운드 스레드 응답 처리 (매 프레임 체크)
-            if (_responseReady)
+            var reply = _requests.Take();
+            if (reply != null)
             {
-                _responseReady = false;
-                if (_pendingError != null)
-                {
-                    // API 오류 (토큰 소진, 네트워크 등) → 채팅에 오류 표시
-                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(_pendingError)));
-                    _pendingError = null;
-                    _isWaiting = false;
-                    _statusText = "";
-                }
-                else
-                {
-                    var resp = _pendingResponse;
-                    _pendingResponse = null;
-                    HandleResponse(resp);
-                }
+                _isWaiting = false;
+                _statusText = "";
+                if (reply.Error != null)
+                    _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(reply.Error)));
+                else HandleResponse(reply.Text);
             }
 
             var font = Text.Font;
@@ -533,6 +466,8 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             Widgets.Label(titleRect, "MapGen AI");
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
+            if (Widgets.ButtonText(new Rect(titleRect.xMax-125f,titleRect.y,120f,28f),IsKorean()?"이미지 지형":"Image terrain"))
+                OpenImageMap();
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
@@ -581,8 +516,10 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 var presetSaveRect = new Rect(resetRect.xMax + sp, bottomY, presetBtnW, 36f);
                 var presetLoadRect = new Rect(presetSaveRect.xMax + sp, bottomY, presetBtnW, 36f);
 
+                GUI.enabled = !_isWaiting;
                 if (Widgets.ButtonText(generateRect, "MapGenAI_Generate".Translate()))
                     GenerateMap();
+                GUI.enabled = true;
 
                 GUI.enabled = _paramStack.Count > 0 && !_isWaiting;
                 if (Widgets.ButtonText(undoRect, "MapGenAI_Undo".Translate()))
@@ -694,88 +631,51 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         {
             var text = _inputText.Trim();
             if (text == "" || _isWaiting) return;
-
             _inputText = "";
             _history.Add(new ChatMessage("user", text));
-            _isWaiting = true;
-            _statusText = "MapGenAI_Requesting".Translate();
-            _paramsReady = false;
-
             var settings = MapGenAIMod.Settings;
-            ILLMClient client;
+            var clients = new List<ILLMClient>();
             try
             {
-                var config = settings.GetActiveConfig();
-                if (config == null)
-                {
-                    _statusText = "MapGenAI_Error".Translate("No API configured");
-                    _isWaiting = false;
-                    return;
-                }
-                client = LLMClientFactory.Create(config, settings.localBaseUrl);
+                var active = settings.GetActiveConfig();
+                if (active == null || !active.IsValid()) throw new Exception("No valid API configured");
+                clients.Add(LLMClientFactory.Create(active, settings.localBaseUrl));
+                // Capture fallback on the UI thread; workers never change saved settings.
+                if (!settings.useSimpleMode && settings.useCloudProviders)
+                    for (int i=1;i<settings.cloudConfigs.Count;i++)
+                    {
+                        var next=settings.cloudConfigs[(settings.currentConfigIndex+i)%settings.cloudConfigs.Count];
+                        if (next.IsValid()) { clients.Add(LLMClientFactory.Create(next,settings.localBaseUrl)); break; }
+                    }
             }
             catch (Exception e)
             {
-                Log.Error($"[MapGenAI] 클라이언트 생성 실패: {e}");
                 _statusText = "MapGenAI_Error".Translate(e.Message);
-                _isWaiting = false;
                 return;
             }
-
-            Log.Message($"[MapGenAI] LLM 요청 시작");
-
-            // 전송 전 현재 파라미터 스냅샷 저장 (undo용)
-            if (MapGenParams.HasParams)
-                _paramStack.Push(MapGenParams.ToSnapshot());
-
-            // LLM 컨텍스트: generate 후 초기화, ask 후 유지
-            // 맵 상태는 system prompt에 MDP로 포함
-            int tileId = Find.WorldSelector?.SelectedTile ?? -1;
-            var systemPrompt = BuildSystemPrompt(tileId);
-
+            var systemPrompt = BuildSystemPrompt(_openedTileId);
             _llmContext.Add(new ChatMessage("user", text));
             var historySnapshot = new List<ChatMessage>(_llmContext);
-
+            var ticket = _requests.Begin();
+            _isWaiting = true;
+            _statusText = "MapGenAI_Requesting".Translate();
             Task.Run(async () =>
             {
-                string result = null;
-                string error = null;
-                try
+                string result=null, error=null;
+                foreach (var client in clients)
                 {
-                    Log.Message("[MapGenAI] Task.Run 시작");
-                    result = await client.SendChatAsync(historySnapshot, systemPrompt);
-                    Log.Message($"[MapGenAI] 응답 수신: {(result == null ? "null" : result.Length + "자")}");
-                }
-                catch (Exception e)
-                {
-                    Log.Error($"[MapGenAI] API 오류: {e}");
-                    // Fallback: 다음 유효한 config 시도
-                    if (settings.TryNextConfig())
+                    try
                     {
-                        try
-                        {
-                            var nextClient = LLMClientFactory.Create(settings.GetActiveConfig(), settings.localBaseUrl);
-                            if (nextClient != null)
-                            {
-                                Log.Message("[MapGenAI] Fallback API 시도");
-                                result = await nextClient.SendChatAsync(historySnapshot, systemPrompt);
-                            }
-                            else error = e.Message;
-                        }
-                        catch (Exception e2)
-                        {
-                            Log.Error($"[MapGenAI] Fallback 오류: {e2}");
-                            error = e2.Message;
-                        }
+                        ticket.Token.ThrowIfCancellationRequested();
+                        result=await client.SendChatAsync(historySnapshot,systemPrompt,ticket.Token);
+                        error=null;
+                        break;
                     }
-                    else
-                    {
-                        error = e.Message;
-                    }
+                    catch (OperationCanceledException) when (ticket.Token.IsCancellationRequested) { return; }
+                    catch (OperationCanceledException) { error = "요청 시간이 초과되었습니다. 다시 시도해 주세요. / Request timed out."; }
+                    catch (Exception e) { error=e.Message; }
                 }
-                _pendingResponse = result;
-                _pendingError = error;
-                _responseReady = true;
+                _requests.Complete(ticket,result,error);
             });
         }
 
@@ -792,31 +692,20 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
             try
             {
-                // JSON 추출: 첫 { ~ 마지막 } (코드블록/마크다운 무시)
-                int firstBrace = response.IndexOf('{');
-                int lastBrace = response.LastIndexOf('}');
-                if (firstBrace < 0 || lastBrace <= firstBrace)
-                {
-                    _history.Add(new ChatMessage("assistant", response));
-                    _statusText = "";
-                    return;
-                }
-                var clean = response.Substring(firstBrace, lastBrace - firstBrace + 1);
-
-                var parsed = SimpleJson.Parse(clean);
+                var parsed = ProviderResponse.Command(response);
                 var action = parsed.GetString("action");
                 Log.Message($"[MapGenAI] 파싱된 action: {action}");
 
                 if (action == "ask")
                 {
                     string askMsg = parsed.GetString("message");
+                    if (string.IsNullOrWhiteSpace(askMsg)) throw new FormatException("Missing clarification message");
                     _history.Add(new ChatMessage("assistant", askMsg));
                     _llmContext.Add(new ChatMessage("assistant", askMsg)); // ask는 컨텍스트 유지
                     _statusText = "";
                 }
                 else if (action == "generate")
                 {
-                    _llmContext.Clear(); // 맵 변경 → 컨텍스트 초기화 (맵 상태는 system prompt에)
                     var data = ParseParams(parsed.GetObject("params"));
 
                     // --- Layer 3: 출력 검증 ---
@@ -825,9 +714,23 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     // 강 없는 타일에서 river 파라미터 차단
                     ValidateRiver(data, warnings);
 
-                    MapGenParams.Apply(data);
-                    _paramsReady = true;
-                    var desc = parsed.GetString("description") ?? "MapGenAI_ParamsSet".Translate().ToString();
+                    var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
+                    var before = previous ?? new TileMapState();
+                    var proposed = MapStateEditor.Merge(before,data);
+                    var changes = MapStateCodec.ChangedFields(before,proposed);
+                    string desc;
+                    if (changes.Count == 0)
+                        desc = IsKorean() ? "변경된 설정이 없습니다. 지원되는 항목과 요청 내용을 확인해 주세요." : "No settings changed. Check the request and supported features.";
+                    else
+                    {
+                        MapGenParams.ApplyPatch(data,_openedTileId);
+                        _paramStack.Push(previous);
+                        _paramsReady = true;
+                        _llmContext.Clear();
+                        desc = MapStateDescription.Describe(before,MapGenParams.CaptureState(_openedTileId),IsKorean());
+                        if (!string.IsNullOrEmpty(MapGenParams.LastWorldChanges)) desc += "\n" + MapGenParams.LastWorldChanges;
+                        if (!string.IsNullOrEmpty(MapGenParams.LastApplyWarning)) warnings.Add(MapGenParams.LastApplyWarning);
+                    }
 
                     // 경고 메시지가 있으면 채팅에 추가
                     string warningText = "";
@@ -841,11 +744,13 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                         $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
                     _statusText = "";
                 }
+                else throw new FormatException("Unsupported response action: " + action);
             }
-            catch
+            catch (Exception e)
             {
+                Log.Warning("[MapGenAI] Response rejected: " + e.Message);
                 _history.Add(new ChatMessage("assistant",
-                    IsKorean() ? "응답을 처리할 수 없습니다. 다시 시도해 주세요." : "Failed to process response. Please try again."));
+                    (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";
             }
         }
@@ -858,7 +763,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         private void ValidateRiver(MapParamsData data, List<string> warnings)
         {
             // 타일에 실제 강이 있는지 확인
-            int tileId = Find.WorldSelector?.SelectedTile ?? -1;
+            int tileId = _openedTileId;
             bool tileHasRiver = false;
             if (tileId >= 0)
             {
@@ -875,10 +780,13 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 // river 관련 explicitKeys 제거
                 if (data.explicitKeys.Contains("river_direction") ||
                     data.explicitKeys.Contains("river_position") ||
+                    data.explicitKeys.Contains("river_x") || data.explicitKeys.Contains("river_z") || data.explicitKeys.Contains("straight_river") ||
                     data.explicitKeys.Contains("river_present"))
                 {
                     data.explicitKeys.Remove("river_direction");
                     data.explicitKeys.Remove("river_position");
+                    data.explicitKeys.Remove("river_x");
+                    data.explicitKeys.Remove("river_z");
                     data.explicitKeys.Remove("river_present");
                     data.river = null;
                     if (data.explicitKeys.Contains("straight_river"))
@@ -899,7 +807,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             if (data.mutators == null || data.mutators.Count == 0)
                 return warnings;
 
-            int tileId = Find.WorldSelector?.SelectedTile ?? -1;
+            int tileId = _openedTileId;
 
             // 타일 정보 수집
             bool hasRiver = false;
@@ -963,314 +871,24 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             return warnings;
         }
 
-        private MapParamsData ParseParams(SimpleJsonObject obj)
-        {
-            var data = new MapParamsData();
-
-            // --- explicitKeys 추적: JSON에 키가 존재하면 기록 ---
-            void Track(string key) { data.explicitKeys.Add(key); }
-
-            if (obj.GetString("hills") != null)            { data.hills = obj.GetString("hills"); Track("hills"); }
-            if (obj.GetString("hill_amount") != null)      { data.hill_amount = obj.GetFloat("hill_amount", 1f); Track("hill_amount"); }
-            if (obj.GetString("vegetation_density") != null){ data.vegetation_density = obj.GetFloat("vegetation_density", 1f); Track("vegetation_density"); }
-            if (obj.GetString("animal_density") != null)   { data.animal_density = obj.GetFloat("animal_density", 1f); Track("animal_density"); }
-            if (obj.GetString("fertility_offset") != null) { data.fertility_offset = obj.GetFloat("fertility_offset", 0f); Track("fertility_offset"); }
-            if (obj.GetString("roads") != null)            { data.roads = obj.GetBool("roads"); Track("roads"); }
-            if (obj.GetString("caves") != null)            { data.caves = obj.GetBool("caves"); data.caves_explicit = true; Track("caves"); }
-            if (obj.GetString("geysers") != null)          { data.geysers = obj.GetInt("geysers", -1); Track("geysers"); }
-            if (obj.GetString("coast_direction") != null)  { data.coast_direction = obj.GetString("coast_direction"); Track("coast_direction"); }
-            if (obj.GetString("rock_count") != null)       { data.rock_count = obj.GetInt("rock_count", -1); Track("rock_count"); }
-            if (obj.GetString("ore_density") != null)      { data.ore_density = obj.GetFloat("ore_density", 1f); Track("ore_density"); }
-            if (obj.GetString("ruin_density") != null)     { data.ruin_density = obj.GetFloat("ruin_density", 1f); Track("ruin_density"); }
-            if (obj.GetString("danger_density") != null)   { data.danger_density = obj.GetFloat("danger_density", 1f); Track("danger_density"); }
-            if (obj.GetString("rock_chunks") != null)      { data.rock_chunks = obj.GetBool("rock_chunks"); Track("rock_chunks"); }
-            if (obj.GetString("hill_size") != null)        { data.hill_size = ParseHillSize(obj.GetString("hill_size")); Track("hill_size"); }
-            if (obj.GetString("hill_smoothness") != null)  { data.hill_smoothness = ParseHillSmoothness(obj.GetString("hill_smoothness")); Track("hill_smoothness"); }
-            if (obj.GetString("straight_river") != null)   { data.straight_river = obj.GetBool("straight_river"); Track("straight_river"); }
-
-            // rock_types 배열 파싱
-            var rockTypesArr = obj.GetArray("rock_types");
-            if (rockTypesArr != null)
-            {
-                data.rock_types = new System.Collections.Generic.List<string>();
-                foreach (var item in rockTypesArr)
-                    data.rock_types.Add(item);
-                Track("rock_types");
-            }
-
-            // river 객체 파싱 — 세부 키별로 추적 (MDP: 방향만 보내도 위치 유지, 위치만 보내도 방향 유지)
-            var riverObj = obj.GetObject("river");
-            if (riverObj != null)
-            {
-                data.river = new RiverData();
-                if (riverObj.GetString("present") != null) { data.river.present = riverObj.GetBool("present"); Track("river_present"); }
-                if (riverObj.GetString("direction") != null) { data.river.direction = riverObj.GetString("direction"); Track("river_direction"); }
-                if (riverObj.GetString("direction_angle") != null) { data.river.direction_angle = riverObj.GetFloat("direction_angle", -1f); Track("river_direction"); }
-                if (riverObj.GetString("x_position") != null) { data.river.x_position = riverObj.GetFloat("x_position", 0.5f); Track("river_position"); }
-                if (riverObj.GetString("z_position") != null) { data.river.z_position = riverObj.GetFloat("z_position", 0.5f); Track("river_position"); }
-            }
-
-            // river_direction / river_position 단축키 지원 (river 객체 없이 직접 지정 가능)
-            {
-                string rdStr = obj.GetString("river_direction");
-                string rpStr = obj.GetString("river_position");
-                if (rdStr != null)
-                {
-                    if (data.river == null) data.river = new RiverData();
-                    data.river.present = true;
-                    data.river.direction = rdStr;
-                    Track("river_direction");
-                    Track("river_present");
-                }
-                if (rpStr != null)
-                {
-                    if (data.river == null) data.river = new RiverData();
-                    data.river.present = true;
-                    string rp = rpStr.Trim().ToLower();
-                    if (rp == "up" || rp == "top")
-                        data.river.z_position = 0.8f;
-                    else if (rp == "down" || rp == "bottom")
-                        data.river.z_position = 0.2f;
-                    else
-                        data.river.x_position = ParseRiverPosition(rpStr);
-                    Track("river_position");
-                    Track("river_present");
-                }
-            }
-
-            // mutators 배열 파싱
-            var mutatorsArr = obj.GetArray("mutators");
-            if (mutatorsArr != null)
-            {
-                data.mutators = new System.Collections.Generic.List<string>();
-                foreach (var item in mutatorsArr)
-                    data.mutators.Add(item);
-                Track("mutators");
-            }
-
-            // remove_mutators 배열 파싱 (기존 특징 제거용)
-            var removeArr = obj.GetArray("remove_mutators");
-            if (removeArr != null)
-            {
-                data.remove_mutators = new System.Collections.Generic.List<string>();
-                foreach (var item in removeArr)
-                    data.remove_mutators.Add(item);
-                Track("remove_mutators");
-            }
-
-            // elevation_shapes 오브젝트 배열 파싱
-            var shapesArr = obj.GetObjectArray("elevation_shapes");
-            if (shapesArr != null)
-            {
-                data.elevation_shapes = new List<ElevationShape>();
-                foreach (var s in shapesArr)
-                {
-                    var es = new ElevationShape
-                    {
-                        type = s.GetString("type"),
-                        direction = s.GetString("direction"),
-                        strength = s.GetString("strength"),
-                        fade = s.GetString("fade"),
-                        noise_amount = s.GetString("noise_amount"),
-                        position = s.GetString("position"),
-                        size = s.GetString("size"),
-                        gap = s.GetString("gap"),
-                        fill = s.GetString("fill")
-                    };
-
-                    // composite: shapes[] + compose[] 파싱
-                    if (es.type == "composite")
-                    {
-                        es.compositeShapes = ParseCompositeShapes(s);
-                        es.compositeOps = ParseCompositeOps(s);
-                    }
-
-                    data.elevation_shapes.Add(es);
-                }
-                Track("elevation_shapes");
-            }
-
-            // 병합은 MapGenParams.Apply()에서 WorldComponent 기반으로 수행 (MDP)
-            // ParseParams는 LLM이 보낸 것만 data에 넣고 explicitKeys로 추적
-
-            return data;
-        }
-
-        /// <summary>composite shapes[] 파싱</summary>
-        private static List<ShapePrimitive> ParseCompositeShapes(SimpleJsonObject shapeObj)
-        {
-            var arr = shapeObj.GetObjectArray("shapes");
-            if (arr == null) return null;
-
-            var result = new List<ShapePrimitive>();
-            foreach (var s in arr)
-            {
-                var sp = new ShapePrimitive
-                {
-                    id = s.GetString("id"),
-                    prim = s.GetString("prim"),
-                    r = s.GetFloat("r", 0f),
-                    r2 = s.GetFloat("r2", 0f),
-                    n = s.GetInt("n", 0),
-                    w = s.GetFloat("w", 0f),
-                    h = s.GetFloat("h", 0f),
-                    size = s.GetFloat("size", 0f),
-                    rot = s.GetFloat("rot", 0f)
-                };
-
-                // center: [x, z]
-                var centerArr = s.GetFloatArray("center");
-                if (centerArr != null && centerArr.Length >= 2)
-                    sp.center = centerArr;
-
-                // verts: [[x,z], [x,z], ...] — 중첩 배열
-                var vertsData = s.GetNestedFloatArray("verts");
-                if (vertsData != null)
-                    sp.verts = vertsData;
-
-                result.Add(sp);
-            }
-            return result;
-        }
-
-        /// <summary>composite compose[] 파싱. LLM이 다양한 필드명을 쓸 수 있으므로 방어적으로 처리.</summary>
-        private static List<ComposeOp> ParseCompositeOps(SimpleJsonObject shapeObj)
-        {
-            var arr = shapeObj.GetObjectArray("compose");
-            if (arr == null) return null;
-
-            var result = new List<ComposeOp>();
-            foreach (var c in arr)
-            {
-                var op = new ComposeOp
-                {
-                    op = c.GetString("op"),
-                    s = c.GetString("s") ?? c.GetString("s1"),        // LLM이 s1으로 보낼 수 있음
-                    a = c.GetString("a") ?? c.GetString("s1"),        // sub에서 a 대신 s1
-                    b = c.GetString("b") ?? c.GetString("s2"),        // union에서 b 대신 s2
-                    from = c.GetString("from") ?? c.GetString("s1"),  // sub에서 from 대신 s1
-                    outId = c.GetString("out") ?? c.GetString("id"),  // out 대신 id
-                    k = c.GetFloat("k", 0f),
-                    e = c.GetFloat("e", 0f),
-                    f = c.GetFloat("f", 0.05f),
-                    fill = c.GetString("fill")
-                };
-
-                // sub 연산: LLM이 {op:"sub", s:"c1", s2:"c2"} 형태로 보내면
-                // a=c2(빼는 도형), from=c1(빼기 대상)으로 매핑
-                if (op.op == "sub" && c.GetString("s2") != null)
-                {
-                    op.from = c.GetString("s") ?? c.GetString("s1");  // 큰 도형 (빼기 대상)
-                    op.a = c.GetString("s2");                          // 빼는 도형
-                }
-
-                result.Add(op);
-            }
-            return result;
-        }
-
-        /// <summary>hill_size 시맨틱 파싱. small/medium/large 또는 숫자.</summary>
-        private static float ParseHillSize(string val)
-        {
-            if (string.IsNullOrEmpty(val)) return 0f; // 0 = 기본값 사용
-            val = val.Trim().ToLower();
-            switch (val)
-            {
-                case "small":  return 0.035f; // 큰 산맥 (frequency 높음 = 작은 패턴이지만, Map Designer에서는 반대 해석)
-                case "medium": return 0.021f; // 바닐라 기본
-                case "large":  return 0.012f; // 거대한 산맥 (낮은 frequency = 큰 패턴)
-                default:
-                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture, out float f) ? f : 0f;
-            }
-        }
-
-        /// <summary>hill_smoothness 시맨틱 파싱. rough/normal/smooth 또는 숫자.</summary>
-        private static float ParseHillSmoothness(string val)
-        {
-            if (string.IsNullOrEmpty(val)) return 0f; // 0 = 기본값 사용
-            val = val.Trim().ToLower();
-            switch (val)
-            {
-                case "rough":  return 1.0f; // 매우 거친
-                case "normal": return 2.0f; // 바닐라 기본
-                case "smooth": return 3.5f; // 매끄러운
-                default:
-                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture, out float f) ? f : 0f;
-            }
-        }
-
-        /// <summary>river_position 시맨틱 파싱. left/center/right 또는 0.0-1.0 숫자.</summary>
-        private static float ParseRiverPosition(string val)
-        {
-            if (string.IsNullOrEmpty(val)) return 0.5f;
-            val = val.Trim().ToLower();
-            switch (val)
-            {
-                case "left":   return 0.2f;
-                case "center": return 0.5f;
-                case "right":  return 0.8f;
-                default:
-                    return float.TryParse(val, System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture, out float f)
-                        ? Mathf.Clamp(f, 0f, 1f) : 0.5f;
-            }
-        }
+        private MapParamsData ParseParams(SimpleJsonObject obj) => MapParameterParser.Parse(obj);
 
         private void SaveCurrentPreset(string presetName)
         {
-            // 현재 MapGenParams 상태를 MapParamsData로 변환
-            var data = new MapParamsData
-            {
-                hills = MapGenParams.Hills,
-                hill_amount = MapGenParams.HillAmount,
-                vegetation_density = MapGenParams.VegetationDensity,
-                animal_density = MapGenParams.AnimalDensity,
-                river = new RiverData
-                {
-                    present = MapGenParams.HasRiver,
-                    direction = MapGenParams.RiverDirection,
-                    direction_angle = MapGenParams.RiverDirectionAngle,
-                    x_position = MapGenParams.RiverXPosition,
-                    z_position = MapGenParams.RiverZPosition
-                },
-                roads = MapGenParams.HasRoads,
-                caves = MapGenParams.HasCaves,
-                geysers = MapGenParams.GeyserCount,
-                coast_direction = MapGenParams.CoastDirection,
-                rock_count = MapGenParams.RockCount,
-                ore_density = MapGenParams.OreDensity,
-                ruin_density = MapGenParams.RuinDensity,
-                danger_density = MapGenParams.DangerDensity,
-                rock_chunks = MapGenParams.HasRockChunks,
-                hill_size = MapGenParams.HillSize,
-                hill_smoothness = MapGenParams.HillSmoothness,
-                rock_types = MapGenParams.RockTypes.Count > 0
-                    ? new List<string>(MapGenParams.RockTypes) : null,
-                mutators = new List<string>(MapGenParams.Mutators),
-                elevation_shapes = MapGenParams.ElevationShapes.Count > 0
-                    ? new List<ElevationShape>(MapGenParams.ElevationShapes) : null
-            };
-
-            PresetManager.Save(presetName, data);
-            _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Translate(presetName)));
+            if (PresetManager.Save(presetName,MapGenParams.CaptureState(_openedTileId)))
+                _history.Add(new ChatMessage("assistant", "MapGenAI_PresetSavedMsg".Translate(presetName)));
+            else _history.Add(new ChatMessage("assistant", IsKorean() ? "프리셋 저장에 실패했습니다." : "Could not save preset."));
         }
 
         private void DoUndo()
         {
             if (_paramStack.Count == 0 || _isWaiting) return;
 
-            var prev = _paramStack.Pop();
-            // Undo는 전체 적용 (explicitKeys 비어있음 → fullApply)
-            MapGenParams.Apply(prev, _openedTileId);
-            _paramsReady = true;
-
-            // 마지막 user + assistant 메시지 쌍 제거 (환영 메시지는 유지)
-            if (_history.Count >= 3)
-                _history.RemoveRange(_history.Count - 2, 2);
-            else if (_history.Count == 2)
-                _history.RemoveAt(_history.Count - 1);
+            var prev = _paramStack.Peek();
+            if (!TryRestore(prev)) return;
+            _paramStack.Pop();
+            _paramsReady = prev != null;
+            _llmContext.Clear();
 
             _history.Add(new ChatMessage("assistant",
                 IsKorean() ? "이전 상태로 되돌렸습니다." : "Reverted to previous state."));
@@ -1278,29 +896,13 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         private void DoReset()
         {
+            _requests.Cancel();
+            _isWaiting = false;
+            _statusText = "";
+            if (!TryRestore(_initialSnapshot)) return;
             _paramStack.Clear();
-
-            // WorldComponent도 대화 시작 시점으로 복원
-            var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
-            if (wc != null)
-            {
-                if (_wcSnapshot != null)
-                    wc.SetState(_openedTileId, _wcSnapshot);
-                else
-                    wc.RemoveState(_openedTileId);
-            }
-
-            if (_initialSnapshot != null)
-            {
-                MapGenParams.Apply(_initialSnapshot);
-                _paramsReady = true;
-            }
-            else
-            {
-                MapGenParams.Reset();
-                _paramsReady = false;
-            }
-
+            _llmContext.Clear();
+            _paramsReady = _initialSnapshot != null;
             _history.Clear();
             _history.Add(new ChatMessage("assistant", "MapGenAI_Welcome".Translate()));
         }
@@ -1349,23 +951,21 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         private void LoadPreset(string presetName)
         {
-            var data = PresetManager.Load(presetName);
-            if (data == null)
+            var data=PresetManager.Load(presetName);
+            if(data==null)
             {
                 _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Translate(presetName)));
                 return;
             }
-
-            MapGenParams.Apply(data);
-            _paramsReady = true;
-            _statusText = "";
-            _history.Add(new ChatMessage("assistant",
-                "MapGenAI_PresetLoadedMsg".Translate(
-                    presetName, data.hills, data.hill_amount.ToString("F2"),
-                    data.vegetation_density.ToString("F1"), data.animal_density.ToString("F1"),
-                    (data.river?.present ?? false).ToString(), data.caves.ToString(),
-                    data.geysers.ToString())
-                + "\n\n" + "MapGenAI_ModifyHint".Translate()));
+            _requests.Cancel();
+            _isWaiting=false;
+            var before=MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
+            if (!TryRestore(data)) return;
+            if(MapStateCodec.ChangedFields(before ?? new TileMapState(),data).Count>0) _paramStack.Push(before);
+            _llmContext.Clear();
+            _paramsReady=true;
+            _statusText="";
+            _history.Add(new ChatMessage("assistant", (IsKorean() ? "프리셋을 불러왔습니다: " : "Loaded preset: ") + presetName));
         }
 
         private void GenerateMap()
@@ -1378,28 +978,54 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         }
 
         private bool _keepParams = false;
+        private bool _closed;
+
+        private void OpenImageMap()
+        {
+            _requests.Cancel(); _isWaiting=false; _statusText="";
+            var current=MapGenParams.CaptureState(_openedTileId);
+            Find.WindowStack.Add(new Dialog_ImageMap(current.imageMap,current.elevationShapes.Count,ApplyImageMap));
+        }
+        private bool ApplyImageMap(MapGenAI.ImageInput.ImageMapData image)
+        {
+            if(_closed)return false;
+            var before=MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
+            var updated=(before??new TileMapState()).Clone();updated.imageMap=image?.Clone();
+            if(MapStateCodec.ChangedFields(before??new TileMapState(),updated).Count==0)return true;
+            if(!TryRestore(updated))return false;
+            _paramStack.Push(before);_paramsReady=true;_llmContext.Clear();
+            _history.Add(new ChatMessage("assistant",MapStateDescription.Describe(before??new TileMapState(),MapGenParams.CaptureState(_openedTileId),IsKorean())+
+                (IsKorean()?"\nMap Preview에서 실제 생성 결과를 확인하세요.":"\nInspect the generated result in Map Preview.")));
+            return true;
+        }
+
+        private bool TryRestore(TileMapState state)
+        {
+            try
+            {
+                MapGenParams.RestoreSnapshot(state, _openedTileId);
+                if (!string.IsNullOrEmpty(MapGenParams.LastApplyWarning))
+                    _history.Add(new ChatMessage("assistant", MapGenParams.LastApplyWarning));
+                return true;
+            }
+            catch (Exception error)
+            {
+                string message = (IsKorean() ? "복원하지 못했습니다: " : "Restore failed: ") + error.Message;
+                _history.Add(new ChatMessage("assistant", message));
+                Log.Warning("[MapGenAI] " + message);
+                return false;
+            }
+        }
 
         public override void PostClose()
         {
+            _closed=true;
+            _requests.Cancel();
             base.PostClose();
-
-            if (!_keepParams)
-            {
-                // 대화 취소/닫기 → WorldComponent를 대화 시작 시점으로 복원
-                var wc = MapGenAI.MapGen.MapGenAIWorldComponent.Get();
-                if (wc != null)
-                {
-                    if (_wcSnapshot != null)
-                        wc.SetState(_openedTileId, _wcSnapshot);
-                    else
-                        wc.RemoveState(_openedTileId);
-                }
-
-                MapGenParams.Reset();
-                MapGenParams.RefreshMapPreview();
-                Log.Message($"[MapGenAI] {"MapGenAI_DialogCancelled".Translate()}");
-            }
+            if (!_keepParams && !TryRestore(_initialSnapshot))
+                Messages.Message(IsKorean() ? "MapGenAI: 창을 닫았지만 타일 상태 복원에 실패했습니다. 로그를 확인해 주세요." : "MapGenAI: the window closed, but tile restoration failed. See the log.", MessageTypeDefOf.RejectInput);
         }
+
     }
 
     /// <summary>

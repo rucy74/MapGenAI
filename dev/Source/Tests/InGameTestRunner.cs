@@ -153,7 +153,7 @@ namespace MapGenAI.Tests
             Log.Message($"[MapGenAI Test] === Result: {passed} PASS / {failed} FAIL / {skipped} SKIP (Total {passed + failed + skipped}) ===");
 
             // 최종 정리
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
         }
 
         // ────────────────────────────────────────────
@@ -180,7 +180,7 @@ namespace MapGenAI.Tests
             try
             {
                 // 테스트 전 상태 초기화
-                MapGenParams.Reset();
+                MapGenParams.ClearTile(_tileId);
 
                 bool result = test();
 
@@ -203,7 +203,7 @@ namespace MapGenAI.Tests
             finally
             {
                 // 테스트 후 상태 정리
-                MapGenParams.Reset();
+                MapGenParams.ClearTile(_tileId);
             }
         }
 
@@ -232,7 +232,10 @@ namespace MapGenAI.Tests
         /// <summary>Apply를 호출합니다. 타일이 선택되어 있어야 합니다.</summary>
         private static void ApplyData(MapParamsData data)
         {
-            MapGenParams.Apply(data);
+            // Old fixture builders describe full snapshots unless they explicitly provide patch keys.
+            if (data.explicitKeys == null || data.explicitKeys.Count == 0)
+                MapGenParams.RestoreSnapshot(MapStateEditor.FromLegacySnapshot(data), _tileId);
+            else MapGenParams.ApplyPatch(data, _tileId);
         }
 
         /// <summary>현재 선택된 타일의 Mutators defName 목록을 가져옵니다.</summary>
@@ -392,7 +395,7 @@ namespace MapGenAI.Tests
             if (!MapGenParams.HasParams) return false;
 
             // Reset 실행
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
 
             // Reset 후 상태 검증
             return !MapGenParams.HasParams
@@ -420,7 +423,7 @@ namespace MapGenAI.Tests
             bool changed = afterApply.Contains("Caves") || afterApply.Contains("HotSprings");
 
             // Reset으로 복원
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
 
             // 복원 후 원본과 동일한지 확인
             var afterReset = GetTileMutatorNames();
@@ -563,7 +566,7 @@ namespace MapGenAI.Tests
             bool highClamp = MapGenParams.GeyserCount == 20;
 
             // 두 번째: geysers=-5 → 음수이므로 -1 (기본값)
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
             var data2 = MakeDefaultData();
             data2.geysers = -5;
             ApplyData(data2);
@@ -654,7 +657,7 @@ namespace MapGenAI.Tests
             if (!MapGenParams.HasParams) return false;
 
             // Reset 실행
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
 
             // 전체 기본값 검증
             return !MapGenParams.HasParams
@@ -724,7 +727,7 @@ namespace MapGenAI.Tests
             bool hasHotSprings = afterMutators.Contains("HotSprings");
 
             // Reset으로 원본 복원 확인
-            MapGenParams.Reset();
+            MapGenParams.ClearTile(_tileId);
             var afterReset = GetTileMutatorNames();
             bool restored = originalMutators.Count == afterReset.Count
                 && !originalMutators.Except(afterReset).Any();
@@ -764,7 +767,7 @@ namespace MapGenAI.Tests
                 var removeData = MakeDefaultData();
                 removeData.remove_mutators = new List<string> { "Caves" };
                 ApplyData(removeData);
-                MapGenParams.Reset();
+                MapGenParams.ClearTile(_tileId);
                 originalMutators = GetTileMutatorNames();
             }
 

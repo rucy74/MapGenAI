@@ -1,0 +1,28 @@
+PASS Unicode escapes decode
+PASS Truncated root rejected
+PASS Empty object array preserved
+PASS Duplicate keys rejected
+PASS Malformed array terminates
+PASS JSON grammar boundaries
+PASS Escaped text roundtrip
+PASS Gemini envelope preserves escaped Korean
+PASS Provider incomplete output rejected
+PASS OpenAI envelope ignores unrelated content
+PASS Command fences preserve completeness
+PASS Reset rejects pending and late replies
+PASS Generated parser corpus terminates and accepts only valid JSON
+PASS Adding hills preserves earlier hills
+PASS Unrelated edits preserve complete geometry
+PASS Empty and unknown patches are no-op
+PASS Explicit empty shapes clear without regeneration
+PASS Null and wrong-type patches rejected
+PASS River X and Z edits remain independent
+PASS Removed features persist and can be re-added
+PASS Contradictory feature patch leaves original intact
+PASS Composite clone does not share nested arrays or ops
+PASS Preset v2 preserves every state field and composite vertices
+PASS Legacy preset loads without inventing explicitly empty shapes
+[LOG] [MapGenAI] 파라미터 적용 (tile=10, explicit=1): 언덕=none, 산양=1.00, 나무=1.0, 동물=1.0, 강=False(방향=-1, X=0.50, Z=0.50), 동굴=False, 간헐천=-1, 해안=auto, 석재수=-1, 석재종류=0개, 광석밀도=1.00, 폐허밀도=1.00, 위험밀도=1.00, 돌덩어리=True, 산크기=0.0210, 산부드러움=2.0, mutators=1개, elevation_shapes=0개
+[LOG] [MapGenAI] 타일 mutator 적용: A (A)
+PASS Apply targets supplied tile and snapshot restores exactly
+CoreRegressionTests: 25 PASS / 0 FAIL

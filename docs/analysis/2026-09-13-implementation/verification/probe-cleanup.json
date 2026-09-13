@@ -1,0 +1,62 @@
+{
+  "installedMapGenAIUnchanged": true,
+  "profiles": "Retained for reproduction; only owned temporary mod folders removed",
+  "removedCount": 11,
+  "removed": [
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-154113",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-154113",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-154113\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-154249",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-154249",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-154249\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-161008",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-161008",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-161008\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-161556",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-161556",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-161556\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-162156",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-162156",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-162156\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-162438",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-162438",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-162438\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-162633",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-162633",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-162633\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-162802",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-162802",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-162802\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-163213",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-163213",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-163213\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-163621",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-163621",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-163621\\launch.json"
+    },
+    {
+      "profileRetained": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260913-164506",
+      "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260913-164506",
+      "sourceManifest": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-13-implementation\\runtime-20260913-164506\\launch.json"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"Resize the lake to medium.","params":{"shape_ops":[{"op":"update","id":"lake","changes":{"size":"medium"}}]}}

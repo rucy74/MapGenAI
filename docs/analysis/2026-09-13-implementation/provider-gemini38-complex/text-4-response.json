@@ -1,0 +1,1 @@
+{"action":"generate","description":"Add a heart-shaped lake in the center while keeping existing terrain.","params":{"shape_ops":[{"op":"add","shape":{"id":"heart_lake_center","type":"composite","fill":"water","shapes":[{"id":"h","prim":"heart","center":[0.5,0.48],"size":0.25}],"compose":[{"op":"add","s":"h","e":-0.6}]}}]}}

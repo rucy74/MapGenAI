@@ -17,6 +17,8 @@ namespace MapGenAI.MapGen
     /// </summary>
     public class ElevationShape : IExposable
     {
+        public string id;
+        public bool autoHills;
         public string type;         // slope, radial, split, bump, noise
         public string direction;    // left/right/top/bottom/top_left/top_right/bottom_left/bottom_right 또는 숫자(0-360)
         public string strength;     // weak/medium/strong/negative_weak/negative_medium/negative_strong 또는 숫자
@@ -33,6 +35,8 @@ namespace MapGenAI.MapGen
 
         public void ExposeData()
         {
+            Scribe_Values.Look(ref id, "id");
+            Scribe_Values.Look(ref autoHills, "autoHills", false);
             Scribe_Values.Look(ref type, "type");
             Scribe_Values.Look(ref direction, "direction");
             Scribe_Values.Look(ref strength, "strength");
@@ -42,17 +46,27 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref fill, "fill");
             Scribe_Values.Look(ref fade, "fade");
             Scribe_Values.Look(ref noise_amount, "noise_amount");
+            string compositeJson = compositeShapes == null && compositeOps == null ? null :
+                MapGenAI.UI.SimpleJson.Serialize(new Dictionary<string, object> { { "shapes", compositeShapes }, { "compose", compositeOps } });
+            Scribe_Values.Look(ref compositeJson, "compositeJson");
+            if (Scribe.mode == LoadSaveMode.LoadingVars && !string.IsNullOrEmpty(compositeJson))
+            {
+                var stored = MapGenAI.UI.SimpleJson.Parse(compositeJson);
+                compositeShapes = MapParameterParser.ParseCompositeShapes(stored);
+                compositeOps = MapParameterParser.ParseCompositeOps(stored);
+            }
         }
 
         public ElevationShape Clone()
         {
             return new ElevationShape
             {
+                id = id, autoHills = autoHills,
                 type = type, direction = direction, strength = strength,
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount,
-                compositeShapes = compositeShapes,  // 참조 공유 OK (읽기 전용)
-                compositeOps = compositeOps
+                compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),
+                compositeOps = compositeOps?.Select(op => op.Clone()).ToList()
             };
         }
 
@@ -201,122 +215,76 @@ namespace MapGenAI.MapGen
     /// </summary>
     public static class MapGenParams
     {
-        public static bool HasParams { get; private set; } = false;
+        private static TileMapState editingState = new TileMapState();
+        private static readonly TileMapState emptyState = new TileMapState();
+        private static TileMapState ReadState => GenerationContext.Active ? GenerationContext.State ?? emptyState : editingState;
+        private static bool editingActive;
+        public static bool HasParams { get => GenerationContext.Active ? GenerationContext.State != null : editingActive; private set => editingActive = value; }
 
         // 지형
-        public static string Hills { get; private set; } = "none";   // left, right, center, edges, top, bottom, none
-        public static float HillAmount { get; private set; } = 1f;         // 0.5~1.6, 전체 고도 오프셋
+        public static string Hills => ReadState.hills;   // left, right, center, edges, top, bottom, none
+        public static float HillAmount => ReadState.hillAmount;         // 0.5~1.6, 전체 고도 오프셋
 
         // Elevation Shape 프리미티브 목록 (additive 조합)
-        public static List<ElevationShape> ElevationShapes { get; private set; } = new List<ElevationShape>();
-        public static float VegetationDensity { get; private set; } = 1f;  // 0.0~2.0
+        public static List<ElevationShape> ElevationShapes => ReadState.elevationShapes;
+        public static MapGenAI.ImageInput.ImageMapData ImageMap => ReadState.imageMap;
+        public static float VegetationDensity => ReadState.vegetationDensity;  // 0.0~2.0
         /// <summary>비옥도 오프셋 (-1.0~1.0). 양수=기름진 토양 증가, 음수=감소.</summary>
-        public static float FertilityOffset { get; private set; } = 0f;
-        public static float AnimalDensity { get; private set; } = 1f;      // 0.0~2.0
+        public static float FertilityOffset => ReadState.fertilityOffset;
+        public static float AnimalDensity => ReadState.animalDensity;      // 0.0~2.0
 
         // 수계
-        public static bool HasRiver { get; private set; } = false;
-        public static string RiverDirection { get; private set; } = "vertical";
+        public static bool HasRiver => ReadState.hasRiver;
+        public static string RiverDirection => RiverDirectionAngle == 90f ? "horizontal" : "vertical";
         /// <summary>강 방향 각도 (0-360도, -1=자동). 0=오른쪽, 90=위, 180=왼쪽, 270=아래.</summary>
-        public static float RiverDirectionAngle { get; private set; } = -1f;
-        public static float RiverXPosition { get; private set; } = 0.5f;
+        public static float RiverDirectionAngle => ReadState.riverDirectionAngle;
+        public static float RiverXPosition => ReadState.riverXPosition;
         /// <summary>강 Z축 위치 (0.0~1.0, 0.5=중앙). 수직 강에서 위/아래 이동.</summary>
-        public static float RiverZPosition { get; private set; } = 0.5f;
+        public static float RiverZPosition => ReadState.riverZPosition;
 
         // 지물
-        public static bool HasRoads { get; private set; } = false;
-        public static bool HasCaves { get; private set; } = false;
-        public static bool CavesExplicitlySet { get; private set; } = false;
-        public static int GeyserCount { get; private set; } = -1;   // -1 = 기본값
+        public static bool HasRoads => ReadState.hasRoads;
+        public static bool HasCaves => ReadState.hasCaves;
+        public static bool CavesExplicitlySet => ReadState.cavesExplicitlySet;
+        public static int GeyserCount => ReadState.geyserCount;   // -1 = 기본값
 
         // 돌덩어리 (RockChunk) 제어
         /// <summary>돌덩어리 생성 여부 (기본 true). false면 GenStep_RockChunks를 완전히 스킵.</summary>
-        public static bool HasRockChunks { get; private set; } = true;
+        public static bool HasRockChunks => ReadState.hasRockChunks;
 
         // 산 크기/부드러움 (Perlin 파라미터)
         /// <summary>산 크기 (Perlin frequency). 기본 0.021. 작을수록 큰 산맥, 클수록 잘게 쪼개짐.</summary>
-        public static float HillSize { get; private set; } = 0.021f;
+        public static float HillSize => ReadState.hillSize;
         /// <summary>산 부드러움 (Perlin lacunarity). 기본 2.0. 낮을수록 거친 지형, 높을수록 매끄러움.</summary>
-        public static float HillSmoothness { get; private set; } = 2.0f;
+        public static float HillSmoothness => ReadState.hillSmoothness;
 
         /// <summary>일자 강 (구불거림 제거). true면 강이 직선.</summary>
-        public static bool StraightRiver { get; private set; } = false;
+        public static bool StraightRiver => ReadState.straightRiver;
 
         // TileMutator (Odyssey): LLM이 선택한 mutator defName 목록
-        public static List<string> Mutators { get; private set; } = new List<string>();
+        public static List<string> Mutators => ReadState.mutators;
         // 제거할 mutator defName 목록 (기존 타일 특징 제거용)
-        public static List<string> RemoveMutators { get; private set; } = new List<string>();
-
-        // 월드 타일 mutator 복원용
-        private static int _mutatorAppliedTileId = -1;
-        private static List<string> _originalMutatorDefNames = null;
-
-        // 월드 타일 hilliness 복원용
-        private static Hilliness _originalHilliness;
-        private static bool _hillinessModified = false;
+        public static List<string> RemoveMutators => ReadState.removeMutators;
 
         // 해안 방향
-        public static string CoastDirection { get; private set; } = "auto"; // auto, north, east, south, west
+        public static string CoastDirection => ReadState.coastDirection; // auto, north, east, south, west
 
         // 석재 수량
-        public static int RockCount { get; private set; } = -1; // 1~15, -1 = 기본값 (바닐라)
+        public static int RockCount => ReadState.rockCount; // 1~15, -1 = 기본값 (바닐라)
 
         // 광석 밀도
-        public static float OreDensity { get; private set; } = 1f; // 0.0~2.5, 1.0 = 기본값
+        public static float OreDensity => ReadState.oreDensity; // 0.0~2.5, 1.0 = 기본값
 
         // 석재 종류 (defName 목록)
-        public static List<string> RockTypes { get; private set; } = new List<string>();
+        public static List<string> RockTypes => ReadState.rockTypes;
 
         // 폐허/위험 밀도
-        public static float RuinDensity { get; private set; } = 1f; // 0.0~2.5, 1.0 = 기본값
-        public static float DangerDensity { get; private set; } = 1f; // 0.0~2.5, 1.0 = 기본값
-
-        // 유효한 hills 값
-        private static readonly HashSet<string> ValidHills = new HashSet<string>
-            { "left", "right", "center", "edges", "top", "bottom", "none" };
-
-        // 유효한 coast_direction 값
-        private static readonly HashSet<string> ValidCoastDirections = new HashSet<string>
-            { "auto", "north", "east", "south", "west" };
-
-        /// <summary>
-        /// hills 자동 변환으로 생성되는 "base layer" shape인지 판별.
-        /// slope(방향), bump(center, fill 없음), radial(fill 없음)이 해당.
-        /// fill=water 등 커스텀 shapes는 false.
-        /// </summary>
-        private static bool IsHillsSlotShape(ElevationShape s)
-        {
-            if (s == null || string.IsNullOrEmpty(s.type)) return false;
-            if (!string.IsNullOrEmpty(s.fill)) return false;
-            switch (s.type)
-            {
-                case "ridge":  return true;   // slope 대체
-                case "slope":  return true;   // 레거시 호환
-                case "bump":
-                    var pos = (s.position ?? "center").Trim().ToLower();
-                    return pos == "center" || pos == "";
-                case "radial": return true;
-                default:       return false;
-            }
-        }
-
-        /// <summary>hills 값에 해당하는 base layer shape 반환. "none"이면 null.</summary>
-        private static ElevationShape GetAutoShapeForHills(string hills)
-        {
-            switch (hills)
-            {
-                case "left":   return new ElevationShape { type = "ridge", direction = "left", strength = "medium", fade = "medium", noise_amount = "medium" };
-                case "right":  return new ElevationShape { type = "ridge", direction = "right", strength = "medium", fade = "medium", noise_amount = "medium" };
-                case "top":    return new ElevationShape { type = "ridge", direction = "top", strength = "medium", fade = "medium", noise_amount = "medium" };
-                case "bottom": return new ElevationShape { type = "ridge", direction = "bottom", strength = "medium", fade = "medium", noise_amount = "medium" };
-                case "center": return new ElevationShape { type = "bump", position = "center", size = "large", strength = "medium" };
-                case "edges":  return new ElevationShape { type = "radial", strength = "medium", size = "medium" };
-                default:       return null;
-            }
-        }
+        public static float RuinDensity => ReadState.ruinDensity; // 0.0~2.5, 1.0 = 기본값
+        public static float DangerDensity => ReadState.dangerDensity; // 0.0~2.5, 1.0 = 기본값
 
         /// <summary>현재 Apply 대상 타일 ID. Dialog에서 설정.</summary>
-        public static int CurrentTileId { get; set; } = -1;
+        private static int editingTileId = -1;
+        public static int CurrentTileId { get => GenerationContext.Active ? GenerationContext.TileId : editingTileId; set => editingTileId = value; }
 
         public static void Apply(MapParamsData data)
         {
@@ -325,210 +293,101 @@ namespace MapGenAI.MapGen
 
         public static void Apply(MapParamsData data, int tileId)
         {
-            // --- MDP 병합: WorldComponent에서 기존 타일 상태 로드, explicitKeys로 부분 업데이트 ---
+            ApplyPatch(data, tileId);
+        }
+
+        public static TileMapState CaptureState(int tileId)
+        {
+            var state = MapGenAIWorldComponent.Get()?.GetState(tileId);
+            return state?.Clone() ?? new TileMapState();
+        }
+
+        public static string LastApplyWarning { get; private set; }
+        public static string LastWorldChanges { get; private set; }
+
+        public static void ApplyPatch(MapParamsData data, int tileId)
+        {
+            LastApplyWarning = null;
+            LastWorldChanges = null;
+            var previous = MapGenAIWorldComponent.Get()?.GetState(tileId);
+            var candidate = MapStateEditor.Merge(previous, data);
+            if (MapStateCodec.ChangedFields(previous ?? new TileMapState(), candidate).Count == 0) return;
+            CommitState(candidate, tileId);
+        }
+
+        public static void RestoreSnapshot(TileMapState snapshot, int tileId)
+        {
+            LastApplyWarning = null;
+            LastWorldChanges = null;
+            if (snapshot == null) { ClearTile(tileId); return; }
+            CommitState(snapshot.Clone(), tileId);
+        }
+
+        private static void CommitState(TileMapState candidate, int tileId)
+        {
+            MapStateValidation.Validate(candidate);
             var wc = MapGenAIWorldComponent.Get();
-            var existingState = wc?.GetState(tileId);
-            TileMapState state = existingState?.Clone() ?? new TileMapState();
-            var keys = data.explicitKeys;
-
-            // explicitKeys가 비어있으면 (프리셋 로드, undo 등) 전체 적용 (기존 동작)
-            bool fullApply = keys.Count == 0;
-
-            // 스칼라 필드 병합: explicitKeys에 있으면 업데이트, 없으면 기존 state 유지
-            if (fullApply || keys.Contains("hills"))
-                state.hills = ValidHills.Contains(data.hills ?? "") ? data.hills : "none";
-            if (fullApply || keys.Contains("hill_amount"))
-                state.hillAmount = Mathf.Clamp(data.hill_amount, 0.1f, 1.6f);
-            if (fullApply || keys.Contains("vegetation_density"))
-                state.vegetationDensity = Mathf.Clamp(data.vegetation_density, 0f, 2f);
-            if (fullApply || keys.Contains("animal_density"))
-                state.animalDensity = Mathf.Clamp(data.animal_density, 0f, 2f);
-            if (fullApply || keys.Contains("fertility_offset"))
-                state.fertilityOffset = Mathf.Clamp(data.fertility_offset, -1f, 1f);
-            if (fullApply || keys.Contains("roads"))
-                state.hasRoads = data.roads;
-            if (fullApply || keys.Contains("caves"))
+            var tile = tileId < 0 ? null : Find.WorldGrid?[tileId];
+            if (wc == null || tile == null) throw new System.FormatException("Map editing requires a valid world tile");
+            var previous = wc.GetState(tileId)?.Clone();
+            var beforeWorld = TileWorldSnapshot.Capture(tile);
+            var savedBaseline = wc.GetBaseline(tileId);
+            var lastApplied = wc.GetLastApplied(tileId);
+            var baseline = WorldTileEditor.Rebase(savedBaseline, lastApplied, beforeWorld);
+            var missing = baseline.mutators.Concat(candidate.mutators).Distinct()
+                .Where(n => DefDatabase<TileMutatorDef>.GetNamedSilentFail(n) == null).ToList();
+            if (missing.Count > 0)
             {
-                state.hasCaves = data.caves;
-                state.cavesExplicitlySet = data.caves_explicit;
+                candidate.mutators.RemoveAll(missing.Contains);
+                LastApplyWarning = "비활성 모드의 특징 생략 / Unavailable features omitted: " + string.Join(", ", missing);
             }
-            if (fullApply || keys.Contains("geysers"))
-                state.geyserCount = (data.geysers >= 0) ? Mathf.Min(data.geysers, 20) : -1;
-            if (fullApply || keys.Contains("coast_direction"))
+            // A concurrent removal of one of our features must not be silently undone.
+            if (lastApplied != null && previous != null)
             {
-                string coastDir = (data.coast_direction ?? "auto").ToLower();
-                state.coastDirection = ValidCoastDirections.Contains(coastDir) ? coastDir : "auto";
+                var externallyRemoved = lastApplied.mutators.Except(beforeWorld.mutators).ToList();
+                if (candidate.mutators.Any(n => externallyRemoved.Contains(n) && previous.mutators.Contains(n)))
+                    throw new System.FormatException("다른 작업에서 제거한 특징과 충돌합니다. 해당 특징을 remove_mutators로 먼저 해제하세요. / A feature was removed externally; remove it from this plan before editing.");
             }
-            if (fullApply || keys.Contains("rock_count"))
-                state.rockCount = (data.rock_count >= 1) ? Mathf.Clamp(data.rock_count, 1, 15) : -1;
-            if (fullApply || keys.Contains("ore_density"))
-                state.oreDensity = Mathf.Clamp(data.ore_density, 0f, 2.5f);
-            if (fullApply || keys.Contains("ruin_density"))
-                state.ruinDensity = Mathf.Clamp(data.ruin_density, 0f, 2.5f);
-            if (fullApply || keys.Contains("danger_density"))
-                state.dangerDensity = Mathf.Clamp(data.danger_density, 0f, 2.5f);
-            if (fullApply || keys.Contains("rock_chunks"))
-                state.hasRockChunks = data.rock_chunks;
-            if (fullApply || keys.Contains("hill_size"))
-                state.hillSize = data.hill_size > 0f ? Mathf.Clamp(data.hill_size, 0.005f, 0.1f) : 0.021f;
-            if (fullApply || keys.Contains("hill_smoothness"))
-                state.hillSmoothness = data.hill_smoothness > 0f ? Mathf.Clamp(data.hill_smoothness, 0.5f, 6f) : 2.0f;
-            if (fullApply || keys.Contains("straight_river"))
-                state.straightRiver = data.straight_river;
-
-            // 강: river 키가 있으면 업데이트
-            // 강: 세부 필드별로 병합 (방향만 보내도 위치 유지, 위치만 보내도 방향 유지)
-            if (fullApply || keys.Contains("river_present"))
-                state.hasRiver = data.river?.present ?? false;
-            if (fullApply || keys.Contains("river_direction"))
+            var desired = WorldTileEditor.Plan(tile, baseline, candidate);
+            var previousCacheTile = CurrentTileId;
+            bool previousCacheActive = HasParams;
+            try
             {
-                float angle = data.river?.direction_angle ?? -1f;
-                // 하위 호환: direction 문자열 → angle 변환
-                if (angle < 0f && data.river != null)
+                WorldTileEditor.Replace(tile, desired);
+                wc.SetState(tileId, candidate);
+                wc.SetBaseline(tileId, baseline);
+                wc.SetLastApplied(tileId, TileWorldSnapshot.Capture(tile));
+                ApplyStateToStaticFields(candidate);
+                CurrentTileId = tileId;
+                HasParams = true;
+            }
+            catch (System.Exception applyError)
+            {
+                try
                 {
-                    string dir = data.river.direction?.ToLower();
-                    if (dir == "horizontal") angle = 90f;
-                    else if (dir == "vertical") angle = -1f;
-                    else if (dir == "left") angle = 270f;
-                    else if (dir == "up") angle = 0f;
-                    else if (dir == "right") angle = 90f;
-                    else if (dir == "down") angle = 180f;
-                    else if (float.TryParse(dir, System.Globalization.NumberStyles.Float,
-                        System.Globalization.CultureInfo.InvariantCulture, out float parsed))
-                        angle = Mathf.Repeat(parsed, 360f);
+                    WorldTileEditor.Restore(tile, beforeWorld);
+                    if (previous == null) wc.RemoveState(tileId); else wc.SetState(tileId, previous);
+                    if (savedBaseline == null) wc.RemoveBaseline(tileId);
+                    else wc.SetBaseline(tileId, savedBaseline);
+                    if (lastApplied == null) wc.RemoveLastApplied(tileId); else wc.SetLastApplied(tileId, lastApplied);
+                    if (previousCacheActive) LoadFromTile(previousCacheTile); else Reset();
                 }
-                else if (angle >= 0f)
-                    angle = Mathf.Repeat(angle, 360f);
-                state.riverDirectionAngle = angle;
-            }
-            if (fullApply || keys.Contains("river_position"))
-            {
-                state.riverXPosition = Mathf.Clamp(data.river?.x_position ?? 0.5f, 0f, 1f);
-                state.riverZPosition = Mathf.Clamp(data.river?.z_position ?? 0.5f, 0f, 1f);
-            }
-
-            // 석재 종류
-            if (fullApply || keys.Contains("rock_types"))
-            {
-                state.rockTypes.Clear();
-                if (data.rock_types != null)
-                    foreach (var rt in data.rock_types)
-                        if (!string.IsNullOrEmpty(rt)) state.rockTypes.Add(rt);
-            }
-
-            // TileMutator — additive 병합.
-            // "추가"는 기존 특징에 더하기(union)로, "제거"는 remove_mutators로만.
-            // 구버전은 mutators 키가 오면 clear+reset(full-replace)이라, "오로라 추가"처럼
-            // 새 것 하나만 보내면 기존 별관측 등이 지워지는 버그가 있었음 → union으로 교체.
-            // fullApply(프리셋/undo)는 완전한 스냅샷이므로 clear 후 대입(교체 의미 유지).
-            if (fullApply || keys.Contains("mutators"))
-            {
-                if (fullApply) state.mutators.Clear();
-                if (data.mutators != null)
-                    foreach (var m in data.mutators)
-                        if (!string.IsNullOrEmpty(m) && !state.mutators.Contains(m))
-                            state.mutators.Add(m);
-            }
-            if (fullApply || keys.Contains("remove_mutators"))
-            {
-                state.removeMutators.Clear();
-                if (data.remove_mutators != null)
-                    foreach (var m in data.remove_mutators)
-                        if (!string.IsNullOrEmpty(m))
-                        {
-                            state.removeMutators.Add(m);
-                            state.mutators.Remove(m);  // desired-set에서도 빼야 재적용 때 안 살아남
-                        }
-            }
-
-            // ElevationShapes: 키가 있으면 전체 교체, 없으면 기존 유지
-            if (fullApply || keys.Contains("elevation_shapes"))
-            {
-                state.elevationShapes.Clear();
-                if (data.elevation_shapes != null)
-                    foreach (var shape in data.elevation_shapes)
-                        if (shape != null && !string.IsNullOrEmpty(shape.type))
-                            state.elevationShapes.Add(shape.Clone());
-            }
-
-            // hills shape 누적: 같은 type+direction이 없으면 추가
-            if (state.hills != "none")
-            {
-                var autoShape = GetAutoShapeForHills(state.hills);
-                if (autoShape != null)
+                catch (System.Exception rollbackError)
                 {
-                    bool exists = state.elevationShapes.Any(s =>
-                        s.type == autoShape.type &&
-                        (s.direction ?? "") == (autoShape.direction ?? "") &&
-                        (s.position ?? "") == (autoShape.position ?? "") &&
-                        string.IsNullOrEmpty(s.fill));
-                    if (!exists)
-                        state.elevationShapes.Add(autoShape);
+                    throw new System.AggregateException("Tile update and metadata rollback both failed", applyError, rollbackError);
                 }
+                throw;
             }
-
-            // --- WorldComponent에 상태 저장 ---
-            if (wc != null && tileId >= 0)
-                wc.SetState(tileId, state);
-
-            // --- 정적 필드 업데이트 (패치용 캐시) ---
-            ApplyStateToStaticFields(state);
-
-            HasParams = true;
-
-            Verse.Log.Message($"[MapGenAI] 파라미터 적용 (tile={tileId}, explicit={keys.Count}): " +
-                $"언덕={Hills}, 산양={HillAmount:F2}, 나무={VegetationDensity:F1}, " +
-                $"동물={AnimalDensity:F1}, 강={HasRiver}(방향={RiverDirectionAngle:F0}, X={RiverXPosition:F2}, Z={RiverZPosition:F2}), " +
-                $"동굴={HasCaves}, 간헐천={GeyserCount}, 해안={CoastDirection}, " +
-                $"석재수={RockCount}, 석재종류={RockTypes.Count}개, 광석밀도={OreDensity:F2}, " +
-                $"폐허밀도={RuinDensity:F2}, 위험밀도={DangerDensity:F2}, " +
-                $"돌덩어리={HasRockChunks}, 산크기={HillSize:F4}, 산부드러움={HillSmoothness:F1}, " +
-                $"mutators={Mutators.Count}개, elevation_shapes={ElevationShapes.Count}개");
-
-            // 월드 타일에 mutator 영구 적용 (Map Designer 방식)
-            ApplyMutatorsToWorldTile();
-
+            var added = tile.Mutators.Select(d=>d.defName).Except(beforeWorld.mutators).ToList();
+            var removed = beforeWorld.mutators.Except(tile.Mutators.Select(d=>d.defName)).ToList();
+            if (added.Count > 0 || removed.Count > 0)
+                LastWorldChanges = "실제 타일 특징 / Tile features: +[" + string.Join(", ",added) + "] −[" + string.Join(", ",removed) + "]";
+            Log.Message("[MapGenAI] Applied state to tile " + tileId + (LastWorldChanges == null ? "" : "; " + LastWorldChanges));
             RefreshMapPreview();
         }
 
         /// <summary>TileMapState를 정적 필드에 적용 (패치들이 읽는 캐시).</summary>
-        private static void ApplyStateToStaticFields(TileMapState state)
-        {
-            Hills = state.hills;
-            HillAmount = state.hillAmount;
-            VegetationDensity = state.vegetationDensity;
-            AnimalDensity = state.animalDensity;
-            FertilityOffset = state.fertilityOffset;
-            HasRiver = state.hasRiver;
-            RiverDirection = state.riverDirectionAngle == 90f ? "horizontal" : "vertical";
-            RiverDirectionAngle = state.riverDirectionAngle;
-            RiverXPosition = state.riverXPosition;
-            RiverZPosition = state.riverZPosition;
-            HasRoads = state.hasRoads;
-            HasCaves = state.hasCaves;
-            CavesExplicitlySet = state.cavesExplicitlySet;
-            GeyserCount = state.geyserCount;
-            HasRockChunks = state.hasRockChunks;
-            HillSize = state.hillSize;
-            HillSmoothness = state.hillSmoothness;
-            StraightRiver = state.straightRiver;
-            CoastDirection = state.coastDirection;
-            RockCount = state.rockCount;
-            OreDensity = state.oreDensity;
-            RuinDensity = state.ruinDensity;
-            DangerDensity = state.dangerDensity;
-
-            Mutators.Clear();
-            Mutators.AddRange(state.mutators);
-            RemoveMutators.Clear();
-            RemoveMutators.AddRange(state.removeMutators);
-            RockTypes.Clear();
-            RockTypes.AddRange(state.rockTypes);
-
-            ElevationShapes.Clear();
-            foreach (var s in state.elevationShapes)
-                ElevationShapes.Add(s.Clone());
-        }
+        private static void ApplyStateToStaticFields(TileMapState state) => editingState = state.Clone();
 
         /// <summary>WorldComponent에서 타일 상태를 로드하여 정적 필드에 적용.</summary>
         public static void LoadFromTile(int tileId)
@@ -548,200 +407,27 @@ namespace MapGenAI.MapGen
             }
         }
 
-        /// <summary>WorldComponent에서 타일 상태 삭제 + 정적 필드 리셋.</summary>
+        /// <summary>Explicitly discard this tile's settings and restore its saved metadata baseline.</summary>
         public static void ClearTile(int tileId)
         {
             var wc = MapGenAIWorldComponent.Get();
+            var baseline = wc?.GetBaseline(tileId);
+            if (baseline != null)
+            {
+                var tile = Find.WorldGrid?[tileId];
+                if (tile == null) throw new System.InvalidOperationException("Cannot restore missing world tile");
+                var before = TileWorldSnapshot.Capture(tile);
+                baseline = WorldTileEditor.Rebase(baseline, wc.GetLastApplied(tileId), before);
+                var missing = baseline.mutators.Where(n => DefDatabase<TileMutatorDef>.GetNamedSilentFail(n) == null).ToList();
+                if (missing.Count > 0) LastApplyWarning = "Unavailable original features omitted: " + string.Join(", ", missing);
+                try { WorldTileEditor.Restore(tile, baseline, false); }
+                catch { WorldTileEditor.Restore(tile, before); throw; }
+            }
             wc?.RemoveState(tileId);
-            Reset();
-        }
-
-        /// <summary>
-        /// 현재 선택된 월드 타일에 mutator + hilliness를 적용 (Map Designer 방식).
-        /// Reset() 시 원본으로 복원.
-        /// </summary>
-        private static void ApplyMutatorsToWorldTile()
-        {
-            try
-            {
-                var tileId = Verse.Find.WorldSelector?.SelectedTile ?? -1;
-                if (tileId < 0) return;
-                var tile = Verse.Find.WorldGrid?[tileId];
-                if (tile == null) return;
-
-                // 이전 적용이 있으면 먼저 복원 (Undo 시에도 이전 mutator가 제거되어야 함)
-                bool hadPreviousApplication = _mutatorAppliedTileId >= 0;
-                if (hadPreviousApplication)
-                    RestoreMutatorsFromWorldTile();
-
-                bool hasMutatorChanges = Mutators.Count > 0;
-                bool hasRemoveMutators = RemoveMutators.Count > 0;
-                // 현재 타일에 Caves mutator가 있는지 (복원 후 기준)
-                bool tileHasCaves = tile.Mutators.Any(m => m.defName == "Caves");
-                // caves 추가가 필요한지 (HasCaves=true이고 타일에 없을 때만)
-                bool needCavesAdd = HasCaves && !tileHasCaves;
-                // caves 제거: LLM이 명시적으로 caves=false 보냈거나 remove_mutators에 "Caves" 있을 때
-                bool needCavesRemove = tileHasCaves &&
-                    (RemoveMutators.Contains("Caves") || (CavesExplicitlySet && !HasCaves));
-
-                // 원본 저장 (복원 후 다시 읽기) — hilliness도 변경할 수 있으므로 항상 저장
-                _mutatorAppliedTileId = tileId;
-                _originalMutatorDefNames = tile.Mutators.Select(m => m.defName).ToList();
-
-                // 1. Caves mutator 추가/제거
-                if (needCavesAdd || needCavesRemove)
-                {
-                    var cavesMutDef = Verse.DefDatabase<TileMutatorDef>.GetNamedSilentFail("Caves");
-                    if (cavesMutDef != null)
-                    {
-                        if (needCavesAdd)
-                        {
-                            tile.AddMutator(cavesMutDef);
-                            Verse.Log.Message("[MapGenAI] 동굴 mutator 추가");
-                        }
-                        else if (needCavesRemove)
-                        {
-                            tile.RemoveMutator(cavesMutDef);
-                            Verse.Log.Message("[MapGenAI] 동굴 mutator 제거");
-                        }
-                    }
-                }
-
-                // 2. LLM이 지정한 mutator 추가 (기존 유지, 같은 카테고리만 교체)
-                // "교체 모드" 제거 — 기존 River/Coast/Mountain은 유지됨
-                foreach (var defName in Mutators)
-                {
-                    var mutDef = Verse.DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
-                    if (mutDef == null) continue;
-
-                    // River 카테고리는 강이 있어야 함
-                    if (mutDef.categories.Contains("River"))
-                    {
-                        var st = tile as RimWorld.Planet.SurfaceTile;
-                        if (st?.Rivers == null || st.Rivers.Count == 0)
-                        {
-                            Verse.Log.Message($"[MapGenAI] '{defName}' 스킵 — 강이 없는 타일");
-                            continue;
-                        }
-                    }
-
-                    // Coast 카테고리는 해안이어야 함
-                    if (mutDef.categories.Contains("Coast"))
-                    {
-                        if (!tile.Mutators.Any(m => m.defName == "Coast") && !tile.IsCoastal)
-                        {
-                            Verse.Log.Message($"[MapGenAI] '{defName}' 스킵 — 해안이 아닌 타일");
-                            continue;
-                        }
-                    }
-
-                    // 같은 카테고리 기존 mutator만 교체 (다른 카테고리는 유지)
-                    var toRemove = tile.Mutators
-                        .Where(m => m.categories.Any(c => mutDef.categories.Contains(c)))
-                        .ToList();
-                    foreach (var old in toRemove)
-                        tile.RemoveMutator(old);
-
-                    tile.AddMutator(mutDef);
-                    Verse.Log.Message($"[MapGenAI] 타일 mutator 적용: {mutDef.label} ({defName})");
-                }
-
-                // 3. 제거할 mutator 처리 (동굴 제거, 동물 개체수 감소 제거 등)
-                foreach (var defName in RemoveMutators)
-                {
-                    var mutDef = Verse.DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
-                    if (mutDef == null) continue;
-                    if (tile.Mutators.Contains(mutDef))
-                    {
-                        tile.RemoveMutator(mutDef);
-                        Verse.Log.Message($"[MapGenAI] 타일 mutator 제거: {mutDef.label} ({defName})");
-                    }
-                }
-
-                // hilliness 변경 제거됨 — Mountainous로 바꾸면 맵 전체가 바위로 뒤덮이는 문제.
-                // shapes 누적으로 양쪽 산 문제는 해결됨.
-            }
-            catch (System.Exception e)
-            {
-                Verse.Log.Warning($"[MapGenAI] Mutator 적용 실패: {e.Message}");
-            }
-        }
-
-        /// <summary>
-        /// hill_amount 기반으로 타일의 hilliness를 변경.
-        /// 바닐라 factor: Flat=0.8, SmallHills=0.9, LargeHills=1.0, Mountainous=1.1, Impassable=1.2
-        /// hill_amount가 높으면 hilliness를 올려서 바닐라 산 생성 로직이 자연스러운 산을 만들도록 함.
-        /// </summary>
-        private static void ApplyHillinessToWorldTile(Tile tile)
-        {
-            // hill_amount → hilliness 매핑
-            Hilliness target;
-            if (HillAmount <= 0.5f)
-                target = Hilliness.Flat;
-            else if (HillAmount <= 0.85f)
-                target = Hilliness.SmallHills;
-            else if (HillAmount <= 1.05f)
-                target = Hilliness.LargeHills;
-            else if (HillAmount <= 1.3f)
-                target = Hilliness.Mountainous;
-            else
-                target = Hilliness.Impassable;
-
-            // elevation_shapes에 산 관련 shape이 있으면 최소 Mountainous 보장
-            // Mountainous = factor 1.1 + DistFromAxis 산맥 추가.
-            // LargeHills(1.0)로는 base 산이 안 생김.
-            if (ElevationShapes.Any(s => s.type == "ridge" || s.type == "radial" || s.type == "ring"))
-            {
-                if (target < Hilliness.Mountainous)
-                    target = Hilliness.Mountainous;
-            }
-
-            if (tile.hilliness == target) return;
-
-            // 원본 저장 (아직 안 했으면)
-            if (!_hillinessModified)
-            {
-                _originalHilliness = tile.hilliness;
-                _hillinessModified = true;
-            }
-
-            tile.hilliness = target;
-            Verse.Log.Message($"[MapGenAI] 타일 hilliness 변경: {_originalHilliness} → {target}");
-        }
-
-        /// <summary>원본 mutator + hilliness 복원</summary>
-        private static void RestoreMutatorsFromWorldTile()
-        {
-            if (_mutatorAppliedTileId < 0 || _originalMutatorDefNames == null) return;
-
-            try
-            {
-                var tile = Verse.Find.WorldGrid?[_mutatorAppliedTileId];
-                if (tile == null) return;
-
-                // hilliness 복원
-                if (_hillinessModified)
-                {
-                    tile.hilliness = _originalHilliness;
-                    _hillinessModified = false;
-                }
-
-                // 현재 mutator 전부 제거
-                foreach (var m in tile.Mutators.ToList())
-                    tile.RemoveMutator(m);
-
-                // 원본 복원
-                foreach (var defName in _originalMutatorDefNames)
-                {
-                    var mutDef = Verse.DefDatabase<TileMutatorDef>.GetNamedSilentFail(defName);
-                    if (mutDef != null)
-                        tile.AddMutator(mutDef);
-                }
-            }
-            catch { }
-
-            _mutatorAppliedTileId = -1;
-            _originalMutatorDefNames = null;
+            wc?.RemoveBaseline(tileId);
+            wc?.RemoveLastApplied(tileId);
+            if (CurrentTileId == tileId) Reset();
+            RefreshMapPreview();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -753,45 +439,16 @@ namespace MapGenAI.MapGen
             }
             catch (System.Exception e)
             {
-                Verse.Log.Warning($"[MapGenAI] Map Preview 갱신 실패: {e.Message}");
+                LastApplyWarning = (LastApplyWarning == null ? "" : LastApplyWarning + "\n") + "Map preview refresh failed: " + e.Message;
+                Verse.Log.Warning("[MapGenAI] " + LastApplyWarning);
             }
         }
 
         public static void Reset()
         {
-            // 월드 타일 mutator 원본 복원
-            RestoreMutatorsFromWorldTile();
-
-            HasParams = false;
-            Hills = "none";
-            HillAmount = 1f;
-            VegetationDensity = 1f;
-            AnimalDensity = 1f;
-            FertilityOffset = 0f;
-            HasRiver = false;
-            RiverDirection = "vertical";
-            RiverDirectionAngle = -1f;
-            RiverXPosition = 0.5f;
-            RiverZPosition = 0.5f;
-            HasRoads = false;
-            HasCaves = false;
-            CavesExplicitlySet = false;
-            GeyserCount = -1;
-            HasRockChunks = true;
-            HillSize = 0.021f;
-            HillSmoothness = 2.0f;
-            StraightRiver = false;
-            CoastDirection = "auto";
-            RockCount = -1;
-            OreDensity = 1f;
-            RuinDensity = 1f;
-            DangerDensity = 1f;
-            RockTypes.Clear();
-            Mutators.Clear();
-            RemoveMutators.Clear();
-            ElevationShapes.Clear();
-
-            RefreshMapPreview();
+            editingTileId = -1;
+            editingActive = false;
+            editingState = new TileMapState();
         }
 
         /// <summary>현재 파라미터 상태를 MapParamsData 스냅샷으로 반환 (undo용).</summary>
@@ -827,12 +484,7 @@ namespace MapGenAI.MapGen
                 rock_types = new List<string>(RockTypes),
                 mutators = new List<string>(Mutators),
                 remove_mutators = new List<string>(RemoveMutators),
-                elevation_shapes = ElevationShapes.Select(s => new ElevationShape
-                {
-                    type = s.type, direction = s.direction, strength = s.strength,
-                    position = s.position, size = s.size, gap = s.gap, fill = s.fill,
-                    fade = s.fade, noise_amount = s.noise_amount
-                }).ToList()
+                elevation_shapes = ElevationShapes.Select(s => s.Clone()).ToList()
             };
         }
 
@@ -848,33 +500,22 @@ namespace MapGenAI.MapGen
                 sb.AppendLine("\n## Currently applied parameters (modify from this state. Keep unchanged values as-is.):");
 
             sb.AppendLine($"- hills: {Hills}, hill_amount: {HillAmount:F2}");
+            if(ImageMap!=null) sb.AppendLine(isKo
+                ? "- 이미지 지형이 적용되어 있습니다. 일반 대화는 이미지 영역을 직접 수정할 수 없습니다. 이미지 수정 요청에는 action:ask로 '이미지 지형' 창에서 영역을 선택하도록 안내하세요. 추가 SDF는 이미지 위에 적용됩니다."
+                : "- An image terrain layer is present. This chat cannot directly edit image regions. For image correction use action:ask and direct the user to select a region in Image terrain. Added SDF shapes overlay the image layer.");
 
             // 현재 맵의 전체 elevation_shapes를 LLM에게 표시 (MDP: LLM이 현재 상태를 보고 완전한 새 상태를 출력)
             if (ElevationShapes.Count > 0)
             {
-                var shapeJsonList = ElevationShapes.Select(s =>
-                {
-                    var parts = new List<string>();
-                    if (!string.IsNullOrEmpty(s.type))      parts.Add($"\"type\":\"{s.type}\"");
-                    if (!string.IsNullOrEmpty(s.direction)) parts.Add($"\"direction\":\"{s.direction}\"");
-                    if (!string.IsNullOrEmpty(s.strength))  parts.Add($"\"strength\":\"{s.strength}\"");
-                    if (!string.IsNullOrEmpty(s.position))  parts.Add($"\"position\":\"{s.position}\"");
-                    if (!string.IsNullOrEmpty(s.size))      parts.Add($"\"size\":\"{s.size}\"");
-                    if (!string.IsNullOrEmpty(s.gap))          parts.Add($"\"gap\":\"{s.gap}\"");
-                    if (!string.IsNullOrEmpty(s.fill))         parts.Add($"\"fill\":\"{s.fill}\"");
-                    if (!string.IsNullOrEmpty(s.fade))         parts.Add($"\"fade\":\"{s.fade}\"");
-                    if (!string.IsNullOrEmpty(s.noise_amount)) parts.Add($"\"noise_amount\":\"{s.noise_amount}\"");
-                    return "{" + string.Join(",", parts) + "}";
-                });
-                string shapesJson = $"[{string.Join(",", shapeJsonList)}]";
+                string shapesJson = MapGenAI.UI.SimpleJson.Serialize(ShapeEdits.Describe(ElevationShapes));
                 if (isKo)
                 {
-                    sb.AppendLine($"- elevation_shapes (현재 맵 상태. 유저 요청에 맞게 전체 목록을 새로 출력하세요):");
+                    sb.AppendLine($"- elevation_shapes (현재 맵 상태. ID를 대상으로 shape_ops를 출력하세요):");
                     sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
                 }
                 else
                 {
-                    sb.AppendLine($"- elevation_shapes (current map state. Output the complete new list based on user request):");
+                    sb.AppendLine($"- elevation_shapes (current map state. Use shape_ops to edit by ID):");
                     sb.AppendLine($"  \"elevation_shapes\":{shapesJson}");
                 }
             }
@@ -937,6 +578,8 @@ namespace MapGenAI.MapGen
         public List<string> mutators;           // 추가할 TileMutator defName 목록
         public List<string> remove_mutators;    // 제거할 TileMutator defName 목록
         public List<ElevationShape> elevation_shapes;  // Elevation 프리미티브 목록
+        public List<ShapeEdit> shape_ops;
+        public bool replace_shapes;
     }
 
     public class RiverData

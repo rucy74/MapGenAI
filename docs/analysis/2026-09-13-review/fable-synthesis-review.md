@@ -1,0 +1,61 @@
+# Claude consultation
+
+Requested: claude-fable-5-1
+
+Observed modelUsage: ["claude-haiku-4-5-20251001", "claude-fable-5-1"]
+
+## 1. 1차 판단의 유지·수정·철회
+
+**철회**
+- "외부 파서 없이 null/Unicode 두 곳만 고치면 충분"은 철회합니다. Codex 재현으로 `[}` 입력에서 무한 반복이 확인되었고, 코드상 원인도 일치합니다. ParseObjectArray가 `}`를 만나면 ParsePrimitive를 호출하는데, ParsePrimitive는 `}`에서 즉시 멈춰 한 글자도 소비하지 않습니다 (`baseline/dev/Source/UI/SimpleJson.cs:195`, `:262`). ParseNestedArray의 같은 분기도 동일 결함입니다. 더 나쁜 점은 HandleResponse가 예외만 잡고 무한 루프는 잡지 못하며, 응답 추출이 첫 `{`부터 마지막 `}`까지라 잘린 응답이 그대로 파서에 들어간다는 것입니다.
+- "좌표 표현이 없다"는 철회합니다. ShapePrimitive의 center/verts와 ElevationShape.position의 숫자 좌표를 확인했습니다. 부족한 것은 좌표가 아니라 대상 식별과 관계 편집, 결과 검증입니다.
+- "이미지→맵은 새 엔진이 필요"는 철회합니다. 폐기 브랜치에 라벨 격자→elevation/fertility 변환 엔진이 이미 있습니다. 재설계할 곳은 입력 해석과 품질 계약입니다.
+
+**수정**
+- OpenRouter 지원과 Custom URL/API key 분리는 이미 구현되어 있으므로 제안 목록에서 제외합니다.
+- "빈 params는 무해"는 수정합니다. ParseParams가 키를 하나도 못 찾으면 explicitKeys가 비고, Apply는 이를 프리셋/Undo와 같은 전체 적용으로 해석합니다 (`MapGenParams.cs:335`). 대화 patch와 스냅샷 복원이 같은 진입점을 쓰는 설계 결함입니다.
+
+**유지**
+- river_position 하나로 X/Z를 함께 덮는 문제, Undo를 전송 시점에 push하는 문제, composite 데이터가 스냅샷·프리셋·ExposeData 모두에서 누락되는 문제는 코드로 재확인했습니다.
+- 추가 확인: 자동 hills 누적 로직 자체는 "왼쪽 산 후 오른쪽 산"을 보존하지만, 그 판단은 LLM이 전체 목록을 다시 출력하는 데 의존합니다. 또 mutator 적용 2단계는 같은 카테고리의 기존 mutator를 제거한 뒤 추가하므로, "추가"가 사실상 카테고리 교체입니다 (`MapGenParams.cs:639`). 사용자의 "기존 특징 유지" 요구와 충돌할 수 있는 경로이며 인게임 재현은 없습니다.
+
+## 2. 개선 항목
+
+| 우선 | 항목 | 근거 (출처) | 구현 방향 | 합격 조건 |
+|---|---|---|---|---|
+| P0 | 파서 무한 반복 차단 | Codex 실증 5번, 코드 195/253/262행 | 모든 루프에 "위치가 진행되지 않으면 예외" 가드. 잘못된 위치의 `}`/`]`는 오류로 처리 | 퍼징 테스트: 무작위 절단·괄호 뒤섞기 입력 수천 건이 모두 100ms 내 반환 또는 예외. `[}` 회귀 케이스 고정 |
+| P0 | 잘린/비정형 응답의 명시적 거부 | 실증 3번, HandleResponse의 첫`{`~마지막`}` 추출 | 엄격 파서 도입(Newtonsoft는 이미 테스트 의존성, 게임 내 동봉 여부 확인 필요) 또는 자체 파서를 엄격 모드로. 실패 시 "응답이 불완전함, 재시도" 안내 | 루트 닫힘 누락 입력이 거부되고 사용자에게 재시도 메시지가 뜸. 정상 응답 회귀 0건 |
+| P0 | 빈 params가 전체 초기화로 해석되는 경로 제거 | 코드 335행, ParseParams 구조 | `Apply(data, mode)`로 Patch/Snapshot을 분리. LLM 경로는 항상 Patch, 프리셋·Undo·Reset은 Snapshot | 단위 테스트: `{"action":"generate","params":{}}`와 미지원 키만 있는 응답이 기존 상태를 바꾸지 않음 |
+| P0 | 테스트 프로젝트 복구 | Codex 빌드 5 errors | csproj에 TileMapState.cs·SdfComposite.cs 링크 추가, IExposable/Hilliness는 VerseShim에 추가 | `dotnet build Tests` 0 errors, 기존 MdpApplyTests 실행 결과가 기록됨 |
+| P1 | 8/26 댓글 "완료라고 하지만 맵 불변" 재현 경로 확보 | Steam 댓글, 원인 미확정 | Apply 후 상태 diff를 채팅에 표시. diff가 비면 "변경 없음"을 명시하고 설명 요구. 로그에 배포판 버전 문자열 포함 | 변경 없는 응답에서 "완료" 대신 "변경 없음"이 표시됨. 문제 재보고 시 버전·diff 로그로 원인 분리 가능 |
+| P1 | Undo를 성공 시점에 push | 코드 728행 | 스냅샷은 Apply 성공 직후 push. 실패/ask 응답은 push 안 함 | ask 응답 3회 후 Undo 1회가 마지막 generate만 되돌림 |
+| P1 | 강 X/Z 키 분리 | 코드 404~408행, 1009~1010행 | river_x/river_z를 별도 explicitKey로 추적 | "강을 위로"만 보냈을 때 x가 유지됨 |
+| P1 | remove_mutators 잔존 및 카테고리 교체 의미 정리 | 코드 432~442행, 639~643행 | removeMutators는 1회성 연산으로 소비 후 비움. 카테고리 교체는 명시적 replace 연산으로만 | 이전 턴에 제거한 mutator를 다음 턴에 추가하면 살아남음. 다른 카테고리 mutator는 항상 보존 |
+| P1 | composite 직렬화 누락 보완 | ToSnapshot 830행, PresetManager, ExposeData 34행, Clone 54행 | 세 경로 모두에 compositeShapes/Ops 포함. Clone은 깊은 복사 | composite 도형 생성→프리셋 저장→재로드→Undo 후 도형이 동일. 세이브/로드 후에도 유지 |
+| P1 | 타일 ID 단일화 | Apply(CurrentTileId) vs ApplyMutatorsToWorldTile의 SelectedTile vs DoUndo의 _openedTileId | tileId를 인자로 끝까지 전달. 창이 열린 채 타일이 바뀌면 경고 | 창 연 뒤 다른 타일 선택 후 Undo/Apply가 원래 타일에만 반영됨 |
+| P1 | 도형 대상 식별과 add/move/remove 연산 | 사용자 반려 사례, ShapePrimitive에 id 있음 | ElevationShape에도 id 부여. LLM에 `shape_ops:[{op:"add"|"move"|"remove"|"replace", id, ...}]`를 허용하고 전체 목록 재출력은 fallback으로 | "왼쪽 산 추가"→"오른쪽 산 추가"→"왼쪽 산 조금 낮게" 3턴 후 도형 수 2, 각각 의도한 속성 |
+| P2 | 미지원 요청의 정직한 대체 안내 | Nil 4/13 댓글, fill 목록에 용암 없음, ruin_density는 배치 API 아님 | 시스템 프롬프트에 "불가능 항목은 message로 설명하고 가장 가까운 대체를 제안" 규칙. 코드에서 미지원 fill을 경고로 변환 | "용암 호수 중앙 섬에 유적" 요청 시 대체 결과와 미지원 사유가 함께 표시됨 |
+| P2 | 모델 선택 안내 | Nil 3/31 댓글 | 통제된 벤치 없이 추천하지 말고, 같은 프롬프트 세트로 파싱 성공률·거부율을 기록하는 인게임 로그 옵션 제공 | 최소 20개 고정 프롬프트에 대한 결과 표가 저장됨 |
+| P2 | 비결정성 대응 검증 도구 | 작성자 3/17 댓글 | temperature와 seed를 설정에 노출하고 로그에 기록. 응답 원문 저장 옵션 | 동일 seed·동일 프롬프트에서 공급자가 지원하는 한 결과 재현 |
+
+## 3. 두 실패 과제의 재접근
+
+**복잡한 자연어 지형**
+- 살릴 자산: SdfComposite의 CSG 도형과 정규화 좌표, TileMapState 기반 부분 갱신, 현재 상태를 프롬프트에 넣는 구조.
+- 경로: 먼저 위 P1의 id 기반 연산을 넣어 누적 편집을 안정시킵니다. 다음으로 "섬 위에 유적" 같은 관계 표현은 LLM이 좌표를 계산하게 하지 말고, 코드가 도형 id를 기준으로 상대 위치를 해석하는 소수의 관계 연산(inside, north_of, center_of)을 제공합니다. 마지막으로 Apply 결과를 축소 격자로 요약해 LLM에 되돌려 주는 검증 턴을 추가하되, 이는 상태 diff이지 실제 생성 결과가 아님을 UI에 표기합니다.
+- 반복하면 안 되는 것: 매 턴 전체 목록을 재출력시켜 LLM 기억에 의존하는 방식, 미지원 지형을 프롬프트 문구로 흉내 내는 방식, 파싱 성공을 의미 성공으로 간주하는 방식.
+
+**이미지→맵**
+- 살릴 자산: Palette/GridBuilder의 라벨 격자→elevation/fertility 변환, BiomeValidator, 미리보기 UI 일부.
+- 경로: 문자 격자를 LLM에게 직접 출력시키는 단계를 폐기하고, 세 갈래 입력 경로를 분리합니다. 첫째, top-down 색상 이미지는 LLM 없이 K-means 라벨링만으로 처리합니다. 둘째, LLM은 라벨 매핑 결정과 영역 이름 부여에만 쓰고, 격자 자체는 픽셀 처리에서 나오게 합니다. 셋째, 4/12 승인 요구의 polygon 세그먼테이션은 현재 문서 기준으로 모델별 응답 계약이 달라 probe 후 IImageAnalyzer 구현체 하나로 격리합니다.
+- 반복하면 안 되는 것: GridParser의 tiling 보충과 행 병합처럼 파싱 성공률을 올리려고 충실도를 희생하는 완화, 토큰 예산·temperature를 흔들어 우연히 통과하는 값을 찾는 방식, 6/3 보고의 "grayscale only" 같은 사용자 미승인 축소를 기본 방향으로 삼는 것.
+
+## 4. 실행 전에는 답할 수 없는 질문
+
+1. 8/26 댓글의 "맵 불변"이 현재 커밋에서도 재현되는가. 게시판 배포판 버전과 현재 코드의 일치 여부, 그리고 빈 params 경로인지 다른 원인인지는 실행 로그가 있어야 판단됩니다. 현재 확인된 것은 정적 경로뿐입니다.
+2. 실제 공급자 응답에서 잘린 JSON이 얼마나 자주 오는가. Codex 실증은 합성 입력이며, 무한 반복의 인게임 빈도는 측정되지 않았습니다.
+3. mutator 카테고리 교체와 remove_mutators 잔존이 인게임에서 사용자 체감 결함으로 나타나는가. 정적 추론만 있습니다.
+4. 현재 선택 가능한 모델들의 이미지 응답 계약이 무엇인가. 문서상 mask 바이트와 polygon 좌표가 세대별로 다르며, 어느 쪽이 현재 코드와 맞는지는 API probe 전에는 알 수 없습니다. 6/3 보고의 Gemini 2.5 Flash 결과는 옛 브랜치·옛 프롬프트 기준입니다.
+5. Newtonsoft.Json을 게임 런타임에 동봉해도 다른 모드와 충돌하지 않는가. 테스트 의존성으로만 존재하며, 자체 파서 엄격화와의 비용 비교는 로드 순서 실험이 필요합니다.
+
+구분 요약: 파서 결함 4종·빌드 실패·코드 경로 분석은 현재 구현과 Codex 실증입니다. 이미지 브랜치의 호출 결과와 테스트 수치는 과거 보고입니다. 표의 구현 방향과 3절의 경로는 제 제안이며 검증되지 않았습니다.

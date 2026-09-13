@@ -1,0 +1,13 @@
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+[Ref CEA1A7ED]
+ [0x0000c] in <51fded79cd284d4d911c5949aff4cb21>:0 
+  at System.Collections.Generic.List`1[T].get_Item (System.Int32 index) [0x00009] in <51fded79cd284d4d911c5949aff4cb21>:0 
+  at RimWorld.Planet.WorldGrid.get_Item (RimWorld.Planet.PlanetTile tile) [0x0000c] in <61e4173561894da49d210260257b5097>:0 
+  at Verse.Map.get_TileInfo () [0x00013] in <61e4173561894da49d210260257b5097>:0 
+  at Verse.MapGenerator.GenerateMap (Verse.IntVec3 mapSize, RimWorld.Planet.MapParent parent, Verse.MapGeneratorDef mapGenerator, System.Collections.Generic.IEnumerable`1[T] extraGenStepDefs, System.Action`1[T] extraInitBeforeContentGen, System.Boolean isPocketMap, System.Boolean stepDebugger) [0x0077a] in <61e4173561894da49d210260257b5097>:0 
+    - TRANSPILER MapPreview.Main: IEnumerable`1 MapPreview.Patches.Patch_Verse_MapGenerator:GenerateMap_Transpiler(IEnumerable`1 instructions)
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Map:Prefix(MapParent parent, IDisposable& __state)
+    - PREFIX MapPreview.Main: Void MapPreview.Patches.Patch_Verse_MapGenerator:GenerateMap()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Map:Finalizer(IDisposable __state)
+  at MapGenAI.RuntimeProbe.RuntimeProbe.FailureCleanupProbe (RimWorld.Planet.MapParent parent, MapGenAI.MapGen.TileMapState state) [0x000ea] in <6d7388911a6148fb9108dac063f6fbdb>:0 

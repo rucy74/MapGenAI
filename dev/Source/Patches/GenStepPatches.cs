@@ -41,6 +41,9 @@ namespace MapGenAI.Patches
                     elevGrid[cell] += offset;
             }
 
+            // Imported terrain is the authored base; later conversation shapes remain independent overlays.
+            MapGenParams.ImageMap?.Apply(map, elevGrid, MapGenerator.Fertility);
+
             // 2. 각 ElevationShape 적용 (비-물 먼저, 물 나중 → 산맥 위 호수 정상 생성)
             var shapes = MapGenParams.ElevationShapes;
             float fertOffset = MapGenParams.FertilityOffset;
@@ -734,20 +737,4 @@ namespace MapGenAI.Patches
 
     이전 TileMutator 패치 끝 ─────────────────────── */
 
-    /// <summary>
-    /// MapGenerator.GenerateMap Postfix: 맵 생성 완료 후 파라미터 자동 리셋.
-    /// 다음 맵에 이전 AI 파라미터가 누출되지 않도록 함.
-    /// </summary>
-    [HarmonyPatch(typeof(MapGenerator), "GenerateMap")]
-    static class Patch_MapGenerator_Reset
-    {
-        static void Postfix()
-        {
-            if (MapGenParams.HasParams)
-            {
-                Log.Message("[MapGenAI] 맵 생성 완료 — 파라미터 자동 리셋");
-                MapGenParams.Reset();
-            }
-        }
-    }
 }

@@ -8,6 +8,12 @@ namespace UnityEngine
     public static class Mathf
     {
         public const float Deg2Rad = 0.0174532924f;
+        public const float PI = (float)Math.PI;
+        public static float Sign(float value) => value >= 0 ? 1f : -1f;
+        public static float Atan2(float y, float x) => (float)Math.Atan2(y, x);
+        public static float Lerp(float a, float b, float t) => a + (b - a) * Clamp01(t);
+        public static float Pow(float a, float b) => (float)Math.Pow(a,b);
+        public static int RoundToInt(float value) => (int)Math.Round(value);
 
         public static float Clamp(float value, float min, float max)
         {
@@ -70,6 +76,12 @@ namespace UnityEngine
 
         public static Vector2 zero => new Vector2(0f, 0f);
         public static Vector2 one => new Vector2(1f, 1f);
+        public float magnitude => (float)Math.Sqrt(x*x+y*y);
+        public static float Dot(Vector2 a, Vector2 b) => a.x*b.x+a.y*b.y;
+        public static Vector2 operator +(Vector2 a, Vector2 b) => new Vector2(a.x+b.x,a.y+b.y);
+        public static Vector2 operator -(Vector2 a, Vector2 b) => new Vector2(a.x-b.x,a.y-b.y);
+        public static Vector2 operator *(Vector2 a, float b) => new Vector2(a.x*b,a.y*b);
+        public static Vector2 operator /(Vector2 a, float b) => new Vector2(a.x/b,a.y/b);
 
         public override string ToString() => $"({x:F2}, {y:F2})";
 

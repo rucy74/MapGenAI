@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><Nullable>disable</Nullable></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../dev/Source/Tests/TextToMap.Tests.csproj" />
+    <Compile Include="../../dev/Source/LLM/ILLMClient.cs" Link="ILLMClient.cs" />
+    <Compile Include="../../dev/Source/LLM/GeminiClient.cs" Link="GeminiClient.cs" />
+    <Compile Include="../../dev/Source/LLM/OpenAIClient.cs" Link="OpenAIClient.cs" />
+    <Compile Include="../../dev/Source/LLM/LocalClient.cs" Link="LocalClient.cs" />
+    <Compile Include="../../dev/Source/LLM/VisionPayload.cs" Link="VisionPayload.cs" />
+    <Compile Include="../../dev/Source/Core/ApiConfig.cs" Link="ApiConfig.cs" />
+    <Compile Include="../../dev/Source/Core/LLMProviders.cs" Link="LLMProviders.cs" />
+  </ItemGroup>
+</Project>

@@ -2,26 +2,30 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using MapGenAI.UI;
 using Verse;
 
 namespace MapGenAI.LLM
 {
-    public class GeminiClient : ILLMClient
+    public class GeminiClient : ILLMClient, IVisionClient
     {
         private readonly string _apiKey;
         private readonly string _model;
+        public string LastModelVersion { get; private set; }
+        public int LastInputTokens { get; private set; }
+        public int LastOutputTokens { get; private set; }
+        public int LastThinkingTokens { get; private set; }
         private static readonly HttpClient Http = new HttpClient();
 
         public GeminiClient(string apiKey, string model)
         {
             _apiKey = apiKey;
-            _model = model;
+            _model = (model ?? "").Trim();
         }
 
-        public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt)
+        public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default)
         {
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/{_model}:generateContent?key={_apiKey}";
-
             var contents = new StringBuilder();
             contents.Append("{\"system_instruction\":{\"parts\":[{\"text\":");
             contents.Append(EscapeJson(systemPrompt));
@@ -33,69 +37,50 @@ namespace MapGenAI.LLM
                 var role = history[i].Role == "assistant" ? "model" : "user";
                 contents.Append($"{{\"role\":\"{role}\",\"parts\":[{{\"text\":{EscapeJson(history[i].Content)}}}]}}");
             }
-            // temperature 0.2: 이 LLM 작업은 "말→파라미터 추출"이라 결정론적이어야 함
-            // (맵 다양성은 코드의 seed/noise가 만듦, LLM 온도가 아님). 고온도는 되물음·변동성 유발.
-            // responseMimeType: 모델이 평문/마크다운 대신 항상 유효 JSON을 내도록 강제 → "말로만 됐다는데 안 바뀜" 방지.
-            contents.Append("],\"generationConfig\":{\"temperature\":0.2,\"responseMimeType\":\"application/json\"}}");
+            // Keep the temperature used in the recorded development benchmarks.
+            // This does not guarantee determinism; compare Gemini 3 defaults before changing it.
+            // JSON mode requests structured output; ProviderResponse still validates the result.
+            contents.Append("],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":16384,\"responseMimeType\":\"application/json\"" +
+                (_model.StartsWith("gemini-3",System.StringComparison.OrdinalIgnoreCase)?",\"thinkingConfig\":{\"thinkingLevel\":\"low\"}":"")+"}}");
 
-            var response = await Http.PostAsync(url,
-                new StringContent(contents.ToString(), Encoding.UTF8, "application/json"));
-            var json = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Log.Error($"[MapGenAI] Gemini error: {json}");
-                throw new System.Exception($"HTTP {(int)response.StatusCode}: {json}");
-            }
-
-            // 간단한 JSON 파싱 (text 필드 추출)
-            var textStart = json.IndexOf("\"text\": \"") + 9;
-            var textEnd = json.IndexOf("\"", textStart);
-            // 더 견고한 파싱은 Phase 3에서 JSON 라이브러리 추가 후 처리
-            return ExtractText(json);
+            return await SendBodyAsync(contents.ToString(), cancellationToken);
         }
 
-        private string ExtractText(string json)
+        public Task<string> SendImageAsync(byte[] image, string mimeType, string instruction, CancellationToken cancellationToken = default)
         {
-            // candidates[0].content.parts[0].text 추출 (JSON 이스케이프 디코딩)
-            var marker = "\"text\": \"";
-            var start = json.IndexOf(marker);
-            if (start < 0)
+            VisionPayload.Validate(image, mimeType);
+            // Google recommends thinkingBudget=0 for Gemini 2.5 Flash segmentation.
+            string visionThinking = _model.StartsWith("gemini-2.5-flash",System.StringComparison.OrdinalIgnoreCase)
+                ? ",\"thinkingConfig\":{\"thinkingBudget\":0}" : _model.StartsWith("gemini-3",System.StringComparison.OrdinalIgnoreCase)
+                ? ",\"thinkingConfig\":{\"thinkingLevel\":\"low\"}" : "";
+            var body = "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":" + EscapeJson(instruction) +
+                "},{\"inline_data\":{\"mime_type\":" + EscapeJson(mimeType) + ",\"data\":\"" + System.Convert.ToBase64String(image) +
+                "\"}}]}],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":8192,\"responseMimeType\":\"application/json\"" + visionThinking + "}}";
+            return SendBodyAsync(body, cancellationToken);
+        }
+
+        private async Task<string> SendBodyAsync(string body, CancellationToken cancellationToken)
+        {
+            var url = "https://generativelanguage.googleapis.com/v1beta/models/" + System.Uri.EscapeDataString(_model) + ":generateContent";
+            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
             {
-                // 공백 없는 형태도 대응
-                marker = "\"text\":\"";
-                start = json.IndexOf(marker);
-                if (start < 0) return null;
-            }
-            start += marker.Length;
-            var sb = new StringBuilder();
-            for (int i = start; i < json.Length; i++)
-            {
-                if (json[i] == '\\' && i + 1 < json.Length)
+                request.Headers.Add("x-goog-api-key", _apiKey);
+                request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+                using (var response = await Http.SendAsync(request, cancellationToken))
                 {
-                    char next = json[i + 1];
-                    switch (next)
-                    {
-                        case 'n':  sb.Append('\n'); break;
-                        case 'r':  sb.Append('\r'); break;
-                        case 't':  sb.Append('\t'); break;
-                        case '"':  sb.Append('"');  break;
-                        case '\\': sb.Append('\\'); break;
-                        default:   sb.Append(next); break;
-                    }
-                    i++;
-                    continue;
+                    var json = await response.Content.ReadAsStringAsync();
+                    cancellationToken.ThrowIfCancellationRequested();
+                    if (!response.IsSuccessStatusCode) throw new System.Exception("Gemini HTTP " + (int)response.StatusCode + " (check model, credentials and quota)");
+                    var envelope=SimpleJson.Parse(json);var usage=envelope.GetObject("usageMetadata");
+                    LastModelVersion=envelope.GetString("modelVersion");LastInputTokens=usage?.GetInt("promptTokenCount")??0;
+                    LastOutputTokens=usage?.GetInt("candidatesTokenCount")??0;LastThinkingTokens=usage?.GetInt("thoughtsTokenCount")??0;
+                    return ExtractText(json);
                 }
-                if (json[i] == '"') break; // 문자열 종료
-                sb.Append(json[i]);
             }
-            return sb.ToString();
         }
 
-        private string EscapeJson(string s)
-        {
-            return "\"" + s.Replace("\\", "\\\\").Replace("\"", "\\\"")
-                           .Replace("\n", "\\n").Replace("\r", "\\r") + "\"";
-        }
+        private string ExtractText(string json) => ProviderResponse.Gemini(json);
+
+        private string EscapeJson(string text) => SimpleJson.Serialize(text);
     }
 }

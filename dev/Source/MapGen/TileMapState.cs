@@ -15,6 +15,7 @@ namespace MapGenAI.MapGen
         public string hills = "none";
         public float hillAmount = 1f;
         public List<ElevationShape> elevationShapes = new List<ElevationShape>();
+        public MapGenAI.ImageInput.ImageMapData imageMap;
         public float vegetationDensity = 1f;
         public float fertilityOffset = 0f;
         public float animalDensity = 1f;
@@ -76,6 +77,7 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref dangerDensity, "dangerDensity", 1f);
 
             Scribe_Collections.Look(ref elevationShapes, "elevationShapes", LookMode.Deep);
+            Scribe_Deep.Look(ref imageMap, "imageMap");
             Scribe_Collections.Look(ref mutators, "mutators", LookMode.Value);
             Scribe_Collections.Look(ref removeMutators, "removeMutators", LookMode.Value);
             Scribe_Collections.Look(ref rockTypes, "rockTypes", LookMode.Value);
@@ -96,6 +98,7 @@ namespace MapGenAI.MapGen
             return new TileMapState
             {
                 hills = hills,
+                imageMap = imageMap?.Clone(),
                 hillAmount = hillAmount,
                 vegetationDensity = vegetationDensity,
                 fertilityOffset = fertilityOffset,
@@ -127,7 +130,7 @@ namespace MapGenAI.MapGen
         /// <summary>기본값(빈 상태)인지 확인.</summary>
         public bool IsDefault()
         {
-            return hills == "none" && hillAmount == 1f && elevationShapes.Count == 0
+            return imageMap == null && hills == "none" && hillAmount == 1f && elevationShapes.Count == 0
                 && vegetationDensity == 1f && animalDensity == 1f && fertilityOffset == 0f
                 && !hasRiver && !hasCaves && !hasRoads
                 && geyserCount == -1 && hasRockChunks

@@ -68,7 +68,7 @@
   <MapGenAI_Settings_FetchError>오류: {0}</MapGenAI_Settings_FetchError>
   <MapGenAI_Settings_LocalUrl>로컬 서버 URL</MapGenAI_Settings_LocalUrl>
   <MapGenAI_Settings_GetFreeKey>무료 API 키 받기</MapGenAI_Settings_GetFreeKey>
-  <MapGenAI_Settings_SimpleDesc>기본으로 gemini-2.5-flash를 사용합니다. 무료 티어 사용 가능.</MapGenAI_Settings_SimpleDesc>
+  <MapGenAI_Settings_SimpleDesc>기본 모델은 gemini-3.8-flash입니다. 아래에서 모델을 바꿀 수 있습니다.</MapGenAI_Settings_SimpleDesc>
   <MapGenAI_Settings_SwitchAdvanced>고급 설정으로 전환</MapGenAI_Settings_SwitchAdvanced>
   <MapGenAI_Settings_SwitchSimple>간단한 설정으로 전환</MapGenAI_Settings_SwitchSimple>
   <MapGenAI_Settings_CloudService>클라우드 서비스</MapGenAI_Settings_CloudService>

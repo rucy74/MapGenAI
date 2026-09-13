@@ -391,6 +391,25 @@ namespace MapGenAI.MapGen
         /// <summary>ShapePrimitive → SDF 함수 빌드</summary>
         private static Func<Vector2, float> BuildSdfFunc(ShapePrimitive s)
         {
+            var unrotated = BuildUnrotatedSdfFunc(s);
+            if (unrotated == null || s.rot == 0) return unrotated;
+            var center = s.GetCenter();
+            if ((s.prim == "tri" || s.prim == "poly") && s.verts != null)
+            {
+                float x = 0, z = 0;
+                foreach (var point in s.verts) { x += point[0]; z += point[1]; }
+                center = new Vector2(x / s.verts.Length, z / s.verts.Length);
+            }
+            float angle = -s.rot * Mathf.PI / 180f, cos = Mathf.Cos(angle), sin = Mathf.Sin(angle);
+            return p =>
+            {
+                var d = p - center;
+                return unrotated(center + new Vector2(d.x * cos - d.y * sin, d.x * sin + d.y * cos));
+            };
+        }
+
+        private static Func<Vector2, float> BuildUnrotatedSdfFunc(ShapePrimitive s)
+        {
             switch (s.prim)
             {
                 case "circle":
@@ -441,6 +460,18 @@ namespace MapGenAI.MapGen
         public float[][] verts; // vertices (tri, poly)
         public float rot;       // rotation degrees
 
+        public ShapePrimitive Clone()
+        {
+            var copy = (ShapePrimitive)MemberwiseClone();
+            copy.center = center == null ? null : (float[])center.Clone();
+            if (verts != null)
+            {
+                copy.verts = new float[verts.Length][];
+                for (int i=0;i<verts.Length;i++) copy.verts[i] = verts[i] == null ? null : (float[])verts[i].Clone();
+            }
+            return copy;
+        }
+
         public Vector2 GetCenter()
         {
             if (center != null && center.Length >= 2)
@@ -473,5 +504,6 @@ namespace MapGenAI.MapGen
         public float e;        // elevation (final op)
         public float f = 0.05f;// falloff radius
         public string fill;    // terrain fill: water, sand, soil, rich_soil, marsh, mud, ice
+        public ComposeOp Clone() => (ComposeOp)MemberwiseClone();
     }
 }

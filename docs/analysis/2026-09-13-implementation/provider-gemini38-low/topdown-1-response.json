@@ -1,0 +1,42 @@
+{
+  "view": "top_down",
+  "candidates": [
+    {
+      "title": "기하학적 지형 배치",
+      "notes": "녹색 배경은 토양(soil)으로 설정했습니다. 좌측 상단의 짙은 갈색 사각형 영역은 산지 또는 암석 지형(mountain)으로 해석하였으며, 우측 하단의 파란색 사각형은 물(water) 영역 및 그 내부의 중앙 토양 섬(soil island)으로 구현했습니다.",
+      "background": "soil",
+      "regions": [
+        {
+          "id": "northwest_mountain",
+          "label": "mountain",
+          "vertices": [
+            [0.06, 0.61],
+            [0.31, 0.61],
+            [0.31, 0.91],
+            [0.06, 0.91]
+          ]
+        },
+        {
+          "id": "southeast_water_body",
+          "label": "water",
+          "vertices": [
+            [0.51, 0.09],
+            [0.91, 0.09],
+            [0.91, 0.49],
+            [0.51, 0.49]
+          ]
+        },
+        {
+          "id": "island_in_water",
+          "label": "soil",
+          "vertices": [
+            [0.66, 0.23],
+            [0.77, 0.23],
+            [0.77, 0.35],
+            [0.66, 0.35]
+          ]
+        }
+      ]
+    }
+  ]
+}

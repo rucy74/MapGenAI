@@ -1,0 +1,1 @@
+{"action":"generate","description":"Set ancient danger density to 1.8, keeping existing terrain and ruin density.","params":{"danger_density":1.8}}

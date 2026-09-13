@@ -1,0 +1,7 @@
+{
+  "action": "generate",
+  "description": "Keep existing terrain unchanged and set ancient danger density to 1.8.",
+  "params": {
+    "danger_density": 1.8
+  }
+}

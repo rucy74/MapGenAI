@@ -1,0 +1,146 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
+namespace MapGenAI.MapGen
+{
+    // Bounds also cap SDF expression depth/work before any terrain or world state is changed.
+    public static class ShapeValidation
+    {
+        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite" };
+        static readonly HashSet<string> Fills = new HashSet<string> { "water", "sand", "soil", "rich_soil", "marsh", "mud", "ice" };
+        const string Positions = "center,top_left,top,top_right,left,right,bottom_left,bottom,bottom_right";
+
+        public static void Validate(ElevationShape shape)
+        {
+            if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
+            if (shape.id != null) Id(shape.id);
+            Fill(shape.fill);
+            if (!string.IsNullOrEmpty(shape.fill) && shape.type != "bump" && shape.type != "ring" && shape.type != "composite")
+                throw new FormatException("This terrain type cannot apply fill: " + shape.type);
+            Semantic(shape.direction, "left,right,top,bottom,top_left,top_right,bottom_left,bottom_right", 0, 360, "direction");
+            Semantic(shape.strength, "weak,medium,strong,negative_weak,negative_medium,negative_strong", -2, 2, "strength");
+            Semantic(shape.size, "small,medium,large", .001f, 1, "size");
+            Semantic(shape.gap, "tiny,small,medium,large", .001f, .5f, "gap");
+            Semantic(shape.fade, "small,medium,large", .001f, 1, "fade");
+            Semantic(shape.noise_amount, "none,low,medium,high", 0, 1.5f, "noise_amount");
+            if (shape.position != null && !Positions.Split(',').Contains(shape.position))
+            {
+                var pair = shape.position.Trim('[',']',' ').Split(',');
+                if (pair.Length != 2) throw new FormatException("Invalid terrain position");
+                ShapeEdits.ValidatePair(pair.Select(Number).ToArray());
+            }
+            if (shape.type != "composite") return;
+            if (shape.compositeShapes == null || shape.compositeShapes.Count == 0 || shape.compositeShapes.Count > 32)
+                throw new FormatException("Composite requires 1 to 32 primitives");
+            if (shape.compositeOps == null || shape.compositeOps.Count == 0 || shape.compositeOps.Count > 32)
+                throw new FormatException("Composite requires 1 to 32 operations");
+            var cost = new Dictionary<string, int>();
+            foreach (var part in shape.compositeShapes)
+            {
+                if (part == null) throw new FormatException("Null primitive");
+                Id(part.id);
+                if (cost.ContainsKey(part.id)) throw new FormatException("Duplicate primitive ID: " + part.id);
+                cost[part.id] = 1;
+                if (part.center != null) ShapeEdits.ValidatePair(part.center);
+                Range(part.rot, -360, 360, "rotation");
+                switch (part.prim)
+                {
+                    case "circle": Range(part.r, .001f, 1, "radius"); break;
+                    case "star":
+                        Range(part.r, .001f, 1, "radius"); Range(part.r2, 0, part.r, "inner radius");
+                        if (part.n != 0 && (part.n < 3 || part.n > 32)) throw new FormatException("Star points must be 3 to 32");
+                        break;
+                    case "rect": case "ellipse":
+                        Range(part.w, .001f, 2, "width"); Range(part.h, .001f, 2, "height"); break;
+                    case "heart": Range(part.size, 0, 1, "heart size"); break;
+                    case "tri": case "poly": ValidatePolygon(part.verts, part.prim == "tri"); break;
+                    default: throw new FormatException("Unknown primitive: " + part.prim);
+                }
+            }
+            bool renders = false;
+            foreach (var op in shape.compositeOps)
+            {
+                if (op == null) throw new FormatException("Null composite operation");
+                int work;
+                switch (op.op)
+                {
+                    case "add": work = Cost(cost, op.s); break;
+                    case "union": case "inter": work = Cost(cost, op.a) + Cost(cost, op.b); break;
+                    case "sub": work = Cost(cost, op.a) + Cost(cost, op.from); break;
+                    default: throw new FormatException("Unknown composite operation: " + op.op);
+                }
+                // Repeated unions of the same prior result otherwise grow exponentially per cell.
+                if (work > 128) throw new FormatException("Composite expression is too complex");
+                if (!string.IsNullOrEmpty(op.outId))
+                {
+                    Id(op.outId);
+                    if (cost.ContainsKey(op.outId)) throw new FormatException("Composite output ID already exists: " + op.outId);
+                    cost[op.outId] = work;
+                }
+                Range(op.k, 0, .5f, "blend radius"); Range(op.f, .001f, .5f, "falloff"); Range(op.e, -2, 2, "elevation");
+                Fill(op.fill);
+                renders |= op.e != 0 || !string.IsNullOrEmpty(op.fill);
+            }
+            if (!renders) throw new FormatException("Composite has no terrain-producing operation");
+        }
+
+        static int Cost(Dictionary<string,int> cost, string id)
+        {
+            if (id == null || !cost.TryGetValue(id, out var result)) throw new FormatException("Missing composite operand: " + id);
+            return result;
+        }
+        static void ValidatePolygon(float[][] vertices, bool triangle)
+        {
+            if (vertices == null || vertices.Length < 3 || vertices.Length > 64 || (triangle && vertices.Length != 3)) throw new FormatException("Invalid polygon vertex count");
+            double area = 0;
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                var a = vertices[i]; var b = vertices[(i+1) % vertices.Length];
+                ShapeEdits.ValidatePair(a); ShapeEdits.ValidatePair(b);
+                if (a[0] == b[0] && a[1] == b[1]) throw new FormatException("Polygon has a zero-length edge");
+                area += a[0] * b[1] - b[0] * a[1];
+            }
+            if (Math.Abs(area) < .000001) throw new FormatException("Polygon has zero area");
+            for(int i=0;i<vertices.Length;i++) for(int j=i+1;j<vertices.Length;j++)
+            {
+                if(j==i+1 || (i==0 && j==vertices.Length-1)) continue;
+                if(Intersects(vertices[i],vertices[(i+1)%vertices.Length],vertices[j],vertices[(j+1)%vertices.Length]))
+                    throw new FormatException("Polygon has intersecting edges");
+            }
+        }
+        static bool Intersects(float[] a,float[] b,float[] c,float[] d)
+        {
+            if(Math.Max(a[0],b[0]) < Math.Min(c[0],d[0]) || Math.Max(c[0],d[0]) < Math.Min(a[0],b[0]) ||
+               Math.Max(a[1],b[1]) < Math.Min(c[1],d[1]) || Math.Max(c[1],d[1]) < Math.Min(a[1],b[1])) return false;
+            return Cross(a,b,c)*Cross(a,b,d)<=0 && Cross(c,d,a)*Cross(c,d,b)<=0;
+        }
+        static double Cross(float[] a,float[] b,float[] c) => ((double)b[0]-a[0])*(c[1]-a[1])-((double)b[1]-a[1])*(c[0]-a[0]);
+        static void Id(string id)
+        {
+            if (string.IsNullOrEmpty(id) || id.Length > 64 || id.Any(c => !(char.IsLetterOrDigit(c) || c == '_' || c == '-')))
+                throw new FormatException("Invalid terrain ID");
+        }
+        static void Fill(string fill)
+        {
+            if (!string.IsNullOrEmpty(fill) && !Fills.Contains(fill)) throw new FormatException("Unknown terrain fill: " + fill);
+        }
+        static float Number(string value)
+        {
+            if (!float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var number) || float.IsNaN(number) || float.IsInfinity(number))
+                throw new FormatException("Invalid terrain number: " + value);
+            return number;
+        }
+        static void Semantic(string value, string names, float min, float max, string label)
+        {
+            if (value == null || names.Split(',').Contains(value)) return;
+            Range(Number(value), min, max, label);
+        }
+        public static void Range(float value, float min, float max, string label)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value) || value < min || value > max)
+                throw new FormatException(label + " outside supported range " + min.ToString(CultureInfo.InvariantCulture) + ".." + max.ToString(CultureInfo.InvariantCulture));
+        }
+    }
+}

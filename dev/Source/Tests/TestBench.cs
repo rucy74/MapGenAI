@@ -569,10 +569,15 @@ class TestBench
     // === 메인 ===
     static async Task Main(string[] args)
     {
-        // 서브커맨드: dotnet run -- mdp → MdpApplyTests 실행
-        if (args.Length > 0 && args[0].Equals("mdp", StringComparison.OrdinalIgnoreCase))
+        if (args.Length == 0 || args[0].Equals("regression", StringComparison.OrdinalIgnoreCase) || args[0].Equals("mdp", StringComparison.OrdinalIgnoreCase))
         {
-            MdpApplyTests.RunAll();
+            CoreRegressionTests.RunAll();
+            return;
+        }
+        if (!args[0].Equals("live", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.Error.WriteLine("Usage: dotnet run -- [regression|live]");
+            Environment.ExitCode = 2;
             return;
         }
 

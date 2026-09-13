@@ -72,7 +72,7 @@ namespace MapGenAI
         {
             switch (p)
             {
-                case LLMProvider.Gemini:      return "gemini-2.5-flash";
+                case LLMProvider.Gemini:      return "gemini-3.8-flash";
                 case LLMProvider.OpenAI:      return "gpt-4o-mini";
                 case LLMProvider.DeepSeek:    return "deepseek-chat";
                 case LLMProvider.Grok:        return "grok-3-mini";

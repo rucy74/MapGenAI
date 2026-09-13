@@ -1,0 +1,42 @@
+{
+  "view": "top_down",
+  "candidates": [
+    {
+      "title": "단순 지형 평면도",
+      "notes": "제공된 범례에 따라 녹색 배경을 기본 토양(soil)으로 설정하고, 좌상단의 갈색 정사각 영역을 산(mountain)으로 지정했습니다. 우하단의 파란색 사각 수역(water) 내부에 위치한 작은 녹색 영역은 토양 섬(soil)으로 수역 위에 덮어씌워 배치했습니다.",
+      "background": "soil",
+      "regions": [
+        {
+          "id": "northwest_mountain",
+          "label": "mountain",
+          "vertices": [
+            [0.06, 0.61],
+            [0.31, 0.61],
+            [0.31, 0.91],
+            [0.06, 0.91]
+          ]
+        },
+        {
+          "id": "southeast_lake",
+          "label": "water",
+          "vertices": [
+            [0.51, 0.09],
+            [0.91, 0.09],
+            [0.91, 0.49],
+            [0.51, 0.49]
+          ]
+        },
+        {
+          "id": "lake_island",
+          "label": "soil",
+          "vertices": [
+            [0.66, 0.23],
+            [0.77, 0.23],
+            [0.77, 0.35],
+            [0.66, 0.35]
+          ]
+        }
+      ]
+    }
+  ]
+}

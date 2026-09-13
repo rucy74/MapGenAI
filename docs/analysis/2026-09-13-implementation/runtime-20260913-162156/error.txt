@@ -1,0 +1,5 @@
+System.InvalidOperationException: failure was injected after generation prefixes
+[Ref 4D78679C]
+  at MapGenAI.RuntimeProbe.RuntimeProbe.Require (System.Boolean condition, System.String label) [0x00009] in <6d7388911a6148fb9108dac063f6fbdb>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.FailureCleanupProbe (RimWorld.Planet.MapParent parent, MapGenAI.MapGen.TileMapState state) [0x00130] in <6d7388911a6148fb9108dac063f6fbdb>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.RunInWorld () [0x006f6] in <6d7388911a6148fb9108dac063f6fbdb>:0 

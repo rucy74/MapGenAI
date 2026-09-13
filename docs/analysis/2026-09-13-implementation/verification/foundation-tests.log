@@ -1,0 +1,59 @@
+PASS Unicode escapes decode
+PASS Truncated root rejected
+PASS Empty object array preserved
+PASS Duplicate keys rejected
+PASS Malformed array terminates
+PASS JSON grammar boundaries
+PASS Escaped text roundtrip
+PASS Gemini envelope preserves escaped Korean
+PASS Provider incomplete output rejected
+PASS OpenAI envelope ignores unrelated content
+PASS Command fences preserve completeness
+PASS Reset rejects pending and late replies
+PASS Generated parser corpus terminates and accepts only valid JSON
+PASS Adding hills preserves earlier hills
+PASS Unrelated edits preserve complete geometry
+PASS Empty and unknown patches are no-op
+PASS Explicit empty shapes clear without regeneration
+PASS Null and wrong-type patches rejected
+PASS River X and Z edits remain independent
+PASS Removed features persist and can be re-added
+PASS Contradictory feature patch leaves original intact
+PASS Composite clone does not share nested arrays or ops
+PASS Preset v2 preserves every state field and composite vertices
+PASS Legacy preset loads without inventing explicitly empty shapes
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Apply targets supplied tile and snapshot restores exactly
+PASS Targeted edits preserve unrelated geometry through repeated changes
+PASS Unknown target rejects entire multi-operation patch
+PASS Whole-list omission cannot accidentally delete existing terrain
+PASS Legacy IDs remain stable after the first targeted edit and preset reload
+PASS Auto hills removal keeps a custom lake
+PASS Prompt geometry uses parser-compatible composite fields
+PASS Relative positions are bounded and preserve target size
+PASS Invalid geometry cannot silently become default terrain
+PASS Exponential SDF operand reuse is rejected before rendering
+PASS SDF lake changes intended cells and leaves the distant terrain unchanged
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 2; 실제 타일 특징 / Tile features: +[B] −[]
+PASS Editing tile B and clearing cache do not revert tile A
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Island] −[Lake]
+PASS Rejected category conflict preserves state and actual features
+PASS World add failure restores metadata and leaves no successful state
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[B] −[A]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Original tile features survive edit remove undo and clear
+PASS Invalid tile cannot report an applied state
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS External feature additions and hilliness changes survive edits and clear
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Disabled baseline definitions do not lock tile editing
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 2
+PASS Generation uses its own tile snapshot despite UI selection changes
+CoreRegressionTests: 43 PASS / 0 FAIL

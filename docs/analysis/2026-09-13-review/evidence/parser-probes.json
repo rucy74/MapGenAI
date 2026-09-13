@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-09-13T14:17:50.757682+09:00",
+  "scope": "Synthetic adversarial inputs against unchanged v1.6 SimpleJson.cs; not live traffic frequency or in-game validation.",
+  "build_exit": 0,
+  "normal_exit": 0,
+  "normal_stdout": "CONTROL action=generate shapes=1\nEMPTY_ARRAY objectArrayNull=True primitiveArrayCount=0\nTRUNCATED strictRejected=True modAction=generate modHillAmount=1.2\nUNICODE expected=한글 actual=uD55CuAE00 equal=False\n",
+  "malformed_array": {
+    "timed_out": true,
+    "timeout_seconds": 2,
+    "process_killed": true
+  }
+}

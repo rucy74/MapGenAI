@@ -91,6 +91,9 @@ namespace MapGenAI.Patches
             }
         }
 
+        [HarmonyPriority(Priority.Low)]
+        static void Finalizer() => Postfix();
+
         static void Postfix()
         {
             // 원본 복원 (GenStepDef는 공유 데이터이므로 반드시 복원)

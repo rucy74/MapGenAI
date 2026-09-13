@@ -1,0 +1,145 @@
+{
+  "prepared_at": "2026-09-13T14:26:49.427352+09:00",
+  "commit": "1439bbdfac7601f6c668be49681f7d8f6073af09",
+  "branch": "dev",
+  "archive_ref": "experiment/image-to-heightmap",
+  "archive_commit": "8c244555deb3097c606c6523beb8dcaabab25bde",
+  "comments_source": "https://steamcommunity.com/sharedfiles/filedetails/comments/3685385453",
+  "comments_retrieved_at": "2026-09-13T14:13:32.057258+09:00",
+  "comments_count": 14,
+  "comments_provenance": [
+    {
+      "id": "590687864233179841",
+      "author": "我是雷电将军的狗",
+      "timestamp": 1787756345,
+      "date_display": "26 Aug @ 7:59am",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_590687864233179841",
+      "date_title": "26 August, 2026 @ 7:59:05 am PDT",
+      "date_kst": "2026-08-26T23:59:05+09:00"
+    },
+    {
+      "id": "797841122761293366",
+      "author": "Nil",
+      "timestamp": 1776129175,
+      "date_display": "13 Apr @ 6:12pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797841122761293366",
+      "date_title": "13 April, 2026 @ 6:12:55 pm PDT",
+      "date_kst": "2026-04-14T10:12:55+09:00"
+    },
+    {
+      "id": "797839944586499775",
+      "author": "smartboy1122",
+      "timestamp": 1774968934,
+      "date_display": "31 Mar @ 7:55am",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797839944586499775",
+      "date_title": "31 March, 2026 @ 7:55:34 am PDT",
+      "date_kst": "2026-03-31T23:55:34+09:00"
+    },
+    {
+      "id": "797839944586488464",
+      "author": "Nil",
+      "timestamp": 1774955988,
+      "date_display": "31 Mar @ 4:19am",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797839944586488464",
+      "date_title": "31 March, 2026 @ 4:19:48 am PDT",
+      "date_kst": "2026-03-31T20:19:48+09:00"
+    },
+    {
+      "id": "797839675763123631",
+      "author": "smartboy1122",
+      "timestamp": 1774775745,
+      "date_display": "29 Mar @ 2:15am",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797839675763123631",
+      "date_title": "29 March, 2026 @ 2:15:45 am PDT",
+      "date_kst": "2026-03-29T18:15:45+09:00"
+    },
+    {
+      "id": "797839675763029869",
+      "author": "Rururtya",
+      "timestamp": 1774676901,
+      "date_display": "27 Mar @ 10:48pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797839675763029869",
+      "date_title": "27 March, 2026 @ 10:48:21 pm PDT",
+      "date_kst": "2026-03-28T14:48:21+09:00"
+    },
+    {
+      "id": "797839165142136004",
+      "author": "Nil",
+      "timestamp": 1774136101,
+      "date_display": "21 Mar @ 4:35pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797839165142136004",
+      "date_title": "21 March, 2026 @ 4:35:01 pm PDT",
+      "date_kst": "2026-03-22T08:35:01+09:00"
+    },
+    {
+      "id": "797838866430321135",
+      "author": "smartboy1122",
+      "timestamp": 1774066102,
+      "date_display": "20 Mar @ 9:08pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838866430321135",
+      "date_title": "20 March, 2026 @ 9:08:22 pm PDT",
+      "date_kst": "2026-03-21T13:08:22+09:00"
+    },
+    {
+      "id": "797838866430230645",
+      "author": "Nil",
+      "timestamp": 1773978046,
+      "date_display": "19 Mar @ 8:40pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838866430230645",
+      "date_title": "19 March, 2026 @ 8:40:46 pm PDT",
+      "date_kst": "2026-03-20T12:40:46+09:00"
+    },
+    {
+      "id": "797838866430128206",
+      "author": "CzarGopnik",
+      "timestamp": 1773879495,
+      "date_display": "18 Mar @ 5:18pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838866430128206",
+      "date_title": "18 March, 2026 @ 5:18:15 pm PDT",
+      "date_kst": "2026-03-19T09:18:15+09:00"
+    },
+    {
+      "id": "797838866430113591",
+      "author": "Chicken",
+      "timestamp": 1773866703,
+      "date_display": "18 Mar @ 1:45pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838866430113591",
+      "date_title": "18 March, 2026 @ 1:45:03 pm PDT",
+      "date_kst": "2026-03-19T05:45:03+09:00"
+    },
+    {
+      "id": "797838802067414851",
+      "author": "smartboy1122",
+      "timestamp": 1773758584,
+      "date_display": "17 Mar @ 7:43am",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838802067414851",
+      "date_title": "17 March, 2026 @ 7:43:04 am PDT",
+      "date_kst": "2026-03-17T23:43:04+09:00"
+    },
+    {
+      "id": "797838547624338896",
+      "author": "Kokorocodon",
+      "timestamp": 1773705369,
+      "date_display": "16 Mar @ 4:56pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838547624338896",
+      "date_title": "16 March, 2026 @ 4:56:09 pm PDT",
+      "date_kst": "2026-03-17T08:56:09+09:00"
+    },
+    {
+      "id": "797838547624272916",
+      "author": "刀刀闪",
+      "timestamp": 1773640853,
+      "date_display": "15 Mar @ 11:00pm",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453#comment_797838547624272916",
+      "date_title": "15 March, 2026 @ 11:00:53 pm PDT",
+      "date_kst": "2026-03-16T15:00:53+09:00"
+    }
+  ],
+  "source_sha256": "31d8c44045ad78c3b9b90f0472ef35522e6eac364f6aa676acc9ce6307f9c927",
+  "probe_source_sha256": "31d8c44045ad78c3b9b90f0472ef35522e6eac364f6aa676acc9ce6307f9c927",
+  "dll_sha256": {
+    "dev": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6",
+    "dist": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6",
+    "installed": "371939200b78156211f0f8c658d88110d801f9cde633489e7af9fd33f48e9cd6"
+  }
+}
