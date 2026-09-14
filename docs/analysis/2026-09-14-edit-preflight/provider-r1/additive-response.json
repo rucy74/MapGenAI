@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 온천을 유지하고 화창함 날씨 특징을 추가합니다.","params":{"mutators":["SunnyMutator"]}}

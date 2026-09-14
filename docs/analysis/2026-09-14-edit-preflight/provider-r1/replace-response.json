@@ -1,0 +1,1 @@
+{"action":"generate","description":"온천을 제거하고 연못 특징을 추가합니다.","params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}}

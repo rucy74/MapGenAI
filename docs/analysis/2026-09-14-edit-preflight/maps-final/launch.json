@@ -1,0 +1,9 @@
+{
+  "probeDllSha256": "B4AD7C5371B2BB683713E4C69F225ABC33A767164127806AD34607371CA1A949",
+  "pid": 42584,
+  "created": "2026-09-14T23:58:41.4513792+09:00",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260914-235841",
+  "sourceDllSha256": "77AD21C9C89F4A4CD6CB753694A9DDC3BFDA871BB62C7F9D33E8AEDAF444C636",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260914-235841",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-14-edit-preflight\\maps-final"
+}

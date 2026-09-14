@@ -23,6 +23,30 @@ static class WorldStateTests
     }
     public static void RunAll()
     {
+        Check("Dry-run validation detects category and override conflicts without changing world state or warnings",()=>
+        {
+            Setup();var tile=Find.WorldGrid[1];Apply(1,"{\"mutators\":[\"Lake\"],\"fertility_offset\":0.2}");
+            var wc=MapGenAIWorldComponent.Get();string state=MapStateCodec.Serialize(MapGenParams.CaptureState(1));
+            string baseline=SimpleJson.Serialize(wc.GetBaseline(1)),applied=SimpleJson.Serialize(wc.GetLastApplied(1)),changes=MapGenParams.LastWorldChanges;
+            foreach(string incoming in new[]{"Island","A"})
+            {
+                if(incoming=="A")DefDatabase<TileMutatorDef>.Definitions[incoming].overrideCategories.Add("Lake");
+                Throws(()=>MapGenParams.ValidatePatch(MapParameterParser.Parse(SimpleJson.Parse("{\"mutators\":[\""+incoming+"\"],\"fertility_offset\":0.6}")),1));
+                Equal(state,MapStateCodec.Serialize(MapGenParams.CaptureState(1)));Equal("Lake",tile.Mutators.Single().defName);Equal(changes,MapGenParams.LastWorldChanges);
+                Equal(baseline,SimpleJson.Serialize(wc.GetBaseline(1)));Equal(applied,SimpleJson.Serialize(wc.GetLastApplied(1)));
+            }
+            MapGenParams.ValidatePatch(MapParameterParser.Parse(SimpleJson.Parse("{\"mutators\":[\"Island\"],\"remove_mutators\":[\"Lake\"]}")),1);
+            Equal(state,MapStateCodec.Serialize(MapGenParams.CaptureState(1)));Equal("Lake",tile.Mutators.Single().defName);
+            Apply(1,"{\"mutators\":[\"Island\"],\"remove_mutators\":[\"Lake\"]}");Equal("Island",tile.Mutators.Single().defName);
+        });
+        Check("Dry-run validates geometry material and geographic constraints before any partial change",()=>
+        {
+            Setup();string before=MapStateCodec.Serialize(MapGenParams.CaptureState(1));
+            foreach(string bad in new[]{"{\"coast_direction\":\"east\",\"fertility_offset\":0.5}","{\"mutators\":[\"MissingModFeature\"]}","{\"shape_ops\":[{\"op\":\"remove\",\"id\":\"missing\"}]}"})
+            {
+                Throws(()=>MapGenParams.ValidatePatch(MapParameterParser.Parse(SimpleJson.Parse(bad)),1));Equal(before,MapStateCodec.Serialize(MapGenParams.CaptureState(1)));
+            }
+        });
         Check("Explicit native hot springs allow flat biomes but retain river and shore constraints",()=>
         {
             Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.hilliness=RimWorld.Hilliness.Flat;

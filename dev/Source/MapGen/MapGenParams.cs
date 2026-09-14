@@ -315,6 +315,22 @@ namespace MapGenAI.MapGen
             FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
             UpgradeStoredFeaturePolicy(tileId);
             var previous = MapGenAIWorldComponent.Get()?.GetState(tileId);
+            var candidate = BuildPatchCandidate(previous, data);
+            if (MapStateCodec.ChangedFields(previous ?? new TileMapState(), candidate).Count == 0) return;
+            CommitState(candidate, tileId);
+        }
+
+        // UI-thread dry run: same request, state, material and world planning checks as application.
+        // No metadata/cache/preview/warning/Undo changes; the candidate is a private clone.
+        public static void ValidatePatch(MapParamsData data, int tileId)
+        {
+            WorldTileEditor.ValidateFeatureRequest(data);
+            FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
+            CommitState(BuildPatchCandidate(MapGenAIWorldComponent.Get()?.GetState(tileId), data), tileId, true);
+        }
+
+        private static TileMapState BuildPatchCandidate(TileMapState previous, MapParamsData data)
+        {
             var candidate = MapStateEditor.Merge(previous, data);
             if (data.mutators != null)
                 foreach (var name in data.mutators)
@@ -323,8 +339,7 @@ namespace MapGenAI.MapGen
                     if (feature != null && feature.categories.Any(candidate.removeFeatureCategories.Contains))
                         throw new System.FormatException("Feature category is suppressed. Include restore_categories to enable: " + name);
                 }
-            if (MapStateCodec.ChangedFields(previous ?? new TileMapState(), candidate).Count == 0) return;
-            CommitState(candidate, tileId);
+            return candidate;
         }
 
         public static void RestoreSnapshot(TileMapState snapshot, int tileId)
@@ -335,7 +350,7 @@ namespace MapGenAI.MapGen
             CommitState(snapshot.Clone(), tileId);
         }
 
-        private static void CommitState(TileMapState candidate, int tileId)
+        private static void CommitState(TileMapState candidate, int tileId, bool validateOnly = false)
         {
             MapStateValidation.Validate(candidate);
             TerrainMaterials.Validate(candidate);
@@ -352,7 +367,7 @@ namespace MapGenAI.MapGen
             if (missing.Count > 0)
             {
                 candidate.mutators.RemoveAll(missing.Contains);
-                LastApplyWarning = "비활성 모드의 특징 생략 / Unavailable features omitted: " + string.Join(", ", missing);
+                if (!validateOnly) LastApplyWarning = "비활성 모드의 특징 생략 / Unavailable features omitted: " + string.Join(", ", missing);
             }
             // A concurrent removal of one of our features must not be silently undone.
             if (lastApplied != null && previous != null)
@@ -362,6 +377,7 @@ namespace MapGenAI.MapGen
                     throw new System.FormatException("다른 작업에서 제거한 특징과 충돌합니다. 해당 특징을 remove_mutators로 먼저 해제하세요. / A feature was removed externally; remove it from this plan before editing.");
             }
             var desired = WorldTileEditor.Plan(tile, baseline, candidate);
+            if (validateOnly) return;
             var previousCacheTile = CurrentTileId;
             bool previousCacheActive = HasParams;
             try

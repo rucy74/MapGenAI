@@ -1,0 +1,19 @@
+{
+  "created": "2026-09-15T00:01:57.766474+09:00",
+  "baseCommit": "eac097e93ac9b9b1fc9a55e54b10fa057f726f2b",
+  "sourceDllSha256": "77ad21c9c89f4a4cd6cb753694a9ddc3bfda871bb62c7f9d33e8aedaf444c636",
+  "offlineTests": 110,
+  "nativeChecks": 162,
+  "catalogEntriesChecked": 107,
+  "fullMaps": 5,
+  "backgroundPreviews": 1,
+  "providerCases": 6,
+  "filesChecked": 159,
+  "secretMatches": 0,
+  "preservedRefs": {
+    "main": "6ece1a4cc842debb52d1590e57b8e689e4fac57d",
+    "v1.6": "0967e2442deacd690b4771682406d01545e3d128",
+    "dev-text-baseline-2026-09-14": "02115976a3069deb687fb72e65ba90b47a620586"
+  },
+  "limits": "Catalog agreement is not full generation for all features. Language interpretation remains model-dependent. Known configured secrets and common key patterns scanned."
+}

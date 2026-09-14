@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="../../dev/Source/Tests/TextToMap.Tests.csproj" />
     <Compile Include="../../dev/Source/LLM/ILLMClient.cs" Link="ILLMClient.cs" />
+    <Compile Include="../../dev/Source/LLM/InvalidEditExplanation.cs" Link="InvalidEditExplanation.cs" />
     <Compile Include="../../dev/Source/LLM/GeminiClient.cs" Link="GeminiClient.cs" />
     <Compile Include="../../dev/Source/LLM/OpenAIClient.cs" Link="OpenAIClient.cs" />
     <Compile Include="../../dev/Source/LLM/LocalClient.cs" Link="LocalClient.cs" />

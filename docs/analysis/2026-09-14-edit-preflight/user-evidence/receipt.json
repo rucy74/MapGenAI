@@ -1,0 +1,6 @@
+{
+  "time": "2026-09-14T23:55:43.509469+09:00",
+  "sourceLogSha256": "3b30b8f3e74dd9088edc7cbd9785079cbe47848582787cd6f87cd43bfb8059f4",
+  "user": "이런 거 일일이 하나하나 다 발견하면서 수정할 수밖에 없나?",
+  "finding": "Model offered Pond OR direct water/sand; after yes sent both, rejected by HotSprings/Pond conflict. Existing state unchanged."
+}

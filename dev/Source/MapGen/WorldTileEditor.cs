@@ -57,7 +57,7 @@ namespace MapGenAI.MapGen
             for (int i = 0; i < additions.Count; i++)
                 for (int j = i + 1; j < additions.Count; j++)
                     if (Conflict(additions[i], additions[j]))
-                        throw new FormatException("함께 적용할 수 없는 특징 / Incompatible features: " + additions[i].defName + ", " + additions[j].defName + ". remove_mutators로 교체할 대상을 지정하세요.");
+                        throw new FormatException("함께 사용할 수 없는 지형 특징입니다: " + FeatureName(additions[i]) + ", " + FeatureName(additions[j]) + ". 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.");
             var removals = new HashSet<string>(state.removeMutators);
             if (state.cavesExplicitlySet && !state.hasCaves) removals.Add("Caves");
             var result = ResolveExisting(baseline.mutators).Where(d => !removals.Contains(d.defName) && !d.categories.Any(suppressed.Contains)).ToList();
@@ -102,8 +102,9 @@ namespace MapGenAI.MapGen
             }
         }
 
-        static bool Conflict(TileMutatorDef a, TileMutatorDef b) => a.categories.Any(b.categories.Contains)
-            || a.overrideCategories.Any(b.categories.Contains) || b.overrideCategories.Any(a.categories.Contains);
+        public static string FeatureName(TileMutatorDef feature) => string.IsNullOrEmpty(feature.label) ? feature.defName : feature.label + " (" + feature.defName + ")";
+        public static bool Conflict(TileMutatorDef a, TileMutatorDef b) => a.defName != b.defName && (a.categories.Any(b.categories.Contains)
+            || a.overrideCategories.Any(b.categories.Contains) || b.overrideCategories.Any(a.categories.Contains));
 
         static TileMutatorDef Resolve(string name) => DefDatabase<TileMutatorDef>.GetNamedSilentFail(name)
             ?? throw new FormatException("Feature is unavailable in the active mod list: " + name);

@@ -1,0 +1,1 @@
+함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.

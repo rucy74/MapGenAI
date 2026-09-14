@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙에 연못 특징과 오아시스 형태의 물 웅덩이 및 모래 지형 생성","params":{"mutators":["Pond"],"shape_ops":[{"op":"add","shape":{"id":"oasis_water","type":"bump","position":"center","size":"small","strength":"negative_strong","fill":"water"}},{"op":"add","shape":{"id":"oasis_sand","type":"ring","position":"center","size":0.22,"strength":"weak","fill":"sand"}}]}}

@@ -31,6 +31,8 @@ namespace MapGenAI.UI
         private TileMapState _initialSnapshot; // dialog 열릴 때 저장
 
         private readonly RequestGate _requests = new RequestGate();
+        private Action<string,string> _explainInvalidReply;
+        private bool _explanationOnly;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -51,6 +53,7 @@ namespace MapGenAI.UI
         {
             var tile = tileId < 0 ? null : Find.WorldGrid?[tileId];
             var available = new System.Text.StringBuilder();
+            var replacements = new System.Text.StringBuilder();
             var unavailable = new System.Text.StringBuilder();
             foreach (var feature in DefDatabase<TileMutatorDef>.AllDefsListForReading)
             {
@@ -59,9 +62,25 @@ namespace MapGenAI.UI
                 string identity = feature.defName + " (" + feature.label + ")";
                 if (reason != null) unavailable.AppendLine(identity + ": " + reason);
                 else if (!VanillaAutoMutators.Contains(feature.defName))
-                    available.AppendLine(identity + " [" + string.Join(",", feature.categories) + "]: " + feature.description);
+                {
+                    // Base world connections may be represented by a compatible variant (e.g. RiverDelta).
+                    // They must never be proposed as remove_mutators targets.
+                    var conflicts = tile.Mutators.Where(old => !VanillaAutoMutators.Contains(old.defName) && WorldTileEditor.Conflict(old,feature)).ToList();
+                    string entry=identity + " [" + string.Join(",", feature.categories) + "] overrides=[" + string.Join(",",feature.overrideCategories) + "]";
+                    if(conflicts.Count>0) replacements.AppendLine(entry + ": requires replacing " + string.Join(", ",conflicts.Select(WorldTileEditor.FeatureName)));
+                    else
+                    {
+                        try
+                        {
+                            MapGenParams.ValidatePatch(MapParameterParser.Parse(SimpleJson.Parse("{\"mutators\":[\""+feature.defName+"\"]}")),tileId);
+                            available.AppendLine(entry + ": " + feature.description);
+                        }
+                        catch(FormatException error){unavailable.AppendLine(identity+": "+error.Message);}
+                    }
+                }
             }
-            return "Available feature additions (category replacement may require remove_mutators):\n" + available
+            return "Addable while preserving the current features (checked against the current plan):\n" + available
+                + "\nReplacement required — NOT an additive alternative. Ask which existing feature to replace unless the user already explicitly chose it; include remove_mutators for that choice:\n" + replacements
                 + "\nUnavailable additions on this tile — explain the reason with action:ask; never substitute silently:\n" + unavailable;
         }
 
@@ -372,7 +391,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         }
 
-        public override void DoWindowContents(Rect inRect)
+        private void PollResponse()
         {
             var reply = _requests.Take();
             if (reply != null)
@@ -383,7 +402,11 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(reply.Error)));
                 else HandleResponse(reply.Text);
             }
+        }
 
+        public override void DoWindowContents(Rect inRect)
+        {
+            PollResponse();
             var font = Text.Font;
             if (Time.frameCount >= _nextAuthoringCheck)
             {
@@ -608,6 +631,21 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             var systemPrompt = BuildSystemPrompt(_openedTileId);
             _llmContext.Add(new ChatMessage("user", text));
             var historySnapshot = new List<ChatMessage>(_llmContext);
+            StartChat(clients,historySnapshot,systemPrompt,false);
+        }
+
+        // Only the provider call runs on a worker. Candidate planning and repair decisions stay on the UI thread.
+        private void StartChat(List<ILLMClient> clients,List<ChatMessage> historySnapshot,string systemPrompt,bool explanationOnly)
+        {
+            _explanationOnly=explanationOnly;
+            _explainInvalidReply=explanationOnly?null:(Action<string,string>)((rejected,reason)=>
+            {
+                var history=new List<ChatMessage>(historySnapshot);
+                history.Add(new ChatMessage("assistant",rejected));
+                history.Add(new ChatMessage("user",InvalidEditExplanation.Instruction(reason)));
+                _statusText=IsKorean()?"현재 설정과 맞지 않는 부분을 확인하고 있습니다…":"Checking the conflict with your current settings…";
+                StartChat(clients,history,BuildSystemPrompt(_openedTileId),true);
+            });
             var ticket = _requests.Begin();
             _isWaiting = true;
             _statusText = "MapGenAI_Requesting".Translate();
@@ -668,7 +706,19 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 }
                 else if (action == "generate")
                 {
-                    var data = ParseParams(parsed.GetObject("params"));
+                    if(_explanationOnly)throw new FormatException(IsKorean()?"충돌 안내 대신 다른 변경 명령을 받아 적용하지 않았습니다. 유지할 특징이나 교체할 특징을 명시해 주세요.":"Expected a conflict explanation; no alternative edit was applied. Specify which features to keep or replace.");
+                    MapParamsData data;
+                    try { data=ParseParams(parsed.GetObject("params"));MapGenParams.ValidatePatch(data,_openedTileId); }
+                    catch(FormatException invalid)
+                    {
+                        var explain=_explainInvalidReply;_explainInvalidReply=null;
+                        if(explain!=null)
+                        {
+                            Log.Warning("[MapGenAI] Edit preflight rejected; requesting one explanation without applying: "+invalid.Message);
+                            explain(response,invalid.Message);return;
+                        }
+                        throw;
+                    }
 
                     var warnings = new List<string>();
 
@@ -704,10 +754,12 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     _statusText = "";
                 }
                 else throw new FormatException("Unsupported response action: " + action);
+                _explainInvalidReply=null;
             }
             catch (Exception e)
             {
                 Log.Warning("[MapGenAI] Response rejected: " + e.Message);
+                _explainInvalidReply=null;
                 _history.Add(new ChatMessage("assistant",
                     (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";

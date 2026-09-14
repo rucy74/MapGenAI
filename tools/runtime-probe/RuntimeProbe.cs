@@ -121,6 +121,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIEditPreflight",out var editEvidence))
+                {GenCommandLine.TryGetCommandLineArg("mapgenAIEditReplies",out var editReplies);EditPreflightProbe.Run(output,editEvidence,editReplies);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIManualFailures",out var manualEvidence))
                 {
                     GenCommandLine.TryGetCommandLineArg("mapgenAIManualResponses",out var manualResponses);
@@ -315,6 +317,7 @@ namespace MapGenAI.RuntimeProbe
             AncientProbe.Tick();
             ManualFailureProbe.Tick();
             FeatureFeedbackProbe.Tick();
+            EditPreflightProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
             if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));

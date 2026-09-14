@@ -14,6 +14,7 @@
 - `dev/Source/MapGen/ContourWarp.cs`: composite 전용 `edge_roughness`(생략/none=0, low=.35, medium=.65, high=1). 도형 로컬 좌표와 안정 ID 해시로 공유 좌표장을 세 번 변형하며 전역 Rand를 소비하지 않는다. `noise_amount`/기존 bump·ring과 구별한다. `tools/runtime-probe/launch.ps1 -Render -NaturalShapes -Language Korean`은 실제 저장·Undo·생성 비교를 수행한다. 근거는 `docs/analysis/2026-09-13-natural-shapes/`.
 - `dev/Source/LLM/StructuredChat.cs`: 사용자 요청·상태·카탈로그를 유지한 채 형식 오류만 공급자별1회 재요청. strict parser/취소/원자적 적용은 유지한다. `FeatureFeedbackProbe`와 provider `feedback` 모드는 VLE 활성/비활성 특징·평지 온천·형식복구를 검사한다.
 - `dev/Source/MapGen/MapGenParams.cs`, `WorldTileEditor.cs`, `MapGenAIWorldComponent.cs`: 타일 상태 적용, 원래 월드 특징과 외부 변경 보존, 타일별 상태 저장.
+- `MapGenParams.ValidatePatch`는 적용과 같은 후보 병합·재료·월드 계획의 dry-run이다. Dialog 후보표도 현재 설정에서 이 검사를 사용하고 충돌/교체 대상을 구별한다. `InvalidEditExplanation`과 `StartChat`은 실패 명령을 UI thread에서 검사하고 한 번 ask 설명만 재요청하며 재요청 generate는 적용하지 않는다. `EditPreflightProbe`/provider `preflight`는 원본 온천/Pond 오류, 다중대안 동의, 임의교체 거부·닫기·Undo·로드된 후보표를 확인한다.
 - `dev/Source/MapGen/FeaturePolicy.cs`, `FeatureEditPrompt.cs`: 실제 Odyssey/외부 모드 정의·worker 조건을 프롬프트 후보와 적용/프리셋에 공유. 월드 River/Coast 연결은 보존하며 개별 변형 제거는 기본 연결로 복귀한다. 기존 저장의 전체 억제는 Load/생성 진입에서 이전한다. 확률·랜드마크 추첨 조건과 환경 조건을 구별한다. `-FeaturePolicy [-Landmarks] [-FeatureResponses 응답폴더]`로 실제 생성·Gemini 응답 재생을 검증한다. 이전 `-FeatureRemoval`도 현행 정책 검증으로 연결한다. [검증 보고서](docs/analysis/2026-09-13-feature-policy/report.md), [텍스트 우선 계획](docs/text-first-plan-ko.md).
 - `dev/Source/MapGen/RegionGrid.cs`, `TerrainMaterials.cs`: 기존 SDF/bump/ring이 산출한 내부 마스크·재료 층 공유, 활성 영구 TerrainDef 해석. 합성 도형의 최상위 fill은 렌더 영역 재료 override다. 강/바다/도로는 최종 채움에서 보호한다.
 - `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적 탐색, 좌표/영역/경계·최소 간격 제약, ruin/ancient_danger 분기. `SpatialRelation.cs`는 실제 강/물/산/영역 안쪽 경계의 정확한 유클리드 거리와 방향을 계산한다. 폐허는0/90/180/270도 회전한다. 공간 부족/대상 부재 시 위치 지정 batch는 미생성·실패 보고.
@@ -42,3 +43,4 @@
 ---
 ## 작성 이력
 - 2026-09-14 23:34 — 활성 모드 특징 자동 인식, 온천 직접 추가 조건, 제한된 JSON 형식 복구 안내.
+- 2026-09-15 00:01 — 현재 특징 조합 후보표와 적용 전 공통 검증·설명 재요청 안내.

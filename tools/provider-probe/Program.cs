@@ -23,6 +23,7 @@ class Program
         if(args[2]=="natural")return await NaturalTextBench.Run(client,args[3],output);
         if(args[2]=="manual")return await ManualFailureBench.Run(client,args[3],output);
         if(args[2]=="feedback")return await FeatureFeedbackBench.Run(client,args[3],output,args.Length>4?args[4]:null);
+        if(args[2]=="preflight")return await EditPreflightBench.Run(client,args[3],output,args[4]);
         if(args[2]=="regions")return await TextRegionBench.Run(client,args[3],output);
         if(args[2]=="compound")return await CompoundTextBench.Run(client,args[3],output);
         if(args[2]=="spatial")return await SpatialTextBench.Run(client,args[3],output);
