@@ -33,6 +33,10 @@ namespace MapGenAI.UI
         private readonly RequestGate _requests = new RequestGate();
         private Action<string,string> _explainInvalidReply;
         private bool _explanationOnly;
+        private List<RecommendationPlan> _recommendations;
+        private string _recommendationState;
+        private bool _recommendationsRequested, _recommendationRepairUsed;
+        private Action<string,string> _repairRecommendations;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -182,10 +186,11 @@ namespace MapGenAI.UI
 
             // 섹션 2: JSON 스키마
             string schema = isKo
-                ? @"반드시 아래 두 형식 중 하나의 JSON만 출력하세요.
+                ? @"반드시 아래 세 형식 중 하나의 JSON만 출력하세요.
 
 질문/안내: {""action"":""ask"",""message"":""내용""}
 맵 생성: {""action"":""generate"",""description"":""맵 설명"",""params"":{...}}
+추천: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}}]}
 
 params 스키마:
 {""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
@@ -228,10 +233,11 @@ elevation_shapes 가이드:
 - river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
 - straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
 - fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용."
-                : @"Output exactly one of these two JSON formats.
+                : @"Output exactly one of these three JSON formats.
 
 Question/guide: {""action"":""ask"",""message"":""content""}
 Map generation: {""action"":""generate"",""description"":""map description"",""params"":{...}}
+Recommendations: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}}]}
 
 params schema:
 {""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
@@ -335,17 +341,17 @@ Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""sou
                 fewShot = isKo
                     ? @"
 예시1) 유저: ""왼쪽에 산, 오른쪽 아래에 호수"" → {""action"":""generate"",""description"":""왼쪽 산+오른쪽 아래 호수"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-예시2) 유저: ""추천해줘"" → {""action"":""generate"",""description"":""해안가 자연 경관"",""params"":{""hills"":""edges"",""vegetation_density"":1.3,""coast_direction"":""auto""}}"
+예시2) 유저: ""추천해줘"" → {""action"":""recommend"",""options"":[{""params"":{""vegetation_density"":1.3}},{""params"":{""fertility_offset"":0.2}}]}"
                     : @"
 Ex1) ""Mountains left, lake bottom-right"" → {""action"":""generate"",""description"":""left mountains + lake"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coastal landscape"",""params"":{""hills"":""edges"",""vegetation_density"":1.3,""coast_direction"":""auto""}}";
+Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""params"":{""vegetation_density"":1.3}},{""params"":{""fertility_offset"":0.2}}]}";
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
             var outcome=AuthoringGeneration.Latest(tileId,MapGenParams.CaptureState(tileId));
             if(outcome?.issues.Count>0)currentParams += "\nLast generation failed: " + string.Join("\n",outcome.issues);
 
-            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo);
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + RecommendationPlan.Rules;
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
@@ -436,22 +442,32 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             Widgets.Label(titleRect, "MapGen AI");
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
-            var imageButton = new Rect(titleRect.xMax-145f,titleRect.y,140f,28f);
-            bool wasEnabled = GUI.enabled;
-            GUI.enabled = wasEnabled && MapGenAI.ImageInput.ImageFeatureGate.Enabled;
-            if (Widgets.ButtonText(imageButton,IsKorean()?"이미지 (일시 중단)":"Images (paused)"))
-                OpenImageMap();
-            GUI.enabled = wasEnabled;
-            TooltipHandler.TipRegion(imageButton, MapGenAI.ImageInput.ImageFeatureGate.Message);
+            if (MapGenAI.ImageInput.ImageFeatureGate.Enabled)
+            {
+                var imageButton = new Rect(titleRect.xMax-145f,titleRect.y,140f,28f);
+                if (Widgets.ButtonText(imageButton,IsKorean()?"이미지":"Images")) OpenImageMap();
+            }
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
-            float bottomReserve = InputHeight + 50f;
+            float choiceHeight = _recommendations == null ? 0f : 32f;
+            float bottomReserve = InputHeight + 50f + choiceHeight;
             var chatRect = new Rect(inRect.x, topOffset, inRect.width, inRect.height - topOffset - bottomReserve + inRect.y);
             DrawChat(chatRect);
 
             // 입력창 + 전송 버튼
-            var inputAreaY = chatRect.yMax + 8f;
+            if (_recommendations != null)
+            {
+                int count=_recommendations.Count;
+                for(int i=0;i<count;i++)
+                {
+                    float width=(inRect.width-6f*(count-1))/count;
+                    if(Widgets.ButtonText(new Rect(inRect.x+i*(width+6f),chatRect.yMax+4f,width,28f),
+                        IsKorean()?(i+1)+"번 적용":"Apply option "+(i+1)))
+                    { ApplyRecommendation(i+1); break; }
+                }
+            }
+            var inputAreaY = chatRect.yMax + choiceHeight + 8f;
             var inputRect = new Rect(inRect.x, inputAreaY, inRect.width - SendButtonWidth - 8f, InputHeight);
             var sendRect = new Rect(inputRect.xMax + 8f, inputAreaY, SendButtonWidth, InputHeight);
 
@@ -608,6 +624,20 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             if (text == "" || _isWaiting) return;
             _inputText = "";
             _history.Add(new ChatMessage("user", text));
+            if (_recommendations != null)
+            {
+                int selected=RecommendationPlan.Selection(text);
+                if(selected>0){ApplyRecommendation(selected);return;}
+                if(RecommendationPlan.IsAmbiguousAcceptance(text))
+                {
+                    if(_recommendations.Count==1){ApplyRecommendation(1);return;}
+                    _history.Add(new ChatMessage("assistant",IsKorean()?"적용할 번호를 선택해 주세요. 위 추천의 설정은 아직 적용하지 않았습니다.":"Choose an option number. The proposed settings have not been applied."));
+                    return;
+                }
+            }
+            ClearRecommendations();
+            _recommendationsRequested=RecommendationPlan.IsRequest(text);
+            _recommendationRepairUsed=false;
             var settings = MapGenAIMod.Settings;
             var clients = new List<ILLMClient>();
             try
@@ -638,6 +668,14 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         private void StartChat(List<ILLMClient> clients,List<ChatMessage> historySnapshot,string systemPrompt,bool explanationOnly)
         {
             _explanationOnly=explanationOnly;
+            _repairRecommendations=explanationOnly || _recommendationRepairUsed?null:(Action<string,string>)((rejected,reason)=>
+            {
+                _recommendationRepairUsed=true;
+                var history=new List<ChatMessage>(historySnapshot);
+                history.Add(new ChatMessage("assistant",rejected));
+                history.Add(new ChatMessage("user","The proposed options failed validation before display; nothing was applied. Correct all options against the current state and return action recommend. Do not remove existing features to bypass this error unless the original request explicitly asked for replacement. Reason: "+reason));
+                StartChat(clients,history,BuildSystemPrompt(_openedTileId),false);
+            });
             _explainInvalidReply=explanationOnly?null:(Action<string,string>)((rejected,reason)=>
             {
                 var history=new List<ChatMessage>(historySnapshot);
@@ -649,6 +687,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             var ticket = _requests.Begin();
             _isWaiting = true;
             _statusText = "MapGenAI_Requesting".Translate();
+            bool requireRecommendations=!explanationOnly && (_recommendationsRequested || _recommendationRepairUsed);
             Task.Run(async () =>
             {
                 string result=null, error=null;
@@ -667,7 +706,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                                 attempt.Add(new ChatMessage("user",StructuredChat.RepairInstruction));
                             }
                             return client.SendChatAsync(attempt,systemPrompt,token);
-                        },ticket.Token);
+                        },ticket.Token,requireRecommendations);
                         error=null;
                         break;
                     }
@@ -696,10 +735,39 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 var action = parsed.GetString("action");
                 Log.Message($"[MapGenAI] 파싱된 action: {action}");
 
-                if (action == "ask")
+                if (action == "recommend")
+                {
+                    if(_explanationOnly)throw new FormatException("Expected a conflict explanation, not new recommendations");
+                    try
+                    {
+                        var plans=RecommendationPlan.Validate(parsed,MapGenParams.CaptureState(_openedTileId),
+                            data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean());
+                        _recommendations=plans;_recommendationState=RecommendationState();
+                        string message=(IsKorean()?"현재 설정과 함께 적용할 수 있는 추천입니다. 번호를 선택하면 해당 설정을 적용합니다.":"These options are compatible with your current settings. Choose a number to apply its settings.");
+                        for(int i=0;i<plans.Count;i++)message+="\n\n"+(i+1)+". "+plans[i].Summary;
+                        if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
+                            message+=IsKorean()?"\n\n구조물의 실제 배치는 맵 생성 때 확인합니다.":"\n\nActual structure placement is checked during generation.";
+                        _history.Add(new ChatMessage("assistant",message));
+                        _llmContext.Add(new ChatMessage("assistant",response));_statusText="";
+                    }
+                    catch(FormatException error)
+                    {
+                        ClearRecommendations();
+                        var repair=_repairRecommendations;_repairRecommendations=null;
+                        if(repair!=null){Log.Warning("[MapGenAI] Recommendations rejected before display: "+error.Message);repair(response,error.Message);return;}
+                        throw;
+                    }
+                }
+                else if (action == "ask")
                 {
                     string askMsg = parsed.GetString("message");
                     if (string.IsNullOrWhiteSpace(askMsg)) throw new FormatException("Missing clarification message");
+                    if(RecommendationPlan.IsNumberedOffer(askMsg))
+                    {
+                        var repair=_repairRecommendations;_repairRecommendations=null;
+                        if(repair!=null){repair(response,"Numbered recommendations require executable options, not unvalidated prose");return;}
+                        throw new FormatException(IsKorean()?"실행할 설정이 없는 추천을 받았습니다. 추천을 다시 요청해 주세요.":"Recommendations lacked executable settings. Please request new options.");
+                    }
                     _history.Add(new ChatMessage("assistant", askMsg));
                     _llmContext.Add(new ChatMessage("assistant", askMsg)); // ask는 컨텍스트 유지
                     _statusText = "";
@@ -720,6 +788,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                         throw;
                     }
 
+                    ClearRecommendations();
                     var warnings = new List<string>();
 
                     var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
@@ -754,16 +823,39 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     _statusText = "";
                 }
                 else throw new FormatException("Unsupported response action: " + action);
-                _explainInvalidReply=null;
+                _explainInvalidReply=null;_repairRecommendations=null;
             }
             catch (Exception e)
             {
                 Log.Warning("[MapGenAI] Response rejected: " + e.Message);
-                _explainInvalidReply=null;
+                _explainInvalidReply=null;_repairRecommendations=null;
+                ClearRecommendations();
                 _history.Add(new ChatMessage("assistant",
                     (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";
             }
+        }
+
+        private void ClearRecommendations(){_recommendations=null;_recommendationState=null;}
+        private string RecommendationState()
+        {
+            var tile=Find.WorldGrid[_openedTileId];
+            return MapStateCodec.Serialize(MapGenParams.CaptureState(_openedTileId))+"|"+tile.PrimaryBiome.defName+"|"+tile.hilliness+"|"+
+                string.Join(",",tile.Mutators.Select(m=>m.defName).OrderBy(n=>n));
+        }
+        private void ApplyRecommendation(int number)
+        {
+            if(_closed || _isWaiting || _recommendations==null)return;
+            if(number<1 || number>_recommendations.Count)
+            { _history.Add(new ChatMessage("assistant",IsKorean()?"목록에 있는 번호를 선택해 주세요.":"Choose a number from the list."));return; }
+            if(RecommendationState()!=_recommendationState)
+            {
+                ClearRecommendations();_llmContext.Clear();
+                _history.Add(new ChatMessage("assistant",IsKorean()?"추천 후 현재 설정이 바뀌었습니다. 새 추천을 요청해 주세요.":"Settings changed after these options were prepared. Please request new recommendations."));return;
+            }
+            string command=_recommendations[number-1].Command;
+            ClearRecommendations();_explanationOnly=false;_explainInvalidReply=null;_repairRecommendations=null;
+            HandleResponse(command); // Reuses preflight, atomic apply and Undo; no new model request.
         }
 
         private MapParamsData ParseParams(SimpleJsonObject obj) => MapParameterParser.Parse(obj);
@@ -782,6 +874,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             var prev = _paramStack.Peek();
             if (!TryRestore(prev)) return;
             _paramStack.Pop();
+            ClearRecommendations();
             _paramsReady = prev != null;
             _llmContext.Clear();
 
@@ -791,6 +884,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
 
         private void DoReset()
         {
+            ClearRecommendations();
             _requests.Cancel();
             _isWaiting = false;
             _statusText = "";
@@ -852,6 +946,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                 _history.Add(new ChatMessage("assistant", "MapGenAI_PresetLoadFailed".Translate(presetName)));
                 return;
             }
+            ClearRecommendations();
             _requests.Cancel();
             _isWaiting=false;
             var before=MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
@@ -880,6 +975,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         private void OpenImageMap()
         {
             if (!MapGenAI.ImageInput.ImageFeatureGate.Enabled) { _statusText = MapGenAI.ImageInput.ImageFeatureGate.Message; return; }
+            ClearRecommendations();
             _requests.Cancel(); _isWaiting=false; _statusText="";
             var current=MapGenParams.CaptureState(_openedTileId);
             var features=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.LabelCap.ToString());
@@ -893,6 +989,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
             var updated=(before??new TileMapState()).Clone();updated.imageMap=image?.Clone();
             if(MapStateCodec.ChangedFields(before??new TileMapState(),updated).Count==0)return true;
             if(!TryRestore(updated))return false;
+            ClearRecommendations();
             _paramStack.Push(before);_paramsReady=true;_llmContext.Clear();
             _history.Add(new ChatMessage("assistant",MapStateDescription.Describe(before??new TileMapState(),MapGenParams.CaptureState(_openedTileId),IsKorean())+
                 (IsKorean()?"\nMap Preview에서 실제 생성 결과를 확인하세요.":"\nInspect the generated result in Map Preview.")));
@@ -920,6 +1017,7 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
         public override void PostClose()
         {
             _closed=true;
+            ClearRecommendations();
             _requests.Cancel();
             base.PostClose();
             if (!_keepParams && !TryRestore(_initialSnapshot))

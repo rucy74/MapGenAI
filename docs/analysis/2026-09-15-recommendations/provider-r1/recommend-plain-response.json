@@ -1,0 +1,1 @@
+{"action":"recommend","options":[{"params":{"mutators":["HotSprings","AncientRuins"],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"type":"radial","strength":"strong","size":"medium"}],"mutators":["MineralRich"]}},{"params":{"elevation_shapes":[{"type":"split","direction":"top_left","strength":"negative_strong","gap":"medium"}],"mutators":["UndergroundCave"]}}]}

@@ -1,0 +1,25 @@
+{
+  "action": "generate",
+  "description": "중앙에 온천과 자연스러운 연못이 있고 비옥한 토양이 풍부한 오아시스 정착지",
+  "params": {
+    "fertility_offset": 0.5,
+    "mutators": [
+      "HotSprings",
+      "Pond",
+      "ArcheanTrees"
+    ],
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "oasis_pond",
+          "type": "bump",
+          "position": "center",
+          "size": "small",
+          "strength": "negative_strong",
+          "fill": "water"
+        }
+      }
+    ]
+  }
+}

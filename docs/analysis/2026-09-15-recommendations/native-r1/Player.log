@@ -1,0 +1,106 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.076 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.421600 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260915-002711 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-15-recommendations\native-r1 -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-15-recommendations\native-r1\Player.log -mapgenAIProbeRender=true -mapgenAIRecommendations=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-15-recommendations\user-evidence
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260915-002711
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000020217779FB0.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000020217A1D4D0.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-00000202186E4EC0.dll
+Translation data for language Korean has 3 errors. Generate translation report for more info.
+[TrueTerrainColors v1.12.26] Extracted true colors from 441 terrain defs in 0.03 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+MVCF successfully applied 0 patches
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 27477.
+Total: 166.883600 ms (FindLiveObjects: 1.171100 ms CreateObjectMapping: 0.346200 ms MarkObjects: 165.060300 ms  DeleteObjects: 0.305700 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.599300 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 27670.
+Total: 154.624100 ms (FindLiveObjects: 1.203800 ms CreateObjectMapping: 0.346800 ms MarkObjects: 153.034100 ms  DeleteObjects: 0.039000 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - OskarPotocki.VanillaFactionsExpanded.Core
+  - VanillaExpanded.VExplorationE
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260915002711
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 40; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] Applied state to tile 40
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"fertility_offset":0.5,"mutators":["HotSprings","Pond","ArcheanTrees"],"shape_ops":[{"op":"add","shape":{"id":"oasis_pond","type":"bump","position":"center","size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] HandleResponse 원문: {"action":"ask","message":"현재 타일(건조관목림, 평지)에 어울리는 몇 가지 추천 콘셉트입니다. 마음에 드는 구성을 선택해 주세요!\n\n1. **오아시스 온천 정착지**: 맵 중앙에 자연스러운 온천과 연못을 배치하고, 주변 토양을 비옥하게 조성하여 사막 속 낙원 형성\n2. **천연 협곡 요새**: 북쪽과 남쪽에 험준한 산맥을 배치하고 중앙 골짜기를 따라 방어선을 구축하는 배산임수형 지형\n3. **고대 군사 유적지**: 곳곳에 버려진 고대 주둔지와 저장고, 광물 자원이 풍부하게 매설된 탐험 중심 지형\n\n어떤 스타일로 진행해 드릴까요? 아니면 다른 원하시는 분위기가 있으신가요?"}
+[MapGenAI] 파싱된 action: ask
+[MapGenAI] Response rejected: 실행할 설정이 없는 추천을 받았습니다. 추천을 다시 요청해 주세요.
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"fertility_offset":0.2}},{"params":{"vegetation_density":1.3}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"fertility_offset":0.2}},{"params":{"vegetation_density":1.3}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"fertility_offset":0.2}},{"params":{"vegetation_density":1.3}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+[MapGenAI] Applied state to tile 40
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 28880.
+Total: 157.124500 ms (FindLiveObjects: 1.196800 ms CreateObjectMapping: 0.340900 ms MarkObjects: 155.548000 ms  DeleteObjects: 0.038500 ms)
+
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"fertility_offset":0.5,"mutators":["HotSprings","Pond","ArcheanTrees"],"shape_ops":[{"op":"add","shape":{"id":"oasis_pond","type":"bump","position":"center","size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Recommendations rejected before display: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.

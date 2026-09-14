@@ -1,0 +1,1 @@
+{"action":"recommend","options":[{"params":{"vegetation_density":1.3,"animal_density":1.2,"mutators":["PlantLife_Increased"]}},{"params":{"mutators":["SteamGeysers_Increased","MineralRich"]}},{"params":{"elevation_shapes":[{"type":"radial","strength":"medium","size":"large"}]}}]}

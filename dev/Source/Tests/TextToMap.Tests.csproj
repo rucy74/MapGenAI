@@ -46,6 +46,7 @@
     <Compile Include="../MapGen/MapStateCodec.cs" Link="MapStateCodec.cs" />
     <Compile Include="../LLM/ProviderResponse.cs" Link="ProviderResponse.cs" />
     <Compile Include="../LLM/RequestGate.cs" Link="RequestGate.cs" />
+    <Compile Include="../LLM/RecommendationPlan.cs" Link="RecommendationPlan.cs" />
     <Compile Include="../LLM/StructuredChat.cs" Link="StructuredChat.cs" />
   </ItemGroup>
 </Project>

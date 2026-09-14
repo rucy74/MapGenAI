@@ -40,7 +40,15 @@
 개발 DLL은 `dev/Assemblies/`에 빌드된다. `dist/Assemblies/MapGenAI.dll`과 설치본은 v1.6 보존 대상이며 개발 빌드로 자동 덮어쓰지 않는다.
 
 
+## 실행할 설정이 포함된 추천
+
+- `dev/Source/LLM/RecommendationPlan.cs`: recommend/options 계약, 독립 patch 검증, 직렬화한 명령과 실제 변경 요약 보관. 임의 제목·설명을 실제 효과로 표시하지 않는다.
+- `StructuredChat`은 추천 요청의 즉시 generate와 설정 없는 번호 목록을 형식 복구 대상으로 처리한다. `Dialog_TextToMap`은 UI thread에서 후보 전체를 ValidatePatch한 뒤 공개하고, 부적합 batch에는 한 번 수정 요청한다.
+- 번호/버튼 선택은 보관 명령을 재검증해 원래 ApplyPatch/Undo 경로로 적용한다. 상태·실제 특징·바이옴·산악도 변경, reset/undo/close/preset 시 폐기한다. 이미지 gate OFF이면 버튼도 그리지 않는다.
+- `tools/runtime-probe/RecommendationProbe.cs`, `tools/provider-probe/RecommendationBench.cs`: 실제 Dialog 선택·재시도·취소·오아시스 완성맵 및 새 모델 응답. [근거](docs/analysis/2026-09-15-recommendations/report.md).
+
 ---
 ## 작성 이력
 - 2026-09-14 23:34 — 활성 모드 특징 자동 인식, 온천 직접 추가 조건, 제한된 JSON 형식 복구 안내.
 - 2026-09-15 00:01 — 현재 특징 조합 후보표와 적용 전 공통 검증·설명 재요청 안내.
+- 2026-09-15 00:34 — 추천 실행 계획 검증·저장 선택, 오아시스 주변 토양, 이미지 버튼 숨김.

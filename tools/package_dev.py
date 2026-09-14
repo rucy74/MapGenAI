@@ -33,7 +33,8 @@ def package(output: Path) -> Path:
         'Fill regions with real Odyssey lava or other loaded permanent terrains. Place simple ruined walls/floors inside an area.\n'
         'Place structures near rivers, water, mountains or inner region edges with minimum gaps; rotate simple ruins in 90-degree steps.\n'
         'Native ancient temples follow game content and difficulty rules. Their orange preview outline reserves space; interiors generate in the full map.\n'
-        'Image input, interpretation and generation are temporarily paused; stored image data is retained but inactive.\n'
+        'Recommendations are validated before display; select a stored option by number or button.\n'
+        'Image input, interpretation and generation are paused, and the image button is hidden. Stored image data is retained but inactive.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
     )
     manifest = {
@@ -63,7 +64,8 @@ def package(output: Path) -> Path:
             'Harmony와 Map Preview가 필요합니다. 기존 MapGen AI를 끄고 MapGen AI [DEV]를 켭니다.\n'
             '새 테스트 월드에서 시작하고 모드 설정에 API 키를 직접 입력하세요.\n'
             '기존 배포판·설정·세이브는 이 패키지에 포함하지 않습니다.\n'
-            '현재 이미지 입력·해석·팔레트·생성 효과는 일시 중단입니다. 저장된 이미지 데이터는 보존합니다.\n'
+            '추천은 적용할 설정을 먼저 검사하고 보여 줍니다. 번호나 적용 버튼으로 선택할 수 있습니다.\n'
+            '현재 이미지 입력·해석·팔레트·생성 효과는 일시 중단이며 버튼도 숨깁니다. 저장된 이미지 데이터는 보존합니다.\n'
             '원형/별/하트는 정확한 형태이며, 자연스러운/울퉁불퉁한 윤곽을 요청하면 선택적으로 굴곡을 추가합니다.\n'
             '살짝/많이로 강도를 바꾸거나 다시 정확한 원형으로 요청해 되돌릴 수 있습니다.\n'
             '월드 강·해안 연결을 보존합니다. 삼각주/피오르드만 제거하면 일반 강/해안이 남습니다.\n'

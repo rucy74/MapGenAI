@@ -1,0 +1,10 @@
+{
+  "captured": "2026-09-15T00:20:59+09:00",
+  "base": "ea98dd44497fb68a9b96649731836f73f2f99000",
+  "responses": [
+    "oasis-water-only",
+    "unchecked-recommendations",
+    "rejected-selection"
+  ],
+  "finding": "Oasis output contains only water; recommendation ask prose is unchecked until selection. User requests paused image button completely hidden. No Fable or image re-enable."
+}

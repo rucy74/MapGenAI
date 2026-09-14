@@ -91,3 +91,14 @@ docs/           — Dev logs, workshop description, prompt engineering notes
 ## License
 
 MIT
+
+
+## Validated recommendations (dev)
+
+Recommendations now include independent executable patches. The application validates the complete options before displaying them; choosing a number or its button applies that stored patch with another preflight check and normal Undo support. Changed state invalidates old options. Generation still checks actual structure placement.
+
+Oasis-like terrain requests compose a small irregular pool with localized fertile soil while preserving biome/feature constraints. Image input remains paused and its button is hidden. [Validation evidence](docs/analysis/2026-09-15-recommendations/report.md).
+
+---
+## 작성 이력
+- 2026-09-15 00:34 — 추천 실행 계획 검증·저장 선택, 오아시스 주변 토양, 이미지 버튼 숨김.

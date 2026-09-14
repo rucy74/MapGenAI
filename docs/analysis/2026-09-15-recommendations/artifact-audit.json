@@ -1,0 +1,511 @@
+{
+  "checkedAt": "2026-09-15T00:36:31+09:00",
+  "dllSha256": "f0cbb5beabc25f53ed9a48f3b92c7310abc6f1ef0b99f60ef043d2172b00c3a5",
+  "offlinePass": 116,
+  "nativeChecks": 45,
+  "fullMaps": 2,
+  "providerRequests": 4,
+  "knownSecretAndCommonPatterns": 0,
+  "preservedRefs": [
+    "3ed22f5038b89665abc4c18b434967bbf253a997 refs/heads/composite-v2-backup",
+    "ea98dd44497fb68a9b96649731836f73f2f99000 refs/heads/dev",
+    "8c244555deb3097c606c6523beb8dcaabab25bde refs/heads/experiment/image-to-heightmap",
+    "b3fa677fb2ee6b30e2ad77e87bf90838bc72d482 refs/heads/feature/mdp-worldcomponent",
+    "1439bbdfac7601f6c668be49681f7d8f6073af09 refs/heads/fix/ore-density-hills",
+    "6ece1a4cc842debb52d1590e57b8e689e4fac57d refs/heads/main",
+    "02115976a3069deb687fb72e65ba90b47a620586 refs/tags/dev-text-baseline-2026-09-14",
+    "37143ebbce25a530e6eeefdc042d2dc265e83a8f refs/tags/v1.0.0",
+    "caee56036edf0bdd8e0f6e8086dd5114440bc336 refs/tags/v1.1",
+    "bfaacd05bb061f1b7e0f7442ffc7c651849ee969 refs/tags/v1.2",
+    "099087c6253457f6db800329318ad2a92f467e7c refs/tags/v1.3",
+    "fc77336232023115a823ac791e80fc6f8425664e refs/tags/v1.4",
+    "0ee41ab8e16cadf3824952be8c76a22605ca6958 refs/tags/v1.5",
+    "0967e2442deacd690b4771682406d01545e3d128 refs/tags/v1.6"
+  ],
+  "files": [
+    {
+      "path": "MAP.md",
+      "sha256": "3bdd38eea2bf8e7f6aa81509056bee119e1b2857c2446de8fab8c2f35e6371ee"
+    },
+    {
+      "path": "README.md",
+      "sha256": "0488c6a44dd8fbe3a734cae23589861a6f80fe65e7e72c1059134be095032d2d"
+    },
+    {
+      "path": "dev/Source/LLM/RecommendationPlan.cs",
+      "sha256": "cabfe77d215513232d7059977c4235609f5bfcfe36fe4eb4439a5b3e938e5a91"
+    },
+    {
+      "path": "dev/Source/LLM/StructuredChat.cs",
+      "sha256": "4a938f27572cda583339303fd0dfccb4cf75f66b24fc2f7c5b18dd83ef7973ba"
+    },
+    {
+      "path": "dev/Source/Tests/StructuredChatTests.cs",
+      "sha256": "7b4676e5486554a6817c5e6e0eae6ccd47436e0fd4aef42b0a2449b1ed20ff51"
+    },
+    {
+      "path": "dev/Source/Tests/TextToMap.Tests.csproj",
+      "sha256": "452c54efe88e2df628212aa4b7eecc9cac714cddc9982c43113126644b4c80c9"
+    },
+    {
+      "path": "dev/Source/UI/Dialog_TextToMap.cs",
+      "sha256": "484ec5edb422202bc6e521146ba7293bb783fc311c88789bf1829f39f445e41e"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/build-r1.log",
+      "sha256": "31e2751e5fac5ea0f86c937c14a1c18251c8af9b68fa109e8963f26e0c011e05"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/final-build.log",
+      "sha256": "67235524dd549d67844997b72281a2f9ee97d52edfcd55c83b8c927a4f7cc068"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/final-tests.log",
+      "sha256": "1b69b6abd0631cdee976316a68f741e49587c207672bd4825273996c6d3778fa"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/Player.log",
+      "sha256": "81c6f6d87b2e3157e6b81082599688f1d665451ba562eaf3160aac168e218d2f"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/cleanup.json",
+      "sha256": "5c3c924add4ecf5b95d8f5ceff7241abef0516653e7695f30393e86156751d24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/displayed-options.txt",
+      "sha256": "82c7eec6adc1eebb7c1c800d524386648ecc73579972ffe105bf45070cc729fb"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/hot-prompt.txt",
+      "sha256": "6907f9744f78b6c834e566182ca24bbce83bb5b62c55d337ebb7c7adfac0c86c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/launch.json",
+      "sha256": "c77b4b77b58ac3d7d72da2ff1007f6eec5d0684ef92e83fa756a4928d6af7d4e"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/mutator-catalog.json",
+      "sha256": "582148263e3dcc9ea54f83deabe7e7d5a829da0c9214793d20b21bfb80fb4c24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-hot-generated-preview.png",
+      "sha256": "a2bcd6b6f830a5ab397cad918a43c50d725bee053590c52aec472066cebeadf7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-hot-generated-state.json",
+      "sha256": "8770d429bd31c4c281077ff76225af2c3cac896340516c8f008e1995cfce311d"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-hot-observation.json",
+      "sha256": "6bb06275cd7823916be5e63c22735ed1592b1ba9ff4191e6096f914dd293a00d"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-plain-generated-preview.png",
+      "sha256": "f4b6aeb96adf8081da2c9ef25b1a6d54a4a7070fd2c0d4060e7db5e1f067dee9"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-plain-generated-state.json",
+      "sha256": "a574c31d0bdd2fa8f88e4c5e1a87c7efb81982360eff5c70daf09d8191db6c96"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/oasis-plain-observation.json",
+      "sha256": "3fb5634aae145630eb19c9fd1f849defd8ce58ca86ae43116d9b902c9d6aad75"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/plain-prompt.txt",
+      "sha256": "8e70439590932caa792603c344f99d4084a107dfcde6bcd62da0fabf8b3d54d2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/recommendations-ui.png",
+      "sha256": "d4ec8a6ccbb595d347a4f8b4ba4a4583fe45ecff0ce26982434d3ea043c0c341"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/result.json",
+      "sha256": "6b9abbb23d7ac5480d12b24ec2508c6eafcc2a85e55fec623c690663a90a7661"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/retry-0.json",
+      "sha256": "75fba2279dcf33e0ac35863261ef38afc989d44c8e1bf56a5c2b0e57b73ac859"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/retry-1.json",
+      "sha256": "75fba2279dcf33e0ac35863261ef38afc989d44c8e1bf56a5c2b0e57b73ac859"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/retry-2.json",
+      "sha256": "56bcc64e1ccc32fc1ad65a2f31b9416a5201bce249927bd827a80c3413235eb7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-final/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/Player.log",
+      "sha256": "ff5e4dfecb934e7e06163d42e780eaa44d9ef3617e8dc7586fda4152291e68c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/cleanup.json",
+      "sha256": "bcef7e134b2e15142747e7aaa432580c798188f0f8a1f0401216e4ec4a086ce7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/hot-prompt.txt",
+      "sha256": "c7b3bd30cbb21832e0f622cbaa97aa52fe19ba7007bd942ec6eb59772865b8a7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/incomplete.txt",
+      "sha256": "0b4f9e79ffe1866455c9e4fe223fbd61f8efdf557e9b89ab90490b25fec89772"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/launch.json",
+      "sha256": "68a0fc840a1f0496678bd08c559b86ff5f9d827cb6a98f710a770330a5473900"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/mutator-catalog.json",
+      "sha256": "582148263e3dcc9ea54f83deabe7e7d5a829da0c9214793d20b21bfb80fb4c24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/plain-prompt.txt",
+      "sha256": "a00a91f0c4b508391d9daaac5f465d39b9b4a60d5f659966d23e671080945e7c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r1/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/Player.log",
+      "sha256": "5dccc8eeb2d3c6ed62b689d9d47c42b916eb675ac5a52640354f717b537be548"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/cleanup.json",
+      "sha256": "905c9f98e40e9030f2fbf08e8e7ac2e52769040ecf482a034fab6569665bd129"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/displayed-options.txt",
+      "sha256": "d26a52df381b7c63dc0811d8eee717e46986f2888319b36bf1fb5d2643f7c6f3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/hot-prompt.txt",
+      "sha256": "e09cc3f4f158cbf1c5b3af2905e16881afa9c375cd2a4c3545be14e0eff0fd51"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/launch.json",
+      "sha256": "fc9514228022c2eae847163afa3412de94f0151ed3fc0b0bf56cc1fab63fd77f"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/mutator-catalog.json",
+      "sha256": "582148263e3dcc9ea54f83deabe7e7d5a829da0c9214793d20b21bfb80fb4c24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-hot-generated-preview.png",
+      "sha256": "e9fc43379c6e08d07d9f586752b19df69748f90355b71970e14c699c442ccad8"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-hot-generated-state.json",
+      "sha256": "047538a85e118e5c59ad7206ee71a5e6a9a6081c1c936a65006c5ba62b4c85ed"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-hot-observation.json",
+      "sha256": "27748edde7d82a714b1e77ee7da46bdc0a32f4c2d57af48f2a2526f6d84cfb8c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-plain-generated-preview.png",
+      "sha256": "47167f3c45834227e9714f829eb5cd5854fca6860fea1d4f0f61984ff67ccf00"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-plain-generated-state.json",
+      "sha256": "7fe2ff36893903435421e5ba9987bd2e37680e1d620669266182cc313ca9a878"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/oasis-plain-observation.json",
+      "sha256": "d77766ed40890a67e4019e72fbe7575056637f524f054a259b744b445a98a3ed"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/plain-prompt.txt",
+      "sha256": "85c0e24d90ab6420d52bdaedccada2777cf3d881672d52eb7a6f9f41965b77a1"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/recommendations-ui.png",
+      "sha256": "20a6c0f408fb2bbed638e2a9c68bdccb2c48da8dd834bfa8baaf20757b4a8325"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/result.json",
+      "sha256": "5fe8381221f5e0f84870e5b07ae78f2152282ac42db08d7a16a475455ba639b8"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/retry-0.json",
+      "sha256": "75fba2279dcf33e0ac35863261ef38afc989d44c8e1bf56a5c2b0e57b73ac859"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/retry-1.json",
+      "sha256": "75fba2279dcf33e0ac35863261ef38afc989d44c8e1bf56a5c2b0e57b73ac859"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/retry-2.json",
+      "sha256": "e5802289e8540b1822b9c9888215dda7c46d7b35f6e4c1a78f566c00bfd004f7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/native-r2/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-hot-after.json",
+      "sha256": "9292d339bb431db18b2c5375431a0142481dc502d2882a2839ea41ab37ce761c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-hot-history.json",
+      "sha256": "1ca31278ddec076c5c6f71c504044777e1f432f8d6b19fb314e6d20f8773cc89"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-hot-prompt.txt",
+      "sha256": "c7b3bd30cbb21832e0f622cbaa97aa52fe19ba7007bd942ec6eb59772865b8a7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-hot-response.json",
+      "sha256": "94586e9350fe6531a001702afcdbb897703a0a3c66accbced3f0416a466e2d15"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-plain-after.json",
+      "sha256": "91987266b176bffa66e637d266804d338ab5d96ed392018204a0eb28e1fa202b"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-plain-history.json",
+      "sha256": "1ca31278ddec076c5c6f71c504044777e1f432f8d6b19fb314e6d20f8773cc89"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-plain-prompt.txt",
+      "sha256": "a00a91f0c4b508391d9daaac5f465d39b9b4a60d5f659966d23e671080945e7c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/oasis-plain-response.json",
+      "sha256": "5a6177eaa5ee65f819fb3ed375ecee06f5c067218cc0a7e90d11f28002e9b39d"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-hot-history.json",
+      "sha256": "f92ee65af2cb8c75ceaeeeb02d378d4cec63b7f222137b1c7692e2004aa962db"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-hot-prompt.txt",
+      "sha256": "c7b3bd30cbb21832e0f622cbaa97aa52fe19ba7007bd942ec6eb59772865b8a7"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-hot-response.json",
+      "sha256": "925dcc9d2f7c61b18f9a3b288fad7054ad6bf0d5cc3a9b0e00a6d0106eff927b"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-plain-history.json",
+      "sha256": "c6db74e71599b6215c985563597360d4f379cff640ee412bec44af7c9d41fbb6"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-plain-prompt.txt",
+      "sha256": "a00a91f0c4b508391d9daaac5f465d39b9b4a60d5f659966d23e671080945e7c"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/recommend-plain-response.json",
+      "sha256": "ff9e19767be40e3e24dba2c9e09f7fc80f318e060aa66941e6856d2524303d51"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/provider-r1/results.json",
+      "sha256": "b90607a88d32688798b0a7c56eb7164317407d9a85d8a1cf3bb0015e85e1b532"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/report.md",
+      "sha256": "0c23d1c9a645aecaf97f748f1b78453a7c5dd44b0d77410700a2a7b584c456a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/tests-r1.log",
+      "sha256": "1b69b6abd0631cdee976316a68f741e49587c207672bd4825273996c6d3778fa"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/Player.log",
+      "sha256": "bc44ead79e34594b6e5bcf6763b8391d043d7444e19b1ce0d938a08dde02cf28"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/cleanup.json",
+      "sha256": "c98d3b2809bd20d613d78505e4d724b42ec941185eef3796327d9eb52f8375b3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/displayed-options.txt",
+      "sha256": "d26a52df381b7c63dc0811d8eee717e46986f2888319b36bf1fb5d2643f7c6f3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/hot-before.json",
+      "sha256": "bcfe511fda529e16d7f00f5451f25c391e671aab9db2489be4b0ac770ef96bd3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/hot-prompt.txt",
+      "sha256": "ce09aa333d675c646a64a4e6dc69b0375ab041a3273ad35c6b308b67a53bad18"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/launch.json",
+      "sha256": "6df0222c52c3a72e90194db3c985449a0fde684a6c3d04a32a81d75df9f25860"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/mutator-catalog.json",
+      "sha256": "582148263e3dcc9ea54f83deabe7e7d5a829da0c9214793d20b21bfb80fb4c24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/plain-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/plain-prompt.txt",
+      "sha256": "036ad0dc0da2086bc30c2a66771e30f1ac29c4e4f89a6529113d542a610ef7f1"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/recommendations-ui.png",
+      "sha256": "add54e46883c44ec7b9d7382e88b1d2711ddaeea98608ea59d1715b3fb3ec8a3"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/result.json",
+      "sha256": "6937a3cf863b558df17f53902025c70624ce632a7b018040c46d6710f9601917"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/ui-r1/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/oasis-water-only.json",
+      "sha256": "6066c5ac0650d03e0401dc2f14b87ec7ebcf716e137f3c17b29728af3a933577"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/oasis.png",
+      "sha256": "4541d824a154b2693b78d8f10f527632d82ca0a1ec013e18da3283909274fb00"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/receipt.json",
+      "sha256": "fa89655f58c960ca4023556938272d29d2f8f43040a7313f29aaf42614a23c95"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/recommendation.png",
+      "sha256": "39ba4df4ec13fe57b83b6b78b8dbe8bfcb3414b3d87d91129a5c7bed20de3d30"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/rejected-selection.json",
+      "sha256": "e2beef531d4fd8b0d3c36199de92a2137f6505fcad1c4bcfac8cdc94d3166fd5"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-recommendations/user-evidence/unchecked-recommendations.json",
+      "sha256": "3c57f7ce1090d4ed9f230eeda9506d08c3aa7db3e7463fb3d967471627c82ad1"
+    },
+    {
+      "path": "docs/description-ko.md",
+      "sha256": "e1d8fb1100e8652f8cb11b113765c16077a65014909aebddccd5ce632f1c746d"
+    },
+    {
+      "path": "docs/text-first-plan-ko.md",
+      "sha256": "f2ef365d742a6bd376e5df84d2e82032136addc22acc36bd26c918de8e3c65f6"
+    },
+    {
+      "path": "tools/package_dev.py",
+      "sha256": "0e3a137e65123b2bb6b055abcc91aae54a5fe630ac8616ec0916d6fa439a7109"
+    },
+    {
+      "path": "tools/provider-probe/Program.cs",
+      "sha256": "3b4bdd6fd62af43ec55bb23089ce1682095033816cdc3a8aa2c0d9f3757ad6d3"
+    },
+    {
+      "path": "tools/provider-probe/RecommendationBench.cs",
+      "sha256": "535223ad9000695c8bd76ff8a15a1d71da283905b33a6e126ebe9a64bfe8408c"
+    },
+    {
+      "path": "tools/runtime-probe/RecommendationProbe.cs",
+      "sha256": "2c7ecba4a9b8d6e294df3af3df61fb07f332865f08f15ea5ceea176f3115502d"
+    },
+    {
+      "path": "tools/runtime-probe/RuntimeProbe.cs",
+      "sha256": "9c3e3120f180a9cae4979c69eff3efe09e7557d85ce9451cbc04ee80657b5fb4"
+    },
+    {
+      "path": "tools/runtime-probe/launch.ps1",
+      "sha256": "1f9ad85b334598ff290fd739394c6e3fd305b4fc74ce90b74cce4c2444dad75f"
+    }
+  ]
+}
