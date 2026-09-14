@@ -12,6 +12,8 @@ namespace MapGenAI.MapGen
 - 다른 내부 특징은 remove_mutators로 하나씩, remove_categories로 해당 종류 전체를 제거할 수 있습니다. restore_categories는 종류 억제만 해제합니다. 개별 remove_mutators로 제거했던 특징은 mutators로 다시 추가합니다. 억제 중인 종류에 추가하려면 같은 응답에 restore_categories도 보냅니다.
 - mutators는 실제 타일의 지형 특징을 바꾸지만 월드 랜드마크의 이름·아이콘을 새로 배치하는 명령은 아닙니다. 사용자 물 도형은 shape_ops로 따로 수정합니다.
 - 채움 재료와 구조물 위치는 아래 텍스트 영역 규칙을 따릅니다. 지형 특징 이름과 fill 재료 이름을 혼동하지 마세요.
+- 온천(HotSprings)은 자체 온천수/암반을 만드는 내부 특징이므로 평지와 자연발생 목록 밖 바이옴에서도 직접 추가할 수 있습니다. 산악이어야 한다고 추측하지 말고 Available/Unavailable 결과를 따르세요. 기존 강·해안과의 충돌 제한은 유지됩니다.
+- 현재 활성 목록에 없는 이름은 '이 게임에 로드되지 않음'입니다. 모드가 꺼져 있을 수 있으므로 그 기능 자체가 존재하지 않는다고 단정하지 마세요. 확인/설명 답변도 반드시 action:ask JSON입니다. 사용자가 '없어?', '찾아봐'라고 물어도 자유 형식 문장으로 응답하지 마세요.
 " : @"
 Feature editing and world geography:
 - actual_tile_features includes original and current features. Use exact defName values, not guessed names or just added_mutators.
@@ -22,6 +24,8 @@ Feature editing and world geography:
 - Remove an internal feature with remove_mutators, or its whole category with remove_categories. restore_categories only clears category suppression; named removed features require re-adding through mutators. To add in a suppressed category also include restore_categories.
 - Feature edits update actual tile mutators, not the world's named landmark identity/icon. Custom water shapes are edited separately with shape_ops.
 - Materials and structure placement follow the text-region rules below. Feature names and fill material names are different catalogs.
+- Native HotSprings creates its own pools/rock bed: explicit additions may use flat tiles and biomes outside its natural-spawn whitelist. Follow Available/Unavailable rather than inventing a mountain requirement. River/shore conflict restrictions remain.
+- Missing from the active catalogs means not loaded in this game, not that the feature cannot exist. A supplying mod may be disabled. Every explanation or follow-up such as 'does it exist?' or 'look again' must still be action:ask JSON, never plain prose.
 ";
     }
 }

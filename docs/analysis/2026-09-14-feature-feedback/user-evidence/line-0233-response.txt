@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산맥 내부 공간의 약 70% 면적을 자연스러운 윤곽의 기름진 토양(SoilRich)으로 채웠습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"donut_inner_rich_soil","type":"composite","edge_roughness":"medium","shapes":[{"center":[0.5,0.5],"id":"soil_circle","prim":"circle","r":0.18}],"compose":[{"op":"add","s":"soil_circle","fill":"SoilRich","e":0.05,"f":0.02}]}}]}}

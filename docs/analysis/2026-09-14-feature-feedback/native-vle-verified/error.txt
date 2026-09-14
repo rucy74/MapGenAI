@@ -1,0 +1,5 @@
+System.InvalidOperationException: model-rich-fill: central radius-20-percent material request has the intended footprint
+[Ref 72899C83]
+  at MapGenAI.RuntimeProbe.FeatureFeedbackProbe.Check (System.Boolean pass, System.String message) [0x00029] in <c2b7d00d88714974b2c0c70968031b1a>:0 
+  at MapGenAI.RuntimeProbe.FeatureFeedbackProbe.Run (System.String output, System.String responses) [0x00993] in <c2b7d00d88714974b2c0c70968031b1a>:0 
+  at MapGenAI.RuntimeProbe.RuntimeProbe.RunInWorld () [0x00055] in <c2b7d00d88714974b2c0c70968031b1a>:0 

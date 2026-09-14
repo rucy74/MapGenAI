@@ -23,6 +23,19 @@ static class WorldStateTests
     }
     public static void RunAll()
     {
+        Check("Explicit native hot springs allow flat biomes but retain river and shore constraints",()=>
+        {
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.hilliness=RimWorld.Hilliness.Flat;
+            var def=new TileMutatorDef{defName="HotSprings",Worker=new RimWorld.TileMutatorWorker_HotSprings(),minHilliness=RimWorld.Hilliness.Mountainous,
+                biomeWhitelist=new List<RimWorld.BiomeDef>{new RimWorld.BiomeDef{defName="OtherBiome"}},canSpawnOnRiver=false,coastSidesRange=new IntRange(0,0)};
+            DefDatabase<TileMutatorDef>.Definitions[def.defName]=def;
+            Apply(1,"{\"mutators\":[\"HotSprings\"]}");Equal("HotSprings",tile.Mutators.Single().defName);Equal(RimWorld.Hilliness.Flat,tile.hilliness);MapGenParams.ClearTile(1);
+            tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));tile.Rivers.Clear();
+            var neighbor=Find.WorldGrid[2];var oldBiome=neighbor.PrimaryBiome;neighbor.PrimaryBiome=RimWorld.BiomeDefOf.Ocean;
+            Find.WorldGrid.Neighbors[1]=new List<PlanetTile>{2};Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));
+            Find.WorldGrid.Neighbors.Clear();neighbor.PrimaryBiome=oldBiome;
+            def.Worker=new TileMutatorWorker();Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));
+        });
         Check("World river deletion rejects the whole request and keeps map edits unchanged",()=>
         {
             Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});tile.AddMutator(DefDatabase<TileMutatorDef>.Definitions["RiverDelta"]);
@@ -171,4 +184,10 @@ static class WorldStateTests
         });
         MapGenParams.Reset(); Find.World=null; Find.WorldGrid=null; Find.WorldSelector=null;
     }
+}
+
+namespace RimWorld
+{
+    // Exact runtime type identity; generation behavior is checked in the actual game probe.
+    public class TileMutatorWorker_HotSprings : RimWorld.Planet.TileMutatorWorker { }
 }

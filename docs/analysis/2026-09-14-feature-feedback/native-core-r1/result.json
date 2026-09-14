@@ -1,0 +1,4 @@
+{
+  "ok": false,
+  "reason": "Probe-only initial type scan failed on a static cached MapPreviewResult callback before Lunar component load; no map tests ran."
+}

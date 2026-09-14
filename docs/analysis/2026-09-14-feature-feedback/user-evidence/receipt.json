@@ -1,0 +1,11 @@
+{
+  "captured": "2026-09-14T23:16:38.459604+09:00",
+  "userReport": "비옥한 화산 토양+비옥한 비+온천+별 보기 좋은 곳+빈번한 오로라+화창함을 이전에 사용했는데 현재는 없거나 추가 불가. overgrown과 확인 질문에서 JSON offset0 오류.",
+  "sourceLogSha256": "fdec1055f2ce86a66495f4d8f80054325fa21f86f34adcd537858d1a8d3cf6b4",
+  "findings": {
+    "VLE": "Installed workshop3656316229, package VanillaExpanded.VExplorationE; absent from current active ModsConfig and game log. Five requested features belong to it.",
+    "HotSprings": "Odyssey. Native XML natural placement biomeWhitelist/minHilliness Mountainous copied into FeaturePolicy. Worker builds noise/terrain without inspecting hilliness/biome; explicit placement relaxation under investigation.",
+    "JSON": "Recorded model plain text rejected by strict Command parser; no map changes on rejection. Plan bounded format-repair attempt without loosening JSON parsing."
+  },
+  "codeStatus": "No feature-feedback product edits yet; dev00cba5b clean except new evidence. Previous D04/F03 completion already pushed/installed, final handoff now recorded."
+}

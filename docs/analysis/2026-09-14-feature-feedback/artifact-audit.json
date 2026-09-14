@@ -1,0 +1,22 @@
+{
+  "created": "2026-09-14T23:39:06.051725+09:00",
+  "baseCommit": "00cba5bfcc572641a9ec407774e77e31a4dc5541",
+  "sourceDllSha256": "fd65655b5a4e4d05f83941b29c2099f751ed245fb3f3364f12f8cf584163b68e",
+  "offlineTests": 108,
+  "fullMaps": 9,
+  "backgroundPreviews": 2,
+  "nativeChecks": 63,
+  "successfulRequestCases": 6,
+  "controlledFormatRepairs": 1,
+  "apiCalls": 8,
+  "transportFailures": 1,
+  "temporaryModsRemoved": true,
+  "checkedFiles": 304,
+  "secretMatches": 0,
+  "preservedRefs": [
+    "main",
+    "v1.6",
+    "dev-text-baseline-2026-09-14"
+  ],
+  "limits": "Known configured keys and Google/private-key patterns only. Long-run weather frequency and exact area percentage not verified."
+}

@@ -1,0 +1,31 @@
+{
+  "action": "generate",
+  "description": "맵 중앙에 반지름 0.2 크기의 비옥한 화산 토양 원형 영역 생성",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "volcanic_soil_circle",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "c1",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "c1",
+              "fill": "VEE_VolcanicSoilRich",
+              "e": 0.05
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

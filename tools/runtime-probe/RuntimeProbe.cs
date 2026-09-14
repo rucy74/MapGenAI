@@ -126,6 +126,11 @@ namespace MapGenAI.RuntimeProbe
                     GenCommandLine.TryGetCommandLineArg("mapgenAIManualResponses",out var manualResponses);
                     ManualFailureProbe.Run(output,manualEvidence,manualResponses);return;
                 }
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIFeatureFeedback",out _))
+                {
+                    GenCommandLine.TryGetCommandLineArg("mapgenAIFeedbackResponses",out var feedbackResponses);
+                    FeatureFeedbackProbe.Run(output,feedbackResponses);return;
+                }
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAITextRegions",out _))
                 {
                     TextRegionProbe.Run(output,Require);
@@ -309,6 +314,7 @@ namespace MapGenAI.RuntimeProbe
             SpatialProbe.Tick();
             AncientProbe.Tick();
             ManualFailureProbe.Tick();
+            FeatureFeedbackProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
             if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));

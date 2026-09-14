@@ -22,6 +22,7 @@ class Program
         var client=new GeminiClient(config.GetString("gemini_api_key"),config.GetString("gemini_model"));
         if(args[2]=="natural")return await NaturalTextBench.Run(client,args[3],output);
         if(args[2]=="manual")return await ManualFailureBench.Run(client,args[3],output);
+        if(args[2]=="feedback")return await FeatureFeedbackBench.Run(client,args[3],output,args.Length>4?args[4]:null);
         if(args[2]=="regions")return await TextRegionBench.Run(client,args[3],output);
         if(args[2]=="compound")return await CompoundTextBench.Run(client,args[3],output);
         if(args[2]=="spatial")return await SpatialTextBench.Run(client,args[3],output);

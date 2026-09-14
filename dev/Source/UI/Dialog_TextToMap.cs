@@ -619,7 +619,17 @@ Ex2) ""Recommend something"" → {""action"":""generate"",""description"":""coas
                     try
                     {
                         ticket.Token.ThrowIfCancellationRequested();
-                        result=await client.SendChatAsync(historySnapshot,systemPrompt,ticket.Token);
+                        result=await StructuredChat.SendAsync((malformed, token)=>
+                        {
+                            var attempt=new List<ChatMessage>(historySnapshot);
+                            if(malformed!=null)
+                            {
+                                Log.Warning("[MapGenAI] Retrying malformed chat response format once; no settings applied.");
+                                attempt.Add(new ChatMessage("assistant",malformed));
+                                attempt.Add(new ChatMessage("user",StructuredChat.RepairInstruction));
+                            }
+                            return client.SendChatAsync(attempt,systemPrompt,token);
+                        },ticket.Token);
                         error=null;
                         break;
                     }

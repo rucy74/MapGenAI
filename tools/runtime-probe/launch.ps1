@@ -18,6 +18,8 @@ param(
     [string]$CompoundResponses='',
     [string]$ManualFailures='',
     [string]$ManualResponses='',
+    [switch]$FeatureFeedback,
+    [string]$FeedbackResponses='',
     [switch]$Landmarks,
     [string]$FeatureResponses='',
     [switch]$DeltaDiagnostics,
@@ -86,6 +88,8 @@ if($SpatialResponses){$arguments+=('-mapgenAISpatialResponses="'+[IO.Path]::GetF
 if($CompoundResponses){$arguments+=('-mapgenAICompoundResponses="'+[IO.Path]::GetFullPath($CompoundResponses)+'"')}
 if($ManualFailures){$arguments+=('-mapgenAIManualFailures="'+[IO.Path]::GetFullPath($ManualFailures)+'"')}
 if($ManualResponses){$arguments+=('-mapgenAIManualResponses="'+[IO.Path]::GetFullPath($ManualResponses)+'"')}
+if($FeatureFeedback){$arguments+='-mapgenAIFeatureFeedback=true'}
+if($FeedbackResponses){$arguments+=('-mapgenAIFeedbackResponses="'+[IO.Path]::GetFullPath($FeedbackResponses)+'"')}
 if($PreviewOnly){$arguments+='-mapgenAIPreviewOnly=true'}
 if($TextResponses){$arguments+=('-mapgenAITextResponses="'+[IO.Path]::GetFullPath($TextResponses)+'"')}
 if($FeatureResponses){$arguments+=('-mapgenAIFeatureResponses="'+[IO.Path]::GetFullPath($FeatureResponses)+'"')}

@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "id": "hot-temperate",
+      "intended": true,
+      "preserved": true,
+      "attempts": 1,
+      "apiCalls": 1,
+      "controlledFirstResponse": false,
+      "modelVersion": "gemini-3.8-flash",
+      "inputTokens": 9773,
+      "outputTokens": 22,
+      "source": "provider-core-hot-retry"
+    },
+    {
+      "id": "hot-tropical",
+      "intended": true,
+      "preserved": true,
+      "attempts": 1,
+      "apiCalls": 1,
+      "controlledFirstResponse": false,
+      "modelVersion": "gemini-3.8-flash",
+      "inputTokens": 9816,
+      "outputTokens": 24,
+      "source": "provider-core-r1"
+    },
+    {
+      "id": "missing",
+      "intended": true,
+      "preserved": true,
+      "attempts": 1,
+      "apiCalls": 1,
+      "controlledFirstResponse": false,
+      "modelVersion": "gemini-3.8-flash",
+      "inputTokens": 9780,
+      "outputTokens": 124,
+      "source": "provider-core-r1"
+    },
+    {
+      "id": "followup",
+      "intended": true,
+      "preserved": true,
+      "attempts": 1,
+      "apiCalls": 1,
+      "controlledFirstResponse": false,
+      "modelVersion": "gemini-3.8-flash",
+      "inputTokens": 9777,
+      "outputTokens": 161,
+      "source": "provider-core-r1"
+    },
+    {
+      "id": "repair",
+      "intended": true,
+      "preserved": true,
+      "attempts": 2,
+      "apiCalls": 1,
+      "controlledFirstResponse": true,
+      "modelVersion": "gemini-3.8-flash",
+      "inputTokens": 10118,
+      "outputTokens": 139,
+      "source": "provider-core-r1"
+    }
+  ],
+  "selection": "All successful cases; the initial hot-temperate HTTP 503 is retained in provider-core-r1. Its one retry is separately recorded, not hidden as first-attempt success."
+}

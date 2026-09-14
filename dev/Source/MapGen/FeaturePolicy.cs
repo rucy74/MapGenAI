@@ -30,6 +30,10 @@ namespace MapGenAI.MapGen
                 var surface = tile as SurfaceTile;
                 int rivers = surface?.Rivers?.Count ?? 0;
                 var worker = def.Worker;
+                // This native worker creates its own pool and rock bed on flat ground too.
+                // Its world-generation biome/hilliness preferences are not runtime prerequisites.
+                // Exact type only: an external subclass may add its own generation requirements.
+                bool explicitHotSpring = worker?.GetType().FullName == "RimWorld.TileMutatorWorker_HotSprings";
                 bool riverWorker = IsWorker(worker, "RimWorld.TileMutatorWorker_River");
                 if ((def.categories.Contains("River") || riverWorker) && rivers == 0)
                     return "월드 강이 있는 타일에서만 가능합니다 / Requires an existing world river";
@@ -53,15 +57,15 @@ namespace MapGenAI.MapGen
                 if (!def.EverValid()) return "필요한 세력이 현재 월드에 없습니다 / Required faction is absent";
                 var biome = tile.PrimaryBiome;
                 if (biome == null) return "타일 바이옴을 확인할 수 없습니다 / Missing biome";
-                if (def.biomeWhitelist != null && !def.biomeWhitelist.Contains(biome))
+                if (!explicitHotSpring && def.biomeWhitelist != null && !def.biomeWhitelist.Contains(biome))
                     return "허용 바이옴 / Allowed biomes: " + string.Join(", ", def.biomeWhitelist.Select(b => b.label ?? b.defName));
                 if (def.biomeBlacklist?.Contains(biome) == true) return "이 바이옴에서는 생성할 수 없습니다 / Excluded biome: " + biome.defName;
                 if (!def.animalDensityRange.Includes(biome.animalDensity) || !def.plantDensityRange.Includes(biome.plantDensity))
                     return "바이옴의 동물·식물 조건이 맞지 않습니다 / Biome animal or plant density requirement";
                 if (!def.pollutionRange.Includes(tile.pollution)) return "타일 오염도 조건이 맞지 않습니다 / Pollution requirement";
                 if (!def.averageTemperatureRange.Includes(tile.temperature)) return "타일 온도 조건이 맞지 않습니다 / Temperature requirement";
-                if ((def.minHilliness != Hilliness.Undefined && tile.hilliness < def.minHilliness) ||
-                    (def.maxHilliness != Hilliness.Undefined && tile.hilliness > def.maxHilliness))
+                if (!explicitHotSpring && ((def.minHilliness != Hilliness.Undefined && tile.hilliness < def.minHilliness) ||
+                    (def.maxHilliness != Hilliness.Undefined && tile.hilliness > def.maxHilliness)))
                     return "월드 지형 조건 / World hilliness required: " + def.minHilliness + " ~ " + def.maxHilliness;
                 if (def.coastSidesRange != IntRange.Invalid && (water.Count < def.coastSidesRange.min || water.Count > def.coastSidesRange.max))
                     return "해안 접면 수 조건 / Coastal sides required: " + def.coastSidesRange;
