@@ -10,6 +10,7 @@ namespace MapGenAI.MapGen
         public readonly string[] Materials;
         public readonly bool[] Flatten;
         readonly Dictionary<string,bool[]> masks = new Dictionary<string,bool[]>();
+        internal readonly Dictionary<int,CoverageCell> CoverageOriginal = new Dictionary<int,CoverageCell>();
         public RegionGrid(Map map) { Map = map; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; }
         public int Index(IntVec3 cell) => cell.z * Map.Size.x + cell.x;
         public Dictionary<int,float> CaptureFlattened(MapGenFloatGrid elevation)
@@ -36,9 +37,16 @@ namespace MapGenAI.MapGen
             }
             if (!string.IsNullOrEmpty(fill)) Materials[i] = TerrainMaterials.DefName(fill, deep);
         }
+        public bool[] Mask(string id) => masks.TryGetValue(id,out var mask)?(bool[])mask.Clone():new bool[Materials.Length];
+        public void SetMask(string id,bool[] mask) { masks[id]=(bool[])mask.Clone(); }
         public static void Record(Map map, string id, IntVec3 cell, bool inside, string fill = null, bool deep = true)
         {
             GenerationContext.Regions(map)?.Record(id, cell, inside, fill, deep);
         }
+    }
+    internal sealed class CoverageCell
+    {
+        public TerrainDef original,painted;
+        public float originalElevation,paintedElevation;
     }
 }

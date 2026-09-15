@@ -17,9 +17,10 @@
 - `MapGenParams.ValidatePatch`는 적용과 같은 후보 병합·재료·월드 계획의 dry-run이다. Dialog 후보표도 현재 설정에서 이 검사를 사용하고 충돌/교체 대상을 구별한다. `InvalidEditExplanation`과 `StartChat`은 실패 명령을 UI thread에서 검사하고 한 번 ask 설명만 재요청하며 재요청 generate는 적용하지 않는다. `EditPreflightProbe`/provider `preflight`는 원본 온천/Pond 오류, 다중대안 동의, 임의교체 거부·닫기·Undo·로드된 후보표를 확인한다.
 - `dev/Source/MapGen/FeaturePolicy.cs`, `FeatureEditPrompt.cs`: 실제 Odyssey/외부 모드 정의·worker 조건을 프롬프트 후보와 적용/프리셋에 공유. 월드 River/Coast 연결은 보존하며 개별 변형 제거는 기본 연결로 복귀한다. 기존 저장의 전체 억제는 Load/생성 진입에서 이전한다. 확률·랜드마크 추첨 조건과 환경 조건을 구별한다. `-FeaturePolicy [-Landmarks] [-FeatureResponses 응답폴더]`로 실제 생성·Gemini 응답 재생을 검증한다. 이전 `-FeatureRemoval`도 현행 정책 검증으로 연결한다. [검증 보고서](docs/analysis/2026-09-13-feature-policy/report.md), [텍스트 우선 계획](docs/text-first-plan-ko.md).
 - `dev/Source/MapGen/RegionGrid.cs`, `TerrainMaterials.cs`: 기존 SDF/bump/ring이 산출한 내부 마스크·재료 층 공유, 활성 영구 TerrainDef 해석. 합성 도형의 최상위 fill은 렌더 영역 재료 override다. 강/바다/도로는 최종 채움에서 보호한다.
+- `RegionCoverage.cs`: `region_fill`은 기존 composite/bump/ring의 실제 마스크를 참조하여 inside 또는 enclosed의 사용 가능한 칸 수로 coverage0..1을 맞춘다. source/part/fraction은 편집·clone·Scribe·프리셋에 포함하며 참조 삭제는 함께 제거/재지정해야 한다. `AuthoringGeneration.ApplyCoverage`는 기존 목표 재료를 포함해 계산하고 건물·캐릭터·산·월드 연결을 보존한다. 790 단계에서 구조물 배치용 마스크를 만들고, 1900 단계에서 늦게 생성된 기본/DLC 구조물 이후 비율을 재검사한다. 다시 칠할 때는 모드가 칠한 뒤 외부에서 바뀌지 않은 칸만 원상태로 돌려 재선택한다. [실제 재현·최종 검증](docs/analysis/2026-09-15-region-coverage/report.md).
 - `StructurePlans.cs`, `PlacementPlanner.cs`, `AuthoringGeneration.cs`: ID별 구조물 계획/변경/Scribe, 전체 면적 탐색, 좌표/영역/경계·최소 간격 제약, ruin/ancient_danger 분기. `SpatialRelation.cs`는 실제 강/물/산/영역 안쪽 경계의 정확한 유클리드 거리와 방향을 계산한다. 폐허는0/90/180/270도 회전한다. 공간 부족/대상 부재 시 위치 지정 batch는 미생성·실패 보고.
 - `AncientDangerGeneration.cs`: 기본 ancientTemple BaseGen 경로, 실제 지붕/내부/전리품/경고와 peacefulTemples 규칙. BaseGen 공유 객체는 finally 복원하며 내부 예외를 삼키는 생성기의 실제 결과를 검사한다. 크기15~20·계획별1~2·전체최대4·회전0만 허용한다. 미리보기는 주황색 예약 테두리만, native pawn/내부 생성은 full map만 수행한다. 임의 모드·퀘스트 구조물 adapter는 후속이다.
-- `Patches/AuthoringGenerationPatch.cs`: 생성별 추가 단계400(지형/도로 이후 재료),800(기존 구조물 이후·시작 지점 이전 폐허). `StructurePreviewPatch.cs`는 GenSpawn을 막는 Map Preview의 텍스처에 같은 벽 계획을 그린다. 실제 맵 건물과 별도로 검사하며 preview와 완성 맵의 충돌 조건은 다를 수 있다.
+- `Patches/AuthoringGenerationPatch.cs`: 생성별 추가 단계400(지형/도로 이후 재료),790(면적 비율 채움),800(기존 구조물 이후·시작 지점 이전 폐허),1900(기본/DLC 구조물 뒤 비율 재조정). `StructurePreviewPatch.cs`는 GenSpawn을 막는 Map Preview의 텍스처에 같은 벽 계획을 그린다. 실제 맵 건물과 별도로 검사하며 preview와 완성 맵의 충돌 조건은 다를 수 있다.
 - `ImageInput/ImageFeatureGate.cs`: 사용자 결정에 따라 false. UI 진입/적용과 생성 스냅샷에서 차단하며 저장 데이터를 삭제하지 않는다. 아래 이미지 경로는 재활성화 전까지 보관 코드다.
 - `dev/Source/MapGen/GenerationContext.cs`, `dev/Source/Patches/`: 생성할 타일의 고정 스냅샷과 RimWorld 생성 단계 연결. 공유 정의 변경은 finalizer에서도 복원한다.
 - `dev/Source/ImageInput/`, `dev/Source/UI/Dialog_ImageMap.cs`: PNG/JPEG/EXIF, 원본 색상 그룹/마스크를 AI가 분류하는 기본 경로, 선택 가능한 다각형 추론/팔레트, 영역 교정. 대상은 배치를 읽을 수 있는 참고 맵이며 설명은 선택 사항이다. 새 이미지 높이 우선 옵션은 토양의 기존 산을 지우고 이미지+SDF 높이를 Odyssey elevation mutator 뒤 복원한다. 기존 저장(false)·N칸은 원래 의미를 유지한다. 얇은 지형/비슷한 색상/삽입 그림 오분류는 남았다.
@@ -55,3 +56,4 @@
 - 2026-09-15 00:01 — 현재 특징 조합 후보표와 적용 전 공통 검증·설명 재요청 안내.
 - 2026-09-15 00:34 — 추천 실행 계획 검증·저장 선택, 오아시스 주변 토양, 이미지 버튼 숨김.
 - 2026-09-15 22:06 — 플레이어용 지형 설명과 런타임 번역 조회, 선택·적용·Undo/화면 검증.
+- 2026-09-15 22:58 — 실제 내부 칸 수 기반 비율 채움과 후속 편집·늦은 구조물 보존, 영어 실제 추천 창 검증.

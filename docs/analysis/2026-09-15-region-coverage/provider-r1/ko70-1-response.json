@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 모양 산맥 안쪽 빈 공간의 70%를 기름진 토양으로 채웁니다.","params":{"shape_ops":[{"op":"add","shape":{"coverage":0.7,"fill":"SoilRich","id":"inner_soil","region":"central_mountain_donut","region_part":"enclosed","type":"region_fill"}}]}}

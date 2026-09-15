@@ -216,6 +216,7 @@ namespace MapGenAI.MapGen
             if ((data.elevation_shapes != null || keys.Contains("hills")) && state.elevationShapes.Count > 0)
                 ShapeEdits.AssignIds(state.elevationShapes);
             if (state.elevationShapes.Count > ShapeEdits.MaxShapes) throw new FormatException("Too many terrain shapes");
+            RegionCoverage.ValidateReferences(state);
             StructurePlans.Validate(state);
             return state;
         }

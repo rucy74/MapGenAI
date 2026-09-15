@@ -8,7 +8,7 @@ namespace MapGenAI.MapGen
     // Bounds also cap SDF expression depth/work before any terrain or world state is changed.
     public static class ShapeValidation
     {
-        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite" };
+        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite", "region_fill" };
         static readonly HashSet<string> Fills = new HashSet<string> { "water", "sand", "soil", "rich_soil", "marsh", "mud", "ice" };
         const string Positions = "center,top_left,top,top_right,left,right,bottom_left,bottom,bottom_right";
 
@@ -17,6 +17,18 @@ namespace MapGenAI.MapGen
             if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
             if (shape.id != null) Id(shape.id);
             Fill(shape.fill);
+            if(shape.type=="region_fill")
+            {
+                Id(shape.region);
+                if(shape.region_part!="inside" && shape.region_part!="enclosed")throw new FormatException("region_part must be inside or enclosed");
+                if(string.IsNullOrEmpty(shape.fill) || shape.coverage==null)throw new FormatException("region_fill requires fill and coverage");
+                Range(Number(shape.coverage),0,1,"coverage");
+                if(shape.direction!=null && !new[]{"left","right","top","bottom"}.Contains(shape.direction))throw new FormatException("region_fill direction must be left/right/top/bottom");
+                if(shape.strength!=null || shape.position!=null || shape.size!=null || shape.gap!=null || shape.fade!=null || shape.noise_amount!=null || shape.edge_roughness!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
+                    throw new FormatException("region_fill follows its source region; do not supply independent geometry or height");
+                return;
+            }
+            if(shape.region!=null || shape.region_part!=null || shape.coverage!=null)throw new FormatException("region/region_part/coverage require region_fill");
             if (!string.IsNullOrEmpty(shape.fill) && shape.type != "bump" && shape.type != "ring" && shape.type != "composite")
                 throw new FormatException("This terrain type cannot apply fill: " + shape.type);
             Semantic(shape.direction, "left,right,top,bottom,top_left,top_right,bottom_left,bottom_right", 0, 360, "direction");

@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 도넛 산맥의 내부 분지 면적 70%를 기름진 토양으로 채웠습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"inner_fertile_soil","type":"region_fill","region":"central_mountain_donut","region_part":"enclosed","coverage":0.7,"fill":"SoilRich"}}]}}

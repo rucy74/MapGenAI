@@ -153,7 +153,7 @@ namespace MapGenAI.MapGen
                 {
                     var shape = state.elevationShapes.Find(s => s.id == p.region);
                     if (shape == null) throw new FormatException("유적이 참조하는 영역이 없습니다. 함께 제거하거나 다시 지정하세요. / Missing structure region; remove or rebind the structure too: " + p.region);
-                    if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring") throw new FormatException("Structure region requires composite, bump or ring geometry");
+                    if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring" && shape.type != "region_fill") throw new FormatException("Structure region requires composite, bump, ring or region_fill geometry");
                 }
             }
             if (total > 24) throw new FormatException("Maximum 24 positioned structures");

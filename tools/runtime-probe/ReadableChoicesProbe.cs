@@ -37,9 +37,12 @@ namespace MapGenAI.RuntimeProbe
                 MapGenParams.RestoreSnapshot(before,target);dialog=new Dialog_TextToMap();string initial=MapStateCodec.Serialize(MapGenParams.CaptureState(target));
                 Invoke("HandleResponse",response);var plans=(List<RecommendationPlan>)Field("_recommendations");Check(plans.Count==3,"recorded real three-option recommendation validates with new presentation");
                 string text=((List<ChatMessage>)Field("_history")).Last().Content;
-                foreach(string word in new[]{"온천","온수 샘","폐허","고대 정착지","비옥도","분지","광물 풍부","산맥","지하 동굴"})Check(text.Contains(word),"localized choice explains "+word);
+                bool korean=LanguageDatabase.activeLanguage.folderName.StartsWith("Korean",StringComparison.OrdinalIgnoreCase);
+                foreach(string word in korean?new[]{"온천","온수 샘","폐허","고대 정착지","비옥도","분지","광물 풍부","산맥","지하 동굴"}:new[]{"hot springs","hot water spring","ruins","ancient settlement","soil fertility","basin","mineral","mountain range","underground cave"})Check(text.Contains(word),"localized choice explains "+word);
                 foreach(string code in new[]{"HotSprings","AncientRuins","MineralRich","UndergroundCave","radial","split","terrain_1","fertilityOffset","elevationShapes"})Check(!text.Contains(code),"choice does not expose internal code "+code);
                 File.WriteAllText(Path.Combine(folder,"choices.txt"),text);
+                // Capture the actual English/Korean system prompt for an independent model replay.
+                File.WriteAllText(Path.Combine(folder,"production-system-prompt.txt"),(string)typeof(Dialog_TextToMap).GetMethod("BuildSystemPrompt",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{target}));
                 for(int i=0;i<plans.Count;i++)
                 {
                     Invoke("HandleResponse",response);var expected=MapStateEditor.Merge(before,MapParameterParser.Parse(RecommendationPlan.Options(command)[i].GetObject("params")));

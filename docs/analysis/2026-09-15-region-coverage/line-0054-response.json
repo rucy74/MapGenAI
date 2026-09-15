@@ -1,0 +1,1 @@
+{"action":"generate","description":"해안을 남쪽으로 배치하고, 위에서 아래로 흐르는 일자 강을 왼쪽과 중앙 중간(0.25)에 배치합니다.","params":{"coast_direction":"south","river_direction":"down","straight_river":true,"river_position":0.25}}

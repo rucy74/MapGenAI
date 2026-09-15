@@ -58,6 +58,66 @@ namespace MapGenAI.MapGen
             }
             RoofCollapseCellsFinder.RemoveBulkCollapsingRoofs(removed,map);
         }
+        public static void ApplyCoverage(Map map)
+        {
+            var regions=GenerationContext.Regions(map);if(regions==null)return;
+            // Plan the whole coverage batch before changing any of its cells.
+            var jobs=new List<Tuple<ElevationShape,TerrainDef,bool[]>>();
+            var planned=new Dictionary<int,TerrainDef>();
+            var restore=new Dictionary<int,CoverageCell>();
+            // A later native structure may consume painted ground. Recount after generation, restoring
+            // only our still-unmodified paint; native floors/buildings and occupied cells remain intact.
+            foreach(var entry in regions.CoverageOriginal)
+            {
+                var cell=new IntVec3(entry.Key%map.Size.x,0,entry.Key/map.Size.x);var old=entry.Value;
+                if(map.terrainGrid.TerrainAt(cell)==old.painted && MapGenerator.Elevation[cell]==old.paintedElevation && cell.GetEdifice(map)==null && !cell.GetThingList(map).Any(t=>t is Pawn))
+                {restore[entry.Key]=old;planned[entry.Key]=old.original;}
+            }
+            var stats=new List<CoverageResult>();
+            foreach(var shape in GenerationContext.State.elevationShapes.Where(s=>s.type=="region_fill"))
+            {
+                var area=regions.Mask(shape.region);
+                if(shape.region_part=="enclosed")area=RegionCoverage.Enclosed(map.Size.x,map.Size.z,area);
+                var def=TerrainMaterials.Resolve(shape.fill);var existing=new bool[area.Length];
+                foreach(var cell in map.AllCells)
+                {
+                    int i=regions.Index(cell);if(!area[i])continue;
+                    var terrain=planned.TryGetValue(i,out var p)?p:map.terrainGrid.TerrainAt(cell);
+                    // The percentage is of usable cells, after slopes and world connections are generated.
+                    bool protectedCell=!TerrainMaterials.Supported(terrain);
+                    area[i]=!protectedCell && cell.GetEdifice(map)==null && !cell.GetThingList(map).Any(t=>t is Pawn) && !(MapGenerator.Elevation[cell]>=.7f && MapGenerator.Caves[cell]<=0);
+                    existing[i]=area[i] && terrain==def;
+                }
+                float fraction=float.Parse(shape.coverage,System.Globalization.CultureInfo.InvariantCulture);
+                var selected=RegionCoverage.Select(map.Size.x,map.Size.z,area,existing,fraction,shape.direction);
+                for(int i=0;i<selected.Length;i++)if(selected[i])planned[i]=def;
+                jobs.Add(Tuple.Create(shape,def,selected));
+                stats.Add(new CoverageResult{id=shape.id,eligible=area.Count(b=>b),selected=selected.Count(b=>b),existing=existing.Count(b=>b)});
+            }
+            using(map.pathing.DisableIncrementalScope())
+            {
+            foreach(var entry in restore)
+            {
+                var cell=new IntVec3(entry.Key%map.Size.x,0,entry.Key/map.Size.x);
+                map.terrainGrid.SetTerrain(cell,entry.Value.original);MapGenerator.Elevation[cell]=entry.Value.originalElevation;
+            }
+            regions.CoverageOriginal.Clear();
+            foreach(var job in jobs)
+            {
+                regions.SetMask(job.Item1.id,job.Item3);
+                foreach(var cell in map.AllCells)if(job.Item3[regions.Index(cell)])
+                {
+                    int i=regions.Index(cell);
+                    if(!regions.CoverageOriginal.TryGetValue(i,out var saved))regions.CoverageOriginal[i]=saved=new CoverageCell{original=map.terrainGrid.TerrainAt(cell),originalElevation=MapGenerator.Elevation[cell]};
+                    map.terrainGrid.SetTerrain(cell,job.Item2);
+                    if(!job.Item2.supportsRock)MapGenerator.Elevation[cell]=Math.Min(MapGenerator.Elevation[cell],.3f);
+                    saved.painted=job.Item2;saved.paintedElevation=MapGenerator.Elevation[cell];
+                    if(working!=null)working.terrainCells++;
+                }
+            }
+            }
+            if(working!=null){working.coverage.Clear();working.coverage.AddRange(stats);}
+        }
         public static void PlaceStructures(Map map)
         {
             if(working?.issues.Count>0)return;

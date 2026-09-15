@@ -121,6 +121,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAICoverage",out var coverageEvidence))
+                {GenCommandLine.TryGetCommandLineArg("mapgenAICoverageReplies",out var coverageReplies);CoverageProbe.Run(output,coverageEvidence,coverageReplies);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIReadableChoices",out var readableReplies))
                 {ReadableChoicesProbe.Run(output,readableReplies);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIRecommendations",out var recommendationEvidence))
@@ -324,6 +326,7 @@ namespace MapGenAI.RuntimeProbe
             EditPreflightProbe.Tick();
             RecommendationProbe.Tick();
             ReadableChoicesProbe.Tick();
+            CoverageProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
             if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));

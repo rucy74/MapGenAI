@@ -30,6 +30,8 @@ namespace MapGenAI.MapGen
         public string noise_amount; // ridge용: none(0)/low(0.3)/medium(0.6)/high(1.0) 또는 0~1.5
         public string edge_roughness; // composite contour: omitted/none=precise, low/medium/high or 0..1
 
+        public string region, region_part, coverage; // region_fill: source area and counted cell fraction
+
         // composite (CSG/SDF) 전용 — type="composite"일 때 사용
         public List<ShapePrimitive> compositeShapes;
         public List<ComposeOp> compositeOps;
@@ -48,6 +50,9 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref fade, "fade");
             Scribe_Values.Look(ref noise_amount, "noise_amount");
             Scribe_Values.Look(ref edge_roughness, "edge_roughness");
+            Scribe_Values.Look(ref region, "region");
+            Scribe_Values.Look(ref region_part, "region_part");
+            Scribe_Values.Look(ref coverage, "coverage");
             string compositeJson = compositeShapes == null && compositeOps == null ? null :
                 MapGenAI.UI.SimpleJson.Serialize(new Dictionary<string, object> { { "shapes", compositeShapes }, { "compose", compositeOps } });
             Scribe_Values.Look(ref compositeJson, "compositeJson");
@@ -67,6 +72,7 @@ namespace MapGenAI.MapGen
                 type = type, direction = direction, strength = strength,
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount, edge_roughness = edge_roughness,
+                region = region, region_part = region_part, coverage = coverage,
                 compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),
                 compositeOps = compositeOps?.Select(op => op.Clone()).ToList()
             };

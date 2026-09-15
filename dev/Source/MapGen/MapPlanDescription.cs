@@ -53,7 +53,7 @@ namespace MapGenAI.MapGen
                     if(old.position!=shape.position || SimpleJson.Serialize(old.compositeShapes)!=SimpleJson.Serialize(shape.compositeShapes))changes.Add(T("모양·위치 조정","shape/location adjusted"));
                     if(old.size!=shape.size || old.gap!=shape.gap)changes.Add(T("크기·폭 조정","size/width adjusted"));
                     if(old.strength!=shape.strength)changes.Add(T("높낮이 조정","height adjusted"));
-                    if(old.fill!=shape.fill || SimpleJson.Serialize(old.compositeOps)!=SimpleJson.Serialize(shape.compositeOps))changes.Add(T("영역의 높이·채움 조정","region height/fill adjusted"));
+                    if(old.fill!=shape.fill || old.coverage!=shape.coverage || old.region!=shape.region || old.region_part!=shape.region_part || SimpleJson.Serialize(old.compositeOps)!=SimpleJson.Serialize(shape.compositeOps))changes.Add(T("영역의 높이·채움 조정","region height/fill adjusted"));
                     if(old.edge_roughness!=shape.edge_roughness)changes.Add(T("윤곽 조정","outline adjusted"));
                     if(old.direction!=shape.direction)changes.Add(T("방향 조정","direction adjusted"));
                     if(old.fade!=shape.fade || old.noise_amount!=shape.noise_amount)changes.Add(T("산맥의 폭·굴곡 조정","ridge width/irregularity adjusted"));
@@ -142,6 +142,7 @@ namespace MapGenAI.MapGen
         }
         public string Shape(ElevationShape s)
         {
+            if(s.type=="region_fill")return T(s.region_part=="enclosed"?"둘러싸인 내부의 채울 수 있는 땅":"지정 영역의 채울 수 있는 땅",s.region_part=="enclosed"?"usable area enclosed by the terrain":"usable area within the region")+" "+(float.Parse(s.coverage,CultureInfo.InvariantCulture)*100).ToString("0.#",CultureInfo.InvariantCulture)+"% — "+Name("terrain",s.fill)+T(" 채움"," fill");
             float strength=ElevationShape.ParseStrength(s.strength);bool raised=strength>=0;
             if(s.type=="radial")return raised?T("가장자리가 높고 중앙이 낮은 분지","basin with raised edges and a lower center"):T("중앙이 높고 바깥으로 낮아지는 산","mountain with a raised center and lower edges");
             if(s.type=="split")return raised?T("양쪽이 높고 가운데가 낮은 협곡","canyon between raised sides"):T("지도를 가로지르는 산맥","mountain range across the map");

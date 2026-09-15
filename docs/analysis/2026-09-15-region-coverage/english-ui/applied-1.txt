@@ -1,0 +1,7 @@
+Changes applied:
+• hot springs added — A hot water spring, heated by geothermal activity.
+• ruins added — The remains of an ancient settlement. These ruins may contain a wide variety of possible threats.
+• Increase soil fertility.
+Features added: hot springs, ruins
+
+Press the button below to generate, or modify via chat.

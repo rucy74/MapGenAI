@@ -25,6 +25,8 @@ param(
     [string]$RecommendationReplies='',
     [switch]$RecommendationScreen,
     [string]$ReadableChoices='',
+    [string]$Coverage='',
+    [string]$CoverageReplies='',
     [string]$FeedbackResponses='',
     [switch]$Landmarks,
     [string]$FeatureResponses='',
@@ -82,6 +84,8 @@ if($Language){
 $arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','640',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
+if($Coverage){$arguments+='-mapgenAICoverage="'+[IO.Path]::GetFullPath($Coverage)+'"'}
+if($CoverageReplies){$arguments+='-mapgenAICoverageReplies="'+[IO.Path]::GetFullPath($CoverageReplies)+'"'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}
 if($NaturalShapes){$arguments+='-mapgenAINaturalShapes=true'}
 if($FeatureRemoval){$arguments+='-mapgenAIFeatureRemoval=true'}

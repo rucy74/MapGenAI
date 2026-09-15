@@ -1,0 +1,6 @@
+Changes applied:
+• underground cave added
+• mountain range across the map added
+Features added: underground cave
+
+Press the button below to generate, or modify via chat.

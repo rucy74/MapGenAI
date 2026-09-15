@@ -1,0 +1,1 @@
+{"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"south_mountain_pass","type":"composite","shapes":[{"id":"pass_rect","prim":"rect","center":[0.5,0.25],"w":0.08,"h":0.3}],"compose":[{"op":"add","s":"pass_rect","fill":"soil","e":0.05,"f":0.01}]}}]}}

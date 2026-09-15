@@ -1,0 +1,6 @@
+Changes applied:
+• mineral rich added
+• basin with raised edges and a lower center added
+Features added: mineral rich
+
+Press the button below to generate, or modify via chat.

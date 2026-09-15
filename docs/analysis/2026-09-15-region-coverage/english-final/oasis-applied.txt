@@ -1,0 +1,5 @@
+Changes applied:
+• map center — round rich soil area (irregular outline) added
+• map center — round shallow water area (irregular outline) added
+
+Press the button below to generate, or modify via chat.

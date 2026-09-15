@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산맥 내부 공간의 약 70% 면적(반경 약 0.15)에 기름진 토양을 배치했습니다.","params":{"shape_ops":[{"op":"add","shape":{"compose":[{"e":0.05,"f":0.02,"fill":"SoilRich","op":"add","s":"fertile_area"}],"id":"inner_fertile_soil","shapes":[{"center":[0.5,0.5],"id":"fertile_area","prim":"circle","r":0.15}],"type":"composite"}}]}}

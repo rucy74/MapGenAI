@@ -21,6 +21,8 @@ namespace MapGenAI.Patches
             if(state==null || (state.elevationShapes.Count==0 && state.structures.Count==0))return;
             genStepDefs=genStepDefs.Concat(new [] {
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_AuthoredTerrain",order=400,genStep=new AuthoredTerrainStep()},default),
+                new GenStepWithParams(new GenStepDef {defName="MapGenAI_RegionCoverage",order=790,genStep=new RegionCoverageStep()},default),
+                new GenStepWithParams(new GenStepDef {defName="MapGenAI_FinalRegionCoverage",order=1900,genStep=new RegionCoverageStep()},default),
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
             }).ToList();
         }
@@ -37,5 +39,12 @@ namespace MapGenAI.Patches
         public override int SeedPart => 214536711;
         public override void Generate(Map map,GenStepParams parms)
         {try {AuthoringGeneration.PlaceStructures(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
+    }
+    // First count after native ruins750, then reconcile after late DLC structures/MutatorFinal1600.
+    sealed class RegionCoverageStep : GenStep
+    {
+        public override int SeedPart => 214536712;
+        public override void Generate(Map map,GenStepParams parms)
+        {try {AuthoringGeneration.ApplyCoverage(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
     }
 }

@@ -127,6 +127,7 @@ namespace MapGenAI.Patches
                 case "slope":     ApplySlope(shape, map, grid); break;
                 case "split":     ApplySplit(shape, map, grid); break;
                 case "composite": ApplyCompositeShape(shape, map, grid); break;
+                case "region_fill": break; // Count and paint after native terrain/structures exist.
                 default:
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;

@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산맥 내부 구멍에 비옥한 토양을 정확히 70% 비율로 채우도록 수정했습니다.","params":{"shape_ops":[{"op":"remove","id":"inner_fertile_soil"},{"op":"add","shape":{"id":"inner_soil_fill","type":"region_fill","region":"central_mountain_donut","region_part":"enclosed","coverage":0.7,"fill":"SoilRich"}}]}}
