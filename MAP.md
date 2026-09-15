@@ -1,7 +1,7 @@
 # MapGenAI 개발 지도
 
 - 대표 지형 확장 전 복구 기준: `dev-landform-baseline-2026-09-15` → `4b05726`. 기존 원형/자연윤곽/면적채움/재료/구조물 생성 의미를 유지하는 것이 사용자 최우선 요구다.
-- `PassageGeometry.cs`, `PassageGeneration.cs`, `PassagePrompt.cs`: 명시적 `type:passage`, ordered `points`2..32, `width`1..64칸, 마른 `fill`. 4방향 연결 중심선을 실제 칸 크기로 넓히고 기존 높이/물 도형 뒤에 적용한다. 기존 `SdfComposite`는 수정하지 않는다. stage400에서 기존 재료 적용 경로를 재사용하고 `UsedRects`에 통로를 예약한다. 생성 완료 후 통로 바닥의 물/위험/장애물/높이를 검사해 남은 장애물을 알린다. 예약을 무시하는 외부 생성기는 후속 장애물을 만들 수 있다. [실제 측정·회귀](docs/analysis/2026-09-15-landform-suite/report.md).
+- `PassageGeometry.cs`, `PassageGeneration.cs`, `PassagePrompt.cs`: 명시적 `type:passage`, ordered `points`2..32, `width`1..64칸, 마른 `fill`. `scope:mountains`는 모든 통로 적용 직전 높이>=.7인 칸과 교차하며 평지의 높이/비옥도/재료를 보존한다. 생략/`full`은 기존 전체 경로 동작. 겹치는 통로도 같은 사전 높이를 사용한다. clone/Scribe/preset/partial edit와 한·영 설명에 범위 포함. 4방향 연결 중심선을 실제 칸 크기로 넓히고 기존 높이/물 도형 뒤에 적용한다. 기존 `SdfComposite`는 수정하지 않는다. stage400에서 기존 재료 적용 경로를 재사용하고 `UsedRects`에 실제 적용 부분만 예약한다. 생성 완료 후 실제 편집 부분의 물/위험/장애물/높이를 검사하며 산과 겹치지 않으면 무변경 안내. 예약을 무시하는 외부 생성기는 후속 장애물을 만들 수 있다. [이전 측정·회귀](docs/analysis/2026-09-15-landform-suite/report.md).
 
 2026-09-14 개발 브랜치: `dev`. 보존판: `v1.6` (`1439bbd`), 텍스트 확장 전 복구 태그: `dev-text-baseline-2026-09-14` (`f9f6aaa`). 규칙은 Rimworld 루트의 `CLAUDE.md`와 `.claude/rules/`를 참조한다.
 

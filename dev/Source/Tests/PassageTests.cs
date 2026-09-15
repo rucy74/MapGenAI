@@ -11,6 +11,40 @@ static class PassageTests
     static TileMapState Start()=>Edit(new TileMapState(),"[{\"op\":\"add\",\"shape\":"+Shape+"}]");
     public static void RunAll()
     {
+        Check("Mountain cuts keep irregular boundaries and leave low ground and holes untouched",()=>
+        {
+            var mask=PassageGeometry.Mask(10,10,new[]{new[]{.5f,1f},new[]{.5f,0f}},3);
+            var heights=Enumerable.Repeat(.1f,100).ToArray();
+            foreach(int i in new[]{24,25,26,35,36,44,46,55,65,66})heights[i]=.8f;
+            heights[75]=.7f;heights[85]=.6999f;heights[0]=.9f;
+            PassageGeometry.RestrictToMountains(mask,heights);
+            string selected=string.Join(",",Enumerable.Range(0,100).Where(i=>mask[i]));
+            Equal("24,25,26,35,36,44,46,55,65,66,75",selected);
+            var again=PassageGeometry.Mask(10,10,new[]{new[]{.5f,1f},new[]{.5f,0f}},3);
+            PassageGeometry.RestrictToMountains(again,heights);Equal(selected,string.Join(",",Enumerable.Range(0,100).Where(i=>again[i])));
+            PassageGeometry.RestrictToMountains(again,new float[100]);Equal(0,again.Count(b=>b));
+        });
+        Check("Mountain scope survives clone presets move and width edits without converting old paths",()=>
+        {
+            var original=Start();Equal(null,original.elevationShapes[0].scope);
+            Equal(false,ShapeEdits.ToObject(original.elevationShapes[0]).ContainsKey("scope"));
+            var scoped=Edit(original,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"scope\":\"mountains\"}}]");
+            Equal("mountains",scoped.Clone().elevationShapes[0].scope);
+            Equal("mountains",MapStateCodec.Deserialize(MapStateCodec.Serialize(scoped)).elevationShapes[0].scope);
+            var wider=Edit(scoped,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"width\":12}}]");Equal("mountains",wider.elevationShapes[0].scope);
+            var moved=Edit(scoped,"[{\"op\":\"move\",\"id\":\"exit\",\"position\":[0.5,0.5]}]");Equal("mountains",moved.elevationShapes[0].scope);
+            var full=Edit(scoped,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"scope\":\"full\"}}]");Equal("full",full.elevationShapes[0].scope);
+            Equal(null,original.elevationShapes[0].scope);
+            Equal(true,new MapPlanDescription(true).Shape(scoped.elevationShapes[0]).Contains("산 부분만, 평지 유지"));
+            Equal(true,new MapPlanDescription(false).Shape(scoped.elevationShapes[0]).Contains("mountains only; open ground preserved"));
+        });
+        Check("Invalid passage scopes reject without changing old terrain",()=>
+        {
+            var initial=Start();string saved=MapStateCodec.Serialize(initial);
+            foreach(string scope in new[]{"null","true","\"mountain\"","\"\""})Throws(()=>Edit(initial,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"scope\":"+scope+"}}]"));
+            Throws(()=>ShapeEdits.ParseShape(SimpleJson.Parse("{\"type\":\"bump\",\"scope\":\"mountains\"}")));
+            Equal(saved,MapStateCodec.Serialize(initial));
+        });
         Check("Passage width is counted in cells on rectangular maps and reaches endpoints",()=>
         {
             foreach(int w in new[]{1,8,9,64})

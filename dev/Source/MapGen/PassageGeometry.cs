@@ -6,6 +6,12 @@ namespace MapGenAI.MapGen
     // No randomness or contour warp: bends cannot shrink the requested clear footprint.
     public static class PassageGeometry
     {
+        public static void RestrictToMountains(bool[] mask,float[] beforeElevation)
+        {
+            if(mask==null || beforeElevation==null || mask.Length!=beforeElevation.Length)throw new ArgumentException("Mismatched passage elevation grid");
+            for(int i=0;i<mask.Length;i++)mask[i] &= beforeElevation[i]>=.7f;
+        }
+
         public static bool[] Mask(int cols,int rows,float[][] points,int width)
         {
             if(cols<1 || rows<1 || width<1 || width>64 || width>Math.Min(cols,rows))throw new ArgumentException("Invalid passage dimensions");
