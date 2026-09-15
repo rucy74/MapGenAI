@@ -1,0 +1,48 @@
+{
+  "action": "generate",
+  "description": "overlap",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "cut0",
+          "type": "passage",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0
+            ]
+          ],
+          "width": 8,
+          "fill": "Soil",
+          "scope": "mountains"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "cut1",
+          "type": "passage",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0
+            ]
+          ],
+          "width": 8,
+          "fill": "SoilRich",
+          "scope": "mountains"
+        }
+      }
+    ]
+  }
+}

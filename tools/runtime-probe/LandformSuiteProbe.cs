@@ -30,11 +30,38 @@ namespace MapGenAI.RuntimeProbe
             var h=new Harmony("choco.mapgenai.probe.landform-suite");
             h.Patch(AccessTools.Method(typeof(WorldGenerator),"GenerateWorld"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(WorldSeed)));
             h.Patch(AccessTools.Method(typeof(MapGenerator),"GenerateContentsIntoMap"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(MapSeed)));
+            h.Patch(AccessTools.Method(typeof(PassageGeneration),"Apply"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(BeforePassages)),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(AfterPassages)));
             Rand.Seed=1750915;
         }
         static void WorldSeed(ref string seedString){seedString="mapgenai-landforms-v1";}
         static void MapSeed(ref int seed){seed=Gen.HashCombineInt(seed,seedOffset);}
         static object Invoke(object dialog,string name,params object[] args)=>typeof(Dialog_TextToMap).GetMethod(name,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(dialog,args);
+        static Dictionary<string,object> passageAudit;
+        static float[] passageElevation,passageFertility;static string[] passageMaterials;static bool[] passageFlatten;
+        static void BeforePassages(Map map,MapGenFloatGrid elevation)
+        {
+            passageAudit=null;int n=map.Size.x*map.Size.z;passageElevation=new float[n];passageFertility=new float[n];var regions=GenerationContext.Regions(map);
+            passageMaterials=(string[])regions.Materials.Clone();passageFlatten=(bool[])regions.Flatten.Clone();
+            foreach(var c in map.AllCells){int i=c.z*map.Size.x+c.x;passageElevation[i]=elevation[c];passageFertility[i]=MapGenerator.Fertility[c];}
+        }
+        static void AfterPassages(Map map,MapGenFloatGrid elevation)
+        {
+            var regions=GenerationContext.Regions(map);var edited=new bool[passageElevation.Length];var details=new List<object>();
+            foreach(var s in GenerationContext.State.elevationShapes.Where(s=>s.type=="passage"))
+            {
+                var mask=regions.Mask(s.id);int flat=0,count=0;
+                foreach(var c in map.AllCells){int i=c.z*map.Size.x+c.x;if(!mask[i])continue;edited[i]=true;count++;if(passageElevation[i]<.7f)flat++;}
+                details.Add(Obj("id",s.id,"scope",typeof(ElevationShape).GetField("scope")?.GetValue(s),"selectedCells",count,"selectedOpenGround",flat));
+            }
+            int outside=0,uncleared=0;
+            foreach(var c in map.AllCells)
+            {
+                int i=c.z*map.Size.x+c.x;
+                if(!edited[i] && (elevation[c]!=passageElevation[i] || MapGenerator.Fertility[c]!=passageFertility[i] || regions.Materials[i]!=passageMaterials[i] || regions.Flatten[i]!=passageFlatten[i]))outside++;
+                if(edited[i] && elevation[c]>=.7f)uncleared++;
+            }
+            passageAudit=Obj("outsideChanges",outside,"unclearedSelectedCells",uncleared,"passages",details);
+        }
         static string Hash(string data){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(data))).Replace("-","").ToLowerInvariant();}
         static Dictionary<string,object> Obj(params object[] pairs){var d=new Dictionary<string,object>();for(int i=0;i<pairs.Length;i+=2)d[(string)pairs[i]]=pairs[i+1];return d;}
         public static void Run(string output,string manifest,string replies,int sample)
@@ -64,7 +91,7 @@ namespace MapGenAI.RuntimeProbe
                         var after=MapGenParams.CaptureState(target);string serialized=MapStateCodec.Serialize(after);
                         var history=(List<ChatMessage>)typeof(Dialog_TextToMap).GetField("_history",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(dialog);
                         string message=history.LastOrDefault()?.Content;
-                        if(command.GetString("action")!="generate" || serialized==MapStateCodec.Serialize(before))
+                        if(command.GetString("action")!="generate" || serialized==MapStateCodec.Serialize(before) && !c.GetBool("generateUnchanged"))
                         {results.Add(Obj("id",id,"action",command.GetString("action"),"generated",false,"message",message));dialog.PostClose();Write();continue;}
                         bool preserved=before.elevationShapes.All(s=>after.elevationShapes.Any(a=>a.id==s.id && SimpleJson.Serialize(s)==SimpleJson.Serialize(a)));
                         Invoke(dialog,"DoUndo");bool undo=MapStateCodec.Serialize(MapGenParams.CaptureState(target))==MapStateCodec.Serialize(before);dialog.PostClose();
@@ -134,6 +161,7 @@ namespace MapGenAI.RuntimeProbe
             int w=map.Size.x,h=map.Size.z;var dry=new bool[w*h];var walk=new bool[w*h];var water=new bool[w*h];var mountain=new bool[w*h];var roof=new bool[w*h];int rich=0,sand=0;
             foreach(var c in map.AllCells){int i=c.z*w+c.x;var t=map.terrainGrid.TerrainAt(c);water[i]=t.IsWater;walk[i]=c.Walkable(map);mountain[i]=c.GetEdifice(map)?.def.building?.isNaturalRock==true || (AuthoringGeneration.Current?.preview==true && MapGenerator.Elevation[c]>=.7f && MapGenerator.Caves[c]<=0);dry[i]=walk[i] && !water[i] && !mountain[i];roof[i]=map.roofGrid.RoofAt(c)?.isThickRoof==true;if(t.defName=="SoilRich")rich++;if(t.defName=="Sand")sand++;}
             var result=new Dictionary<string,object>{{"kind",kind},{"dryCells",dry.Count(v=>v)},{"waterCells",water.Count(v=>v)},{"mountainCells",mountain.Count(v=>v)},{"richSoilCells",rich},{"sandCells",sand},{"thickRoofCells",roof.Count(v=>v)}};
+            result["passageScopeAudit"]=passageAudit;
             int center=(h/2)*w+w/2;var centerGround=Flood(dry,w,h,new[]{center});
             result["centerDry"]=dry[center];result["centerReachesSouth"]=Enumerable.Range(0,w).Any(i=>centerGround[i]);result["centerReachesAnyEdge"]=Edge(centerGround,w,h);result["centerGroundCells"]=centerGround.Count(v=>v);
             if(kind=="valley-exit" || kind=="straight-canyon" || kind=="bent-canyon")

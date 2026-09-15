@@ -1,0 +1,25 @@
+{
+  "action": "generate",
+  "description": "호수 북쪽 물가(거리 2~8칸)에 상호 간격 10칸 이상 떨어진 9x7 크기의 폐허 2개를 배치합니다.",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "ruins_north_lake",
+          "kind": "ruin",
+          "width": 9,
+          "height": 7,
+          "count": 2,
+          "spacing": 10,
+          "relation": {
+            "target": "water",
+            "side": "north",
+            "min_distance": 2,
+            "max_distance": 8
+          }
+        }
+      }
+    ]
+  }
+}

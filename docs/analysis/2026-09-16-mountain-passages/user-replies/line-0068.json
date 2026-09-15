@@ -1,0 +1,1 @@
+{"action":"generate","description":"남쪽으로 길게 이어지던 흙길 통로를 제거하고 산맥 영역을 관통하는 짧은 통로로 변경하여 바깥 평지는 원래 지형으로 복원합니다.","params":{"shape_ops":[{"op":"remove","id":"south_exit_passage"},{"op":"add","shape":{"id":"mountain_cut_passage","type":"passage","points":[[0.5,0.4],[0.5,0.2]],"width":8,"fill":"Soil"}}]}}

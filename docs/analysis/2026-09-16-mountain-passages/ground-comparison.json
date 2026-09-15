@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ko-cut",
+    "terrainChanges": 254,
+    "changesOnOriginallyOpenCells": 0,
+    "examples": []
+  },
+  {
+    "id": "ko-short",
+    "terrainChanges": 270,
+    "changesOnOriginallyOpenCells": 0,
+    "examples": []
+  },
+  {
+    "id": "ko-bent",
+    "terrainChanges": 2675,
+    "changesOnOriginallyOpenCells": 0,
+    "examples": []
+  },
+  {
+    "id": "ko-convert",
+    "terrainChanges": 279,
+    "changesOnOriginallyOpenCells": 0,
+    "examples": []
+  },
+  {
+    "id": "ko-widen",
+    "terrainChanges": 366,
+    "changesOnOriginallyOpenCells": 0,
+    "examples": []
+  }
+]

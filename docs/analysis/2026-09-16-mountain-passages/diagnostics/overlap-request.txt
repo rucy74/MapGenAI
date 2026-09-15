@@ -1,0 +1,1 @@
+Deterministic overlap fixture, not a model response.

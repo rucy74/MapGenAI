@@ -1,0 +1,1 @@
+{"action":"generate","description":"남쪽 출구 통로의 폭을 12칸으로 넓히고, 산 부분만 관통하도록 범위를 유지합니다.","params":{"shape_ops":[{"op":"update","id":"south_exit_passage","changes":{"width":12,"scope":"mountains"}}]}}

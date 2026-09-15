@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 산의 서쪽 기슭(산 바위로부터 2~10칸 거리)에 최소 10칸 간격을 둔 9x7 폐허 2개를 배치했습니다. 기존 지형과 설정은 그대로 유지됩니다.","params":{"structure_ops":[{"op":"add","structure":{"count":2,"height":7,"id":"mountain_west_ruins","kind":"ruin","relation":{"max_distance":10,"min_distance":2,"side":"west","target":"mountain"},"spacing":10,"width":9}}]}}

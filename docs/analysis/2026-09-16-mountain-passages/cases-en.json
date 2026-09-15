@@ -1,0 +1,42 @@
+{
+  "cases": [
+    {
+      "id": "en-cut",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "Cut an 8-cell-wide exit through the south side of the donut mountain. Keep the original ground inside and outside the mountain.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "en-full",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "Build an 8-cell-wide soil path from the donut center to the south map edge, painting the entire route including the open ground outside the mountain.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    }
+  ]
+}

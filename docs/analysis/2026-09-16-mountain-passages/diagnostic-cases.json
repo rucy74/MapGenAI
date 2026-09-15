@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "id": "overlap",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "Deterministic overlap fixture, not a model response.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "mixed",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "Deterministic overlap fixture, not a model response.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "no-mountain",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "Deterministic empty intersection fixture, not a model response.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "flat_ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "all",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 2,
+                "h": 2
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "all",
+                "e": 0.05,
+                "f": 0.001,
+                "fill": "Soil"
+              }
+            ]
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    }
+  ]
+}

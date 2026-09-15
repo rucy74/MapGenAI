@@ -1,0 +1,1 @@
+{"action":"generate","description":"남쪽 출구 통로의 범위를 전체 경로로 확장하여 산 밖 평지까지 흙길이 이어지도록 수정했습니다.","params":{"shape_ops":[{"op":"update","id":"south_exit_passage","changes":{"scope":"full"}}]}}

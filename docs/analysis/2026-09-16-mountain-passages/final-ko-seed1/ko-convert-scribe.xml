@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>center_mountain_ring</id>
+					<type>ring</type>
+					<strength>strong</strength>
+					<position>center</position>
+					<size>medium</size>
+				</li>
+				<li>
+					<id>south_exit_passage</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>8</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0.5,0.5],[0.5,0]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

@@ -1,0 +1,1 @@
+{"action":"generate","description":"남쪽 통로의 적용 범위를 산맥 구간으로 한정하여, 평지의 흙길을 제거하고 실제 산벽만 관통하도록 수정합니다.","params":{"shape_ops":[{"op":"update","id":"south_exit_passage","changes":{"scope":"mountains"}}]}}

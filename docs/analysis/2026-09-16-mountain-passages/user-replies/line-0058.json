@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산 중앙에서 남쪽 가장자리까지 연결되는 8칸 폭의 마른 흙길 통로를 추가했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"south_exit_passage","type":"passage","points":[[0.5,0.5],[0.5,0]],"width":8,"fill":"Soil"}}]}}

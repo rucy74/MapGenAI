@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>ridge</type>
+					<direction>left</direction>
+					<strength>strong</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+				<li>
+					<id>terrain_2</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.75,0.25],"h":0,"id":"lake_circle","n":0,"prim":"circle","r":0.195,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":-0.5,"f":0.05,"fill":"water","from":null,"k":0,"op":"add","outId":null,"s":"lake_circle"}]}</compositeJson>
+				</li>
+				<li>
+					<id>mountain_top_right</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.75,0.75],"h":0,"id":"c_mountain","n":0,"prim":"circle","r":0.15,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.7,"f":0.05,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"c_mountain"}]}</compositeJson>
+				</li>
+				<li>
+					<id>west_pass</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.25,0.5],"h":0.08,"id":"pass_rect","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.5}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"pass_rect"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

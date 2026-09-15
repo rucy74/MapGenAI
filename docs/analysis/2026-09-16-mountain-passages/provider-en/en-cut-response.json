@@ -1,0 +1,22 @@
+{
+  "action": "generate",
+  "description": "Cut an 8-cell-wide exit through the south side of the mountain ring, preserving existing ground inside and outside.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_mountain_exit",
+          "type": "passage",
+          "points": [
+            [0.5, 0.5],
+            [0.5, 0.0]
+          ],
+          "width": 8,
+          "fill": "Soil",
+          "scope": "mountains"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "cases": [
+    {
+      "id": "ko-cut",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "도넛 산 안쪽에서 남쪽으로 나갈 수 있게 폭 8칸 출구를 뚫어줘. 산 부분만 깎고 안쪽과 바깥 평지의 원래 토양은 유지해.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-short",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "도넛 산 남쪽에 폭 8칸 출구 하나 뚫어줘.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-bent",
+      "kind": "bent-canyon",
+      "tile": "inland",
+      "request": "산을 관통하는 폭 8칸 통로를 뚫어줘. 왼쪽 중앙에서 (0.35,0.7), (0.65,0.3)을 지나 오른쪽 중앙으로 이어줘. 산 밖의 평지는 그대로 둬.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-full",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "도넛 산 안쪽 중앙에서 남쪽 맵 끝까지 폭 8칸의 흙길을 이어줘. 산 밖 평지에도 전체 경로를 흙으로 칠해줘.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          }
+        ]
+      },
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-convert",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "기존 통로에서 산 부분만 남기고 바깥과 안쪽 평지의 흙길은 지워줘. 경로와 폭은 유지해.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          },
+          {
+            "id": "south_exit_passage",
+            "type": "passage",
+            "points": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0
+              ]
+            ],
+            "width": 8,
+            "fill": "Soil"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-widen",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "그 통로 폭만 12칸으로 넓혀줘. 산 밖 평지는 그대로 유지해.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          },
+          {
+            "id": "south_exit_passage",
+            "type": "passage",
+            "points": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0
+              ]
+            ],
+            "width": 8,
+            "fill": "Soil",
+            "scope": "mountains"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-restore",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "request": "이제 그 통로를 산 밖으로도 이어서 남쪽 맵 끝까지 전체 경로에 흙길을 만들어줘. 경로와 폭은 유지해.",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "center_mountain_ring",
+            "type": "ring",
+            "position": "center",
+            "size": "medium",
+            "strength": "strong"
+          },
+          {
+            "id": "south_exit_passage",
+            "type": "passage",
+            "points": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0
+              ]
+            ],
+            "width": 8,
+            "fill": "Soil",
+            "scope": "mountains"
+          }
+        ]
+      },
+      "preview": false,
+      "omitAmbientRuins": true
+    }
+  ]
+}

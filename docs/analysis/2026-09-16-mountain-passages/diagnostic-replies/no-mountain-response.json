@@ -1,0 +1,28 @@
+{
+  "action": "generate",
+  "description": "empty intersection",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "a",
+          "type": "passage",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0
+            ]
+          ],
+          "width": 8,
+          "fill": "Soil",
+          "scope": "mountains"
+        }
+      }
+    ]
+  }
+}

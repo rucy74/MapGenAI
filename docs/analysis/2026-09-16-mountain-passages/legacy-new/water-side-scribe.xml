@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<hillAmount>0.100000001</hillAmount>
+			<vegetationDensity>0</vegetationDensity>
+			<animalDensity>0</animalDensity>
+			<geyserCount>0</geyserCount>
+			<hasRockChunks>False</hasRockChunks>
+			<ruinDensity>0</ruinDensity>
+			<dangerDensity>0</dangerDensity>
+			<elevationShapes>
+				<li>
+					<id>pond</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"c","n":0,"prim":"circle","r":0.17,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.002,"fill":"water","from":null,"k":0,"op":"add","outId":null,"s":"c"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":2,"height":7,"id":"ruins_north_lake","kind":"ruin","position":null,"region":null,"relation":{"max_distance":8,"min_distance":2,"side":"north","target":"water"},"rotation":0,"seed":0,"spacing":10,"width":9}</plan>
+				</li>
+			</structures>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

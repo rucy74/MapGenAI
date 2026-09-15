@@ -1,0 +1,42 @@
+{
+  "acceptedModelMaps": 16,
+  "freshModelRequests": 9,
+  "scopeAndWidthChecksPassed": true,
+  "originalGroundComparisons": [
+    {
+      "id": "ko-cut",
+      "terrainChanges": 254,
+      "changedOriginallyOpenGround": 0
+    },
+    {
+      "id": "ko-short",
+      "terrainChanges": 270,
+      "changedOriginallyOpenGround": 0
+    },
+    {
+      "id": "ko-bent",
+      "terrainChanges": 2675,
+      "changedOriginallyOpenGround": 0
+    },
+    {
+      "id": "ko-convert",
+      "terrainChanges": 279,
+      "changedOriginallyOpenGround": 0
+    },
+    {
+      "id": "ko-widen",
+      "terrainChanges": 366,
+      "changedOriginallyOpenGround": 0
+    }
+  ],
+  "legacyMapsIdentical": 10,
+  "legacyLayers": [
+    "terrain",
+    "edifice",
+    "roofs"
+  ],
+  "controlledScope": "Ambient Ancient*, ruins, shrines, road/cave debris and mechanoid remains excluded; authored structures included.",
+  "overlappingAndEmptyRouteChecks": 3,
+  "actualBackgroundPreviews": 4,
+  "fullNativeMaps": 2
+}

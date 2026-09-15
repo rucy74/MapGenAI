@@ -1,0 +1,1 @@
+Build an 8-cell-wide soil path from the donut center to the south map edge, painting the entire route including the open ground outside the mountain.

@@ -1,0 +1,5 @@
+{
+  "sourceCommit": "3610873937cc9b8c97a29713963450cc2ac2a962",
+  "oldDllSha256": "a3edda95b8b31fc064f870796675979ef844331057bda71ca14f0d0d4ba9ad60",
+  "scope": "mountain-only cuts preserve ground outside the pre-cut mountain; existing omitted-scope paths retain full behavior"
+}

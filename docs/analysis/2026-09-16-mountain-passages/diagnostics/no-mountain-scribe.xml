@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>flat_ground</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":2,"id":"all","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":2}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.001,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"all"}]}</compositeJson>
+				</li>
+				<li>
+					<id>a</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>8</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0.5,0.5],[0.5,0]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>
