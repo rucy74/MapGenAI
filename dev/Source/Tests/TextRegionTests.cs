@@ -11,7 +11,7 @@ static class TextRegionTests
     public static void SeedMaterials()
     {
         foreach(var name in new[]{"WaterDeep","WaterShallow","Sand","Soil","SoilRich","MarshyTerrain","Mud","Ice","Gravel"})
-            DefDatabase<TerrainDef>.Definitions[name]=new TerrainDef{defName=name,label=name,fertility=name=="Soil"?1:0};
+            DefDatabase<TerrainDef>.Definitions[name]=new TerrainDef{defName=name,label=name,fertility=name=="Soil"?1:0,IsWater=name.StartsWith("Water")};
     }
     static TileMapState Edit(TileMapState state,string json)=>MapStateEditor.Merge(state,MapParameterParser.Parse(SimpleJson.Parse(json)));
     static TileMapState Island()=>Edit(new TileMapState(),@"{""shape_ops"":[{""op"":""add"",""shape"":{""id"":""island"",""type"":""composite"",""shapes"":[{""id"":""c"",""prim"":""circle"",""center"":[0.5,0.5],""r"":0.2}],""compose"":[{""op"":""add"",""s"":""c"",""e"":0.05,""fill"":""soil""}]}}]}");

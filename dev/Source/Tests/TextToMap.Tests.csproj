@@ -20,6 +20,7 @@
     <Compile Include="../MapGen/TerrainMaterials.cs" Link="TerrainMaterials.cs" />
     <Compile Include="../MapGen/RegionGrid.cs" Link="RegionGrid.cs" />
     <Compile Include="../MapGen/RegionCoverage.cs" Link="RegionCoverage.cs" />
+    <Compile Include="../MapGen/PassageGeometry.cs" Link="PassageGeometry.cs" />
     <Compile Include="../MapGen/AuthoringResult.cs" Link="AuthoringResult.cs" />
     <Compile Include="../MapGen/StructurePlans.cs" Link="StructurePlans.cs" />
     <Compile Include="../MapGen/PlacementPlanner.cs" Link="PlacementPlanner.cs" />

@@ -31,6 +31,8 @@ namespace MapGenAI.MapGen
         public string edge_roughness; // composite contour: omitted/none=precise, low/medium/high or 0..1
 
         public string region, region_part, coverage; // region_fill: source area and counted cell fraction
+        public float[][] points; // passage: ordered normalized centerline, distinct from legacy SDF geometry
+        public int width; // passage width in map cells; zero means absent in older states
 
         // composite (CSG/SDF) 전용 — type="composite"일 때 사용
         public List<ShapePrimitive> compositeShapes;
@@ -53,6 +55,10 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref region, "region");
             Scribe_Values.Look(ref region_part, "region_part");
             Scribe_Values.Look(ref coverage, "coverage");
+            Scribe_Values.Look(ref width, "passageWidth", 0);
+            string pointsJson=points==null?null:MapGenAI.UI.SimpleJson.Serialize(new Dictionary<string,object>{{"points",points}});
+            Scribe_Values.Look(ref pointsJson,"passagePoints");
+            if(Scribe.mode==LoadSaveMode.LoadingVars)points=string.IsNullOrEmpty(pointsJson)?null:MapGenAI.UI.SimpleJson.Parse(pointsJson).GetNestedFloatArray("points");
             string compositeJson = compositeShapes == null && compositeOps == null ? null :
                 MapGenAI.UI.SimpleJson.Serialize(new Dictionary<string, object> { { "shapes", compositeShapes }, { "compose", compositeOps } });
             Scribe_Values.Look(ref compositeJson, "compositeJson");
@@ -73,6 +79,7 @@ namespace MapGenAI.MapGen
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount, edge_roughness = edge_roughness,
                 region = region, region_part = region_part, coverage = coverage,
+                width = width, points = points?.Select(p => (float[])p.Clone()).ToArray(),
                 compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),
                 compositeOps = compositeOps?.Select(op => op.Clone()).ToList()
             };

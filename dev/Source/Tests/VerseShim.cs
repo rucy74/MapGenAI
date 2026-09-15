@@ -160,6 +160,7 @@ namespace Verse
     {
         public string defName,label;
         public bool temporary,bridge,isFoundation,dontRender,exposesToVacuum,IsRiver;
+        public bool IsWater,dangerous;
         public object designationCategory;
         public List<object> costList;
         public int costStuffCount;

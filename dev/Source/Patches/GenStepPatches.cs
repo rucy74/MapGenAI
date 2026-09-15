@@ -66,6 +66,7 @@ namespace MapGenAI.Patches
                 if (shape.fill == "water")
                     ApplyShape(shape, map, elevGrid);
             }
+            PassageGeneration.Apply(map,elevGrid);
 
             // 3. Fertility 오프셋 적용 (기름진 토양 증감)
             if (Mathf.Abs(fertOffset) > 0.01f)
@@ -128,6 +129,7 @@ namespace MapGenAI.Patches
                 case "split":     ApplySplit(shape, map, grid); break;
                 case "composite": ApplyCompositeShape(shape, map, grid); break;
                 case "region_fill": break; // Count and paint after native terrain/structures exist.
+                case "passage": break; // Explicit clear route applied after legacy height/water shapes.
                 default:
                     Log.Warning($"[MapGenAI] 알 수 없는 ElevationShape type: {shape.type}");
                     break;

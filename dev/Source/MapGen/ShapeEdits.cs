@@ -54,6 +54,8 @@ namespace MapGenAI.MapGen
             }
             if (shape.compositeShapes != null) result["shapes"] = shape.compositeShapes;
             if (shape.compositeOps != null) result["compose"] = shape.compositeOps;
+            if (shape.points != null) result["points"] = shape.points;
+            if (shape.width != 0) result["width"] = shape.width;
             return result;
         }
 
@@ -62,7 +64,7 @@ namespace MapGenAI.MapGen
             if (obj == null) throw new FormatException("Expected terrain shape");
             var shape = new ElevationShape { id = obj.GetString("id") };
             foreach (var key in obj.Keys)
-                if (key != "id" && !TextFields.Contains(key) && key != "shapes" && key != "compose")
+                if (key != "id" && !TextFields.Contains(key) && key != "shapes" && key != "compose" && key != "points" && key != "width")
                     throw new FormatException("Unsupported terrain field: " + key);
             foreach (var name in TextFields)
             {
@@ -83,6 +85,11 @@ namespace MapGenAI.MapGen
                 shape.compositeOps = MapParameterParser.ParseCompositeOps(obj);
             }
             else if (obj.ContainsKey("shapes") || obj.ContainsKey("compose")) throw new FormatException("Only composite terrain accepts shapes/compose");
+            if(obj.ContainsKey("points") || obj.ContainsKey("width"))
+            {
+                if(shape.type!="passage")throw new FormatException("points/width require passage");
+                shape.points=obj.GetNestedFloatArray("points");shape.width=obj.GetInt("width");
+            }
             ShapeValidation.Validate(shape);
             return shape;
         }
@@ -161,6 +168,7 @@ namespace MapGenAI.MapGen
         static Vector2 Center(ElevationShape shape)
         {
             if (shape.type == "bump" || shape.type == "ring") return ElevationShape.ParsePosition(shape.position);
+            if (shape.type == "passage") return new Vector2(shape.points.Average(p=>p[0]),shape.points.Average(p=>p[1]));
             if (shape.type != "composite") throw new FormatException("Only bump, ring and composite terrain can be moved by position");
             var points = shape.compositeShapes.SelectMany(p => p.prim == "tri" || p.prim == "poly" ? p.verts : new[] { p.center ?? new[] { .5f, .5f } }).ToList();
             return new Vector2(points.Average(p => p[0]), points.Average(p => p[1]));
@@ -186,7 +194,11 @@ namespace MapGenAI.MapGen
                 }
             }
             ValidatePair(new[] { next.x, next.y });
-            if (shape.type == "composite")
+            if(shape.type=="passage")
+            {
+                var delta=next-old;foreach(var point in shape.points){point[0]+=delta.x;point[1]+=delta.y;}
+            }
+            else if (shape.type == "composite")
             {
                 var delta = next - old;
                 foreach (var part in shape.compositeShapes)

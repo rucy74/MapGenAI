@@ -8,7 +8,7 @@ namespace MapGenAI.MapGen
     // Bounds also cap SDF expression depth/work before any terrain or world state is changed.
     public static class ShapeValidation
     {
-        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite", "region_fill" };
+        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite", "region_fill", "passage" };
         static readonly HashSet<string> Fills = new HashSet<string> { "water", "sand", "soil", "rich_soil", "marsh", "mud", "ice" };
         const string Positions = "center,top_left,top,top_right,left,right,bottom_left,bottom,bottom_right";
 
@@ -17,6 +17,18 @@ namespace MapGenAI.MapGen
             if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
             if (shape.id != null) Id(shape.id);
             Fill(shape.fill);
+            if(shape.type=="passage")
+            {
+                if(shape.points==null || shape.points.Length<2 || shape.points.Length>32)throw new FormatException("passage requires 2..32 points");
+                Range(shape.width,1,64,"passage width in cells");
+                foreach(var point in shape.points)ShapeEdits.ValidatePair(point);
+                for(int i=1;i<shape.points.Length;i++)if(shape.points[i].SequenceEqual(shape.points[i-1]))throw new FormatException("passage has duplicate adjacent points");
+                if(string.IsNullOrEmpty(shape.fill))throw new FormatException("passage requires a dry ground fill");
+                if(shape.region!=null || shape.region_part!=null || shape.coverage!=null || shape.direction!=null || shape.strength!=null || shape.position!=null || shape.size!=null || shape.gap!=null || shape.fade!=null || shape.noise_amount!=null || shape.edge_roughness!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
+                    throw new FormatException("passage uses only points, width and dry fill; keep natural surroundings as separate terrain");
+                return;
+            }
+            if(shape.points!=null || shape.width!=0)throw new FormatException("points/width require passage");
             if(shape.type=="region_fill")
             {
                 Id(shape.region);

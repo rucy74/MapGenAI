@@ -32,7 +32,11 @@ namespace MapGenAI.MapGen
         {
             foreach (var shape in state.elevationShapes)
             {
-                if (!string.IsNullOrEmpty(shape.fill)) Resolve(shape.fill);
+                if (!string.IsNullOrEmpty(shape.fill))
+                {
+                    var material=Resolve(shape.fill);
+                    if(shape.type=="passage" && (material.IsWater || material.dangerous))throw new FormatException("통로에는 마른 안전한 바닥 재료가 필요합니다. / Passage requires dry, safe ground.");
+                }
                 if (shape.compositeOps != null)
                     foreach (var op in shape.compositeOps)
                         if (!string.IsNullOrEmpty(op.fill)) Resolve(op.fill);

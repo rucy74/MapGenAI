@@ -351,7 +351,7 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
             var outcome=AuthoringGeneration.Latest(tileId,MapGenParams.CaptureState(tileId));
             if(outcome?.issues.Count>0)currentParams += "\nLast generation failed: " + string.Join("\n",outcome.issues);
 
-            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + RecommendationPlan.Rules;
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + PassagePrompt.Rules(isKo) + RecommendationPlan.Rules;
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 

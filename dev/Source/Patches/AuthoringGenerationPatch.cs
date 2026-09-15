@@ -26,13 +26,17 @@ namespace MapGenAI.Patches
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
             }).ToList();
         }
-        static void Postfix(Map map) => AuthoringGeneration.Finish((int)map.Tile);
+        static void Postfix(Map map)
+        {
+            try {PassageGeneration.Check(map);}catch(Exception e){AuthoringGeneration.Fail(e);}
+            AuthoringGeneration.Finish((int)map.Tile);
+        }
     }
     sealed class AuthoredTerrainStep : GenStep
     {
         public override int SeedPart => 214536710;
         public override void Generate(Map map,GenStepParams parms)
-        {try {AuthoringGeneration.ApplyTerrain(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
+        {try {AuthoringGeneration.ApplyTerrain(map);PassageGeneration.Reserve(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
     }
     sealed class PositionedStructureStep : GenStep
     {

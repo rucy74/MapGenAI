@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$GameRoot='G:/SteamLibrary/steamapps/common/RimWorld',
     [string]$Output='',
     [string]$Profile='',
@@ -25,6 +25,9 @@ param(
     [string]$RecommendationReplies='',
     [switch]$RecommendationScreen,
     [string]$ReadableChoices='',
+    [string]$LandformSuite='',
+    [string]$LandformReplies='',
+    [int]$LandformSample=0,
     [string]$Coverage='',
     [string]$CoverageReplies='',
     [string]$FeedbackResponses='',
@@ -38,7 +41,7 @@ param(
     [string]$ImageStates=''
 )
 $ErrorActionPreference='Stop'
-$probeStamp=Get-Date -Format 'yyyyMMdd-HHmmss'
+$probeStamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 $probeRepo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 if (-not $Output) { $Output=Join-Path $probeRepo "docs/analysis/2026-09-13-implementation/runtime-$probeStamp" }
 if (-not $Profile) { $Profile=Join-Path $env:LOCALAPPDATA "mapgen-ai-probe/profile-$probeStamp" }
@@ -84,6 +87,8 @@ if($Language){
 $arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','640',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
+if($LandformSuite){$arguments+='-mapgenAILandformSuite="'+[IO.Path]::GetFullPath($LandformSuite)+'"';$arguments+='-mapgenAILandformSample='+$LandformSample}
+if($LandformReplies){$arguments+='-mapgenAILandformReplies="'+[IO.Path]::GetFullPath($LandformReplies)+'"'}
 if($Coverage){$arguments+='-mapgenAICoverage="'+[IO.Path]::GetFullPath($Coverage)+'"'}
 if($CoverageReplies){$arguments+='-mapgenAICoverageReplies="'+[IO.Path]::GetFullPath($CoverageReplies)+'"'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}

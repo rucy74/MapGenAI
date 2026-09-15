@@ -11,7 +11,7 @@ try {
     $probeProfilePath=[IO.Path]::GetFullPath($run.profile)
     $modsRoot=[IO.Path]::GetFullPath((Join-Path $GameRoot 'Mods')).TrimEnd('\')
     $probeProfilePathsRoot=[IO.Path]::GetFullPath((Join-Path $env:LOCALAPPDATA 'mapgen-ai-probe')).TrimEnd('\')+'\'
-    if((Split-Path -Parent $target) -ne $modsRoot -or (Split-Path -Leaf $target) -notmatch '^MapGenAI_Probe_\d{8}-\d{6}$'){throw 'Refusing target outside the intended temporary mod directory'}
+    if((Split-Path -Parent $target) -ne $modsRoot -or (Split-Path -Leaf $target) -notmatch '^MapGenAI_Probe_\d{8}-\d{6}(-\d{3})?$'){throw 'Refusing target outside the intended temporary mod directory'}
     if(-not $probeProfilePath.StartsWith($probeProfilePathsRoot,[StringComparison]::OrdinalIgnoreCase)){throw 'Profile outside owned probe directory'}
     if(-not (Test-Path -LiteralPath $target)){return}
     if((Get-Item -LiteralPath $target).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Refusing a linked mod directory'}
