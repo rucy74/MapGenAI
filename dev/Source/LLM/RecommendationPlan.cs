@@ -40,7 +40,7 @@ Recommendations and selectable alternatives:
                 throw new FormatException("recommend requires 1..3 options, each with params");
             return options;
         }
-        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean)
+        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null)
         {
             var plans=new List<RecommendationPlan>();
             foreach(var option in Options(command))
@@ -51,16 +51,7 @@ Recommendations and selectable alternatives:
                 var after=MapStateEditor.Merge(before,data);
                 if(MapStateCodec.ChangedFields(before,after).Count==0)throw new FormatException("Recommendation has no changes");
                 var envelope=new SimpleJsonObject();envelope.SetString("action","generate");envelope.SetObject("params",parameters);
-                string summary=MapStateDescription.Describe(before,after,korean)
-                    .Replace(korean?"설정 변경 내용:":"Settings changed:",korean?"적용할 설정:":"Planned settings:");
-                // Shape IDs alone do not tell the user which materials a proposal will place.
-                foreach(var shape in after.elevationShapes.Where(s=>!before.elevationShapes.Any(b=>b.id==s.id)))
-                {
-                    var fills=new List<string>();
-                    if(!string.IsNullOrEmpty(shape.fill))fills.Add(shape.fill);
-                    if(shape.compositeOps!=null)fills.AddRange(shape.compositeOps.Where(c=>!string.IsNullOrEmpty(c.fill)).Select(c=>c.fill));
-                    summary+="\n  "+shape.id+": "+shape.type+(fills.Count==0?"":" · "+string.Join(", ",fills.Distinct()));
-                }
+                string summary=new MapPlanDescription(korean,lookup).Describe(before,after);
                 plans.Add(new RecommendationPlan(SimpleJson.Serialize(envelope),summary));
             }
             return plans; // Nothing is published when any option failed.

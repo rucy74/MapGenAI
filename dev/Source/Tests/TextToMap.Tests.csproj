@@ -39,6 +39,7 @@
     <Compile Include="../ImageInput/ImageHeader.cs" Link="ImageHeader.cs" />
     <Compile Include="../ImageInput/ColorTerrainPlan.cs" Link="ColorTerrainPlan.cs" />
     <Compile Include="../MapGen/MapStateDescription.cs" Link="MapStateDescription.cs" />
+    <Compile Include="../MapGen/MapPlanDescription.cs" Link="MapPlanDescription.cs" />
     <Compile Include="../MapGen/ShapeEditPrompt.cs" Link="ShapeEditPrompt.cs" />
     <Compile Include="../MapGen/FeatureEditPrompt.cs" Link="FeatureEditPrompt.cs" />
     <Compile Include="../MapGen/FeaturePolicy.cs" Link="FeaturePolicy.cs" />

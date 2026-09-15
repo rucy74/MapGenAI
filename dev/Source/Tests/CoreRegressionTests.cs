@@ -73,6 +73,7 @@ static class CoreRegressionTests
         TextRegionTests.RunAll();
         ManualFailureTests.RunAll();
         StructuredChatTests.RunAll();
+        MapPlanDescriptionTests.RunAll();
         SpatialRelationTests.RunAll();
         AncientPlanTests.RunAll();
         Console.WriteLine($"CoreRegressionTests: {passed} PASS / {failed} FAIL");

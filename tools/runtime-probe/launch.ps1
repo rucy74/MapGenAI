@@ -24,6 +24,7 @@ param(
     [string]$Recommendations='',
     [string]$RecommendationReplies='',
     [switch]$RecommendationScreen,
+    [string]$ReadableChoices='',
     [string]$FeedbackResponses='',
     [switch]$Landmarks,
     [string]$FeatureResponses='',
@@ -98,6 +99,7 @@ if($EditPreflight){$arguments+=('-mapgenAIEditPreflight="'+[IO.Path]::GetFullPat
 if($EditReplies){$arguments+=('-mapgenAIEditReplies="'+[IO.Path]::GetFullPath($EditReplies)+'"')}
 if($Recommendations){$arguments+=('-mapgenAIRecommendations="'+[IO.Path]::GetFullPath($Recommendations)+'"')}
 if($RecommendationScreen){$arguments+='-mapgenAIRecommendationScreen=true'}
+if($ReadableChoices){$arguments+=('-mapgenAIReadableChoices="'+[IO.Path]::GetFullPath($ReadableChoices)+'"')}
 if($RecommendationReplies){$arguments+=('-mapgenAIRecommendationReplies="'+[IO.Path]::GetFullPath($RecommendationReplies)+'"')}
 if($FeedbackResponses){$arguments+=('-mapgenAIFeedbackResponses="'+[IO.Path]::GetFullPath($FeedbackResponses)+'"')}
 if($PreviewOnly){$arguments+='-mapgenAIPreviewOnly=true'}

@@ -741,10 +741,10 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
                     try
                     {
                         var plans=RecommendationPlan.Validate(parsed,MapGenParams.CaptureState(_openedTileId),
-                            data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean());
+                            data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean(),DefinitionText);
                         _recommendations=plans;_recommendationState=RecommendationState();
                         string message=(IsKorean()?"현재 설정과 함께 적용할 수 있는 추천입니다. 번호를 선택하면 해당 설정을 적용합니다.":"These options are compatible with your current settings. Choose a number to apply its settings.");
-                        for(int i=0;i<plans.Count;i++)message+="\n\n"+(i+1)+". "+plans[i].Summary;
+                        for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — 이렇게 바뀝니다":"Option "+(i+1)+" — changes")+"\n"+plans[i].Summary;
                         if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
                             message+=IsKorean()?"\n\n구조물의 실제 배치는 맵 생성 때 확인합니다.":"\n\nActual structure placement is checked during generation.";
                         _history.Add(new ChatMessage("assistant",message));
@@ -796,6 +796,7 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
                     var proposed = MapStateEditor.Merge(before,data);
                     var changes = MapStateCodec.ChangedFields(before,proposed);
                     // Backend rejects the whole response before any state or undo history changes.
+                    var oldFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
                     MapGenParams.ApplyPatch(data, _openedTileId);
                     string desc;
                     if (changes.Count == 0)
@@ -805,8 +806,12 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
                         _paramStack.Push(previous);
                         _paramsReady = true;
                         _llmContext.Clear();
-                        desc = MapStateDescription.Describe(before,MapGenParams.CaptureState(_openedTileId),IsKorean());
-                        if (!string.IsNullOrEmpty(MapGenParams.LastWorldChanges)) desc += "\n" + MapGenParams.LastWorldChanges;
+                        desc = (IsKorean()?"변경한 내용:\n":"Changes applied:\n")+new MapPlanDescription(IsKorean(),DefinitionText).Describe(before,MapGenParams.CaptureState(_openedTileId));
+                        var currentFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
+                        var actualAdded=currentFeatures.Except(oldFeatures).ToList();var actualRemoved=oldFeatures.Except(currentFeatures).ToList();
+                        var names=new MapPlanDescription(IsKorean(),DefinitionText);
+                        if(actualAdded.Count>0)desc+="\n"+(IsKorean()?"실제 추가된 특징: ":"Features added: ")+string.Join(", ",actualAdded.Select(n=>names.Name("feature",n)));
+                        if(actualRemoved.Count>0)desc+="\n"+(IsKorean()?"실제 제거된 특징: ":"Features removed: ")+string.Join(", ",actualRemoved.Select(n=>names.Name("feature",n)));
                         if (!string.IsNullOrEmpty(MapGenParams.LastApplyWarning)) warnings.Add(MapGenParams.LastApplyWarning);
                     }
 
@@ -837,6 +842,30 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
         }
 
         private void ClearRecommendations(){_recommendations=null;_recommendationState=null;}
+        private static PlanDefinition DefinitionText(string kind,string id)
+        {
+            if(kind=="category")
+            {
+                var labels=DefDatabase<TileMutatorDef>.AllDefsListForReading.Where(d=>d.categories.Contains(id) && !string.IsNullOrEmpty(d.label)).Select(d=>d.label).Distinct().ToList();
+                return labels.Count==0?null:new PlanDefinition(string.Join("·",labels.Take(4))+(labels.Count>4?(IsKorean()?" 등":" and others"):""));
+            }
+            if(kind=="feature")
+            {
+                var def=DefDatabase<TileMutatorDef>.GetNamedSilentFail(id);
+                return def==null?null:new PlanDefinition(def.label,def.description);
+            }
+            if(kind=="terrain")
+            {
+                var def=DefDatabase<TerrainDef>.GetNamedSilentFail(TerrainMaterials.DefName(id));
+                return def==null?null:new PlanDefinition(def.label,def.description);
+            }
+            if(kind=="rock")
+            {
+                var def=DefDatabase<ThingDef>.GetNamedSilentFail(id);
+                return def==null?null:new PlanDefinition(def.label,def.description);
+            }
+            return null;
+        }
         private string RecommendationState()
         {
             var tile=Find.WorldGrid[_openedTileId];
