@@ -1,0 +1,1 @@
+{"action":"generate","description":"Cut an 8-cell-wide dry soil passage through the mountain connecting the west and east edges.","params":{"shape_ops":[{"op":"add","shape":{"id":"mountain_passage","type":"passage","points":[[0.0,0.5],[0.35,0.7],[0.65,0.3],[1.0,0.5]],"width":8,"fill":"Soil"}}]}}

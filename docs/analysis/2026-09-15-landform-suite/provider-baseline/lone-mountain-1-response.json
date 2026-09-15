@@ -1,0 +1,30 @@
+{
+  "action": "generate",
+  "description": "맵 중앙에 반지름 약 20% 크기의 외딴 원형 산을 생성하고 주변을 평지로 유지합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "center_round_mountain",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "c1",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "c1",
+              "e": 0.85
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "action": "generate",
+  "description": "크고 작은 섬 3개로 이루어진 군도 지형을 형성하고, 가장 큰 섬에서 맵 가장자리로 걸어서 이동할 수 있는 얕은 물 여울 통로를 배치합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "archipelago_water",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "base_sea",
+              "prim": "rect",
+              "center": [0.5, 0.5],
+              "w": 1.0,
+              "h": 1.0
+            },
+            {
+              "id": "main_island",
+              "prim": "ellipse",
+              "center": [0.45, 0.5],
+              "w": 0.42,
+              "h": 0.38
+            },
+            {
+              "id": "small_island_north",
+              "prim": "ellipse",
+              "center": [0.72, 0.72],
+              "w": 0.22,
+              "h": 0.2
+            },
+            {
+              "id": "small_island_south",
+              "prim": "ellipse",
+              "center": [0.75, 0.28],
+              "w": 0.2,
+              "h": 0.18
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "main_island",
+              "from": "base_sea",
+              "out": "water_1"
+            },
+            {
+              "op": "sub",
+              "a": "small_island_north",
+              "from": "water_1",
+              "out": "water_2"
+            },
+            {
+              "op": "sub",
+              "a": "small_island_south",
+              "from": "water_2",
+              "out": "sea_channels"
+            },
+            {
+              "op": "add",
+              "s": "sea_channels",
+              "fill": "WaterDeep",
+              "e": 0,
+              "f": 0.02
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "shallow_water_ford",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "path_west",
+              "prim": "rect",
+              "center": [0.12, 0.5],
+              "w": 0.26,
+              "h": 0.08
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "path_west",
+              "fill": "WaterShallow",
+              "e": 0,
+              "f": 0.015
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

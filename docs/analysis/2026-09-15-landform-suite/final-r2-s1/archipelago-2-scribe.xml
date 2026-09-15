@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>ocean_base</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":1,"id":"sea_full","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":1}],"compose":[{"a":null,"b":null,"e":0,"f":0.05,"fill":"WaterDeep","from":null,"k":0,"op":"add","outId":null,"s":"sea_full"}]}</compositeJson>
+				</li>
+				<li>
+					<id>main_island</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0.34,"id":"island_center","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.38}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"island_center"}]}</compositeJson>
+				</li>
+				<li>
+					<id>small_island_west</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.2,0.75],"h":0,"id":"island_w","n":0,"prim":"circle","r":0.11,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"island_w"}]}</compositeJson>
+				</li>
+				<li>
+					<id>small_island_east</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.8,0.25],"h":0,"id":"island_e","n":0,"prim":"circle","r":0.12,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"island_e"}]}</compositeJson>
+				</li>
+				<li>
+					<id>shallow_water_ford</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.17],"h":0.34,"id":"ford_path","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.08}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"ford_path"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

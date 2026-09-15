@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>promontory_land</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.6,0.5],"h":0.22,"id":"base_strip","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.5},{"center":[0.75,0.5],"h":0,"id":"headland","n":0,"prim":"circle","r":0.16,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"base_strip","b":"headland","e":0,"f":0.05,"fill":null,"from":null,"k":0.08,"op":"union","outId":"land_mass","s":null},{"a":null,"b":null,"e":0.05,"f":0.015,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"land_mass"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

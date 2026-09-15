@@ -1,0 +1,8 @@
+{
+  "baseCommit": "4b05726c18b02b44cf96bcf6df06d05b43b0c7ef",
+  "dllSha256": "91955863bab902bbfc70b061025aa80476d82d7ec1e4a5d696c160e933ca8596",
+  "frozenDll": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\landform-suite\\baseline-MapGenAI.dll",
+  "tag": "dev-landform-baseline-2026-09-15",
+  "imageEnabled": false,
+  "fableCallsAllowed": false
+}

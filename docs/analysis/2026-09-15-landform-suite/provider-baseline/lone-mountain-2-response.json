@@ -1,0 +1,16 @@
+{
+  "action": "generate",
+  "description": "중앙에 직경 약 40% 크기의 산이 솟아 있고 주변은 평평한 지형",
+  "params": {
+    "hills": "none",
+    "hill_amount": 0.1,
+    "elevation_shapes": [
+      {
+        "type": "bump",
+        "position": "center",
+        "size": 0.2,
+        "strength": "strong"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"맵 중앙(z=0.5)을 가로질러 왼쪽 끝에서 오른쪽 끝까지 산을 깎아 최소 8칸 폭의 토양 통로를 개설했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"horizontal_passage","type":"passage","points":[[0,0.5],[1,0.5]],"width":8,"fill":"Soil"}}]}}

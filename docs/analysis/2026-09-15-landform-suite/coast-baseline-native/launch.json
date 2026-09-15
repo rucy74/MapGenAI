@@ -1,0 +1,9 @@
+{
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260915-235805-063",
+  "created": "2026-09-15T23:58:05.2089800+09:00",
+  "pid": 50800,
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-15-landform-suite\\coast-baseline-native",
+  "sourceDllSha256": "A3EDDA95B8B31FC064F870796675979EF844331057BDA71CA14F0D0D4BA9AD60",
+  "probeDllSha256": "AECA5EB3E9914BCBFA1CE26A71450FE02F3733B06616F75124F19EDA7000408D",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260915-235805-063"
+}

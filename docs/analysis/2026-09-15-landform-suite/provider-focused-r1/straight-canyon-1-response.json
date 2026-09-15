@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 산을 동서로 관통하는 폭 8칸의 마른 흙 통로 협곡을 생성합니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"east_west_canyon","type":"passage","points":[[0,0.5],[1,0.5]],"width":8,"fill":"Soil"}}]}}

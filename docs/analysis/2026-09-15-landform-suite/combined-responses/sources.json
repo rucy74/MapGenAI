@@ -1,0 +1,22 @@
+{
+  "archipelago-1-response.json": "provider-baseline",
+  "archipelago-2-response.json": "provider-baseline",
+  "bent-canyon-1-response.json": "provider-focused-r1",
+  "bent-canyon-2-response.json": "provider-focused-r1",
+  "caldera-1-response.json": "provider-focused-r1",
+  "caldera-2-response.json": "provider-baseline",
+  "cave-entrance-1-response.json": "provider-baseline",
+  "cave-entrance-2-response.json": "provider-baseline",
+  "lake-island-1-response.json": "provider-focused-r1",
+  "lake-island-2-response.json": "provider-baseline",
+  "lone-mountain-1-response.json": "provider-focused-r1",
+  "lone-mountain-2-response.json": "provider-baseline",
+  "oasis-1-response.json": "provider-focused-r1",
+  "oasis-2-response.json": "provider-baseline",
+  "peninsula-1-response.json": "provider-baseline",
+  "peninsula-2-response.json": "provider-baseline",
+  "straight-canyon-1-response.json": "provider-focused-r1",
+  "straight-canyon-2-response.json": "provider-focused-r1",
+  "valley-exit-1-response.json": "provider-focused-r1",
+  "valley-exit-2-response.json": "provider-focused-r1"
+}

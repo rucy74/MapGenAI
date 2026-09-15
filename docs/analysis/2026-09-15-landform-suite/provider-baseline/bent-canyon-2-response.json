@@ -1,0 +1,67 @@
+{
+  "action": "generate",
+  "description": "중앙 산맥을 왼쪽에서 오른쪽으로 관통하는 지그재그 마른 흙길 통로를 생성합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "zigzag_pass",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "poly_path",
+              "prim": "poly",
+              "verts": [
+                [0.10, 0.54],
+                [0.32, 0.74],
+                [0.38, 0.74],
+                [0.68, 0.34],
+                [0.90, 0.54],
+                [0.90, 0.46],
+                [0.62, 0.26],
+                [0.32, 0.66],
+                [0.10, 0.46]
+              ]
+            },
+            {
+              "id": "joint1",
+              "prim": "circle",
+              "center": [0.35, 0.70],
+              "r": 0.055
+            },
+            {
+              "id": "joint2",
+              "prim": "circle",
+              "center": [0.65, 0.30],
+              "r": 0.055
+            }
+          ],
+          "compose": [
+            {
+              "op": "union",
+              "a": "poly_path",
+              "b": "joint1",
+              "outId": "u1",
+              "k": 0.02
+            },
+            {
+              "op": "union",
+              "a": "u1",
+              "b": "joint2",
+              "outId": "full_path",
+              "k": 0.02
+            },
+            {
+              "op": "add",
+              "s": "full_path",
+              "fill": "Soil",
+              "e": 0.05,
+              "f": 0.01
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

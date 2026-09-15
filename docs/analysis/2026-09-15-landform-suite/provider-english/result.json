@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"bent-canyon-1","action":"generate","model":"gemini-3.8-flash","inputTokens":9526,"outputTokens":99},{"id":"valley-exit-1","action":"generate","model":"gemini-3.8-flash","inputTokens":9596,"outputTokens":82}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

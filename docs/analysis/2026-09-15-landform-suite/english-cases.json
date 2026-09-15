@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "id": "valley-exit-1",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "central_mountain_donut",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "outer",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.35
+              },
+              {
+                "id": "inner",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.18
+              }
+            ],
+            "compose": [
+              {
+                "op": "sub",
+                "a": "inner",
+                "from": "outer",
+                "out": "ring"
+              },
+              {
+                "op": "add",
+                "s": "ring",
+                "e": 0.85,
+                "f": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      "request": "Make a dry soil passage at least 8 cells wide from the center of the donut mountain interior to the south edge of the map. Keep the rest of the mountain.",
+      "preview": true
+    },
+    {
+      "id": "bent-canyon-1",
+      "kind": "bent-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "Cut an 8-cell-wide dry soil passage through the existing mountain from (0,0.5) through (0.35,0.7) and (0.65,0.3) to (1,0.5), in that order. Preserve the other mountain areas.",
+      "preview": true
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 산 고리의 내부에서 남쪽 바깥까지 걸어나갈 수 있도록 폭 8칸 이상의 마른 흙길 통로를 뚫었습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"south_pass","type":"composite","shapes":[{"id":"cut","prim":"rect","center":[0.5,0.2],"w":0.07,"h":0.4}],"compose":[{"op":"add","s":"cut","fill":"soil","e":0.05,"f":0.01}]}}]}}

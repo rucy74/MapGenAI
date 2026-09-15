@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 산을 동서로 가로지르는 평평한 흙길 통로를 생성했습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"east_west_pass","type":"composite","shapes":[{"id":"pass_rect","prim":"rect","center":[0.5,0.5],"w":1.0,"h":0.08}],"compose":[{"op":"add","s":"pass_rect","fill":"soil","e":0.05,"f":0.01}]}}]}}

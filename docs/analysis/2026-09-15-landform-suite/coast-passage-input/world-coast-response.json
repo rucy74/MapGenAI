@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"vegetation_density": 0.9, "shape_ops": [{"op": "add", "shape": {"id": "coast_crossing", "type": "passage", "points": [[0, 0.5], [1, 0.5]], "width": 8, "fill": "Soil"}}]}}

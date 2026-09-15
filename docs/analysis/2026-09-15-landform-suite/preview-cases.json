@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "id": "valley-exit-1",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "central_mountain_donut",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "outer",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.35
+              },
+              {
+                "id": "inner",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.18
+              }
+            ],
+            "compose": [
+              {
+                "op": "sub",
+                "a": "inner",
+                "from": "outer",
+                "out": "ring"
+              },
+              {
+                "op": "add",
+                "s": "ring",
+                "e": 0.85,
+                "f": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      "request": "기존 도넛 산은 유지하고 중앙 내부에서 맵 남쪽 가장자리까지 이어지는 마른 출구 하나를 만들어줘. 가장 좁은 곳도8칸 이상. 출구 바닥은 흙으로 하고 다른 산은 그대로.",
+      "preview": true
+    },
+    {
+      "id": "bent-canyon-1",
+      "kind": "bent-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "기존 산에 마른 굽은 협곡을 내줘. 맵의 왼쪽(0%,50%)에서 (35%,70%), (65%,30%)를 지나 오른쪽(100%,50%)까지 이어져야 해. 모든 구간 최소8칸 폭, 흙 바닥이며 다른 산은 유지해.",
+      "preview": true
+    }
+  ]
+}

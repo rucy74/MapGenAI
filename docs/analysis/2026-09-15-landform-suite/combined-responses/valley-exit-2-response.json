@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산맥 안쪽에서 남쪽 맵 끝까지 이어지는 폭 8칸의 흙길 통로를 뚫었습니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"south_passage","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"fill":"Soil"}}]}}

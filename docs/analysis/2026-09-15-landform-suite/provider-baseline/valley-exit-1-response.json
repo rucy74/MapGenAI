@@ -1,0 +1,1 @@
+{"action":"generate","description":"중앙 내부에서 남쪽 맵 가장자리까지 이어지는 흙 바닥의 마른 출구 통로를 추가합니다.","params":{"shape_ops":[{"op":"add","shape":{"id":"south_pass","type":"composite","shapes":[{"id":"cut","prim":"rect","center":[0.5,0.22],"w":0.07,"h":0.44}],"compose":[{"op":"add","s":"cut","fill":"Soil","e":0.05,"f":0.01}]}}]}}

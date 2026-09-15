@@ -15,6 +15,7 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 - **Natural Language Map Generation** — Describe terrain in plain text, AI converts it to map parameters
 - **Live Map Preview** — See changes instantly through Map Preview integration
 - **Elevation Shapes** — Diagonal mountain ranges, central lakes, ring fortresses, canyons, ridges, passages, and more
+- **Explicit Dry Passages** — Connect ordered waypoints with a width in map cells. Existing shape behavior is preserved; generation reports remaining obstructions and protects world water.
 - **Free-form Shapes** — Star, heart, crescent, and custom shapes via CSG/SDF composite system
 - **Terrain Fill** — Paint areas with loaded permanent terrain materials, including Odyssey lava, cooled lava, soil, sand, gravel, mud, or ice
 - **Positioned Ruins** — Place small ruined walls/floors inside a named shape or bounded location; full footprints and available space are checked

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>central_lake</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"outer_water","n":0,"prim":"circle","r":0.3,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.5,0.5],"h":0,"id":"inner_hole","n":0,"prim":"circle","r":0.1,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"inner_hole","b":null,"e":0,"f":0.05,"fill":null,"from":"outer_water","k":0,"op":"sub","outId":"lake_ring","s":null},{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterDeep","from":null,"k":0,"op":"add","outId":null,"s":"lake_ring"}]}</compositeJson>
+				</li>
+				<li>
+					<id>center_island</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"island_ground","n":0,"prim":"circle","r":0.1,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.015,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"island_ground"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

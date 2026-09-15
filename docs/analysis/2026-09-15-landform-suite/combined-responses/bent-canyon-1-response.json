@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 산을 관통하는 최소 8칸 폭의 흙바닥 굽은 통로를 생성합니다.","params":{"shape_ops":[{"op":"add","shape":{"fill":"Soil","id":"curved_canyon","points":[[0.0,0.5],[0.35,0.7],[0.65,0.3],[1.0,0.5]],"type":"passage","width":8}}]}}

@@ -1,0 +1,286 @@
+{
+  "scope": "Three-seed native comparisons, explicitly separated from semantic/visual limits.",
+  "baseline": {
+    "maps": 54,
+    "paths": [
+      {
+        "sample": 0,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": false
+      },
+      {
+        "sample": 0,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": false
+      },
+      {
+        "sample": 1,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": false,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": false,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": false
+      }
+    ],
+    "passageCases": 18,
+    "passageConnectionsAndWaypointsPassed": 13,
+    "generationWarnings": []
+  },
+  "final": {
+    "maps": 54,
+    "paths": [
+      {
+        "sample": 0,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 0,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 1,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "valley-exit-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "valley-exit-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "straight-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "straight-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "bent-canyon-1",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      },
+      {
+        "sample": 2,
+        "id": "bent-canyon-2",
+        "connectedAtWidth8": true,
+        "waypointsAtWidth8": true
+      }
+    ],
+    "passageCases": 18,
+    "passageConnectionsAndWaypointsPassed": 18,
+    "generationWarnings": [
+      {
+        "sample": 1,
+        "id": "bent-canyon-2",
+        "issues": [
+          "요청한 폭의 마른 통로에 장애물이 4칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 4 obstructed cells; adjust its route/width. World water and buildings are preserved."
+        ]
+      }
+    ]
+  },
+  "legacyCellsUnchanged": {
+    "cases": [
+      "d04-1",
+      "f03-1",
+      "ko70-1",
+      "followup50",
+      "repair70",
+      "island-edge",
+      "water-side",
+      "foothills"
+    ],
+    "cellsPerMap": 62500,
+    "layers": [
+      "terrain",
+      "edifice",
+      "roofs"
+    ],
+    "scope": "Only this controlled fixture omits ambient Ancient*, ScatterRuinsSimple, ScatterShrines, ScatterRoadDebris, ScatterCaveDebris and MechanoidRemains. Authored structures and native terrain remain enabled. Full native runs are retained separately."
+  },
+  "backgroundPreviews": [
+    {
+      "language": "ko",
+      "id": "valley-exit-1"
+    },
+    {
+      "language": "ko",
+      "id": "bent-canyon-1"
+    },
+    {
+      "language": "en",
+      "id": "valley-exit-1"
+    },
+    {
+      "language": "en",
+      "id": "bent-canyon-1"
+    }
+  ],
+  "legacyCoverageChecks": 116,
+  "freshGeminiRequests": 32,
+  "worldCoastProtection": {
+    "oceanCellsUnchanged": 8624,
+    "obstructionReported": true
+  }
+}

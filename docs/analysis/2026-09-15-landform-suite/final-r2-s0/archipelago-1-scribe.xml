@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>archipelago_water</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":1,"id":"base_sea","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":1},{"center":[0.45,0.5],"h":0.38,"id":"main_island","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.42},{"center":[0.72,0.72],"h":0.2,"id":"small_island_north","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.22},{"center":[0.75,0.28],"h":0.18,"id":"small_island_south","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.2}],"compose":[{"a":"main_island","b":null,"e":0,"f":0.05,"fill":null,"from":"base_sea","k":0,"op":"sub","outId":"water_1","s":null},{"a":"small_island_north","b":null,"e":0,"f":0.05,"fill":null,"from":"water_1","k":0,"op":"sub","outId":"water_2","s":null},{"a":"small_island_south","b":null,"e":0,"f":0.05,"fill":null,"from":"water_2","k":0,"op":"sub","outId":"sea_channels","s":null},{"a":null,"b":null,"e":0,"f":0.02,"fill":"WaterDeep","from":null,"k":0,"op":"add","outId":null,"s":"sea_channels"}]}</compositeJson>
+				</li>
+				<li>
+					<id>shallow_water_ford</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.12,0.5],"h":0.08,"id":"path_west","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.26}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"path_west"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

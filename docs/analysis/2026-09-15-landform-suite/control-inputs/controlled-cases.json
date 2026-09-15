@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "id": "d04-1",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "d04-1-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-14-manual-fixes\\provider-r1\\d04-1-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "f03-1",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "f03-1-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-14-manual-fixes\\provider-r1\\f03-1-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko70-1",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "ko70-1-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-15-region-coverage\\provider-r1\\ko70-1-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "followup50",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "followup50-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-15-region-coverage\\provider-r1\\followup50-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "repair70",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "repair70-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-15-region-coverage\\provider-r1\\repair70-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "island-edge",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "island-edge-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-14-text-expansion\\spatial-provider-r1\\island-edge-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "water-side",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "water-side-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-14-text-expansion\\spatial-provider-r1\\water-side-response.json",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "foothills",
+      "kind": "legacy-control",
+      "tile": "inland",
+      "beforeFile": "foothills-before.json",
+      "request": "Replay recorded successful command; no new model request.",
+      "source": "docs\\analysis\\2026-09-14-text-expansion\\spatial-provider-r1\\foothills-response.json",
+      "omitAmbientRuins": true
+    }
+  ]
+}

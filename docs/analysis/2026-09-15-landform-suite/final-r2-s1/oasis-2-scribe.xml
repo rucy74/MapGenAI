@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>oasis_sand_outer</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"s_circle","n":0,"prim":"circle","r":0.16,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.015,"fill":"Sand","from":null,"k":0,"op":"add","outId":null,"s":"s_circle"}]}</compositeJson>
+				</li>
+				<li>
+					<id>oasis_rich_soil_mid</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"r_circle","n":0,"prim":"circle","r":0.12,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"r_circle"}]}</compositeJson>
+				</li>
+				<li>
+					<id>oasis_water_center</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"w_circle","n":0,"prim":"circle","r":0.08,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0,"f":0.01,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"w_circle"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

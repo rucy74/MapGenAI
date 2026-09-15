@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {
+      "id": "world-coast",
+      "kind": "protected-coast",
+      "tile": "coast",
+      "beforeParams": {},
+      "request": "Diagnostic authored dry route across the ocean: native water must survive and the obstruction must be reported."
+    }
+  ]
+}

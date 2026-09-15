@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>peninsula_body</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.65,0.5],"h":0.16,"id":"neck","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.3},{"center":[0.8,0.5],"h":0.22,"id":"head","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.25}],"compose":[{"a":"neck","b":"head","e":0,"f":0.05,"fill":null,"from":null,"k":0.05,"op":"union","outId":"peninsula","s":null},{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"peninsula"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

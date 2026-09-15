@@ -1,0 +1,9 @@
+{
+  "probeDllSha256": "5324A842454F9DA310D82D93E941DE938AB56282E638C1387987DD0C590991BE",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-15-landform-suite\\controlled-r2-baseline",
+  "sourceDllSha256": "91955863BAB902BBFC70B061025AA80476D82D7EC1E4A5D696C160E933CA8596",
+  "pid": 48004,
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260915-235319-907",
+  "created": "2026-09-15T23:53:20.3139100+09:00",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260915-235319-907"
+}

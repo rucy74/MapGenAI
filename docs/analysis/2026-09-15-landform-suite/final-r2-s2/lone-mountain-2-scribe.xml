@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<hillAmount>0.100000001</hillAmount>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>bump</type>
+					<strength>strong</strength>
+					<position>center</position>
+					<size>0.2</size>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

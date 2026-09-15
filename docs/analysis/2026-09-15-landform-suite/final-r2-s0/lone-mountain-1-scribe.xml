@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>central_round_mountain</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"c1","n":0,"prim":"circle","r":0.2,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.8,"f":0.05,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"c1"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

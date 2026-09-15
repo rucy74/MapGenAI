@@ -1,0 +1,272 @@
+{
+  "cases": [
+    {
+      "id": "valley-exit-1",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "central_mountain_donut",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "outer",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.35
+              },
+              {
+                "id": "inner",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.18
+              }
+            ],
+            "compose": [
+              {
+                "op": "sub",
+                "a": "inner",
+                "from": "outer",
+                "out": "ring"
+              },
+              {
+                "op": "add",
+                "s": "ring",
+                "e": 0.85,
+                "f": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      "request": "기존 도넛 산은 유지하고 중앙 내부에서 맵 남쪽 가장자리까지 이어지는 마른 출구 하나를 만들어줘. 가장 좁은 곳도8칸 이상. 출구 바닥은 흙으로 하고 다른 산은 그대로."
+    },
+    {
+      "id": "valley-exit-2",
+      "kind": "valley-exit",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "central_mountain_donut",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "outer",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.35
+              },
+              {
+                "id": "inner",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.18
+              }
+            ],
+            "compose": [
+              {
+                "op": "sub",
+                "a": "inner",
+                "from": "outer",
+                "out": "ring"
+              },
+              {
+                "op": "add",
+                "s": "ring",
+                "e": 0.85,
+                "f": 0.05
+              }
+            ]
+          }
+        ]
+      },
+      "request": "이 산 고리의 안쪽에서 남쪽 끝까지 걸어 나갈 수 있게 폭8칸 이상의 흙길을 하나 뚫어줘. 물길이 아니고 나머지 산은 보존해."
+    },
+    {
+      "id": "straight-canyon-1",
+      "kind": "straight-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "기존 산 중앙을 서쪽 맵 끝에서 동쪽 맵 끝까지 관통하는 직선 협곡을 만들어줘. 가장 좁은 곳도8칸 이상인 마른 흙 통로로, 나머지 산은 유지해."
+    },
+    {
+      "id": "straight-canyon-2",
+      "kind": "straight-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "맵 높이의 절반 지점에서 왼쪽 끝과 오른쪽 끝을 연결해줘. 산을 깎아 최소8칸 폭의 평평한 흙길을 만들고 물은 넣지 마."
+    },
+    {
+      "id": "bent-canyon-1",
+      "kind": "bent-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "기존 산에 마른 굽은 협곡을 내줘. 맵의 왼쪽(0%,50%)에서 (35%,70%), (65%,30%)를 지나 오른쪽(100%,50%)까지 이어져야 해. 모든 구간 최소8칸 폭, 흙 바닥이며 다른 산은 유지해."
+    },
+    {
+      "id": "bent-canyon-2",
+      "kind": "bent-canyon",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "mountain_block",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "block",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.7,
+                "h": 0.7
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "block",
+                "e": 0.95,
+                "f": 0.01
+              }
+            ]
+          }
+        ]
+      },
+      "request": "산을 관통하는 지그재그 흙길을 만들어줘. 왼쪽 중앙→가로35% 세로70%→가로65% 세로30%→오른쪽 중앙으로 잇고, 꺾이는 곳도 폭8칸 이상 통과 가능하게 해줘."
+    },
+    {
+      "id": "lone-mountain-1",
+      "kind": "lone-mountain",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": []
+      },
+      "request": "맵 중앙에 외딴 원형 산 하나를 만들어줘. 반지름은 맵 너비의 약20%, 주변은 평지로 남겨줘."
+    },
+    {
+      "id": "caldera-1",
+      "kind": "caldera",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": []
+      },
+      "request": "중앙에 자연스러운 칼데라를 만들어줘. 바깥 반지름35%, 안쪽 반지름18%의 산 고리로 내부 평지를 완전히 둘러싸줘. 물은 넣지 마."
+    },
+    {
+      "id": "lake-island-1",
+      "kind": "lake-island",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": []
+      },
+      "request": "중앙에 반지름30%의 자연스러운 호수를 만들고 그 가운데 반지름10%의 흙 섬을 남겨줘. 섬은 물로 완전히 둘러싸고 맵 가장자리의 육지는 유지해."
+    },
+    {
+      "id": "oasis-1",
+      "kind": "oasis",
+      "tile": "inland",
+      "beforeParams": {
+        "elevation_shapes": []
+      },
+      "request": "맵 중앙에 오아시스 같은 지형을 만들어줘. 반지름8% 정도의 자연스러운 작은 물웅덩이와 주위 비옥한 토양, 바깥쪽 모래를 배치해줘. 바이옴과 기존 지형 특징은 바꾸지 마."
+    }
+  ]
+}
