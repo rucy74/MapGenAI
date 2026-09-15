@@ -1,0 +1,139 @@
+{
+  "checkedAt": "2026-09-15T22:06:55.318173+09:00",
+  "base": "8507a012c0110ae7e273a3dc433158199931a984",
+  "dllSha256": "1533cc146f9b7781e53d9bf401d6bf68fb3d3a85e3bcf27621c513632a43c375",
+  "offlinePass": 122,
+  "nativeChecks": 32,
+  "newProviderCalls": 0,
+  "knownSecretAndCommonPatterns": 0,
+  "files": [
+    {
+      "path": "MAP.md",
+      "sha256": "f6aba7541e0872453481f9ae42281f64c69c44064cc7b38798de1e63520bae76"
+    },
+    {
+      "path": "dev/Source/LLM/RecommendationPlan.cs",
+      "sha256": "2959c25c568b26d40d2da3d0affc8d69c15b1c2eecc805d835d5d8ce4f14c350"
+    },
+    {
+      "path": "dev/Source/MapGen/MapPlanDescription.cs",
+      "sha256": "b7d2a47526d7eb9aff54bba0ba16cca415b109d61b94e0ec68c0496202c56297"
+    },
+    {
+      "path": "dev/Source/Tests/CoreRegressionTests.cs",
+      "sha256": "e670e11ff8b098cb147b23ee6081198e3026b601b77af1622816ecaa2d018836"
+    },
+    {
+      "path": "dev/Source/Tests/MapPlanDescriptionTests.cs",
+      "sha256": "f208cafcf07c1ccd88f28e5571f3b3f9e3792952bac1b1ba3153b68dcb628804"
+    },
+    {
+      "path": "dev/Source/Tests/TextToMap.Tests.csproj",
+      "sha256": "1cd7244ef701fcc01e699311fc6762f094a36df779c407d1c66346a62697e244"
+    },
+    {
+      "path": "dev/Source/UI/Dialog_TextToMap.cs",
+      "sha256": "e83348e4b5676ef3cfacb2d46e1ef21582566b2cde80d8ea5739e079447b5341"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/final-build.log",
+      "sha256": "209e1bb75b55eb5226c173d49e32877f380d4c8421dfdc5cbec4468b1d587e72"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/final-tests.log",
+      "sha256": "8458c2de61dd67707e5a638354515eb9861b83a064637a99535415304e064e3b"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/Player.log",
+      "sha256": "c293c9d7137010281508e0d0c5c1cf54b3b629cc07eac3078fddb600cdc7ccc9"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/applied-1.txt",
+      "sha256": "f406ef21675b89438691d373e72871ff6b5a1bc64262ae67ff47bab531d2bdfe"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/applied-2.txt",
+      "sha256": "16628ef866478e6147c97cf3fc12a1924d50a9a6b814ce7ca1916488a0281edf"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/applied-3.txt",
+      "sha256": "a01098f6e4fa54b1fc496f80648524c224177828ba3e6794d9ccfc74a9556e40"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/choices-bottom.png",
+      "sha256": "f16186c0294cd1d437fdcb5b9c60924798dac27124aebdffb0957bb8e40d24d6"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/choices-top.png",
+      "sha256": "d466550f02fc760da292f3eaadb2d7368d43482ed545a73dcd6c9b6a246b0a7a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/choices.txt",
+      "sha256": "8da7f2355051cbedda73dc238fa1d0ad3834c99f62cbcf3b110c980009610dac"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/cleanup.json",
+      "sha256": "3e5c746f601573e1cc98b52f789b8e72e6bcd249cdc753496ee8cd519898b85e"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/launch.json",
+      "sha256": "b0c98d6edf9ff74b22b7081f366ecd9271536ae7dc206ad101ebedc6ec5ea678"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/mutator-catalog.json",
+      "sha256": "582148263e3dcc9ea54f83deabe7e7d5a829da0c9214793d20b21bfb80fb4c24"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/oasis-applied.txt",
+      "sha256": "70c29e14ce3addb473bc6a62b2a8bdc2741c5649414fd8bb02784765e385beb2"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/result.json",
+      "sha256": "0a23cf382ae283980d4bdff1c4cde64972a086b433317ae3c8435d19895ffe8e"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/native-r1/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/report.md",
+      "sha256": "a7437d7603351a26e8f2b8affc841b8717c5aa141414061d9d37d55368f6df1f"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/request.md",
+      "sha256": "863dc37e97bff8a66ab87fe6235f6154b6e6e0388d1f7304c478e7d9506d6289"
+    },
+    {
+      "path": "docs/analysis/2026-09-15-readable-choices/tests-r1.log",
+      "sha256": "97174059f9fa8f57fa4430d5e004ebb1745843de1d3260beaf4352adbe80680b"
+    },
+    {
+      "path": "docs/description-ko.md",
+      "sha256": "96c1df92c1c541a89fe19fcce7fa6c69e193f4dbde93f67161aadb8f6d5e7671"
+    },
+    {
+      "path": "tools/runtime-probe/ReadableChoicesProbe.cs",
+      "sha256": "11aa7037c0de4313efd7f6bfc83654a66541ac8a3bd2964acfcfb9db1c29bc77"
+    },
+    {
+      "path": "tools/runtime-probe/RuntimeProbe.cs",
+      "sha256": "ddbf868692904fcfa912d7ba8b2885080ad0782ded86e31f7f6678680bf0fa1a"
+    },
+    {
+      "path": "tools/runtime-probe/launch.ps1",
+      "sha256": "73ec24b57fde66afbfd897808b4c26688282a1f7d56b6abed63c6d2504b9e948"
+    }
+  ]
+}

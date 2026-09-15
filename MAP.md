@@ -42,6 +42,8 @@
 
 ## 실행할 설정이 포함된 추천
 
+- `MapPlanDescription.cs`: 검증 전후 상태로 플레이어용 설명을 작성한다. `Dialog_TextToMap.DefinitionText`는 실행 시점의 DefDatabase label/description을 제공하므로 원래 defName이나 생성한 ID를 선택 문구로 노출하지 않는다. 기존 MapStateDescription은 진단용으로 보존한다. [표시 개선 근거](docs/analysis/2026-09-15-readable-choices/report.md).
+
 - `dev/Source/LLM/RecommendationPlan.cs`: recommend/options 계약, 독립 patch 검증, 직렬화한 명령과 실제 변경 요약 보관. 임의 제목·설명을 실제 효과로 표시하지 않는다.
 - `StructuredChat`은 추천 요청의 즉시 generate와 설정 없는 번호 목록을 형식 복구 대상으로 처리한다. `Dialog_TextToMap`은 UI thread에서 후보 전체를 ValidatePatch한 뒤 공개하고, 부적합 batch에는 한 번 수정 요청한다.
 - 번호/버튼 선택은 보관 명령을 재검증해 원래 ApplyPatch/Undo 경로로 적용한다. 상태·실제 특징·바이옴·산악도 변경, reset/undo/close/preset 시 폐기한다. 이미지 gate OFF이면 버튼도 그리지 않는다.
@@ -52,3 +54,4 @@
 - 2026-09-14 23:34 — 활성 모드 특징 자동 인식, 온천 직접 추가 조건, 제한된 JSON 형식 복구 안내.
 - 2026-09-15 00:01 — 현재 특징 조합 후보표와 적용 전 공통 검증·설명 재요청 안내.
 - 2026-09-15 00:34 — 추천 실행 계획 검증·저장 선택, 오아시스 주변 토양, 이미지 버튼 숨김.
+- 2026-09-15 22:06 — 플레이어용 지형 설명과 런타임 번역 조회, 선택·적용·Undo/화면 검증.
