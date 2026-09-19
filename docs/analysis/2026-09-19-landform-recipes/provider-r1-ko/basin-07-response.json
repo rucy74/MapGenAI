@@ -1,0 +1,12 @@
+{
+  "action": "generate",
+  "description": "동쪽 출구를 닫아 완전히 둘러싸인 칼데라로 변경",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "remove",
+        "id": "south_pass"
+      }
+    ]
+  }
+}

@@ -1,0 +1,3431 @@
+{
+  "dllSha256": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+  "fullMaps": 53,
+  "previews": 17,
+  "launches": [
+    {
+      "folder": "baseline-capture",
+      "hash": "7f01ca9d935a7111184cd6f0e7bf6731f521ba2c9aa2b3dad5a6796cb4437fe4",
+      "maps": 0
+    },
+    {
+      "folder": "baseline-native",
+      "hash": "7f01ca9d935a7111184cd6f0e7bf6731f521ba2c9aa2b3dad5a6796cb4437fe4",
+      "maps": 3
+    },
+    {
+      "folder": "capture-features",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 0
+    },
+    {
+      "folder": "capture-r1-en",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 0
+    },
+    {
+      "folder": "capture-r1-ko",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 0
+    },
+    {
+      "folder": "compound-new",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 7
+    },
+    {
+      "folder": "legacy-new",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 10
+    },
+    {
+      "folder": "native-features",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 2
+    },
+    {
+      "folder": "native-normal",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 2
+    },
+    {
+      "folder": "native-r1-basic",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 6
+    },
+    {
+      "folder": "native-r1-en",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 3
+    },
+    {
+      "folder": "native-r1-ko",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 7
+    },
+    {
+      "folder": "native-r1-shapes",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 3
+    },
+    {
+      "folder": "native-r1-two",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 3
+    },
+    {
+      "folder": "native-seed1-ko",
+      "hash": "7ed1e8ba2d0024de128f1dd304c6a41ae7cbe6abc8feb5854af6746ff30962bb",
+      "maps": 7
+    }
+  ],
+  "allOwnedProbeModsRemoved": true,
+  "secretPatternScan": {
+    "files": 835,
+    "matches": 0,
+    "positiveControls": 3
+  },
+  "checkedLocalLinks": 37,
+  "files": [
+    {
+      "path": "MAP.md",
+      "sha256": "182e7753a51a1ac9ec5c50681be1505cb606f04fbfa566e8bff6ecf7cb9ebd99"
+    },
+    {
+      "path": "dev/Source/MapGen/LandformPrompt.cs",
+      "sha256": "934d88539ff61fbb337658c79be2282d4d5389d314344b3d25c684ab8a0c8a98"
+    },
+    {
+      "path": "dev/Source/Tests/CoreRegressionTests.cs",
+      "sha256": "f186a95b01666147520214c577f1619488f2967cf78c95ea6f8ee2424c73f131"
+    },
+    {
+      "path": "dev/Source/Tests/RecordedLandformTests.cs",
+      "sha256": "0de8534f96455e7533f93a57591f1e3bb3409211c45a474bfeeeb7c2a1a68c54"
+    },
+    {
+      "path": "dev/Source/Tests/TextToMap.Tests.csproj",
+      "sha256": "0732488b46980fe99d3bb324a74090839fb2d8ec9a7cf77906362a6ef7b2e30b"
+    },
+    {
+      "path": "dev/Source/UI/Dialog_TextToMap.cs",
+      "sha256": "17ff3233cfbcccbc2a3204400251435347b5376034cd861f9e3fa6edeb3c5a0d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/Player.log",
+      "sha256": "56d7727a35cdc4f7ec85e128380f497ed2c29d05d970e71bf77f7200586de15d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/basin-short-prompt.txt",
+      "sha256": "965e89d9fa9e6b3d7992fec8f9eef298a4b40cca96800c64561309c197f8e2cf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/caldera-short-prompt.txt",
+      "sha256": "2613e10a4f8a3498817751760ba11cd354769ae913b537e9404d903f39c3d558"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/canyon-short-prompt.txt",
+      "sha256": "901106cec28481eafacd80f0f7a9a35954342fc5f6dbbec447ee162b407106b8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/cleanup.json",
+      "sha256": "13dd390bc701446ea58a34611534dc5066f4e6f2a60e4c6a9d095a4ba9737b16"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/launch.json",
+      "sha256": "f1773406469909618e8be525dfb4905a7ba487dc19454ea184dfcc00fade7b3c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-capture/suite-result.json",
+      "sha256": "493cddd9fd88df18cf13359817a2462b957808d2a53e187faf724eadd318d846"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/Player.log",
+      "sha256": "c0366ab587d54de010f9685156d4c03411c2433720b3bb86e9e2df8dc2b79094"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-after.json",
+      "sha256": "8d9746f8525d8c685a6f23df7815619394333a544c64d4658d8fe5bd0777030d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-background-preview.png",
+      "sha256": "da42dce5a6c7190b00865d086494718d309927a58a7b8c56590f8fde7b54970e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-cells.json",
+      "sha256": "6013a85afbcb1e04eb142ad2f4c5791906b95802f7cd41815c1f38d0094559ed"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-generated-preview.png",
+      "sha256": "1f116f193bf7d5ce78dbcb1d8b38371ed32d7084acc93bf1220a1e507b75f870"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-generated-state.json",
+      "sha256": "bbaf2ed36d9faa9123fb5039609c42ded3155c5283a227ba7c6816bbc907e4db"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-prompt.txt",
+      "sha256": "965e89d9fa9e6b3d7992fec8f9eef298a4b40cca96800c64561309c197f8e2cf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-scribe.xml",
+      "sha256": "9f177493c4bdb911ca6c1d1e4d17abc60c3b689d21f94ea4f777a6f5905e211b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/basin-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-after.json",
+      "sha256": "3684c2167ca489f05a1585397698208c2b0203720139b141c1fcef4e3385638d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-background-preview.png",
+      "sha256": "e2532a7eeec510a0dbbc16d940ee86e53d8bb4a1c26cdab5804a772e121f405e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-cells.json",
+      "sha256": "6654e7089ca846478e70b2385b662e63bec11f21ae0193599f976335f07262a5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-generated-preview.png",
+      "sha256": "9d32f43f2fa5b2b813076cf2779ee9c15b3df6b4b6c7ed4ba74d3a17631ad4dd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-generated-state.json",
+      "sha256": "276e880a3aaaef870a5320f67771a06449fa1353d4df69c8a78e305e7a44540b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-prompt.txt",
+      "sha256": "2613e10a4f8a3498817751760ba11cd354769ae913b537e9404d903f39c3d558"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-scribe.xml",
+      "sha256": "0e21a1c99d9c2871703fcec681b82853aadf0fa8740b643e9a33353f17905d9c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/caldera-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-after.json",
+      "sha256": "46ef61cdd97cbedda18877200155f506974d2c05eef5da246f6512c0c8face8b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-background-preview.png",
+      "sha256": "d6f2f1482a63a115bb369e73fec61f3a2591b7b16aa64d1108668c8ab8bc4cce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-cells.json",
+      "sha256": "5df4ad6935d04796356088eefb13a2b8a5e971c052da0d58f8fb3462ba003814"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-generated-preview.png",
+      "sha256": "d6f2f1482a63a115bb369e73fec61f3a2591b7b16aa64d1108668c8ab8bc4cce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-generated-state.json",
+      "sha256": "d5ee988dc4c8b2abc1f51e54f09a789e7b4ba95399c9d86daff239de7e37a868"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-prompt.txt",
+      "sha256": "901106cec28481eafacd80f0f7a9a35954342fc5f6dbbec447ee162b407106b8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-scribe.xml",
+      "sha256": "4baac1a8625b38d2f539501a01acb9f782b748392ae1ecd99ff602065cf74f26"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/canyon-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/cleanup.json",
+      "sha256": "2cde1e22922b92287a5e2a51bd0146b809a271987d5fde5e8da81dfa890af6de"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/launch.json",
+      "sha256": "af42a8f77da196a29c82b3c62c9237d647ba3b247a9cd71fb744c164d1d4fb65"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/preview-result.json",
+      "sha256": "684658b03b5f296a1941791259cbd331e0375803198036a1745dc76511235ae2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-native/suite-result.json",
+      "sha256": "d218b0f7d4057076fe11ddc6a0654d332c403d863162f1ac6b3dc8249fa7d047"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/baseline-tests.log",
+      "sha256": "6543674dcfbdd3a7374eb59220527066c57db83659fe0e44e3d021e243e6e715"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/build-r1.log",
+      "sha256": "088f263c6a2f0714af36d69cfc4ff05a742618c68346095669fe0eab77563804"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/Player.log",
+      "sha256": "0d3786c10c81c7f88a46041ad3378e570691169df02bc988e7c2e57eceebb868"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/cleanup.json",
+      "sha256": "7cbf5e3d53217746c5eb8bd6088fc92325baf44e2eabf36b261685b74f10669e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-add-before.json",
+      "sha256": "93426280d88a0ca4ee8cbf595db410a4d5f337fed1fbef237ebecf1471458c05"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-add-prompt.txt",
+      "sha256": "fa2716d2c50bb758a7f94d744b3f9f9008e8d70f83f43df6a0761232d1c461d8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-add-request.txt",
+      "sha256": "3bb922ea317e0d2c466afb618899457241ff34f68c2333f234378549a7737e87"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-remove-before.json",
+      "sha256": "cde5300b9d09e248a58d2db79ba2044b0fdb142b7cb125ac2c2e10a6b4b5e1a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-remove-prompt.txt",
+      "sha256": "3575c65a605a8ef1624d0b3476a7b255c055c5ed28dd9dc055a4999b416cdf07"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/features-remove-request.txt",
+      "sha256": "a49cd6c934817387bbbe465ad7e864245a304e4fda6cd0307842fb9ceb2da494"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/launch.json",
+      "sha256": "238d8da3813db8f4fb16380f251cfa59b4c0a52f11c916c349d0c44fc99e1061"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-features/suite-result.json",
+      "sha256": "e9558d111ce8c0ca409a830cb113ea19067d2a79e031712b8b275e0ae75cecca"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/Player.log",
+      "sha256": "050bb48f8d239b59e817f8ff286f604d9cb61ace074b9596f521fc7c210e1baa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/cleanup.json",
+      "sha256": "a618cad5215bbaaa9b483a8df5707066d3ac6ef2a580f408cf4f247807ec62e4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-basin-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-basin-prompt.txt",
+      "sha256": "dab0895c7b6d644d851cb8f653c2b9ef9dab3fbffea115c7969a23fffd4c370a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-basin-request.txt",
+      "sha256": "bd43c8df9c202e3ad3a9cf7822d6e290ce195f499c9f1d4b4d0203d10ea57d48"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-caldera-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-caldera-prompt.txt",
+      "sha256": "287a3639b8a29ecf07f60b8fda29a23feef97ec073a7a60a21f584aee7aa13dc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-caldera-request.txt",
+      "sha256": "985641435680fb01ec5ae5f8eb45a805316416c44b7683ceea9f31722811d5d7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-canyon-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-canyon-prompt.txt",
+      "sha256": "721891103ce5da52cbf52c0b5272eda704b8a0615ed5d1234b8c972274636ff0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/en-canyon-request.txt",
+      "sha256": "1e37ef55ef8707ebadfadd256e9168d6f85eb3e3927a4c9440295f27bd9057fb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/launch.json",
+      "sha256": "4f1e9e370be632661f3c77a54e724d70b8c05097640a647500fd0de0e8ae3add"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-en/suite-result.json",
+      "sha256": "636910a5b16a27cfd5459bdd69cf0741853ccd98e9bee33e09a596565650731e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/Player.log",
+      "sha256": "f35d786b114875bfb19d92565321017c38d187756156ddee1d4da103a594825a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/basin-short-prompt.txt",
+      "sha256": "b36ae4d6e67a1a6b9bf44ccf022dbdc23e7cd47f8a0cc64a5d216df83a5feced"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/caldera-short-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/canyon-short-prompt.txt",
+      "sha256": "8afbf327831aba4a444482a6e2543b8e3bd222aca69e210a5a837390aec54408"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/cleanup.json",
+      "sha256": "1a6657f971ab9296feaf6ed85f282aab20814e2a992136c4b5da0b86878eb712"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/launch.json",
+      "sha256": "4ffb1d75ed252a49b000711187bb61641dffe736629ed2cfb5d75f25b8aafaf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/capture-r1-ko/suite-result.json",
+      "sha256": "493cddd9fd88df18cf13359817a2462b957808d2a53e187faf724eadd318d846"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/cases-baseline.json",
+      "sha256": "267423bfb0378f103c92f52146faf186d61373c645d0c8f67e513a72ad7a6cdc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/cases-english.json",
+      "sha256": "331cf8daf616c4427693a4ac8f0d792c515f1c8cd73575ff1284f645ca3849e2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/cases-feature-guards.json",
+      "sha256": "67f81e422641bb027ffb868ac0fb42d49021806319d30380532bcaa005a7a0c5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/cases-normal.json",
+      "sha256": "c9c89d47a08999a8a7b6b08ea69bfe2a0bb537a3a7df3166755abfc805228154"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/Player.log",
+      "sha256": "87b356745eda25f10fef07b46620b52f8ac300f760acc35f1378d29f695ef146"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/cleanup.json",
+      "sha256": "fd53772bab25a4d50444d80db41c1a5e1a7a4708b364d5d9c5ee948442fd07cc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-after.json",
+      "sha256": "b93c82ae12c3db22a966b524830da679a0997be2b256a2641b5cdab98e3ae33d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-background-preview.png",
+      "sha256": "36731356892cb90ebabdeccffb276f96523a07bc8997f9ac2e4e94b7fbb45c25"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-cells.json",
+      "sha256": "1256174e64ef59692e476857f07591c34a6858a48291f2e87f12934512d10c4d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-generated-preview.png",
+      "sha256": "1c4c8b607225179ffbc0ae9bf95a3c4df48b635b2c0c3f4ca0514e5df837d75f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-generated-state.json",
+      "sha256": "6ece35c708ff4d47bb9f62ae86b81ac3f7e0cfc1707bb6f37149ef37e234e403"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-request.txt",
+      "sha256": "254678ba6a691a1fd8ffb521ba18da9bd352c9bbee4768dd66a85c6f9c12e013"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-scribe.xml",
+      "sha256": "3f07e3d02dbc6bb3c262caf2c3f0cf6e6352e94fb901853f6b7ea197356f4618"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-01-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-after.json",
+      "sha256": "f67af642eaa21cff0fd13b1bdea821bfa7df45d87fff7f3c06b366098ca095fa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-before.json",
+      "sha256": "b93c82ae12c3db22a966b524830da679a0997be2b256a2641b5cdab98e3ae33d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-cells.json",
+      "sha256": "53f90a1e57c2a6060e437ebe75a7cb418aae258cc263d87166a16d741ae46ad6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-generated-preview.png",
+      "sha256": "4a5acc7f08071878fc598989f36c3fa123fe1877e9ea1b33786f16ec954bbced"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-generated-state.json",
+      "sha256": "15784885a3253316e764f25a1a2d1dd672542bff8ed76efb258c6a330e14e0b9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-prompt.txt",
+      "sha256": "32cf44d62c6b77a4e0341878cc9825c6b5df2f3babe8b955433eb9821ec90c82"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-request.txt",
+      "sha256": "399e86e4cb289a3ae0c8ee8c386bcb0c76518c43feb62040af99d41859cea240"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-scribe.xml",
+      "sha256": "3b76d2d74583faa4a95e2eb55868fd6692b4f292ac5f3a95d6296880a6b8e81b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-02-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-after.json",
+      "sha256": "6ce15157f3e57f45a94fc31e615a608b244168a18cdcfb2385ddc34754450782"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-before.json",
+      "sha256": "f67af642eaa21cff0fd13b1bdea821bfa7df45d87fff7f3c06b366098ca095fa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-cells.json",
+      "sha256": "ca17e2b5f67ef5b3351be95e01e6651dead5eb4b4333d5460bfbba3101bb42df"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-generated-preview.png",
+      "sha256": "670cab561f8a477b9b5499a817a99ab1896e24499b132d70c54dfbd607e9a641"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-generated-state.json",
+      "sha256": "20cdeb398d33e49f5a30b3f3e62b0c3f30fe03b278676f9a19555b68b7795f86"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-prompt.txt",
+      "sha256": "ec1c2d40d20cad8b64291df981bc5d9e836062abd1d27c5316a4040f3b532c7d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-request.txt",
+      "sha256": "5c4d8ea1d5206e3278deb3ddefbe47f54fa66700643bdf38d61a7e4fdda19b06"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-scribe.xml",
+      "sha256": "2cf5597f01495bb3d6ae2adf86312a9e21b77a96e2118dc8753dbb3c1960b02f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-03-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-after.json",
+      "sha256": "ede820fbe6b6ea9db7ed3cee9b836a899abcb720b180a2d62764031243cf3d5a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-before.json",
+      "sha256": "6ce15157f3e57f45a94fc31e615a608b244168a18cdcfb2385ddc34754450782"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-cells.json",
+      "sha256": "c61a8d62bf4c40b850ed7acb95f3f198cc460b22d2a7439950990cd0c186c493"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-generated-preview.png",
+      "sha256": "a547e775bea6af0614c9f2f14b66dbd1add9187245bb536af337a8030859c9ca"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-generated-state.json",
+      "sha256": "632438944a973619ad86572552545d7afeb82386c98cd87573a4e752b061328e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-prompt.txt",
+      "sha256": "7eda9d780969ddb6cb619b5cad236e5d455c03229b3dee79ac8377b35194cbe6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-request.txt",
+      "sha256": "6e83ce438e7bb10a95bb68f3a89a2810d84cbea0030124b097f7e00ce4c6527a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-scribe.xml",
+      "sha256": "15fddc5605bcccc6505a6188406c9697bade5f7c14f388fac007c89fdb9d604d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-04-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-after.json",
+      "sha256": "da538f9395f0c42cedea0a831cbe14e86231e5b3b88fe7649eda7b9e858f5940"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-before.json",
+      "sha256": "ede820fbe6b6ea9db7ed3cee9b836a899abcb720b180a2d62764031243cf3d5a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-cells.json",
+      "sha256": "034d7a7717642a6230a1f4207ccc96dbd77fdd6404c13a1eec5332b7a626684f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-generated-preview.png",
+      "sha256": "d40ce7ae635f5e3de902a085e81ba20fa8032b327ff828401d3cab62c2485015"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-generated-state.json",
+      "sha256": "858b1aeb260d60d71b8034bd1c9a8d8fb3a70d6e2670d58629ae582ab02a963b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-prompt.txt",
+      "sha256": "10b5c9d0813451fe3c9c9d5b4cff2df9329718f755efafe6a548626eb6493216"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-request.txt",
+      "sha256": "d4061c3eec9a19554a753c2d99492f97abafc5780b13b1e714edab70972a7bca"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-scribe.xml",
+      "sha256": "0bc9fa6963ccddb24849665dddd588e628bed14878739cac09f37bb7773c62ff"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-05-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-after.json",
+      "sha256": "c4684245db3b1cbaa6bf88eb48391496cd519feb3b0a600cd38cedcf0e852a7e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-background-preview.png",
+      "sha256": "80a2c059e60a9cda719c15604493c5607cdd8cebc5089e489bca912173c70062"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-before.json",
+      "sha256": "da538f9395f0c42cedea0a831cbe14e86231e5b3b88fe7649eda7b9e858f5940"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-cells.json",
+      "sha256": "d3421dc409e96cfda6620bac5c772a1432b6df45db6b18f0fedc0fb83276e735"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-generated-preview.png",
+      "sha256": "9e395412781957746111c8ea30f32c7ed87ed7587b726ddd4150576066a77ea8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-generated-state.json",
+      "sha256": "49be007f9270558c7cefac9f0cd96b7db6af9ff6b5c805780beea6a03aa4459c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-prompt.txt",
+      "sha256": "c5960b3bba58c8a1676650bd77ee089c6afb2d31bae766c34e1ca5682080dacc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-request.txt",
+      "sha256": "cf69d9a04f5ba24d87ea42d28b620823db4fbc67a78af191c366d7d587c77f77"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-scribe.xml",
+      "sha256": "6161266e17fd3041c5637dc8cf7ca532d66687c46a27e820b8e9fe2ef76450b2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-06-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-after.json",
+      "sha256": "1625692dad13bf11e3d3a9e6c1fb6f27ba9c032bb6b4f60868e7c7d94558a3f6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-before.json",
+      "sha256": "c4684245db3b1cbaa6bf88eb48391496cd519feb3b0a600cd38cedcf0e852a7e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-cells.json",
+      "sha256": "abfea204edd28c6c031f1783f89872b3071bd00ff5e7582098ea151e21c10c51"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-generated-preview.png",
+      "sha256": "d4686fd902f6d61ef74231f572f449c266dc46091a350bf10026a86577f2275d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-generated-state.json",
+      "sha256": "53161418f1f73d139cb9637ec2f37b80f17e1e573ad237b94b93a25b8cfb273a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-prompt.txt",
+      "sha256": "dbdd10b173d43fa3c6b301e7fa236f31aa8adc755a32e197d8aeabade5b052bc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-request.txt",
+      "sha256": "95d906ec07f6efa94ee2626aae044620b8095082987b15650952a191168eedb0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-scribe.xml",
+      "sha256": "a8225cfe0ef8779c7f1645ac419c512aeb190085c6409f02e6448cd051402256"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/compound-07-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/launch.json",
+      "sha256": "9db9933c5265840b2b58254933cd1fad41704cf4fc1f933b6b6c69aa4ccf349a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/preview-result.json",
+      "sha256": "fea8889f6cf5642bfddb215645056468e33df098ff7dc56ac4a30b598244e85a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/compound-new/suite-result.json",
+      "sha256": "5383f93511dd553e5c499a7bc1af9c8e0e8a98dd0c127d37b3dbb4be46722535"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/evaluation.json",
+      "sha256": "bac687b88260a0791fb04d378033b6e5e7aa05936dddac27ecc0c201560f8034"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/final-tests.log",
+      "sha256": "c332c4810a410a2cff85cdd72a449da730c820af7c88c5c31138a07994fbba2b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/Player.log",
+      "sha256": "3be3fa6414d8dc479738b83620f70f9f523216901545b2878eff0fef03dbecce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-after.json",
+      "sha256": "d28cd80fdd12647983baf261a1ff368154544f65211f380d18a0e1eeba9a27da"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-before.json",
+      "sha256": "80a7ba83d7208674324c46705c87c04e075de9c414d154ee3f2dea26b38faea1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-cells.json",
+      "sha256": "db614d2c8b4cf9309626d1d0722a809509cf4cfcbbda7101fae6f09ee352f3a5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-generated-preview.png",
+      "sha256": "c05f8b7143d143037f7d3ee5bd26c47f2a0411ac43f534b9a0a2e381e1b7315d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-generated-state.json",
+      "sha256": "6034cc54ec749a8288a3b5b8eb184360929677033d32b3b9bdbc526728369255"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-prompt.txt",
+      "sha256": "501b95946a373cf783387eacc27de1837a350ab272665f58ba310ea254ba82cb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-request.txt",
+      "sha256": "f94eacc1d7c43bc525cb34011a481d7426cbb1cca79cb5244e1a896f1a2c6d17"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-scribe.xml",
+      "sha256": "af2272606bd0af56ad39b89894aef5be752533e6139be342704bed1a612b57dd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/bent-canyon-1-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/cleanup.json",
+      "sha256": "631506d81b35ca10a55f84ce31c0e0f7502c531f7b1b85c861247041540ea7ec"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-after.json",
+      "sha256": "9f9c7d19a2668556366eb4cc6282a05a7f957378f1f819c43768d5ab161610f1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-before.json",
+      "sha256": "e118a01756ee863af1d72e114b789a93120249e314e973f42f37cf274f08a83e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-cells.json",
+      "sha256": "8b6a3867ca74df5898fc496173318b9029a95b03749e7179c1f2aee586b57ea0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-generated-preview.png",
+      "sha256": "451680565c33bd524f3dda0d2f9c609c6c2d64528aa8f1992aa9e7001279b63a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-generated-state.json",
+      "sha256": "5b4767748bbf2899021ac6290220db8d5701fbf792018bf3269f6039df4b69ae"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-prompt.txt",
+      "sha256": "bfa25e530c03960f23da5a46adf9739cfec8755f6a6b7d7ac0b13f4cd5fe04cd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-scribe.xml",
+      "sha256": "8521a8143221436eedf309159472ab895f4c984da92027a841e417dc3ce7d385"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/d04-1-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-after.json",
+      "sha256": "a39d4a34cf2a6a5c687f07bd5dbcbb5e21bc95f912e903232bfe717d4d1eed35"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-before.json",
+      "sha256": "a8e6cd3979f25fc7c2d0d10bcc2cd35ab579b7ea043f9c86995cb9d4d5a19fe3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-cells.json",
+      "sha256": "91075e66a44098bb9e694a1680042b5622d2f4623e588e7a69403bd4c9e60137"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-generated-preview.png",
+      "sha256": "9bee41b8534a67b9bb9b027c4bc53cc179280d795b55be4cbb71fb5f772f4b85"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-generated-state.json",
+      "sha256": "fbcae715f49775b30e1c2d0f0ec80bfdbe3f4358187e206f69ff1da4b130e8ef"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-prompt.txt",
+      "sha256": "d21007912cf795d25eee7ba6c30a3da631695b0dfb19e03d6672d8e32ca567f8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-scribe.xml",
+      "sha256": "a9573693444e40581f9296e7dab1d555e1f43793ba0c4e84ff80552d174c5a7f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/f03-1-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-after.json",
+      "sha256": "45fa31629148f112d6fc75f8936172b9bd892c446ee0709f474dfa161f0ce7ef"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-before.json",
+      "sha256": "4ad3664b93c710cb8cda1fad9a5b8e6185f66a9b67eb7ef39d132fb5d67f7f2e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-cells.json",
+      "sha256": "7b2c1abce8f820fe7cfca984b1f7cd6e1677cbf4850a2b9d95e957cdffcdb185"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-generated-preview.png",
+      "sha256": "89b5e95331dee187f60ff87f8ca030eb68dfcb6cb91e8da1a5e78d41379c38d4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-generated-state.json",
+      "sha256": "9263c5fe13b120ecfb0325788ac90bab944f7546406d43fc2806cfebfea63335"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-prompt.txt",
+      "sha256": "9f57043efe4cbeb3005e879cf4e996ed478419223636dd5ff9eff1db608354c6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-scribe.xml",
+      "sha256": "6d1f8d356007a79a1e74c53c377ea67a9ab1b41bc1cf39114c10871cfa42d82b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/followup50-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-after.json",
+      "sha256": "669d6dcbe11ef84b76fcb5a9981e15bd9c086e8ee68021013fb23dd215fb35d9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-before.json",
+      "sha256": "6fca20dde88f3fd24faed1f7dbfe80e12f868fce8098ad2ee24bb4314282a250"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-cells.json",
+      "sha256": "a4850b1785421852b7f47c94f1726d981468d3b935deb16288259a74c02d0856"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-generated-preview.png",
+      "sha256": "38400c7eb5253310896d2ad46eeb74adec2a4950c11fa8447303c703456d5aad"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-generated-state.json",
+      "sha256": "a16632f6e1b39acd56199005abd4f706de7d7613f8994121388921d71d68e13d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-prompt.txt",
+      "sha256": "b0e0f356197d86f6c4210156723409efa68b89bd6e9ae074f910a835d0022364"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-scribe.xml",
+      "sha256": "2717b8076c5ea351cb94d3835cd0f64430beeed3b532c1a4408775134c6eb9d0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/foothills-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-after.json",
+      "sha256": "ac8bf8694a56476b0b94ce567502b5c7988e9564997ccb4a4ed4ef2ac07ef873"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-before.json",
+      "sha256": "53267b06fc0d3288a271448fc697e55503fe778bc6e77bd607f654ec5e32f0d3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-cells.json",
+      "sha256": "3d594bbe364a79b3fedfa4d51a566067daea2993fcae2620acd1ade628fac71e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-generated-preview.png",
+      "sha256": "44b357b58716fbab4833db7aa9de43ac115b2873c50afb7d80893a175ea69179"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-generated-state.json",
+      "sha256": "644c267baa2cc5d928a1741f772cc63bbeef2f330022288215bffc69a5f56ff5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-prompt.txt",
+      "sha256": "adad2206e4ed955ac651a769cf77b1ec32d063a6ea60780c7738110279ea06a4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-scribe.xml",
+      "sha256": "9aae6c2580a6ced332c69e0611c4b32e0c72716a4478986200aa34bc1b5fdf15"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/island-edge-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-after.json",
+      "sha256": "33f972b53ae3e308afea026532a8be7a41dcaef748a211ef39eab347a297f392"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-before.json",
+      "sha256": "074041df65b91ad1f93b903685420fc3dedd4ba5abb9b0dadeb92bd1eef4df7f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-cells.json",
+      "sha256": "f21905103b4e5902dece4237b683630e458ef34e16e62e86085b1ef58850301f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-generated-preview.png",
+      "sha256": "9e803ac8a3abefcb8e9114bdc2ffe71413f198d5611a3b4e932691a01e64d784"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-generated-state.json",
+      "sha256": "dac9662e740924e1ffb7e5d7c2487b2d16575ad88ead77fb51d7cb623ac97eeb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-prompt.txt",
+      "sha256": "83276169b7cec083d5096188fb5466668859a805b6b7f59893b534605409d1e8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-scribe.xml",
+      "sha256": "8596f9c80aca05fc2c787de700364b9416261d11ac61915afc48387f4edb5a68"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/ko70-1-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/launch.json",
+      "sha256": "563080d246ad6d7b0fc25ccf1be35aff4bf4f102b48b01f2e3a833a07f219307"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-after.json",
+      "sha256": "01f9091e2256eb28ad2913acd1d3ea1bfc6ecfbbbf62669c40cb6b817b1122a9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-before.json",
+      "sha256": "9892b41c5218ef1060b85122e059e1758552deced442a7c276ef1dfeed967b91"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-cells.json",
+      "sha256": "2c30ca577189da759f08f5fa0fa06d16d31bb0fc51460943e1bc20dcb7fd8f46"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-generated-preview.png",
+      "sha256": "ffd4b1ecb01380ede7a5ac2eb849e62014938b01421c7936e26c15f9678f6463"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-generated-state.json",
+      "sha256": "30198ad9e35e124c06f061a621e1e4652ad62d14c090ef4c3aa648a2154056ea"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-prompt.txt",
+      "sha256": "6cf5d481b53a05b958713fef7ee20ad8fc342b34250e0c1760df30e99ae0892c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-scribe.xml",
+      "sha256": "dbde03088b30dfcb351fc5f5ef05bc5dd1b9e7582fb453499984bd1b96c6a5fe"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/repair70-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/suite-result.json",
+      "sha256": "2d37331be10842a3ed988919eadda794fa35ec62a3dff3f7a9d05fcebfa1caf6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-after.json",
+      "sha256": "a1472962f82c62039215a55e5ec35796d90824b780b5d8f371c68146d739bd50"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-before.json",
+      "sha256": "074041df65b91ad1f93b903685420fc3dedd4ba5abb9b0dadeb92bd1eef4df7f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-cells.json",
+      "sha256": "2c85c63da8557c3e2c6715d0e14bb3139942349fd62f42a93e65e84dd12b69e2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-generated-preview.png",
+      "sha256": "310754b977070b794aa18cfea5a23aed427c4a7b3815f50b57916c7cf1fe7ae2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-generated-state.json",
+      "sha256": "abba7d2247d557e08c009b58e82bbc94a83656cf29266801ecc60b1a16db36f9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-prompt.txt",
+      "sha256": "7370c4662861d8f59bcca2fb790c497086be59abfc4f248bc322559e72a4de61"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-request.txt",
+      "sha256": "c509a19e0b1e69eddccfd76d89a4025d6fb1c84a4a49f22a7e0f711767a2390a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-scribe.xml",
+      "sha256": "66b810ec5e43b2dee7a5df63bb179dfba3df95c89d3b194e54578de5e72d566b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/valley-exit-1-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-after.json",
+      "sha256": "afa02d4103a5aa57b0e47be9f4ad2ddcf406dbe38652dfae20d731687e8221fe"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-before.json",
+      "sha256": "79f2aa0557afb5dfb609a350958b42c82fbcf7ccbe0f0594953b056a7cae4f9b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-cells.json",
+      "sha256": "744182055881ddf8b345e8cb3975a08c9a30f7f2b2026e9910e3bf362be8e474"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-generated-preview.png",
+      "sha256": "86338da6236f7a712fd6f440e0f773ea63eb51e52fd153a8dd2c632caff6faa9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-generated-state.json",
+      "sha256": "db3ff6bc87dd771cc5a25e08e83fc1bb819ecb93b2450e01b5cc55a8b08eb035"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-prompt.txt",
+      "sha256": "ffdef459f7f83434f202d02cff96b8c76decd91357ef4cbed01fb7fe30cb5794"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-request.txt",
+      "sha256": "138af28130c28255582ad488ca970a0c05ea1c7b373c5c3968c342c47fbca8ee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-scribe.xml",
+      "sha256": "2263ebc0a4d037d8f388e0e5a1720d90bc0131026e3b77c560e959f3cfac1306"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/legacy-new/water-side-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/manual-tests.md",
+      "sha256": "fd3d44cb5693b53ea6c43cb02f8031bd5526fefeb58c264cf3456c9bee08e221"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/Player.log",
+      "sha256": "3544a2552bd3912dbcb6b4a678961fea3307f459aa56566b45c0157774404254"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/cleanup.json",
+      "sha256": "6a7abb998014783f22a58e71b50fe20736f7d1d229dd33a0ec6a740e1959edd4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-after.json",
+      "sha256": "cde5300b9d09e248a58d2db79ba2044b0fdb142b7cb125ac2c2e10a6b4b5e1a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-before.json",
+      "sha256": "93426280d88a0ca4ee8cbf595db410a4d5f337fed1fbef237ebecf1471458c05"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-cells.json",
+      "sha256": "0729b50d32bf30513655b4b8bf4141c0589a3abb15d694dd378fadd496e18894"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-generated-preview.png",
+      "sha256": "b2ef52cb388ad0459ff03ddec2b1fa972560293154df5888a7d8376330e1dbf4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-generated-state.json",
+      "sha256": "72d111757ddac50e3777f9c214cbae53d35e5f9ca664f9a13f640bb3969df647"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-prompt.txt",
+      "sha256": "fa2716d2c50bb758a7f94d744b3f9f9008e8d70f83f43df6a0761232d1c461d8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-request.txt",
+      "sha256": "3bb922ea317e0d2c466afb618899457241ff34f68c2333f234378549a7737e87"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-scribe.xml",
+      "sha256": "9667f7bf8ea32fed3401efaae66aa355f28762e052826eecd45ebf38d727b78f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-add-steps.json",
+      "sha256": "ee0cbad43e4e18290add6e6a725f88b8923e2e83a168edd68060978561c5585a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-after.json",
+      "sha256": "460ace8be074460a22c6b1f5c6379fc6e8881c8382dc28783fed80b25c60a45c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-before.json",
+      "sha256": "cde5300b9d09e248a58d2db79ba2044b0fdb142b7cb125ac2c2e10a6b4b5e1a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-cells.json",
+      "sha256": "5cdedfbd314022b678d5aa7c07c1ab146b00eb8374fa2d82f7918d1ccbd4e443"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-generated-preview.png",
+      "sha256": "5dc9f758a29b4280535508aad0af4c9642efce75f7e139db8f2f901fb7f89865"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-generated-state.json",
+      "sha256": "0b41bcd3c699426f4bc59740389cfcf6bdeae79c9cc46a4f9cfdd630871f8199"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-prompt.txt",
+      "sha256": "3575c65a605a8ef1624d0b3476a7b255c055c5ed28dd9dc055a4999b416cdf07"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-request.txt",
+      "sha256": "a49cd6c934817387bbbe465ad7e864245a304e4fda6cd0307842fb9ceb2da494"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-scribe.xml",
+      "sha256": "4b4360ed5ee0a57f366479b78d4131a31a3409e8519030d18ce165cfd39b8a30"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/features-remove-steps.json",
+      "sha256": "ee0cbad43e4e18290add6e6a725f88b8923e2e83a168edd68060978561c5585a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/launch.json",
+      "sha256": "513917d1d9f227f566bf143362fe82af205880d6ecca4cff9aa9cc93dd903c04"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-features/suite-result.json",
+      "sha256": "bb1c1da3fe31b959adf65abedf04bc9b57b57ec6a39308c8fee490a2b1d12dc5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/Player.log",
+      "sha256": "b2f72ef47db8f8d00b72e9f55fe5a46095282b4903163dcc0a60318fbaf95111"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-after.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-cells.json",
+      "sha256": "32bb27b2e00071761f7499ae9ba451454fc3849515ad4c94435f6339b758dafb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-generated-preview.png",
+      "sha256": "87b255a71a95dba79e02cd22b500f06d8f5905dafead3da2a8e5040d668d4dc2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-generated-state.json",
+      "sha256": "d9a6a4f4abce1c9bd782a91305b02cefe552ab2051dcb29301221db4d75281db"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-request.txt",
+      "sha256": "2e6ffe7e74f245af4b7e0f88d6d6b896290347a2809da036372fe6688bf7f7bb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-scribe.xml",
+      "sha256": "7bb7b9e7180c20a0b56bc2bfa27a05b21ec53ca68003c1dc127bdaccfc9d033a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-01-steps.json",
+      "sha256": "ee0cbad43e4e18290add6e6a725f88b8923e2e83a168edd68060978561c5585a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-after.json",
+      "sha256": "07be1a2f8ad75b83ef47867d152c5bf9ffae1b56fc0950cdabdafa268c063d40"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-before.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-cells.json",
+      "sha256": "7d60700325c38b5faf89dd8742f14d6871e70ecd3e5b3fd283fda59ce56697a9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-generated-preview.png",
+      "sha256": "169374be7d7fdc67177aabfe37547788556b791bb8cdbfd99b62d08e7a33f8b5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-generated-state.json",
+      "sha256": "568bfed09b60d62a9266577e32f7817acfd69e143d86ec766328c9eef0201480"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-prompt.txt",
+      "sha256": "bffe576adf7d447500233e39493597f2e207057ed811a596a0858943b69a1cad"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-request.txt",
+      "sha256": "7442c4529653936c60d608080cb7217e183ff79cc813c9c2d69bf9cc25a54971"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-scribe.xml",
+      "sha256": "130dd49a14814bb87c3c1219f0f73734e2e159778876912328eb58ca7a92fe28"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/basin-07-steps.json",
+      "sha256": "ee0cbad43e4e18290add6e6a725f88b8923e2e83a168edd68060978561c5585a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/cleanup.json",
+      "sha256": "e80186120a9d116df9aa3929683a5aceb224c3fddb28c7d76d64438c690a393a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/launch.json",
+      "sha256": "42952f4309ac3f77840e5deca9d99b95484027e0bd9ab66ddc7bd305e31f498a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-normal/suite-result.json",
+      "sha256": "942572f878a0f357f800df2c886da1b5a76a5cb5a3dcca8929979e57ecb12562"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/Player.log",
+      "sha256": "1765b987b8b45fe98c1ca5dd4c83e8aeede77d013c2b71cda5b3cce3821b854c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-after.json",
+      "sha256": "823227d350c6c1bd3c9a6dd5e5c6463dc0a1b1ce979097ca05af6cd2ca2eb88c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-cells.json",
+      "sha256": "e7cfd851562ca7ba07f7888ad6c8a22d2b5c65a791d1002be836ff575443bdb2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-generated-preview.png",
+      "sha256": "65eee26e5a7d288241d48cdd769dbfe7bbae89d83890b1161b81c3069855e0cb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-generated-state.json",
+      "sha256": "1fe055df26bedba0e7ce1f7c52fc7b8afdacdc30dee64e5c1301f1811b51a5f3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-request.txt",
+      "sha256": "b5642d106167eb30c26b6caeec0667da93990f61b74bb6ac6e8de4f7a342bad1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-scribe.xml",
+      "sha256": "7997b88d417b54c8d9835ca61d7a85fcbdb962ec905f7ef4cc518e2cc2617cdc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-01-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-after.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-before.json",
+      "sha256": "823227d350c6c1bd3c9a6dd5e5c6463dc0a1b1ce979097ca05af6cd2ca2eb88c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-cells.json",
+      "sha256": "244a39afaf76a08e168fb8f333f03e77033abade0a44f41b2d3e880a896a308e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-generated-preview.png",
+      "sha256": "93b5369e0e93b2a2484f7552e888f9ac72da26d72abe8a85ea0be0c278977965"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-generated-state.json",
+      "sha256": "83697ffe26e1675df9a6da29bf70f310e6ffc3a3a114a203a91545e11274f44f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-prompt.txt",
+      "sha256": "0a9bc6840c255678ae551f049a339fd0c0cd65080ef4d47a32162c9b34b328b3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-request.txt",
+      "sha256": "76f2dabfb9a17d21c6e596f2d53b25cbaf8733d6dca442157236fa02ceff7e01"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-scribe.xml",
+      "sha256": "15457a8236776c53e8384bd09e43e8f170598d3b178ce1f1649c210c40c0f22c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-02-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-after.json",
+      "sha256": "e5c016b14ef04119c8c8bb87a63e061ca065d95994f4ac89e138f012aad97607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-before.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-cells.json",
+      "sha256": "532311dff77fbc8a7d967d5d22d90979b296badcf5e9dea6a76731e79b7dec7c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-generated-preview.png",
+      "sha256": "25fa4e3d4cbbcb7c3d957d05d795fc239aa50c6887701ea52dfc73b1f97c054f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-generated-state.json",
+      "sha256": "ac7e5c514ab827dbc5370fc0b71ea3361452d94eec7512ec9f4f2f49e9acc5f9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-prompt.txt",
+      "sha256": "029ac90737a9e4b34d7ededaab9b8c1c624b4857d7e5476d69f0fb3e88217ee2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-request.txt",
+      "sha256": "6c7603ab5d80116269f151cd98097c584d5b0a0ae2ffd8eceac53d4621a89dc5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-scribe.xml",
+      "sha256": "b868c892f3c2bbc93488b1b05ad8e390a82c10a0f394be188c57def30f98b6db"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-03-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-after.json",
+      "sha256": "cc5201113c8dc76dfddf0d97ec6eb24475b69210fba62dc9a6bb2173049caaa1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-before.json",
+      "sha256": "e5c016b14ef04119c8c8bb87a63e061ca065d95994f4ac89e138f012aad97607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-cells.json",
+      "sha256": "fa7c43ed7418acfaef865f718fd77f03d68c038031cebf60f51e75b1bc2c2f1a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-generated-preview.png",
+      "sha256": "cce14816dd69e0be4c58efc1c0775cd53184a4b69ff202d69d93fcf34729834e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-generated-state.json",
+      "sha256": "ae6e418ba2d90e89e20572fc89a3adb72b519a79982b22ef27d5242b4e21f5a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-prompt.txt",
+      "sha256": "f2ec6f1e377badf668e877f7eb477ea2ea5bea5b5bb8d376e6e93ff2f389a000"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-request.txt",
+      "sha256": "6fd469a2ac25ba7ea05633ebfebe7002351ea3e0dc0d217ff376e374af146b2b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-scribe.xml",
+      "sha256": "f6648a87cd94f21e665298ba09555c2f4e03230bb6b0097e73e2db58a0ada6d6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-04-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-after.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-before.json",
+      "sha256": "cc5201113c8dc76dfddf0d97ec6eb24475b69210fba62dc9a6bb2173049caaa1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-cells.json",
+      "sha256": "da0f38681ecf2d6cc97b51eaa4961ab25b06057b9000636f3852ec0fe57cd356"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-generated-preview.png",
+      "sha256": "32d31753a56e073137156dbf9549319495cbdb9e48e62b8a1444ca67c63c1ee9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-generated-state.json",
+      "sha256": "cd7482347ccce4f765541b2a6533a950eddee22447e57cab17f29731cad8d048"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-prompt.txt",
+      "sha256": "8ebae7585fcaa528fe3cb3c9502d35329812048f66afd2430c773a5f70e53161"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-request.txt",
+      "sha256": "f92392238954210d7d8103fd59fa9c933c57c7fda7596ac989559bd36186e205"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-scribe.xml",
+      "sha256": "15457a8236776c53e8384bd09e43e8f170598d3b178ce1f1649c210c40c0f22c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-05-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-after.json",
+      "sha256": "f98c83fa0f88d277441157e4967329f748e7476e17208564fba5a8d920619eeb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-before.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-cells.json",
+      "sha256": "f711f13f5194bc58036ddde0aba9ae0957ced8131ad9a35d24fcc99e94ffae06"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-generated-preview.png",
+      "sha256": "bf55f349ec5c08799f6d33dc103407ba0d19beb655875f12be289546680a87f0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-generated-state.json",
+      "sha256": "3a03570761a646342df2a3534068a88e26fdb19304fba8f34e0fa3dcf921d668"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-prompt.txt",
+      "sha256": "f614bcbaead498c50c96d9357a2ea361cdc410623746cc049816f1d4e0212a9b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-request.txt",
+      "sha256": "1d6117a62cbae06d03c184b486c8147e801fef773d2db203aacf2b1dd651c14c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-scribe.xml",
+      "sha256": "3d07cbef0f3142a75e46e37073f849f92220e0859f3ba053ef3c9284c82da4de"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/basic-06-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/cleanup.json",
+      "sha256": "c5399c76ada3f9169dd442a23eacbd4adeded333077aa32b656c036ec93617d1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/launch.json",
+      "sha256": "c8d91b6e577bfa7c0fd87c15b716bac425a0f24b50f7839a1fa805ba639b9c56"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-basic/suite-result.json",
+      "sha256": "837a64eb66cc30a25f76fa11735158f44b7e0c61345547e3dca7e597bc6a6748"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/Player.log",
+      "sha256": "83db5ef8b04ff856e70ce038520685b52a55a2daedb4661f90725422122b5025"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/cleanup.json",
+      "sha256": "94411709896726ddbdf07e952bf40b254700881f935ebf045cd717672eeba003"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-after.json",
+      "sha256": "42644311e6d84d4daff125b7e2fa9e51a57704bb95c63c8029dbeab9d346ddee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-cells.json",
+      "sha256": "ed0f2396e2ddb7f6042eb00668f7111db81d9fcddb8e0227caddfc6d3ce90a3c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-generated-preview.png",
+      "sha256": "73187cc196ca195908ac883b8430891b27f7c33fcb86e8707bea9bd1b2a7adfc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-generated-state.json",
+      "sha256": "5ed2985673947dd28b71e2918bbf053002d7f18ee9077f121e51d9df61b8e95f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-prompt.txt",
+      "sha256": "dab0895c7b6d644d851cb8f653c2b9ef9dab3fbffea115c7969a23fffd4c370a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-request.txt",
+      "sha256": "bd43c8df9c202e3ad3a9cf7822d6e290ce195f499c9f1d4b4d0203d10ea57d48"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-scribe.xml",
+      "sha256": "11b0b944105d58db2029b58d3a266a86986dee78484c5d020372b18118b7e7f1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-basin-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-after.json",
+      "sha256": "182407bb5987d94b9faa641b8293c7e31778eb02772d9299cc7e00ebe415f6d5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-cells.json",
+      "sha256": "d79954aead5b9104f0674dde208f2b0f81bb1a3d67d9c4dd7f04a333deaa5dee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-generated-preview.png",
+      "sha256": "43ff72254842565fbc0f45831bcbec9624cb11d199892578f7144af505379f02"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-generated-state.json",
+      "sha256": "df4e708596a1b7f3b4c2a1f8cc1c2dae8ddb6fa8d7d00081320096900bf5d348"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-prompt.txt",
+      "sha256": "287a3639b8a29ecf07f60b8fda29a23feef97ec073a7a60a21f584aee7aa13dc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-request.txt",
+      "sha256": "985641435680fb01ec5ae5f8eb45a805316416c44b7683ceea9f31722811d5d7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-scribe.xml",
+      "sha256": "4a18ff649c1276151a14b144daa3cf28208fa628105a4890ccf23878e2aca782"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-caldera-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-after.json",
+      "sha256": "c5c516872f1c90e62175f7e21be91612891bac6bf233a44a1d4057b145ad3aab"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-background-preview.png",
+      "sha256": "b6036fae4ce86de78611626784ffc3ecb1f398b7aa9c5ff1a8befead90c5cbf1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-cells.json",
+      "sha256": "4c449b9e9fd7b05565a2ff6f91b91b3f2c00f8288ded27bb99ba7dc282aae0f6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-generated-preview.png",
+      "sha256": "6fd77a72404f8925a3d09ac3599a2f5ca088a8b51e69202ec0cf38bcbc13074f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-generated-state.json",
+      "sha256": "ad2f54c5d3fae0c99fffaf7598fc67a3478457529c48d37e458528d0eec50601"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-prompt.txt",
+      "sha256": "721891103ce5da52cbf52c0b5272eda704b8a0615ed5d1234b8c972274636ff0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-request.txt",
+      "sha256": "1e37ef55ef8707ebadfadd256e9168d6f85eb3e3927a4c9440295f27bd9057fb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-scribe.xml",
+      "sha256": "a9f1f7a3455a026563ab59e7497b30d00f6c29c4b5e2f379bf90103ce8b54f50"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/en-canyon-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/launch.json",
+      "sha256": "0593c305746ffe2d58c4c8f6d96f3d97864d54b7eb640ff726653e9e06309229"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/preview-result.json",
+      "sha256": "e62ff1460a3a85fd54ae205d6baf97f084381ff55c528f60cd8309ec7d0cc3bd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-en/suite-result.json",
+      "sha256": "1f0af188e221931381335f3cae695801ee4cb5c26eb14da225ac4c86065ec2cd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/Player.log",
+      "sha256": "118fcbe999edfe73cbc0252fa24fb036c0f068b92526ed9d4780c06d0c290e41"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-after.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-background-preview.png",
+      "sha256": "13e2bed89ed972ddcf5429c6fe0f5401a370ff5dd7483d3584679641a92ebbc9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-cells.json",
+      "sha256": "e74458f53e4a609854c5c3b982c3a4fe8fca5495ff26e0e630a15de7296418a4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-generated-preview.png",
+      "sha256": "4e6b2876e5c79749537194fc1f0a341c8edfce75a45da27226e28aa6ba0d30ff"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-generated-state.json",
+      "sha256": "d9a6a4f4abce1c9bd782a91305b02cefe552ab2051dcb29301221db4d75281db"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-request.txt",
+      "sha256": "4a3e84d8cc3152335723c52f9a38fda54f88876dab71cc96600339b4059341d0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-scribe.xml",
+      "sha256": "7bb7b9e7180c20a0b56bc2bfa27a05b21ec53ca68003c1dc127bdaccfc9d033a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-01-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-after.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-before.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-cells.json",
+      "sha256": "96e7d48ef083798ac3297d487ce3fa1e51d8cec29f4d8d070516f0502b3f9245"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-generated-preview.png",
+      "sha256": "9cb5185a9e71d69337a157775fc0b4a55374830717820c69e81626c6f11871df"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-generated-state.json",
+      "sha256": "03dfa26fd4f3e5c764421e4ba877a8dfd2c7bf98a875bb085aac88014901c4db"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-prompt.txt",
+      "sha256": "58507f3661edd4646cd8151cd730bb242e1dab991d663a563ce0db2a549f9c1d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-request.txt",
+      "sha256": "85d52c03d851afe0ccd4532927d6aba08bcedf61c58c2c7541cedfb3ed63c4da"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-scribe.xml",
+      "sha256": "eac9a27d3f00a072df45332f85af558def2809a42330b1dedbe9090bf3a2a51f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-02-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-after.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-before.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-cells.json",
+      "sha256": "a7d824997e467ff1697d977babff8030d6539085cba5d2580d5e6577d3591e8d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-generated-preview.png",
+      "sha256": "a36a622db8d6e63a234d095922c06a6ed171d0bde50f0e10daa80f189db1094c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-generated-state.json",
+      "sha256": "89151432cbc0f887d98435aa6b87647c01717ba7eb9c7a0ac9206ed76dde90b3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-prompt.txt",
+      "sha256": "92084680ae5c3592a163600d3d3756c5609b0c97b568d035afd1501d361b6607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-request.txt",
+      "sha256": "d71db2fef8e117815ba1a4f7cd5d2daedb2cbaccd15c1eafa2ea3c32df703f55"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-scribe.xml",
+      "sha256": "a5b76acb5e7dcd85c79754a0347354118030c3a66eaecd2c2fc6a819df699eaa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-03-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-after.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-background-preview.png",
+      "sha256": "39781c97c5b31d378d7881450e4c44b1315f8c6ab7ec243383ac53e6de751eae"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-before.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-cells.json",
+      "sha256": "847cffb9bf7d200460825e92bd25d011811cc43549756a9b935bf7a062506fce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-generated-preview.png",
+      "sha256": "1b1f9523e7296cffc3f3e299cd13f5f8953ec6d4e5bb9de9966d63b1d5d19ddf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-generated-state.json",
+      "sha256": "fe1e2fed7d1ff2f625f677fcb605d16db8accc93b0a34bcf4ecea181120fa192"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-prompt.txt",
+      "sha256": "3e5be3ea87c79291f30a2b9cf85ba7644453329ea2d6e1166b8625eec9d54bf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-request.txt",
+      "sha256": "99693e4575dcf7218c4e270dd69944150c3e162c48356be5e8df30566b71baf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-scribe.xml",
+      "sha256": "ccafde9f8dcca9cc5762c4e635202cc16ae4eb13ba2aa82d7905780b9c1a307b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-04-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-after.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-before.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-cells.json",
+      "sha256": "37efe44698eaf77d3c693f4ef7ce3ffc371181508beaae142ce2fb581ff56fb7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-generated-preview.png",
+      "sha256": "2cf9fbedb4a57cefd3c1fb5204eff11d440027298c357bf28ecba1129257a798"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-generated-state.json",
+      "sha256": "118fa7fcc5f62c4d51044e565496eedbf682e5295a0556e56010b8defd2b176c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-prompt.txt",
+      "sha256": "c0cb630ac51bff292331b580f7385f85c3cd10abc0834a8fd37dedfb0154e6e6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-request.txt",
+      "sha256": "c64a47d10ff4f130d61b710f57adf99c1ee61e4a31c734cb29a162ae8f3458c1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-scribe.xml",
+      "sha256": "01f48820c708111c37f1f0251f81ae75256f38c74641080cb4559ec02c4af25a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-05-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-after.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-before.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-cells.json",
+      "sha256": "23e05fe83e5bcaa94b225b2127ee671c03f5910c32e8b710d54930981b179bd0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-generated-preview.png",
+      "sha256": "aa9aeea706650e9230899d99778fb9ca692254461f26a80fc0132b4f723bfb07"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-generated-state.json",
+      "sha256": "8118a338279bc984cadd342bbc12cb7847f1a10c64dedcb630b86f8ce9fe42c8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-prompt.txt",
+      "sha256": "85da3967d23803b1703a2e6688ebf422221791e38a4a890a6fd709a30fd760b5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-request.txt",
+      "sha256": "9f9d9e556250d33afaf64932a29df4109442c515d939c8924274a7f4826a6eff"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-scribe.xml",
+      "sha256": "20e5131515dd8550bb1e246cd26dc4f0ec4400275914568b258ebeee6437674d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-06-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-after.json",
+      "sha256": "07be1a2f8ad75b83ef47867d152c5bf9ffae1b56fc0950cdabdafa268c063d40"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-background-preview.png",
+      "sha256": "f5d96e94d785e229a533994f34656ed94be0d0df5a83e92c16fd73ae6d5ae117"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-before.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-cells.json",
+      "sha256": "930446c46ad64aea1952129751e9ceac6581a4ed6fc0000faa473da5983f12e7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-generated-preview.png",
+      "sha256": "aa038a33893e69dd65b32f99b279e513dd58342336337c8f3b703affa20721bb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-generated-state.json",
+      "sha256": "01732209938995d217cda99b68075e48521b3646913827ab9baa8079d531463e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-prompt.txt",
+      "sha256": "aa431f013916a6d7f20a0d9dde8806262cdef18073347286b3359d9075754b18"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-request.txt",
+      "sha256": "65e5839157543505c1e9c0abfa85bf15941b2a4ba5ae9df75f47b7ee87d92051"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-scribe.xml",
+      "sha256": "130dd49a14814bb87c3c1219f0f73734e2e159778876912328eb58ca7a92fe28"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/basin-07-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/cleanup.json",
+      "sha256": "aef5b455490d42d362686f5e0b1ac24344224e7aae49ab47dafe6e5f5058ce29"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/launch.json",
+      "sha256": "809f161b6f6af502c6c3737b77824ea77a5e284eaae301da6ae745324b80b1a7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/preview-result.json",
+      "sha256": "a76a86c93a7a3ce96f0ad0261aa9f51a7aa501c04c670becbe1b60126d01d11e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-ko/suite-result.json",
+      "sha256": "31ba220b4837206ba03a6245cb2b83b0e58d0535e232670239552cdda8e2a183"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/Player.log",
+      "sha256": "7eb4ebfba26204280668f2490dee558b46bfa26da2711997a9512c7a974c7aa1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-after.json",
+      "sha256": "95cbd96468e04bc8f7007107587117a53abce3f31c8f10f462cd5e3e698bb40d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-background-preview.png",
+      "sha256": "6fe5029cc162de904d655286a56ebee0e51016e1fc0477fb233b89a80900b9c3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-cells.json",
+      "sha256": "61f41d7108b6c42921b4effc64798193446ae8348caf78a0bafb393b0cd82324"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-generated-preview.png",
+      "sha256": "d46d64330f2353fde901ff75e9d8baad4dd3bd0a6e6d81b662af09db2403fad0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-generated-state.json",
+      "sha256": "6fd91baf24ecf162339baaedf1071b2f0e7202467e43a5084534162266fcd430"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-prompt.txt",
+      "sha256": "b36ae4d6e67a1a6b9bf44ccf022dbdc23e7cd47f8a0cc64a5d216df83a5feced"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-scribe.xml",
+      "sha256": "e6c9cacd9e0bad9a045b4c61a62f103b0dd53e7bbb8c9df5c2192342f5812104"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/basin-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-after.json",
+      "sha256": "2cb9ca47e6af7a723eedb8b1157e8d17e9dc7da0b3b7c91b263c65fbaa8aba74"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-background-preview.png",
+      "sha256": "cc96ec66c152e86e9f3f88db93a4c8653e795c2306213c057c038a928795fd1a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-cells.json",
+      "sha256": "f8cc4fe409cd967b1298a3225e048faba8d9ade75c41b6700c388a40fa7792a1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-generated-preview.png",
+      "sha256": "d4bdb9f7954156e5d581ea3a5d13cc904cbbd0f6be9f0dfe7c38d4d87c70dfcf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-generated-state.json",
+      "sha256": "6527fd72bda137c667f9c60548672847f11151384a5577921e28c2e25e843618"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-scribe.xml",
+      "sha256": "9ab8103f397e15500d9ca076d716c675629687b1efde99a748bfbba5e13b10d1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/caldera-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-after.json",
+      "sha256": "2726e00e83a5a8808e2b774b8faeac3f09f37f5ec907145aa0e95789886bf2c2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-background-preview.png",
+      "sha256": "7c5f02def671c54f39c962a5d91b989a5efc841d0184a96f526dbdcf637de27e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-cells.json",
+      "sha256": "4110a1d57a121add554c0f9f566f7ea05243006f38dfc6e458cc81bb9ee375e9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-generated-preview.png",
+      "sha256": "7c5f02def671c54f39c962a5d91b989a5efc841d0184a96f526dbdcf637de27e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-generated-state.json",
+      "sha256": "e345ee295ed68b4a7c238599076177fdca5572ce9fd9f04529d3585e46cae6fa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-prompt.txt",
+      "sha256": "8afbf327831aba4a444482a6e2543b8e3bd222aca69e210a5a837390aec54408"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-scribe.xml",
+      "sha256": "679c0bb67ecd2fd39f1979700ec4736ec55e5b2661b9b6acda48419492cf79b6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/canyon-short-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/cleanup.json",
+      "sha256": "729ea8093c44fa6c035508cb2f70edd4ca4f3e9f0effd37bc87aabdb1c5caff3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/launch.json",
+      "sha256": "a2f590ec2574248917da21188ba36587d8bffd9561c395d905f3ff578029f3fe"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/preview-result.json",
+      "sha256": "b670fbca6a6a3a143f5e631d70e3001dbd66c2082b3144432789fa62f89dcc5e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-shapes/suite-result.json",
+      "sha256": "b7c49ebac85d55c4afd856e6d43a189eaea56093df70135cbc49d5337a2dc383"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/Player.log",
+      "sha256": "33abf2d673b95264c7eed2e3c8aa6c7fd6769957527527224eaf6837a385f03b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/cleanup.json",
+      "sha256": "742f096157492cb1b44cc434eb410244595cf7aad72c700a85a622de89fbcb53"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/launch.json",
+      "sha256": "31175ecb4882c0d2a761bf38d2683ecfff6ba516f8f61826586e39180147266c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/preview-result.json",
+      "sha256": "b2c889c4b62183f56c3e5d7c0620f21a44ec8f3b9771465e6b816d4118b6cd17"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/suite-result.json",
+      "sha256": "d4a688135890fe8c22456a2caf6cbf0b349d4c7fe528271a7f7019f4d4936786"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-after.json",
+      "sha256": "d93fd6beec7a00153435cfa2eedc8c5ad0e8ff610297650bafec50a88017e86c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-background-preview.png",
+      "sha256": "932dcd15145cfb04a8bbabdba328d492c86e6d5843eabec08a007cee1c91a6f2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-cells.json",
+      "sha256": "18188d0764915f741a9057762e423669bba204108f0642892a349888067ad0c9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-generated-preview.png",
+      "sha256": "f8c0fb322e3f835b4d7e80280fb110453f9d424a1f13d71fdbf48d871590f4c5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-generated-state.json",
+      "sha256": "efffdb6da799fed649a3017c3eadcc227287ceafd2c54797e5c69c203592439b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-request.txt",
+      "sha256": "84ace9f12cee1c80813fd137faec0ea4e2ba38556b9f404b056caccef58849ce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-scribe.xml",
+      "sha256": "107e58a093a9655487238ac0cd079c205a4f1ac04964831becf398c957da71c2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-01-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-after.json",
+      "sha256": "1d18ff11d69c72f43e12ba61944c6c460e5e0b7fb346b74eb01a77d5ff506252"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-before.json",
+      "sha256": "d93fd6beec7a00153435cfa2eedc8c5ad0e8ff610297650bafec50a88017e86c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-cells.json",
+      "sha256": "51bb202b65c0c79359a981889839b90a35077bcccfe0756b84b95234cfb41791"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-generated-preview.png",
+      "sha256": "21ebefc22b098d0fbe5533d8c6bc541e254bd2cef426f8039ede815652cc476a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-generated-state.json",
+      "sha256": "39006d95b33577783acea35f42a7f594914f8747b9a489e3389c8572d2b25067"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-prompt.txt",
+      "sha256": "cd8fe846494d7ce4fc921b995c2658d7cc3bbfa8b471d0407e47a1a04357ba35"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-request.txt",
+      "sha256": "df8c0147ca052f1726ef9946655c06bd7cd82615e090863d8ee4997939e3424f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-scribe.xml",
+      "sha256": "acedbd4e218fd99c4a312ae1c26d51707926a7a36b4c7a62ab065004ea75917e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-02-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-after.json",
+      "sha256": "4cd31fac57e2319eb2006267d51cbbe295d500f18972f58ee6a079375bbef77b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-background-preview.png",
+      "sha256": "95a5186beac7a84657fa991f3a017d275439f44ddd5c13b4c6b6b6eaf8e507c9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-before.json",
+      "sha256": "1d18ff11d69c72f43e12ba61944c6c460e5e0b7fb346b74eb01a77d5ff506252"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-cells.json",
+      "sha256": "81531cf83e0b9e1000db135a8bf01834456a81f8b785ab64a199fc3874c7e7cc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-generated-preview.png",
+      "sha256": "996d2f057a64865de45ea95b973fee85e6b335c8f1c5652f404202e10569f2f1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-generated-state.json",
+      "sha256": "4ecb3b2a82e9a3b1ad3046c0dfee1e855980b34628496f4794bf3bdac5f2c5b9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-prompt.txt",
+      "sha256": "a19e95c252e5f5b4f5cc6606c2195a686a46d87acaa0f4fb01c33d9e74ae49bc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-request.txt",
+      "sha256": "5209c928e6a69a9b257399d9d772520207463464a08c4b2fed699cf246945d8c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-scribe.xml",
+      "sha256": "cc3008a0b7226a07ca5b3d1ac279bc0bf26619549fc24809f8f43086d43d8689"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-r1-two/two-03-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/Player.log",
+      "sha256": "aebe4efee7a062176f899e34a62a100de4578d7c94b6d958a66c1fd123694b65"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-after.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-background-preview.png",
+      "sha256": "01f653ab0740fc453f65abe27dc2c8f4e15428e2e506103f086079dab933c3bf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-cells.json",
+      "sha256": "6124cd694db672b268f0161419ab1d83b6df584e9e3071ee1b25363afc2e9618"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-generated-preview.png",
+      "sha256": "ea516fddf9806ac09554e1be9caf68d29c602489abf4487dc3377f3877408e8d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-generated-state.json",
+      "sha256": "e9ad864c528ce6219283921e01324e579dbccca008cc9d33f847375e8d333c36"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-request.txt",
+      "sha256": "4a3e84d8cc3152335723c52f9a38fda54f88876dab71cc96600339b4059341d0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-scribe.xml",
+      "sha256": "7bb7b9e7180c20a0b56bc2bfa27a05b21ec53ca68003c1dc127bdaccfc9d033a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-01-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-after.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-before.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-cells.json",
+      "sha256": "da8efb5cce8ff64a06b397886f5f97c660d104d6485fa7ea4c033c51d5251eb7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-generated-preview.png",
+      "sha256": "f9bf3bc832a3e45aaa33b79ef7e1d8562e7ac38451ab98a3742ab65502c94b91"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-generated-state.json",
+      "sha256": "aace098195a2b0f9ff31c75ebd051207c7b73881a5f75824745fa1b476b5cac5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-prompt.txt",
+      "sha256": "58507f3661edd4646cd8151cd730bb242e1dab991d663a563ce0db2a549f9c1d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-request.txt",
+      "sha256": "85d52c03d851afe0ccd4532927d6aba08bcedf61c58c2c7541cedfb3ed63c4da"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-scribe.xml",
+      "sha256": "eac9a27d3f00a072df45332f85af558def2809a42330b1dedbe9090bf3a2a51f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-02-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-after.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-before.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-cells.json",
+      "sha256": "7b2517539d94a9ddfe4b4bc1615a0a743c0243be52796bfb1eae37517e3dec4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-generated-preview.png",
+      "sha256": "86908e4fbab528a369b319ee58012c0e6b8aa12123d344de27ef1e09fdf0a0df"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-generated-state.json",
+      "sha256": "af8d8987345df10c519ecff0cf053b5cb199519ac960cb3b8d8458117928ef84"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-prompt.txt",
+      "sha256": "92084680ae5c3592a163600d3d3756c5609b0c97b568d035afd1501d361b6607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-request.txt",
+      "sha256": "d71db2fef8e117815ba1a4f7cd5d2daedb2cbaccd15c1eafa2ea3c32df703f55"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-scribe.xml",
+      "sha256": "a5b76acb5e7dcd85c79754a0347354118030c3a66eaecd2c2fc6a819df699eaa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-03-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-after.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-background-preview.png",
+      "sha256": "edf945a04734318046e0b4b5284a97564e968faa1ec09244f99f313f002b9f13"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-before.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-cells.json",
+      "sha256": "8a239da8c933a9a4fbcb46dbf5cab416edf6030ba39f327c8baab14aff758c95"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-generated-preview.png",
+      "sha256": "1c94a2de9f3b12d5a0717c91a39dfa9acf296e9ccadd32f6637f75d6425eae5d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-generated-state.json",
+      "sha256": "7793a9e82b3e962c3075d90bc86d46f7c7889c3c84cdac0ac949066c2c16b8a2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-prompt.txt",
+      "sha256": "3e5be3ea87c79291f30a2b9cf85ba7644453329ea2d6e1166b8625eec9d54bf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-request.txt",
+      "sha256": "99693e4575dcf7218c4e270dd69944150c3e162c48356be5e8df30566b71baf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-scribe.xml",
+      "sha256": "ccafde9f8dcca9cc5762c4e635202cc16ae4eb13ba2aa82d7905780b9c1a307b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-04-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-after.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-before.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-cells.json",
+      "sha256": "db8abd267d81afb9b52a905c4b9635e1b1ddc4381e8d14a6d8739c7eb6d1eb97"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-generated-preview.png",
+      "sha256": "226685dacdbced34a0c87f66f5d2bbc2f99ecc357370954d18b4000e0c1d8dc4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-generated-state.json",
+      "sha256": "336148e4a44b6054b724ffcdea375cdba27bb0c47b6b80f8558cf77cde6d3337"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-prompt.txt",
+      "sha256": "c0cb630ac51bff292331b580f7385f85c3cd10abc0834a8fd37dedfb0154e6e6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-request.txt",
+      "sha256": "c64a47d10ff4f130d61b710f57adf99c1ee61e4a31c734cb29a162ae8f3458c1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-scribe.xml",
+      "sha256": "01f48820c708111c37f1f0251f81ae75256f38c74641080cb4559ec02c4af25a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-05-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-after.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-before.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-cells.json",
+      "sha256": "17e64b13fa6068d67e957a985cce9aabf4dd0285d2d4aaa32168e60ddddef050"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-generated-preview.png",
+      "sha256": "8afb1e2d25fa42f7548b59cf6b6bcb4c261b5f1a4575650872a681676806ed84"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-generated-state.json",
+      "sha256": "91534aebdcffc1db0744d0ca26a75c4a6ae84481a2efa202821487c52087b8a5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-prompt.txt",
+      "sha256": "85da3967d23803b1703a2e6688ebf422221791e38a4a890a6fd709a30fd760b5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-request.txt",
+      "sha256": "9f9d9e556250d33afaf64932a29df4109442c515d939c8924274a7f4826a6eff"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-scribe.xml",
+      "sha256": "20e5131515dd8550bb1e246cd26dc4f0ec4400275914568b258ebeee6437674d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-06-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-after.json",
+      "sha256": "07be1a2f8ad75b83ef47867d152c5bf9ffae1b56fc0950cdabdafa268c063d40"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-background-preview.png",
+      "sha256": "ea929ba9814ccf00891a659a69bfb2b930906b02277e70aba47a3e2e736abdb4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-before.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-cells.json",
+      "sha256": "dacae9c12650683b7b08c54fd645b7acd5385ebb456b2557013195826d4f49b0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-generated-preview.png",
+      "sha256": "c717977fa07b74e879cba141f85fcaf62c929b60bf0db0e7a760d7423c196e81"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-generated-state.json",
+      "sha256": "b3fd3cbe83fe7ab6c5cfb42eb092973a43b4aa6208c51907307ba005a5f171c6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-prompt.txt",
+      "sha256": "aa431f013916a6d7f20a0d9dde8806262cdef18073347286b3359d9075754b18"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-request.txt",
+      "sha256": "65e5839157543505c1e9c0abfa85bf15941b2a4ba5ae9df75f47b7ee87d92051"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-scribe.xml",
+      "sha256": "130dd49a14814bb87c3c1219f0f73734e2e159778876912328eb58ca7a92fe28"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/basin-07-steps.json",
+      "sha256": "730d4aa5e5ca963fb65b96e4644031f0deb984793856d9f608af52f78a51e01c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/cleanup.json",
+      "sha256": "9120e844c71d99f943805d762dae45eb52b55d11bbafc32a299fe39262ab01ad"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/damaged-image.xml",
+      "sha256": "1a95d66d24a95cf50c77cb775e9346e32473e40fe5a13b95091111330063f66a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/launch.json",
+      "sha256": "d8a0ab93502ab067ac8f99ee9dcef556e6c31428aa5722b3789df9c3dd6b996c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/legacy-image-mode.xml",
+      "sha256": "7b6d5ee21a613a5c412771b3523d7674f0a3b84358ce276bd503759f9e7aadf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/legacy-optional-fields.xml",
+      "sha256": "3f213d7d84fc54b486cc5c09fa3836ccd09ae1bbe0c1231df5cf8ce7485c0b4a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/mutator-catalog.json",
+      "sha256": "ab056f0b13d43b4194126c594141acc8d3ea0f5bdc49e9827135aab9646aea75"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/preview-result.json",
+      "sha256": "063a24e43e4d23575746e6018057e6a076c9d83b063c59ade05cdb643b1233ac"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/state-roundtrip.xml",
+      "sha256": "2a9c8072ae5299c909684ae03320c4b2736da37fc03b183aaa8f4e6a63a9b730"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/native-seed1-ko/suite-result.json",
+      "sha256": "50292888be8a3c7b6e97be64319c04dad85e38528177cc721053ccf7f6a2b582"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/probe-build-r1.log",
+      "sha256": "3674918d757e68beb02122c885f931ae07ae85ef3a3000e22da5d86bd1e7277b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline.log",
+      "sha256": "8d826aadf8b6a4cb8fa27312a220eba5c9cd0c53ed956b4638194174db24fd34"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/basin-short-prompt.txt",
+      "sha256": "965e89d9fa9e6b3d7992fec8f9eef298a4b40cca96800c64561309c197f8e2cf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/basin-short-response.json",
+      "sha256": "d3582ca3e1d72c64439a6950ccf6126916bd56817533b23c9859cd5b86796afd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/caldera-short-prompt.txt",
+      "sha256": "2613e10a4f8a3498817751760ba11cd354769ae913b537e9404d903f39c3d558"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/caldera-short-response.json",
+      "sha256": "de27f61c923314a2e36e002bccf5f3547a464dd2c7b067271cf4e179c05720e8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/canyon-short-prompt.txt",
+      "sha256": "901106cec28481eafacd80f0f7a9a35954342fc5f6dbbec447ee162b407106b8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/canyon-short-response.json",
+      "sha256": "8768b6714cba9b2388978b40d0339cb15b3123ec3dc6123072786555d387e8c3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-baseline/result.json",
+      "sha256": "094c817426ad0ba54b759b3de3b6d38af53d503a77f6cbf197370663019a3893"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic.log",
+      "sha256": "072eb9e44e192dfc102e27797058f7820ec416b6f692550e7aea1cb1287a04ea"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-01-after.json",
+      "sha256": "823227d350c6c1bd3c9a6dd5e5c6463dc0a1b1ce979097ca05af6cd2ca2eb88c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-01-prompt.txt",
+      "sha256": "5ecee0d8f43b854a28ded52230b5d41695c0534c858e386e3bbfec90cfb1a52c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-01-request.txt",
+      "sha256": "b5642d106167eb30c26b6caeec0667da93990f61b74bb6ac6e8de4f7a342bad1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-01-response.json",
+      "sha256": "271bbac96576f984b5014be983602bc72094c8b75291afb642194e240afd0c54"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-02-after.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-02-before.json",
+      "sha256": "823227d350c6c1bd3c9a6dd5e5c6463dc0a1b1ce979097ca05af6cd2ca2eb88c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-02-prompt.txt",
+      "sha256": "1799fa16c80e19717b1c34e35efa66531bcb15eac716fe728336f8bde276dfa6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-02-request.txt",
+      "sha256": "76f2dabfb9a17d21c6e596f2d53b25cbaf8733d6dca442157236fa02ceff7e01"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-02-response.json",
+      "sha256": "768a9c3926f27f3f49f863cde5f23588ec52074a8ea07d0b5aa25cac4578f91b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-03-after.json",
+      "sha256": "e5c016b14ef04119c8c8bb87a63e061ca065d95994f4ac89e138f012aad97607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-03-before.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-03-prompt.txt",
+      "sha256": "f80e25c667ed16368e319ae9fc8e0c3b08b85c502e72ba2d790a9f95b4ff8923"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-03-request.txt",
+      "sha256": "6c7603ab5d80116269f151cd98097c584d5b0a0ae2ffd8eceac53d4621a89dc5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-03-response.json",
+      "sha256": "d6016952f52407b3b6c743ed9572de7f641ec128980a5b581525c5f74943750d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-04-after.json",
+      "sha256": "cc5201113c8dc76dfddf0d97ec6eb24475b69210fba62dc9a6bb2173049caaa1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-04-before.json",
+      "sha256": "e5c016b14ef04119c8c8bb87a63e061ca065d95994f4ac89e138f012aad97607"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-04-prompt.txt",
+      "sha256": "dc5339807c6c545f4360e1e6576a66cab18c64716fbcda4367cfa8ef6ea3dbe6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-04-request.txt",
+      "sha256": "6fd469a2ac25ba7ea05633ebfebe7002351ea3e0dc0d217ff376e374af146b2b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-04-response.json",
+      "sha256": "087f4d1cf0a8dfce411e49ea1dbca3afb9e1b8dd92d763695a4580a7cf1b85ec"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-05-after.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-05-before.json",
+      "sha256": "cc5201113c8dc76dfddf0d97ec6eb24475b69210fba62dc9a6bb2173049caaa1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-05-prompt.txt",
+      "sha256": "075e843441d8e85a03880d0a51d95d6d377a5fdbf3dfbb56d5b039f245d20aa9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-05-request.txt",
+      "sha256": "f92392238954210d7d8103fd59fa9c933c57c7fda7596ac989559bd36186e205"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-05-response.json",
+      "sha256": "85611314224013180919d222a4fecfa9823da586f5d4c1ccd024f4a51fefd8aa"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-06-after.json",
+      "sha256": "f98c83fa0f88d277441157e4967329f748e7476e17208564fba5a8d920619eeb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-06-before.json",
+      "sha256": "3a89fcd9baaf97ea941206d9d0c43693b38f77300406377088c980f4bcb03681"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-06-prompt.txt",
+      "sha256": "f80e25c667ed16368e319ae9fc8e0c3b08b85c502e72ba2d790a9f95b4ff8923"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-06-request.txt",
+      "sha256": "1d6117a62cbae06d03c184b486c8147e801fef773d2db203aacf2b1dd651c14c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-06-response.json",
+      "sha256": "e00a30cd427a5d032341b813308a0aec39d22dde732b1fd78b399e675b2a0a59"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/cases.json",
+      "sha256": "18834bac9bd7624ea0386296aba1656ffa4c014e06e88ab22abaf6568178d425"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/sequence-result.json",
+      "sha256": "dd2a9f6fc3cc797193c0a90f4e07dc833282c15ef584e7e6cf67725d6734de03"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en.log",
+      "sha256": "a2ae31a06b8698224a2009596a2fb05bebaafe8f65fb3f9274ea6b98bffc5ef4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-basin-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-basin-prompt.txt",
+      "sha256": "dab0895c7b6d644d851cb8f653c2b9ef9dab3fbffea115c7969a23fffd4c370a"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-basin-request.txt",
+      "sha256": "bd43c8df9c202e3ad3a9cf7822d6e290ce195f499c9f1d4b4d0203d10ea57d48"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-basin-response.json",
+      "sha256": "6fd7be1136ee5b3247ead981796f24483691464522c4014f67e33d0300d7e6ab"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-caldera-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-caldera-prompt.txt",
+      "sha256": "287a3639b8a29ecf07f60b8fda29a23feef97ec073a7a60a21f584aee7aa13dc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-caldera-request.txt",
+      "sha256": "985641435680fb01ec5ae5f8eb45a805316416c44b7683ceea9f31722811d5d7"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-caldera-response.json",
+      "sha256": "925dab5346f99abd906042e05503235f3bb6d6da505d2be84f1297b9f214be0b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-canyon-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-canyon-prompt.txt",
+      "sha256": "721891103ce5da52cbf52c0b5272eda704b8a0615ed5d1234b8c972274636ff0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-canyon-request.txt",
+      "sha256": "1e37ef55ef8707ebadfadd256e9168d6f85eb3e3927a4c9440295f27bd9057fb"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/en-canyon-response.json",
+      "sha256": "f42744a76c64124057a901431a01d9f8ebf6584be9231f253913a17565f06414"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-en/result.json",
+      "sha256": "f8511801433c29735efcf116980b12ddce8bc0536a04f0d19d00de5f63e79602"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features.log",
+      "sha256": "70c403b892ca46c18d30c0fa11eea72f80a355e602657670f1566dcb4d5b7e71"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-add-before.json",
+      "sha256": "93426280d88a0ca4ee8cbf595db410a4d5f337fed1fbef237ebecf1471458c05"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-add-prompt.txt",
+      "sha256": "fa2716d2c50bb758a7f94d744b3f9f9008e8d70f83f43df6a0761232d1c461d8"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-add-request.txt",
+      "sha256": "3bb922ea317e0d2c466afb618899457241ff34f68c2333f234378549a7737e87"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-add-response.json",
+      "sha256": "2d789a9c06ef9fb50635b3a65139eb3da4239292e6118ae8ee5a0204d7bf55a5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-remove-before.json",
+      "sha256": "cde5300b9d09e248a58d2db79ba2044b0fdb142b7cb125ac2c2e10a6b4b5e1a0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-remove-prompt.txt",
+      "sha256": "3575c65a605a8ef1624d0b3476a7b255c055c5ed28dd9dc055a4999b416cdf07"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-remove-request.txt",
+      "sha256": "a49cd6c934817387bbbe465ad7e864245a304e4fda6cd0307842fb9ceb2da494"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/features-remove-response.json",
+      "sha256": "d16e918efd0330cfb29cb9ced3f1cf88ac70965f53be6c57f94c7ede8110f998"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-features/result.json",
+      "sha256": "42e78e098a616e70c6dbd1da6334736e52c4ad534bfb8cea165a895e08a53afd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko.log",
+      "sha256": "5b54edb860cc97c02deb521ad05ce16a2771e48e4f91f8dcacb79453b574e590"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-01-after.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-01-prompt.txt",
+      "sha256": "443eae03b41848a52027a38cd94ac82e40fc0e66e843cb51f92f27b2ae6bca8d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-01-request.txt",
+      "sha256": "4a3e84d8cc3152335723c52f9a38fda54f88876dab71cc96600339b4059341d0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-01-response.json",
+      "sha256": "20391ccb387b7eb19721dd6b588566f2711e5e059b509cb74f2bb8a14ce82f63"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-02-after.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-02-before.json",
+      "sha256": "e53a5d62077432c2565fc109dee7e594233fc2c30c02388d640299314c2aec5b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-02-prompt.txt",
+      "sha256": "daa2708efbc956a222baf30c8c658e9081d2afc0675b25fb63f44dab7786a603"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-02-request.txt",
+      "sha256": "85d52c03d851afe0ccd4532927d6aba08bcedf61c58c2c7541cedfb3ed63c4da"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-02-response.json",
+      "sha256": "753a22493e89996d53f93cb2bdfd8153f67e02bb3022a60c041ca6232f98c87e"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-03-after.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-03-before.json",
+      "sha256": "bb55c0809c81b4f5429877985d352284f9501dbb50abfb44bd1da6c3c3f83a3f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-03-prompt.txt",
+      "sha256": "707947671652458bc7b0b7872b01953c8cf7a9084e1d30118f67f0de4dd37cef"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-03-request.txt",
+      "sha256": "d71db2fef8e117815ba1a4f7cd5d2daedb2cbaccd15c1eafa2ea3c32df703f55"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-03-response.json",
+      "sha256": "1889b17e3f6432b7fc8de41d76f8f6c0ef786f4b43abc7fe91916458d12acb42"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-04-after.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-04-before.json",
+      "sha256": "e48e51e696798c96c2a3b21fafb1e6772e38cd7f77e1fb80a0d27f36edf537e0"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-04-prompt.txt",
+      "sha256": "78f3a0085f7e282bd60f205eef83acca29bf8088da447ab4f8289e139d72fe78"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-04-request.txt",
+      "sha256": "99693e4575dcf7218c4e270dd69944150c3e162c48356be5e8df30566b71baf9"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-04-response.json",
+      "sha256": "ae90503605dd822ea7c83ddf3d1cdba80cfe3bfacd5e35c21c02056d3207a2ac"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-05-after.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-05-before.json",
+      "sha256": "43fcd992e3e8b91740fc76f0a9a42cc54a6e1959810db374a7ba0c25cfab1bf2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-05-prompt.txt",
+      "sha256": "35c608b0624bf0a3bb342ae3cc95f478443aee83d2cd629b4fc68ff02f8711e4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-05-request.txt",
+      "sha256": "c64a47d10ff4f130d61b710f57adf99c1ee61e4a31c734cb29a162ae8f3458c1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-05-response.json",
+      "sha256": "877ca1d97e98c14af4f60b2223accee52ce7971b4db6dac0480630047e987856"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-06-after.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-06-before.json",
+      "sha256": "fc14b675f7a61d07014b283daa63c54b670b571e0fceae8c562ab222144ad6a6"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-06-prompt.txt",
+      "sha256": "f40cd394ca71e75d685ab89d78787ed30e3c988d82292c1442b9970bbab2ef89"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-06-request.txt",
+      "sha256": "9f9d9e556250d33afaf64932a29df4109442c515d939c8924274a7f4826a6eff"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-06-response.json",
+      "sha256": "89ad3aa7cefad28e3cf416093ea59a670487b211864785da32e1fdc15a102d00"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-07-after.json",
+      "sha256": "07be1a2f8ad75b83ef47867d152c5bf9ffae1b56fc0950cdabdafa268c063d40"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-07-before.json",
+      "sha256": "36d3a34a834e5f7118b6b4c8fa46ef95c1632e1073d788015718e91b4eecaed5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-07-prompt.txt",
+      "sha256": "69969fc1ddaf228dd849a090dc91bf51954cbbbc2530a9e2acb99567c505ac38"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-07-request.txt",
+      "sha256": "65e5839157543505c1e9c0abfa85bf15941b2a4ba5ae9df75f47b7ee87d92051"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-07-response.json",
+      "sha256": "f4b7b6d0b925b340a5d57fa1e6b64a13b6eb6fbccb952931d7b27263a13ac2ab"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/cases.json",
+      "sha256": "cff2858969005b9bb8b18eca7cd14f59c9dc3a475b2edb052566156b42996cba"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/sequence-result.json",
+      "sha256": "89989345dee52f60f345be0f826d2c68bb1842e66afe5adef0e8dde9520a6abf"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes.log",
+      "sha256": "8d826aadf8b6a4cb8fa27312a220eba5c9cd0c53ed956b4638194174db24fd34"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/basin-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/basin-short-prompt.txt",
+      "sha256": "b36ae4d6e67a1a6b9bf44ccf022dbdc23e7cd47f8a0cc64a5d216df83a5feced"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/basin-short-request.txt",
+      "sha256": "0defad44329a8accbafcd48ccca6028943ecde6fd03a7838e7db02ee92bb0950"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/basin-short-response.json",
+      "sha256": "8d53cde0f49a3b86c1b5d03797a16a0cac83a83b8a280286be627b4594602569"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/caldera-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/caldera-short-prompt.txt",
+      "sha256": "0011f50f1f95d92691f88fd8e509ec468af0a489848c1b73e0f3f977f4ca1bbc"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/caldera-short-request.txt",
+      "sha256": "490da86ae440f7f83f7cc96b9031cc6016da888a951f162b08f7c041f4bc8db3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/caldera-short-response.json",
+      "sha256": "5beac7cde9e6f48b57efb33b25936f192b386e55aaf270b4f7cddff53870aa65"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/canyon-short-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/canyon-short-prompt.txt",
+      "sha256": "8afbf327831aba4a444482a6e2543b8e3bd222aca69e210a5a837390aec54408"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/canyon-short-request.txt",
+      "sha256": "8a688833619cc9f2c57a2f00e8fa0f9a62dad1d4464e88a3803ee6786752c0af"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/canyon-short-response.json",
+      "sha256": "6705c951f81b0df2f7d81b436fe4c9a16cb103dc63b22c126a254e4d2beee3b2"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-shapes/result.json",
+      "sha256": "a4f5db44c59dbd659f84e3b24f2af46946124b23066f20d52e239e7a904dd018"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two.log",
+      "sha256": "6c4f7e688ac374ed0109c50b4a065ba9cdc7b597ca43824ac1fa95e726e05f29"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/cases.json",
+      "sha256": "d1a0ecd22ca7ea85314753fdaa4ad97b51e79c78e5c6c1c5e668734b63cb3eee"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/sequence-result.json",
+      "sha256": "deb9d1814ab3205625c9b57e40474807350845865d7539422b3511ee8351126c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-01-after.json",
+      "sha256": "d93fd6beec7a00153435cfa2eedc8c5ad0e8ff610297650bafec50a88017e86c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-01-before.json",
+      "sha256": "7c15719c3fdd69c3af775a4fcb9266d9b719504d516345c9403ee53c4a3fd8c4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-01-prompt.txt",
+      "sha256": "443eae03b41848a52027a38cd94ac82e40fc0e66e843cb51f92f27b2ae6bca8d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-01-request.txt",
+      "sha256": "84ace9f12cee1c80813fd137faec0ea4e2ba38556b9f404b056caccef58849ce"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-01-response.json",
+      "sha256": "79bd45fe1429b2b917992c44c8cebd6d5465098fd5e36071d906c90c1fe859c3"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-02-after.json",
+      "sha256": "1d18ff11d69c72f43e12ba61944c6c460e5e0b7fb346b74eb01a77d5ff506252"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-02-before.json",
+      "sha256": "d93fd6beec7a00153435cfa2eedc8c5ad0e8ff610297650bafec50a88017e86c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-02-prompt.txt",
+      "sha256": "2f322391fe903252448aeb91e185e60f45609144b650d352cbb30172ad82638f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-02-request.txt",
+      "sha256": "df8c0147ca052f1726ef9946655c06bd7cd82615e090863d8ee4997939e3424f"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-02-response.json",
+      "sha256": "7526fda77a28a490ce78c8e9708adb1074856547c0e57f58f059f85e384356bd"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-03-after.json",
+      "sha256": "4cd31fac57e2319eb2006267d51cbbe295d500f18972f58ee6a079375bbef77b"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-03-before.json",
+      "sha256": "1d18ff11d69c72f43e12ba61944c6c460e5e0b7fb346b74eb01a77d5ff506252"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-03-prompt.txt",
+      "sha256": "34a3b49993dad86743fda424a6b574a9be2f9662871ccf1091508f6239a83bb5"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-03-request.txt",
+      "sha256": "5209c928e6a69a9b257399d9d772520207463464a08c4b2fed699cf246945d8c"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-03-response.json",
+      "sha256": "88b831dca66eebd503adaa19b1923674ba07f4a8f1f834f105333f0fa8dd0a22"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/report.md",
+      "sha256": "8fb1713fdb6c6e679b70dd9afcb838d1f26b4e7f5db589cd7b2db73329b986d4"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/sequence-basic-ko.json",
+      "sha256": "f23052688236385421593b7b2f60913d88e93dd49ad3147333c9b02fb3c7c96d"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/sequence-landforms-ko.json",
+      "sha256": "97c58bef49f966d11e08b102d05b82ad07324ab1cf75cf1ed36ff19e780ed0c1"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/sequence-two-basins-ko.json",
+      "sha256": "8028d37712cfab29901c6131c7fd825338acaa20c800d58c79ce255ffba9b362"
+    },
+    {
+      "path": "docs/analysis/2026-09-19-landform-recipes/tests-r1.log",
+      "sha256": "5c048c023d21caed2d00f8c4de9d416288f23e5a2dff08ec502b2f7c2baec4dc"
+    },
+    {
+      "path": "docs/description-ko.md",
+      "sha256": "4f1f8b381bed25f7420f2c85cd26b5336ddb5b5810f218054a4868ac65eb14d2"
+    },
+    {
+      "path": "tools/evaluate_landform_recipes.py",
+      "sha256": "793f13ff92fb36a280a696e6d7d3a4a9f98f3698043371b126a701ddcb1ea4e6"
+    },
+    {
+      "path": "tools/package_dev.py",
+      "sha256": "d0945397a435676d7023c5e08d4fa515e17f873cdc0fd72cc77da4d562316919"
+    },
+    {
+      "path": "tools/runtime-probe/LandformSuiteProbe.cs",
+      "sha256": "3f8e3170b4270a597e043b59a8447b6b601fb1891daa041096bc4321b00ccda4"
+    }
+  ]
+}

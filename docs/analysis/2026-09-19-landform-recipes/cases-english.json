@@ -1,0 +1,7 @@
+{
+  "cases":[
+    {"id":"en-caldera","kind":"caldera","beforeParams":{},"request":"Create a natural caldera with a dry, flat interior. Keep the mountain ring completely closed.","omitAmbientRuins":true},
+    {"id":"en-basin","kind":"valley-exit","beforeParams":{},"request":"Create a natural basin with a dry buildable interior and just one 8-cell-wide exit to the south.","omitAmbientRuins":true},
+    {"id":"en-canyon","kind":"bent-canyon","beforeParams":{},"request":"Create a winding canyon through a large central mountain. Its dry passage must be at least 10 cells wide and run from the west centre through (35%,70%), then (65%,30%), to the east centre. Preserve terrain outside the mountain.","omitAmbientRuins":true,"preview":true}
+  ]
+}

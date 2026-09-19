@@ -1,0 +1,28 @@
+{
+  "action": "generate",
+  "description": "분지 지형과 내부 바닥, 출구를 오른쪽으로 8% 이동",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "move",
+        "id": "basin_mountain",
+        "position": [0.58, 0.5]
+      },
+      {
+        "op": "move",
+        "id": "basin_floor",
+        "position": [0.58, 0.5]
+      },
+      {
+        "op": "update",
+        "id": "south_pass",
+        "changes": {
+          "points": [
+            [0.58, 0.5],
+            [0.58, 0.0]
+          ]
+        }
+      }
+    ]
+  }
+}

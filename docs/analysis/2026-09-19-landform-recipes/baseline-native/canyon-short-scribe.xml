@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>canyon_mountains</id>
+					<type>split</type>
+					<direction>top</direction>
+					<strength>strong</strength>
+					<gap>medium</gap>
+					<noise_amount>high</noise_amount>
+				</li>
+				<li>
+					<id>canyon_passage</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>12</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0,0.5],[1,0.5]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

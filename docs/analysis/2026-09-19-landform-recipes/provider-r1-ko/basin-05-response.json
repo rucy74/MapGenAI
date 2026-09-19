@@ -1,0 +1,1 @@
+{"action":"generate","description":"동쪽 출구 폭 12칸으로 확장","params":{"shape_ops":[{"op":"update","id":"south_pass","changes":{"width":12}}]}}

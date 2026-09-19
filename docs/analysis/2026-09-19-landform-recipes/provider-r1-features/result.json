@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"features-add","action":"generate","model":"gemini-3.8-flash","inputTokens":13185,"outputTokens":44},{"id":"features-remove","action":"generate","model":"gemini-3.8-flash","inputTokens":13224,"outputTokens":41}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

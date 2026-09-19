@@ -1,0 +1,1 @@
+{"action":"generate","description":"오른쪽 분지의 산, 내부 평지, 비옥토 채움, 출구 통로 및 배치된 폐허를 모두 제거하고 왼쪽 분지만 유지합니다.","params":{"shape_ops":[{"op":"remove","id":"east_basin_ground"},{"op":"remove","id":"east_basin_mountain"},{"op":"remove","id":"east_soil"},{"op":"remove","id":"east_exit"}],"structure_ops":[{"op":"remove","id":"ruin_east"}]}}

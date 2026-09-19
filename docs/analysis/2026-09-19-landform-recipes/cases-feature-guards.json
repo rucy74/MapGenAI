@@ -1,0 +1,6 @@
+{
+  "cases":[
+    {"id":"features-add","kind":"feature-guard","beforeParams":{"hills":"left","fertility_offset":0.1},"request":"온천과 화창함 특징만 추가해 줘. 왼쪽 산과 비옥도 등 나머지 설정은 그대로 둬."},
+    {"id":"features-remove","kind":"feature-guard","beforeParams":{"hills":"left","fertility_offset":0.1,"mutators":["HotSprings","SunnyMutator"]},"request":"온천 특징만 없애 줘. 화창함과 왼쪽 산, 비옥도 등 다른 설정은 그대로 둬."}
+  ]
+}

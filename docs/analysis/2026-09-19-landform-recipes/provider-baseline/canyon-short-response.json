@@ -1,0 +1,30 @@
+{
+  "action": "generate",
+  "description": "서쪽에서 동쪽으로 이어지는 자연스러운 협곡과 중앙 마른 통로",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "canyon_mountains",
+          "type": "split",
+          "direction": "top",
+          "strength": "strong",
+          "gap": "medium",
+          "noise_amount": "high"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "canyon_passage",
+          "type": "passage",
+          "points": [[0.0, 0.5], [1.0, 0.5]],
+          "width": 12,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ]
+  }
+}

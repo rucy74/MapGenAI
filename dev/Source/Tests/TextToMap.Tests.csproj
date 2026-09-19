@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-*.json" Link="landform-fixtures/ko/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-*.json" Link="landform-fixtures/basic/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-*.json" Link="landform-fixtures/two/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-19-compound-plan/provider-baseline/compound-01-response.json" Link="compound-fixtures/compound-01-response.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-15-region-coverage/line-0058-response.json" Link="coverage-fixtures/line-0058-response.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-15-region-coverage/line-0072-response.json" Link="coverage-fixtures/line-0072-response.json" CopyToOutputDirectory="PreserveNewest" />

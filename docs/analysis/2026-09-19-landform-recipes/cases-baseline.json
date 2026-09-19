@@ -1,0 +1,7 @@
+{
+  "cases": [
+    {"id":"caldera-short","kind":"caldera","beforeParams":{},"request":"자연스러운 칼데라 지형을 만들어 줘. 안쪽은 마른 평지로 해 줘.","omitAmbientRuins":true,"preview":true},
+    {"id":"basin-short","kind":"valley-exit","beforeParams":{},"request":"남쪽으로 열린 자연스러운 분지를 만들어 줘. 안쪽은 정착할 수 있는 마른 평지로 해 줘.","omitAmbientRuins":true,"preview":true},
+    {"id":"canyon-short","kind":"straight-canyon","beforeParams":{},"request":"서쪽에서 동쪽으로 이어지는 자연스러운 협곡을 만들어 줘. 가운데는 걸어 다닐 수 있는 마른 통로로 해 줘.","omitAmbientRuins":true,"preview":true}
+  ]
+}

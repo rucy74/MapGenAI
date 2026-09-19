@@ -1,0 +1,1 @@
+{"action":"generate","description":"용암 호수(terrain_2)를 제거하고 왼쪽 산맥만 유지합니다.","params":{"shape_ops":[{"op":"remove","id":"terrain_2"}]}}

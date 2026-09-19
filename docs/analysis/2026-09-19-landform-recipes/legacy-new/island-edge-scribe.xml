@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<hillAmount>0.400000006</hillAmount>
+			<vegetationDensity>0</vegetationDensity>
+			<animalDensity>0</animalDensity>
+			<geyserCount>0</geyserCount>
+			<hasRockChunks>False</hasRockChunks>
+			<ruinDensity>0</ruinDensity>
+			<dangerDensity>0</dangerDensity>
+			<elevationShapes>
+				<li>
+					<id>moat</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"outer","n":0,"prim":"circle","r":0.34,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.5,0.5],"h":0,"id":"inner","n":0,"prim":"circle","r":0.14,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"inner","b":null,"e":0,"f":0.002,"fill":"lava","from":"outer","k":0,"op":"sub","outId":null,"s":null}]}</compositeJson>
+				</li>
+				<li>
+					<id>island</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"c","n":0,"prim":"circle","r":0.14,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.002,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"c"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":3,"height":7,"id":"island_ruins","kind":"ruin","position":null,"region":"island","region_part":null,"relation":{"max_distance":5,"min_distance":2,"side":"any","target":"region_edge"},"rotation":0,"seed":0,"spacing":8,"width":9}</plan>
+				</li>
+			</structures>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>caldera_floor</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"floor","n":0,"prim":"circle","r":0.24,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"floor"}]}</compositeJson>
+				</li>
+				<li>
+					<id>caldera_mountain</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"outer","n":0,"prim":"circle","r":0.35,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.5,0.5],"h":0,"id":"inner","n":0,"prim":"circle","r":0.2,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"inner","b":null,"e":0,"f":0.05,"fill":null,"from":"outer","k":0,"op":"sub","outId":"ring","s":null},{"a":null,"b":null,"e":0.8,"f":0.03,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"ring"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

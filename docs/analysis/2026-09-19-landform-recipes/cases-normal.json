@@ -1,0 +1,6 @@
+{
+  "cases":[
+    {"id":"basin-01","kind":"compound-plan","beforeFile":"provider-r1-ko/basin-01-before.json","request":"원래 게임 생성 단계를 포함한 분지·출구·비옥토·폐허 검증"},
+    {"id":"basin-07","kind":"caldera","beforeFile":"provider-r1-ko/basin-07-before.json","request":"원래 게임 생성 단계를 포함한 출구 닫기 검증"}
+  ]
+}

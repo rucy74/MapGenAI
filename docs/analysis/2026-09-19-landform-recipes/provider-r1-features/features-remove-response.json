@@ -1,0 +1,1 @@
+{"action":"generate","description":"온천 특징을 제거하고 기존의 화창한 날씨와 지형 설정을 유지합니다.","params":{"remove_mutators":["HotSprings"]}}

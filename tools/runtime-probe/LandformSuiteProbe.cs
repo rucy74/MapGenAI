@@ -67,7 +67,7 @@ namespace MapGenAI.RuntimeProbe
         static void MeasureCompound(Map map)
         {
             int w=map.Size.x,h=map.Size.z;var state=GenerationContext.State;var grid=GenerationContext.Regions(map);var report=AuthoringGeneration.Current;
-            var fills=new List<object>();var structures=new List<object>();var routes=new List<object>();
+            var fills=new List<object>();var structures=new List<object>();var routes=new List<object>();var enclosures=new List<object>();
             // Independent outside flood: intentionally does not call RegionCoverage.Enclosed/Select.
             bool[] Area(string id,string part)
             {
@@ -76,6 +76,14 @@ namespace MapGenAI.RuntimeProbe
                 var outside=Flood(open,w,h,seeds);return open.Select((b,i)=>b&&!outside[i]).ToArray();
             }
             var dry=new bool[w*h];foreach(var c in map.AllCells){var t=map.terrainGrid.TerrainAt(c);dry[c.z*w+c.x]=!t.IsWater&&!t.dangerous&&c.Walkable(map)&&MapGenerator.Elevation[c]<.7f;}
+            foreach(var s in state.elevationShapes.Where(s=>s.type=="composite" || s.type=="ring" || s.type=="bump"))
+            {
+                var area=Area(s.id,"enclosed");int cells=area.Count(b=>b);if(cells==0)continue;
+                int water=0,rock=0,clear=0;
+                foreach(var c in map.AllCells)if(area[c.z*w+c.x])
+                {if(map.terrainGrid.TerrainAt(c).IsWater)water++;if(MapGenerator.Elevation[c]>=.7f)rock++;if(dry[c.z*w+c.x])clear++;}
+                enclosures.Add(Obj("id",s.id,"cells",cells,"dryWalkableCells",clear,"waterCells",water,"mountainCells",rock));
+            }
             foreach(var s in state.elevationShapes.Where(s=>s.type=="passage"))
             {
                 int sx=Math.Min(w-1,(int)(s.points[0][0]*w+.0001f)),sz=Math.Min(h-1,(int)(s.points[0][1]*h+.0001f));
@@ -116,7 +124,7 @@ namespace MapGenAI.RuntimeProbe
                 }
                 structures.Add(Obj("id",p.id,"outsideRegionCells",outside,"routeOverlapCells",routeOverlap));
             }
-            compoundAudit=Obj("fills",fills,"structures",structures,"routes",routes);
+            compoundAudit=Obj("fills",fills,"structures",structures,"routes",routes,"enclosures",enclosures);
         }
         static string Hash(string data){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(data))).Replace("-","").ToLowerInvariant();}
         static Dictionary<string,object> Obj(params object[] pairs){var d=new Dictionary<string,object>();for(int i=0;i<pairs.Length;i+=2)d[(string)pairs[i]]=pairs[i+1];return d;}

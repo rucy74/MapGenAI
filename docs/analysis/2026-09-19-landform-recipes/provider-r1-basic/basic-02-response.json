@@ -1,0 +1,1 @@
+{"action":"generate","description":"호수를 깊은 용암으로 변경","params":{"shape_ops":[{"op":"update","id":"terrain_2","changes":{"fill":"LavaDeep"}}]}}

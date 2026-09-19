@@ -1,0 +1,1 @@
+{"action":"generate","description":"왼쪽에 산맥을 배치하고 오른쪽 아래에 작은 원형 호수를 생성합니다.","params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"medium","fade":"medium","noise_amount":"medium"},{"type":"composite","shapes":[{"id":"lake_c","prim":"circle","center":[0.75,0.25],"r":0.12}],"compose":[{"op":"add","s":"lake_c","fill":"water","e":0,"f":0.015}]}]}}

@@ -72,6 +72,7 @@ static class CoreRegressionTests
         ImageMapTests.RunAll();
         TextRegionTests.RunAll();
         CompoundPlanTests.RunAll();
+        RecordedLandformTests.RunAll();
         ManualFailureTests.RunAll();
         StructuredChatTests.RunAll();
         MapPlanDescriptionTests.RunAll();

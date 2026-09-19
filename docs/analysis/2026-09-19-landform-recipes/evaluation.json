@@ -1,0 +1,602 @@
+{
+  "ok": true,
+  "reviewedSequentialEdits": 16,
+  "newFullMaps": 33,
+  "frozenIdenticalMaps": [
+    "legacy-new/d04-1",
+    "legacy-new/f03-1",
+    "legacy-new/ko70-1",
+    "legacy-new/followup50",
+    "legacy-new/repair70",
+    "legacy-new/island-edge",
+    "legacy-new/water-side",
+    "legacy-new/foothills",
+    "legacy-new/valley-exit-1",
+    "legacy-new/bent-canyon-1",
+    "compound-new/compound-01",
+    "compound-new/compound-02",
+    "compound-new/compound-03",
+    "compound-new/compound-04",
+    "compound-new/compound-05",
+    "compound-new/compound-06",
+    "compound-new/compound-07"
+  ],
+  "detectorPositiveControls": [
+    "outer ring changed during interior resize",
+    "wrong coverage by 100 cells",
+    "one blocked passage cell"
+  ],
+  "observations": [
+    {
+      "run": "native-r1-shapes",
+      "id": "caldera-short",
+      "enclosures": [
+        {
+          "id": "caldera_mountain",
+          "cells": 7108,
+          "dryWalkableCells": 6502,
+          "waterCells": 0,
+          "mountainCells": 606
+        }
+      ],
+      "routes": []
+    },
+    {
+      "run": "native-r1-shapes",
+      "id": "basin-short",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 7026,
+          "dryWalkableCells": 6345,
+          "waterCells": 0,
+          "mountainCells": 681
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 434,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-shapes",
+      "id": "canyon-short",
+      "enclosures": [],
+      "routes": [
+        {
+          "id": "canyon_pass",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 3232,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-en",
+      "id": "en-caldera",
+      "enclosures": [
+        {
+          "id": "caldera_mountain",
+          "cells": 7108,
+          "dryWalkableCells": 6650,
+          "waterCells": 0,
+          "mountainCells": 458
+        }
+      ],
+      "routes": []
+    },
+    {
+      "run": "native-r1-en",
+      "id": "en-basin",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 8698,
+          "dryWalkableCells": 8105,
+          "waterCells": 0,
+          "mountainCells": 593
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 388,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-en",
+      "id": "en-canyon",
+      "enclosures": [],
+      "routes": [
+        {
+          "id": "winding_canyon",
+          "width": 10,
+          "dryEndpointConnection": true,
+          "cutCells": 3880,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-01",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 7171,
+          "dryWalkableCells": 5962,
+          "waterCells": 0,
+          "mountainCells": 1169
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 404,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-02",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10222,
+          "waterCells": 0,
+          "mountainCells": 1536
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 334,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-03",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10222,
+          "waterCells": 0,
+          "mountainCells": 1536
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 368,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-04",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10228,
+          "waterCells": 0,
+          "mountainCells": 1529
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 325,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-05",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10247,
+          "waterCells": 0,
+          "mountainCells": 1511
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 538,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-06",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10247,
+          "waterCells": 0,
+          "mountainCells": 1511
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 476,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-ko",
+      "id": "basin-07",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10192,
+          "waterCells": 0,
+          "mountainCells": 1566
+        }
+      ],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-01",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-02",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-03",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-04",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-05",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-basic",
+      "id": "basic-06",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-r1-two",
+      "id": "two-01",
+      "enclosures": [
+        {
+          "id": "west_basin_mountain",
+          "cells": 3236,
+          "dryWalkableCells": 3013,
+          "waterCells": 0,
+          "mountainCells": 202
+        },
+        {
+          "id": "east_basin_mountain",
+          "cells": 3080,
+          "dryWalkableCells": 2848,
+          "waterCells": 0,
+          "mountainCells": 205
+        }
+      ],
+      "routes": [
+        {
+          "id": "west_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 236,
+          "blockedCutCells": 0
+        },
+        {
+          "id": "east_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 199,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-two",
+      "id": "two-02",
+      "enclosures": [
+        {
+          "id": "west_basin_mountain",
+          "cells": 3236,
+          "dryWalkableCells": 3013,
+          "waterCells": 0,
+          "mountainCells": 202
+        },
+        {
+          "id": "east_basin_mountain",
+          "cells": 3080,
+          "dryWalkableCells": 2857,
+          "waterCells": 0,
+          "mountainCells": 205
+        }
+      ],
+      "routes": [
+        {
+          "id": "west_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 236,
+          "blockedCutCells": 0
+        },
+        {
+          "id": "east_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 200,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-r1-two",
+      "id": "two-03",
+      "enclosures": [
+        {
+          "id": "west_basin_mountain",
+          "cells": 3236,
+          "dryWalkableCells": 3011,
+          "waterCells": 0,
+          "mountainCells": 202
+        }
+      ],
+      "routes": [
+        {
+          "id": "west_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 231,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-01",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 7171,
+          "dryWalkableCells": 5962,
+          "waterCells": 0,
+          "mountainCells": 1169
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 389,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-02",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10222,
+          "waterCells": 0,
+          "mountainCells": 1536
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 299,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-03",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10217,
+          "waterCells": 0,
+          "mountainCells": 1536
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 318,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-04",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10219,
+          "waterCells": 0,
+          "mountainCells": 1529
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 345,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-05",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10240,
+          "waterCells": 0,
+          "mountainCells": 1511
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 523,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-06",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10232,
+          "waterCells": 0,
+          "mountainCells": 1511
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 12,
+          "dryEndpointConnection": false,
+          "cutCells": 518,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-seed1-ko",
+      "id": "basin-07",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10192,
+          "waterCells": 0,
+          "mountainCells": 1566
+        }
+      ],
+      "routes": []
+    },
+    {
+      "run": "native-features",
+      "id": "features-add",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-features",
+      "id": "features-remove",
+      "enclosures": [],
+      "routes": []
+    },
+    {
+      "run": "native-normal",
+      "id": "basin-01",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 7171,
+          "dryWalkableCells": 5875,
+          "waterCells": 0,
+          "mountainCells": 1169
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_pass",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 404,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "run": "native-normal",
+      "id": "basin-07",
+      "enclosures": [
+        {
+          "id": "basin_mountain",
+          "cells": 11798,
+          "dryWalkableCells": 10192,
+          "waterCells": 0,
+          "mountainCells": 1566
+        }
+      ],
+      "routes": []
+    }
+  ],
+  "limits": "RimWorld1.6, recorded Gemini first replies and fixed inland tiles/seeds. No GL generator integration, all-language/model guarantee, or thick-roof cave/coast support. Mountain-only passages preserve outside terrain; endpoint connectivity is reported separately."
+}

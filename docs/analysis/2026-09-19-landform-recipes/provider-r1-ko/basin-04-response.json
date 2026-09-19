@@ -1,0 +1,18 @@
+{
+  "action": "generate",
+  "description": "남쪽 출구를 닫고 동쪽으로 통로를 변경합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "south_pass",
+        "changes": {
+          "points": [
+            [0.58, 0.5],
+            [1.0, 0.5]
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>ridge</type>
+					<direction>left</direction>
+					<strength>medium</strength>
+					<fade>medium</fade>
+					<noise_amount>medium</noise_amount>
+				</li>
+				<li>
+					<id>terrain_2</id>
+					<type>composite</type>
+					<fill>LavaDeep</fill>
+					<compositeJson>{"shapes":[{"center":[0.75,0.25],"h":0,"id":"lake_c","n":0,"prim":"circle","r":0.12,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"water","from":null,"k":0,"op":"add","outId":null,"s":"lake_c"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

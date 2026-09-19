@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "오른쪽 분지 안의 비옥한 토양 비율을 30%로 조정합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "east_soil",
+        "changes": {
+          "coverage": 0.3
+        }
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 대표 지형 조합 안내: `LandformPrompt.cs`를 `Dialog_TextToMap.BuildSystemPrompt`에 추가했다. 칼데라/열린 분지/좁은 협곡, 내부 확장·전체 이동·출구 편집·독립 분지 삭제에 기존 도형과 ID 편집을 사용한다. 생성 엔진/저장 형식/추가 모델 호출 변경 없음. `RecordedLandformTests`는 실제16연속응답을 회귀에 포함한다. 기준 `dev-before-landform-recipes-2026-09-19`→`d631d60`. [새 응답·33맵·기존17맵 동일성 검증](docs/analysis/2026-09-19-landform-recipes/report.md), [요청 예시](docs/analysis/2026-09-19-landform-recipes/manual-tests.md).
+
 - 복합 요청 확장 전 기준: `dev-before-compound-2026-09-19` → `4a89b06`. `StructurePlan.region_part`는 생략/inside가 기존 영역, enclosed가 닫힌 고리에 둘러싸인 빈 내부다. 토양 비율과 독립적으로 원본 산 ID를 참조한다. Clone/Scribe/preset/update/한영 표시를 보존하며 region 해제 시 part도 null로 해제한다. `AuthoringGeneration.PlaceStructures`는 해당 마스크로 전체 footprint와 region_edge 거리를 검사하고 산 전용 통로의 전체 경로를 구조물 점유 후보에서 제외한다. 기존 지형 칠하기와 native UsedRects 예약 범위는 그대로다. `TextRegionPrompt`의 복합 조건·최소 변경 안내와 dry interior 별도 평탄화 예시를 함께 갱신했다. [복합 요청 검증](docs/analysis/2026-09-19-compound-plan/report.md).
 
 - 대표 지형 확장 전 복구 기준: `dev-landform-baseline-2026-09-15` → `4b05726`. 기존 원형/자연윤곽/면적채움/재료/구조물 생성 의미를 유지하는 것이 사용자 최우선 요구다.

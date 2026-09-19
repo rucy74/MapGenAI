@@ -1,0 +1,1 @@
+Create a winding canyon through a large central mountain. Its dry passage must be at least 10 cells wide and run from the west centre through (35%,70%), then (65%,30%), to the east centre. Preserve terrain outside the mountain.

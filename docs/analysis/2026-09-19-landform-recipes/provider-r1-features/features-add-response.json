@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 지형과 비옥도를 유지하고, 온천과 화창함 특징을 추가했습니다.","params":{"mutators":["HotSprings","SunnyMutator"]}}

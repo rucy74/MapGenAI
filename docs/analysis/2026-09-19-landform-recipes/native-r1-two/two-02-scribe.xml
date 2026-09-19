@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>west_basin_ground</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.28,0.5],"h":0,"id":"g_w","n":0,"prim":"circle","r":0.16,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"g_w"}]}</compositeJson>
+				</li>
+				<li>
+					<id>west_basin_mountain</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.28,0.5],"h":0,"id":"m_w_outer","n":0,"prim":"circle","r":0.22,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.28,0.5],"h":0,"id":"m_w_inner","n":0,"prim":"circle","r":0.13,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"m_w_inner","b":null,"e":0,"f":0.05,"fill":null,"from":"m_w_outer","k":0,"op":"sub","outId":"ring_w","s":null},{"a":null,"b":null,"e":0.85,"f":0.015,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"ring_w"}]}</compositeJson>
+				</li>
+				<li>
+					<id>west_soil</id>
+					<type>region_fill</type>
+					<fill>SoilRich</fill>
+					<region>west_basin_mountain</region>
+					<region_part>enclosed</region_part>
+					<coverage>0.7</coverage>
+				</li>
+				<li>
+					<id>west_exit</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>8</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0.28,0.5],[0.28,0.15]]}</passagePoints>
+				</li>
+				<li>
+					<id>east_basin_ground</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.72,0.5],"h":0,"id":"g_e","n":0,"prim":"circle","r":0.16,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"g_e"}]}</compositeJson>
+				</li>
+				<li>
+					<id>east_basin_mountain</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.72,0.5],"h":0,"id":"m_e_outer","n":0,"prim":"circle","r":0.22,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.72,0.5],"h":0,"id":"m_e_inner","n":0,"prim":"circle","r":0.13,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"m_e_inner","b":null,"e":0,"f":0.05,"fill":null,"from":"m_e_outer","k":0,"op":"sub","outId":"ring_e","s":null},{"a":null,"b":null,"e":0.85,"f":0.015,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"ring_e"}]}</compositeJson>
+				</li>
+				<li>
+					<id>east_soil</id>
+					<type>region_fill</type>
+					<fill>SoilRich</fill>
+					<region>east_basin_mountain</region>
+					<region_part>enclosed</region_part>
+					<coverage>0.3</coverage>
+				</li>
+				<li>
+					<id>east_exit</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>8</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0.72,0.5],[0.72,0.15]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":1,"height":7,"id":"ruin_west","kind":"ruin","position":null,"region":"west_basin_mountain","region_part":"enclosed","relation":null,"rotation":0,"seed":0,"spacing":1,"width":9}</plan>
+				</li>
+				<li>
+					<plan>{"bounds":null,"count":1,"height":7,"id":"ruin_east","kind":"ruin","position":null,"region":"east_basin_mountain","region_part":"enclosed","relation":null,"rotation":0,"seed":0,"spacing":1,"width":9}</plan>
+				</li>
+			</structures>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

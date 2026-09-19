@@ -1,0 +1,32 @@
+{
+  "action": "generate",
+  "description": "오른쪽 위에 별 모양 산을 추가했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "star_mountain",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "star_prim",
+              "prim": "star",
+              "center": [0.75, 0.75],
+              "r": 0.18,
+              "r2": 0.08,
+              "n": 5
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "star_prim",
+              "e": 0.85
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

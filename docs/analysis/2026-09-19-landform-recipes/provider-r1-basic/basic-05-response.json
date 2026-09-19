@@ -1,0 +1,1 @@
+{"action":"generate","description":"별 모양 산 제거","params":{"shape_ops":[{"op":"remove","id":"star_mountain"}]}}

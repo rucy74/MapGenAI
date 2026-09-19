@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<hills>left</hills>
+			<fertilityOffset>0.100000001</fertilityOffset>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<autoHills>True</autoHills>
+					<type>ridge</type>
+					<direction>left</direction>
+					<strength>medium</strength>
+					<fade>medium</fade>
+					<noise_amount>medium</noise_amount>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>HotSprings</li>
+				<li>SunnyMutator</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>
