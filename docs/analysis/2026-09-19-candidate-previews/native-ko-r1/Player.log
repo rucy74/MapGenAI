@@ -1,0 +1,83 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.075 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.419100 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-191150-115 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-previews\native-ko-r1 -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-previews\native-ko-r1\Player.log -mapgenAIProbeRender=true -mapgenAICandidatePreviews=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-landscape-recommendations\provider-final-ko
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-191150-115
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001D3CA288030.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001D417993890.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001D417F04010.dll
+Exception getting types in assembly MapGenAI, Version=1.0.9758.34341, Culture=neutral, PublicKeyToken=null. Some types may not work correctly. Exception: System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+Could not load type of field 'MapGenAI.UI.RecommendationPreviews+<>c__DisplayClass14_0:request' (0) due to: Could not resolve type with token 01000059 from typeref (expected class 'MapPreview.MapPreviewRequest' in assembly 'MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null') assembly:MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null type:MapPreview.MapPreviewRequest member:(null)
+[Ref 7339E16C]
+(wrapper managed-to-native) System.Reflection.Assembly.GetTypes(System.Reflection.Assembly,bool)
+  at System.Reflection.Assembly.GetTypes () [0x00000] in <51fded79cd284d4d911c5949aff4cb21>:0 
+  at Verse.GenTypes.get_AllTypes () [0x00037] in <61e4173561894da49d210260257b5097>:0 
+System.TypeLoadException: Could not load type of field 'MapGenAI.UI.RecommendationPreviews+<>c__DisplayClass14_0:request' (0) due to: Could not resolve type with token 01000059 from typeref (expected class 'MapPreview.MapPreviewRequest' in assembly 'MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null') assembly:MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null type:MapPreview.MapPreviewRequest member:(null)
+Exception getting types in assembly MapGenAI.RuntimeProbe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null. Some types may not work correctly. Exception: System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+Could not load type of field 'MapGenAI.RuntimeProbe.CandidatePreviewProbe+<>c:<>9__33_8' (13) due to: Could not resolve type with token 01000031 from typeref (expected class 'MapPreview.MapPreviewResult' in assembly 'MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null') assembly:MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null type:MapPreview.MapPreviewResult member:(null)
+[Ref 7339E16C] Duplicate stacktrace, see ref for original
+System.TypeLoadException: Could not load type of field 'MapGenAI.RuntimeProbe.CandidatePreviewProbe+<>c:<>9__33_8' (13) due to: Could not resolve type with token 01000031 from typeref (expected class 'MapPreview.MapPreviewResult' in assembly 'MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null') assembly:MapPreview, Version=1.12.24.0, Culture=neutral, PublicKeyToken=null type:MapPreview.MapPreviewResult member:(null)
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.03 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 160.135600 ms (FindLiveObjects: 1.343800 ms CreateObjectMapping: 0.325000 ms MarkObjects: 158.129500 ms  DeleteObjects: 0.336900 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.633700 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 164.045600 ms (FindLiveObjects: 1.360300 ms CreateObjectMapping: 0.400100 ms MarkObjects: 162.228200 ms  DeleteObjects: 0.056800 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919191150115
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Scatterer RimWorld.GenStep_ScatterAncientMechs from def AncientMechs could not find cell to generate at.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27811.
+Total: 162.489800 ms (FindLiveObjects: 1.394600 ms CreateObjectMapping: 0.355800 ms MarkObjects: 160.709700 ms  DeleteObjects: 0.029100 ms)
+

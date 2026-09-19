@@ -1,0 +1,10 @@
+F:\Projects\Rimworld\active\mapgen_ai\tools\runtime-probe\CandidatePreviewProbe.cs(31,40): warning CS0414: 'CandidatePreviewProbe.workerEntered' 필드가 할당되었지만 사용되지 않았습니다. [F:\Projects\Rimworld\active\mapgen_ai\tools\runtime-probe\RuntimeProbe.csproj]
+  RuntimeProbe -> F:\Projects\Rimworld\active\mapgen_ai\tools\runtime-probe\bin\Debug\net472\MapGenAI.RuntimeProbe.dll
+
+빌드했습니다.
+
+F:\Projects\Rimworld\active\mapgen_ai\tools\runtime-probe\CandidatePreviewProbe.cs(31,40): warning CS0414: 'CandidatePreviewProbe.workerEntered' 필드가 할당되었지만 사용되지 않았습니다. [F:\Projects\Rimworld\active\mapgen_ai\tools\runtime-probe\RuntimeProbe.csproj]
+    경고 1개
+    오류 0개
+
+경과 시간: 00:00:00.65

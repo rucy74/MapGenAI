@@ -47,6 +47,7 @@ namespace MapGenAI.RuntimeProbe
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIImageInputs",out var inputs))
                 {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 LandformSuiteProbe.Configure();
+                CandidatePreviewProbe.Configure();
                 SaveLoadProbe();
                 var catalog = DefDatabase<TileMutatorDef>.AllDefsListForReading.Select(d => new Dictionary<string,object> {
                     {"def",d.defName},{"categories",d.categories},{"overrideCategories",d.overrideCategories},{"priority",d.priority}
@@ -122,6 +123,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAICandidatePreviews",out var candidateFixtures))
+                {CandidatePreviewProbe.Run(output,candidateFixtures);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAILandformSuite",out var suite))
                 {GenCommandLine.TryGetCommandLineArg("mapgenAILandformReplies",out var replies);GenCommandLine.TryGetCommandLineArg("mapgenAILandformSample",out var sample);LandformSuiteProbe.Run(output,suite,replies,int.TryParse(sample,out var sampleNumber)?sampleNumber:0);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAICoverage",out var coverageEvidence))
@@ -328,6 +331,7 @@ namespace MapGenAI.RuntimeProbe
             FeatureFeedbackProbe.Tick();
             EditPreflightProbe.Tick();
             RecommendationProbe.Tick();
+            CandidatePreviewProbe.Tick();
             ReadableChoicesProbe.Tick();
             CoverageProbe.Tick();
             LandformSuiteProbe.Tick();

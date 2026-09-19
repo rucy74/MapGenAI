@@ -37,6 +37,9 @@ namespace MapGenAI.UI
         private string _recommendationState;
         private bool _recommendationsRequested, _recommendationRepairUsed;
         private Action<string,string> _repairRecommendations;
+        private RecommendationPreviews _recommendationPreviews;
+        private string _previewError;
+        private int _nextRecommendationCheck;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -413,6 +416,7 @@ For recommendations follow the rules below and propose three distinct landscape 
         public override void DoWindowContents(Rect inRect)
         {
             PollResponse();
+            UpdateRecommendationPreviews();
             var font = Text.Font;
             if (Time.frameCount >= _nextAuthoringCheck)
             {
@@ -450,7 +454,8 @@ For recommendations follow the rules below and propose three distinct landscape 
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
-            float choiceHeight = _recommendations == null ? 0f : 32f;
+            float previewHeight = _recommendations == null ? 0f : Mathf.Min(190f, (inRect.width - 12f) / _recommendations.Count) + 28f;
+            float choiceHeight = _recommendations == null ? 0f : previewHeight + 32f;
             float bottomReserve = InputHeight + 50f + choiceHeight;
             var chatRect = new Rect(inRect.x, topOffset, inRect.width, inRect.height - topOffset - bottomReserve + inRect.y);
             DrawChat(chatRect);
@@ -458,11 +463,12 @@ For recommendations follow the rules below and propose three distinct landscape 
             // 입력창 + 전송 버튼
             if (_recommendations != null)
             {
+                DrawRecommendationPreviews(new Rect(inRect.x, chatRect.yMax + 4f, inRect.width, previewHeight));
                 int count=_recommendations.Count;
                 for(int i=0;i<count;i++)
                 {
                     float width=(inRect.width-6f*(count-1))/count;
-                    if(Widgets.ButtonText(new Rect(inRect.x+i*(width+6f),chatRect.yMax+4f,width,28f),
+                    if(Widgets.ButtonText(new Rect(inRect.x+i*(width+6f),chatRect.yMax+4f+previewHeight,width,28f),
                         IsKorean()?(i+1)+"번 적용":"Apply option "+(i+1)))
                     { ApplyRecommendation(i+1); break; }
                 }
@@ -746,6 +752,10 @@ For recommendations follow the rules below and propose three distinct landscape 
                         var plans=RecommendationPlan.Validate(parsed,MapGenParams.CaptureState(_openedTileId),
                             data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean(),DefinitionText);
                         _recommendations=plans;_recommendationState=RecommendationState();
+                        _recommendationPreviews?.Dispose();
+                        _recommendationPreviews=null; _previewError=null;
+                        try { _recommendationPreviews = new RecommendationPreviews(_openedTileId, plans, MapGenParams.CaptureState(_openedTileId)); }
+                        catch (Exception error) { _previewError = error.Message; Log.Warning("[MapGenAI] Candidate preview unavailable: " + error); }
                         string message=(IsKorean()?"현재 타일과 설정에 맞춰 추천했어요. 아래에서 하나를 골라 주세요. 아직 맵은 바뀌지 않았습니다. 번호를 입력하거나 버튼을 누르면 선택한 설정을 적용합니다.":"Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.");
                         for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — 이렇게 바뀝니다":"Option "+(i+1)+" — changes")+"\n"+plans[i].Summary;
                         if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
@@ -844,7 +854,61 @@ For recommendations follow the rules below and propose three distinct landscape 
             }
         }
 
-        private void ClearRecommendations(){_recommendations=null;_recommendationState=null;}
+        private void ClearRecommendations()
+        {
+            _recommendationPreviews?.Dispose(); _recommendationPreviews=null; _previewError=null;
+            _recommendations=null;_recommendationState=null;
+        }
+
+        private void UpdateRecommendationPreviews()
+        {
+            if (_recommendations == null || _closed) return;
+            if (Time.frameCount >= _nextRecommendationCheck)
+            {
+                _nextRecommendationCheck = Time.frameCount + 30;
+                if (RecommendationState() != _recommendationState || (_recommendationPreviews != null && !_recommendationPreviews.ContextMatches()))
+                {
+                    ClearRecommendations();
+                    _history.Add(new ChatMessage("assistant", IsKorean() ? "설정이나 맵 시드가 바뀌어 이전 추천을 지웠습니다. 새 추천을 요청해 주세요." : "Settings or the map seed changed. Please request new recommendations."));
+                    return;
+                }
+            }
+            _recommendationPreviews?.Update();
+        }
+
+        private void DrawRecommendationPreviews(Rect rect)
+        {
+            int count = _recommendations.Count;
+            float width = (rect.width - 6f * (count - 1)) / count;
+            for (int i = 0; i < count; i++)
+            {
+                var card = new Rect(rect.x + i * (width + 6f), rect.y, width, rect.height - 4f);
+                Widgets.DrawBoxSolid(card, new Color(.08f, .09f, .10f));
+                var title = new Rect(card.x + 4f, card.y, card.width - 8f, 24f);
+                var item = _recommendationPreviews?.Items[i];
+                Widgets.Label(title, (IsKorean() ? (i + 1) + "번" : "Option " + (i + 1)) + (item?.Texture != null ? (IsKorean() ? " · 눌러서 확대" : " · Click to enlarge") : ""));
+                var image = new Rect(card.x + 3f, card.y + 24f, card.width - 6f, card.height - 27f);
+                if (item?.Texture != null)
+                {
+                    GUI.DrawTexture(image, item.Texture, ScaleMode.ScaleToFit, false);
+                    TooltipHandler.TipRegion(image, _recommendations[i].Summary + (string.IsNullOrEmpty(item.Warning) ? "" : "\n" + item.Warning));
+                    if (Widgets.ButtonInvisible(image))
+                    {
+                        int number = i + 1;
+                        var owner = _recommendationPreviews;
+                        Find.WindowStack.Add(new Dialog_RecommendationPreview(item, number,
+                            () => !_closed && _recommendationPreviews == owner && owner.ContextMatches(), () => ApplyRecommendation(number)));
+                    }
+                }
+                else
+                {
+                    string error = item?.Error ?? _previewError;
+                    Widgets.Label(image.ContractedBy(6f), error == null ? (IsKorean() ? "미리보기 생성 중…" : "Rendering preview…") :
+                        (IsKorean() ? "미리보기를 만들지 못했습니다.\n설명으로 선택할 수 있습니다." : "Preview unavailable.\nYou can still select using its description."));
+                    if (error != null) TooltipHandler.TipRegion(image, error);
+                }
+            }
+        }
         private static PlanDefinition DefinitionText(string kind,string id)
         {
             if(kind=="category")
@@ -880,7 +944,7 @@ For recommendations follow the rules below and propose three distinct landscape 
             if(_closed || _isWaiting || _recommendations==null)return;
             if(number<1 || number>_recommendations.Count)
             { _history.Add(new ChatMessage("assistant",IsKorean()?"목록에 있는 번호를 선택해 주세요.":"Choose a number from the list."));return; }
-            if(RecommendationState()!=_recommendationState)
+            if(RecommendationState()!=_recommendationState || (_recommendationPreviews!=null && !_recommendationPreviews.ContextMatches()))
             {
                 ClearRecommendations();_llmContext.Clear();
                 _history.Add(new ChatMessage("assistant",IsKorean()?"추천 후 현재 설정이 바뀌었습니다. 새 추천을 요청해 주세요.":"Settings changed after these options were prepared. Please request new recommendations."));return;

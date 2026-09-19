@@ -26,6 +26,8 @@ namespace MapGenAI.MapGen
         public static void Finish(int tile)
         {
             if(working==null)return;
+            if (Patches.CandidatePreviewContext.Current != null)
+            { Patches.CandidatePreviewContext.Current.Report = working; working = null; return; }
             if(Results.Count>128)Results.Clear();
             Results[tile]=working;working=null;
         }

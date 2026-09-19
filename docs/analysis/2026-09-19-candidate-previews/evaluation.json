@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "dllSha256": "d53110ee3d5e7e5a7a05efa3a5da1b192d83c0d15c707c326d802397a93cddcd",
+  "offlineTests": 146,
+  "nativeChecks": 112,
+  "pixelComparisons": 18,
+  "newProviderCalls": 0,
+  "runs": [
+    {
+      "name": "native-ko-final",
+      "checks": 56,
+      "pixelComparisons": 9,
+      "seconds": [
+        0.40906,
+        0.325025,
+        0.4224718,
+        0.4303787,
+        0.4270986,
+        0.4339799,
+        0.38044279999999997,
+        0.36249339999999997,
+        0.2849869
+      ],
+      "intentionalFailureRecovered": true,
+      "cleanShutdown": true
+    },
+    {
+      "name": "native-en-final",
+      "checks": 56,
+      "pixelComparisons": 9,
+      "seconds": [
+        0.4855267,
+        0.30923849999999997,
+        0.32761409999999996,
+        0.49219189999999996,
+        0.43364189999999997,
+        0.443166,
+        0.38487499999999997,
+        0.32198699999999997,
+        0.2827864
+      ],
+      "intentionalFailureRecovered": true,
+      "cleanShutdown": true
+    }
+  ],
+  "limits": "Fixed seed, flat inland tile, isolated DLC/Map Preview profile; ordinary preview comparison, not full-map equality. Timings include a deliberate 100 ms worker pause."
+}
