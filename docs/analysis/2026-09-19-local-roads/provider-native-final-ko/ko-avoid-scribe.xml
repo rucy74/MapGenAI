@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>ground</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":1,"id":"s","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":1}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.05,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"s"}]}</compositeJson>
+				</li>
+				<li>
+					<id>mountain</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"s","n":0,"prim":"circle","r":0.14,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.9,"f":0.05,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"s"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads>
+				<li>
+					<plan>{"id":"winding_dirt_path","kind":"DirtPath","points":[[0,0.5],[0.25,0.4],[0.5,0.25],[0.75,0.4],[1,0.5]],"route":"avoid","seed":0}</plan>
+				</li>
+			</localRoads>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

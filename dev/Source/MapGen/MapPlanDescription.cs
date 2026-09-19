@@ -80,11 +80,12 @@ namespace MapGenAI.MapGen
                 lines.Add(text);
             }
             foreach(var old in before.structures.Where(s=>after.structures.All(a=>a.id!=s.id)))lines.Add((old.kind=="ancient_danger"?T("고대 위협","Ancient danger"):T("폐허","Ruins"))+T(" 배치 계획 제거"," placement plan removed"));
+            lines.AddRange(RoadChanges(before, after));
             foreach(string field in MapStateCodec.ChangedFields(before,after))
             {
                 switch(field)
                 {
-                    case "mutators":case "removeMutators":case "elevationShapes":case "structures":break;
+                    case "mutators":case "removeMutators":case "elevationShapes":case "structures":case "localRoads":break;
                     case "cavesExplicitlySet":if(before.hasCaves==after.hasCaves)lines.Add(T(after.cavesExplicitlySet?(after.hasCaves?"동굴 생성을 명시적으로 허용합니다.":"동굴 생성을 명시적으로 차단합니다."):"동굴 생성을 기본 규칙에 맡깁니다.",after.cavesExplicitlySet?(after.hasCaves?"Explicitly allow caves.":"Explicitly disable caves."):"Use default cave generation rules."));break;
                     case "fertilityOffset":lines.Add(after.fertilityOffset>before.fertilityOffset?T("토양의 비옥도를 높입니다.","Increase soil fertility."):T("토양의 비옥도를 낮춥니다.","Decrease soil fertility."));break;
                     case "vegetationDensity":lines.Add(More(after.vegetationDensity,before.vegetationDensity,"식물","plants"));break;
@@ -118,6 +119,31 @@ namespace MapGenAI.MapGen
             return string.Join("\n",lines.Select(line=>"• "+line));
         }
         string More(float value,float old,string ko,string en)=>korean?ko+" 생성량을 "+(value>old?"늘립니다.":"줄입니다."):(value>old?"Increase ":"Decrease ")+en+" generation.";
+        public IEnumerable<string> RoadChanges(TileMapState before, TileMapState after)
+        {
+            var oldRoads = before.localRoads ?? new List<RoadPlan>();
+            var newRoads = after.localRoads ?? new List<RoadPlan>();
+            foreach (var road in newRoads)
+            {
+                var old = oldRoads.FirstOrDefault(r => r.id == road.id);
+                if (old != null && SimpleJson.Serialize(old) == SimpleJson.Serialize(road)) continue;
+                if (old == null) { yield return Road(road) + T(" 배치 계획 추가", " placement plan added"); continue; }
+                var changes = new List<string>();
+                if (old.kind != road.kind) changes.Add(RoadPlans.Label(old.kind, korean) + " → " + RoadPlans.Label(road.kind, korean));
+                if (old.route != road.route || old.seed != road.seed || SimpleJson.Serialize(old.points) != SimpleJson.Serialize(road.points))
+                    changes.Add(T("경로 조정", "route adjusted"));
+                yield return Road(road) + " — " + string.Join(", ", changes);
+            }
+            foreach (var old in oldRoads.Where(r => newRoads.All(n => n.id != r.id)))
+                yield return Road(old) + T(" 배치 계획 제거", " placement plan removed");
+        }
+        public string Road(RoadPlan road)
+        {
+            string where = Position(road.points[0][0], road.points[0][1]) + " → " + Position(road.points.Last()[0], road.points.Last()[1]);
+            string route = road.route == "direct" ? T("경유점 사이 직선", "straight waypoint segments") : T("장애물 우회", "route around obstacles");
+            return RoadPlans.Label(road.kind, korean) + " · " + where + " · " + route
+                + (road.points.Length > 2 ? T(" · 중간 경유지 ", " · intermediate waypoints: ") + (road.points.Length - 2) : "");
+        }
         string Direction(float angle)
         {
             string[] ko={"동쪽","북동쪽","북쪽","북서쪽","서쪽","남서쪽","남쪽","남동쪽"};

@@ -1,0 +1,1 @@
+Add a stone road from the west edge to the map center, then turn south to the edge.

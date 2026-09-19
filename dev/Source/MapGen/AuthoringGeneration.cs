@@ -33,7 +33,13 @@ namespace MapGenAI.MapGen
         }
         public static void Fail(Exception error)
         {
+            if(working!=null)working.blockStructures=true;
             working?.issues.Add(error.Message); Log.Warning("[MapGenAI] Authored generation: " + error.Message);
+        }
+        public static void RoadFailure(Exception error)
+        {
+            // A failed optional road must not suppress unrelated existing structure plans.
+            working?.issues.Add(error.Message);Log.Warning("[MapGenAI] Local road generation: "+error.Message);
         }
         public static void ApplyTerrain(Map map)
         {
@@ -86,7 +92,7 @@ namespace MapGenAI.MapGen
                     int i=regions.Index(cell);if(!area[i])continue;
                     var terrain=planned.TryGetValue(i,out var p)?p:map.terrainGrid.TerrainAt(cell);
                     // The percentage is of usable cells, after slopes and world connections are generated.
-                    bool protectedCell=!TerrainMaterials.Supported(terrain);
+                    bool protectedCell=regions.LocalRoadCells[i] || !TerrainMaterials.Supported(terrain);
                     area[i]=!protectedCell && cell.GetEdifice(map)==null && !cell.GetThingList(map).Any(t=>t is Pawn) && !(MapGenerator.Elevation[cell]>=.7f && MapGenerator.Caves[cell]<=0);
                     existing[i]=area[i] && terrain==def;
                 }
@@ -122,7 +128,7 @@ namespace MapGenAI.MapGen
         }
         public static void PlaceStructures(Map map)
         {
-            if(working?.issues.Count>0)return;
+            if(working?.blockStructures==true)return;
             var plans=GenerationContext.State?.structures;
             if(plans==null || plans.Count==0)return;
             int cols=map.Size.x,rows=map.Size.z;
@@ -156,7 +162,7 @@ namespace MapGenAI.MapGen
                     sumX+=cell.x;sumZ+=cell.z;area++;
                     var terrain=map.terrainGrid.TerrainAt(cell);
                     bool solidRock=MapGenerator.Elevation[cell]>.7f && MapGenerator.Caves[cell]<=0f;
-                    allowed[cell.z*cols+cell.x]=!solidRock && !terrain.dangerous && !terrain.IsWater && !terrain.IsRiver && !terrain.HasTag("Road")
+                    allowed[cell.z*cols+cell.x]=!regions.LocalRoadCells[cell.z*cols+cell.x] && !solidRock && !terrain.dangerous && !terrain.IsWater && !terrain.IsRiver && !terrain.HasTag("Road")
                         && cell.GetEdifice(map)==null && GenConstruct.CanBuildOnTerrain(ThingDefOf.Wall,cell,map,Rot4.North);
                 }
                 float targetX=p.position==null?(float)(sumX/Math.Max(1,area)):p.position[0]*cols;

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using MapGenAI.LLM;
 using MapGenAI.MapGen;
+using MapGenAI.UI;
 using static CoreRegressionTests;
 
 static class RecordedLandformTests
@@ -26,10 +28,25 @@ static class RecordedLandformTests
             var response=ProviderResponse.Command(File.ReadAllText(Path.Combine(root,id+"-response.json")));
             var after=MapStateEditor.Merge(before,MapParameterParser.Parse(response.GetObject("params")));
             MapStateValidation.Validate(after);
-            string expected=File.ReadAllText(Path.Combine(root,id+"-after.json"));
+            string expected=NormalizeOptionalRoads(File.ReadAllText(Path.Combine(root,id+"-after.json")));
             Equal(expected,MapStateCodec.Serialize(after));
             Equal(expected,MapStateCodec.Serialize(MapStateCodec.Deserialize(expected)));
-            Equal(beforeText,MapStateCodec.Serialize(before));
+            Equal(NormalizeOptionalRoads(beforeText),MapStateCodec.Serialize(before));
         }
+    }
+
+    // The recorded files predate local roads. Add only this new optional default to
+    // the comparison, keeping every original field/value (even unknown ones) intact.
+    // Normalizing the entire expected snapshot would hide an accidentally dropped field.
+    static string NormalizeOptionalRoads(string text)
+    {
+        var stored=SimpleJson.Parse(text);var state=stored.GetObject("state");
+        if(!state.ContainsKey("localRoads") || state.IsNull("localRoads"))
+        {
+            var normalized=SimpleJson.Parse(MapStateCodec.Serialize(MapStateCodec.Deserialize(text))).GetObject("state");
+            state.Values["localRoads"]=normalized.Values["localRoads"];
+        }
+        stored.Values["state"]=new SortedDictionary<string,object>(state.Values,StringComparer.Ordinal);
+        return SimpleJson.Serialize(stored);
     }
 }

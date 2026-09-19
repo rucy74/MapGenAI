@@ -1,0 +1,160 @@
+{
+  "ok": true,
+  "dllSha256": "50caa50cf25b1f6fc820b30f78271f4e5943ab15b8db194df04845e425ecba2a",
+  "offlineTests": 173,
+  "newProviderCalls": 6,
+  "roadFullMaps": 20,
+  "roadBackgroundPreviews": 20,
+  "expectedBlockedCases": 4,
+  "matchedRoadFootprints": 13,
+  "baselineImagesIdentical": 12,
+  "auditPositiveControls": 3,
+  "maps": [
+    {
+      "run": "fixtures-final-r2",
+      "id": "dirt-path",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/dirt-path-generated-preview.png",
+      "preview": "fixtures-final-r2/dirt-path-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "dirt-road",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/dirt-road-generated-preview.png",
+      "preview": "fixtures-final-r2/dirt-road-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "stone-road",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/stone-road-generated-preview.png",
+      "preview": "fixtures-final-r2/stone-road-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "asphalt",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/asphalt-generated-preview.png",
+      "preview": "fixtures-final-r2/asphalt-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "highway",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/highway-generated-preview.png",
+      "preview": "fixtures-final-r2/highway-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "avoid-mountain",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/avoid-mountain-generated-preview.png",
+      "preview": "fixtures-final-r2/avoid-mountain-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "blocked-direct",
+      "expectedFailure": true,
+      "image": "fixtures-final-r2/blocked-direct-generated-preview.png",
+      "preview": "fixtures-final-r2/blocked-direct-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "blocked-water",
+      "expectedFailure": true,
+      "image": "fixtures-final-r2/blocked-water-generated-preview.png",
+      "preview": "fixtures-final-r2/blocked-water-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "change-kind",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/change-kind-generated-preview.png",
+      "preview": "fixtures-final-r2/change-kind-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "remove-road",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/remove-road-generated-preview.png",
+      "preview": "fixtures-final-r2/remove-road-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "preserve-basin",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/preserve-basin-generated-preview.png",
+      "preview": "fixtures-final-r2/preserve-basin-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "failed-road-keeps-ruins",
+      "expectedFailure": true,
+      "image": "fixtures-final-r2/failed-road-keeps-ruins-generated-preview.png",
+      "preview": "fixtures-final-r2/failed-road-keeps-ruins-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "batch-failure",
+      "expectedFailure": true,
+      "image": "fixtures-final-r2/batch-failure-generated-preview.png",
+      "preview": "fixtures-final-r2/batch-failure-background-preview.png"
+    },
+    {
+      "run": "fixtures-final-r2",
+      "id": "existing-world-road",
+      "expectedFailure": false,
+      "image": "fixtures-final-r2/existing-world-road-generated-preview.png",
+      "preview": "fixtures-final-r2/existing-world-road-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-ko",
+      "id": "ko-asphalt",
+      "expectedFailure": false,
+      "image": "provider-native-final-ko/ko-asphalt-generated-preview.png",
+      "preview": "provider-native-final-ko/ko-asphalt-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-ko",
+      "id": "ko-avoid",
+      "expectedFailure": false,
+      "image": "provider-native-final-ko/ko-avoid-generated-preview.png",
+      "preview": "provider-native-final-ko/ko-avoid-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-ko",
+      "id": "ko-change",
+      "expectedFailure": false,
+      "image": "provider-native-final-ko/ko-change-generated-preview.png",
+      "preview": "provider-native-final-ko/ko-change-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-ko",
+      "id": "ko-remove",
+      "expectedFailure": false,
+      "image": "provider-native-final-ko/ko-remove-generated-preview.png",
+      "preview": "provider-native-final-ko/ko-remove-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-en",
+      "id": "en-highway",
+      "expectedFailure": false,
+      "image": "provider-native-final-en/en-highway-generated-preview.png",
+      "preview": "provider-native-final-en/en-highway-background-preview.png"
+    },
+    {
+      "run": "provider-native-final-en",
+      "id": "en-stone",
+      "expectedFailure": false,
+      "image": "provider-native-final-en/en-stone-generated-preview.png",
+      "preview": "provider-native-final-en/en-stone-background-preview.png"
+    }
+  ],
+  "limitations": [
+    "Native world-road overlaps can differ in preview.",
+    "Road surfaces only; no bridges, tunnels or roadside buildings.",
+    "One fixed test world and isolated mod profile.",
+    "Prior MG23 native crash remains unresolved."
+  ]
+}

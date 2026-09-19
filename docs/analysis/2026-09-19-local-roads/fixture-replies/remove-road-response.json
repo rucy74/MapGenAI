@@ -1,0 +1,11 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "remove",
+        "id": "road_1"
+      }
+    ]
+  }
+}

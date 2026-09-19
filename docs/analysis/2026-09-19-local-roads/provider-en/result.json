@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"en-highway","action":"generate","model":"gemini-3.8-flash","inputTokens":12283,"outputTokens":140},{"id":"en-stone","action":"generate","model":"gemini-3.8-flash","inputTokens":12289,"outputTokens":80}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

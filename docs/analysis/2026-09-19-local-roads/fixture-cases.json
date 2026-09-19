@@ -1,0 +1,470 @@
+{
+  "cases": [
+    {
+      "id": "dirt-path",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "dirt-path",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "dirt-road",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "dirt-road",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "stone-road",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "stone-road",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "asphalt",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "asphalt",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "highway",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "highway",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "avoid-mountain",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "mountain",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.14
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.9
+              }
+            ]
+          }
+        ]
+      },
+      "request": "avoid-mountain",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "blocked-direct",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "mountain",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.14
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.9
+              }
+            ]
+          }
+        ]
+      },
+      "request": "blocked-direct",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "blocked-water",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "river_barrier",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "water"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "blocked-water",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "change-kind",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "road_ops": [
+          {
+            "op": "add",
+            "road": {
+              "id": "road_1",
+              "kind": "DirtRoad",
+              "route": "direct",
+              "points": [
+                [
+                  0.02,
+                  0.5
+                ],
+                [
+                  0.98,
+                  0.5
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "request": "change-kind",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "remove-road",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "road_ops": [
+          {
+            "op": "add",
+            "road": {
+              "id": "road_1",
+              "kind": "DirtRoad",
+              "route": "direct",
+              "points": [
+                [
+                  0.02,
+                  0.5
+                ],
+                [
+                  0.98,
+                  0.5
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "request": "remove-road",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "preserve-basin",
+      "kind": "local-roads",
+      "request": "preserve-basin",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "beforeFile": "existing-basin.json"
+    }
+  ]
+}

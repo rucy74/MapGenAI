@@ -1,0 +1,23 @@
+{
+  "action": "generate",
+  "description": "중앙의 원형 산을 남쪽으로 우회하여 서쪽에서 동쪽으로 이어지는 자연스러운 흙길을 추가합니다.",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "winding_dirt_path",
+          "kind": "DirtPath",
+          "route": "avoid",
+          "points": [
+            [0.0, 0.5],
+            [0.25, 0.4],
+            [0.5, 0.25],
+            [0.75, 0.4],
+            [1.0, 0.5]
+          ]
+        }
+      }
+    ]
+  }
+}

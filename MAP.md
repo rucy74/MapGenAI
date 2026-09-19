@@ -54,7 +54,14 @@
 개발 DLL은 `dev/Assemblies/`에 빌드된다. `dist/Assemblies/MapGenAI.dll`과 설치본은 v1.6 보존 대상이며 개발 빌드로 자동 덮어쓰지 않는다.
 
 
-## 실행할 설정이 포함된 추천
+## 지역 맵 도로
+
+- `MapGen/RoadPlans.cs`, `RoadPrompt.cs`: localRoads/road_ops 계약, 종류별 읽기 쉬운 설명, 기존 저장의 기본값. 월드 도로 연결과 legacy roads bool은 변경하지 않는다.
+- `MapGen/RoadRouting.cs`, `LocalRoadGeneration.cs`, `RoadPlacement.cs`: 순수 경로 탐색·폭 검사 후 RoadDef 노면을 단계410에서 적용한다. 도로 없는 상태는 단계 삽입/RNG 소비 없음. 자동 Bulldoze/다리/터널/부속 건물 미지원. 기존 바닥과 높이를 보존한다.
+- 도로 영역은 비율 채움과 위치 지정 구조물에서 보호된다. `AuthoringGeneration.RoadFailure`는 기존 구조물 생성을 막지 않으며 일반 작성 오류의 차단 동작은 유지한다. native 월드 Roads가 생략되는 Map Preview의 교차 부분 한계는 일반/추천 화면에 표시한다.
+- `Tests/RoadPlanTests.cs`, `RoadRoutingTests.cs`, `tools/runtime-probe/RoadProbeAudit.cs`, `tools/evaluate_local_roads.py`: 상태·경로·실게임·배경 미리보기와 기존 맵 동일성 검사. [검증 보고서](docs/analysis/2026-09-19-local-roads/report.md).
+
+## 추천 계약과 미리보기
 
 - `MapPlanDescription.cs`: 검증 전후 상태로 플레이어용 설명을 작성한다. `Dialog_TextToMap.DefinitionText`는 실행 시점의 DefDatabase label/description을 제공하므로 원래 defName이나 생성한 ID를 선택 문구로 노출하지 않는다. 기존 MapStateDescription은 진단용으로 보존한다. [표시 개선 근거](docs/analysis/2026-09-15-readable-choices/report.md).
 

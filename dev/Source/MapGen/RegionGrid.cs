@@ -9,9 +9,10 @@ namespace MapGenAI.MapGen
         public readonly Map Map;
         public readonly string[] Materials;
         public readonly bool[] Flatten;
+        public readonly bool[] LocalRoadCells;
         readonly Dictionary<string,bool[]> masks = new Dictionary<string,bool[]>();
         internal readonly Dictionary<int,CoverageCell> CoverageOriginal = new Dictionary<int,CoverageCell>();
-        public RegionGrid(Map map) { Map = map; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; }
+        public RegionGrid(Map map) { Map = map; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; LocalRoadCells = new bool[Materials.Length]; }
         public int Index(IntVec3 cell) => cell.z * Map.Size.x + cell.x;
         public Dictionary<int,float> CaptureFlattened(MapGenFloatGrid elevation)
         {

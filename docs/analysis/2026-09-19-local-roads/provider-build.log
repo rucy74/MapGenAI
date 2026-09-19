@@ -1,0 +1,17 @@
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(57,40): warning CS0649: 'CoverageCell.paintedElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(56,36): warning CS0649: 'CoverageCell.painted' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(57,22): warning CS0649: 'CoverageCell.originalElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(56,27): warning CS0649: 'CoverageCell.original' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+  TextToMap.Tests -> F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\bin\Debug\net10.0\TextToMap.Tests.dll
+  ProviderProbe -> F:\Projects\Rimworld\active\mapgen_ai\tools\provider-probe\bin\Debug\net10.0\ProviderProbe.dll
+
+빌드했습니다.
+
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(57,40): warning CS0649: 'CoverageCell.paintedElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(56,36): warning CS0649: 'CoverageCell.painted' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(57,22): warning CS0649: 'CoverageCell.originalElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(56,27): warning CS0649: 'CoverageCell.original' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+    경고 4개
+    오류 0개
+
+경과 시간: 00:00:07.16

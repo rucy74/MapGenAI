@@ -587,6 +587,8 @@ namespace MapGenAI.MapGen
                 sb.AppendLine(isKo ? "- 저장된 이미지 데이터는 일시 중단되어 현재 생성에 영향이 없습니다." : "- Stored image data is paused and has no generation effect.");
             if (ReadState.structures.Count > 0)
                 sb.AppendLine("- positioned_structures (edit by ID with structure_ops): " + MapGenAI.UI.SimpleJson.Serialize(ReadState.structures));
+            if (ReadState.localRoads.Count > 0)
+                sb.AppendLine("- local_roads (edit by ID with road_ops; local map only): " + MapGenAI.UI.SimpleJson.Serialize(ReadState.localRoads));
             if(ImageMap!=null) sb.AppendLine(isKo
                 ? "- 이미지 지형이 적용되어 있습니다. 일반 대화는 이미지 영역을 직접 수정할 수 없습니다. 이미지 수정 요청에는 action:ask로 '이미지 지형' 창에서 영역을 선택하도록 안내하세요. 추가 SDF는 이미지 위에 적용됩니다."
                 : "- An image terrain layer is present. This chat cannot directly edit image regions. For image correction use action:ask and direct the user to select a region in Image terrain. Added SDF shapes overlay the image layer.");
@@ -673,6 +675,7 @@ namespace MapGenAI.MapGen
         public List<ElevationShape> elevation_shapes;  // Elevation 프리미티브 목록
         public List<ShapeEdit> shape_ops;
         public List<StructureEdit> structure_ops;
+        public List<RoadEdit> road_ops;
         public bool replace_shapes;
     }
 

@@ -1,0 +1,1 @@
+{"action":"generate","description":"추가했던 도로를 제거합니다.","params":{"road_ops":[{"op":"remove","id":"road_1"}]}}

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<fertilityOffset>0.200000003</fertilityOffset>
+			<elevationShapes>
+				<li>
+					<id>northeast_ridge</id>
+					<type>ridge</type>
+					<direction>top_right</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+				<li>
+					<id>forest_pond</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.35,0.45],"h":0,"id":"p_soil","n":0,"prim":"circle","r":0.16,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.015,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"p_soil"}]}</compositeJson>
+				</li>
+				<li>
+					<id>forest_pond_water</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.35,0.45],"h":0,"id":"p_water","n":0,"prim":"circle","r":0.1,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"p_water"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>PlantLife_Increased</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

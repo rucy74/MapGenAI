@@ -1,0 +1,1 @@
+{"action":"generate","description":"Add a stone road connecting the west edge to the center and turning south to the map edge","params":{"road_ops":[{"op":"add","road":{"id":"stone_road_main","kind":"StoneRoad","route":"avoid","points":[[0,0.5],[0.5,0.5],[0.5,0]]}}]}}

@@ -32,6 +32,7 @@ namespace MapGenAI.RuntimeProbe
         {
             if(!GenCommandLine.TryGetCommandLineArg("mapgenAILandformSuite",out _))return;
             var h=new Harmony("choco.mapgenai.probe.landform-suite");
+            RoadProbeAudit.Configure(h);
             // Full-map suites can run before normal GameComponent updates resume.
             // Root updates also drive deferred preview work and its bounded timeout.
             h.Patch(AccessTools.Method(typeof(Root),"Update"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(Tick)));
@@ -75,6 +76,7 @@ namespace MapGenAI.RuntimeProbe
         {
             int w=map.Size.x,h=map.Size.z;var state=GenerationContext.State;var grid=GenerationContext.Regions(map);var report=AuthoringGeneration.Current;
             var fills=new List<object>();var structures=new List<object>();var routes=new List<object>();var enclosures=new List<object>();
+            var reservedRoadCells=new HashSet<int>((report?.roads??new List<RoadPlacement>()).SelectMany(r=>r.footprint).Select(p=>p[1]*w+p[0]));
             // Independent outside flood: intentionally does not call RegionCoverage.Enclosed/Select.
             bool[] Area(string id,string part)
             {
@@ -109,7 +111,7 @@ namespace MapGenAI.RuntimeProbe
                     var t=map.terrainGrid.TerrainAt(c);bool solid=MapGenerator.Elevation[c]>=.7f && MapGenerator.Caves[c]<=0;
                     if(t.IsWater)water++;if(solid)rock++;
                     bool natural=t.designationCategory==null&&(t.costList==null||t.costList.Count==0)&&t.costStuffCount==0&&!t.temporary&&!t.bridge&&!t.isFoundation&&t.defName!="Underwall";
-                    if(!solid&&c.GetEdifice(map)==null&&!c.GetThingList(map).Any(tg=>tg is Pawn)&&!t.IsRiver&&!t.HasTag("Road")&&!t.defName.Contains("Ocean")&&natural)
+                    if(!reservedRoadCells.Contains(c.z*w+c.x)&&!solid&&c.GetEdifice(map)==null&&!c.GetThingList(map).Any(tg=>tg is Pawn)&&!t.IsRiver&&!t.HasTag("Road")&&!t.defName.Contains("Ocean")&&natural)
                     {eligible++;if(t.defName==TerrainMaterials.DefName(s.fill))painted++;}
                 }
                 fills.Add(Obj("id",s.id,"eligible",eligible,"painted",painted,"waterInInterior",water,"rockInInterior",rock));
@@ -151,6 +153,11 @@ namespace MapGenAI.RuntimeProbe
                     if(c.GetString("biome")!=null)
                     {
                         tile=Find.WorldGrid.Tiles.First(t=>t.PrimaryBiome.defName==c.GetString("biome") && t.hilliness.ToString()==c.GetString("hilliness") && (c.GetBool("allowFeatures") || t.Mutators.Count==0) && !FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count==0 && !Find.WorldObjects.AnyMapParentAt(t.tile));
+                        target=tile.tile;
+                    }
+                    if(c.GetBool("worldRoads"))
+                    {
+                        tile=Find.WorldGrid.Tiles.First(t=>t is RimWorld.Planet.SurfaceTile s && s.Roads?.Count>0 && s.Roads.All(r=>r.road.defName=="DirtRoad" || r.road.defName=="DirtPath") && t.PrimaryBiome==BiomeDefOf.TemperateForest && t.hilliness==Hilliness.Flat && !FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count==0 && !Find.WorldObjects.AnyMapParentAt(t.tile));
                         target=tile.tile;
                     }
                     var before=c.GetString("beforeFile")==null ? MapStateEditor.Merge(new TileMapState(),MapParameterParser.Parse(c.GetObject("beforeParams"))) : MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(Path.GetDirectoryName(manifest),c.GetString("beforeFile"))));
@@ -274,6 +281,7 @@ namespace MapGenAI.RuntimeProbe
             var result=new Dictionary<string,object>{{"kind",kind},{"dryCells",dry.Count(v=>v)},{"waterCells",water.Count(v=>v)},{"mountainCells",mountain.Count(v=>v)},{"richSoilCells",rich},{"sandCells",sand},{"thickRoofCells",roof.Count(v=>v)}};
             result["passageScopeAudit"]=passageAudit;
             result["compoundAudit"]=compoundAudit;
+            result["roadAudit"]=RoadProbeAudit.Measure(map);
             int center=(h/2)*w+w/2;var centerGround=Flood(dry,w,h,new[]{center});
             result["centerDry"]=dry[center];result["centerReachesSouth"]=Enumerable.Range(0,w).Any(i=>centerGround[i]);result["centerReachesAnyEdge"]=Edge(centerGround,w,h);result["centerGroundCells"]=centerGround.Count(v=>v);
             if(kind=="valley-exit" || kind=="straight-canyon" || kind=="bent-canyon")

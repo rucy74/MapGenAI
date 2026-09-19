@@ -1,0 +1,14 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "update",
+        "id": "road_1",
+        "changes": {
+          "kind": "AncientAsphaltRoad"
+        }
+      }
+    ]
+  }
+}

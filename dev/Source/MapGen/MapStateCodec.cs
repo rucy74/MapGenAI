@@ -29,6 +29,7 @@ namespace MapGenAI.MapGen
             }
             state.elevationShapes = state.elevationShapes ?? new List<ElevationShape>();
             state.structures = state.structures ?? new List<StructurePlan>();
+            state.localRoads = state.localRoads ?? new List<RoadPlan>();
             state.mutators = state.mutators ?? new List<string>();
             state.removeMutators = state.removeMutators ?? new List<string>();
             state.removeFeatureCategories = state.removeFeatureCategories ?? new List<string>();

@@ -8,6 +8,9 @@ namespace MapGenAI.MapGen
         public readonly List<string> issues = new List<string>();
         public readonly List<StructurePlacement> placements = new List<StructurePlacement>();
         public readonly List<CoverageResult> coverage = new List<CoverageResult>();
+        public readonly List<RoadPlacement> roads = new List<RoadPlacement>();
+        internal bool blockStructures;
+        public bool nativeRoadPreviewLimited;
         public int terrainCells, protectedCells;
         public bool preview;
     }

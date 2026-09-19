@@ -132,6 +132,7 @@ namespace MapGenAI.UI
                         item.Texture = texture;
                         item.Seconds = timer.Elapsed.TotalSeconds;
                         item.Warning = snapshot.Report == null ? null : string.Join("\n", snapshot.Report.issues);
+                        if(snapshot.Report?.nativeRoadPreviewLimited==true)item.Warning=(string.IsNullOrEmpty(item.Warning)?"":item.Warning+"\n")+RoadPlans.NativePreviewNote(L10n.IsKorean());
                     }
                     catch (Exception error) { if (texture != null) UnityEngine.Object.Destroy(texture); item.Error = error.Message; }
                     item.Complete = true;

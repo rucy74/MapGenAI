@@ -18,17 +18,19 @@ namespace MapGenAI.Patches
             var steps=genStepDefs.ToList();genStepDefs=steps;
             AuthoringGeneration.Begin(steps.Any(s=>s.def.genStep.GetType().FullName=="MapPreview.MapPreviewGenerator+PreviewTextureGenStep"));
             var state=GenerationContext.State;
-            if(state==null || (state.elevationShapes.Count==0 && state.structures.Count==0))return;
+            if(state==null || (state.elevationShapes.Count==0 && state.structures.Count==0 && state.localRoads.Count==0))return;
             genStepDefs=genStepDefs.Concat(new [] {
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_AuthoredTerrain",order=400,genStep=new AuthoredTerrainStep()},default),
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_RegionCoverage",order=790,genStep=new RegionCoverageStep()},default),
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_FinalRegionCoverage",order=1900,genStep=new RegionCoverageStep()},default),
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
             }).ToList();
+            if(state.localRoads.Count>0)genStepDefs=genStepDefs.Concat(new[]{new GenStepWithParams(new GenStepDef {defName="MapGenAI_LocalRoads",order=410,genStep=new LocalRoadStep()},default)}).ToList();
         }
         static void Postfix(Map map)
         {
             try {PassageGeneration.Check(map);}catch(Exception e){AuthoringGeneration.Fail(e);}
+            try {LocalRoadGeneration.Check(map);}catch(Exception e){AuthoringGeneration.RoadFailure(e);}
             AuthoringGeneration.Finish((int)map.Tile);
         }
     }
@@ -37,6 +39,12 @@ namespace MapGenAI.Patches
         public override int SeedPart => 214536710;
         public override void Generate(Map map,GenStepParams parms)
         {try {AuthoringGeneration.ApplyTerrain(map);PassageGeneration.Reserve(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
+    }
+    sealed class LocalRoadStep : GenStep
+    {
+        public override int SeedPart=>214536713;
+        public override void Generate(Map map,GenStepParams parms)
+        {try{LocalRoadGeneration.Apply(map);}catch(Exception e){AuthoringGeneration.RoadFailure(e);}}
     }
     sealed class PositionedStructureStep : GenStep
     {

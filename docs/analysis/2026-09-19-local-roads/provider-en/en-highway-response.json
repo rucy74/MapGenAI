@@ -1,0 +1,20 @@
+{
+  "action": "generate",
+  "description": "Add an ancient asphalt highway running from south to north across the map.",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "highway_s_to_n",
+          "kind": "AncientAsphaltHighway",
+          "route": "avoid",
+          "points": [
+            [0.5, 0.0],
+            [0.5, 1.0]
+          ]
+        }
+      }
+    ]
+  }
+}

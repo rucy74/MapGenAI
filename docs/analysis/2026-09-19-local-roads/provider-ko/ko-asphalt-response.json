@@ -1,0 +1,1 @@
+{"action":"generate","description":"서쪽에서 동쪽으로 이어지는 고대 아스팔트 도로를 배치합니다.","params":{"road_ops":[{"op":"add","road":{"id":"ancient_asphalt_road_main","kind":"AncientAsphaltRoad","points":[[0,0.5],[1,0.5]],"route":"avoid"}}]}}

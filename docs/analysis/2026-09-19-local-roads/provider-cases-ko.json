@@ -1,0 +1,206 @@
+{
+  "cases": [
+    {
+      "id": "ko-asphalt",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "서쪽에서 동쪽으로 고대 아스팔트 도로를 만들어 줘.",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "ko-avoid",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "mountain",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.14
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.9
+              }
+            ]
+          }
+        ]
+      },
+      "request": "서쪽에서 동쪽으로 가운데 산을 피해 구불구불한 흙길을 내 줘. 산은 그대로 둬.",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "ko-change",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "road_ops": [
+          {
+            "op": "add",
+            "road": {
+              "id": "road_1",
+              "kind": "DirtRoad",
+              "route": "direct",
+              "points": [
+                [
+                  0.02,
+                  0.5
+                ],
+                [
+                  0.98,
+                  0.5
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "request": "이 길을 돌길로 바꿔 줘. 경로는 그대로.",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "ko-remove",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "road_ops": [
+          {
+            "op": "add",
+            "road": {
+              "id": "road_1",
+              "kind": "DirtRoad",
+              "route": "direct",
+              "points": [
+                [
+                  0.02,
+                  0.5
+                ],
+                [
+                  0.98,
+                  0.5
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "request": "추가한 길만 지워 줘.",
+      "omitAmbientRuins": true,
+      "preview": true
+    }
+  ]
+}

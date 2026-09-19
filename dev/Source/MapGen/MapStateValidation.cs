@@ -28,6 +28,7 @@ namespace MapGenAI.MapGen
             foreach (var shape in state.elevationShapes) ShapeValidation.Validate(shape);
             RegionCoverage.ValidateReferences(state);
             StructurePlans.Validate(state);
+            RoadPlans.Validate(state);
             var ids = new System.Collections.Generic.HashSet<string>();
             foreach (var shape in state.elevationShapes)
                 if (!string.IsNullOrEmpty(shape.id) && !ids.Add(shape.id)) throw new FormatException("Duplicate terrain ID");

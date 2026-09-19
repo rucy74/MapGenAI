@@ -1,0 +1,43 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "valid",
+          "kind": "DirtRoad",
+          "route": "direct",
+          "points": [
+            [
+              0,
+              0.12
+            ],
+            [
+              1,
+              0.12
+            ]
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "road": {
+          "id": "invalid",
+          "kind": "DirtRoad",
+          "route": "direct",
+          "points": [
+            [
+              0,
+              0.5
+            ],
+            [
+              1,
+              0.5
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -26,6 +26,13 @@ namespace MapGenAI.MapGen
             foreach(string key in MapStateCodec.ChangedFields(before,after))
             {
                 if(key=="cavesExplicitlySet") continue;
+                if(key=="localRoads")
+                {
+                    foreach(var line in new MapPlanDescription(korean).RoadChanges(before,after))
+                        text.Append("\n• ").Append(line);
+                    text.Append(korean ? "\n도로 배치 여부는 미리보기 생성 결과에서 확인합니다." : "\nRoad placement is checked during preview generation.");
+                    continue;
+                }
                 if(key=="structures")
                 {
                     var a=before.structures.ToDictionary(p=>p.id);var b=after.structures.ToDictionary(p=>p.id);

@@ -47,7 +47,7 @@ PENDING RECOMMENDATION EDITOR: the displayed candidates are NOT applied to the c
 To modify a candidate return {""action"":""revise"",""option"":3,""params"":{...}}.
 option is its existing 1-based number. params is a MINIMAL PATCH against THAT candidate's complete proposed state below.
 Only that candidate changes; all others remain. Do not send action generate or apply the candidate. The user selects it separately.
-Use the normal parameter/shape_ops/structure_ops schema. Do not copy state serialization field names into params.
+Use the normal parameter/shape_ops/structure_ops/road_ops schema. Do not copy state serialization field names into params.
 Preserve unspecified parts. A more natural straight passage keeps points/width/fill/scope and updates only edge_roughness.
 If the referenced candidate is unclear, ask which number. For new/different recommendations return recommend against the actual CURRENT map, not a candidate.
 ");

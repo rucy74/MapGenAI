@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-09-19T22:30:15.474739+09:00",
+  "filesScanned": 1013,
+  "secretMatches": 0,
+  "positiveControls": 3,
+  "localLinksChecked": 35,
+  "isolatedRunsCleaned": [
+    "context-en",
+    "context-ko",
+    "fixtures-final",
+    "fixtures-final-r2",
+    "fixtures-r1",
+    "fixtures-r2",
+    "fixtures-r3",
+    "provider-native-en-r1",
+    "provider-native-final-en",
+    "provider-native-final-ko",
+    "provider-native-ko-r1",
+    "unchanged-baseline"
+  ],
+  "evaluationOk": true,
+  "dllSha256": "50caa50cf25b1f6fc820b30f78271f4e5943ab15b8db194df04845e425ecba2a"
+}

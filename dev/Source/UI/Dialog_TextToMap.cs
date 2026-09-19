@@ -355,7 +355,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var outcome=AuthoringGeneration.Latest(tileId,MapGenParams.CaptureState(tileId));
             if(outcome?.issues.Count>0)currentParams += "\nLast generation failed: " + string.Join("\n",outcome.issues);
 
-            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + PassagePrompt.Rules(isKo) + LandformPrompt.Rules(isKo) + RecommendationPlan.Rules;
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + PassagePrompt.Rules(isKo) + LandformPrompt.Rules(isKo) + RoadPrompt.Rules(isKo) + RecommendationPlan.Rules;
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
@@ -426,6 +426,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 if (result != null && result != _shownAuthoringResult)
                 {
                     _shownAuthoringResult = result;
+                    if(result.preview && result.nativeRoadPreviewLimited)_history.Add(new ChatMessage("assistant",RoadPlans.NativePreviewNote(IsKorean())));
                     if (result.issues.Count > 0) _history.Add(new ChatMessage("assistant", string.Join("\n",result.issues)));
                     else if (result.placements.Count > 0) _history.Add(new ChatMessage("assistant", (IsKorean()?"구조물 배치 계획: ":"Planned structures: ") + result.placements.Count +
                         (IsKorean()?". 실제 맵의 다른 건물에 따라 위치가 달라질 수 있으며, 생성 때 다시 검사합니다.":". Other buildings in the full map can affect placement; generation checks again.")));

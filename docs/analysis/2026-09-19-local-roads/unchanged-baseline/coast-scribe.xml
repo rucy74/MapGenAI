@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>inland_plateau</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.35,0.65],"h":0.3,"id":"hill_core","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.4}],"compose":[{"a":null,"b":null,"e":0.75,"f":0.08,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"hill_core"}]}</compositeJson>
+				</li>
+				<li>
+					<id>plateau_rich_soil</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.4,0.45],"h":0.25,"id":"soil_patch","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.35}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"soil_patch"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>Fertile</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

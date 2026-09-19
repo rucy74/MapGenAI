@@ -1,0 +1,1 @@
+{"action":"generate","description":"기존 도로의 경로를 유지한 채 돌길로 변경했습니다.","params":{"road_ops":[{"op":"update","id":"road_1","changes":{"kind":"StoneRoad"}}]}}
