@@ -8,12 +8,12 @@ namespace MapGenAI.MapGen
 {
     public sealed class StructurePlan : IExposable
     {
-        public string id, kind = "ruin", region;
+        public string id, kind = "ruin", region, region_part;
         public float[] position, bounds;
         public int width = 11, height = 9, count = 1, seed;
         public int rotation, spacing=1;
         public SpatialRelation relation;
-        public StructurePlan Clone() => new StructurePlan { id=id, kind=kind, region=region,
+        public StructurePlan Clone() => new StructurePlan { id=id, kind=kind, region=region, region_part=region_part,
             position=(float[])position?.Clone(), bounds=(float[])bounds?.Clone(), width=width, height=height, count=count, seed=seed,
             rotation=rotation,spacing=spacing,relation=relation?.Clone() };
         public void ExposeData()
@@ -23,7 +23,7 @@ namespace MapGenAI.MapGen
             if (Scribe.mode == LoadSaveMode.LoadingVars && !string.IsNullOrEmpty(json))
             {
                 var p = SimpleJson.ConvertTo<StructurePlan>(SimpleJson.Parse(json));
-                id=p.id; kind=p.kind; region=p.region; position=p.position; bounds=p.bounds;
+                id=p.id; kind=p.kind; region=p.region; region_part=p.region_part; position=p.position; bounds=p.bounds;
                 width=p.width; height=p.height; count=p.count; seed=p.seed;
                 rotation=p.rotation;spacing=p.spacing;relation=p.relation;
             }
@@ -32,7 +32,7 @@ namespace MapGenAI.MapGen
     public sealed class StructureEdit { public string op, id; public SimpleJsonObject values; }
     public static class StructurePlans
     {
-        static readonly HashSet<string> Fields = new HashSet<string> { "id","kind","region","position","bounds","width","height","count","seed","rotation","spacing","relation" };
+        static readonly HashSet<string> Fields = new HashSet<string> { "id","kind","region","region_part","position","bounds","width","height","count","seed","rotation","spacing","relation" };
         public static List<StructureEdit> Parse(SimpleJsonObject root)
         {
             var items = root.GetObjectArray("structure_ops");
@@ -77,7 +77,7 @@ namespace MapGenAI.MapGen
                 }
                 if ((key == "position" || key == "bounds") && !obj.IsNull(key))
                 { if (obj.GetFloatArray(key) == null) throw new FormatException("Invalid structure " + key); }
-                else if (key != "region" && key != "position" && key != "bounds" && obj.GetString(key) == null)
+                else if (key != "region" && key != "region_part" && key != "position" && key != "bounds" && obj.GetString(key) == null)
                     throw new FormatException("Invalid structure " + key);
                 if (key == "width" || key == "height" || key == "count" || key == "seed" || key=="rotation" || key=="spacing")
                     if (!int.TryParse(obj.GetString(key), System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out _))
@@ -115,6 +115,8 @@ namespace MapGenAI.MapGen
             Id(p.id);
             if (p.kind != "ruin" && p.kind!="ancient_danger") throw new FormatException("현재 위치 지정 지원 구조물: ruin / ancient_danger. 임의 모드 건물은 별도 생성기가 필요합니다. / Supported kinds: ruin and ancient_danger; other structures require an adapter.");
             if (p.region != null) Id(p.region);
+            if(p.region_part!=null && p.region_part!="inside" && p.region_part!="enclosed")throw new FormatException("Structure region_part must be inside or enclosed");
+            if(p.region_part!=null && p.region==null)throw new FormatException("Structure region_part requires a region ID; clear both when unbinding");
             if (p.position != null) ShapeEdits.ValidatePair(p.position);
             if (p.bounds != null)
             {
@@ -154,6 +156,7 @@ namespace MapGenAI.MapGen
                     var shape = state.elevationShapes.Find(s => s.id == p.region);
                     if (shape == null) throw new FormatException("유적이 참조하는 영역이 없습니다. 함께 제거하거나 다시 지정하세요. / Missing structure region; remove or rebind the structure too: " + p.region);
                     if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring" && shape.type != "region_fill") throw new FormatException("Structure region requires composite, bump, ring or region_fill geometry");
+                    if(p.region_part=="enclosed" && shape.type=="region_fill")throw new FormatException("For an enclosed interior, reference the original ring, not its partial material fill");
                 }
             }
             if (total > 24) throw new FormatException("Maximum 24 positioned structures");

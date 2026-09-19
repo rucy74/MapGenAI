@@ -70,7 +70,7 @@ namespace MapGenAI.MapGen
                 if(structure.region!=null)
                 {
                     var region=after.elevationShapes.FirstOrDefault(s=>s.id==structure.region);
-                    where=region==null?where:Shape(region)+T(" 안쪽"," interior");
+                    where=region==null?where:Shape(region)+(structure.region_part=="enclosed"?T("에 둘러싸인 빈 내부"," enclosed interior"):T(" 안쪽"," interior"));
                 }
                 string kind=structure.kind=="ancient_danger"?T("고대 위협","ancient danger"):T("폐허","ruins");
                 string text=where+" — "+kind+" "+structure.count+T("개, "," instance(s), ")+structure.width+"×"+structure.height+T("칸 배치 계획"," cells each");

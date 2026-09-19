@@ -38,6 +38,12 @@ namespace MapGenAI.MapGen
             if (!string.IsNullOrEmpty(fill)) Materials[i] = TerrainMaterials.DefName(fill, deep);
         }
         public bool[] Mask(string id) => masks.TryGetValue(id,out var mask)?(bool[])mask.Clone():new bool[Materials.Length];
+        // The source mask precedes passage cuts, so an exit does not erase a ring's interior.
+        public bool[] Mask(string id,string part)
+        {
+            var mask=Mask(id);
+            return part=="enclosed"?RegionCoverage.Enclosed(Map.Size.x,Map.Size.z,mask):mask;
+        }
         public void SetMask(string id,bool[] mask) { masks[id]=(bool[])mask.Clone(); }
         public static void Record(Map map, string id, IntVec3 cell, bool inside, string fill = null, bool deep = true)
         {

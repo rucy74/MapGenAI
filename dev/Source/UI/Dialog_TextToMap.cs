@@ -307,7 +307,7 @@ Additional parameters:
 - 요청하지 않은 파라미터는 생략하세요. 현재 값이 유지됩니다.
 - 맵 특징(mutators): 추가할 것만 mutators에, 제거할 것만 remove_mutators에 넣으세요. 이미 있는 특징(actual_tile_features)은 다시 안 적어도 유지됩니다. 특징을 교체할 땐 remove_mutators로 뺀 뒤 mutators로 추가.
 - 완전 평지 = hills:none + hill_amount:0.1 + elevation_shapes:[]
-- 통로/출구 = bump(negative_strong, position=맵 가장자리)로 산벽을 자연스럽게 깎기. 예: 남쪽 통로=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), 남동쪽=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
+- 마른 통로/산 출구는 아래 passage 규칙을 따릅니다. negative bump는 마른 통로 대신 사용하지 마세요.
 - fill로 지형 종류 지정: water/sand/soil/rich_soil/marsh/mud/ice. bump/ring/composite에서 사용.
 - 온천=mutators:[""HotSprings""], 간헐천 개수=geysers:N.
 - 한국어로 답변하세요."
@@ -315,7 +315,7 @@ Additional parameters:
 - Omit parameters not requested. Current values are kept.
 - Map features (mutators): put only what to ADD in mutators, only what to REMOVE in remove_mutators. Existing features (actual_tile_features) are kept even if you don't re-list them. To replace a feature, remove it via remove_mutators then add via mutators.
 - Flat terrain = hills:none + hill_amount:0.1 + elevation_shapes:[]
-- Passage/exit = bump(negative_strong, position=map edge) to naturally carve through mountains. Ex: south=bump(position:""bottom"",strength:""negative_strong"",size:""medium""), southeast=bump(position:""bottom_right"",strength:""negative_strong"",size:""medium"")
+- Dry passages/mountain exits follow the passage rules below. Do not substitute a negative bump for a dry passage.
 - fill specifies terrain type: water/sand/soil/rich_soil/marsh/mud/ice. Works with bump/ring/composite.
 - Hot springs=mutators:[""HotSprings""], geyser count=geysers:N.
 - Respond in English.";
@@ -329,11 +329,11 @@ Additional parameters:
                     ? @"
 예시1) 유저: ""산악 요새에 호수"" → {""action"":""generate"",""description"":""산악 요새에 호수"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
 예시2) 유저: ""왼쪽에 산, 완전 평지"" → {""action"":""generate"",""description"":""왼쪽에 산"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
-예시3) 유저: ""남쪽에 통로 뚫어줘"" → {""action"":""generate"",""description"":""남쪽 통로"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}}]}}"
+예시3) 유저: ""남쪽에 통로 뚫어줘"" → {""action"":""generate"",""description"":""남쪽 통로"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""id"":""south_exit"",""type"":""passage"",""points"":[[0.5,0.5],[0.5,0]],""width"":8,""scope"":""mountains"",""fill"":""Soil""}}]}}"
                     : @"
 Ex1) ""Mountain fortress with lake"" → {""action"":""generate"",""description"":""fortress with lake"",""params"":{""elevation_shapes"":[{""type"":""radial"",""strength"":""strong"",""size"":""medium""},{""type"":""bump"",""position"":""center"",""size"":""small"",""strength"":""negative_strong"",""fill"":""water""}]}}
 Ex2) ""Mountains on the left"" → {""action"":""generate"",""description"":""left mountains"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""medium""}]}}
-Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""south passage"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""type"":""bump"",""position"":""bottom"",""strength"":""negative_strong"",""size"":""medium""}}]}}";
+Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""south passage"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""id"":""south_exit"",""type"":""passage"",""points"":[[0.5,0.5],[0.5,0]],""width"":8,""scope"":""mountains"",""fill"":""Soil""}}]}}";
             }
             else
             {

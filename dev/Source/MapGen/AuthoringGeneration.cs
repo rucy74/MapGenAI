@@ -131,13 +131,21 @@ namespace MapGenAI.MapGen
             var used=MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
             foreach(var r in used)
                 foreach(var cell in r.ExpandedBy(1).ClipInsideMap(map))occupied[cell.z*cols+cell.x]=true;
+            // Keep planned ruins off the complete access route, without painting the open ground.
+            // Native generators retain their existing UsedRects behavior.
+            foreach(var passage in GenerationContext.State.elevationShapes.Where(s=>s.type=="passage" && s.scope=="mountains"))
+            {
+                var route=PassageGeometry.Mask(cols,rows,passage.points,passage.width);
+                for(int i=0;i<occupied.Length;i++)occupied[i]|=route[i];
+            }
             foreach(var p in plans)
             {
                 var allowed=new bool[cols*rows];double sumX=0,sumZ=0;int area=0;
+                var region=p.region==null?null:regions.Mask(p.region,p.region_part);
                 foreach(var cell in map.AllCells)
                 {
                     float x=(cell.x+.5f)/cols,z=(cell.z+.5f)/rows;
-                    bool inside=p.region==null || regions.Contains(p.region,cell.x,cell.z);
+                    bool inside=region==null || region[cell.z*cols+cell.x];
                     if(p.bounds!=null)inside &= x>=p.bounds[0] && z>=p.bounds[1] && x<=p.bounds[2] && z<=p.bounds[3];
                     // A point request has a bounded neighborhood; it never relocates to a distant open field.
                     if(p.region==null && p.bounds==null && p.position!=null)
@@ -154,7 +162,7 @@ namespace MapGenAI.MapGen
                 Func<PlannedRect,bool> relation=null;
                 if(p.relation!=null)
                 {
-                    string key=p.relation.target+":"+(p.relation.target=="region_edge"?p.region:"");
+                    string key=p.relation.target+":"+(p.relation.target=="region_edge"?p.region+":"+p.region_part:"");
                     if(!distances.TryGetValue(key,out var distance))
                     {
                         var target=new bool[cols*rows];
@@ -162,7 +170,7 @@ namespace MapGenAI.MapGen
                         {
                             var terrain=map.terrainGrid.TerrainAtIgnoreTemp(map.cellIndices.CellToIndex(cell));
                             target[cell.z*cols+cell.x]=p.relation.target=="river"?terrain.IsRiver:p.relation.target=="water"?terrain.IsWater:
-                                p.relation.target=="mountain"?(cell.GetEdifice(map)?.def.building.isNaturalRock==true || MapGenerator.Elevation[cell]>.7f && MapGenerator.Caves[cell]<=0):regions.Contains(p.region,cell.x,cell.z);
+                                p.relation.target=="mountain"?(cell.GetEdifice(map)?.def.building.isNaturalRock==true || MapGenerator.Elevation[cell]>.7f && MapGenerator.Caves[cell]<=0):region[cell.z*cols+cell.x];
                         }
                         if(p.relation.target=="region_edge")target=SpatialDistance.InteriorEdge(cols,rows,target);
                         distances[key]=distance=new SpatialDistance(cols,rows,target);

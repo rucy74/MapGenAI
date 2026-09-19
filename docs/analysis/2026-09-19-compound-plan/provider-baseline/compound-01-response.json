@@ -1,0 +1,82 @@
+{
+  "action": "generate",
+  "description": "중앙의 자연스러운 도넛 모양 산맥과 남쪽 8칸 출구, 내부 70% 비옥한 토양 및 폐허 2곳을 생성합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "donut_mountain",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "outer_circle",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.38
+            },
+            {
+              "id": "inner_circle",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.22
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner_circle",
+              "from": "outer_circle",
+              "out": "donut_ring"
+            },
+            {
+              "op": "add",
+              "s": "donut_ring",
+              "e": 0.85
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_exit",
+          "type": "passage",
+          "points": [
+            [0.5, 0.5],
+            [0.5, 0.0]
+          ],
+          "width": 8,
+          "fill": "Soil",
+          "scope": "mountains"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "inner_rich_soil",
+          "type": "region_fill",
+          "region": "donut_mountain",
+          "region_part": "enclosed",
+          "coverage": 0.7,
+          "fill": "SoilRich"
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "inner_ruins",
+          "kind": "ruin",
+          "region": "donut_mountain",
+          "width": 9,
+          "height": 7,
+          "count": 2,
+          "spacing": 3
+        }
+      }
+    ]
+  }
+}
