@@ -1,0 +1,1 @@
+{"action":"generate","description":"내부 폐허를 제거하고 고리 산, 내부 기름진 토양 및 동쪽 출구를 유지합니다.","params":{"structure_ops":[{"op":"remove","id":"inner_ruins"}]}}

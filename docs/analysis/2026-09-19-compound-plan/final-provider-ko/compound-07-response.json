@@ -1,0 +1,1 @@
+{"action":"generate","description":"내부 폐허 구조물 제거","params":{"structure_ops":[{"op":"remove","id":"inner_ruins"}]}}

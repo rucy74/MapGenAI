@@ -1,0 +1,23 @@
+{
+  "action": "generate",
+  "description": "도넛 산, 내부 평지, 남쪽 출구를 오른쪽으로 10% 이동",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "move",
+        "id": "inner_ground",
+        "position": [0.6, 0.5]
+      },
+      {
+        "op": "move",
+        "id": "donut_mountain",
+        "position": [0.6, 0.5]
+      },
+      {
+        "op": "move",
+        "id": "south_exit",
+        "position": [0.6, 0.25]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+Create a rectangular mountain ring in the center with a dry flat buildable interior, a single 8-cell-wide exit to the south cutting only the mountains, rich soil on exactly 70% of the usable interior, and two 9 by 7 cell ruins inside the ring. The ruins must not block the exit. Apply these conditions together.

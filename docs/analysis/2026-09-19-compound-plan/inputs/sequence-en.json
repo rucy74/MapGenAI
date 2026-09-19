@@ -1,0 +1,21 @@
+{
+  "language": "English",
+  "capture": "compound-01",
+  "turns": [
+    {
+      "id": "english-01",
+      "request": "Create a rectangular mountain ring in the center with a dry flat buildable interior, a single 8-cell-wide exit to the south cutting only the mountains, rich soil on exactly 70% of the usable interior, and two 9 by 7 cell ruins inside the ring. The ruins must not block the exit. Apply these conditions together.",
+      "preview": true
+    },
+    {
+      "id": "english-02",
+      "request": "Only widen the exit to 12 cells and reduce rich soil to 50% of the usable interior. Keep both ruins, the mountain outline, placement and other settings.",
+      "preview": false
+    },
+    {
+      "id": "english-03",
+      "request": "Move the entire mountain ring and its interior and exit 10% of the map width to the right. Keep both ruins inside the ring, the 50% soil fraction, and the 12-cell mountain-only exit.",
+      "preview": false
+    }
+  ]
+}

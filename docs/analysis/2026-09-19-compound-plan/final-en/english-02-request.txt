@@ -1,0 +1,1 @@
+Only widen the exit to 12 cells and reduce rich soil to 50% of the usable interior. Keep both ruins, the mountain outline, placement and other settings.

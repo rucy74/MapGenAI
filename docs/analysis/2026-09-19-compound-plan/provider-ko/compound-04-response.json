@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "도넛 산 안쪽 폐허 개수를 3개로 변경",
+  "params": {
+    "structure_ops": [
+      {
+        "op": "update",
+        "id": "inner_ruins",
+        "changes": {
+          "count": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "id": "compound-01",
+      "kind": "compound-plan",
+      "request": "맵 중앙에 자연스러운 도넛 모양 산을 만들어 줘. 안쪽은 정착할 수 있는 마른 평지로 두고, 남쪽으로 폭 8칸짜리 출구 하나만 뚫어 줘. 출구는 산 부분만 깎고 바깥 평지는 그대로 둬. 도넛 내부에서 쓸 수 있는 땅의 70%만 비옥한 토양으로 채우고, 그 내부에 가로 9칸 세로 7칸 폐허를 2개 배치해 줘. 폐허가 출구를 막으면 안 돼. 이 조건들을 한꺼번에 적용해 줘.",
+      "beforeFile": "../final-provider-ko/compound-01-before.json",
+      "omitAmbientRuins": false,
+      "preview": false
+    },
+    {
+      "id": "english-01",
+      "kind": "compound-plan",
+      "request": "Create a rectangular mountain ring in the center with a dry flat buildable interior, a single 8-cell-wide exit to the south cutting only the mountains, rich soil on exactly 70% of the usable interior, and two 9 by 7 cell ruins inside the ring. The ruins must not block the exit. Apply these conditions together.",
+      "beforeFile": "../final-provider-en/english-01-before.json",
+      "omitAmbientRuins": false,
+      "preview": false
+    }
+  ]
+}

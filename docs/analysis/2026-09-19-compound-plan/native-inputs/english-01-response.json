@@ -1,0 +1,108 @@
+{
+  "action": "generate",
+  "description": "Rectangular mountain ring with a flat dry interior, south mountain exit, 70% rich soil interior coverage, and two ruins inside",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "inner_ground",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "flat_rect",
+              "prim": "rect",
+              "center": [0.5, 0.5],
+              "w": 0.36,
+              "h": 0.36
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "flat_rect",
+              "fill": "Soil",
+              "e": 0.05,
+              "f": 0.01
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "mountain_ring",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "outer_rect",
+              "prim": "rect",
+              "center": [0.5, 0.5],
+              "w": 0.5,
+              "h": 0.5
+            },
+            {
+              "id": "hole_rect",
+              "prim": "rect",
+              "center": [0.5, 0.5],
+              "w": 0.32,
+              "h": 0.32
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "hole_rect",
+              "from": "outer_rect",
+              "out": "ring_shape"
+            },
+            {
+              "op": "add",
+              "s": "ring_shape",
+              "e": 0.85
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_exit",
+          "type": "passage",
+          "points": [
+            [0.5, 0.5],
+            [0.5, 0.0]
+          ],
+          "width": 8,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "interior_soil",
+          "type": "region_fill",
+          "region": "mountain_ring",
+          "region_part": "enclosed",
+          "coverage": 0.7,
+          "fill": "SoilRich"
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "inner_ruins",
+          "kind": "ruin",
+          "region": "mountain_ring",
+          "region_part": "enclosed",
+          "width": 9,
+          "height": 7,
+          "count": 2
+        }
+      }
+    ]
+  }
+}

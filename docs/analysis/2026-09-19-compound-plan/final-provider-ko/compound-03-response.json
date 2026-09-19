@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "도넛 산 내부의 기름진 토양 비율을 50%로 조정했습니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "inner_rich_soil",
+        "changes": {
+          "coverage": "0.5"
+        }
+      }
+    ]
+  }
+}

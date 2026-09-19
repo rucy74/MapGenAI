@@ -29,6 +29,7 @@ class Program
         if(args[2]=="recommendations")return await RecommendationBench.Run(client,args[3],output);
         if(args[2]=="regions")return await TextRegionBench.Run(client,args[3],output);
         if(args[2]=="compound")return await CompoundTextBench.Run(client,args[3],output);
+        if(args[2]=="plan-sequence")return await PlanSequenceBench.Run(client,args[3],args[4],output);
         if(args[2]=="spatial")return await SpatialTextBench.Run(client,args[3],output);
         if(args[2]=="ancient")return await AncientTextBench.Run(client,args[3],output);
         if(args[2]=="features")return await FeaturePolicyTextBench.Run(client,args[3],output);

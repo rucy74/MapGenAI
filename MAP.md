@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 복합 요청 확장 전 기준: `dev-before-compound-2026-09-19` → `4a89b06`. `StructurePlan.region_part`는 생략/inside가 기존 영역, enclosed가 닫힌 고리에 둘러싸인 빈 내부다. 토양 비율과 독립적으로 원본 산 ID를 참조한다. Clone/Scribe/preset/update/한영 표시를 보존하며 region 해제 시 part도 null로 해제한다. `AuthoringGeneration.PlaceStructures`는 해당 마스크로 전체 footprint와 region_edge 거리를 검사하고 산 전용 통로의 전체 경로를 구조물 점유 후보에서 제외한다. 기존 지형 칠하기와 native UsedRects 예약 범위는 그대로다. `TextRegionPrompt`의 복합 조건·최소 변경 안내와 dry interior 별도 평탄화 예시를 함께 갱신했다. [복합 요청 검증](docs/analysis/2026-09-19-compound-plan/report.md).
+
 - 대표 지형 확장 전 복구 기준: `dev-landform-baseline-2026-09-15` → `4b05726`. 기존 원형/자연윤곽/면적채움/재료/구조물 생성 의미를 유지하는 것이 사용자 최우선 요구다.
 - `PassageGeometry.cs`, `PassageGeneration.cs`, `PassagePrompt.cs`: 명시적 `type:passage`, ordered `points`2..32, `width`1..64칸, 마른 `fill`. `scope:mountains`는 모든 통로 적용 직전 높이>=.7인 칸과 교차하며 평지의 높이/비옥도/재료를 보존한다. 생략/`full`은 기존 전체 경로 동작. 겹치는 통로도 같은 사전 높이를 사용한다. clone/Scribe/preset/partial edit와 한·영 설명에 범위 포함. 4방향 연결 중심선을 실제 칸 크기로 넓히고 기존 높이/물 도형 뒤에 적용한다. 기존 `SdfComposite`는 수정하지 않는다. stage400에서 기존 재료 적용 경로를 재사용하고 `UsedRects`에 실제 적용 부분만 예약한다. 생성 완료 후 실제 편집 부분의 물/위험/장애물/높이를 검사하며 산과 겹치지 않으면 무변경 안내. 예약을 무시하는 외부 생성기는 후속 장애물을 만들 수 있다. [이전 측정·회귀](docs/analysis/2026-09-15-landform-suite/report.md).
 

@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 내부 비옥한 토양 비율 50%로 조정","params":{"shape_ops":[{"op":"update","id":"inner_soil","changes":{"coverage":"0.5"}}]}}

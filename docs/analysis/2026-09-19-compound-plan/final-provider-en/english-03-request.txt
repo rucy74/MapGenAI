@@ -1,0 +1,1 @@
+Move the entire mountain ring and its interior and exit 10% of the map width to the right. Keep both ruins inside the ring, the 50% soil fraction, and the 12-cell mountain-only exit.

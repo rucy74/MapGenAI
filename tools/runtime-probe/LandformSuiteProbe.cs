@@ -31,12 +31,14 @@ namespace MapGenAI.RuntimeProbe
             h.Patch(AccessTools.Method(typeof(WorldGenerator),"GenerateWorld"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(WorldSeed)));
             h.Patch(AccessTools.Method(typeof(MapGenerator),"GenerateContentsIntoMap"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(MapSeed)));
             h.Patch(AccessTools.Method(typeof(PassageGeneration),"Apply"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(BeforePassages)),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(AfterPassages)));
+            h.Patch(AccessTools.Method(typeof(PassageGeneration),"Check"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(MeasureCompound)));
             Rand.Seed=1750915;
         }
         static void WorldSeed(ref string seedString){seedString="mapgenai-landforms-v1";}
         static void MapSeed(ref int seed){seed=Gen.HashCombineInt(seed,seedOffset);}
         static object Invoke(object dialog,string name,params object[] args)=>typeof(Dialog_TextToMap).GetMethod(name,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(dialog,args);
         static Dictionary<string,object> passageAudit;
+        static Dictionary<string,object> compoundAudit;
         static float[] passageElevation,passageFertility;static string[] passageMaterials;static bool[] passageFlatten;
         static void BeforePassages(Map map,MapGenFloatGrid elevation)
         {
@@ -61,6 +63,60 @@ namespace MapGenAI.RuntimeProbe
                 if(edited[i] && elevation[c]>=.7f)uncleared++;
             }
             passageAudit=Obj("outsideChanges",outside,"unclearedSelectedCells",uncleared,"passages",details);
+        }
+        static void MeasureCompound(Map map)
+        {
+            int w=map.Size.x,h=map.Size.z;var state=GenerationContext.State;var grid=GenerationContext.Regions(map);var report=AuthoringGeneration.Current;
+            var fills=new List<object>();var structures=new List<object>();var routes=new List<object>();
+            // Independent outside flood: intentionally does not call RegionCoverage.Enclosed/Select.
+            bool[] Area(string id,string part)
+            {
+                var mask=grid.Mask(id);if(part!="enclosed")return mask;
+                var open=mask.Select(b=>!b).ToArray();var seeds=Enumerable.Range(0,w).Concat(Enumerable.Range((h-1)*w,w)).Concat(Enumerable.Range(0,h).SelectMany(z=>new[]{z*w,z*w+w-1}));
+                var outside=Flood(open,w,h,seeds);return open.Select((b,i)=>b&&!outside[i]).ToArray();
+            }
+            var dry=new bool[w*h];foreach(var c in map.AllCells){var t=map.terrainGrid.TerrainAt(c);dry[c.z*w+c.x]=!t.IsWater&&!t.dangerous&&c.Walkable(map)&&MapGenerator.Elevation[c]<.7f;}
+            foreach(var s in state.elevationShapes.Where(s=>s.type=="passage"))
+            {
+                int sx=Math.Min(w-1,(int)(s.points[0][0]*w+.0001f)),sz=Math.Min(h-1,(int)(s.points[0][1]*h+.0001f));
+                var last=s.points.Last();int ex=Math.Min(w-1,(int)(last[0]*w+.0001f)),ez=Math.Min(h-1,(int)(last[1]*h+.0001f));
+                // Endpoints on the map border cannot center an N-wide pawn; clamp to an interior footprint.
+                int lo=(s.width-1)/2,hi=s.width/2;sx=Math.Max(lo,Math.Min(w-1-hi,sx));ex=Math.Max(lo,Math.Min(w-1-hi,ex));sz=Math.Max(lo,Math.Min(h-1-hi,sz));ez=Math.Max(lo,Math.Min(h-1-hi,ez));
+                var reached=Flood(Footprint(dry,w,h,s.width),w,h,new[]{sz*w+sx});
+                var cut=grid.Mask(s.id);int blocked=0;for(int i=0;i<cut.Length;i++)if(cut[i]&&!dry[i])blocked++;
+                routes.Add(Obj("id",s.id,"width",s.width,"dryEndpointConnection",reached[ez*w+ex],"cutCells",cut.Count(b=>b),"blockedCutCells",blocked));
+            }
+            foreach(var s in state.elevationShapes.Where(s=>s.type=="region_fill"))
+            {
+                var area=Area(s.region,s.region_part);int eligible=0,painted=0,water=0,rock=0;
+                foreach(var c in map.AllCells)if(area[c.z*w+c.x])
+                {
+                    var t=map.terrainGrid.TerrainAt(c);bool solid=MapGenerator.Elevation[c]>=.7f && MapGenerator.Caves[c]<=0;
+                    if(t.IsWater)water++;if(solid)rock++;
+                    bool natural=t.designationCategory==null&&(t.costList==null||t.costList.Count==0)&&t.costStuffCount==0&&!t.temporary&&!t.bridge&&!t.isFoundation&&t.defName!="Underwall";
+                    if(!solid&&c.GetEdifice(map)==null&&!c.GetThingList(map).Any(tg=>tg is Pawn)&&!t.IsRiver&&!t.HasTag("Road")&&!t.defName.Contains("Ocean")&&natural)
+                    {eligible++;if(t.defName==TerrainMaterials.DefName(s.fill))painted++;}
+                }
+                fills.Add(Obj("id",s.id,"eligible",eligible,"painted",painted,"waterInInterior",water,"rockInInterior",rock));
+            }
+            if(report!=null)foreach(var p in state.structures)
+            {
+                // Reflection lets the same instrument load the tagged pre-feature DLL.
+                string part=typeof(StructurePlan).GetField("region_part")?.GetValue(p) as string;var area=p.region==null?null:Area(p.region,part);int outside=0,routeOverlap=0;
+                foreach(var placed in report.placements.Where(r=>r.id==p.id))
+                for(int z=placed.rect.z;z<placed.rect.z+placed.rect.height;z++)for(int x=placed.rect.x;x<placed.rect.x+placed.rect.width;x++)
+                {
+                    if(area!=null&&!area[z*w+x])outside++;
+                    // Compound fixtures have axis-aligned routes; use independent interval arithmetic.
+                    foreach(var s in state.elevationShapes.Where(s=>s.type=="passage"))
+                    {
+                        var a=s.points[0];var b=s.points.Last();int ax=Math.Min(w-1,(int)(a[0]*w+.0001f)),az=Math.Min(h-1,(int)(a[1]*h+.0001f)),bx=Math.Min(w-1,(int)(b[0]*w+.0001f)),bz=Math.Min(h-1,(int)(b[1]*h+.0001f));int lo=(s.width-1)/2,hi=s.width/2;
+                        if((ax==bx||az==bz)&&x>=Math.Min(ax,bx)-lo&&x<=Math.Max(ax,bx)+hi&&z>=Math.Min(az,bz)-lo&&z<=Math.Max(az,bz)+hi)routeOverlap++;
+                    }
+                }
+                structures.Add(Obj("id",p.id,"outsideRegionCells",outside,"routeOverlapCells",routeOverlap));
+            }
+            compoundAudit=Obj("fills",fills,"structures",structures,"routes",routes);
         }
         static string Hash(string data){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(data))).Replace("-","").ToLowerInvariant();}
         static Dictionary<string,object> Obj(params object[] pairs){var d=new Dictionary<string,object>();for(int i=0;i<pairs.Length;i+=2)d[(string)pairs[i]]=pairs[i+1];return d;}
@@ -108,6 +164,7 @@ namespace MapGenAI.RuntimeProbe
                         generator.genSteps.Add(new GenStepDef{defName="LandformSuiteCapture",order=99999,genStep=new RealImageProbe.CaptureStep{output=output,id=id}});
                         var map=MapGenerator.GenerateMap(new IntVec3(250,1,250),parent,generator);var report=AuthoringGeneration.Latest(target,after);
                         var measured=Measure(map,kind);measured["id"]=id;measured["generated"]=true;measured["action"]="generate";measured["preservedSourceShapes"]=preserved;measured["undo"]=undo;measured["issues"]=report?.issues;
+                        measured["coverage"]=report?.coverage;measured["placements"]=report?.placements;
                         string cells=Sample(map);File.WriteAllText(Path.Combine(output,id+"-cells.json"),cells);measured["cellHash"]=Hash(cells);results.Add(measured);Write();
                         if(c.GetBool("preview"))previews.Enqueue(Tuple.Create(id,kind,target,after));
                     }
@@ -126,7 +183,7 @@ namespace MapGenAI.RuntimeProbe
         }
         static void PreviewMeasured(Map map)
         {
-            if(!previewPending)return;var measured=Measure(map,previewKind);measured["id"]=previewId;measured["issues"]=AuthoringGeneration.Current?.issues.ToArray();previewResults.Add(measured);
+            if(!previewPending)return;MeasureCompound(map);var measured=Measure(map,previewKind);measured["id"]=previewId;measured["issues"]=AuthoringGeneration.Current?.issues.ToArray();previewResults.Add(measured);
         }
         static void PreviewFinish(Exception error=null)
         {
@@ -162,6 +219,7 @@ namespace MapGenAI.RuntimeProbe
             foreach(var c in map.AllCells){int i=c.z*w+c.x;var t=map.terrainGrid.TerrainAt(c);water[i]=t.IsWater;walk[i]=c.Walkable(map);mountain[i]=c.GetEdifice(map)?.def.building?.isNaturalRock==true || (AuthoringGeneration.Current?.preview==true && MapGenerator.Elevation[c]>=.7f && MapGenerator.Caves[c]<=0);dry[i]=walk[i] && !water[i] && !mountain[i];roof[i]=map.roofGrid.RoofAt(c)?.isThickRoof==true;if(t.defName=="SoilRich")rich++;if(t.defName=="Sand")sand++;}
             var result=new Dictionary<string,object>{{"kind",kind},{"dryCells",dry.Count(v=>v)},{"waterCells",water.Count(v=>v)},{"mountainCells",mountain.Count(v=>v)},{"richSoilCells",rich},{"sandCells",sand},{"thickRoofCells",roof.Count(v=>v)}};
             result["passageScopeAudit"]=passageAudit;
+            result["compoundAudit"]=compoundAudit;
             int center=(h/2)*w+w/2;var centerGround=Flood(dry,w,h,new[]{center});
             result["centerDry"]=dry[center];result["centerReachesSouth"]=Enumerable.Range(0,w).Any(i=>centerGround[i]);result["centerReachesAnyEdge"]=Edge(centerGround,w,h);result["centerGroundCells"]=centerGround.Count(v=>v);
             if(kind=="valley-exit" || kind=="straight-canyon" || kind=="bent-canyon")

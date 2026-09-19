@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 산과 남쪽 출구를 오른쪽으로 10% 이동하고, 내부 비옥토와 폐허를 유지합니다.","params":{"shape_ops":[{"op":"move","id":"donut_mountain","position":[0.6,0.5]},{"op":"update","id":"south_exit","changes":{"points":[[0.6,0.5],[0.6,0]]}}]}}

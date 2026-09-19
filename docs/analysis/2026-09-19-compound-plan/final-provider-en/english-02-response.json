@@ -1,0 +1,22 @@
+{
+  "action": "generate",
+  "description": "Widen south exit to 12 cells and reduce interior rich soil coverage to 50%",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "south_exit",
+        "changes": {
+          "width": 12
+        }
+      },
+      {
+        "op": "update",
+        "id": "interior_soil",
+        "changes": {
+          "coverage": "0.5"
+        }
+      }
+    ]
+  }
+}

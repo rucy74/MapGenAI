@@ -1,0 +1,412 @@
+{
+  "ok": true,
+  "sequentialEdits": 10,
+  "finalMaps": 19,
+  "actualPreviews": 5,
+  "legacyIdenticalMaps": 10,
+  "detectorPositiveControls": [
+    "wrong-percentage",
+    "ruin-in-passage"
+  ],
+  "observations": [
+    {
+      "folder": "final-ko",
+      "id": "compound-01",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7884,
+          "painted": 5519,
+          "waterInInterior": 0,
+          "rockInInterior": 460
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-02",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7893,
+          "painted": 5525,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-03",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7886,
+          "painted": 3943,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": false
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-04",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7835,
+          "painted": 3918,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": false
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-05",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7834,
+          "painted": 3917,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-06",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7847,
+          "painted": 3924,
+          "waterInInterior": 0,
+          "rockInInterior": 444
+        }
+      ],
+      "routes": [
+        {
+          "id": "east_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-ko",
+      "id": "compound-07",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7983,
+          "painted": 3992,
+          "waterInInterior": 0,
+          "rockInInterior": 444
+        }
+      ],
+      "routes": [
+        {
+          "id": "east_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-01",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7879,
+          "painted": 5515,
+          "waterInInterior": 0,
+          "rockInInterior": 460
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 279,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-02",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7888,
+          "painted": 5522,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 418,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-03",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7887,
+          "painted": 3944,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 430,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-04",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7835,
+          "painted": 3918,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 429,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-05",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7839,
+          "painted": 3920,
+          "waterInInterior": 0,
+          "rockInInterior": 455
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 437,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-06",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7842,
+          "painted": 3921,
+          "waterInInterior": 0,
+          "rockInInterior": 444
+        }
+      ],
+      "routes": [
+        {
+          "id": "east_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 595,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-ko-seed1",
+      "id": "compound-07",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7998,
+          "painted": 3999,
+          "waterInInterior": 0,
+          "rockInInterior": 444
+        }
+      ],
+      "routes": [
+        {
+          "id": "east_exit",
+          "width": 12,
+          "dryEndpointConnection": true,
+          "cutCells": 595,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "final-en",
+      "id": "english-01",
+      "fills": [
+        {
+          "id": "interior_soil",
+          "eligible": 5248,
+          "painted": 3674,
+          "waterInInterior": 0,
+          "rockInInterior": 888
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-en",
+      "id": "english-02",
+      "fills": [
+        {
+          "id": "interior_soil",
+          "eligible": 5258,
+          "painted": 2629,
+          "waterInInterior": 0,
+          "rockInInterior": 876
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "final-en",
+      "id": "english-03",
+      "fills": [
+        {
+          "id": "interior_soil",
+          "eligible": 5239,
+          "painted": 2620,
+          "waterInInterior": 0,
+          "rockInInterior": 955
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 12,
+          "dryEndpointConnection": true
+        }
+      ]
+    },
+    {
+      "folder": "native",
+      "id": "compound-01",
+      "fills": [
+        {
+          "id": "inner_rich_soil",
+          "eligible": 7579,
+          "painted": 5305,
+          "waterInInterior": 0,
+          "rockInInterior": 460
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 287,
+          "blockedCutCells": 0
+        }
+      ]
+    },
+    {
+      "folder": "native",
+      "id": "english-01",
+      "fills": [
+        {
+          "id": "interior_soil",
+          "eligible": 5253,
+          "painted": 3677,
+          "waterInInterior": 0,
+          "rockInInterior": 888
+        }
+      ],
+      "routes": [
+        {
+          "id": "south_exit",
+          "width": 8,
+          "dryEndpointConnection": true,
+          "cutCells": 259,
+          "blockedCutCells": 0
+        }
+      ]
+    }
+  ],
+  "limits": "Mountain-only scope preserves open ground, so full-width connectivity to the map edge is observational, not guaranteed. Natural mountain slopes remain around the usable interior. Final edits are replayed on separate fixed tiles, with seed variation; exact unrelated settings preservation is tested in the sequential states."
+}

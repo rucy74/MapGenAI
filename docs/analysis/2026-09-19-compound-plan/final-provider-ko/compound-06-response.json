@@ -1,0 +1,26 @@
+{
+  "action": "generate",
+  "description": "남쪽 출구를 닫고 동쪽으로 12칸 폭의 산악 출구를 개설합니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "remove",
+        "id": "south_exit"
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "east_exit",
+          "type": "passage",
+          "points": [
+            [0.6, 0.5],
+            [1.0, 0.5]
+          ],
+          "width": 12,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ]
+  }
+}

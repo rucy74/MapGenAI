@@ -1,0 +1,107 @@
+{
+  "action": "generate",
+  "description": "중앙에 자연스러운 도넛 모양 산맥과 마른 평지 내부, 남쪽 8칸 산악 통로, 내부 70% 비옥한 토양 채움 및 폐허 2개 배치",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "inner_ground",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "inner_base",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.24
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "inner_base",
+              "fill": "Soil",
+              "e": 0.05,
+              "f": 0.01
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "donut_mountain",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "outer_circle",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.36
+            },
+            {
+              "id": "inner_hole",
+              "prim": "circle",
+              "center": [0.5, 0.5],
+              "r": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner_hole",
+              "from": "outer_circle",
+              "out": "ring_shape"
+            },
+            {
+              "op": "add",
+              "s": "ring_shape",
+              "e": 0.8,
+              "f": 0.02
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "inner_rich_soil",
+          "type": "region_fill",
+          "region": "donut_mountain",
+          "region_part": "enclosed",
+          "coverage": 0.7,
+          "fill": "SoilRich"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_exit",
+          "type": "passage",
+          "points": [
+            [0.5, 0.5],
+            [0.5, 0.0]
+          ],
+          "width": 8,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "inner_ruins",
+          "kind": "ruin",
+          "region": "donut_mountain",
+          "region_part": "enclosed",
+          "width": 9,
+          "height": 7,
+          "count": 2
+        }
+      }
+    ]
+  }
+}

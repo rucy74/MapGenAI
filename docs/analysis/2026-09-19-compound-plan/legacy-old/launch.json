@@ -1,0 +1,9 @@
+{
+  "sourceDllSha256": "B488514FECD2CEA999AEBDD1C3D4B0225439ED0B650795589A65A9ECFCD16D5E",
+  "probeDllSha256": "BC4E503F42D03604A5FA155301967FC21C014C654FBB78956767E301C3EF9EFE",
+  "created": "2026-09-19T16:26:15.9847754+09:00",
+  "pid": 56532,
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-19-compound-plan\\legacy-old",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260919-162615-935",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260919-162615-935"
+}

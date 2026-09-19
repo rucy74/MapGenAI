@@ -1,0 +1,1 @@
+{"action":"generate","description":"Move the mountain ring, interior ground, and south exit 10% to the right","params":{"shape_ops":[{"op":"move","id":"inner_ground","position":[0.6,0.5]},{"op":"move","id":"mountain_ring","position":[0.6,0.5]},{"op":"move","id":"south_exit","position":[0.6,0.25]}]}}

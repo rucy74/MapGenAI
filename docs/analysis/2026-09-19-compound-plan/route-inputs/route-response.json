@@ -1,0 +1,93 @@
+{
+  "action": "generate",
+  "description": "중앙에 자연스러운 도넛 산, 남쪽 8칸 산 전용 출구, 도넛 내부 70% 비옥한 토양, 내부 9x7 폐허 2개 생성",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "donut_mountain",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "outer",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.35
+            },
+            {
+              "id": "inner",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner",
+              "from": "outer",
+              "out": "ring"
+            },
+            {
+              "op": "add",
+              "s": "ring",
+              "e": 0.8
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "inner_soil",
+          "type": "region_fill",
+          "region": "donut_mountain",
+          "region_part": "enclosed",
+          "coverage": 0.7,
+          "fill": "SoilRich"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_exit",
+          "type": "passage",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0.0
+            ]
+          ],
+          "width": 8,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ],
+    "structure_ops": [
+      {
+        "op": "add",
+        "structure": {
+          "id": "inner_ruins",
+          "kind": "ruin",
+          "region": "inner_soil",
+          "width": 9,
+          "height": 7,
+          "count": 2
+        }
+      }
+    ]
+  }
+}

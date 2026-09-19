@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>water_moat</id>
+					<type>composite</type>
+					<fill>LavaDeep</fill>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"outer","n":0,"prim":"circle","r":0.325,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.5,0.5],"h":0,"id":"inner","n":0,"prim":"circle","r":0.14,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"inner","b":null,"e":0,"f":0.05,"fill":null,"from":"outer","k":0,"op":"sub","outId":"moat","s":null},{"a":null,"b":null,"e":0,"f":0.05,"fill":"water","from":null,"k":0,"op":"add","outId":null,"s":"moat"}]}</compositeJson>
+				</li>
+				<li>
+					<id>soil_island</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"island_circle","n":0,"prim":"circle","r":0.14,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.05,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"island_circle"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":2,"height":9,"id":"island_ruins","kind":"ruin","position":null,"region":"soil_island","relation":null,"rotation":0,"seed":0,"spacing":8,"width":11}</plan>
+				</li>
+			</structures>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

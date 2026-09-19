@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {
+      "id": "route",
+      "kind": "compound-plan",
+      "beforeParams": {},
+      "request": "Controlled old-compatible footprint: ruins in rich-soil mask, mountain-only exit. No provider call.",
+      "omitAmbientRuins": true
+    }
+  ]
+}

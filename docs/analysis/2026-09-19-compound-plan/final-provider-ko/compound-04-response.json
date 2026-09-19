@@ -1,0 +1,1 @@
+{"action":"generate","description":"안쪽 폐허 개수를 3개로 증가","params":{"structure_ops":[{"op":"update","id":"inner_ruins","changes":{"count":3}}]}}

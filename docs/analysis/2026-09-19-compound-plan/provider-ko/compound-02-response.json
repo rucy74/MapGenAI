@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "description": "남쪽 출구의 폭을 12칸으로 넓힙니다.",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "update",
+        "id": "south_exit",
+        "changes": {
+          "width": 12
+        }
+      }
+    ]
+  }
+}
