@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>woodland_lake_soil</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.62,0.45],"h":0.26,"id":"s1","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.36}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.015,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"s1"}]}</compositeJson>
+				</li>
+				<li>
+					<id>woodland_lake_water</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.62,0.45],"h":0.16,"id":"w1","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.24}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"w1"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>PlantLife_Increased</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

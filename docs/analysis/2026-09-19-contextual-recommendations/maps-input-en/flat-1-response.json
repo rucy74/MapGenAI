@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"elevation_shapes": [{"type": "ridge", "direction": "top_right", "strength": "medium", "fade": "small", "noise_amount": "high"}], "mutators": ["Fertile"]}}

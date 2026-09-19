@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "id": "flat",
+      "biome": "TemperateForest",
+      "hilliness": "Flat",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "desert",
+      "biome": "Desert",
+      "hilliness": "Flat",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "mountain",
+      "biome": "TemperateForest",
+      "hilliness": "Mountainous",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "allowFeatures": true,
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "coast",
+      "tile": "coast",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing",
+      "beforeFile": "existing-basin.json",
+      "request": "추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "explicit-ring",
+      "kind": "contextual-recommendation",
+      "request": "추천 말고 바로 남쪽에 8칸 출구가 있는 완전한 원형 도넛 산을 만들어 줘. 내부는 마른 평지로 해줘.",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    }
+  ]
+}

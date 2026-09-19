@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<fertilityOffset>0.300000012</fertilityOffset>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>bump</type>
+					<strength>negative_strong</strength>
+					<position>0.6,0.5</position>
+					<size>small</size>
+					<fill>water</fill>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>PlantGrove</li>
+				<li>Fertile</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

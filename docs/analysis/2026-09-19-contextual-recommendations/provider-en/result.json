@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"explicit-canyon","action":"generate","model":"gemini-3.8-flash","inputTokens":11565,"outputTokens":157},{"id":"flat","action":"recommend","model":"gemini-3.8-flash","inputTokens":11540,"outputTokens":255}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

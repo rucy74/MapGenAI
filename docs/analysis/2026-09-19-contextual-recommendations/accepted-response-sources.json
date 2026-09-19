@@ -1,0 +1,10 @@
+{
+  "ko/flat": "provider-r3-ko",
+  "ko/desert": "provider-final-ko",
+  "ko/mountain": "provider-final-ko",
+  "ko/coast": "provider-final-ko",
+  "ko/existing": "provider-final-ko",
+  "ko/explicit-ring": "provider-final-ko",
+  "en/flat": "provider-final-en",
+  "en/explicit-canyon": "provider-final-en"
+}

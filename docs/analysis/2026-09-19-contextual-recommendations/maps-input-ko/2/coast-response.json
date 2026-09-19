@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["Fertile", "ArcheanTrees"], "shape_ops": [{"op": "add", "shape": {"id": "natural_fresh_pond", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "lake_body", "prim": "circle", "center": [0.45, 0.55], "r": 0.16}], "compose": [{"op": "add", "s": "lake_body", "fill": "WaterShallow", "e": 0, "f": 0.015}]}}]}}

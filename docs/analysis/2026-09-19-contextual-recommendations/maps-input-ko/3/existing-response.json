@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["SteamGeysers_Increased"], "shape_ops": [{"op": "add", "shape": {"id": "southwest_marsh", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "marsh_area", "prim": "ellipse", "center": [0.2, 0.2], "w": 0.22, "h": 0.16}], "compose": [{"op": "add", "s": "marsh_area", "fill": "MarshyTerrain", "e": 0.05, "f": 0.02}]}}]}}

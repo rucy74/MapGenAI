@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 일반 추천의 고정 도넛/측면산/직사각형 협곡 반복 완화: `RecommendationPlan.Rules`에서 타일의 바이옴·산악도·물 연결 및 넓은 정착 공간을 우선한다. 명시적 기하 요청/기존 맵 보존은 유지한다. 지상 추천에 `UndergroundCave`를 새로 넣지 않도록 안내. 품질 자동 판정은 없으며 모델 의존 한계가 남는다. 시작 추천 문구는 숫자를 생략했지만 후보 최대3개는 그대로다. [검증·실패·원문 출처](docs/analysis/2026-09-19-contextual-recommendations/report.md), [실제 그림](docs/analysis/2026-09-19-contextual-recommendations/gallery.html), `tools/evaluate_contextual_recommendations.py`.
+
 - 첫 안내 문구: `L10n.cs`의 `MapGenAI_Welcome`와 한/영 Keyed XML을 함께 관리한다. 추천3그림·확대·후보 수정·번호 선택을 먼저 안내하고, 직접 지형 묘사와 부분 수정 예시를 제공한다. 일반 대화/생성 프롬프트는 이 문구 변경의 대상이 아니다.
 - 추천 후보 수정: `RecommendationPlan.Refine/Resolve/Edits/PendingInstruction`은 원래 명령+최대32개 수정 명령을 보관한다. `Command`는 원래 명령 호환용이며 수정된 후보는 반드시 `Edits()`/`Resolve()`로 처리한다. `action:revise, option:1..3, params`는 해당 후보를 기준으로 하는 부분 수정이다. `Dialog_TextToMap`은 후보가 있는 요청에서 즉시 generate 적용을 차단하고 선택 전 상태를 유지한다. `MapGenParams.ValidatePatches/ApplyPatches`가 private state로 전체 수정열을 검사한 후 한 번만 commit/Undo한다. `RecommendationPreviews.Replace`는 해당 슬롯만 무효화하고 이전 요청의 늦은 완료를 버린다. [검증·제약](docs/analysis/2026-09-19-candidate-refinement/report.md).
 - 자연스러운 통로: 기존 `edge_roughness` 저장 필드를 passage에도 허용한다. `PassageGeometry.Mask`의 기본/none은 기존 계산과 동일하며, 명시한 low/medium/high는 같은4연결 중심선의 stamp를 결정적 noise로 바깥에만 확장한다. 최소 core를 줄이지 않는다. mountain clipping·구조물 회피·예약·완성검사는 확장된 mask를 사용한다. 정확한 점/폭/재료/범위를 유지하고 none으로 되돌릴 수 있다.

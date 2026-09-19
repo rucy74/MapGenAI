@@ -1,0 +1,58 @@
+{
+  "cases": [
+    {
+      "id": "flat",
+      "biome": "TemperateForest",
+      "hilliness": "Flat",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true,
+      "previewOnly": true
+    },
+    {
+      "id": "desert",
+      "biome": "Desert",
+      "hilliness": "Flat",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true,
+      "previewOnly": true
+    },
+    {
+      "id": "mountain",
+      "biome": "TemperateForest",
+      "hilliness": "Mountainous",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "allowFeatures": true,
+      "preview": true,
+      "omitAmbientRuins": true,
+      "previewOnly": true
+    },
+    {
+      "id": "coast",
+      "tile": "coast",
+      "request": "이 타일에 어울리는 지형 추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true,
+      "previewOnly": true
+    },
+    {
+      "id": "existing",
+      "beforeFile": "existing-basin.json",
+      "request": "추천해 줘",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true,
+      "previewOnly": true
+    }
+  ]
+}

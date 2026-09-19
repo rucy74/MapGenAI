@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<fertilityOffset>0.200000003</fertilityOffset>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>ridge</type>
+					<direction>top_left</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>AncientRuins</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

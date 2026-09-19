@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>north_plateau_ridge</id>
+					<type>ridge</type>
+					<direction>top</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>DryLake</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

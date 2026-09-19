@@ -1,0 +1,125 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.111 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.517700 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-212845-207 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\accepted-maps-ko-1 -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\accepted-maps-ko-1\Player.log -mapgenAIProbeRender=true -mapgenAILandformSuite=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-accepted-ko\cases-1.json -mapgenAILandformSample=0 -mapgenAILandformReplies=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-accepted-ko\1
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-212845-207
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB11178040.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB1114EB50.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB125FD030.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.03 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+Modifying the initial rand seed. Call PushState() first. The initial rand seed should always be based on the startup time and set only once.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 242.380800 ms (FindLiveObjects: 1.433500 ms CreateObjectMapping: 0.363400 ms MarkObjects: 240.283500 ms  DeleteObjects: 0.300100 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.685600 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 223.605600 ms (FindLiveObjects: 1.351000 ms CreateObjectMapping: 0.462100 ms MarkObjects: 221.740500 ms  DeleteObjects: 0.051400 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919212845207
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+[MapGenAI] Authored generation: Object reference not set to an instance of an object
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"fertility_offset": 0.2, "mutators": ["PlantLife_Increased"], "shape_ops": [{"op": "add", "shape": {"id": "northeast_ridge", "type": "ridge", "direction": "top_right", "strength": "medium", "fade": "small", "noise_amount": "high"}}, {"op": "add", "shape": {"id": "forest_pond", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "p_soil", "prim": "circle", "center": [0.35, 0.45], "r": 0.16}], "compose": [{"op": "add", "s": "p_soil", "fill": "SoilRich", "e": 0.05, "f": 0.015}]}}, {"op": "add", "shape": {"id": "forest_pond_water", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "p_water", "prim": "circle", "center": [0.35, 0.45], "r": 0.1}], "compose": [{"op": "add", "s": "p_water", "fill": "WaterShallow", "e": 0, "f": 0.015}]}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[PlantLife_Increased] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[PlantLife_Increased]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[PlantLife_Increased] −[]
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "desert_oasis_soil", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "s_soil", "prim": "circle", "center": [0.5, 0.45], "r": 0.18}], "compose": [{"op": "add", "s": "s_soil", "fill": "SoilRich", "e": 0.05, "f": 0.015}]}}, {"op": "add", "shape": {"id": "desert_oasis_water", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "s_water", "prim": "circle", "center": [0.5, 0.45], "r": 0.11}], "compose": [{"op": "add", "s": "s_water", "fill": "WaterShallow", "e": 0.0, "f": 0.01}]}}], "vegetation_density": 1.2}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] 식생 밀도 적용: 1.20
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"elevation_shapes": [{"type": "ridge", "direction": "top", "strength": "medium", "fade": "small", "noise_amount": "high"}, {"type": "ridge", "direction": "bottom", "strength": "weak", "fade": "small", "noise_amount": "medium"}], "mutators": ["Valley"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Valley] −[Mountain]
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Mountain] −[Valley]
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Valley] −[Mountain]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "inland_plateau", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "hill_core", "prim": "ellipse", "center": [0.35, 0.65], "w": 0.4, "h": 0.3}], "compose": [{"op": "add", "s": "hill_core", "e": 0.75, "f": 0.08}]}}, {"op": "add", "shape": {"id": "plateau_rich_soil", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "soil_patch", "prim": "ellipse", "center": [0.4, 0.45], "w": 0.35, "h": 0.25}], "compose": [{"op": "add", "s": "soil_patch", "fill": "SoilRich", "e": 0.05, "f": 0.02}]}}], "mutators": ["Fertile"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[Fertile] −[]
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[] −[Fertile]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[Fertile] −[]
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "northeast_lake", "type": "bump", "position": [0.8, 0.8], "size": "small", "strength": "negative_medium", "fill": "water"}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] HandleResponse 원문: {"action": "generate", "description": "남쪽에 8칸 폭의 출구가 있는 완전한 원형 도넛 산과 마른 평지 내부를 생성합니다.", "params": {"shape_ops": [{"op": "add", "shape": {"id": "inner_ground", "type": "composite", "shapes": [{"id": "ground", "prim": "circle", "center": [0.5, 0.5], "r": 0.24}], "compose": [{"op": "add", "s": "ground", "fill": "Soil", "e": 0.05, "f": 0.01}]}}, {"op": "add", "shape": {"id": "donut_mountain", "type": "composite", "shapes": [{"id": "outer", "prim": "circle", "center": [0.5, 0.5], "r": 0.35}, {"id": "inner", "prim": "circle", "center": [0.5, 0.5], "r": 0.2}], "compose": [{"op": "sub", "a": "inner", "from": "outer", "out": "ring"}, {"op": "add", "s": "ring", "e": 0.8}]}}, {"op": "add", "shape": {"id": "south_exit", "type": "passage", "points": [[0.5, 0.5], [0.5, 0.0]], "width": 8, "scope": "mountains", "fill": "Soil"}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 10
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 59584.
+Total: 263.135400 ms (FindLiveObjects: 2.539000 ms CreateObjectMapping: 1.147600 ms MarkObjects: 259.387400 ms  DeleteObjects: 0.061000 ms)
+
+[MapGenAI] Applied state to tile 9
+[MapGenAI] 식생 밀도 적용: 1.20

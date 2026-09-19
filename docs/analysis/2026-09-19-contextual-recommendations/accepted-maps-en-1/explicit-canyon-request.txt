@@ -1,0 +1,1 @@
+Create a solid rectangular mountain with a straight east-west dry passage through its center, exactly 12 cells wide. Apply it directly, without recommendations.

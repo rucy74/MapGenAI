@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "forest_pond", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "pool", "prim": "circle", "center": [0.62, 0.48], "r": 0.16}], "compose": [{"op": "add", "s": "pool", "fill": "WaterShallow", "e": 0, "f": 0.015}]}}], "mutators": ["HotSprings"]}}

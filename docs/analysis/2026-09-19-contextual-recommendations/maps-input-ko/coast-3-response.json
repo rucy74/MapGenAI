@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["Bay"], "shape_ops": [{"op": "add", "shape": {"id": "harbor_backdrop_hills", "type": "ridge", "direction": "top", "strength": "weak", "fade": "small", "noise_amount": "medium"}}, {"op": "add", "shape": {"id": "inland_ruins", "kind": "ruin", "position": [0.4, 0.35], "width": 11, "height": 9, "count": 2}}]}}

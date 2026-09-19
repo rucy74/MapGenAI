@@ -1,0 +1,5 @@
+{
+  "utc": "2026-09-19T12:31:36.9796437Z",
+  "pid": 32080,
+  "reason": "Full maps completed; GameComponent-driven deferred preview did not advance after first image; rerun preview phase with Root update hook"
+}

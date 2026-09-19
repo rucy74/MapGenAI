@@ -1,0 +1,393 @@
+[
+  {
+    "action": "recommend",
+    "options": [
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "basin_floor",
+              "type": "composite",
+              "shapes": [
+                {
+                  "id": "floor_c",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.24
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "floor_c",
+                  "fill": "Soil",
+                  "e": 0.05,
+                  "f": 0.01
+                }
+              ]
+            },
+            {
+              "id": "basin_mountain",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "outer_c",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.35
+                },
+                {
+                  "id": "inner_c",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.2
+                }
+              ],
+              "compose": [
+                {
+                  "op": "sub",
+                  "a": "inner_c",
+                  "from": "outer_c",
+                  "out": "ring"
+                },
+                {
+                  "op": "add",
+                  "s": "ring",
+                  "e": 0.85,
+                  "f": 0.02
+                }
+              ]
+            },
+            {
+              "id": "south_pass",
+              "type": "passage",
+              "points": [
+                [
+                  0.5,
+                  0.5
+                ],
+                [
+                  0.5,
+                  0.0
+                ]
+              ],
+              "width": 8,
+              "scope": "mountains",
+              "fill": "Soil"
+            }
+          ]
+        }
+      },
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "north_ridge",
+              "type": "ridge",
+              "direction": "top",
+              "strength": "strong",
+              "fade": "small",
+              "noise_amount": "high"
+            },
+            {
+              "id": "south_lake",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "lake_c",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.3
+                  ],
+                  "r": 0.16
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "lake_c",
+                  "fill": "WaterShallow",
+                  "e": 0.0,
+                  "f": 0.015
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "canyon_base",
+              "type": "composite",
+              "shapes": [
+                {
+                  "id": "base_block",
+                  "prim": "rect",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "w": 0.85,
+                  "h": 0.6
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "base_block",
+                  "e": 0.85,
+                  "f": 0.02
+                }
+              ]
+            },
+            {
+              "id": "canyon_pass",
+              "type": "passage",
+              "edge_roughness": "medium",
+              "points": [
+                [
+                  0.0,
+                  0.5
+                ],
+                [
+                  1.0,
+                  0.5
+                ]
+              ],
+              "width": 12,
+              "scope": "mountains",
+              "fill": "Soil"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "action": "recommend",
+    "options": [
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "basin_ground",
+              "type": "composite",
+              "shapes": [
+                {
+                  "id": "g",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.26
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "g",
+                  "fill": "Soil",
+                  "e": 0.05,
+                  "f": 0.01
+                }
+              ]
+            },
+            {
+              "id": "basin_mountain",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "outer",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.38
+                },
+                {
+                  "id": "inner",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.22
+                }
+              ],
+              "compose": [
+                {
+                  "op": "sub",
+                  "a": "inner",
+                  "from": "outer",
+                  "out": "ring"
+                },
+                {
+                  "op": "add",
+                  "s": "ring",
+                  "e": 0.85,
+                  "f": 0.015
+                }
+              ]
+            },
+            {
+              "id": "south_gate",
+              "type": "passage",
+              "points": [
+                [
+                  0.5,
+                  0.5
+                ],
+                [
+                  0.5,
+                  0.08
+                ]
+              ],
+              "width": 8,
+              "scope": "mountains",
+              "fill": "Soil"
+            }
+          ],
+          "mutators": [
+            "AncientRuins"
+          ]
+        }
+      },
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "canyon_rock",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "block",
+                  "prim": "rect",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "w": 0.75,
+                  "h": 0.55
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "block",
+                  "e": 0.85,
+                  "f": 0.02
+                }
+              ]
+            },
+            {
+              "id": "canyon_path",
+              "type": "passage",
+              "edge_roughness": "medium",
+              "points": [
+                [
+                  0.1,
+                  0.5
+                ],
+                [
+                  0.9,
+                  0.5
+                ]
+              ],
+              "width": 10,
+              "scope": "mountains",
+              "fill": "Soil"
+            }
+          ],
+          "mutators": [
+            "MineralRich"
+          ]
+        }
+      },
+      {
+        "params": {
+          "elevation_shapes": [
+            {
+              "id": "north_ridge",
+              "type": "ridge",
+              "direction": "top",
+              "strength": "strong",
+              "fade": "medium",
+              "noise_amount": "high"
+            },
+            {
+              "id": "oasis_soil",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "s_soil",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.38
+                  ],
+                  "r": 0.16
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "s_soil",
+                  "fill": "SoilRich",
+                  "e": 0.05,
+                  "f": 0.01
+                }
+              ]
+            },
+            {
+              "id": "oasis_water",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "s_water",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.38
+                  ],
+                  "r": 0.1
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "s_water",
+                  "fill": "WaterShallow",
+                  "e": 0,
+                  "f": 0.01
+                }
+              ]
+            }
+          ],
+          "mutators": [
+            "HotSprings"
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "northeast_ridge", "type": "ridge", "direction": "top_right", "strength": "medium", "fade": "small", "noise_amount": "high"}}], "mutators": ["Fertile"]}}

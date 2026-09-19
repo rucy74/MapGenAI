@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "creek_swale", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "swale", "prim": "ellipse", "center": [0.42, 0.55], "w": 0.46, "h": 0.22}], "compose": [{"op": "add", "s": "swale", "fill": "MarshyTerrain", "e": 0.05, "f": 0.02}]}}], "mutators": ["AncientRuins"]}}

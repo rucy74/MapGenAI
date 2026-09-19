@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>western_bluff</id>
+					<type>ridge</type>
+					<direction>left</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>medium</noise_amount>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>AncientGarrison</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

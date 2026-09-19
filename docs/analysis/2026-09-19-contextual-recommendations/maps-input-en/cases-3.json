@@ -1,0 +1,14 @@
+{
+  "cases": [
+    {
+      "id": "flat",
+      "biome": "TemperateForest",
+      "hilliness": "Flat",
+      "request": "Suggest landscapes for this tile.",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    }
+  ]
+}

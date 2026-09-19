@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["SteamGeysers_Increased"], "elevation_shapes": [{"type": "ridge", "direction": "west", "strength": "medium", "fade": "small", "noise_amount": "high"}]}}

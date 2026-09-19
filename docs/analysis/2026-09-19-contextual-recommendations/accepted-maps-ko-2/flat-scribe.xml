@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>west_cliff</id>
+					<type>ridge</type>
+					<direction>left</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+				<li>
+					<id>sheltered_soil</id>
+					<type>composite</type>
+					<edge_roughness>low</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.55,0.45],"h":0.22,"id":"patch","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.3}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"patch"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>HotSprings</li>
+				<li>SteamGeysers_Increased</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes>
+				<li>Marble</li>
+				<li>Granite</li>
+			</rockTypes>
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

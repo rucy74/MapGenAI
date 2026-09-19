@@ -1,0 +1,116 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.086 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.462300 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-212121-052 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-ko-3 -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-ko-3\Player.log -mapgenAIProbeRender=true -mapgenAILandformSuite=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-final-ko\cases-3.json -mapgenAILandformSample=0 -mapgenAILandformReplies=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-final-ko\3
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-212121-052
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB034BD030.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB036F6250.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB03DC0040.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.03 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+Modifying the initial rand seed. Call PushState() first. The initial rand seed should always be based on the startup time and set only once.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 200.727900 ms (FindLiveObjects: 1.731800 ms CreateObjectMapping: 0.530800 ms MarkObjects: 198.102900 ms  DeleteObjects: 0.361600 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.637900 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 164.230500 ms (FindLiveObjects: 1.419500 ms CreateObjectMapping: 0.300200 ms MarkObjects: 162.469000 ms  DeleteObjects: 0.041400 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919212121052
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+[MapGenAI] Authored generation: Object reference not set to an instance of an object
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "rocky_caves", "type": "noise", "strength": "medium", "size": "medium"}}], "mutators": ["UndergroundCave", "MineralRich"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[UndergroundCave, MineralRich] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[UndergroundCave, MineralRich]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[UndergroundCave, MineralRich] −[]
+Underground cave generation exceeded 100 tries
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "ruin_pass_canyon", "type": "split", "direction": "top_left", "strength": "strong", "gap": "large"}}], "mutators": ["AncientRuins", "MineralRich"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 9; 실제 타일 특징 / Tile features: +[AncientRuins, MineralRich] −[]
+[MapGenAI] Applied state to tile 9; 실제 타일 특징 / Tile features: +[] −[AncientRuins, MineralRich]
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9; 실제 타일 특징 / Tile features: +[AncientRuins, MineralRich] −[]
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"elevation_shapes": [{"type": "split", "direction": "top_left", "strength": "negative_medium", "gap": "large"}], "mutators": ["SteamGeysers_Increased", "MineralRich"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[SteamGeysers_Increased, MineralRich] −[]
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[] −[SteamGeysers_Increased, MineralRich]
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[SteamGeysers_Increased, MineralRich] −[]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "western_bluff", "type": "ridge", "direction": "left", "strength": "medium", "fade": "small", "noise_amount": "medium"}}], "mutators": ["AncientGarrison"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[AncientGarrison] −[]
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[] −[AncientGarrison]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[AncientGarrison] −[]
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"mutators": ["AncientGarrison"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 36; 실제 타일 특징 / Tile features: +[AncientGarrison] −[]
+[MapGenAI] Applied state to tile 36; 실제 타일 특징 / Tile features: +[] −[AncientGarrison]
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36; 실제 타일 특징 / Tile features: +[AncientGarrison] −[]
+[MapGenAI] Applied state to tile 10
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 56157.
+Total: 247.023500 ms (FindLiveObjects: 2.463600 ms CreateObjectMapping: 1.360500 ms MarkObjects: 243.138600 ms  DeleteObjects: 0.060600 ms)
+
+Underground cave generation exceeded 100 tries

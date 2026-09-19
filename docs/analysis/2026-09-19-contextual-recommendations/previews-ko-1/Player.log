@@ -1,0 +1,457 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.095 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.588800 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-213138-080 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\previews-ko-1 -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\previews-ko-1\Player.log -mapgenAIProbeRender=true -mapgenAILandformSuite=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-accepted-ko\previews-1.json -mapgenAILandformSample=0 -mapgenAILandformReplies=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-contextual-recommendations\maps-input-accepted-ko\1
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-213138-080
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000017BC804AED0.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000017C1553D0D0.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000017C16602020.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.06 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+Modifying the initial rand seed. Call PushState() first. The initial rand seed should always be based on the startup time and set only once.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 170.712000 ms (FindLiveObjects: 1.079400 ms CreateObjectMapping: 0.358700 ms MarkObjects: 169.015500 ms  DeleteObjects: 0.257800 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.617000 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 147.311700 ms (FindLiveObjects: 1.055500 ms CreateObjectMapping: 0.315000 ms MarkObjects: 145.887400 ms  DeleteObjects: 0.053600 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919213138080
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+[MapGenAI] Authored generation: Object reference not set to an instance of an object
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"fertility_offset": 0.2, "mutators": ["PlantLife_Increased"], "shape_ops": [{"op": "add", "shape": {"id": "northeast_ridge", "type": "ridge", "direction": "top_right", "strength": "medium", "fade": "small", "noise_amount": "high"}}, {"op": "add", "shape": {"id": "forest_pond", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "p_soil", "prim": "circle", "center": [0.35, 0.45], "r": 0.16}], "compose": [{"op": "add", "s": "p_soil", "fill": "SoilRich", "e": 0.05, "f": 0.015}]}}, {"op": "add", "shape": {"id": "forest_pond_water", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "p_water", "prim": "circle", "center": [0.35, 0.45], "r": 0.1}], "compose": [{"op": "add", "s": "p_water", "fill": "WaterShallow", "e": 0, "f": 0.015}]}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[PlantLife_Increased] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[PlantLife_Increased]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[PlantLife_Increased] −[]
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "desert_oasis_soil", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "s_soil", "prim": "circle", "center": [0.5, 0.45], "r": 0.18}], "compose": [{"op": "add", "s": "s_soil", "fill": "SoilRich", "e": 0.05, "f": 0.015}]}}, {"op": "add", "shape": {"id": "desert_oasis_water", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "s_water", "prim": "circle", "center": [0.5, 0.45], "r": 0.11}], "compose": [{"op": "add", "s": "s_water", "fill": "WaterShallow", "e": 0.0, "f": 0.01}]}}], "vegetation_density": 1.2}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 9
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"elevation_shapes": [{"type": "ridge", "direction": "top", "strength": "medium", "fade": "small", "noise_amount": "high"}, {"type": "ridge", "direction": "bottom", "strength": "weak", "fade": "small", "noise_amount": "medium"}], "mutators": ["Valley"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Valley] −[Mountain]
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Mountain] −[Valley]
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 119; 실제 타일 특징 / Tile features: +[Valley] −[Mountain]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "inland_plateau", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "hill_core", "prim": "ellipse", "center": [0.35, 0.65], "w": 0.4, "h": 0.3}], "compose": [{"op": "add", "s": "hill_core", "e": 0.75, "f": 0.08}]}}, {"op": "add", "shape": {"id": "plateau_rich_soil", "type": "composite", "edge_roughness": "medium", "shapes": [{"id": "soil_patch", "prim": "ellipse", "center": [0.4, 0.45], "w": 0.35, "h": 0.25}], "compose": [{"op": "add", "s": "soil_patch", "fill": "SoilRich", "e": 0.05, "f": 0.02}]}}], "mutators": ["Fertile"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[Fertile] −[]
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[] −[Fertile]
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 248; 실제 타일 특징 / Tile features: +[Fertile] −[]
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] HandleResponse 원문: {"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "northeast_lake", "type": "bump", "position": [0.8, 0.8], "size": "small", "strength": "negative_medium", "fill": "water"}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] HandleResponse 원문: {"action": "generate", "description": "남쪽에 8칸 폭의 출구가 있는 완전한 원형 도넛 산과 마른 평지 내부를 생성합니다.", "params": {"shape_ops": [{"op": "add", "shape": {"id": "inner_ground", "type": "composite", "shapes": [{"id": "ground", "prim": "circle", "center": [0.5, 0.5], "r": 0.24}], "compose": [{"op": "add", "s": "ground", "fill": "Soil", "e": 0.05, "f": 0.01}]}}, {"op": "add", "shape": {"id": "donut_mountain", "type": "composite", "shapes": [{"id": "outer", "prim": "circle", "center": [0.5, 0.5], "r": 0.35}, {"id": "inner", "prim": "circle", "center": [0.5, 0.5], "r": 0.2}], "compose": [{"op": "sub", "a": "inner", "from": "outer", "out": "ring"}, {"op": "add", "s": "ring", "e": 0.8}]}}, {"op": "add", "shape": {"id": "south_exit", "type": "passage", "points": [[0.5, 0.5], [0.5, 0.0]], "width": 8, "scope": "mountains", "fill": "Soil"}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 68
+[MapGenAI] Applied state to tile 10
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27896.
+Total: 158.663100 ms (FindLiveObjects: 1.764300 ms CreateObjectMapping: 0.563600 ms MarkObjects: 156.294300 ms  DeleteObjects: 0.040600 ms)
+
+[MapGenAI] Applied state to tile 9
+[MapGenAI] 식생 밀도 적용: 1.20
+Exception filling window for LudeonTK.EditWindow_Log: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+[Ref 5C96376D]
+  at System.Collections.Generic.Queue`1+Enumerator[T].MoveNext () [0x00013] in <51fded79cd284d4d911c5949aff4cb21>:0 
+  at LudeonTK.EditWindow_Log.DoMessagesListing (UnityEngine.Rect listingRect) [0x001a8] in <61e4173561894da49d210260257b5097>:0 
+  at LudeonTK.EditWindow_Log.DoWindowContents (UnityEngine.Rect inRect) [0x0026e] in <61e4173561894da49d210260257b5097>:0 
+  at Verse.Window.InnerWindowOnGUI (System.Int32 x) [0x001a6] in <61e4173561894da49d210260257b5097>:0 
+GUI Error: You are pushing more GUIClips than you are popping. Make sure they are balanced.
+[MapGenAI] Applied state to tile 119
+[MapGenAI] Applied state to tile 248
+[MapGenAI] Applied state to tile 36
+[MapGenAI] Applied state to tile 68
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 25046 frames, [1.0 KB-2.0 KB]: 4 frames, [2.0 KB-4.0 KB]: 1075 frames, [4.0 KB-8.0 KB]: 8 frames, [8.0 KB-16.0 KB]: 5 frames, [16.0 KB-32.0 KB]: 2 frames, [64.0 KB-128.0 KB]: 2 frames, [128.0 KB-256.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 4 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 3.9 MB
+      Overflow Count 1
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 120.0 KB
+      Peak Allocated Bytes 117.2 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 3.8 KB
+      Overflow Count 8
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_UnityGfxDeviceWorker]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 10.3 KB
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 138 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 507 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 192 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 42545
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 29734
+        32B: 34 Subsections = 17408 buckets. Failed count: 47747
+        48B: 49 Subsections = 16725 buckets. Failed count: 86615
+        64B: 40 Subsections = 10240 buckets. Failed count: 34356
+        80B: 85 Subsections = 17408 buckets. Failed count: 23555
+        96B: 28 Subsections = 4778 buckets. Failed count: 45720
+        112B: 10 Subsections = 1462 buckets. Failed count: 11446
+        128B: 6 Subsections = 768 buckets. Failed count: 8498
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 20693 frames, [32.0 MB-64.0 MB]: 1 frames, [128.0 MB-256.0 MB]: 5453 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 12
+      Peak Allocated memory 190.1 MB
+      Peak Large allocation bytes 19.9 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [8.0 MB-16.0 MB]: 21029 frames, [16.0 MB-32.0 MB]: 64 frames, [32.0 MB-64.0 MB]: 5054 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 4
+      Peak Allocated memory 48.6 MB
+      Peak Large allocation bytes 10.0 MB
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 46
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 29734
+        32B: 34 Subsections = 17408 buckets. Failed count: 47747
+        48B: 49 Subsections = 16725 buckets. Failed count: 86615
+        64B: 40 Subsections = 10240 buckets. Failed count: 34356
+        80B: 85 Subsections = 17408 buckets. Failed count: 23555
+        96B: 28 Subsections = 4778 buckets. Failed count: 45720
+        112B: 10 Subsections = 1462 buckets. Failed count: 11446
+        128B: 6 Subsections = 768 buckets. Failed count: 8498
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [64.0 KB-128.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 25055 frames, [8.0 MB-16.0 MB]: 1090 frames, [256.0 MB-0.50 GB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 3
+      Peak Allocated memory 500.5 MB
+      Peak Large allocation bytes 478.4 MB
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 20782 frames, [1.0 KB-2.0 KB]: 4275 frames, [8.0 KB-16.0 KB]: 1 frames, [32.0 KB-64.0 KB]: 1089 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 37.1 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 109
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 29734
+        32B: 34 Subsections = 17408 buckets. Failed count: 47747
+        48B: 49 Subsections = 16725 buckets. Failed count: 86615
+        64B: 40 Subsections = 10240 buckets. Failed count: 34356
+        80B: 85 Subsections = 17408 buckets. Failed count: 23555
+        96B: 28 Subsections = 4778 buckets. Failed count: 45720
+        112B: 10 Subsections = 1462 buckets. Failed count: 11446
+        128B: 6 Subsections = 768 buckets. Failed count: 8498
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 1 frames, [8.0 MB-16.0 MB]: 20693 frames, [16.0 MB-32.0 MB]: 5453 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 5
+      Peak Allocated memory 17.2 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 24298 frames, [32.0 KB-64.0 KB]: 1 frames, [64.0 KB-128.0 KB]: 1845 frames, [256.0 KB-0.5 MB]: 2 frames, [0.5 MB-1.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 0.6 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 29734
+        32B: 34 Subsections = 17408 buckets. Failed count: 47747
+        48B: 49 Subsections = 16725 buckets. Failed count: 86615
+        64B: 40 Subsections = 10240 buckets. Failed count: 34356
+        80B: 85 Subsections = 17408 buckets. Failed count: 23555
+        96B: 28 Subsections = 4778 buckets. Failed count: 45720
+        112B: 10 Subsections = 1462 buckets. Failed count: 11446
+        128B: 6 Subsections = 768 buckets. Failed count: 8498
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 20693 frames, [32.0 KB-64.0 KB]: 5453 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 49.8 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 26147 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B

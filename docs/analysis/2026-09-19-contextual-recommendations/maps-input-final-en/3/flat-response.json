@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"elevation_shapes": [{"type": "ridge", "direction": "bottom", "strength": "weak", "fade": "small", "noise_amount": "medium"}], "mutators": ["SteamGeysers_Increased", "HotSprings"]}}

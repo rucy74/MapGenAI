@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"elevation_shapes": [{"type": "bump", "position": [0.6, 0.5], "size": "small", "strength": "negative_strong", "fill": "water"}], "mutators": ["PlantGrove", "Fertile"], "fertility_offset": 0.3}}

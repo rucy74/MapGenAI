@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"elevation_shapes": [{"type": "split", "direction": "top_left", "strength": "negative_medium", "gap": "large"}], "mutators": ["SteamGeysers_Increased", "MineralRich"]}}

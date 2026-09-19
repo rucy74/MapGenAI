@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>ridge</type>
+					<direction>top</direction>
+					<strength>medium</strength>
+					<fade>small</fade>
+					<noise_amount>high</noise_amount>
+				</li>
+				<li>
+					<id>terrain_2</id>
+					<type>ridge</type>
+					<direction>bottom</direction>
+					<strength>weak</strength>
+					<fade>small</fade>
+					<noise_amount>medium</noise_amount>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>Valley</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

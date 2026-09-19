@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["Lake"], "fertility_offset": 0.2, "elevation_shapes": [{"type": "ridge", "direction": "north", "strength": "weak", "fade": "small", "noise_amount": "high"}]}}

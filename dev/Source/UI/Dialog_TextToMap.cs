@@ -345,10 +345,10 @@ Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""sou
                 fewShot = isKo
                     ? @"
 예시1) 유저: ""왼쪽에 산, 오른쪽 아래에 호수"" → {""action"":""generate"",""description"":""왼쪽 산+오른쪽 아래 호수"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-추천 요청은 아래 추천 규칙에 따라 서로 다른 지형 선택지 세 개를 제안하세요."
+추천 요청은 아래 추천 규칙과 현재 타일의 지형·해안 조건을 따르세요."
                     : @"
 Ex1) ""Mountains left, lake bottom-right"" → {""action"":""generate"",""description"":""left mountains + lake"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-For recommendations follow the rules below and propose three distinct landscape options.";
+For recommendations follow the rules below and this tile's terrain and shore context.";
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);

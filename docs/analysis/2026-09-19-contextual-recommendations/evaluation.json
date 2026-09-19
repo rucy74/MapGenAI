@@ -1,0 +1,203 @@
+{
+  "ok": true,
+  "dllSha256": "f265b99feb95e86a289dedefed4a5aa518af7177db9fbde5f9b5c023dbc1eda2",
+  "offlineTests": 150,
+  "newProviderCalls": 17,
+  "acceptedReplySources": {
+    "ko/flat": "provider-r3-ko",
+    "ko/desert": "provider-final-ko",
+    "ko/mountain": "provider-final-ko",
+    "ko/coast": "provider-final-ko",
+    "ko/existing": "provider-final-ko",
+    "ko/explicit-ring": "provider-final-ko",
+    "en/flat": "provider-final-en",
+    "en/explicit-canyon": "provider-final-en"
+  },
+  "candidateSelections": 18,
+  "fullMaps": 20,
+  "backgroundPreviews": 20,
+  "maps": [
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "flat",
+      "dryPercent": 82.37,
+      "centerConnectedCells": 50353,
+      "image": "accepted-maps-ko-1/flat-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "desert",
+      "dryPercent": 93.4,
+      "centerConnectedCells": 0,
+      "image": "accepted-maps-ko-1/desert-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "mountain",
+      "dryPercent": 46.49,
+      "centerConnectedCells": 28399,
+      "image": "accepted-maps-ko-1/mountain-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "coast",
+      "dryPercent": 74.04,
+      "centerConnectedCells": 46273,
+      "image": "accepted-maps-ko-1/coast-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "existing",
+      "dryPercent": 61.24,
+      "centerConnectedCells": 38218,
+      "image": "accepted-maps-ko-1/existing-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 1,
+      "id": "explicit-ring",
+      "dryPercent": 65.06,
+      "centerConnectedCells": 40652,
+      "image": "accepted-maps-ko-1/explicit-ring-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 2,
+      "id": "flat",
+      "dryPercent": 83.41,
+      "centerConnectedCells": 51713,
+      "image": "accepted-maps-ko-2/flat-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 2,
+      "id": "desert",
+      "dryPercent": 92.47,
+      "centerConnectedCells": 57691,
+      "image": "accepted-maps-ko-2/desert-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 2,
+      "id": "mountain",
+      "dryPercent": 42.5,
+      "centerConnectedCells": 0,
+      "image": "accepted-maps-ko-2/mountain-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 2,
+      "id": "coast",
+      "dryPercent": 78.37,
+      "centerConnectedCells": 48982,
+      "image": "accepted-maps-ko-2/coast-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 2,
+      "id": "existing",
+      "dryPercent": 62.51,
+      "centerConnectedCells": 39011,
+      "image": "accepted-maps-ko-2/existing-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 3,
+      "id": "flat",
+      "dryPercent": 79.51,
+      "centerConnectedCells": 48755,
+      "image": "accepted-maps-ko-3/flat-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 3,
+      "id": "desert",
+      "dryPercent": 70.41,
+      "centerConnectedCells": 42496,
+      "image": "accepted-maps-ko-3/desert-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 3,
+      "id": "mountain",
+      "dryPercent": 31.17,
+      "centerConnectedCells": 0,
+      "image": "accepted-maps-ko-3/mountain-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 3,
+      "id": "coast",
+      "dryPercent": 73.09,
+      "centerConnectedCells": 45362,
+      "image": "accepted-maps-ko-3/coast-generated-preview.png"
+    },
+    {
+      "language": "ko",
+      "option": 3,
+      "id": "existing",
+      "dryPercent": 60.99,
+      "centerConnectedCells": 38063,
+      "image": "accepted-maps-ko-3/existing-generated-preview.png"
+    },
+    {
+      "language": "en",
+      "option": 1,
+      "id": "flat",
+      "dryPercent": 76.36,
+      "centerConnectedCells": 46775,
+      "image": "accepted-maps-en-1/flat-generated-preview.png"
+    },
+    {
+      "language": "en",
+      "option": 1,
+      "id": "explicit-canyon",
+      "dryPercent": 43.64,
+      "centerConnectedCells": 27269,
+      "image": "accepted-maps-en-1/explicit-canyon-generated-preview.png"
+    },
+    {
+      "language": "en",
+      "option": 2,
+      "id": "flat",
+      "dryPercent": 96.3,
+      "centerConnectedCells": 60187,
+      "image": "accepted-maps-en-2/flat-generated-preview.png"
+    },
+    {
+      "language": "en",
+      "option": 3,
+      "id": "flat",
+      "dryPercent": 92.64,
+      "centerConnectedCells": 57844,
+      "image": "accepted-maps-en-3/flat-generated-preview.png"
+    }
+  ],
+  "welcome": [
+    {
+      "language": "Korean",
+      "codeXmlMatch": true,
+      "text": "원하는 맵을 설명하거나, 추천 그림부터 비교해 보세요!\n\n추천받기:\n  \"이 타일에 어울리는 지형 추천해 줘\"\n그림을 눌러 확대하고 번호로 선택하세요.\n선택 전 수정: \"2번을 좀 더 자연스럽게 해 줘\"\n\n직접 만들기:\n  \"남쪽에 출구가 있는 자연스러운 도넛 산\"\n  \"중앙에 호수, 북쪽에 산, 남쪽에 넓은 평지\"\n후속 수정: \"도넛 안쪽의 70%만 비옥한 토양으로\""
+    },
+    {
+      "language": "English",
+      "codeXmlMatch": true,
+      "text": "Describe a map, or compare recommended maps first!\n\nGet recommendations:\n  \"Suggest landscapes for this tile.\"\nClick an image to zoom; choose its number to apply.\nBefore choosing: \"Make option 2 more natural.\"\n\nCreate your own:\n  \"A natural mountain ring with a southern exit.\"\n  \"A central lake, northern mountains and open land south.\"\nThen refine: \"Fill 70% of the ring's interior with rich soil.\""
+    }
+  ],
+  "initialInvalidReplies": 2,
+  "intermediateUndergroundCaveGenerationFailure": true,
+  "interruptedPreviewStages": 6,
+  "unresolvedPriorNativeCrashes": 1,
+  "limitations": [
+    "Prompt guidance, not a mechanical quality gate.",
+    "One deterministic world, selected tiles and Gemini 3.8 only.",
+    "Maximum options remains three; four not implemented.",
+    "Existing unrelated native crash remains unresolved."
+  ]
+}

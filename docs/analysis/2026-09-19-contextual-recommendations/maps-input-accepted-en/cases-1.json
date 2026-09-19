@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "id": "flat",
+      "biome": "TemperateForest",
+      "hilliness": "Flat",
+      "request": "Suggest landscapes for this tile.",
+      "kind": "contextual-recommendation",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "explicit-canyon",
+      "kind": "contextual-recommendation",
+      "request": "Create a solid rectangular mountain with a straight east-west dry passage through its center, exactly 12 cells wide. Apply it directly, without recommendations.",
+      "beforeParams": {},
+      "preview": true,
+      "omitAmbientRuins": true
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"mutators": ["HotSprings", "Fertile"], "elevation_shapes": [{"type": "bump", "position": [0.75, 0.7], "size": "small", "strength": "medium", "fill": "Soil"}]}}

@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "add", "shape": {"id": "ruin_pass_canyon", "type": "split", "direction": "top_left", "strength": "strong", "gap": "large"}}], "mutators": ["AncientRuins", "MineralRich"]}}

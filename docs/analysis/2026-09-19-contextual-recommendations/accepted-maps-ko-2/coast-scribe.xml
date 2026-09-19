@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>coastal_inlet_soil</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.6,0.35],"h":0.28,"id":"wet_margin","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.36}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.02,"fill":"SoilRich","from":null,"k":0,"op":"add","outId":null,"s":"wet_margin"}]}</compositeJson>
+				</li>
+				<li>
+					<id>coastal_inlet_pool</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.62,0.32],"h":0.16,"id":"pool","n":0,"prim":"ellipse","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.22}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"pool"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>Fish_Increased</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

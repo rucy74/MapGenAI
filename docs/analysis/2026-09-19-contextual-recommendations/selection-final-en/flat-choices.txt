@@ -1,0 +1,17 @@
+Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option. Before selecting, you can refine it: e.g. “Make option 3’s passage more natural.”
+
+Option 1 — changes
+• ruins added — The remains of an ancient settlement. These ruins may contain a wide variety of possible threats.
+• northwest edge mountain range added
+• Increase soil fertility.
+
+Option 2 — changes
+• plant grove added — This area contains a large number of {0}s.
+• fertile added — This area contains more fertile soil than normal.
+• map center — deep water area added
+• Increase soil fertility.
+
+Option 3 — changes
+• high geothermal activity added — Steam geysers are more common in this area.
+• hot springs added — A hot water spring, heated by geothermal activity.
+• south edge mountain range added

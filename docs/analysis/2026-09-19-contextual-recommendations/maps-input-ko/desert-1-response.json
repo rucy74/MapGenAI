@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"description": "북동쪽 사암 절벽 기슭의 아늑한 사막 주거지", "elevation_shapes": [{"type": "ridge", "direction": "top_right", "strength": "medium", "fade": "small", "noise_amount": "high"}], "mutators": ["DryLake"]}}

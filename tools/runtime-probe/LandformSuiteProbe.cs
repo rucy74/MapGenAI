@@ -21,13 +21,20 @@ namespace MapGenAI.RuntimeProbe
     {
         static int seedOffset;
         static readonly Queue<Tuple<string,string,int,TileMapState>> previews=new Queue<Tuple<string,string,int,TileMapState>>();
-        static string previewFolder,previewId,previewKind;static bool previewPending;static DateTime previewDeadline;
+        static string previewFolder,previewId,previewKind;static bool previewPending,previewAdvance;static DateTime previewDeadline;
         static readonly List<object> previewResults=new List<object>();
-        public static void Tick(){if(previewPending && DateTime.UtcNow>previewDeadline)PreviewFinish(new TimeoutException("Landform preview timed out"));}
+        public static void Tick()
+        {
+            if(previewAdvance){previewAdvance=false;NextPreview();}
+            if(previewPending && DateTime.UtcNow>previewDeadline)PreviewFinish(new TimeoutException("Landform preview timed out"));
+        }
         public static void Configure()
         {
             if(!GenCommandLine.TryGetCommandLineArg("mapgenAILandformSuite",out _))return;
             var h=new Harmony("choco.mapgenai.probe.landform-suite");
+            // Full-map suites can run before normal GameComponent updates resume.
+            // Root updates also drive deferred preview work and its bounded timeout.
+            h.Patch(AccessTools.Method(typeof(Root),"Update"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(Tick)));
             h.Patch(AccessTools.Method(typeof(WorldGenerator),"GenerateWorld"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(WorldSeed)));
             h.Patch(AccessTools.Method(typeof(MapGenerator),"GenerateContentsIntoMap"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(MapSeed)));
             h.Patch(AccessTools.Method(typeof(PassageGeneration),"Apply"),prefix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(BeforePassages)),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(AfterPassages)));
@@ -141,6 +148,11 @@ namespace MapGenAI.RuntimeProbe
                 foreach(var c in cases)
                 {
                     string id=c.GetString("id"),kind=c.GetString("kind");var tile=c.GetString("tile")=="coast"?coast[coastIndex++]:inland[insideIndex++];int target=tile.tile;
+                    if(c.GetString("biome")!=null)
+                    {
+                        tile=Find.WorldGrid.Tiles.First(t=>t.PrimaryBiome.defName==c.GetString("biome") && t.hilliness.ToString()==c.GetString("hilliness") && (c.GetBool("allowFeatures") || t.Mutators.Count==0) && !FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count==0 && !Find.WorldObjects.AnyMapParentAt(t.tile));
+                        target=tile.tile;
+                    }
                     var before=c.GetString("beforeFile")==null ? MapStateEditor.Merge(new TileMapState(),MapParameterParser.Parse(c.GetObject("beforeParams"))) : MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(Path.GetDirectoryName(manifest),c.GetString("beforeFile"))));
                     Find.WorldSelector.SelectedTile=target;MapGenParams.RestoreSnapshot(before,target);
                     File.WriteAllText(Path.Combine(output,id+"-before.json"),MapStateCodec.Serialize(before));
@@ -183,6 +195,11 @@ namespace MapGenAI.RuntimeProbe
                         Invoke(dialog,"DoUndo");bool undo=MapStateCodec.Serialize(MapGenParams.CaptureState(target))==MapStateCodec.Serialize(before);dialog.PostClose();
                         if(!undo)throw new InvalidOperationException("Dialog Undo changed the source state");
                         File.WriteAllText(Path.Combine(output,id+"-after.json"),serialized);MapGenParams.RestoreSnapshot(after,target);
+                        if(c.GetBool("previewOnly"))
+                        {
+                            previews.Enqueue(Tuple.Create(id,kind,target,after));
+                            results.Add(Obj("id",id,"action","generate","previewOnly",true,"undo",undo,"preservedSourceShapes",preserved));Write();continue;
+                        }
                         var fixture=new ProbeEnvelope{state=after};string scribe=Path.Combine(output,id+"-scribe.xml");
                         Scribe.saver.InitSaving(scribe,"LandformSuite");Scribe_Deep.Look(ref fixture,"fixture");Scribe.saver.FinalizeSaving();fixture=null;
                         Scribe.loader.InitLoading(scribe);Scribe_Deep.Look(ref fixture,"fixture");Scribe.loader.FinalizeLoading();
@@ -206,7 +223,14 @@ namespace MapGenAI.RuntimeProbe
             Write();
             if(complete && previews.Count>0)
             {
-                previewFolder=output;new Harmony("choco.mapgenai.probe.landform-preview").Patch(AccessTools.Method(AccessTools.TypeByName("MapGenAI.MapGen.PassageGeneration"),"Check"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(PreviewMeasured)));NextPreview();
+                previewFolder=output;
+                try
+                {
+                    File.WriteAllText(Path.Combine(output,"preview-start.txt"),DateTime.UtcNow.ToString("o"));
+                    new Harmony("choco.mapgenai.probe.landform-preview").Patch(AccessTools.Method(AccessTools.TypeByName("MapGenAI.MapGen.PassageGeneration"),"Check"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(PreviewMeasured)));
+                    NextPreview();
+                }
+                catch(Exception error){PreviewFinish(error);}
             }
             else Application.Quit();
             void Write(){File.WriteAllText(Path.Combine(output,"suite-result.json"),SimpleJson.Serialize(new Dictionary<string,object>{{"complete",complete},{"fatal",fatal},{"sample",sample},{"worldSeed",Find.World.info.seedString},{"tiles",tiles},{"results",results},{"scope","Measured actual full maps. Individual semantic metrics and visual review determine acceptance; completion alone is not PASS."}}));}
@@ -226,7 +250,7 @@ namespace MapGenAI.RuntimeProbe
             MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(result=>{
                 try{
                     if(result.InvalidCells!=0 || !previewResults.Any(r=>((Dictionary<string,object>)r)["id"].Equals(id)))throw new InvalidOperationException("Preview failed to capture actual terrain");
-                    var texture=new Texture2D(250,250);result.CopyToTexture(texture);texture.Apply();File.WriteAllBytes(Path.Combine(previewFolder,id+"-background-preview.png"),ImageConversion.EncodeToPNG(texture));UnityEngine.Object.Destroy(texture);previewPending=false;NextPreview();
+                    var texture=new Texture2D(250,250);result.CopyToTexture(texture);texture.Apply();File.WriteAllBytes(Path.Combine(previewFolder,id+"-background-preview.png"),ImageConversion.EncodeToPNG(texture));UnityEngine.Object.Destroy(texture);previewPending=false;previewAdvance=true;
                 }catch(Exception e){PreviewFinish(e);}
             },error=>PreviewFinish(error));
         }

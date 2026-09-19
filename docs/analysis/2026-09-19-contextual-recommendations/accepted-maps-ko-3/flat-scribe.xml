@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<oreDensity>1.29999995</oreDensity>
+			<elevationShapes>
+				<li>
+					<id>south_ridge</id>
+					<type>ridge</type>
+					<direction>bottom</direction>
+					<strength>weak</strength>
+					<fade>small</fade>
+					<noise_amount>medium</noise_amount>
+				</li>
+				<li>
+					<id>rolling_hills</id>
+					<type>noise</type>
+					<strength>weak</strength>
+					<size>medium</size>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators>
+				<li>AncientRuins</li>
+			</mutators>
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes>
+				<li>Sandstone</li>
+				<li>Slate</li>
+			</rockTypes>
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>
