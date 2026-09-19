@@ -1,0 +1,8 @@
+{
+  "action": "generate",
+  "params": {
+    "mutators": [
+      "SteamGeysers_Increased"
+    ]
+  }
+}

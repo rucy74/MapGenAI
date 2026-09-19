@@ -1,0 +1,302 @@
+{
+  "ok": false,
+  "checks": [
+    {
+      "pass": true,
+      "check": "ko: native run complete"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-plain: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-plain: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-plain: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-existing: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-existing: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-existing: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "ko: existing geometry, floor, exit, 70% soil, two ruins and scalars preserved"
+    },
+    {
+      "pass": true,
+      "check": "ko: preservation detector rejects an unintended floor change"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-coast: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-coast: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-coast: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-scoped: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-scoped: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-scoped: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "scoped soil options retain the left mountain"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-two: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-two: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "ko/recommend-two: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "direct request still generates mountain and lake without choices"
+    },
+    {
+      "pass": true,
+      "check": "ko: full-map replay completed"
+    },
+    {
+      "pass": true,
+      "check": "ko: all selected terrain options generated"
+    },
+    {
+      "pass": true,
+      "check": "ko/plain-1: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/plain-1: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/plain-2: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/plain-3: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/plain-3: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/coast-1: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/coast-1: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/coast-2: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": false,
+      "check": "ko/coast-3: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": false,
+      "check": "ko/coast-3: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-1: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-1: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-1: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-1: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-2: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-2: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-2: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-2: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-2: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-3: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-3: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-3: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "ko/existing-3: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en: native run complete"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-plain: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-plain: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-plain: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-existing: expected choices, no immediate edit"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-existing: every selection and Undo"
+    },
+    {
+      "pass": true,
+      "check": "en/recommend-existing: distinct states"
+    },
+    {
+      "pass": true,
+      "check": "en: existing geometry, floor, exit, 70% soil, two ruins and scalars preserved"
+    },
+    {
+      "pass": true,
+      "check": "en: preservation detector rejects an unintended floor change"
+    },
+    {
+      "pass": true,
+      "check": "en: full-map replay completed"
+    },
+    {
+      "pass": true,
+      "check": "en: all selected terrain options generated"
+    },
+    {
+      "pass": true,
+      "check": "en/plain-1: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/plain-1: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en/plain-2: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/plain-3: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/plain-3: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-1: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-1: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-1: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-1: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-2: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-2: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-2: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-2: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-2: mountain passage actually cuts dry cells"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-3: generated with no authoring issues and reversible state"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-3: actual 70% usable interior soil"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-3: two original ruins placed"
+    },
+    {
+      "pass": true,
+      "check": "en/existing-3: mountain passage actually cuts dry cells"
+    }
+  ],
+  "limits": "First responses on fixed tiles; state preservation is not pixel equality. Rendering diversity and naturalness also require visual review. Whole-route edge connectivity is reported separately."
+}

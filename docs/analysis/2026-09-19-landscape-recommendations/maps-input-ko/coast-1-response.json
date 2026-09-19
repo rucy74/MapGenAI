@@ -1,0 +1,96 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "basin_floor",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "floor",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.24
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "floor",
+              "fill": "Soil",
+              "e": 0.05,
+              "f": 0.01
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "basin_mountain",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "outer",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.35
+            },
+            {
+              "id": "inner",
+              "prim": "circle",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "r": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "sub",
+              "a": "inner",
+              "from": "outer",
+              "out": "ring"
+            },
+            {
+              "op": "add",
+              "s": "ring",
+              "e": 0.85,
+              "f": 0.02
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "south_pass",
+          "type": "passage",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              0.5,
+              0
+            ]
+          ],
+          "width": 8,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ]
+  }
+}

@@ -16,8 +16,12 @@ namespace MapGenAI.LLM
 
         public const string Rules = @"
 Recommendations and selectable alternatives:
-- When the user asks for recommendations, or you offer alternative map configurations, return action:recommend with 1..3 options. Each option has params using the SAME patch schema as generate. Every option is a complete independent patch against the CURRENT state, not a sequence.
-- Format: {""action"":""recommend"",""options"":[{""params"":{""vegetation_density"":1.3}},{""params"":{""fertility_offset"":0.2}}]}.
+- When the user asks for recommendations, or you offer alternative map configurations, return action:recommend. Normally provide THREE distinct options; honor an explicit request for one or two, and offer fewer if constraints leave fewer valid alternatives. Each option has params using the SAME patch schema as generate. Every option is a complete independent patch against the CURRENT state, not a sequence.
+- Format: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}},{""params"":{...}}]}.
+- For an open-ended first recommendation (e.g. '추천해줘' / 'Recommend a map'), propose visibly different LANDSCAPES, not three fertility/vegetation sliders or the same layout with different resources. Use supported terrain compositions: a mountain-enclosed settlement basin with an exit, an open valley with an offset lake, a mountain range along one side with open settlement ground, a narrow traversable canyon, or a small irregular pool with localized fertile ground. Choose three suited to this tile and the user's preferences; these are examples, not a fixed menu. Use the landform rules for dry floors and separate mountain-only exits; prefer natural outlines unless exact geometry was requested. Keep native features as optional accents, not unrelated bonus bundles. Do not promise GL's unsupported sea islands, fjords or thick-roof caves.
+- If the user has already authored terrain/structures, an unqualified recommendation means three complementary additions or small edits to THAT map. Keep all existing shapes, passages, structures, materials, coverage, settings and native features unless the user asks to change them. Prefer additions that do not overlap existing authored areas. Do not silently replace a basin, repaint its interior or add another whole-map mountain formation. Only propose replacement layouts when explicitly requested.
+- A scoped request ('recommend soil changes', '온천에 어울리는 특징 추천') stays within that scope; the three-landscape rule does not override it. A request for more/different suggestions should avoid the pending alternatives when present in the conversation. Distinguish choices by meaningful geometry/location or the requested effect, not internal IDs, decorative titles, or tiny numerical variations. No candidate is applied until selected.
+- Check each option's spatial composition: for a pool with a wider soil surround, add the soil FIRST and the water LAST, or subtract a water-sized hole from the soil. Never cover a proposed lake with a later solid soil disk. For a dry basin keep the hidden floor smooth beneath the irregular mountain ring. For existing maps read the actual extents: 'outside the basin' must be beyond its OUTER mountain boundary, not in the mountain wall. Only cut a new opening when proposing a clearly described additional passage. Keep suggestions small enough to coexist with the existing layout.
 - The application validates every option before displaying it and applies the stored command when the user selects it. Do not put numbered concepts, alternative configurations, or promises in action:ask. ask is only for factual explanations or missing user information, with no executable alternatives. A recommendation request must not immediately generate.
 - Do not use titles/descriptions/messages to promise effects absent from params. The UI displays the actual planned changes. A dry run checks configuration compatibility; final building placement is still checked during generation.
 - Features individually available on this tile can conflict with EACH OTHER. Check their categories and overrides together, and preserve existing features. Never propose incompatible pairs such as HotSprings+Pond. Custom terrain does not require adding a native lake feature.
@@ -43,6 +47,7 @@ Recommendations and selectable alternatives:
         public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null)
         {
             var plans=new List<RecommendationPlan>();
+            var outcomes=new HashSet<string>(StringComparer.Ordinal);
             foreach(var option in Options(command))
             {
                 var parameters=option.GetObject("params");
@@ -50,6 +55,7 @@ Recommendations and selectable alternatives:
                 validate(data);
                 var after=MapStateEditor.Merge(before,data);
                 if(MapStateCodec.ChangedFields(before,after).Count==0)throw new FormatException("Recommendation has no changes");
+                if(!outcomes.Add(MapStateCodec.Serialize(after)))throw new FormatException("Recommendations produce the same settings. Provide distinct alternatives against the current state.");
                 var envelope=new SimpleJsonObject();envelope.SetString("action","generate");envelope.SetObject("params",parameters);
                 string summary=new MapPlanDescription(korean,lookup).Describe(before,after);
                 plans.Add(new RecommendationPlan(SimpleJson.Serialize(envelope),summary));

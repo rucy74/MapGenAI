@@ -57,5 +57,18 @@ static class MapPlanDescriptionTests
             var after=Patch(before,"{\"remove_mutators\":[\"HotSprings\"],\"caves\":false}");string text=new MapPlanDescription(true,(kind,id)=>new PlanDefinition("온천","온수 샘입니다.")).Describe(before,after);
             Equal(true,text.Contains("온천 제거") && text.Contains("동굴 생성을 명시적으로 차단"));Equal(false,text.Contains("온수 샘입니다"));
         });
+        Check("Composite explanations distinguish raised land from flattened ground and preserve fills",()=>
+        {
+            var shape=new ElevationShape{type="composite",compositeShapes=new List<ShapePrimitive>{new ShapePrimitive{id="hidden",prim="circle",center=new[]{.5f,.5f},r=.2f}},compositeOps=new List<ComposeOp>{new ComposeOp{op="add",s="hidden",e=.9f}}};
+            var ko=new MapPlanDescription(true,(kind,id)=>new PlanDefinition("얕은 물"));
+            var en=new MapPlanDescription(false,(kind,id)=>new PlanDefinition("shallow water"));
+            Equal(true,ko.Shape(shape).Contains("산·언덕"));Equal(true,en.Shape(shape).Contains("mountains and hills"));
+            shape.compositeOps[0].e=.05f;
+            Equal(true,ko.Shape(shape).Contains("평탄하게 다듬은 땅"));Equal(true,en.Shape(shape).Contains("flattened ground"));
+            shape.fill="WaterShallow";
+            Equal(true,ko.Shape(shape).Contains("얕은 물"));Equal(false,en.Shape(shape).Contains("flattened ground"));
+            shape.fill=null;shape.compositeOps[0].fill="WaterShallow";shape.compositeOps[0].outId="rendered_and_reusable";
+            Equal(true,ko.Shape(shape).Contains("얕은 물"));Equal(false,en.Shape(shape).Contains("flattened ground"));
+        });
     }
 }

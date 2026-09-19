@@ -341,10 +341,10 @@ Ex3) ""Open a passage south"" → {""action"":""generate"",""description"":""sou
                 fewShot = isKo
                     ? @"
 예시1) 유저: ""왼쪽에 산, 오른쪽 아래에 호수"" → {""action"":""generate"",""description"":""왼쪽 산+오른쪽 아래 호수"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-예시2) 유저: ""추천해줘"" → {""action"":""recommend"",""options"":[{""params"":{""vegetation_density"":1.3}},{""params"":{""fertility_offset"":0.2}}]}"
+추천 요청은 아래 추천 규칙에 따라 서로 다른 지형 선택지 세 개를 제안하세요."
                     : @"
 Ex1) ""Mountains left, lake bottom-right"" → {""action"":""generate"",""description"":""left mountains + lake"",""params"":{""elevation_shapes"":[{""type"":""ridge"",""direction"":""left"",""strength"":""strong""},{""type"":""bump"",""position"":""bottom_right"",""size"":""medium"",""strength"":""negative_strong"",""fill"":""water""}]}}
-Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""params"":{""vegetation_density"":1.3}},{""params"":{""fertility_offset"":0.2}}]}";
+For recommendations follow the rules below and propose three distinct landscape options.";
             }
 
             string currentParams = MapGenParams.BuildCurrentParamsText(isKo);
@@ -561,10 +561,12 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
             float scrollWidth = innerRect.width - 16f;
             float msgRenderWidth = scrollWidth * 0.75f;
             float msgTextWidth = msgRenderWidth - 12f;
+            // Pending alternatives use the full chat width so three landscape descriptions remain readable.
+            float MessageWidth(ChatMessage msg)=>_recommendations!=null && msg==_history.LastOrDefault()?scrollWidth:msgRenderWidth;
 
             float contentHeight = 0f;
             foreach (var msg in _history)
-                contentHeight += Text.CalcHeight(msg.Content, msgTextWidth) + 12f + 6f;
+                contentHeight += Text.CalcHeight(msg.Content, MessageWidth(msg)-12f) + 12f + 6f;
             if (_isWaiting)
                 contentHeight += 30f; // "AI 응답 대기 중..." 높이
 
@@ -575,15 +577,16 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
             foreach (var msg in _history)
             {
                 bool isUser = msg.Role == "user";
-                float msgHeight = Text.CalcHeight(msg.Content, msgTextWidth) + 12f;
-                float x = isUser ? scrollWidth - msgRenderWidth : 0f;
+                float width=MessageWidth(msg);
+                float msgHeight = Text.CalcHeight(msg.Content, width-12f) + 12f;
+                float x = isUser ? scrollWidth - width : 0f;
 
                 var bgColor = isUser
                     ? new Color(0.18f, 0.38f, 0.62f, 0.92f)  // 유저: 진한 파랑
                     : new Color(0.18f, 0.20f, 0.22f, 0.92f);  // AI: 어두운 회색
 
-                Widgets.DrawBoxSolid(new Rect(x, y, msgRenderWidth, msgHeight), bgColor);
-                Widgets.Label(new Rect(x, y, msgRenderWidth, msgHeight).ContractedBy(6f), msg.Content);
+                Widgets.DrawBoxSolid(new Rect(x, y, width, msgHeight), bgColor);
+                Widgets.Label(new Rect(x, y, width, msgHeight).ContractedBy(6f), msg.Content);
                 y += msgHeight + 6f;
             }
 
@@ -743,7 +746,7 @@ Ex2) ""Recommend something"" → {""action"":""recommend"",""options"":[{""param
                         var plans=RecommendationPlan.Validate(parsed,MapGenParams.CaptureState(_openedTileId),
                             data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean(),DefinitionText);
                         _recommendations=plans;_recommendationState=RecommendationState();
-                        string message=(IsKorean()?"현재 설정과 함께 적용할 수 있는 추천입니다. 번호를 선택하면 해당 설정을 적용합니다.":"These options are compatible with your current settings. Choose a number to apply its settings.");
+                        string message=(IsKorean()?"현재 타일과 설정에 맞춰 추천했어요. 아래에서 하나를 골라 주세요. 아직 맵은 바뀌지 않았습니다. 번호를 입력하거나 버튼을 누르면 선택한 설정을 적용합니다.":"Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.");
                         for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — 이렇게 바뀝니다":"Option "+(i+1)+" — changes")+"\n"+plans[i].Summary;
                         if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
                             message+=IsKorean()?"\n\n구조물의 실제 배치는 맵 생성 때 확인합니다.":"\n\nActual structure placement is checked during generation.";

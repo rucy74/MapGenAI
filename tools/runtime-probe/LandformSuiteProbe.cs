@@ -155,6 +155,28 @@ namespace MapGenAI.RuntimeProbe
                         var after=MapGenParams.CaptureState(target);string serialized=MapStateCodec.Serialize(after);
                         var history=(List<ChatMessage>)typeof(Dialog_TextToMap).GetField("_history",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(dialog);
                         string message=history.LastOrDefault()?.Content;
+                        if(command.GetString("action")=="recommend")
+                        {
+                            string original=MapStateCodec.Serialize(before);
+                            var offered=(List<RecommendationPlan>)typeof(Dialog_TextToMap).GetField("_recommendations",BindingFlags.NonPublic|BindingFlags.Instance).GetValue(dialog);
+                            if(offered==null || serialized!=original)throw new InvalidOperationException("Recommendation rejected or mutated the map before selection: "+message);
+                            File.WriteAllText(Path.Combine(output,id+"-choices.txt"),message);
+                            var selections=new List<object>();
+                            for(int i=0;i<offered.Count;i++)
+                            {
+                                if(i>0)Invoke(dialog,"HandleResponse",response);
+                                var expected=MapStateEditor.Merge(before,MapParameterParser.Parse(ProviderResponse.Command(offered[i].Command).GetObject("params")));
+                                typeof(Dialog_TextToMap).GetField("_inputText",BindingFlags.NonPublic|BindingFlags.Instance).SetValue(dialog,(i+1).ToString());
+                                Invoke(dialog,"SendMessage");
+                                string chosen=MapStateCodec.Serialize(MapGenParams.CaptureState(target));
+                                if(chosen!=MapStateCodec.Serialize(expected))throw new InvalidOperationException("Stored selection changed: "+id+"/"+(i+1));
+                                File.WriteAllText(Path.Combine(output,id+"-option-"+(i+1)+"-after.json"),chosen);
+                                Invoke(dialog,"DoUndo");
+                                if(MapStateCodec.Serialize(MapGenParams.CaptureState(target))!=original)throw new InvalidOperationException("Recommendation Undo changed source state");
+                                selections.Add(Obj("option",i+1,"appliedStoredCommand",true,"undo",true));
+                            }
+                            results.Add(Obj("id",id,"action","recommend","options",offered.Count,"unchangedBeforeSelection",true,"selections",selections));dialog.PostClose();Write();continue;
+                        }
                         if(command.GetString("action")!="generate" || serialized==MapStateCodec.Serialize(before) && !c.GetBool("generateUnchanged"))
                         {results.Add(Obj("id",id,"action",command.GetString("action"),"generated",false,"message",message));dialog.PostClose();Write();continue;}
                         bool preserved=before.elevationShapes.All(s=>after.elevationShapes.Any(a=>a.id==s.id && SimpleJson.Serialize(s)==SimpleJson.Serialize(a)));

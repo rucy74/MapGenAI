@@ -18,7 +18,7 @@ namespace MapGenAI.RuntimeProbe
 {
     static class RecommendationProbe
     {
-        static string folder,initial,bad;static int target,stage,frame;static bool active;static DateTime deadline;
+        static string folder,initial,bad,screenReply;static int target,stage,frame;static bool active;static DateTime deadline;
         static Dialog_TextToMap dialog;static FakeClient client;static readonly List<string> checks=new List<string>();
         const string Good="{\"action\":\"recommend\",\"options\":[{\"params\":{\"fertility_offset\":0.2}},{\"params\":{\"vegetation_density\":1.3}}]}";
         static object Invoke(string name,params object[] args)=>typeof(Dialog_TextToMap).GetMethod(name,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(dialog,args);
@@ -42,7 +42,16 @@ namespace MapGenAI.RuntimeProbe
                 var tile=Find.WorldGrid.Tiles.First(t=>t.PrimaryBiome.defName=="AridShrubland" && t.hilliness==Hilliness.Flat && t.Mutators.Count==0 && !FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count==0 && !Find.WorldObjects.AnyMapParentAt(t.tile));
                 target=tile.tile;Find.WorldSelector.SelectedTile=target;MapGenParams.LoadFromTile(target);SavePrompt("plain");
                 MapGenParams.ApplyPatch(MapParameterParser.Parse(SimpleJson.Parse("{\"mutators\":[\"HotSprings\"]}")),target);initial=State();SavePrompt("hot");
-                if(GenCommandLine.TryGetCommandLineArg("mapgenAIRecommendationScreen",out _)){stage=4;Next();return;}
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIRecommendationScreen",out _))
+                {
+                    screenReply=Good;
+                    if(!string.IsNullOrEmpty(replies))
+                    {
+                        initial=File.ReadAllText(Path.Combine(replies,"recommend-plain-before.json"));
+                        screenReply=File.ReadAllText(Path.Combine(replies,"recommend-plain-response.json"));
+                    }
+                    stage=4;Next();return;
+                }
                 var rejected=ProviderResponse.Command(File.ReadAllText(Path.Combine(evidence,"rejected-selection.json")));
                 var opt=new SimpleJsonObject();opt.SetObject("params",rejected.GetObject("params"));var rec=new SimpleJsonObject();rec.SetString("action","recommend");rec.SetObjectArray("options",new List<SimpleJsonObject>{opt});bad=SimpleJson.Serialize(rec);
                 New();Invoke("HandleResponse",bad);Check(State()==initial && Field("_recommendations")==null && ((ICollection)Field("_paramStack")).Count==0,"recorded incompatible HotSprings+Pond plan is never displayed or applied");dialog.PostClose();
@@ -104,7 +113,7 @@ namespace MapGenAI.RuntimeProbe
         static void Next()
         {
             New();
-            if(stage==4){Invoke("HandleResponse",Good);Find.WindowStack.Add(dialog);frame=Time.frameCount;active=true;return;}
+            if(stage==4){Invoke("HandleResponse",screenReply??Good);Check(Field("_recommendations")!=null,"screen shows a validated recommendation batch");Find.WindowStack.Add(dialog);frame=Time.frameCount;active=true;return;}
             client=new FakeClient{first=stage==2?"{\"action\":\"ask\",\"message\":\"추천합니다.\\n1. 온천과 연못\\n2. 협곡\"}":bad,second=stage==1?bad:Good,hold=stage==3};
             Set("_recommendationsRequested",true);active=true;deadline=DateTime.UtcNow.AddSeconds(35);
             Invoke("StartChat",new List<ILLMClient>{client},new List<ChatMessage>{new ChatMessage("user","그냥 추천해 봐")},Prompt(),false);
@@ -116,8 +125,11 @@ namespace MapGenAI.RuntimeProbe
             {
                 if(stage==4)
                 {
-                    if(Time.frameCount-frame==30)ScreenCapture.CaptureScreenshot(Path.Combine(folder,"recommendations-ui.png"));
-                    if(Time.frameCount-frame<65)return;
+                    if(Time.frameCount-frame==15)Set("_scrollPos",Vector2.zero);
+                    if(Time.frameCount-frame==30)ScreenCapture.CaptureScreenshot(Path.Combine(folder,"recommendations-top.png"));
+                    if(Time.frameCount-frame==45)Set("_scrollPos",new Vector2(0,10000));
+                    if(Time.frameCount-frame==60)ScreenCapture.CaptureScreenshot(Path.Combine(folder,"recommendations-ui.png"));
+                    if(Time.frameCount-frame<85)return;
                     Check(!MapGenAI.ImageInput.ImageFeatureGate.Enabled,"image feature remains disabled; visible title inspected in screenshot");
                     File.WriteAllText(Path.Combine(folder,"displayed-options.txt"),((List<ChatMessage>)Field("_history")).Last().Content);dialog.Close(false);Finish();return;
                 }

@@ -35,6 +35,39 @@ static class StructuredChatTests
             foreach(var json in new[]{"{}","{\"options\":[]}","{\"options\":[{}]}","{\"options\":[{\"params\":{}},{\"params\":{}},{\"params\":{}},{\"params\":{}}]}"})Throws(()=>RecommendationPlan.Options(SimpleJson.Parse(json)));
             Throws(()=>RecommendationPlan.Validate(SimpleJson.Parse("{\"options\":[{\"params\":{}}]}"),new TileMapState(),data=>{},true));
         });
+        Check("Recorded recommendations stay independent and duplicate outcomes reject atomically",()=>
+        {
+            var before=new TileMapState();string saved=MapStateCodec.Serialize(before);
+            var recorded=ProviderResponse.Command(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"recommendation-fixtures","plain-response.json")));
+            Equal(3,RecommendationPlan.Validate(recorded,before,data=>{},true).Count);
+            var options=recorded.GetObjectArray("options");options[1]=options[0];
+            recorded.SetObjectArray("options",options);
+            Throws(()=>RecommendationPlan.Validate(recorded,before,data=>{},true));
+            Equal(saved,MapStateCodec.Serialize(before));
+            // Different patches with the same effective state must not become separate choices.
+            Throws(()=>RecommendationPlan.Validate(SimpleJson.Parse("{\"options\":[{\"params\":{\"fertility_offset\":0.2}},{\"params\":{\"vegetation_density\":1,\"fertility_offset\":0.2}}]}"),before,data=>{},false));
+        });
+        foreach(string language in new[]{"ko","en"})Check("Recorded "+language+" landscape choices replay every stored native outcome without changing source",()=>
+        {
+            string folder=Path.Combine(AppContext.BaseDirectory,"recommendation-fixtures",language);
+            var names=language=="ko"?new[]{"plain","coast","existing","scoped","two"}:new[]{"plain","existing"};
+            foreach(string name in names)
+            {
+                string id="recommend-"+name;
+                var before=MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(folder,id+"-before.json")));
+                string saved=MapStateCodec.Serialize(before);
+                var command=ProviderResponse.Command(File.ReadAllText(Path.Combine(folder,id+"-response.json")));
+                var plans=RecommendationPlan.Validate(command,before,data=>MapStateValidation.Validate(MapStateEditor.Merge(before,data)),language=="ko");
+                Equal(name=="two"?2:3,plans.Count);
+                for(int i=0;i<plans.Count;i++)
+                {
+                    var expected=MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(folder,id+"-option-"+(i+1)+"-after.json")));
+                    var after=MapStateEditor.Merge(before,MapParameterParser.Parse(ProviderResponse.Command(plans[i].Command).GetObject("params")));
+                    Equal(MapStateCodec.Serialize(expected),MapStateCodec.Serialize(after));
+                }
+                Equal(saved,MapStateCodec.Serialize(before));
+            }
+        });
         Check("Selection accepts only a specific number without silently dropping edits",()=>
         {
             foreach(var text in new[]{"1","1번","1번으로 해줘","option 1 please"})Equal(1,RecommendationPlan.Selection(text));

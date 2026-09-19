@@ -1,0 +1,21 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "outer_pond",
+          "type": "bump",
+          "position": [
+            0.18,
+            0.82
+          ],
+          "size": "small",
+          "strength": "negative_strong",
+          "fill": "water"
+        }
+      }
+    ]
+  }
+}

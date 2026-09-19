@@ -1,0 +1,27 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "east_pass",
+          "type": "passage",
+          "fill": "Soil",
+          "scope": "mountains",
+          "points": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              1,
+              0.5
+            ]
+          ],
+          "width": 8
+        }
+      }
+    ]
+  }
+}

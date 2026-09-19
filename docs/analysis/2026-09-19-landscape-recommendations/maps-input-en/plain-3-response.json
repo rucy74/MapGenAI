@@ -1,0 +1,54 @@
+{
+  "action": "generate",
+  "params": {
+    "elevation_shapes": [
+      {
+        "type": "composite",
+        "shapes": [
+          {
+            "id": "mtn_block",
+            "prim": "rect",
+            "center": [
+              0.5,
+              0.5
+            ],
+            "w": 0.75,
+            "h": 0.55
+          }
+        ],
+        "compose": [
+          {
+            "op": "add",
+            "s": "mtn_block",
+            "e": 0.9,
+            "f": 0.02
+          }
+        ]
+      },
+      {
+        "type": "passage",
+        "points": [
+          [
+            0.1,
+            0.5
+          ],
+          [
+            0.35,
+            0.55
+          ],
+          [
+            0.65,
+            0.45
+          ],
+          [
+            0.9,
+            0.5
+          ]
+        ],
+        "width": 10,
+        "scope": "mountains",
+        "fill": "Soil"
+      }
+    ]
+  }
+}

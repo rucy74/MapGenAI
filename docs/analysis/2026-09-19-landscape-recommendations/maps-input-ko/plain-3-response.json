@@ -1,0 +1,49 @@
+{
+  "action": "generate",
+  "params": {
+    "elevation_shapes": [
+      {
+        "id": "canyon_rock",
+        "type": "composite",
+        "edge_roughness": "medium",
+        "shapes": [
+          {
+            "id": "b",
+            "prim": "rect",
+            "center": [
+              0.5,
+              0.5
+            ],
+            "w": 0.75,
+            "h": 0.55
+          }
+        ],
+        "compose": [
+          {
+            "op": "add",
+            "s": "b",
+            "e": 0.85,
+            "f": 0.02
+          }
+        ]
+      },
+      {
+        "id": "canyon_pass",
+        "type": "passage",
+        "points": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            1.0,
+            0.5
+          ]
+        ],
+        "width": 12,
+        "scope": "mountains",
+        "fill": "Soil"
+      }
+    ]
+  }
+}

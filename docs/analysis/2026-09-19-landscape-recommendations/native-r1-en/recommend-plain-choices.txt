@@ -1,0 +1,18 @@
+Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.
+
+Option 1 — changes
+• map center — round soil area (irregular outline) added
+• map center — ring-shaped mountains and hills area (irregular outline) added
+• Dry passage, 8 cells wide — soil, map center → map south (mountains only; open ground preserved) added
+• usable area enclosed by the terrain 40% — rich soil fill added
+
+Option 2 — changes
+• increased plant life added — Plant life is more abundant here.
+• north edge mountain range added
+• map center — round shallow water area (irregular outline) added
+• map center — ring-shaped rich soil area (irregular outline) added
+
+Option 3 — changes
+• map center — rectangular mountains and hills area added
+• Dry passage, 10 cells wide — soil, map west → map east (mountains only; open ground preserved) added
+• Increase naturally generated ruins generation.

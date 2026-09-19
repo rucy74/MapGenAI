@@ -153,8 +153,15 @@ namespace MapGenAI.MapGen
             if(s.type=="noise")return T(raised?"곳곳에 흩어진 언덕":"곳곳에 낮게 패인 지형",raised?"scattered hills":"scattered depressions");
             var fills=new List<string>();
             if(!string.IsNullOrEmpty(s.fill))fills.Add(s.fill);
-            else if(s.compositeOps!=null)fills.AddRange(s.compositeOps.Where(o=>o.outId==null && !string.IsNullOrEmpty(o.fill)).Select(o=>o.fill));
+            else if(s.compositeOps!=null)fills.AddRange(s.compositeOps.Where(o=>!string.IsNullOrEmpty(o.fill)).Select(o=>o.fill));
             string material=fills.Count>0?string.Join("·",fills.Distinct().Select(f=>Name("terrain",f))):s.type=="composite"?T("높낮이를 조정한 지형","height-adjusted terrain"):T(raised?"높인 지형":"낮춘 지형",raised?"raised terrain":"lowered terrain");
+            if(s.type=="composite" && fills.Count==0 && s.compositeOps!=null)
+            {
+                // Match the generator's rendered operations, not the model's shape IDs or titles.
+                var rendered=s.compositeOps.Where(o=>o.e!=0f).ToList();
+                if(rendered.Count>0 && rendered.All(o=>o.e>=.1f))material=T("산·언덕","mountains and hills");
+                else if(rendered.Count>0 && rendered.All(o=>o.e>0f && o.e<.1f))material=T("평탄하게 다듬은 땅","flattened ground");
+            }
             string form=s.type=="ring"?T("고리 모양 ","ring-shaped "):"";string where;
             if(s.type=="composite")
             {

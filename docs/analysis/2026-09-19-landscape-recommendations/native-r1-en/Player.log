@@ -1,0 +1,425 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.094 seconds
+- Finished resetting the current domain, in  0.001 seconds
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.905700 ms
+Command line arguments: -batchmode -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-180944-939 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-landscape-recommendations\native-r1-en -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-landscape-recommendations\native-r1-en\Player.log -mapgenAILandformSuite=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-landscape-recommendations\cases-en.json -mapgenAILandformSample=0 -mapgenAILandformReplies=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-landscape-recommendations\provider-en
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-180944-939
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000013CAEFE6040.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000013CAF303570.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000013CB043F020.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.07 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+Modifying the initial rand seed. Call PushState() first. The initial rand seed should always be based on the startup time and set only once.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26487.
+Total: 153.447500 ms (FindLiveObjects: 1.114800 ms CreateObjectMapping: 0.527900 ms MarkObjects: 151.504500 ms  DeleteObjects: 0.300100 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 2.144900 ms
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 26665.
+Total: 139.330000 ms (FindLiveObjects: 1.059900 ms CreateObjectMapping: 0.377900 ms MarkObjects: 137.872800 ms  DeleteObjects: 0.019100 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919180944939
+[MapGenAI] Authored generation: Object reference not set to an instance of an object
+Unloading 0 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"shape_ops":[{"op":"add","shape":{"id":"basin_floor","type":"composite","edge_roughness":"medium","shapes":[{"id":"floor_circle","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"floor_circle","fill":"Soil","e":0.05,"f":0.01}]}},{"op":"add","shape":{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"outer_m","prim":"circle","center":[0.5,0.5],"r":0.38},{"id":"inner_m","prim":"circle","center":[0.5,0.5],"r":0.21}],"compose":[{"op":"sub","a":"inner_m","from":"outer_m","out":"ring_wall"},{"op":"add","s":"ring_wall","e":0.85,"f":0.02}]}},{"op":"add","shape":{"id":"south_exit","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}},{"op":"add","shape":{"id":"inner_fertile","type":"region_fill","region":"basin_mountain","region_part":"enclosed","coverage":0.4,"fill":"SoilRich"}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"north_mountains","type":"ridge","direction":"top","strength":"strong","fade":"medium","noise_amount":"high"}},{"op":"add","shape":{"id":"lake_water","type":"composite","edge_roughness":"medium","shapes":[{"id":"water_body","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"add","s":"water_body","fill":"WaterShallow","e":0.0,"f":0.015}]}},{"op":"add","shape":{"id":"lake_rich_shore","type":"composite","edge_roughness":"medium","shapes":[{"id":"rich_ring","prim":"circle","center":[0.5,0.35],"r":0.23},{"id":"water_hole","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"sub","a":"water_hole","from":"rich_ring","out":"shore_band"},{"op":"add","s":"shore_band","fill":"SoilRich","e":0.05,"f":0.01}]}}],"mutators":["PlantLife_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"canyon_mountain_mass","type":"composite","shapes":[{"id":"mountain_block","prim":"rect","center":[0.5,0.5],"w":0.82,"h":0.62}],"compose":[{"op":"add","s":"mountain_block","e":0.9,"f":0.02}]}},{"op":"add","shape":{"id":"canyon_path","type":"passage","points":[[0.0,0.5],[0.3,0.48],[0.7,0.52],[1.0,0.5]],"width":10,"scope":"mountains","fill":"Soil"}}],"ruin_density":1.5}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"basin_floor","type":"composite","edge_roughness":"medium","shapes":[{"id":"floor_circle","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"floor_circle","fill":"Soil","e":0.05,"f":0.01}]}},{"op":"add","shape":{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"outer_m","prim":"circle","center":[0.5,0.5],"r":0.38},{"id":"inner_m","prim":"circle","center":[0.5,0.5],"r":0.21}],"compose":[{"op":"sub","a":"inner_m","from":"outer_m","out":"ring_wall"},{"op":"add","s":"ring_wall","e":0.85,"f":0.02}]}},{"op":"add","shape":{"id":"south_exit","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}},{"op":"add","shape":{"id":"inner_fertile","type":"region_fill","region":"basin_mountain","region_part":"enclosed","coverage":0.4,"fill":"SoilRich"}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"shape_ops":[{"op":"add","shape":{"id":"basin_floor","type":"composite","edge_roughness":"medium","shapes":[{"id":"floor_circle","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"floor_circle","fill":"Soil","e":0.05,"f":0.01}]}},{"op":"add","shape":{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"outer_m","prim":"circle","center":[0.5,0.5],"r":0.38},{"id":"inner_m","prim":"circle","center":[0.5,0.5],"r":0.21}],"compose":[{"op":"sub","a":"inner_m","from":"outer_m","out":"ring_wall"},{"op":"add","s":"ring_wall","e":0.85,"f":0.02}]}},{"op":"add","shape":{"id":"south_exit","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}},{"op":"add","shape":{"id":"inner_fertile","type":"region_fill","region":"basin_mountain","region_part":"enclosed","coverage":0.4,"fill":"SoilRich"}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"north_mountains","type":"ridge","direction":"top","strength":"strong","fade":"medium","noise_amount":"high"}},{"op":"add","shape":{"id":"lake_water","type":"composite","edge_roughness":"medium","shapes":[{"id":"water_body","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"add","s":"water_body","fill":"WaterShallow","e":0.0,"f":0.015}]}},{"op":"add","shape":{"id":"lake_rich_shore","type":"composite","edge_roughness":"medium","shapes":[{"id":"rich_ring","prim":"circle","center":[0.5,0.35],"r":0.23},{"id":"water_hole","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"sub","a":"water_hole","from":"rich_ring","out":"shore_band"},{"op":"add","s":"shore_band","fill":"SoilRich","e":0.05,"f":0.01}]}}],"mutators":["PlantLife_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"canyon_mountain_mass","type":"composite","shapes":[{"id":"mountain_block","prim":"rect","center":[0.5,0.5],"w":0.82,"h":0.62}],"compose":[{"op":"add","s":"mountain_block","e":0.9,"f":0.02}]}},{"op":"add","shape":{"id":"canyon_path","type":"passage","points":[[0.0,0.5],[0.3,0.48],[0.7,0.52],[1.0,0.5]],"width":10,"scope":"mountains","fill":"Soil"}}],"ruin_density":1.5}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"north_mountains","type":"ridge","direction":"top","strength":"strong","fade":"medium","noise_amount":"high"}},{"op":"add","shape":{"id":"lake_water","type":"composite","edge_roughness":"medium","shapes":[{"id":"water_body","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"add","s":"water_body","fill":"WaterShallow","e":0.0,"f":0.015}]}},{"op":"add","shape":{"id":"lake_rich_shore","type":"composite","edge_roughness":"medium","shapes":[{"id":"rich_ring","prim":"circle","center":[0.5,0.35],"r":0.23},{"id":"water_hole","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"sub","a":"water_hole","from":"rich_ring","out":"shore_band"},{"op":"add","s":"shore_band","fill":"SoilRich","e":0.05,"f":0.01}]}}],"mutators":["PlantLife_Increased"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[PlantLife_Increased] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[PlantLife_Increased]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"shape_ops":[{"op":"add","shape":{"id":"basin_floor","type":"composite","edge_roughness":"medium","shapes":[{"id":"floor_circle","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"floor_circle","fill":"Soil","e":0.05,"f":0.01}]}},{"op":"add","shape":{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"outer_m","prim":"circle","center":[0.5,0.5],"r":0.38},{"id":"inner_m","prim":"circle","center":[0.5,0.5],"r":0.21}],"compose":[{"op":"sub","a":"inner_m","from":"outer_m","out":"ring_wall"},{"op":"add","s":"ring_wall","e":0.85,"f":0.02}]}},{"op":"add","shape":{"id":"south_exit","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}},{"op":"add","shape":{"id":"inner_fertile","type":"region_fill","region":"basin_mountain","region_part":"enclosed","coverage":0.4,"fill":"SoilRich"}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"north_mountains","type":"ridge","direction":"top","strength":"strong","fade":"medium","noise_amount":"high"}},{"op":"add","shape":{"id":"lake_water","type":"composite","edge_roughness":"medium","shapes":[{"id":"water_body","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"add","s":"water_body","fill":"WaterShallow","e":0.0,"f":0.015}]}},{"op":"add","shape":{"id":"lake_rich_shore","type":"composite","edge_roughness":"medium","shapes":[{"id":"rich_ring","prim":"circle","center":[0.5,0.35],"r":0.23},{"id":"water_hole","prim":"circle","center":[0.5,0.35],"r":0.16}],"compose":[{"op":"sub","a":"water_hole","from":"rich_ring","out":"shore_band"},{"op":"add","s":"shore_band","fill":"SoilRich","e":0.05,"f":0.01}]}}],"mutators":["PlantLife_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"canyon_mountain_mass","type":"composite","shapes":[{"id":"mountain_block","prim":"rect","center":[0.5,0.5],"w":0.82,"h":0.62}],"compose":[{"op":"add","s":"mountain_block","e":0.9,"f":0.02}]}},{"op":"add","shape":{"id":"canyon_path","type":"passage","points":[[0.0,0.5],[0.3,0.48],[0.7,0.52],[1.0,0.5]],"width":10,"scope":"mountains","fill":"Soil"}}],"ruin_density":1.5}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"canyon_mountain_mass","type":"composite","shapes":[{"id":"mountain_block","prim":"rect","center":[0.5,0.5],"w":0.82,"h":0.62}],"compose":[{"op":"add","s":"mountain_block","e":0.9,"f":0.02}]}},{"op":"add","shape":{"id":"canyon_path","type":"passage","points":[[0.0,0.5],[0.3,0.48],[0.7,0.52],[1.0,0.5]],"width":10,"scope":"mountains","fill":"Soil"}}],"ruin_density":1.5}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 20
+[MapGenAI] Applied state to tile 20
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["HotSprings"],"shape_ops":[{"op":"add","shape":{"id":"northeast_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"lake_body","prim":"circle","center":[0.8,0.75],"r":0.12}],"compose":[{"op":"add","s":"lake_body","fill":"WaterShallow","e":0,"f":0.015}]}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"south_approach_path","type":"passage","points":[[0.5,0],[0.5,0.2]],"width":6,"scope":"full","fill":"Gravel"}}],"structure_ops":[{"op":"add","structure":{"id":"entry_guard_ruin","kind":"ruin","bounds":[0.42,0.18,0.58,0.28],"width":7,"height":7,"count":1}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"west_highland_ridge","type":"composite","edge_roughness":"medium","shapes":[{"id":"ridge_body","prim":"ellipse","center":[0.12,0.5],"w":0.14,"h":0.7}],"compose":[{"op":"add","s":"ridge_body","fill":null,"e":0.75,"f":0.08}]}}],"mutators":["MineralRich"]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"mutators":["HotSprings"],"shape_ops":[{"op":"add","shape":{"id":"northeast_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"lake_body","prim":"circle","center":[0.8,0.75],"r":0.12}],"compose":[{"op":"add","s":"lake_body","fill":"WaterShallow","e":0,"f":0.015}]}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 20; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] Applied state to tile 20; 실제 타일 특징 / Tile features: +[] −[HotSprings]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["HotSprings"],"shape_ops":[{"op":"add","shape":{"id":"northeast_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"lake_body","prim":"circle","center":[0.8,0.75],"r":0.12}],"compose":[{"op":"add","s":"lake_body","fill":"WaterShallow","e":0,"f":0.015}]}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"south_approach_path","type":"passage","points":[[0.5,0],[0.5,0.2]],"width":6,"scope":"full","fill":"Gravel"}}],"structure_ops":[{"op":"add","structure":{"id":"entry_guard_ruin","kind":"ruin","bounds":[0.42,0.18,0.58,0.28],"width":7,"height":7,"count":1}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"west_highland_ridge","type":"composite","edge_roughness":"medium","shapes":[{"id":"ridge_body","prim":"ellipse","center":[0.12,0.5],"w":0.14,"h":0.7}],"compose":[{"op":"add","s":"ridge_body","fill":null,"e":0.75,"f":0.08}]}}],"mutators":["MineralRich"]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"south_approach_path","type":"passage","points":[[0.5,0],[0.5,0.2]],"width":6,"scope":"full","fill":"Gravel"}}],"structure_ops":[{"op":"add","structure":{"id":"entry_guard_ruin","kind":"ruin","bounds":[0.42,0.18,0.58,0.28],"width":7,"height":7,"count":1}}]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 20
+[MapGenAI] Applied state to tile 20
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["HotSprings"],"shape_ops":[{"op":"add","shape":{"id":"northeast_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"lake_body","prim":"circle","center":[0.8,0.75],"r":0.12}],"compose":[{"op":"add","s":"lake_body","fill":"WaterShallow","e":0,"f":0.015}]}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"south_approach_path","type":"passage","points":[[0.5,0],[0.5,0.2]],"width":6,"scope":"full","fill":"Gravel"}}],"structure_ops":[{"op":"add","structure":{"id":"entry_guard_ruin","kind":"ruin","bounds":[0.42,0.18,0.58,0.28],"width":7,"height":7,"count":1}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"west_highland_ridge","type":"composite","edge_roughness":"medium","shapes":[{"id":"ridge_body","prim":"ellipse","center":[0.12,0.5],"w":0.14,"h":0.7}],"compose":[{"op":"add","s":"ridge_body","fill":null,"e":0.75,"f":0.08}]}}],"mutators":["MineralRich"]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"shape_ops":[{"op":"add","shape":{"id":"west_highland_ridge","type":"composite","edge_roughness":"medium","shapes":[{"id":"ridge_body","prim":"ellipse","center":[0.12,0.5],"w":0.14,"h":0.7}],"compose":[{"op":"add","s":"ridge_body","fill":null,"e":0.75,"f":0.08}]}}],"mutators":["MineralRich"]}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Applied state to tile 20; 실제 타일 특징 / Tile features: +[MineralRich] −[]
+[MapGenAI] Applied state to tile 20; 실제 타일 특징 / Tile features: +[] −[MineralRich]
+[MapGenAI] Applied state to tile 20
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27776.
+Total: 144.712400 ms (FindLiveObjects: 1.118300 ms CreateObjectMapping: 0.440800 ms MarkObjects: 143.097000 ms  DeleteObjects: 0.056000 ms)
+
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 478 frames, [1.0 KB-2.0 KB]: 2 frames, [8.0 KB-16.0 KB]: 1 frames, [32.0 KB-64.0 KB]: 1 frames, [128.0 KB-256.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 3 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 3.9 MB
+      Overflow Count 1
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 120.0 KB
+      Peak Allocated Bytes 117.2 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 3.8 KB
+      Overflow Count 8
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 288 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 138 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 507 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 480 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 41780
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26228
+        32B: 33 Subsections = 16896 buckets. Failed count: 40674
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32366
+        80B: 85 Subsections = 17408 buckets. Failed count: 22056
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9774
+        128B: 6 Subsections = 768 buckets. Failed count: 8050
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 225 frames, [128.0 MB-256.0 MB]: 261 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 12
+      Peak Allocated memory 179.4 MB
+      Peak Large allocation bytes 11.3 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 1 frames, [8.0 MB-16.0 MB]: 251 frames, [16.0 MB-32.0 MB]: 4 frames, [32.0 MB-64.0 MB]: 230 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 3
+      Peak Allocated memory 45.5 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26228
+        32B: 33 Subsections = 16896 buckets. Failed count: 40674
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32366
+        80B: 85 Subsections = 17408 buckets. Failed count: 22056
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9774
+        128B: 6 Subsections = 768 buckets. Failed count: 8050
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [64.0 KB-128.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 483 frames, [8.0 MB-16.0 MB]: 1 frames, [128.0 MB-256.0 MB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 2
+      Peak Allocated memory 216.6 MB
+      Peak Large allocation bytes 213.1 MB
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 485 frames, [1.0 KB-2.0 KB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 1.2 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 101
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26228
+        32B: 33 Subsections = 16896 buckets. Failed count: 40674
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32366
+        80B: 85 Subsections = 17408 buckets. Failed count: 22056
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9774
+        128B: 6 Subsections = 768 buckets. Failed count: 8050
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 225 frames, [8.0 MB-16.0 MB]: 261 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 5
+      Peak Allocated memory 15.8 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 440 frames, [16.0 KB-32.0 KB]: 1 frames, [32.0 KB-64.0 KB]: 1 frames, [64.0 KB-128.0 KB]: 42 frames, [256.0 KB-0.5 MB]: 1 frames, [0.5 MB-1.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 0.6 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 26228
+        32B: 33 Subsections = 16896 buckets. Failed count: 40674
+        48B: 48 Subsections = 16384 buckets. Failed count: 81308
+        64B: 39 Subsections = 9984 buckets. Failed count: 32366
+        80B: 85 Subsections = 17408 buckets. Failed count: 22056
+        96B: 31 Subsections = 5290 buckets. Failed count: 41216
+        112B: 10 Subsections = 1462 buckets. Failed count: 9774
+        128B: 6 Subsections = 768 buckets. Failed count: 8050
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 224 frames, [32.0 KB-64.0 KB]: 261 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 50.0 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 486 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B

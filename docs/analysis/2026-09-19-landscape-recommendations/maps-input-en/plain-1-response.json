@@ -1,0 +1,85 @@
+{
+  "action": "generate",
+  "params": {
+    "elevation_shapes": [
+      {
+        "type": "composite",
+        "edge_roughness": "medium",
+        "shapes": [
+          {
+            "id": "basin_floor",
+            "prim": "circle",
+            "center": [
+              0.5,
+              0.5
+            ],
+            "r": 0.24
+          }
+        ],
+        "compose": [
+          {
+            "op": "add",
+            "s": "basin_floor",
+            "fill": "Soil",
+            "e": 0.05,
+            "f": 0.01
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "edge_roughness": "medium",
+        "shapes": [
+          {
+            "id": "outer_m",
+            "prim": "circle",
+            "center": [
+              0.5,
+              0.5
+            ],
+            "r": 0.36
+          },
+          {
+            "id": "inner_m",
+            "prim": "circle",
+            "center": [
+              0.5,
+              0.5
+            ],
+            "r": 0.21
+          }
+        ],
+        "compose": [
+          {
+            "op": "sub",
+            "a": "inner_m",
+            "from": "outer_m",
+            "out": "basin_ring"
+          },
+          {
+            "op": "add",
+            "s": "basin_ring",
+            "e": 0.9,
+            "f": 0.02
+          }
+        ]
+      },
+      {
+        "type": "passage",
+        "points": [
+          [
+            0.5,
+            0.5
+          ],
+          [
+            0.5,
+            0
+          ]
+        ],
+        "width": 8,
+        "scope": "mountains",
+        "fill": "Soil"
+      }
+    ]
+  }
+}

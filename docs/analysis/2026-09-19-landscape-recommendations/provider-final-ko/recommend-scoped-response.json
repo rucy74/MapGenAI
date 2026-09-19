@@ -1,0 +1,1 @@
+{"action":"recommend","options":[{"params":{"fertility_offset":0.5}},{"params":{"mutators":["Fertile"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"central_farmland","type":"composite","edge_roughness":"medium","shapes":[{"id":"field","prim":"rect","center":[0.6,0.5],"w":0.4,"h":0.35}],"compose":[{"op":"add","s":"field","fill":"SoilRich","e":0.05,"f":0.015}]}}]}}]}

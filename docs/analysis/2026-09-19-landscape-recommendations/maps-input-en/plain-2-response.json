@@ -1,0 +1,25 @@
+{
+  "action": "generate",
+  "params": {
+    "elevation_shapes": [
+      {
+        "type": "ridge",
+        "direction": "left",
+        "strength": "strong",
+        "fade": "medium",
+        "noise_amount": "medium"
+      },
+      {
+        "type": "bump",
+        "position": [
+          0.65,
+          0.45
+        ],
+        "size": "small",
+        "strength": "negative_strong",
+        "fill": "water"
+      }
+    ],
+    "fertility_offset": 0.2
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "west_ridge",
+          "type": "ridge",
+          "direction": "left",
+          "strength": "strong",
+          "fade": "medium",
+          "noise_amount": "medium"
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "valley_lake",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "lake_body",
+              "prim": "circle",
+              "center": [
+                0.65,
+                0.45
+              ],
+              "r": 0.14
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "lake_body",
+              "fill": "WaterShallow",
+              "e": 0,
+              "f": 0.015
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

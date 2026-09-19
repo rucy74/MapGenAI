@@ -1,0 +1,76 @@
+{
+  "cases": [
+    {
+      "id": "plain-1",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "plain-1-before.json",
+      "request": "Replay stored option plain-1",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "plain-2",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "plain-2-before.json",
+      "request": "Replay stored option plain-2",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "plain-3",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "plain-3-before.json",
+      "request": "Replay stored option plain-3",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "coast-1",
+      "kind": "recommendation",
+      "tile": "coast",
+      "beforeFile": "coast-1-before.json",
+      "request": "Replay stored option coast-1",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "coast-2",
+      "kind": "recommendation",
+      "tile": "coast",
+      "beforeFile": "coast-2-before.json",
+      "request": "Replay stored option coast-2",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "coast-3",
+      "kind": "recommendation",
+      "tile": "coast",
+      "beforeFile": "coast-3-before.json",
+      "request": "Replay stored option coast-3",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing-1",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "existing-1-before.json",
+      "request": "Replay stored option existing-1",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing-2",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "existing-2-before.json",
+      "request": "Replay stored option existing-2",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing-3",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "existing-3-before.json",
+      "request": "Replay stored option existing-3",
+      "omitAmbientRuins": true
+    }
+  ]
+}

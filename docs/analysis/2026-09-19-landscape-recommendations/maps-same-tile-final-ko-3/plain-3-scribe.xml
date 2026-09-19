@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>canyon_rock</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0.55,"id":"b","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.75}],"compose":[{"a":null,"b":null,"e":0.85,"f":0.02,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"b"}]}</compositeJson>
+				</li>
+				<li>
+					<id>canyon_pass</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>12</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0,0.5],[1,0.5]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

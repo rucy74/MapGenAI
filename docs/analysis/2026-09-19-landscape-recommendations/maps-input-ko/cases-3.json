@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "id": "plain-3",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "plain-3-before.json",
+      "request": "Replay stored option plain-3",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "coast-3",
+      "kind": "recommendation",
+      "tile": "coast",
+      "beforeFile": "coast-3-before.json",
+      "request": "Replay stored option coast-3",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing-3",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "existing-3-before.json",
+      "request": "Replay stored option existing-3",
+      "omitAmbientRuins": true
+    }
+  ]
+}

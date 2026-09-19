@@ -1,0 +1,10 @@
+Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.
+
+Option 1 — changes
+• map northeast — round shallow water area (irregular outline) added
+
+Option 2 — changes
+• Dry passage, 8 cells wide — soil, map center → map north (mountains only; open ground preserved) added
+
+Option 3 — changes
+• high geothermal activity added — Steam geysers are more common in this area.

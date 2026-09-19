@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"recommend-existing","action":"recommend","model":"gemini-3.8-flash","inputTokens":11469,"outputTokens":333},{"id":"recommend-plain","action":"recommend","model":"gemini-3.8-flash","inputTokens":11128,"outputTokens":774}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

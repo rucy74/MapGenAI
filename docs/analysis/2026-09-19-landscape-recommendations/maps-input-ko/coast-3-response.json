@@ -1,0 +1,54 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "canyon_rock",
+          "type": "composite",
+          "shapes": [
+            {
+              "id": "block",
+              "prim": "rect",
+              "center": [
+                0.5,
+                0.5
+              ],
+              "w": 0.8,
+              "h": 0.6
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "block",
+              "e": 0.85,
+              "f": 0.02
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "canyon_path",
+          "type": "passage",
+          "points": [
+            [
+              0,
+              0.5
+            ],
+            [
+              1,
+              0.5
+            ]
+          ],
+          "width": 12,
+          "scope": "mountains",
+          "fill": "Soil"
+        }
+      }
+    ]
+  }
+}

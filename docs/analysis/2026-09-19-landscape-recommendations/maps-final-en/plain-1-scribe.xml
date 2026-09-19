@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>terrain_1</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"basin_floor","n":0,"prim":"circle","r":0.24,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.01,"fill":"Soil","from":null,"k":0,"op":"add","outId":null,"s":"basin_floor"}]}</compositeJson>
+				</li>
+				<li>
+					<id>terrain_2</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":0,"id":"outer_m","n":0,"prim":"circle","r":0.36,"r2":0,"rot":0,"size":0,"verts":null,"w":0},{"center":[0.5,0.5],"h":0,"id":"inner_m","n":0,"prim":"circle","r":0.21,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":"inner_m","b":null,"e":0,"f":0.05,"fill":null,"from":"outer_m","k":0,"op":"sub","outId":"basin_ring","s":null},{"a":null,"b":null,"e":0.9,"f":0.02,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"basin_ring"}]}</compositeJson>
+				</li>
+				<li>
+					<id>terrain_3</id>
+					<type>passage</type>
+					<fill>Soil</fill>
+					<passageWidth>8</passageWidth>
+					<passageScope>mountains</passageScope>
+					<passagePoints>{"points":[[0.5,0.5],[0.5,0]]}</passagePoints>
+				</li>
+			</elevationShapes>
+			<structures />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

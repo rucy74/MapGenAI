@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <None Include="../../../docs/analysis/2026-09-15-recommendations/provider-r1/recommend-plain-response.json" Link="recommendation-fixtures/plain-response.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landscape-recommendations/provider-final-ko/recommend-*.json" Link="recommendation-fixtures/ko/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landscape-recommendations/provider-final-en/recommend-*.json" Link="recommendation-fixtures/en/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landscape-recommendations/native-final-ko/recommend-*-after.json" Link="recommendation-fixtures/ko/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-19-landscape-recommendations/native-final-en/recommend-*-after.json" Link="recommendation-fixtures/en/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-ko/basin-*.json" Link="landform-fixtures/ko/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-basic/basic-*.json" Link="landform-fixtures/basic/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-19-landform-recipes/provider-r1-two/two-*.json" Link="landform-fixtures/two/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />

@@ -1,0 +1,20 @@
+{
+  "cases": [
+    {
+      "id": "plain-1",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "plain-1-before.json",
+      "request": "Replay stored option plain-1",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "existing-1",
+      "kind": "recommendation",
+      "tile": "inland",
+      "beforeFile": "existing-1-before.json",
+      "request": "Replay stored option existing-1",
+      "omitAmbientRuins": true
+    }
+  ]
+}

@@ -38,7 +38,7 @@ def package(output: Path) -> Path:
         'Mountain exits cut only mountain cells and preserve open ground; explicitly request a soil path across the entire route to paint the plains.\n'
         'Combine ring mountains, exits, interior soil fractions and ruins. Ruins can reference an enclosed interior and avoid the complete planned passage route.\n'
         'Describe calderas, open basins and canyons; edit their interiors and exits using existing terrain components. This is not a Geological Landforms generator integration.\n'
-        'Recommendations are validated before display; select a stored option by number or button.\n'
+        'Ask for three distinct landscape options, or complementary ideas for your edited map. Recommendations are validated before display; select a stored option by number or button, without another model call. Candidate image previews are not included.\n'
         'Image input, interpretation and generation are paused, and the image button is hidden. Stored image data is retained but inactive.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
     )
@@ -74,7 +74,7 @@ def package(output: Path) -> Path:
             '산에 출구를 뚫는 요청은 산 부분만 깎고 평지를 유지합니다. 평지에도 흙길을 원하면 전체 경로에 길을 이어달라고 요청하세요.\n'
             '고리 산·출구·내부 비옥토 비율·폐허를 함께 요청하고 폭·비율·개수만 따로 수정할 수 있습니다. 폐허는 산에 둘러싸인 빈 내부를 참조하고 지정한 통로 전체를 피합니다.\n'
             '칼데라·열린 분지·협곡의 구성 안내를 보강했습니다. 내부 평지 확장·출구 변경·여러 분지 중 하나만 수정하거나 삭제할 수 있습니다. GL 원본 생성기 연동은 아닙니다.\n'
-            '추천은 적용할 설정을 먼저 검사하고 보여 줍니다. 번호나 적용 버튼으로 선택할 수 있습니다.\n'
+            '추천은 기본적으로 서로 다른 지형3개, 편집 중에는 기존 맵에 어울리는 보완안을 제안합니다. 설정을 먼저 검사하고 번호나 버튼으로 선택하며 선택 시 모델 재호출은 없습니다. 후보 이미지 미리보기는 아직 없습니다.\n'
             '현재 이미지 입력·해석·팔레트·생성 효과는 일시 중단이며 버튼도 숨깁니다. 저장된 이미지 데이터는 보존합니다.\n'
             '원형/별/하트는 정확한 형태이며, 자연스러운/울퉁불퉁한 윤곽을 요청하면 선택적으로 굴곡을 추가합니다.\n'
             '살짝/많이로 강도를 바꾸거나 다시 정확한 원형으로 요청해 되돌릴 수 있습니다.\n'

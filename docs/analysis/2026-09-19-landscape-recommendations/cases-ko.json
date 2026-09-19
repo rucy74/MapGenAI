@@ -1,0 +1,10 @@
+{
+  "cases": [
+    {"id":"recommend-plain","kind":"recommendation","beforeParams":{},"request":"그냥 추천해 줘"},
+    {"id":"recommend-coast","kind":"recommendation","tile":"coast","beforeParams":{},"request":"이 타일에 어울리는 맵 추천해 줘"},
+    {"id":"recommend-existing","kind":"recommendation","beforeFile":"existing-basin.json","request":"추천해 줘"},
+    {"id":"recommend-scoped","kind":"recommendation","beforeParams":{"hills":"left"},"request":"농사하기 좋게 토양을 바꾸는 방법을 추천해 줘"},
+    {"id":"recommend-two","kind":"recommendation","beforeParams":{},"request":"서로 다른 맵 두 개만 추천해 줘"},
+    {"id":"direct-edit","kind":"regression","beforeParams":{},"request":"추천 말고 바로 왼쪽에 산, 오른쪽 아래에 작은 호수를 만들어 줘","omitAmbientRuins":true}
+  ]
+}

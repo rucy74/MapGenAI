@@ -1,0 +1,6 @@
+{
+  "cases": [
+    {"id":"recommend-plain","kind":"recommendation","beforeParams":{},"request":"Recommend a map"},
+    {"id":"recommend-existing","kind":"recommendation","beforeFile":"existing-basin.json","request":"Any suggestions?"}
+  ]
+}

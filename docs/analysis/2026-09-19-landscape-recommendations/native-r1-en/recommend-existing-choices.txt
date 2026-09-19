@@ -1,0 +1,15 @@
+Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.
+
+Option 1 — changes
+• hot springs added — A hot water spring, heated by geothermal activity.
+• map northeast — round shallow water area (irregular outline) added
+
+Option 2 — changes
+• Dry passage, 6 cells wide — stony soil, map south → map south (entire route) added
+• the chosen area — ruins 1 instance(s), 7×7 cells each
+
+Option 3 — changes
+• mineral rich added
+• map west — oval mountains and hills area (irregular outline) added
+
+Actual structure placement is checked during generation.
