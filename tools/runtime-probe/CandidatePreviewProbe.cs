@@ -36,6 +36,13 @@ namespace MapGenAI.RuntimeProbe
         static volatile string replayReply;
         static int replayCalls;
         static RecommendationPreviews.Item superseded;
+        static int refinementRound, refinementRounds=1;
+        static bool controlDone,lateDone;
+        static volatile bool holdNext,workerHeld;
+        static readonly System.Threading.AutoResetEvent releaseWorker=new System.Threading.AutoResetEvent(false);
+        static object orphanRequest;
+        static float queueLostAt;
+        static RecommendationPreviews.Item timedOutItem;
         static readonly List<string> checks = new List<string>();
         static readonly List<object> measurements = new List<object>();
         static readonly string[] cases = { "recommend-plain", "recommend-existing", "native-features" };
@@ -43,9 +50,19 @@ namespace MapGenAI.RuntimeProbe
         static string Metadata() => SimpleJson.Serialize(new Dictionary<string, object> {
             {"mutators", original.Mutators.Select(d=>d.defName).ToArray()}, {"hilliness", original.hilliness.ToString()}, {"pollution", original.pollution},
             {"baseline", MapGenAIWorldComponent.Get().GetBaseline(target)}, {"last", MapGenAIWorldComponent.Get().GetLastApplied(target)} });
-        static object Invoke(string name, params object[] args) => AccessTools.Method(typeof(Dialog_TextToMap), name).Invoke(dialog, args);
+        static object Invoke(string name, params object[] args)
+        {
+            Trace("enter "+name);
+            var result=AccessTools.Method(typeof(Dialog_TextToMap), name).Invoke(dialog, args);
+            Trace("exit "+name);
+            return result;
+        }
+        static void Trace(string message)
+        {
+            if(folder!=null)File.AppendAllText(Path.Combine(folder,"trace.txt"),DateTime.UtcNow.ToString("o")+" frame="+Time.frameCount+" stage="+stage+" round="+refinementRound+" "+message+"\n");
+        }
         static object Field(string name) => AccessTools.Field(typeof(Dialog_TextToMap), name).GetValue(dialog);
-        static void Check(bool ok, string name) { checks.Add((ok ? "PASS " : "FAIL ") + name); if (!ok) throw new Exception(name); }
+        static void Check(bool ok, string name) { checks.Add((ok ? "PASS " : "FAIL ") + name); Trace(checks.Last()); if (!ok) throw new Exception(name); }
         public static void Configure()
         {
             if (!GenCommandLine.TryGetCommandLineArg("mapgenAICandidatePreviews", out _)) return;
@@ -81,6 +98,7 @@ namespace MapGenAI.RuntimeProbe
         public static void Run(string output, string input)
         {
             folder = output; fixtures = input; Application.runInBackground = true;
+            if(GenCommandLine.TryGetCommandLineArg("mapgenAICandidateStressRounds",out string count))refinementRounds=int.Parse(count);
             typeof(Prefs).GetProperty("RunInBackground")?.SetValue(null, true, null);
             try
             {
@@ -227,7 +245,48 @@ namespace MapGenAI.RuntimeProbe
                 {
                     if(MapPreview.MapPreviewGenerator.CurrentRequest!=null || !MapPreview.MapPreviewGenerator.Init().WaitUntilIdle(0))return;
                     Check(discarded.Items.All(i=>i.Texture==null),"reset batch discards late textures before clean shutdown");
-                    Finish();
+                    if(GenCommandLine.TryGetCommandLineArg("mapgenAICandidateQueueLoss",out _))StartQueueLoss();else Finish();
+                }
+                else if(stage==40)
+                {
+                    if(!workerHeld)return;
+                    dialog=new Dialog_TextToMap();Invoke("HandleResponse",reply);previews=(RecommendationPreviews)Field("_recommendationPreviews");
+                    Invoke("UpdateRecommendationPreviews");
+                    var generator=MapPreview.MapPreviewGenerator.Instance;
+                    var queue=(System.Collections.Concurrent.ConcurrentQueue<MapPreview.MapPreviewRequest>)AccessTools.Field(generator.GetType(),"_queuedRequests").GetValue(generator);
+                    Check(queue.Count==1,"candidate queued behind held control preview");orphanRequest=queue.ToArray()[0];
+                    generator.ClearQueue();Check(queue.Count==0,"external queue clear removes the candidate request without completion");
+                    queueLostAt=Time.realtimeSinceStartup;releaseWorker.Set();stage=41;deadline=DateTime.UtcNow.AddSeconds(150);
+                }
+                else if(stage==41)
+                {
+                    Invoke("UpdateRecommendationPreviews");
+                    if(!controlDone || Time.realtimeSinceStartup-queueLostAt<125f)return;
+                    Check(previews.Items[0].Complete && previews.Items[0].Error!=null,"dropped request reaches a bounded error instead of waiting forever");
+                    if(previews.Items.Skip(1).Any(i=>!i.Complete))return;
+                    Check(previews.Items.Skip(1).All(i=>i.Texture!=null),"remaining candidates render after a dropped request");
+                    Check(State()==before && Metadata()==worldBefore,"queue interruption preserves live state and native features");
+                    timedOutItem=previews.Items[0];retainedTextures=previews.Items.Select(i=>i.Texture).ToArray();
+                    Revise("{\"action\":\"revise\",\"option\":1,\"params\":{\"fertility_offset\":0.23}}");
+                    var ticket=(MapPreview.MapPreviewRequest)orphanRequest;
+                    MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(ticket).Then(new Action<MapPreview.MapPreviewResult>(LateReady));
+                    Invoke("UpdateRecommendationPreviews");stage=42;deadline=DateTime.UtcNow.AddSeconds(60);
+                }
+                else if(stage==42)
+                {
+                    Invoke("UpdateRecommendationPreviews");if(!lateDone || previews.Items.Any(i=>!i.Complete))return;
+                    Check(timedOutItem.Texture==null && timedOutItem.Error!=null,"late timed-out result cannot publish a stale texture");
+                    Check(previews.Items[0].Texture!=null && ReferenceEquals(previews.Items[1].Texture,retainedTextures[1]) && ReferenceEquals(previews.Items[2].Texture,retainedTextures[2]),"replacement renders while other candidate textures stay unchanged");
+                    var expected=plans[0].Resolve(MapGenParams.CaptureState(target));Invoke("ApplyRecommendation",1);
+                    Check(State()==MapStateCodec.Serialize(expected),"candidate selection still applies exact state after queue recovery");Invoke("DoUndo");
+                    Check(State()==before && Metadata()==worldBefore,"queue recovery selection remains one-step undoable");
+                    dialog.PostClose();orphanRequest=null;
+                    MapPreview.MapPreviewGenerator.OnBeginGenerating-=new Action<MapPreview.MapPreviewRequest>(HoldPreview);
+                    stage=43;deadline=DateTime.UtcNow.AddSeconds(60);
+                }
+                else if(stage==43)
+                {
+                    if(MapPreview.MapPreviewGenerator.CurrentRequest==null && MapPreview.MapPreviewGenerator.Init().WaitUntilIdle(0))Finish();
                 }
                 else if(stage==20)
                 {
@@ -310,7 +369,8 @@ namespace MapGenAI.RuntimeProbe
                             Check(firstAfter.fertilityOffset>firstBefore.fertilityOffset && State()==before,"generic fertility refinement changes only proposed state");
                             Invoke("ApplyRecommendation",1);Check(State()==MapStateCodec.Serialize(firstAfter),"generic refined option applies complete candidate");
                             Invoke("DoUndo");Check(State()==before && Metadata()==worldBefore,"generic refinement Undo restores original map");
-                            dialog.PostClose();StartCancellation();
+                            dialog.PostClose();
+                            if(refinementRound<refinementRounds)StartRefinement();else StartCancellation();
                         }
                         catch(Exception error){Finish(error);}
                     }).Catch(Finish);
@@ -320,12 +380,32 @@ namespace MapGenAI.RuntimeProbe
         }
         static void StartRefinement()
         {
+            refinementRound++;replayCalls=0;superseded=null;
+            Trace("start refinement");
             reply=File.ReadAllText(Path.Combine(fixtures,"recommend-plain-response.json"));
             MapGenParams.RestoreSnapshot(MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(fixtures,"recommend-plain-before.json"))),target);
             before=State();worldBefore=Metadata();dialog=new Dialog_TextToMap();Invoke("HandleResponse",reply);
             previews=(RecommendationPreviews)Field("_recommendationPreviews");Find.WindowStack.Add(dialog);
             stage=20;deadline=DateTime.UtcNow.AddSeconds(120);
         }
+        static void HoldPreview(MapPreview.MapPreviewRequest request)
+        {
+            if(!holdNext)return;holdNext=false;workerHeld=true;
+            try{if(!releaseWorker.WaitOne(15000))throw new TimeoutException("Queue-loss control gate was not released");}
+            finally{workerHeld=false;}
+        }
+        static void StartQueueLoss()
+        {
+            MapGenParams.RestoreSnapshot(MapStateCodec.Deserialize(before),target);worldBefore=Metadata();
+            // Explicit delegate construction avoids compiler-cached fields referring to the
+            // optional MapPreview assembly before Lunar has loaded it during startup.
+            holdNext=true;MapPreview.MapPreviewGenerator.OnBeginGenerating+=new Action<MapPreview.MapPreviewRequest>(HoldPreview);
+            var request=new MapPreview.MapPreviewRequest(Find.World.info.seedString,target,new IntVec2(250,250)){UseMinimalMapComponents=true,UseTrueTerrainColors=true};
+            MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(new Action<MapPreview.MapPreviewResult>(ControlReady));
+            stage=40;deadline=DateTime.UtcNow.AddSeconds(60);
+        }
+        static void ControlReady(MapPreview.MapPreviewResult result){controlDone=true;}
+        static void LateReady(MapPreview.MapPreviewResult result){lateDone=true;}
         static string ReadRevision(string name,string id,string roughness)
         {
             string path=Path.Combine(fixtures,"refine-"+name+"-response.json");
@@ -355,6 +435,7 @@ namespace MapGenAI.RuntimeProbe
         }
         static void Finish(Exception error=null)
         {
+            releaseWorker.Set();
             active=false; File.WriteAllText(Path.Combine(folder,"result.json"), SimpleJson.Serialize(new Dictionary<string,object>{{"ok",error==null},{"tile",target},{"checks",checks},{"measurements",measurements},{"error",error?.ToString()}})); Application.Quit();
         }
     }

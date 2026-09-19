@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "scope": "Queue-loss recovery and recorded recommendation regression; prior native crash remains unresolved.",
+  "dllSha256": "4010d0decee7a5d485c944bbf1877421a48020a7800693e837cbd02de23018ef",
+  "baselineDllSha256": "53fa0d7f4574a555d654f433e7aaa0a5542d5b27a87265fabc5ba589ee8d04ae",
+  "offlineTests": 150,
+  "runs": [
+    {
+      "name": "baseline-ko",
+      "checks": 176,
+      "refinementRounds": 6
+    },
+    {
+      "name": "recovered-ko-r2",
+      "checks": 185,
+      "refinementRounds": 6
+    },
+    {
+      "name": "baseline-en",
+      "checks": 176,
+      "refinementRounds": 6
+    },
+    {
+      "name": "recovered-en-r2",
+      "checks": 176,
+      "refinementRounds": 6
+    }
+  ],
+  "finalNativeChecks": 361,
+  "baselineNativeChecks": 352,
+  "unchangedBaselineImages": 18,
+  "finalNormalPreviewPixelComparisons": 30,
+  "newProviderCalls": 0,
+  "newFullMaps": 0,
+  "expectedBaselineFailure": "dropped request reaches a bounded error instead of waiting forever",
+  "interruptedHarnessRuns": 3,
+  "unresolvedPriorNativeCrashes": 1
+}

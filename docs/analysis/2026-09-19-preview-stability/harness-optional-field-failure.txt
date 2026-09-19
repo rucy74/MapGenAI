@@ -1,0 +1,2 @@
+		.field public static class [mscorlib]System.Func`2<class [MapPreview]MapPreview.MapPreviewResult, bool> '<>9__58_16'
+		.field public static class [mscorlib]System.Func`2<class [MapPreview]MapPreview.MapPreviewResult, bool> '<>9__61_0'

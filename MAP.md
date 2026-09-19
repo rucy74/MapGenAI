@@ -61,6 +61,7 @@
 - `UI/RecommendationPreviews.cs`는 추천의 저장 명령을 로컬 Map Preview로 순차 생성한다. `Patches/CandidatePreviewContext.cs`는 요청별 스냅샷과 타일 복사본을 해당 worker에서만 노출하며 편집 상태/월드 원본을 적용하지 않는다. 후보 보고서는 일반 현재 맵 보고서와 분리한다. 자동 썸네일·확대 창은 추가 LLM 호출 없이 동작하며 선택은 기존 Apply/Undo를 사용한다. seed/크기/상태 변경과 닫기/Reset/후속 요청은 후보를 폐기하고 늦은 결과와 Texture를 정리한다. 외부 assembly 타입을 closure 필드에도 두지 않아야 Lunar 로드 전 type enumeration이 실패하지 않는다. [후보 미리보기 검증](docs/analysis/2026-09-19-candidate-previews/report.md).
 - `StructuredChat`은 추천 요청의 즉시 generate와 설정 없는 번호 목록을 형식 복구 대상으로 처리한다. `Dialog_TextToMap`은 UI thread에서 후보 전체를 ValidatePatch한 뒤 공개하고, 부적합 batch에는 한 번 수정 요청한다.
 - 번호/버튼 선택은 보관 명령을 재검증해 원래 ApplyPatch/Undo 경로로 적용한다. 상태·실제 특징·바이옴·산악도 변경, reset/undo/close/preset 시 폐기한다. 이미지 gate OFF이면 버튼도 그리지 않는다.
+- `RecommendationPreviews`는 유실된 요청을 120초 뒤 오류로 종료하고 다음 후보를 처리한다. 늦은 콜백은 요청 동일성으로 차단하며 원래 스냅샷 매핑은 유지한다. 공유 큐를 중단하지 않는다. `CandidatePreviewProbe -CandidateStressRounds 6 -CandidateQueueLoss`는 저장 응답 반복 및 별도 게임에서 큐 유실/지연 결과/수정/선택/Undo를 검사한다. 기존 MG23 native 충돌은 원인 미확정으로 남아 있다. [대기 복구 검증](docs/analysis/2026-09-19-preview-stability/report.md).
 - `tools/runtime-probe/RecommendationProbe.cs`, `tools/provider-probe/RecommendationBench.cs`: 실제 Dialog 선택·재시도·취소·오아시스 완성맵 및 새 모델 응답. [근거](docs/analysis/2026-09-15-recommendations/report.md).
 
 ---

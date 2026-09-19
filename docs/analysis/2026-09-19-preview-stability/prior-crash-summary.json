@@ -1,0 +1,31 @@
+{
+  "exception": {
+    "threadId": 30476,
+    "code": "0xc0000005",
+    "address": "0x7ffc6a8ec3e3",
+    "parameters": [
+      "0x1",
+      "0x1acd8e73360"
+    ],
+    "module": [
+      {
+        "name": "mono-2.0-bdwgc.dll",
+        "offset": "0x4fc3e3"
+      }
+    ]
+  },
+  "registers": {
+    "RAX": "0x1acd8e73340",
+    "RCX": "0x1acd8e73360",
+    "RDX": "0x1ad114914f0",
+    "RBX": "0x1acd8e73340",
+    "RSP": "0x960110ca38",
+    "RBP": "0x1ad691c1a10",
+    "R8": "0x123",
+    "R9": "0xffffffffffffffe0",
+    "RIP": "0x7ffc6a8ec3e3"
+  },
+  "threadCount": 171,
+  "instructionBytes": "0ac5fe6f5220c5fe6f5a40c5fe6f6260c5fd7f09c5fd7f5120c5fd7f5940c5fd7f6160c5fe6f8a80000000c5fe6f92a0",
+  "note": "Only exception metadata exported; minidump memory remains local."
+}

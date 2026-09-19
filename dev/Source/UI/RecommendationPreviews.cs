@@ -28,7 +28,16 @@ namespace MapGenAI.UI
         readonly int seed;
         readonly IntVec2 mapSize;
         readonly World world;
-        bool disposed, pending;
+        sealed class Pending
+        {
+            public readonly Item Item;
+            public readonly int Index;
+            public readonly float Since=Time.realtimeSinceStartup;
+            public Pending(Item item,int index){Item=item;Index=index;}
+        }
+        const float RequestTimeoutSeconds=120f;
+        bool disposed;
+        Pending pending;
         int next;
 
         public RecommendationPreviews(int tileId, IReadOnlyList<RecommendationPlan> plans, TileMapState before)
@@ -67,7 +76,20 @@ namespace MapGenAI.UI
 
         public void Update()
         {
-            if (disposed || pending) return;
+            if (disposed) return;
+            if(pending!=null)
+            {
+                if(Time.realtimeSinceStartup-pending.Since<RequestTimeoutSeconds)return;
+                var expired=pending;pending=null;
+                if(ReferenceEquals(expired.Item,Items[expired.Index]))
+                {
+                    expired.Item.Error=L10n.IsKorean()?"미리보기 응답 시간이 초과되었습니다. 다른 후보를 선택하거나 다시 추천받아 주세요.":
+                        "Preview timed out. Choose another option or request new recommendations.";
+                    expired.Item.Complete=true;
+                }
+                // A queued/running request may still finish. Keep its weak snapshot mapping
+                // until that callback (or GC); removing it now would render the live map instead.
+            }
             while(next<Items.Count && Items[next].Complete)next++;
             if(next>=Items.Count)return;
             if (!MapPreviewIntegration.IsAvailable)
@@ -85,7 +107,7 @@ namespace MapGenAI.UI
             int index = next++;
             var item = Items[index];
             var snapshot=snapshots[index];
-            pending = true;
+            var attempt=new Pending(item,index);pending=attempt;
             var request = new MapPreview.MapPreviewRequest(seed, tileId, mapSize)
             { UseMinimalMapComponents = true, UseTrueTerrainColors = true };
             // Closure fields must not reference optional assembly types: RimWorld enumerates
@@ -98,7 +120,8 @@ namespace MapGenAI.UI
                 MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(result =>
                 {
                     CandidatePreviewContext.Requests.Remove(ticket);
-                    pending = false;
+                    if(!ReferenceEquals(pending,attempt))return;
+                    pending = null;
                     if (disposed || !ReferenceEquals(item,Items[index])) return;
                     Texture2D texture = null;
                     try
@@ -115,21 +138,23 @@ namespace MapGenAI.UI
                 }).Catch(error =>
                 {
                     CandidatePreviewContext.Requests.Remove(ticket);
-                    pending = false;
+                    if(!ReferenceEquals(pending,attempt))return;
+                    pending = null;
                     if (!disposed) { item.Error = error.Message; item.Complete = true; }
                 });
             }
             catch (Exception error)
             {
                 CandidatePreviewContext.Requests.Remove(ticket);
-                pending = false; item.Error = error.Message; item.Complete = true;
+                if(ReferenceEquals(pending,attempt))pending = null;
+                item.Error = error.Message; item.Complete = true;
             }
         }
 
         public void Dispose()
         {
             if (disposed) return;
-            disposed = true;
+            disposed = true;pending=null;
             foreach (var item in Items)
             {
                 if (item.Texture != null) UnityEngine.Object.Destroy(item.Texture);

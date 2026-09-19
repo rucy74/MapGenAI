@@ -1,0 +1,9 @@
+{
+  "pid": 73776,
+  "sourceDllSha256": "53FA0D7F4574A555D654F433E7AAA0A5542D5B27A87265FABC5BA589EE8D04AE",
+  "created": "2026-09-19T20:34:29.3666433+09:00",
+  "probeDllSha256": "F09F333F221999E0BD3A9CC2914230FDF2A822FDD7E0F3DFC2E622312706901D",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-19-preview-stability\\queue-baseline",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260919-203428-594",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260919-203428-594"
+}

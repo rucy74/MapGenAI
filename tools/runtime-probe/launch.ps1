@@ -25,6 +25,8 @@
     [string]$RecommendationReplies='',
     [switch]$RecommendationScreen,
     [string]$CandidatePreviews='',
+    [ValidateRange(1,100)][int]$CandidateStressRounds=1,
+    [switch]$CandidateQueueLoss,
     [string]$ReadableChoices='',
     [string]$LandformSuite='',
     [string]$LandformReplies='',
@@ -109,7 +111,11 @@ if($EditPreflight){$arguments+=('-mapgenAIEditPreflight="'+[IO.Path]::GetFullPat
 if($EditReplies){$arguments+=('-mapgenAIEditReplies="'+[IO.Path]::GetFullPath($EditReplies)+'"')}
 if($Recommendations){$arguments+=('-mapgenAIRecommendations="'+[IO.Path]::GetFullPath($Recommendations)+'"')}
 if($RecommendationScreen){$arguments+='-mapgenAIRecommendationScreen=true'}
-if($CandidatePreviews){$arguments+='-mapgenAICandidatePreviews="'+[IO.Path]::GetFullPath($CandidatePreviews)+'"'}
+if($CandidatePreviews){
+    $arguments+='-mapgenAICandidatePreviews="'+[IO.Path]::GetFullPath($CandidatePreviews)+'"'
+    $arguments+='-mapgenAICandidateStressRounds='+$CandidateStressRounds
+    if($CandidateQueueLoss){$arguments+='-mapgenAICandidateQueueLoss=true'}
+}
 if($ReadableChoices){$arguments+=('-mapgenAIReadableChoices="'+[IO.Path]::GetFullPath($ReadableChoices)+'"')}
 if($RecommendationReplies){$arguments+=('-mapgenAIRecommendationReplies="'+[IO.Path]::GetFullPath($RecommendationReplies)+'"')}
 if($FeedbackResponses){$arguments+=('-mapgenAIFeedbackResponses="'+[IO.Path]::GetFullPath($FeedbackResponses)+'"')}

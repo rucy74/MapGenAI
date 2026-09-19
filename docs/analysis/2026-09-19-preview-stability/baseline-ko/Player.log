@@ -1,0 +1,701 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.085 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.550800 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-202952-831 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-preview-stability\baseline-ko -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-preview-stability\baseline-ko\Player.log -mapgenAIProbeRender=true -mapgenAICandidatePreviews=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-refinement\provider-ko -mapgenAICandidateStressRounds=6
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-202952-831
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000029C868103E0.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000029C86C7F660.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-0000029C87A0D010.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.04 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 211.042500 ms (FindLiveObjects: 1.175800 ms CreateObjectMapping: 0.355900 ms MarkObjects: 209.239500 ms  DeleteObjects: 0.270700 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.862400 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 307.219100 ms (FindLiveObjects: 1.844800 ms CreateObjectMapping: 0.609300 ms MarkObjects: 304.708100 ms  DeleteObjects: 0.056300 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919202952831
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27798.
+Total: 285.384700 ms (FindLiveObjects: 3.480600 ms CreateObjectMapping: 1.323900 ms MarkObjects: 280.536000 ms  DeleteObjects: 0.043800 ms)
+
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[SteamGeysers_Increased] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[SteamGeysers_Increased]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[Pond] −[HotSprings]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[Pond]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[HotSprings]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[HotSprings]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":1,"params":{"fertility_offset":0.2}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[Map Preview v1.12.26] Failed to generate map preview!
+System.InvalidOperationException: Intentional candidate preview failure
+[Ref 3BB998F4]
+  at MapGenAI.RuntimeProbe.CandidatePreviewProbe.InspectWorker (Verse.Map map) [0x00096] in <2dfc726bd6374bcc91fb43c65d4d320a>:0 
+  at Verse.MapGenerator.GenerateContentsIntoMap (System.Collections.Generic.IEnumerable`1[T] genStepDefs, Verse.Map map, System.Int32 seed, System.Boolean stepDebugger) [0x003cf] in <61e4173561894da49d210260257b5097>:0 
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Contents:Prefix(Map map, IDisposable& __state)
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Prefix()
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_AuthoredGeneration:Prefix(IEnumerable`1& genStepDefs)
+    - PREFIX choco.mapgenai.probe.candidate-previews: Void MapGenAI.RuntimeProbe.CandidatePreviewProbe:InspectWorker(Map map)
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_AuthoredGeneration:Postfix(Map map)
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Postfix()
+    - POSTFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Postfix()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_BiomeDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GeyserCount:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_OreDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_RuinDangerDensity:Finalizer()
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_GenerationContext_Contents:Finalizer(IDisposable __state)
+  at MapPreview.MapPreviewGenerator.GenerateContentsIntoPreview (MapPreview.MapPreviewRequest request, MapPreview.MapPreviewResult result) [0x00227] in <383a182800514229acdb4ee5897b8908>:0 
+  at MapPreview.MapPreviewGenerator.GeneratePreview (MapPreview.MapPreviewRequest request, MapPreview.MapPreviewResult result) [0x00129] in <383a182800514229acdb4ee5897b8908>:0 
+    - PREFIX Choco.MapGenAI: Void MapGenAI.Patches.Patch_CandidatePreviewRequest:Prefix(Object request, IDisposable& __state)
+    - FINALIZER Choco.MapGenAI: Void MapGenAI.Patches.Patch_CandidatePreviewRequest:Finalizer(IDisposable __state)
+  at MapPreview.MapPreviewGenerator.DoThreadWork () [0x000e6] in <383a182800514229acdb4ee5897b8908>:0 
+[Map Preview v1.12.26] Map Info: 
+World Seed Hash: 1303693982
+World Tile: 10,0
+Biome: TemperateForest
+Biome TPMs: 1
+Biome TTresh: 2
+Biome MCP: Core
+Tick Speed: Normal
+Map Seed: 1399040508
+Map Size: 250x250
+Map Comps: Minimal
+Color Palette: Dynamic
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 29815 frames, [1.0 KB-2.0 KB]: 4 frames, [2.0 KB-4.0 KB]: 6949 frames, [4.0 KB-8.0 KB]: 18 frames, [8.0 KB-16.0 KB]: 15 frames, [16.0 KB-32.0 KB]: 18 frames, [32.0 KB-64.0 KB]: 12 frames, [64.0 KB-128.0 KB]: 14 frames, [128.0 KB-256.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 4 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 3.9 MB
+      Overflow Count 1
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 120.0 KB
+      Peak Allocated Bytes 117.2 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 3.8 KB
+      Overflow Count 8
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_] x 12
+      Initial Block Size 64.0 KB
+      Current Block Size 92.0 KB
+      Peak Allocated Bytes 91.6 KB
+      Overflow Count 7
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_UnityGfxDeviceWorker]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 10.3 KB
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 138 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 507 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 480 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 176 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 160 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 30415
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 38986
+        32B: 34 Subsections = 17408 buckets. Failed count: 58216
+        48B: 49 Subsections = 16725 buckets. Failed count: 98055
+        64B: 40 Subsections = 10240 buckets. Failed count: 34431
+        80B: 85 Subsections = 17408 buckets. Failed count: 55370
+        96B: 28 Subsections = 4778 buckets. Failed count: 45292
+        112B: 10 Subsections = 1462 buckets. Failed count: 12052
+        128B: 6 Subsections = 768 buckets. Failed count: 8565
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 25314 frames, [32.0 MB-64.0 MB]: 1 frames, [128.0 MB-256.0 MB]: 11535 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 12
+      Peak Allocated memory 193.7 MB
+      Peak Large allocation bytes 19.9 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [8.0 MB-16.0 MB]: 25682 frames, [16.0 MB-32.0 MB]: 74 frames, [32.0 MB-64.0 MB]: 11094 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 4
+      Peak Allocated memory 50.2 MB
+      Peak Large allocation bytes 10.0 MB
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 20
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 38986
+        32B: 34 Subsections = 17408 buckets. Failed count: 58216
+        48B: 49 Subsections = 16725 buckets. Failed count: 98055
+        64B: 40 Subsections = 10240 buckets. Failed count: 34431
+        80B: 85 Subsections = 17408 buckets. Failed count: 55370
+        96B: 28 Subsections = 4778 buckets. Failed count: 45292
+        112B: 10 Subsections = 1462 buckets. Failed count: 12052
+        128B: 6 Subsections = 768 buckets. Failed count: 8565
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [64.0 KB-128.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 29824 frames, [8.0 MB-16.0 MB]: 7024 frames, [256.0 MB-0.50 GB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 2
+      Peak Allocated memory 387.1 MB
+      Peak Large allocation bytes 383.6 MB
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 25425 frames, [1.0 KB-2.0 KB]: 4401 frames, [4.0 KB-8.0 KB]: 1 frames, [16.0 KB-32.0 KB]: 4378 frames, [32.0 KB-64.0 KB]: 2645 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 34.4 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 109
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 38986
+        32B: 34 Subsections = 17408 buckets. Failed count: 58216
+        48B: 49 Subsections = 16725 buckets. Failed count: 98055
+        64B: 40 Subsections = 10240 buckets. Failed count: 34431
+        80B: 85 Subsections = 17408 buckets. Failed count: 55370
+        96B: 28 Subsections = 4778 buckets. Failed count: 45292
+        112B: 10 Subsections = 1462 buckets. Failed count: 12052
+        128B: 6 Subsections = 768 buckets. Failed count: 8565
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 1 frames, [8.0 MB-16.0 MB]: 25314 frames, [16.0 MB-32.0 MB]: 11535 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 5
+      Peak Allocated memory 17.3 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 28966 frames, [32.0 KB-64.0 KB]: 1 frames, [64.0 KB-128.0 KB]: 7880 frames, [256.0 KB-0.5 MB]: 2 frames, [0.5 MB-1.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 0.6 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 38986
+        32B: 34 Subsections = 17408 buckets. Failed count: 58216
+        48B: 49 Subsections = 16725 buckets. Failed count: 98055
+        64B: 40 Subsections = 10240 buckets. Failed count: 34431
+        80B: 85 Subsections = 17408 buckets. Failed count: 55370
+        96B: 28 Subsections = 4778 buckets. Failed count: 45292
+        112B: 10 Subsections = 1462 buckets. Failed count: 12052
+        128B: 6 Subsections = 768 buckets. Failed count: 8565
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 25314 frames, [32.0 KB-64.0 KB]: 11535 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 49.8 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 36850 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B
