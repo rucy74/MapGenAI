@@ -19,7 +19,7 @@ namespace MapGenAI.MapGen
             }
             foreach(var s in shapes.Where(s=>s.type=="passage"))
             {
-                var mask=PassageGeometry.Mask(map.Size.x,map.Size.z,s.points,s.width);var regions=GenerationContext.Regions(map);
+                var mask=PassageGeometry.Mask(map.Size.x,map.Size.z,s.points,s.width,s.edge_roughness,s.id);var regions=GenerationContext.Regions(map);
                 if(s.scope=="mountains")PassageGeometry.RestrictToMountains(mask,beforeElevation);
                 foreach(var c in map.AllCells)if(mask[c.z*map.Size.x+c.x])
                 {
@@ -34,7 +34,7 @@ namespace MapGenAI.MapGen
             var shapes=GenerationContext.State?.elevationShapes;if(shapes==null)return;
             foreach(var s in shapes.Where(s=>s.type=="passage"))
             {
-                var mask=s.scope=="mountains"?GenerationContext.Regions(map).Mask(s.id):PassageGeometry.Mask(map.Size.x,map.Size.z,s.points,s.width);int blocked=0;
+                var mask=s.scope=="mountains"?GenerationContext.Regions(map).Mask(s.id):PassageGeometry.Mask(map.Size.x,map.Size.z,s.points,s.width,s.edge_roughness,s.id);int blocked=0;
                 if(s.scope=="mountains" && !mask.Any(b=>b))
                 {
                     AuthoringGeneration.Fail(new InvalidOperationException("지정한 통로 경로에 깎을 산이 없습니다. 평지는 유지했습니다. / No mountain intersects the passage route. Open ground was preserved."));

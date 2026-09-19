@@ -76,7 +76,7 @@ namespace MapGenAI.MapGen
         static float Field(float x, float y, uint hash) =>
             (Noise(x * 4 + 17.3f, y * 4 + 9.1f, hash) + .3f * Noise(x * 10 - 3.7f, y * 10 + 2.8f, hash ^ 0x85ebca6bu)) / 1.3f;
 
-        static float Noise(float x, float y, uint hash)
+        internal static float Noise(float x, float y, uint hash)
         {
             int ix = (int)Math.Floor(x), iy = (int)Math.Floor(y);
             float tx = x - ix, ty = y - iy;

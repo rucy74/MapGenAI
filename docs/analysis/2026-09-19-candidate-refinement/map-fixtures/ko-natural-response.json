@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "update", "id": "canyon_pass", "changes": {"edge_roughness": "medium"}}]}}

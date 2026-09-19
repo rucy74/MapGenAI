@@ -1,0 +1,3 @@
+RimWorld.Planet.Tile get_TileInfo(): 
+Void GenerateContentsIntoMap(System.Collections.Generic.IEnumerable`1[Verse.GenStepWithParams], Verse.Map, Int32, Boolean): Choco.MapGenAI,choco.mapgenai.probe.candidate-previews
+Void GeneratePreview(MapPreview.MapPreviewRequest, MapPreview.MapPreviewResult): Choco.MapGenAI

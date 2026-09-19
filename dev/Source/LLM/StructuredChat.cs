@@ -11,7 +11,7 @@ namespace MapGenAI.LLM
         public const string RepairInstruction = "Your previous answer did not match the required response format. Return exactly one complete JSON object: " +
             "{\"action\":\"ask\",\"message\":\"your explanation\"} or {\"action\":\"generate\",\"description\":\"summary\",\"params\":{...}}. " +
             "Answer the original user request using the same current state and feature/material catalogs. Explanations and unavailable-feature answers MUST use action ask, never plain prose. " +
-            "Do not invent unavailable features or apply an alternative without the user's agreement. No text outside JSON. For recommendations or selectable alternatives use action recommend with options:[{params:{...}},...], 1..3 independent executable patches. Never offer unvalidated numbered concepts in ask.";
+            "Do not invent unavailable features or apply an alternative without the user's agreement. No text outside JSON. For recommendations or selectable alternatives use action recommend with options:[{params:{...}},...], 1..3 independent executable patches. For pending candidate edits use action revise with option:1..3 and params:{...}, a patch against that candidate. Never offer unvalidated numbered concepts in ask.";
 
         // null = first attempt; otherwise the previous malformed answer, for a fresh repair history.
         public static async Task<string> SendAsync(Func<string,CancellationToken,Task<string>> send,CancellationToken token=default,bool requireRecommendations=false)
@@ -35,6 +35,7 @@ namespace MapGenAI.LLM
             var command=ProviderResponse.Command(response);string action=command.GetString("action");
             if(action=="recommend"){RecommendationPlan.Options(command);return;}
             if(requireRecommendations)throw new FormatException("Return executable recommendation options, not prose or an immediate edit");
+            if(action=="revise" && command.GetObject("params")!=null && command.GetInt("option")>=1 && command.GetInt("option")<=3)return;
             if(action=="ask" && !string.IsNullOrWhiteSpace(command.GetString("message")) && !RecommendationPlan.IsNumberedOffer(command.GetString("message")))return;
             if(action=="generate" && command.GetObject("params")!=null)return;
             throw new FormatException("Expected ask with a question, generate with params, or recommend with executable options");

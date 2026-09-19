@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "scope": "Acceptance assertions passed; not a claim that every native run succeeded.",
+  "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+  "offlineTests": 150,
+  "pairedNativeChecks": 152,
+  "repeatNativeChecks": 76,
+  "pairedPixelComparisons": 20,
+  "pairedUnchangedBaselineImages": 18,
+  "newProviderCalls": 6,
+  "fableCalls": 0,
+  "fullMaps": 4,
+  "runs": [
+    {
+      "name": "native-repeat-ko",
+      "checks": 76,
+      "normalPreviewPixelComparisons": 10,
+      "unchangedBaselineImages": 9,
+      "cleanShutdown": true
+    },
+    {
+      "name": "native-final-en",
+      "checks": 76,
+      "normalPreviewPixelComparisons": 10,
+      "unchangedBaselineImages": 9,
+      "cleanShutdown": true
+    },
+    {
+      "name": "native-repeat2-ko",
+      "checks": 76,
+      "normalPreviewPixelComparisons": 10,
+      "unchangedBaselineImages": 9,
+      "cleanShutdown": true
+    }
+  ],
+  "knownFailures": [
+    {
+      "run": "native-final-ko",
+      "kind": "native Mono crash during rapid in-flight replacement",
+      "resolved": false,
+      "sameBuildKoreanRepeatsPassed": 2
+    }
+  ],
+  "limits": "Fixed seed and isolated DLC/Map Preview profile; four controlled full maps omit ambient ruins. Six live provider calls are a sample, not a general natural-language guarantee. Native crash root cause is undetermined and not declared fixed."
+}

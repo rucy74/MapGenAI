@@ -1,0 +1,3 @@
+refine-natural candidate=3 preserved=true
+refine-precise candidate=3 preserved=true
+refine-fertility candidate=1 preserved=true

@@ -12,7 +12,53 @@ namespace MapGenAI.LLM
     {
         public readonly string Command;
         public readonly string Summary;
-        private RecommendationPlan(string command,string summary){Command=command;Summary=summary;}
+        public readonly IReadOnlyList<string> Commands;
+        private RecommendationPlan(string command,string summary):this(new[]{command},summary){}
+        private RecommendationPlan(IReadOnlyList<string> commands,string summary){Commands=commands;Command=commands[0];Summary=summary;}
+        public List<MapParamsData> Edits()=>Commands.Select(c=>MapParameterParser.Parse(ProviderResponse.Command(c).GetObject("params"))).ToList();
+        public TileMapState Resolve(TileMapState before)
+        {
+            var state=before;
+            foreach(var data in Edits())state=MapStateEditor.Merge(state,data);
+            return state;
+        }
+
+        public static RecommendationPlan Refine(IReadOnlyList<RecommendationPlan> plans,int number,SimpleJsonObject parameters,
+            TileMapState before,Action<IReadOnlyList<MapParamsData>> validate,bool korean,Func<string,string,PlanDefinition> lookup=null)
+        {
+            if(number<1 || number>plans.Count)throw new FormatException("Choose an existing candidate number");
+            var old=plans[number-1];
+            if(old.Commands.Count>=33)throw new FormatException("Candidate revision limit reached; select it or request new options");
+            var envelope=new SimpleJsonObject();envelope.SetString("action","generate");envelope.SetObject("params",parameters);
+            var commands=old.Commands.Concat(new[]{SimpleJson.Serialize(envelope)}).ToArray();
+            var pending=new RecommendationPlan(commands,"");
+            validate(pending.Edits());
+            var after=pending.Resolve(before);
+            if(MapStateCodec.ChangedFields(old.Resolve(before),after).Count==0)throw new FormatException("Candidate revision has no changes");
+            for(int i=0;i<plans.Count;i++)if(i!=number-1 && MapStateCodec.Serialize(plans[i].Resolve(before))==MapStateCodec.Serialize(after))
+                throw new FormatException("Revised candidate duplicates another option");
+            return new RecommendationPlan(commands,new MapPlanDescription(korean,lookup).Describe(before,after));
+        }
+
+        public static string PendingInstruction(IReadOnlyList<RecommendationPlan> plans,TileMapState before)
+        {
+            var text=new System.Text.StringBuilder(@"
+PENDING RECOMMENDATION EDITOR: the displayed candidates are NOT applied to the current map.
+To modify a candidate return {""action"":""revise"",""option"":3,""params"":{...}}.
+option is its existing 1-based number. params is a MINIMAL PATCH against THAT candidate's complete proposed state below.
+Only that candidate changes; all others remain. Do not send action generate or apply the candidate. The user selects it separately.
+Use the normal parameter/shape_ops/structure_ops schema. Do not copy state serialization field names into params.
+Preserve unspecified parts. A more natural straight passage keeps points/width/fill/scope and updates only edge_roughness.
+If the referenced candidate is unclear, ask which number. For new/different recommendations return recommend against the actual CURRENT map, not a candidate.
+");
+            for(int i=0;i<plans.Count;i++)
+            {
+                var state=plans[i].Resolve(before);state.imageMap=null;
+                text.AppendLine("Candidate "+(i+1)+" proposed state: "+MapStateCodec.Serialize(state));
+                text.AppendLine("Editable terrain IDs/schema: "+SimpleJson.Serialize(ShapeEdits.Describe(state.elevationShapes)));
+            }
+            return text.ToString();
+        }
 
         public const string Rules = @"
 Recommendations and selectable alternatives:
@@ -37,6 +83,7 @@ Recommendations and selectable alternatives:
             return match.Success?int.Parse(match.Groups[1].Value):-1;
         }
         public static bool IsAmbiguousAcceptance(string text)=>Regex.IsMatch((text??"").Trim(),@"^(그래|응|네|좋아|yes|ok|okay|go ahead)[.!]?$",RegexOptions.IgnoreCase);
+        public static bool RequestsDirectEdit(string text)=>Regex.IsMatch(text??"",@"(?:추천|후보|선택지)\s*(?:말고|무시|취소)|(?:현재|실제)\s*맵에?\s*(?:바로|직접)|\b(?:ignore|cancel|skip)\s+(?:the\s+)?(?:recommendations|options|candidates)\b",RegexOptions.IgnoreCase);
         public static List<SimpleJsonObject> Options(SimpleJsonObject command)
         {
             var options=command.GetObjectArray("options");

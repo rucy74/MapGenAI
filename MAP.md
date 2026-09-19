@@ -1,5 +1,8 @@
 # MapGenAI 개발 지도
 
+- 추천 후보 수정: `RecommendationPlan.Refine/Resolve/Edits/PendingInstruction`은 원래 명령+최대32개 수정 명령을 보관한다. `Command`는 원래 명령 호환용이며 수정된 후보는 반드시 `Edits()`/`Resolve()`로 처리한다. `action:revise, option:1..3, params`는 해당 후보를 기준으로 하는 부분 수정이다. `Dialog_TextToMap`은 후보가 있는 요청에서 즉시 generate 적용을 차단하고 선택 전 상태를 유지한다. `MapGenParams.ValidatePatches/ApplyPatches`가 private state로 전체 수정열을 검사한 후 한 번만 commit/Undo한다. `RecommendationPreviews.Replace`는 해당 슬롯만 무효화하고 이전 요청의 늦은 완료를 버린다. [검증·제약](docs/analysis/2026-09-19-candidate-refinement/report.md).
+- 자연스러운 통로: 기존 `edge_roughness` 저장 필드를 passage에도 허용한다. `PassageGeometry.Mask`의 기본/none은 기존 계산과 동일하며, 명시한 low/medium/high는 같은4연결 중심선의 stamp를 결정적 noise로 바깥에만 확장한다. 최소 core를 줄이지 않는다. mountain clipping·구조물 회피·예약·완성검사는 확장된 mask를 사용한다. 정확한 점/폭/재료/범위를 유지하고 none으로 되돌릴 수 있다.
+
 - 대표 지형 조합 안내: `LandformPrompt.cs`를 `Dialog_TextToMap.BuildSystemPrompt`에 추가했다. 칼데라/열린 분지/좁은 협곡, 내부 확장·전체 이동·출구 편집·독립 분지 삭제에 기존 도형과 ID 편집을 사용한다. 생성 엔진/저장 형식/추가 모델 호출 변경 없음. `RecordedLandformTests`는 실제16연속응답을 회귀에 포함한다. 기준 `dev-before-landform-recipes-2026-09-19`→`d631d60`. [새 응답·33맵·기존17맵 동일성 검증](docs/analysis/2026-09-19-landform-recipes/report.md), [요청 예시](docs/analysis/2026-09-19-landform-recipes/manual-tests.md).
 
 - 복합 요청 확장 전 기준: `dev-before-compound-2026-09-19` → `4a89b06`. `StructurePlan.region_part`는 생략/inside가 기존 영역, enclosed가 닫힌 고리에 둘러싸인 빈 내부다. 토양 비율과 독립적으로 원본 산 ID를 참조한다. Clone/Scribe/preset/update/한영 표시를 보존하며 region 해제 시 part도 null로 해제한다. `AuthoringGeneration.PlaceStructures`는 해당 마스크로 전체 footprint와 region_edge 거리를 검사하고 산 전용 통로의 전체 경로를 구조물 점유 후보에서 제외한다. 기존 지형 칠하기와 native UsedRects 예약 범위는 그대로다. `TextRegionPrompt`의 복합 조건·최소 변경 안내와 dry interior 별도 평탄화 예시를 함께 갱신했다. [복합 요청 검증](docs/analysis/2026-09-19-compound-plan/report.md).

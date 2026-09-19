@@ -3,7 +3,7 @@ using System;
 namespace MapGenAI.MapGen
 {
     // Explicit passages sweep a cell-width square along a four-connected centerline.
-    // No randomness or contour warp: bends cannot shrink the requested clear footprint.
+    // Optional roughness only expands the edges; bends never shrink the clear core.
     public static class PassageGeometry
     {
         public static void RestrictToMountains(bool[] mask,float[] beforeElevation)
@@ -12,11 +12,18 @@ namespace MapGenAI.MapGen
             for(int i=0;i<mask.Length;i++)mask[i] &= beforeElevation[i]>=.7f;
         }
 
-        public static bool[] Mask(int cols,int rows,float[][] points,int width)
+        public static bool[] Mask(int cols,int rows,float[][] points,int width,string roughness=null,string id=null)
         {
             if(cols<1 || rows<1 || width<1 || width>64 || width>Math.Min(cols,rows))throw new ArgumentException("Invalid passage dimensions");
             if(points==null || points.Length<2 || points.Length>32)throw new ArgumentException("Invalid passage centerline");
             foreach(var p in points)ShapeEdits.ValidatePair(p);
+            float amount=ContourWarp.Amount(roughness);
+            if(float.IsNaN(amount) || amount<0 || amount>1)throw new ArgumentException("Invalid passage roughness");
+            float amplitude=Math.Min(12f,Math.Max(3f,width*.65f))*amount;
+            float wavelength=Math.Max(10f,width*1.7f);
+            uint seed=2166136261u;
+            unchecked { foreach(char c in id ?? "passage")seed=(seed^c)*16777619u; }
+            int Margin(int x,int z,uint side)=>amount==0?0:(int)Math.Floor(amplitude*(.5f+.5f*ContourWarp.Noise(x/wavelength,z/wavelength,seed^side)));
             var result=new bool[checked(cols*rows)];var delta=new int[checked((cols+1)*(rows+1))];int stride=cols+1,lo=(width-1)/2,hi=width/2;
             // Mono can retain extended float precision before integer casts (.7*250 ->174).
             // Stabilize coordinates near exact cell boundaries across Unity/CLR runtimes.
@@ -24,7 +31,8 @@ namespace MapGenAI.MapGen
             int Z(float v)=>Math.Min(rows-1,(int)Math.Floor((double)v*rows+.0001));
             void Stamp(int x,int z)
             {
-                int left=Math.Max(0,x-lo),right=Math.Min(cols,x+hi+1),bottom=Math.Max(0,z-lo),top=Math.Min(rows,z+hi+1);
+                int left=Math.Max(0,x-lo-Margin(x,z,0x1234u)),right=Math.Min(cols,x+hi+1+Margin(x,z,0x5678u)),
+                    bottom=Math.Max(0,z-lo-Margin(x,z,0x9abcu)),top=Math.Min(rows,z+hi+1+Margin(x,z,0xdef0u));
                 delta[bottom*stride+left]++;delta[bottom*stride+right]--;delta[top*stride+left]--;delta[top*stride+right]++;
             }
             for(int i=1;i<points.Length;i++)

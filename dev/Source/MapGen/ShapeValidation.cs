@@ -25,8 +25,9 @@ namespace MapGenAI.MapGen
                 for(int i=1;i<shape.points.Length;i++)if(shape.points[i].SequenceEqual(shape.points[i-1]))throw new FormatException("passage has duplicate adjacent points");
                 if(string.IsNullOrEmpty(shape.fill))throw new FormatException("passage requires a dry ground fill");
                 if(shape.scope!=null && shape.scope!="full" && shape.scope!="mountains")throw new FormatException("passage scope must be full or mountains");
-                if(shape.region!=null || shape.region_part!=null || shape.coverage!=null || shape.direction!=null || shape.strength!=null || shape.position!=null || shape.size!=null || shape.gap!=null || shape.fade!=null || shape.noise_amount!=null || shape.edge_roughness!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
-                    throw new FormatException("passage uses only points, width, dry fill and scope; keep natural surroundings as separate terrain");
+                Semantic(shape.edge_roughness,"none,low,medium,high",0,1,"edge_roughness");
+                if(shape.region!=null || shape.region_part!=null || shape.coverage!=null || shape.direction!=null || shape.strength!=null || shape.position!=null || shape.size!=null || shape.gap!=null || shape.fade!=null || shape.noise_amount!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
+                    throw new FormatException("passage uses points, width, dry fill, scope and optional edge_roughness");
                 return;
             }
             if(shape.points!=null || shape.width!=0 || shape.scope!=null)throw new FormatException("points/width/scope require passage");

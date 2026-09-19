@@ -41,9 +41,18 @@ namespace MapGenAI.UI
             foreach (var plan in plans)
             {
                 Items.Add(new Item());
-                snapshots.Add(new CandidatePreviewSnapshot(tileId, MapStateEditor.Merge(before,
-                    MapParameterParser.Parse(ProviderResponse.Command(plan.Command).GetObject("params")))));
+                snapshots.Add(new CandidatePreviewSnapshot(tileId, plan.Resolve(before)));
             }
+        }
+
+        // Preserve the other textures. A previous in-flight version may finish but cannot publish.
+        public void Replace(int index,RecommendationPlan plan,TileMapState before)
+        {
+            var snapshot=new CandidatePreviewSnapshot(tileId,plan.Resolve(before));
+            var old=Items[index];
+            if(old.Texture!=null)UnityEngine.Object.Destroy(old.Texture);
+            Items[index]=new Item();snapshots[index]=snapshot;
+            next=Math.Min(next,index);
         }
 
         public bool ContextMatches()
@@ -58,7 +67,9 @@ namespace MapGenAI.UI
 
         public void Update()
         {
-            if (disposed || pending || next >= Items.Count) return;
+            if (disposed || pending) return;
+            while(next<Items.Count && Items[next].Complete)next++;
+            if(next>=Items.Count)return;
             if (!MapPreviewIntegration.IsAvailable)
             {
                 foreach (var item in Items) { item.Error = L10n.IsKorean() ? "Map Preview 모드를 사용할 수 없습니다." : "Map Preview is unavailable."; item.Complete = true; }
@@ -73,6 +84,7 @@ namespace MapGenAI.UI
             if (!MapPreview.MapPreviewAPI.IsReady || MapGenerator.mapBeingGenerated != null) return;
             int index = next++;
             var item = Items[index];
+            var snapshot=snapshots[index];
             pending = true;
             var request = new MapPreview.MapPreviewRequest(seed, tileId, mapSize)
             { UseMinimalMapComponents = true, UseTrueTerrainColors = true };
@@ -80,14 +92,14 @@ namespace MapGenAI.UI
             // all types before Lunar loads MapPreview, including compiler-generated closures.
             object ticket = request;
             var timer = request.Timer;
-            CandidatePreviewContext.Requests.Add(ticket, snapshots[index]);
+            CandidatePreviewContext.Requests.Add(ticket, snapshot);
             try
             {
                 MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(result =>
                 {
                     CandidatePreviewContext.Requests.Remove(ticket);
                     pending = false;
-                    if (disposed) return;
+                    if (disposed || !ReferenceEquals(item,Items[index])) return;
                     Texture2D texture = null;
                     try
                     {
@@ -96,7 +108,7 @@ namespace MapGenAI.UI
                         texture.Apply(false);
                         item.Texture = texture;
                         item.Seconds = timer.Elapsed.TotalSeconds;
-                        item.Warning = snapshots[index].Report == null ? null : string.Join("\n", snapshots[index].Report.issues);
+                        item.Warning = snapshot.Report == null ? null : string.Join("\n", snapshot.Report.issues);
                     }
                     catch (Exception error) { if (texture != null) UnityEngine.Object.Destroy(texture); item.Error = error.Message; }
                     item.Complete = true;

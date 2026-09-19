@@ -1,0 +1,401 @@
+Mono path[0] = 'G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed'
+Mono config path = 'G:/SteamLibrary/steamapps/common/RimWorld/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.088 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.776500 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 960 -screen-height 640 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-194722-269 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-refinement\native-final-ko -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-refinement\native-final-ko\Player.log -mapgenAIProbeRender=true -mapgenAICandidatePreviews=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-19-candidate-refinement\provider-ko
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260919-194722-269
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001ACB4908850.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB43140090.dll
+Fallback handler could not load library G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/MonoBleedingEdge/data-000001AB43674040.dll
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.04 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26506.
+Total: 179.918500 ms (FindLiveObjects: 1.191700 ms CreateObjectMapping: 0.382400 ms MarkObjects: 178.057800 ms  DeleteObjects: 0.286200 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.702800 ms
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 26699.
+Total: 167.320500 ms (FindLiveObjects: 1.186800 ms CreateObjectMapping: 0.365400 ms MarkObjects: 165.731700 ms  DeleteObjects: 0.036000 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260919194722269
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27839.
+Total: 159.014600 ms (FindLiveObjects: 1.389600 ms CreateObjectMapping: 0.341000 ms MarkObjects: 157.247800 ms  DeleteObjects: 0.035700 ms)
+
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[SteamGeysers_Increased] −[]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[SteamGeysers_Increased]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"mutators":["SteamGeysers_Increased"]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"east_pass","type":"passage","fill":"Soil","scope":"mountains","points":[[0.5,0.5],[1,0.5]],"width":8}}]}},{"params":{"shape_ops":[{"op":"add","shape":{"id":"outer_pond","type":"bump","position":[0.18,0.82],"size":"small","strength":"negative_strong","fill":"water"}}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[Pond] −[HotSprings]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[Pond]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"remove_mutators":["HotSprings"],"mutators":["Pond"]}},{"params":{"fertility_offset":0.3}},{"params":{"remove_mutators":["HotSprings"],"elevation_shapes":[{"id":"pool","type":"bump","position":"top_right","size":"small","strength":"negative_strong","fill":"water"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[HotSprings]
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[MapGenAI] Applied state to tile 10
+[MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[HotSprings]
+[MapGenAI] HandleResponse 원문: {"action":"recommend","options":[{"params":{"elevation_shapes":[{"id":"basin_floor","type":"composite","shapes":[{"id":"f","prim":"circle","center":[0.5,0.5],"r":0.25}],"compose":[{"op":"add","s":"f","fill":"Soil","e":0.05,"f":0.01}]},{"id":"basin_mountain","type":"composite","edge_roughness":"medium","shapes":[{"id":"m_outer","prim":"circle","center":[0.5,0.5],"r":0.35},{"id":"m_inner","prim":"circle","center":[0.5,0.5],"r":0.20}],"compose":[{"op":"sub","a":"m_inner","from":"m_outer","out":"ring"},{"op":"add","s":"ring","e":0.85,"f":0.02}]},{"id":"south_pass","type":"passage","points":[[0.5,0.5],[0.5,0.0]],"width":8,"scope":"mountains","fill":"Soil"}]}},{"params":{"elevation_shapes":[{"type":"ridge","direction":"left","strength":"strong","fade":"medium","noise_amount":"high"},{"id":"valley_lake","type":"bump","position":[0.68,0.45],"size":"small","strength":"negative_strong","fill":"water"}],"fertility_offset":0.2}},{"params":{"elevation_shapes":[{"id":"canyon_rock","type":"composite","edge_roughness":"medium","shapes":[{"id":"b","prim":"rect","center":[0.5,0.5],"w":0.75,"h":0.55}],"compose":[{"op":"add","s":"b","e":0.85,"f":0.02}]},{"id":"canyon_pass","type":"passage","points":[[0.0,0.5],[1.0,0.5]],"width":12,"scope":"mountains","fill":"Soil"}]}}]}
+[MapGenAI] 파싱된 action: recommend
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"mutators":["HotSprings","Pond"]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] Response rejected: 함께 사용할 수 없는 지형 특징입니다: 온천 (HotSprings), 연못 (Pond). 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.
+[MapGenAI] HandleResponse 원문: {"action":"generate","params":{"fertility_offset":0.8}}
+[MapGenAI] 파싱된 action: generate
+[MapGenAI] Response rejected: 후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"none"}}]}}
+[MapGenAI] 파싱된 action: revise
+[MapGenAI] HandleResponse 원문: {"action":"revise","option":3,"params":{"shape_ops":[{"op":"update","id":"canyon_pass","changes":{"edge_roughness":"medium"}}]}}
+[MapGenAI] 파싱된 action: revise
+Crash!!!
+SymInit: Symbol-SearchPath: '.;F:\Projects\Rimworld\active\mapgen_ai;G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Plugins\x86_64;G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Plugins;G:\SteamLibrary\steamapps\common\RimWorld;C:\WINDOWS;C:\WINDOWS\system32;', symOptions: 534, UserName: 'choco'
+OS-Version: 10.0.0
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64.exe:RimWorldWin64.exe (00007FF79EE60000), size: 688128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.35.4614
+C:\WINDOWS\SYSTEM32\ntdll.dll:ntdll.dll (00007FFD4D020000), size: 2519040 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFD4AD40000), size: 831488 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFD4A3A0000), size: 4202496 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+G:\SteamLibrary\steamapps\common\RimWorld\UnityPlayer.dll:UnityPlayer.dll (00007FFC6AE50000), size: 31911936 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.35.4614
+C:\WINDOWS\System32\USER32.dll:USER32.dll (00007FFD4C9D0000), size: 1896448 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\win32u.dll:win32u.dll (00007FFD4ABE0000), size: 159744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\GDI32.dll:GDI32.dll (00007FFD4AE10000), size: 176128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8328
+C:\WINDOWS\System32\gdi32full.dll:gdi32full.dll (00007FFD4AC10000), size: 1216512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\msvcp_win.dll:msvcp_win.dll (00007FFD4AB30000), size: 667648 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ucrtbase.dll:ucrtbase.dll (00007FFD4A9D0000), size: 1359872 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ole32.dll:ole32.dll (00007FFD4B750000), size: 1679360 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\combase.dll:combase.dll (00007FFD4C380000), size: 3690496 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\RPCRT4.dll:RPCRT4.dll (00007FFD4B630000), size: 1146880 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFD4AEC0000), size: 417792 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\VERSION.dll:VERSION.dll (00007FFD421B0000), size: 45056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\WINDOWS\System32\msvcrt.dll:msvcrt.dll (00007FFD4C0F0000), size: 692224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 7.0.26100.9444
+C:\WINDOWS\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFD4AF30000), size: 4747264 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFD4C7D0000), size: 770048 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\sechost.dll:sechost.dll (00007FFD4B3E0000), size: 692224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\SHELL32.dll:SHELL32.dll (00007FFD4B940000), size: 7962624 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFD4C1A0000), size: 888832 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\IMM32.dll:IMM32.dll (00007FFD4CDC0000), size: 200704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\CRYPT32.dll:CRYPT32.dll (00007FFD4A7B0000), size: 1564672 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\WS2_32.dll:WS2_32.dll (00007FFD4B520000), size: 524288 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FFD05080000), size: 1097728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\WINMM.dll:WINMM.dll (00007FFD3A9A0000), size: 221184 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\WINHTTP.dll:WINHTTP.dll (00007FFD43450000), size: 1220608 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\bcrypt.dll:bcrypt.dll (00007FFD4A110000), size: 172032 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\HID.DLL:HID.DLL (00007FFD48520000), size: 61440 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\WINDOWS\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFD47590000), size: 192512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\GLU32.dll:GLU32.dll (00007FFD05040000), size: 184320 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\WINDOWS\SYSTEM32\dxcore.dll:dxcore.dll (00007FFD473E0000), size: 278528 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFD48EB0000), size: 110592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (00007FFD4A220000), size: 704512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFD472C0000), size: 688128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\shcore.dll:shcore.dll (00007FFD4C8D0000), size: 1028096 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+G:\SteamLibrary\steamapps\common\RimWorld\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FFC6A3F0000), size: 10825728 (result: 0), SymType: '-deferred-', PDB: ''
+C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFD47C60000), size: 9101312 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFD4A140000), size: 167936 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\iphlpapi.dll:iphlpapi.dll (00007FFD48860000), size: 208896 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\MSCTF.dll:MSCTF.dll (00007FFD4CC60000), size: 1421312 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\d3d11.dll:d3d11.dll (00007FFD45B00000), size: 2490368 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\dxgi.dll:dxgi.dll (00007FFD47430000), size: 1290240 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\powrprof.dll:powrprof.dll (00007FFD49EC0000), size: 385024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.3912
+C:\WINDOWS\SYSTEM32\UMPDC.dll:UMPDC.dll (00007FFD49EA0000), size: 86016 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8972
+C:\WINDOWS\SYSTEM32\directxdatabasehelper.dll:directxdatabasehelper.dll (00007FFD432B0000), size: 385024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (00007FFD49DF0000), size: 335872 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvldumdx.dll:nvldumdx.dll (00007FFD421C0000), size: 802816 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9186
+C:\WINDOWS\SYSTEM32\msasn1.dll:msasn1.dll (00007FFD49820000), size: 77824 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFD41EC0000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFD497C0000), size: 49152 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\wldp.dll:wldp.dll (00007FFD498A0000), size: 434176 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\drvstore.dll:drvstore.dll (00007FFD41F00000), size: 1548288 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\devobj.dll:devobj.dll (00007FFD49DB0000), size: 192512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\wintrust.dll:wintrust.dll (00007FFD4A940000), size: 532480 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\imagehlp.dll:imagehlp.dll (00007FFD4C8A0000), size: 131072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.4202
+C:\WINDOWS\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFD497A0000), size: 110592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\system32\rsaenh.dll:rsaenh.dll (00007FFD48E10000), size: 233472 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7705
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvgpucomp64.dll:nvgpucomp64.dll (00007FFD3C930000), size: 80736256 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9186
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\Display.NvContainer\NvMessageBus.dll:NvMessageBus.dll (00007FFD328F0000), size: 3551232 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 3.15.3538.9611
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\NvMemMapStoragex.dll:NvMemMapStoragex.dll (00007FFD3A9E0000), size: 1245184 (result: 0), SymType: '-deferred-', PDB: ''
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvwgf2umx.dll:nvwgf2umx.dll (00007FFD34C10000), size: 84860928 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9186
+C:\WINDOWS\system32\nvspcap64.dll:nvspcap64.dll (00007FFCEFAD0000), size: 1339392 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 11.0.5.420
+C:\WINDOWS\SYSTEM32\ntmarta.dll:ntmarta.dll (00007FFD48FF0000), size: 221184 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7019
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvppex.dll:nvppex.dll (00007FFD0C950000), size: 1798144 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9186
+C:\WINDOWS\System32\clbcatq.dll:clbcatq.dll (00007FFD4C710000), size: 712704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2001.12.10941.16384
+C:\WINDOWS\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFD2FDF0000), size: 73728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFD300E0000), size: 499712 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7920
+C:\WINDOWS\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFD2D2C0000), size: 86016 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\system32\wbem\fastprox.dll:fastprox.dll (00007FFD2D660000), size: 1003520 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\amsi.dll:amsi.dll (00007FFD26CA0000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7309
+C:\WINDOWS\SYSTEM32\USERENV.dll:USERENV.dll (00007FFD49520000), size: 212992 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.4-0\MpOav.dll:MpOav.dll (00007FFD26BF0000), size: 671744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.18.26080.4
+C:\WINDOWS\System32\MMDevApi.dll:MMDevApi.dll (00007FFD3A8F0000), size: 675840 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (00007FFD33360000), size: 1798144 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\resourcepolicyclient.dll:resourcepolicyclient.dll (00007FFD47820000), size: 81920 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8115
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\lib_burst_generated.dll:lib_burst_generated.dll (00007FFC656E0000), size: 126976 (result: 0), SymType: '-deferred-', PDB: ''
+C:\WINDOWS\SYSTEM32\xinput1_3.dll:xinput1_3.dll (0000000000400000), size: 122880 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 9.18.944.0
+C:\WINDOWS\SYSTEM32\dcomp.dll:dcomp.dll (00007FFD465D0000), size: 2248704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\Microsoft.Internal.WarpPal.dll:Microsoft.Internal.WarpPal.dll (00007FFD450C0000), size: 106496 (result: 0), SymType: '-deferred-', PDB: ''
+C:\WINDOWS\SYSTEM32\textinputframework.dll:textinputframework.dll (00007FFD18AE0000), size: 1318912 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\steam_api64.dll:steam_api64.dll (00007FFC64E40000), size: 311296 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 6.91.21.57
+C:\Program Files (x86)\Steam\steamclient64.dll:steamclient64.dll (00007FFC87990000), size: 26726400 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.96.30.42
+C:\WINDOWS\System32\PSAPI.DLL:PSAPI.DLL (00007FFD4C0E0000), size: 32768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8521
+C:\Program Files (x86)\Steam\tier0_s64.dll:tier0_s64.dll (00007FFCEDF90000), size: 3203072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.96.30.42
+C:\Program Files (x86)\Steam\vstdlib_s64.dll:vstdlib_s64.dll (00007FFD09140000), size: 798720 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.96.30.42
+C:\WINDOWS\SYSTEM32\Secur32.dll:Secur32.dll (00007FFD47120000), size: 53248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7705
+C:\WINDOWS\SYSTEM32\MSWSOCK.dll:MSWSOCK.dll (00007FFD49460000), size: 442368 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFD49180000), size: 299008 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Program Files (x86)\Steam\gameoverlayrenderer64.dll:gameoverlayrenderer64.dll (00007FFC63E20000), size: 1798144 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.96.30.42
+C:\WINDOWS\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFD3BBC0000), size: 2408448 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+
+========== OUTPUTTING STACK TRACE ==================
+
+0x00007FFC6A8EC3E3 (mono-2.0-bdwgc) mono_breakpoint_clean_code
+0x00007FFC6A676B3B (mono-2.0-bdwgc) mono_unity_class_has_failure
+0x00007FFC6A67ACBA (mono-2.0-bdwgc) mono_unity_class_has_failure
+0x00007FFC6A67B637 (mono-2.0-bdwgc) mono_unity_class_has_failure
+0x00007FFC6A68280C (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FFC6A683DBE (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FFC6A684526 (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FFC6A5BD254 (mono-2.0-bdwgc) mono_object_get_virtual_method
+0x00007FFC6A5C4B5F (mono-2.0-bdwgc) mono_runtime_invoke_array
+0x00007FFC6A4F4EE2 (mono-2.0-bdwgc) mono_install_unhandled_exception_hook
+0x00007FFC6A51B0C1 (mono-2.0-bdwgc) mono_lookup_icall_symbol
+0x000001ACFF2B4990 (Mono JIT Code) (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo:InternalInvoke (System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+0x000001ACFF2B434B (Mono JIT Code) System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+0x000001ACFF2B420E (Mono JIT Code) System.Reflection.MethodBase:Invoke (object,object[])
+0x000001AD4CDE81DB (Mono JIT Code) MapGenAI.RuntimeProbe.CandidatePreviewProbe:Invoke (string,object[])
+0x000001AD4CF450F3 (Mono JIT Code) MapGenAI.RuntimeProbe.CandidatePreviewProbe:Tick ()
+0x000001AD4CF3921B (Mono JIT Code) MapGenAI.RuntimeProbe.RuntimeProbe:Update ()
+0x000001AD4CF3914B (Mono JIT Code) MapGenAI.RuntimeProbe.RuntimeProbeComponent:GameComponentUpdate ()
+0x000001AD4CF38F7F (Mono JIT Code) Verse.GameComponentUtility:GameComponentUpdate ()
+0x000001AD4CE7A8FB (Mono JIT Code) Verse.Game:UpdatePlay ()
+0x000001AD4F7028C3 (Mono JIT Code) Verse.Root_Play:Update ()
+0x000001ACB4DE0B68 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007FFC6A684C1E (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FFC6A5BD254 (mono-2.0-bdwgc) mono_object_get_virtual_method
+0x00007FFC6A5BD3CC (mono-2.0-bdwgc) mono_runtime_invoke
+SymInit: Symbol-SearchPath: '.;F:\Projects\Rimworld\active\mapgen_ai;G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Plugins\x86_64;G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Plugins;G:\SteamLibrary\steamapps\common\RimWorld;C:\WINDOWS;C:\WINDOWS\system32;', symOptions: 534, UserName: 'choco'
+OS-Version: 10.0.0
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64.exe:RimWorldWin64.exe (00007FF79EE60000), size: 688128 (result: 0), SymType: '-exported-', PDB: 'G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64.exe', fileVersion: 2022.3.35.4614
+C:\WINDOWS\SYSTEM32\ntdll.dll:ntdll.dll (00007FFD4D020000), size: 2519040 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\ntdll.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFD4AD40000), size: 831488 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\KERNEL32.DLL', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFD4A3A0000), size: 4202496 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\KERNELBASE.dll', fileVersion: 10.0.26100.9444
+G:\SteamLibrary\steamapps\common\RimWorld\UnityPlayer.dll:UnityPlayer.dll (00007FFC6AE50000), size: 31911936 (result: 0), SymType: '-exported-', PDB: 'G:\SteamLibrary\steamapps\common\RimWorld\UnityPlayer.dll', fileVersion: 2022.3.35.4614
+C:\WINDOWS\System32\USER32.dll:USER32.dll (00007FFD4C9D0000), size: 1896448 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\USER32.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\win32u.dll:win32u.dll (00007FFD4ABE0000), size: 159744 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\win32u.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\GDI32.dll:GDI32.dll (00007FFD4AE10000), size: 176128 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\GDI32.dll', fileVersion: 10.0.26100.8328
+C:\WINDOWS\System32\gdi32full.dll:gdi32full.dll (00007FFD4AC10000), size: 1216512 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\gdi32full.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\msvcp_win.dll:msvcp_win.dll (00007FFD4AB30000), size: 667648 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\msvcp_win.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ucrtbase.dll:ucrtbase.dll (00007FFD4A9D0000), size: 1359872 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\ucrtbase.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ole32.dll:ole32.dll (00007FFD4B750000), size: 1679360 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\ole32.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\combase.dll:combase.dll (00007FFD4C380000), size: 3690496 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\combase.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\RPCRT4.dll:RPCRT4.dll (00007FFD4B630000), size: 1146880 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\RPCRT4.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFD4AEC0000), size: 417792 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\SHLWAPI.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\VERSION.dll:VERSION.dll (00007FFD421B0000), size: 45056 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\VERSION.dll', fileVersion: 10.0.26100.1150
+C:\WINDOWS\System32\msvcrt.dll:msvcrt.dll (00007FFD4C0F0000), size: 692224 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\msvcrt.dll', fileVersion: 7.0.26100.9444
+C:\WINDOWS\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFD4AF30000), size: 4747264 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\SETUPAPI.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFD4C7D0000), size: 770048 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\ADVAPI32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\sechost.dll:sechost.dll (00007FFD4B3E0000), size: 692224 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\sechost.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\SHELL32.dll:SHELL32.dll (00007FFD4B940000), size: 7962624 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\SHELL32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFD4C1A0000), size: 888832 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\OLEAUT32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\IMM32.dll:IMM32.dll (00007FFD4CDC0000), size: 200704 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\IMM32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\CRYPT32.dll:CRYPT32.dll (00007FFD4A7B0000), size: 1564672 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\CRYPT32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\WS2_32.dll:WS2_32.dll (00007FFD4B520000), size: 524288 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\WS2_32.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FFD05080000), size: 1097728 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\OPENGL32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\WINMM.dll:WINMM.dll (00007FFD3A9A0000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\WINMM.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\WINHTTP.dll:WINHTTP.dll (00007FFD43450000), size: 1220608 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\WINHTTP.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\bcrypt.dll:bcrypt.dll (00007FFD4A110000), size: 172032 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\bcrypt.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\HID.DLL:HID.DLL (00007FFD48520000), size: 61440 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\HID.DLL', fileVersion: 10.0.26100.1150
+C:\WINDOWS\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFD47590000), size: 192512 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\dwmapi.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\GLU32.dll:GLU32.dll (00007FFD05040000), size: 184320 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\GLU32.dll', fileVersion: 10.0.26100.1150
+C:\WINDOWS\SYSTEM32\dxcore.dll:dxcore.dll (00007FFD473E0000), size: 278528 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\dxcore.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFD48EB0000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\kernel.appcore.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (00007FFD4A220000), size: 704512 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\bcryptPrimitives.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFD472C0000), size: 688128 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\uxtheme.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\shcore.dll:shcore.dll (00007FFD4C8D0000), size: 1028096 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\shcore.dll', fileVersion: 10.0.26100.9444
+G:\SteamLibrary\steamapps\common\RimWorld\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FFC6A3F0000), size: 10825728 (result: 0), SymType: '-exported-', PDB: 'G:\SteamLibrary\steamapps\common\RimWorld\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll'
+C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFD47C60000), size: 9101312 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\windows.storage.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFD4A140000), size: 167936 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\profapi.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\iphlpapi.dll:iphlpapi.dll (00007FFD48860000), size: 208896 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\iphlpapi.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\MSCTF.dll:MSCTF.dll (00007FFD4CC60000), size: 1421312 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\MSCTF.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\d3d11.dll:d3d11.dll (00007FFD45B00000), size: 2490368 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\d3d11.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\dxgi.dll:dxgi.dll (00007FFD47430000), size: 1290240 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\dxgi.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\powrprof.dll:powrprof.dll (00007FFD49EC0000), size: 385024 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\powrprof.dll', fileVersion: 10.0.26100.3912
+C:\WINDOWS\SYSTEM32\UMPDC.dll:UMPDC.dll (00007FFD49EA0000), size: 86016 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\UMPDC.dll', fileVersion: 10.0.26100.8972
+C:\WINDOWS\SYSTEM32\directxdatabasehelper.dll:directxdatabasehelper.dll (00007FFD432B0000), size: 385024 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\directxdatabasehelper.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (00007FFD49DF0000), size: 335872 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\cfgmgr32.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvldumdx.dll:nvldumdx.dll (00007FFD421C0000), size: 802816 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvldumdx.dll', fileVersion: 32.0.15.9186
+C:\WINDOWS\SYSTEM32\msasn1.dll:msasn1.dll (00007FFD49820000), size: 77824 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\msasn1.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFD41EC0000), size: 241664 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\cryptnet.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFD497C0000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\cryptbase.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\wldp.dll:wldp.dll (00007FFD498A0000), size: 434176 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\wldp.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\drvstore.dll:drvstore.dll (00007FFD41F00000), size: 1548288 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\drvstore.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\devobj.dll:devobj.dll (00007FFD49DB0000), size: 192512 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\devobj.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\System32\wintrust.dll:wintrust.dll (00007FFD4A940000), size: 532480 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\wintrust.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\System32\imagehlp.dll:imagehlp.dll (00007FFD4C8A0000), size: 131072 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\imagehlp.dll', fileVersion: 10.0.26100.4202
+C:\WINDOWS\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFD497A0000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\CRYPTSP.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\system32\rsaenh.dll:rsaenh.dll (00007FFD48E10000), size: 233472 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\rsaenh.dll', fileVersion: 10.0.26100.7705
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvgpucomp64.dll:nvgpucomp64.dll (00007FFD3C930000), size: 80736256 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvgpucomp64.dll', fileVersion: 32.0.15.9186
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\Display.NvContainer\NvMessageBus.dll:NvMessageBus.dll (00007FFD328F0000), size: 3551232 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\Display.NvContainer\NvMessageBus.dll', fileVersion: 3.15.3538.9611
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\NvMemMapStoragex.dll:NvMemMapStoragex.dll (00007FFD3A9E0000), size: 1245184 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\NvMemMapStoragex.dll'
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvwgf2umx.dll:nvwgf2umx.dll (00007FFD34C10000), size: 84860928 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvwgf2umx.dll', fileVersion: 32.0.15.9186
+C:\WINDOWS\system32\nvspcap64.dll:nvspcap64.dll (00007FFCEFAD0000), size: 1339392 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\nvspcap64.dll', fileVersion: 11.0.5.420
+C:\WINDOWS\SYSTEM32\ntmarta.dll:ntmarta.dll (00007FFD48FF0000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\ntmarta.dll', fileVersion: 10.0.26100.7019
+C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvppex.dll:nvppex.dll (00007FFD0C950000), size: 1798144 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\DriverStore\FileRepository\nv_dispig.inf_amd64_f4c7a2fd13e0f763\nvppex.dll', fileVersion: 32.0.15.9186
+C:\WINDOWS\System32\clbcatq.dll:clbcatq.dll (00007FFD4C710000), size: 712704 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\clbcatq.dll', fileVersion: 2001.12.10941.16384
+C:\WINDOWS\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFD2FDF0000), size: 73728 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\wbem\wbemprox.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFD300E0000), size: 499712 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\wbemcomn.dll', fileVersion: 10.0.26100.7920
+C:\WINDOWS\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFD2D2C0000), size: 86016 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\wbem\wbemsvc.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\system32\wbem\fastprox.dll:fastprox.dll (00007FFD2D660000), size: 1003520 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\system32\wbem\fastprox.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\amsi.dll:amsi.dll (00007FFD26CA0000), size: 118784 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\amsi.dll', fileVersion: 10.0.26100.7309
+C:\WINDOWS\SYSTEM32\USERENV.dll:USERENV.dll (00007FFD49520000), size: 212992 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\USERENV.dll', fileVersion: 10.0.26100.9278
+C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.4-0\MpOav.dll:MpOav.dll (00007FFD26BF0000), size: 671744 (result: 0), SymType: '-exported-', PDB: 'C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26080.4-0\MpOav.dll', fileVersion: 4.18.26080.4
+C:\WINDOWS\System32\MMDevApi.dll:MMDevApi.dll (00007FFD3A8F0000), size: 675840 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\MMDevApi.dll', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (00007FFD33360000), size: 1798144 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\AUDIOSES.DLL', fileVersion: 10.0.26100.9444
+C:\WINDOWS\SYSTEM32\resourcepolicyclient.dll:resourcepolicyclient.dll (00007FFD47820000), size: 81920 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\resourcepolicyclient.dll', fileVersion: 10.0.26100.8115
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\lib_burst_generated.dll:lib_burst_generated.dll (00007FFC656E0000), size: 126976 (result: 0), SymType: '-exported-', PDB: 'G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\lib_burst_generated.dll'
+C:\WINDOWS\SYSTEM32\xinput1_3.dll:xinput1_3.dll (0000000000400000), size: 122880 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\xinput1_3.dll', fileVersion: 9.18.944.0
+C:\WINDOWS\SYSTEM32\dcomp.dll:dcomp.dll (00007FFD465D0000), size: 2248704 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\dcomp.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\Microsoft.Internal.WarpPal.dll:Microsoft.Internal.WarpPal.dll (00007FFD450C0000), size: 106496 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\Microsoft.Internal.WarpPal.dll'
+C:\WINDOWS\SYSTEM32\textinputframework.dll:textinputframework.dll (00007FFD18AE0000), size: 1318912 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\textinputframework.dll', fileVersion: 10.0.26100.9278
+G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\steam_api64.dll:steam_api64.dll (00007FFC64E40000), size: 311296 (result: 0), SymType: '-exported-', PDB: 'G:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Plugins\x86_64\steam_api64.dll', fileVersion: 6.91.21.57
+C:\Program Files (x86)\Steam\steamclient64.dll:steamclient64.dll (00007FFC87990000), size: 26726400 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\Steam\steamclient64.dll', fileVersion: 10.96.30.42
+C:\WINDOWS\System32\PSAPI.DLL:PSAPI.DLL (00007FFD4C0E0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\System32\PSAPI.DLL', fileVersion: 10.0.26100.8521
+C:\Program Files (x86)\Steam\tier0_s64.dll:tier0_s64.dll (00007FFCEDF90000), size: 3203072 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\Steam\tier0_s64.dll', fileVersion: 10.96.30.42
+C:\Program Files (x86)\Steam\vstdlib_s64.dll:vstdlib_s64.dll (00007FFD09140000), size: 798720 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\Steam\vstdlib_s64.dll', fileVersion: 10.96.30.42
+C:\WINDOWS\SYSTEM32\Secur32.dll:Secur32.dll (00007FFD47120000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\Secur32.dll', fileVersion: 10.0.26100.7705
+C:\WINDOWS\SYSTEM32\MSWSOCK.dll:MSWSOCK.dll (00007FFD49460000), size: 442368 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\MSWSOCK.dll', fileVersion: 10.0.26100.9278
+C:\WINDOWS\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFD49180000), size: 299008 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\SSPICLI.DLL', fileVersion: 10.0.26100.9278
+C:\Program Files (x86)\Steam\gameoverlayrenderer64.dll:gameoverlayrenderer64.dll (00007FFC63E20000), size: 1798144 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\Steam\gameoverlayrenderer64.dll', fileVersion: 10.96.30.42
+C:\WINDOWS\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFD3BBC0000), size: 2408448 (result: 0), SymType: '-exported-', PDB: 'C:\WINDOWS\SYSTEM32\dbghelp.dll', fileVersion: 10.0.26100.9444
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B5CC2A6)
+0x00007FFC6B5CC2A6 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B5CC3D1)
+0x00007FFC6B5CC3D1 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B29F380)
+0x00007FFC6B29F380 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B40B198)
+0x00007FFC6B40B198 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B40B384)
+0x00007FFC6B40B384 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B40B8A2)
+0x00007FFC6B40B8A2 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B65E78B)
+0x00007FFC6B65E78B (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B66118B)
+0x00007FFC6B66118B (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FFC6B66453B)
+0x00007FFC6B66453B (UnityPlayer) (function-name not available)
+0x00007FFC6B6647DB (UnityPlayer) UnityMain
+  ERROR: SymGetSymFromAddr64, GetLastError: '잘못된 주소를 액세스하려고 했습니다.' (Address: 00007FF79EE611F2)
+0x00007FF79EE611F2 (RimWorldWin64) (function-name not available)
+0x00007FFD4AD6CD87 (KERNEL32) BaseThreadInitThunk
+0x00007FFD4D0CCAEC (ntdll) RtlUserThreadStart
+
+========== END OF STACKTRACE ===========
+
+A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
+ * C:/Users/choco/AppData/Local/Temp/Ludeon Studios/RimWorld by Ludeon Studios/Crashes

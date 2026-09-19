@@ -137,7 +137,7 @@ namespace MapGenAI.MapGen
             // Native generators retain their existing UsedRects behavior.
             foreach(var passage in GenerationContext.State.elevationShapes.Where(s=>s.type=="passage" && s.scope=="mountains"))
             {
-                var route=PassageGeometry.Mask(cols,rows,passage.points,passage.width);
+                var route=PassageGeometry.Mask(cols,rows,passage.points,passage.width,passage.edge_roughness,passage.id);
                 for(int i=0;i<occupied.Length;i++)occupied[i]|=route[i];
             }
             foreach(var p in plans)

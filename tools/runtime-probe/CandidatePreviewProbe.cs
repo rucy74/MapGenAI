@@ -29,6 +29,13 @@ namespace MapGenAI.RuntimeProbe
         static Color32[][] pixels;
         static AuthoringResult reportBefore;
         static volatile bool failNext;
+        static string naturalReply,preciseReply;
+        static Texture2D[] retainedTextures;
+        static Color32[] precisePixels,naturalPixels;
+        static List<RecommendationPlan> plans => (List<RecommendationPlan>)Field("_recommendations");
+        static volatile string replayReply;
+        static int replayCalls;
+        static RecommendationPreviews.Item superseded;
         static readonly List<string> checks = new List<string>();
         static readonly List<object> measurements = new List<object>();
         static readonly string[] cases = { "recommend-plain", "recommend-existing", "native-features" };
@@ -45,6 +52,18 @@ namespace MapGenAI.RuntimeProbe
             var h = new Harmony("choco.mapgenai.probe.candidate-previews");
             h.Patch(AccessTools.Method(typeof(WorldGenerator), "GenerateWorld"), prefix: new HarmonyMethod(typeof(CandidatePreviewProbe), nameof(WorldSeed)));
             h.Patch(AccessTools.Method(typeof(MapGenerator), "GenerateContentsIntoMap"), prefix: new HarmonyMethod(typeof(CandidatePreviewProbe), nameof(InspectWorker)) { priority = Priority.Last });
+            h.Patch(AccessTools.Method(typeof(LLMClientFactory),"Create"),prefix:new HarmonyMethod(typeof(CandidatePreviewProbe),nameof(ReplayFactory)));
+        }
+        static bool ReplayFactory(ref ILLMClient __result)
+        { if(!active || replayReply==null)return true;__result=new ReplayClient();return false; }
+        sealed class ReplayClient : ILLMClient
+        {
+            public System.Threading.Tasks.Task<string> SendChatAsync(List<ChatMessage> history,string prompt,System.Threading.CancellationToken token=default)
+            {
+                if(!prompt.Contains("PENDING RECOMMENDATION EDITOR:") || !prompt.Contains("Candidate 3 proposed state:"))throw new Exception("SendMessage omitted candidate context");
+                string response=replayReply;replayReply=null;System.Threading.Interlocked.Increment(ref replayCalls);
+                return System.Threading.Tasks.Task.FromResult(response);
+            }
         }
         static void WorldSeed(ref string seedString) => seedString = "mapgenai-landforms-v1";
         static void InspectWorker(Map map)
@@ -105,6 +124,7 @@ namespace MapGenAI.RuntimeProbe
             try
             {
                 if (DateTime.UtcNow > deadline) throw new TimeoutException("Candidate preview stage " + stage);
+                if(dialog!=null)Invoke("PollResponse");
                 if (stage == 0)
                 {
                     Invoke("UpdateRecommendationPreviews");
@@ -146,7 +166,7 @@ namespace MapGenAI.RuntimeProbe
                     {
                         caseIndex++;
                         if (caseIndex < cases.Length) { StartCase(); return; }
-                        StartCancellation(); return;
+                        StartRefinement(); return;
                     }
                     MapGenParams.RestoreSnapshot(MapStateCodec.Deserialize(before), target);
                     dialog = new Dialog_TextToMap(); Invoke("HandleResponse", reply);
@@ -209,8 +229,118 @@ namespace MapGenAI.RuntimeProbe
                     Check(discarded.Items.All(i=>i.Texture==null),"reset batch discards late textures before clean shutdown");
                     Finish();
                 }
+                else if(stage==20)
+                {
+                    Invoke("UpdateRecommendationPreviews");if(previews.Items.Any(i=>!i.Complete))return;
+                    retainedTextures=previews.Items.Select(i=>i.Texture).ToArray();precisePixels=retainedTextures[2].GetPixels32();
+                    File.WriteAllBytes(Path.Combine(folder,"refine-precise.png"),ImageConversion.EncodeToPNG(retainedTextures[2]));
+                    string prompt=(string)AccessTools.Method(typeof(Dialog_TextToMap),"BuildSystemPrompt").Invoke(null,new object[]{target});
+                    File.WriteAllText(Path.Combine(folder,"candidate-editor-prompt.txt"),prompt+RecommendationPlan.PendingInstruction(plans,MapGenParams.CaptureState(target)));
+                    File.WriteAllText(Path.Combine(folder,"refinement-before.json"),before);
+                    File.WriteAllText(Path.Combine(folder,"refinement-options-response.json"),reply);
+                    var passage=plans[2].Resolve(MapGenParams.CaptureState(target)).elevationShapes.Single(s=>s.type=="passage");
+                    naturalReply=ReadRevision("natural",passage.id,"medium");preciseReply=ReadRevision("precise",passage.id,"none");
+                    SendRevision(naturalReply,"3번 통로를 자연스럽게 해 줘");stage=21;
+                }
+                else if(stage==21)
+                {
+                    if((bool)Field("_isWaiting"))return;
+                    Invoke("UpdateRecommendationPreviews");if(!previews.Items[2].Complete)return;
+                    Check(previews.Items[2].Texture!=null,"natural candidate preview rendered");
+                    naturalPixels=previews.Items[2].Texture.GetPixels32();
+                    Check(Hash(naturalPixels)!=Hash(precisePixels),"natural passage visibly changes candidate terrain");
+                    Check(ReferenceEquals(retainedTextures[0],previews.Items[0].Texture) && ReferenceEquals(retainedTextures[1],previews.Items[1].Texture),"refining option 3 preserves options 1 and 2 textures");
+                    Check(State()==before && Metadata()==worldBefore && ((ICollection)Field("_paramStack")).Count==0,"revision leaves current map world and Undo unchanged");
+                    var proposed=plans[2].Resolve(MapGenParams.CaptureState(target));
+                    File.WriteAllText(Path.Combine(folder,"refine-natural-after.json"),MapStateCodec.Serialize(proposed));
+                    File.WriteAllBytes(Path.Combine(folder,"refine-natural.png"),ImageConversion.EncodeToPNG(previews.Items[2].Texture));
+                    ScreenCapture.CaptureScreenshot(Path.Combine(folder,"refine-natural-ui.png"));frame=Time.frameCount;stage=22;
+                }
+                else if(stage==22 && Time.frameCount-frame>=4)
+                {
+                    var prior=plans[2];var texture=previews.Items[2].Texture;
+                    Revise("{\"action\":\"revise\",\"option\":3,\"params\":{\"mutators\":[\"HotSprings\",\"Pond\"]}}");
+                    Check(ReferenceEquals(prior,plans[2]) && ReferenceEquals(texture,previews.Items[2].Texture),"invalid candidate refinement preserves last valid plan and texture");
+                    AccessTools.Field(typeof(Dialog_TextToMap),"_requestedCandidates").SetValue(dialog,plans);
+                    Invoke("HandleResponse","{\"action\":\"generate\",\"params\":{\"fertility_offset\":0.8}}");
+                    Check(State()==before && ReferenceEquals(prior,plans[2]),"immediate generate response during candidate editing cannot change live map");
+                    SendRevision(preciseReply,"3번 통로 다시 반듯하게 해 줘");stage=23;
+                }
+                else if(stage==23)
+                {
+                    if((bool)Field("_isWaiting"))return;
+                    Invoke("UpdateRecommendationPreviews");if(!previews.Items[2].Complete)return;
+                    Check(previews.Items[2].Texture!=null && Hash(previews.Items[2].Texture.GetPixels32())==Hash(precisePixels),"precise-again revision restores every original preview pixel");
+                    File.WriteAllText(Path.Combine(folder,"refine-precise-after.json"),MapStateCodec.Serialize(plans[2].Resolve(MapGenParams.CaptureState(target))));
+                    SendRevision(naturalReply,"3번 통로 다시 자연스럽게");stage=24;
+                }
+                else if(stage==24)
+                {
+                    if((bool)Field("_isWaiting"))return;
+                    if(superseded==null)
+                    {
+                        Invoke("UpdateRecommendationPreviews");superseded=previews.Items[2];
+                        Revise(preciseReply);Revise(naturalReply);
+                        Check(!ReferenceEquals(superseded,previews.Items[2]),"new revision supersedes an in-flight candidate image");
+                    }
+                    Invoke("UpdateRecommendationPreviews");if(!previews.Items[2].Complete)return;
+                    Check(superseded.Texture==null,"superseded request cannot publish a stale texture");
+                    Check(Hash(previews.Items[2].Texture.GetPixels32())==Hash(naturalPixels),"repeated natural revision is deterministic");
+                    var expected=plans[2].Resolve(MapGenParams.CaptureState(target));
+                    Invoke("ApplyRecommendation",3);
+                    Check(State()==MapStateCodec.Serialize(expected) && ((ICollection)Field("_paramStack")).Count==1,"refined sequence applies atomically with one Undo entry");
+                    stage=25;
+                    var request=new MapPreview.MapPreviewRequest(Find.World.info.seedString,target,new IntVec2(250,250)){UseMinimalMapComponents=true,UseTrueTerrainColors=true};
+                    // Capture only core types, never optional MapPreview types in closure fields.
+                    int refinedOption=3;
+                    MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(result=>
+                    {
+                        try
+                        {
+                            var tex=new Texture2D(250,250);result.CopyToTexture(tex);tex.Apply(false);
+                            Check(refinedOption==3 && Hash(tex.GetPixels32())==Hash(naturalPixels),"refined candidate matches all 62500 normal preview pixels after selection");UnityEngine.Object.Destroy(tex);
+                            Invoke("DoUndo");Check(State()==before && Metadata()==worldBefore,"one Undo restores the map before all candidate refinements");
+                            Check(replayCalls==3,"SendMessage and StructuredChat route all three recorded revisions without extra selection calls");
+                            dialog.Close(false);
+                            dialog=new Dialog_TextToMap();Invoke("HandleResponse",reply);
+                            var firstBefore=plans[0].Resolve(MapGenParams.CaptureState(target));
+                            string fertilityFile=Path.Combine(fixtures,"refine-fertility-response.json");
+                            string fertility=File.Exists(fertilityFile)?File.ReadAllText(fertilityFile):"{\"action\":\"revise\",\"option\":1,\"params\":{\"fertility_offset\":0.2}}";
+                            Revise(fertility);var firstAfter=plans[0].Resolve(MapGenParams.CaptureState(target));
+                            Check(firstAfter.fertilityOffset>firstBefore.fertilityOffset && State()==before,"generic fertility refinement changes only proposed state");
+                            Invoke("ApplyRecommendation",1);Check(State()==MapStateCodec.Serialize(firstAfter),"generic refined option applies complete candidate");
+                            Invoke("DoUndo");Check(State()==before && Metadata()==worldBefore,"generic refinement Undo restores original map");
+                            dialog.PostClose();StartCancellation();
+                        }
+                        catch(Exception error){Finish(error);}
+                    }).Catch(Finish);
+                }
             }
             catch(Exception error) { Finish(error); }
+        }
+        static void StartRefinement()
+        {
+            reply=File.ReadAllText(Path.Combine(fixtures,"recommend-plain-response.json"));
+            MapGenParams.RestoreSnapshot(MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(fixtures,"recommend-plain-before.json"))),target);
+            before=State();worldBefore=Metadata();dialog=new Dialog_TextToMap();Invoke("HandleResponse",reply);
+            previews=(RecommendationPreviews)Field("_recommendationPreviews");Find.WindowStack.Add(dialog);
+            stage=20;deadline=DateTime.UtcNow.AddSeconds(120);
+        }
+        static string ReadRevision(string name,string id,string roughness)
+        {
+            string path=Path.Combine(fixtures,"refine-"+name+"-response.json");
+            return File.Exists(path)?File.ReadAllText(path):"{\"action\":\"revise\",\"option\":3,\"params\":{\"shape_ops\":[{\"op\":\"update\",\"id\":\""+id+"\",\"changes\":{\"edge_roughness\":\""+roughness+"\"}}]}}";
+        }
+        static void Revise(string response)
+        {
+            AccessTools.Field(typeof(Dialog_TextToMap),"_requestedCandidates").SetValue(dialog,plans);Invoke("HandleResponse",response);
+        }
+        static void SendRevision(string response,string text)
+        {
+            // This marked disposable profile uses a replay transport, never the user's API config.
+            MapGenAIMod.Settings.useSimpleMode=true;MapGenAIMod.Settings.geminiApiKey="probe-placeholder";
+            replayReply=response;AccessTools.Field(typeof(Dialog_TextToMap),"_inputText").SetValue(dialog,text);Invoke("SendMessage");
+            Check((bool)Field("_isWaiting") && plans!=null,"candidate request keeps choices visible while waiting");
         }
         static void StartCancellation()
         {

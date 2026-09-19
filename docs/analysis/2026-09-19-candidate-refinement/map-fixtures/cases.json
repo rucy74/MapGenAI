@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "id": "ko-natural",
+      "kind": "canyon",
+      "beforeFile": "ko-natural-before.json",
+      "request": "Recorded candidate refinement, applied state replay",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "ko-precise",
+      "kind": "canyon",
+      "beforeFile": "ko-precise-before.json",
+      "request": "Recorded candidate refinement, applied state replay",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "en-natural",
+      "kind": "canyon",
+      "beforeFile": "en-natural-before.json",
+      "request": "Recorded candidate refinement, applied state replay",
+      "omitAmbientRuins": true
+    },
+    {
+      "id": "en-precise",
+      "kind": "canyon",
+      "beforeFile": "en-precise-before.json",
+      "request": "Recorded candidate refinement, applied state replay",
+      "omitAmbientRuins": true
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-09-19T19:59:15.041381+09:00",
+  "sourceDllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+  "changedFilesScanned": 316,
+  "secretMatches": 0,
+  "positiveControls": 3,
+  "localLinksChecked": 44,
+  "isolatedRuns": [
+    {
+      "path": "full-maps",
+      "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+      "removed": true
+    },
+    {
+      "path": "native-final-en",
+      "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+      "removed": true
+    },
+    {
+      "path": "native-final-ko",
+      "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+      "removed": true
+    },
+    {
+      "path": "native-r1-en",
+      "dllSha256": "28675fbcd3179be0ccf3d362a2a3367c00b98118319983a5ae2f9318dba07813",
+      "removed": true
+    },
+    {
+      "path": "native-r1-ko",
+      "dllSha256": "28675fbcd3179be0ccf3d362a2a3367c00b98118319983a5ae2f9318dba07813",
+      "removed": true
+    },
+    {
+      "path": "native-repeat-ko",
+      "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+      "removed": true
+    },
+    {
+      "path": "native-repeat2-ko",
+      "dllSha256": "83ce44a7f12991c930d47a593ddb62ed353fcad4895e749b31eb19d46419dffe",
+      "removed": true
+    }
+  ],
+  "offlineTests": 150,
+  "newProviderCalls": 6,
+  "pairedNativeChecks": 152,
+  "repeatNativeChecks": 76,
+  "normalPreviewPixelComparisons": 20,
+  "unchangedBaselineImages": 18,
+  "fullMaps": 4,
+  "unresolvedNativeCrashes": 1
+}

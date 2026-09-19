@@ -11,6 +11,37 @@ static class PassageTests
     static TileMapState Start()=>Edit(new TileMapState(),"[{\"op\":\"add\",\"shape\":"+Shape+"}]");
     public static void RunAll()
     {
+        Check("Natural passage keeps every precise core cell, varies banks and is deterministic",()=>
+        {
+            foreach(var points in new[]{new[]{new[]{0f,.5f},new[]{1f,.5f}},new[]{new[]{.2f,.8f},new[]{.6f,.2f},new[]{.9f,.7f}}})
+            {
+                var core=PassageGeometry.Mask(250,200,points,12);
+                var none=PassageGeometry.Mask(250,200,points,12,"none","exit");
+                var low=PassageGeometry.Mask(250,200,points,12,"low","exit");
+                var high=PassageGeometry.Mask(250,200,points,12,"high","exit");
+                Equal(true,core.SequenceEqual(none));
+                Equal(true,high.SequenceEqual(PassageGeometry.Mask(250,200,points,12,"high","exit")));
+                Equal(true,Enumerable.Range(0,core.Length).All(i=>(!core[i] || low[i]) && (!low[i] || high[i])));
+                Equal(true,high.Count(b=>b)>low.Count(b=>b) && low.Count(b=>b)>core.Count(b=>b));
+            }
+            var straight=PassageGeometry.Mask(250,200,new[]{new[]{0f,.5f},new[]{1f,.5f}},12,"medium","exit");
+            Equal(true,Enumerable.Range(10,230).Select(x=>Enumerable.Range(0,200).First(z=>straight[z*250+x])).Distinct().Count()>=3);
+            Equal(true,Enumerable.Range(10,230).Select(x=>Enumerable.Range(0,200).Last(z=>straight[z*250+x])).Distinct().Count()>=3);
+            var mountains=Enumerable.Range(0,straight.Length).Select(i=>i%250>50 && i%250<200?.8f:.1f).ToArray();
+            PassageGeometry.RestrictToMountains(straight,mountains);
+            Equal(true,Enumerable.Range(0,straight.Length).All(i=>!straight[i] || mountains[i]>=.7f));
+        });
+        Check("Passage roughness-only edits survive storage and restore the original exact route",()=>
+        {
+            var initial=Start();var rough=Edit(initial,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"edge_roughness\":\"medium\"}}]");
+            var shape=MapStateCodec.Deserialize(MapStateCodec.Serialize(rough)).elevationShapes.Single();
+            Equal("medium",shape.edge_roughness);Equal(8,shape.width);Equal("Soil",shape.fill);
+            Equal(SimpleJson.Serialize(initial.elevationShapes[0].points),SimpleJson.Serialize(shape.points));
+            Equal(true,new MapPlanDescription(false).Shape(shape).Contains("Natural edges"));
+            var precise=Edit(rough,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"edge_roughness\":\"none\"}}]").elevationShapes[0];
+            Equal(true,PassageGeometry.Mask(250,250,shape.points,8).SequenceEqual(PassageGeometry.Mask(250,250,precise.points,precise.width,precise.edge_roughness,precise.id)));
+            Equal(null,initial.elevationShapes[0].edge_roughness);
+        });
         Check("Mountain cuts keep irregular boundaries and leave low ground and holes untouched",()=>
         {
             var mask=PassageGeometry.Mask(10,10,new[]{new[]{.5f,1f},new[]{.5f,0f}},3);
@@ -76,7 +107,7 @@ static class PassageTests
         Check("Bad passages reject atomically and do not extend legacy shape contracts",()=>
         {
             var initial=Start();string saved=MapStateCodec.Serialize(initial);
-            foreach(string changes in new[]{"{\"width\":0}","{\"width\":8.5}","{\"width\":65}","{\"points\":[[0,0]]}","{\"points\":[[0,0],[0,0]]}","{\"points\":[[-0.1,0],[1,1]]}","{\"points\":null}","{\"edge_roughness\":\"medium\"}","{\"fill\":null}"})Throws(()=>Edit(initial,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":"+changes+"}]"));
+            foreach(string changes in new[]{"{\"width\":0}","{\"width\":8.5}","{\"width\":65}","{\"points\":[[0,0]]}","{\"points\":[[0,0],[0,0]]}","{\"points\":[[-0.1,0],[1,1]]}","{\"points\":null}","{\"edge_roughness\":\"extreme\"}","{\"fill\":null}"})Throws(()=>Edit(initial,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":"+changes+"}]"));
             Throws(()=>ShapeEdits.ParseShape(SimpleJson.Parse("{\"type\":\"bump\",\"points\":[[0,0],[1,1]],\"width\":8}")));
             Equal(saved,MapStateCodec.Serialize(initial));
             var water=Edit(initial,"[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"fill\":\"WaterDeep\"}}]");Throws(()=>TerrainMaterials.Validate(water));

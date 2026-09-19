@@ -28,7 +28,7 @@ namespace MapGenAI.MapGen
         public string fill;         // null 또는 "water" (bump용, 호수 생성)
         public string fade;         // ridge용: small(0.3)/medium(0.5)/large(0.7) 또는 0~1
         public string noise_amount; // ridge용: none(0)/low(0.3)/medium(0.6)/high(1.0) 또는 0~1.5
-        public string edge_roughness; // composite contour: omitted/none=precise, low/medium/high or 0..1
+        public string edge_roughness; // composite contour or passage edges: omitted/none=precise
 
         public string region, region_part, coverage; // region_fill: source area and counted cell fraction
         public float[][] points; // passage: ordered normalized centerline, distinct from legacy SDF geometry
@@ -323,14 +323,17 @@ namespace MapGenAI.MapGen
         public static string LastWorldChanges { get; private set; }
 
         public static void ApplyPatch(MapParamsData data, int tileId)
+            => ApplyPatches(new[] { data },tileId);
+
+        // Candidate refinements are replayed into private state, then committed once.
+        public static void ApplyPatches(IReadOnlyList<MapParamsData> edits, int tileId)
         {
             LastApplyWarning = null;
             LastWorldChanges = null;
-            WorldTileEditor.ValidateFeatureRequest(data);
-            FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
+            ValidateSequenceRequests(edits,tileId);
             UpgradeStoredFeaturePolicy(tileId);
             var previous = MapGenAIWorldComponent.Get()?.GetState(tileId);
-            var candidate = BuildPatchCandidate(previous, data);
+            var candidate = BuildSequenceCandidate(previous, edits, tileId);
             if (MapStateCodec.ChangedFields(previous ?? new TileMapState(), candidate).Count == 0) return;
             CommitState(candidate, tileId);
         }
@@ -338,10 +341,27 @@ namespace MapGenAI.MapGen
         // UI-thread dry run: same request, state, material and world planning checks as application.
         // No metadata/cache/preview/warning/Undo changes; the candidate is a private clone.
         public static void ValidatePatch(MapParamsData data, int tileId)
+            => ValidatePatches(new[] { data },tileId);
+
+        public static void ValidatePatches(IReadOnlyList<MapParamsData> edits, int tileId)
+            => CommitState(BuildSequenceCandidate(MapGenAIWorldComponent.Get()?.GetState(tileId), edits, tileId), tileId, true);
+
+        private static TileMapState BuildSequenceCandidate(TileMapState previous,IReadOnlyList<MapParamsData> edits,int tileId)
         {
-            WorldTileEditor.ValidateFeatureRequest(data);
-            FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
-            CommitState(BuildPatchCandidate(MapGenAIWorldComponent.Get()?.GetState(tileId), data), tileId, true);
+            ValidateSequenceRequests(edits,tileId);
+            var candidate=previous;
+            foreach(var data in edits)candidate=BuildPatchCandidate(candidate,data);
+            return candidate;
+        }
+
+        private static void ValidateSequenceRequests(IReadOnlyList<MapParamsData> edits,int tileId)
+        {
+            if(edits==null || edits.Count<1 || edits.Count>33)throw new System.FormatException("Invalid candidate edit sequence");
+            foreach(var data in edits)
+            {
+                WorldTileEditor.ValidateFeatureRequest(data);
+                FeaturePolicy.ValidateRequest(data, tileId < 0 ? null : Find.WorldGrid?[tileId]);
+            }
         }
 
         private static TileMapState BuildPatchCandidate(TileMapState previous, MapParamsData data)

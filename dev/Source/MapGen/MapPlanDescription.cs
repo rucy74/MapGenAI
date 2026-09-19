@@ -143,7 +143,7 @@ namespace MapGenAI.MapGen
         }
         public string Shape(ElevationShape s)
         {
-            if(s.type=="passage")return T("폭 ","Dry passage, ")+s.width+T("칸의 마른 통로 — "," cells wide — ")+Name("terrain",s.fill)+", "+Position(s.points[0][0],s.points[0][1])+" → "+Position(s.points.Last()[0],s.points.Last()[1])+(s.scope=="mountains"?T(" (산 부분만, 평지 유지)"," (mountains only; open ground preserved)"):T(" (전체 경로)"," (entire route)"));
+            if(s.type=="passage")return (ContourWarp.Amount(s.edge_roughness)>0?T("자연스러운 가장자리 · 최소 폭 ","Natural edges · minimum width "):T("폭 ","Dry passage, "))+s.width+T("칸의 마른 통로 — "," cells wide — ")+Name("terrain",s.fill)+", "+Position(s.points[0][0],s.points[0][1])+" → "+Position(s.points.Last()[0],s.points.Last()[1])+(s.scope=="mountains"?T(" (산 부분만, 평지 유지)"," (mountains only; open ground preserved)"):T(" (전체 경로)"," (entire route)"));
             if(s.type=="region_fill")return T(s.region_part=="enclosed"?"둘러싸인 내부의 채울 수 있는 땅":"지정 영역의 채울 수 있는 땅",s.region_part=="enclosed"?"usable area enclosed by the terrain":"usable area within the region")+" "+(float.Parse(s.coverage,CultureInfo.InvariantCulture)*100).ToString("0.#",CultureInfo.InvariantCulture)+"% — "+Name("terrain",s.fill)+T(" 채움"," fill");
             float strength=ElevationShape.ParseStrength(s.strength);bool raised=strength>=0;
             if(s.type=="radial")return raised?T("가장자리가 높고 중앙이 낮은 분지","basin with raised edges and a lower center"):T("중앙이 높고 바깥으로 낮아지는 산","mountain with a raised center and lower edges");

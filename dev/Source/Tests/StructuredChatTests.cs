@@ -12,6 +12,33 @@ static class StructuredChatTests
     const string Ask="{\"action\":\"ask\",\"message\":\"해당 모드가 현재 로드되지 않았습니다.\"}";
     public static void RunAll()
     {
+        Check("Candidate refinements compose privately and preserve other candidates and original map",()=>
+        {
+            var before=new TileMapState{animalDensity=1.2f};string original=MapStateCodec.Serialize(before);
+            var plans=RecommendationPlan.Validate(SimpleJson.Parse("{\"options\":[{\"params\":{\"fertility_offset\":0.2}},{\"params\":{\"vegetation_density\":1.3}},{\"params\":{\"shape_ops\":[{\"op\":\"add\",\"shape\":{\"id\":\"exit\",\"type\":\"passage\",\"points\":[[0,0.5],[1,0.5]],\"width\":12,\"scope\":\"mountains\",\"fill\":\"Soil\"}}]}}]}"),before,data=>{},true);
+            string first=MapStateCodec.Serialize(plans[0].Resolve(before)),second=MapStateCodec.Serialize(plans[1].Resolve(before));
+            var old=plans[2];
+            var change=SimpleJson.Parse("{\"shape_ops\":[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"edge_roughness\":\"medium\"}}]}");
+            int count=0;plans[2]=RecommendationPlan.Refine(plans,3,change,before,edits=>count=edits.Count,true);
+            Equal(2,count);Equal(null,old.Resolve(before).elevationShapes[0].edge_roughness);
+            var rough=plans[2].Resolve(before);Equal("medium",rough.elevationShapes[0].edge_roughness);Equal(1.2f,rough.animalDensity);
+            Equal(first,MapStateCodec.Serialize(plans[0].Resolve(before)));Equal(second,MapStateCodec.Serialize(plans[1].Resolve(before)));Equal(original,MapStateCodec.Serialize(before));
+            plans[2]=RecommendationPlan.Refine(plans,3,SimpleJson.Parse("{\"shape_ops\":[{\"op\":\"update\",\"id\":\"exit\",\"changes\":{\"width\":16}}]}"),before,edits=>{},false);
+            Equal(16,plans[2].Resolve(before).elevationShapes[0].width);Equal("medium",plans[2].Resolve(before).elevationShapes[0].edge_roughness);
+            string saved=MapStateCodec.Serialize(plans[2].Resolve(before));
+            Throws(()=>RecommendationPlan.Refine(plans,3,change,before,edits=>throw new FormatException("native conflict"),true));
+            Throws(()=>RecommendationPlan.Refine(plans,4,change,before,edits=>{},true));
+            Throws(()=>RecommendationPlan.Refine(plans,3,SimpleJson.Parse("{}"),before,edits=>{},true));
+            Equal(saved,MapStateCodec.Serialize(plans[2].Resolve(before)));
+            Equal(true,RecommendationPlan.RequestsDirectEdit("추천 말고 현재 맵에 바로 산 만들어줘"));
+            Equal(false,RecommendationPlan.RequestsDirectEdit("3번 통로만 자연스럽게"));
+        });
+        Check("Candidate revision envelope validates number and parameters without allowing immediate recommendation edits",()=>
+        {
+            StructuredChat.ValidateEnvelope("{\"action\":\"revise\",\"option\":3,\"params\":{\"fertility_offset\":0.2}}");
+            foreach(string option in new[]{"0","4","1.5","null"})Throws(()=>StructuredChat.ValidateEnvelope("{\"action\":\"revise\",\"option\":"+option+",\"params\":{}}"));
+            Throws(()=>StructuredChat.ValidateEnvelope("{\"action\":\"revise\",\"option\":1}"));
+        });
         Check("Recommendation options are independent stored patches with authoritative summaries",()=>
         {
             var before=new TileMapState();string original=MapStateCodec.Serialize(before);int calls=0;

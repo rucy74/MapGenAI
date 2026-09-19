@@ -20,6 +20,7 @@ class Program
         string modelOverride=Environment.GetEnvironmentVariable("MAPGENAI_PROBE_MODEL");
         if(!string.IsNullOrWhiteSpace(modelOverride))config.SetString("gemini_model",modelOverride);
         var client=new GeminiClient(config.GetString("gemini_api_key"),config.GetString("gemini_model"));
+        if(args[2]=="candidate-refinement")return await CandidateRefinementBench.Run(client,args[3],output,args.Length<5 || args[4]!="en");
         if(args[2]=="natural")return await NaturalTextBench.Run(client,args[3],output);
         if(args[2]=="manual")return await ManualFailureBench.Run(client,args[3],output);
         if(args[2]=="landforms")return await LandformBench.Run(client,args[3],output);

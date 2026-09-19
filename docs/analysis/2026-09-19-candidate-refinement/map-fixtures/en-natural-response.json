@@ -1,0 +1,1 @@
+{"action": "generate", "params": {"shape_ops": [{"op": "update", "id": "terrain_2", "changes": {"edge_roughness": "medium"}}]}}

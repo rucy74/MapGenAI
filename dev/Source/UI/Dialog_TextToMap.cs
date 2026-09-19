@@ -40,6 +40,7 @@ namespace MapGenAI.UI
         private RecommendationPreviews _recommendationPreviews;
         private string _previewError;
         private int _nextRecommendationCheck;
+        private List<RecommendationPlan> _requestedCandidates;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -644,8 +645,9 @@ For recommendations follow the rules below and propose three distinct landscape 
                     return;
                 }
             }
-            ClearRecommendations();
-            _recommendationsRequested=RecommendationPlan.IsRequest(text);
+            _requestedCandidates=RecommendationPlan.RequestsDirectEdit(text)?null:_recommendations;
+            if(_requestedCandidates==null)ClearRecommendations();
+            _recommendationsRequested=_requestedCandidates==null && RecommendationPlan.IsRequest(text);
             _recommendationRepairUsed=false;
             var settings = MapGenAIMod.Settings;
             var clients = new List<ILLMClient>();
@@ -668,6 +670,7 @@ For recommendations follow the rules below and propose three distinct landscape 
                 return;
             }
             var systemPrompt = BuildSystemPrompt(_openedTileId);
+            if(_requestedCandidates!=null)systemPrompt+=RecommendationPlan.PendingInstruction(_requestedCandidates,MapGenParams.CaptureState(_openedTileId));
             _llmContext.Add(new ChatMessage("user", text));
             var historySnapshot = new List<ChatMessage>(_llmContext);
             StartChat(clients,historySnapshot,systemPrompt,false);
@@ -683,7 +686,7 @@ For recommendations follow the rules below and propose three distinct landscape 
                 var history=new List<ChatMessage>(historySnapshot);
                 history.Add(new ChatMessage("assistant",rejected));
                 history.Add(new ChatMessage("user","The proposed options failed validation before display; nothing was applied. Correct all options against the current state and return action recommend. Do not remove existing features to bypass this error unless the original request explicitly asked for replacement. Reason: "+reason));
-                StartChat(clients,history,BuildSystemPrompt(_openedTileId),false);
+                StartChat(clients,history,systemPrompt,false);
             });
             _explainInvalidReply=explanationOnly?null:(Action<string,string>)((rejected,reason)=>
             {
@@ -740,6 +743,8 @@ For recommendations follow the rules below and propose three distinct landscape 
 
             try
             {
+                if(_requestedCandidates!=null && (!ReferenceEquals(_requestedCandidates,_recommendations) || !RecommendationsCurrent()))
+                    throw new FormatException(IsKorean()?"추천 후 설정이 바뀌어 응답을 적용하지 않았습니다.":"Settings changed; the candidate response was discarded.");
                 var parsed = ProviderResponse.Command(response);
                 var action = parsed.GetString("action");
                 Log.Message($"[MapGenAI] 파싱된 action: {action}");
@@ -756,7 +761,7 @@ For recommendations follow the rules below and propose three distinct landscape 
                         _recommendationPreviews=null; _previewError=null;
                         try { _recommendationPreviews = new RecommendationPreviews(_openedTileId, plans, MapGenParams.CaptureState(_openedTileId)); }
                         catch (Exception error) { _previewError = error.Message; Log.Warning("[MapGenAI] Candidate preview unavailable: " + error); }
-                        string message=(IsKorean()?"현재 타일과 설정에 맞춰 추천했어요. 아래에서 하나를 골라 주세요. 아직 맵은 바뀌지 않았습니다. 번호를 입력하거나 버튼을 누르면 선택한 설정을 적용합니다.":"Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option.");
+                        string message=(IsKorean()?"현재 타일과 설정에 맞춰 추천했어요. 아래에서 하나를 골라 주세요. 아직 맵은 바뀌지 않았습니다. 번호를 입력하거나 버튼을 누르면 선택한 설정을 적용합니다. 선택 전에는 “3번 통로를 자연스럽게”처럼 후보를 수정할 수 있어요.":"Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option. Before selecting, you can refine it: e.g. “Make option 3’s passage more natural.”");
                         for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — 이렇게 바뀝니다":"Option "+(i+1)+" — changes")+"\n"+plans[i].Summary;
                         if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
                             message+=IsKorean()?"\n\n구조물의 실제 배치는 맵 생성 때 확인합니다.":"\n\nActual structure placement is checked during generation.";
@@ -765,11 +770,25 @@ For recommendations follow the rules below and propose three distinct landscape 
                     }
                     catch(FormatException error)
                     {
-                        ClearRecommendations();
+                        if(_requestedCandidates==null)ClearRecommendations();
                         var repair=_repairRecommendations;_repairRecommendations=null;
                         if(repair!=null){Log.Warning("[MapGenAI] Recommendations rejected before display: "+error.Message);repair(response,error.Message);return;}
                         throw;
                     }
+                }
+                else if(action=="revise")
+                {
+                    if(_explanationOnly || _recommendations==null || !RecommendationsCurrent())throw new FormatException("No current candidate to revise");
+                    int number=parsed.GetInt("option");
+                    var before=MapGenParams.CaptureState(_openedTileId);
+                    var revised=RecommendationPlan.Refine(_recommendations,number,parsed.GetObject("params"),before,
+                        edits=>MapGenParams.ValidatePatches(edits,_openedTileId),IsKorean(),DefinitionText);
+                    // Build the replacement snapshot before publishing the new plan.
+                    _recommendationPreviews?.Replace(number-1,revised,before);
+                    _recommendations[number-1]=revised;
+                    _history.Add(new ChatMessage("assistant",(IsKorean()?number+"번 후보만 수정했습니다. 아직 맵에는 적용하지 않았습니다.\n":
+                        "Revised option "+number+" only. Your map has not changed yet.\n")+revised.Summary));
+                    _llmContext.Add(new ChatMessage("assistant",response));_statusText="";
                 }
                 else if (action == "ask")
                 {
@@ -787,6 +806,7 @@ For recommendations follow the rules below and propose three distinct landscape 
                 }
                 else if (action == "generate")
                 {
+                    if(_requestedCandidates!=null)throw new FormatException(IsKorean()?"후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.":"Candidate edits must remain proposals. Request a revision by option number.");
                     if(_explanationOnly)throw new FormatException(IsKorean()?"충돌 안내 대신 다른 변경 명령을 받아 적용하지 않았습니다. 유지할 특징이나 교체할 특징을 명시해 주세요.":"Expected a conflict explanation; no alternative edit was applied. Specify which features to keep or replace.");
                     MapParamsData data;
                     try { data=ParseParams(parsed.GetObject("params"));MapGenParams.ValidatePatch(data,_openedTileId); }
@@ -801,57 +821,68 @@ For recommendations follow the rules below and propose three distinct landscape 
                         throw;
                     }
 
-                    ClearRecommendations();
-                    var warnings = new List<string>();
-
-                    var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
-                    var before = previous ?? new TileMapState();
-                    var proposed = MapStateEditor.Merge(before,data);
-                    var changes = MapStateCodec.ChangedFields(before,proposed);
-                    // Backend rejects the whole response before any state or undo history changes.
-                    var oldFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
-                    MapGenParams.ApplyPatch(data, _openedTileId);
-                    string desc;
-                    if (changes.Count == 0)
-                        desc = IsKorean() ? "변경된 설정이 없습니다. 지원되는 항목과 요청 내용을 확인해 주세요." : "No settings changed. Check the request and supported features.";
-                    else
-                    {
-                        _paramStack.Push(previous);
-                        _paramsReady = true;
-                        _llmContext.Clear();
-                        desc = (IsKorean()?"변경한 내용:\n":"Changes applied:\n")+new MapPlanDescription(IsKorean(),DefinitionText).Describe(before,MapGenParams.CaptureState(_openedTileId));
-                        var currentFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
-                        var actualAdded=currentFeatures.Except(oldFeatures).ToList();var actualRemoved=oldFeatures.Except(currentFeatures).ToList();
-                        var names=new MapPlanDescription(IsKorean(),DefinitionText);
-                        if(actualAdded.Count>0)desc+="\n"+(IsKorean()?"실제 추가된 특징: ":"Features added: ")+string.Join(", ",actualAdded.Select(n=>names.Name("feature",n)));
-                        if(actualRemoved.Count>0)desc+="\n"+(IsKorean()?"실제 제거된 특징: ":"Features removed: ")+string.Join(", ",actualRemoved.Select(n=>names.Name("feature",n)));
-                        if (!string.IsNullOrEmpty(MapGenParams.LastApplyWarning)) warnings.Add(MapGenParams.LastApplyWarning);
-                    }
-
-                    // 경고 메시지가 있으면 채팅에 추가
-                    string warningText = "";
-                    if (warnings.Count > 0)
-                    {
-                        warningText = "\n\n" + string.Join("\n", warnings);
-                        Log.Message($"[MapGenAI] 검증 경고 {warnings.Count}건: {string.Join("; ", warnings)}");
-                    }
-
-                    _history.Add(new ChatMessage("assistant",
-                        $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
-                    _statusText = "";
+                    ApplyEdits(new[]{data});
                 }
                 else throw new FormatException("Unsupported response action: " + action);
-                _explainInvalidReply=null;_repairRecommendations=null;
+                _explainInvalidReply=null;_repairRecommendations=null;_requestedCandidates=null;
             }
             catch (Exception e)
             {
                 Log.Warning("[MapGenAI] Response rejected: " + e.Message);
                 _explainInvalidReply=null;_repairRecommendations=null;
-                ClearRecommendations();
+                if(_requestedCandidates==null && _recommendations==null)ClearRecommendations();
+                _requestedCandidates=null;
                 _history.Add(new ChatMessage("assistant",
                     (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";
             }
+        }
+
+        private bool RecommendationsCurrent()=>_recommendations!=null && RecommendationState()==_recommendationState &&
+            (_recommendationPreviews==null || _recommendationPreviews.ContextMatches());
+
+        private void ApplyEdits(IReadOnlyList<MapParamsData> edits)
+        {
+            MapGenParams.ValidatePatches(edits,_openedTileId);
+            var warnings = new List<string>();
+
+            var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
+            var before = previous ?? new TileMapState();
+            var proposed = before;
+            foreach(var edit in edits)proposed=MapStateEditor.Merge(proposed,edit);
+            var changes = MapStateCodec.ChangedFields(before,proposed);
+            // Backend rejects the whole response before any state or undo history changes.
+            var oldFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
+            MapGenParams.ApplyPatches(edits, _openedTileId);
+            ClearRecommendations();
+            string desc;
+            if (changes.Count == 0)
+                desc = IsKorean() ? "변경된 설정이 없습니다. 지원되는 항목과 요청 내용을 확인해 주세요." : "No settings changed. Check the request and supported features.";
+            else
+            {
+                _paramStack.Push(previous);
+                _paramsReady = true;
+                _llmContext.Clear();
+                desc = (IsKorean()?"변경한 내용:\n":"Changes applied:\n")+new MapPlanDescription(IsKorean(),DefinitionText).Describe(before,MapGenParams.CaptureState(_openedTileId));
+                var currentFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
+                var actualAdded=currentFeatures.Except(oldFeatures).ToList();var actualRemoved=oldFeatures.Except(currentFeatures).ToList();
+                var names=new MapPlanDescription(IsKorean(),DefinitionText);
+                if(actualAdded.Count>0)desc+="\n"+(IsKorean()?"실제 추가된 특징: ":"Features added: ")+string.Join(", ",actualAdded.Select(n=>names.Name("feature",n)));
+                if(actualRemoved.Count>0)desc+="\n"+(IsKorean()?"실제 제거된 특징: ":"Features removed: ")+string.Join(", ",actualRemoved.Select(n=>names.Name("feature",n)));
+                if (!string.IsNullOrEmpty(MapGenParams.LastApplyWarning)) warnings.Add(MapGenParams.LastApplyWarning);
+            }
+
+            // 경고 메시지가 있으면 채팅에 추가
+            string warningText = "";
+            if (warnings.Count > 0)
+            {
+                warningText = "\n\n" + string.Join("\n", warnings);
+                Log.Message($"[MapGenAI] 검증 경고 {warnings.Count}건: {string.Join("; ", warnings)}");
+            }
+
+            _history.Add(new ChatMessage("assistant",
+                $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
+            _statusText = "";
         }
 
         private void ClearRecommendations()
@@ -949,9 +980,11 @@ For recommendations follow the rules below and propose three distinct landscape 
                 ClearRecommendations();_llmContext.Clear();
                 _history.Add(new ChatMessage("assistant",IsKorean()?"추천 후 현재 설정이 바뀌었습니다. 새 추천을 요청해 주세요.":"Settings changed after these options were prepared. Please request new recommendations."));return;
             }
-            string command=_recommendations[number-1].Command;
-            ClearRecommendations();_explanationOnly=false;_explainInvalidReply=null;_repairRecommendations=null;
-            HandleResponse(command); // Reuses preflight, atomic apply and Undo; no new model request.
+            var plan=_recommendations[number-1];
+            _explanationOnly=false;_explainInvalidReply=null;_repairRecommendations=null;_requestedCandidates=null;
+            try { ApplyEdits(plan.Edits()); }
+            catch(Exception error)
+            { _history.Add(new ChatMessage("assistant",(IsKorean()?"후보를 적용하지 못했습니다: ":"Could not apply candidate: ")+error.Message)); }
         }
 
         private MapParamsData ParseParams(SimpleJsonObject obj) => MapParameterParser.Parse(obj);
