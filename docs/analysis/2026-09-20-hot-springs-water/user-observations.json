@@ -1,0 +1,86 @@
+[
+  {
+    "line": 89,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 103,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 112,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 113,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"generate\",\"description\":\"중간 지점을 가로질러 서쪽에서 동쪽으로 이어지는 흙길을 추가합니다.\",\"params\":{\"road_ops\":[{\"op\":\"add\",\"road\":{\"id\":\"east_west_dirt_path\",\"kind\":\"DirtPath\",\"points\":[[0,0.5],[1,0.5]],\"route\":\"avoid\"}}]}}"
+  },
+  {
+    "line": 121,
+    "text": "[MapGenAI] Local road generation: 흙길 / Dirt path: 도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다. / No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved."
+  },
+  {
+    "line": 122,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 123,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"현재 도로는 강이나 바다를 건너는 다리 및 산을 뚫는 터널을 자동으로 생성하지 못하며, 물을 가로지르는 경로는 배치가 실패합니다. 대신 강을 건너지 않고 강 한쪽(동쪽 또는 서쪽) 평지에서 산 출구로 연결되도록 도로 경로를 조정하거나, 강 양쪽에 각각 별도의 도로를 배치하는 방식을 추천드립니다. 어떤 방식으로 연결해 드릴까요?\"}"
+  },
+  {
+    "line": 125,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"generate\",\"description\":\"북쪽(12시)에서 시작해 중앙에서 꺾여 동쪽(3시)으로 이어지는 흙길로 수정합니다.\",\"params\":{\"road_ops\":[{\"op\":\"update\",\"id\":\"east_west_dirt_path\",\"changes\":{\"points\":[[0.5,1],[0.5,0.5],[1,0.5]]}}]}}"
+  },
+  {
+    "line": 133,
+    "text": "[MapGenAI] Local road generation: 흙길 / Dirt path: 도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다. / No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved."
+  },
+  {
+    "line": 134,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 141,
+    "text": "[MapGenAI] Local road generation: 흙길 / Dirt path: 도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다. / No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved."
+  },
+  {
+    "line": 142,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 149,
+    "text": "[MapGenAI] Authored generation: 요청한 폭의 마른 통로에 장애물이 360칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has 360 obstructed cells; adjust its route/width. World water and buildings are preserved."
+  },
+  {
+    "line": 150,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"현재 타일은 해안과 접해 있어 온천(HotSprings) 특징을 추가할 수 없습니다. (온천 조건: 해안 접면 수 0개 필요)\\n\\n원하시면 mutator 대신 직접 형태를 만들어 자연스러운 온천 웅덩이(HotSpring 지형 타일)를 맵에 배치해 드릴 수 있습니다. 그렇게 진행할까요?\"}"
+  },
+  {
+    "line": 152,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"현재 타일은 해안에 접해 있어(남쪽 해안) 게임 규칙상 '온천(HotSprings)' 월드 특징을 추가할 수 없습니다. (해안 접면 수가 0개여야 가능)\\n\\n대신 맵 내부에 직접 '온천수(HotSpring)' 타일로 이루어진 온천 웅덩이를 만들어 배치할 수는 있습니다. 웅덩이 형태로 추가해 드릴까요, 아니면 다른 특징을 원하시나요?\"}"
+  },
+  {
+    "line": 154,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"게임 자체의 생성 규칙과 제약 조건은 강제로 무시하거나 우회할 수 없습니다. 현재 타일은 남쪽 해안에 접해 있어 '온천(HotSprings)' 월드 특징을 등록하면 생성이 완전히 실패합니다.\\n\\n대신 월드 특징 등록 대신 실제 '온천수(HotSpring)' 지형 타일로 이루어진 웅덩이를 원하는 위치에 직접 생성해 드릴 수 있습니다. 이 방식으로 추가해 드릴까요?\"}"
+  },
+  {
+    "line": 156,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"generate\",\"description\":\"요청에 따라 온천(HotSprings) 특징 추가를 시도합니다. (주의: 해안 타일 제약으로 인해 게임 엔진 검증 시 생성이 실패할 수 있습니다)\",\"params\":{\"mutators\":[\"HotSprings\"]}}"
+  },
+  {
+    "line": 158,
+    "text": "[MapGenAI] Edit preflight rejected; requesting one explanation without applying: HotSprings: 해안 접면 수 조건 / Coastal sides required: 0"
+  },
+  {
+    "line": 159,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"'온천' 특징 추가가 실패했습니다. 현재 타일은 남쪽에 해안이 있어 게임 엔진의 규칙(해안 접면 수 0개 필요)과 충돌합니다.\\n\\n월드 특징 대신, 맵 내부에 직접 '온천수' 타일로 이루어진 자연스러운 웅덩이를 만들어 배치해 드릴까요?\"}"
+  },
+  {
+    "line": 161,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"'온천(HotSprings)' 월드 특징은 해안이 없는 타일(해안 접면 수 0)에서만 생성 가능하도록 게임 엔진에 제한되어 있어 현재 타일(남쪽 해안)에는 추가할 수 없습니다.\\n\\n대신 맵 내부(예: 분지 안쪽이나 평지)에 실제 '온천수(HotSpring)' 지형 타일을 사용한 자연스러운 온천 웅덩이를 직접 만들어 드릴 수 있습니다. 이 방식으로 배치해 드릴까요?\"}"
+  },
+  {
+    "line": 163,
+    "text": "[MapGenAI] HandleResponse 원문: {\"action\":\"ask\",\"message\":\"'온천(HotSprings)' 특징은 해안 접면 수가 0개여야만 작동하도록 게임 엔진에 엄격히 제한되어 있어, 남쪽 해안이 있는 현재 타일에서는 '특징(mutator)'으로 추가할 수 없습니다. 시스템상 이 규칙을 우회하여 특징에 등록할 수 없는 점 양해 부탁드립니다. 대신 맵 내부에 직접 온천수(HotSpring) 타일로 웅덩이를 파서 배치해 드릴 수는 있습니다.\"}"
+  }
+]

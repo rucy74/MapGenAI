@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {
+      "id": "natural",
+      "kind": "hot-springs-water",
+      "naturalHotSpring": true,
+      "generateUnchanged": true,
+      "beforeParams": {},
+      "request": "Keep the naturally occurring hot springs unchanged."
+    }
+  ]
+}

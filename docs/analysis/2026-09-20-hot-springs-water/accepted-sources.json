@@ -1,0 +1,10 @@
+{
+  "inland": "replies\\inland-response.json",
+  "coast-0": "provider\\coast-0-response.json",
+  "coast-1": "replies\\coast-1-response.json",
+  "river-0": "replies\\river-0-response.json",
+  "river-1": "replies\\river-1-response.json",
+  "mouth-0": "provider\\mouth-0-response.json",
+  "mouth-1": "replies\\mouth-1-response.json",
+  "mouth-2": "replies\\mouth-2-response.json"
+}

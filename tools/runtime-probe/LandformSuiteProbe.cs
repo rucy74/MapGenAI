@@ -33,6 +33,7 @@ namespace MapGenAI.RuntimeProbe
             if(!GenCommandLine.TryGetCommandLineArg("mapgenAILandformSuite",out _))return;
             var h=new Harmony("choco.mapgenai.probe.landform-suite");
             RoadProbeAudit.Configure(h);
+            HotSpringAudit.Configure(h);
             // Full-map suites can run before normal GameComponent updates resume.
             // Root updates also drive deferred preview work and its bounded timeout.
             h.Patch(AccessTools.Method(typeof(Root),"Update"),postfix:new HarmonyMethod(typeof(LandformSuiteProbe),nameof(Tick)));
@@ -160,6 +161,19 @@ namespace MapGenAI.RuntimeProbe
                         tile=Find.WorldGrid.Tiles.First(t=>t is RimWorld.Planet.SurfaceTile s && s.Roads?.Count>0 && s.Roads.All(r=>r.road.defName=="DirtRoad" || r.road.defName=="DirtPath") && t.PrimaryBiome==BiomeDefOf.TemperateForest && t.hilliness==Hilliness.Flat && !FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count==0 && !Find.WorldObjects.AnyMapParentAt(t.tile));
                         target=tile.tile;
                     }
+                    if(c.GetBool("worldRiver"))
+                    {
+                        bool wantCoast=c.GetString("tile")=="coast";
+                        tile=Find.WorldGrid.Tiles.Where(t=>t.PrimaryBiome==BiomeDefOf.TemperateForest && FeaturePolicy.HasRiver(t)
+                            && (FeaturePolicy.WaterNeighbors(t).Any(n=>n.PrimaryBiome==BiomeDefOf.Ocean)==wantCoast)
+                            && !t.Mutators.Any(d=>d.categories.Contains("Lake")) && !Find.WorldObjects.AnyMapParentAt(t.tile)).Skip(c.GetInt("riverIndex")).First();
+                        target=tile.tile;
+                    }
+                    if(c.GetBool("naturalHotSpring"))
+                    {
+                        tile=Find.WorldGrid.Tiles.First(t=>t.Mutators.Any(d=>d.defName=="HotSprings")
+                            && !Find.WorldObjects.AnyMapParentAt(t.tile));target=tile.tile;
+                    }
                     var before=c.GetString("beforeFile")==null ? MapStateEditor.Merge(new TileMapState(),MapParameterParser.Parse(c.GetObject("beforeParams"))) : MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(Path.GetDirectoryName(manifest),c.GetString("beforeFile"))));
                     Find.WorldSelector.SelectedTile=target;MapGenParams.RestoreSnapshot(before,target);
                     File.WriteAllText(Path.Combine(output,id+"-before.json"),MapStateCodec.Serialize(before));
@@ -282,6 +296,7 @@ namespace MapGenAI.RuntimeProbe
             result["passageScopeAudit"]=passageAudit;
             result["compoundAudit"]=compoundAudit;
             result["roadAudit"]=RoadProbeAudit.Measure(map);
+            result["hotSpringAudit"]=HotSpringAudit.Measure(map);
             int center=(h/2)*w+w/2;var centerGround=Flood(dry,w,h,new[]{center});
             result["centerDry"]=dry[center];result["centerReachesSouth"]=Enumerable.Range(0,w).Any(i=>centerGround[i]);result["centerReachesAnyEdge"]=Edge(centerGround,w,h);result["centerGroundCells"]=centerGround.Count(v=>v);
             if(kind=="valley-exit" || kind=="straight-canyon" || kind=="bent-canyon")

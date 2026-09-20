@@ -54,7 +54,12 @@
 개발 DLL은 `dev/Assemblies/`에 빌드된다. `dist/Assemblies/MapGenAI.dll`과 설치본은 v1.6 보존 대상이며 개발 빌드로 자동 덮어쓰지 않는다.
 
 
-## 지역 맵 도로
+## 강·해안 온천
+
+- `FeaturePolicy.PostTerrainOrder`, `Patches/HotSpringWaterPatch.cs`: 명시적으로 추가한 정확한 native HotSprings만 강/해안 자연발생 제한에서 제외한다. 해당 타일의 PostTerrain 실행 목록 복사본에서 온천을 마지막으로 이동하고, 호출 전 기존 물 지형을 finalizer에서 복원한다. native River가 기존 온천수를 건너뛰어 끊기는 것을 방지한다. 원본 목록/공유 genOrder/Init/고도 단계/다른 worker 순서는 보존한다.
+- `tools/runtime-probe/HotSpringAudit.cs`, `tools/evaluate_hot_springs_water.py`: 이전 거부 재현·실제 물 복원·연결·Preview와 기존 지형/도로 이미지 비교. [검증 및 한계](docs/analysis/2026-09-20-hot-springs-water/report.md).
+
+## 지역 맵 도로 구현
 
 - `MapGen/RoadPlans.cs`, `RoadPrompt.cs`: localRoads/road_ops 계약, 종류별 읽기 쉬운 설명, 기존 저장의 기본값. 월드 도로 연결과 legacy roads bool은 변경하지 않는다.
 - `MapGen/RoadRouting.cs`, `LocalRoadGeneration.cs`, `RoadPlacement.cs`: 순수 경로 탐색·폭 검사 후 RoadDef 노면을 단계410에서 적용한다. 도로 없는 상태는 단계 삽입/RNG 소비 없음. 자동 Bulldoze/다리/터널/부속 건물 미지원. 기존 바닥과 높이를 보존한다.

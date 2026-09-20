@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-09-20T16:12:39.384146+09:00",
+  "filesScanned": 562,
+  "secretMatches": 0,
+  "positiveControls": 3,
+  "localLinksChecked": 36,
+  "isolatedRunsCleaned": [
+    "baseline",
+    "final-r1",
+    "final-r2",
+    "natural-baseline",
+    "natural-baseline-r2",
+    "natural-final",
+    "natural-final-r2",
+    "roads-unchanged",
+    "unchanged-baseline"
+  ],
+  "evaluationOk": true,
+  "dllSha256": "47fa300bd24e0211559d4acdef338b2eee7a8897506bd48f0e7301f83cdb3ffb"
+}

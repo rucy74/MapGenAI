@@ -1,0 +1,1 @@
+{"requestsCompleted":2,"transportAndEnvelopeOk":true,"results":[{"id":"coast-0","action":"generate","model":"gemini-3.8-flash","inputTokens":15049,"outputTokens":27},{"id":"mouth-0","action":"generate","model":"gemini-3.8-flash","inputTokens":15115,"outputTokens":29}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

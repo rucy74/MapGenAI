@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "id": "inland",
+      "kind": "hot-springs-water",
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "coast-0",
+      "kind": "hot-springs-water",
+      "tile": "coast",
+      "worldRiver": false,
+      "riverIndex": 0,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "coast-1",
+      "kind": "hot-springs-water",
+      "tile": "coast",
+      "worldRiver": false,
+      "riverIndex": 1,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "river-0",
+      "kind": "hot-springs-water",
+      "tile": "inland",
+      "worldRiver": true,
+      "riverIndex": 0,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "river-1",
+      "kind": "hot-springs-water",
+      "tile": "inland",
+      "worldRiver": true,
+      "riverIndex": 1,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "mouth-0",
+      "kind": "hot-springs-water",
+      "tile": "coast",
+      "worldRiver": true,
+      "riverIndex": 0,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "mouth-1",
+      "kind": "hot-springs-water",
+      "tile": "coast",
+      "worldRiver": true,
+      "riverIndex": 1,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    },
+    {
+      "id": "mouth-2",
+      "kind": "hot-springs-water",
+      "tile": "coast",
+      "worldRiver": true,
+      "riverIndex": 2,
+      "request": "온천을 지형 특징으로 추가해 줘",
+      "beforeParams": {}
+    }
+  ]
+}

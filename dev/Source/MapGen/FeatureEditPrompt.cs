@@ -14,7 +14,7 @@ namespace MapGenAI.MapGen
 - 채움 재료와 구조물 위치는 아래 텍스트 영역 규칙을 따릅니다. 지형 특징 이름과 fill 재료 이름을 혼동하지 마세요.
 - 후보는 현재 특징 유지 가능/교체 필요/불가로 구분됩니다. 대안을 제안하기 전에도 이 구분을 따르세요. 교체 필요 항목을 단순 추가 대안으로 제안하지 마세요. 동일 categories 또는 어느 쪽 overrideCategories에 걸리는 특징은 함께 추가하지 않습니다. 기존 특징 교체는 사용자가 대상을 명확히 선택한 경우만 remove_mutators로 수행합니다.
 - 두 대안을 한 번에 제시하고 '그래'를 받았다고 둘 다 적용하지 마세요. 하나의 구체적인 호환 대안을 제안하거나 어느 쪽인지 질문하세요. 기존 온천 등 내부 특징을 유지하며 새 물/모래를 원하면 특징 추가와 직접 도형 편집을 구분하세요.
-- 온천(HotSprings)은 자체 온천수/암반을 만드는 내부 특징이므로 평지와 자연발생 목록 밖 바이옴에서도 직접 추가할 수 있습니다. 산악이어야 한다고 추측하지 말고 Available/Unavailable 결과를 따르세요. 기존 강·해안과의 충돌 제한은 유지됩니다.
+- 온천(HotSprings)은 자체 온천수/암반을 만드는 내부 특징이므로 평지와 자연발생 목록 밖 바이옴에서도 직접 추가할 수 있습니다. 산악이어야 한다고 추측하지 말고 Available/Unavailable 결과를 따르세요. 강·해안 타일에서도 추가할 수 있으며 기존 강·바닷물·호숫가 물은 보존하고 남은 육지에 온천을 생성합니다. 자연 발생 조건을 게임 엔진상 추가 불가능한 조건으로 설명하지 마세요. 다른 호수 계열 특징과의 충돌은 여전히 따릅니다.
 - 현재 활성 목록에 없는 이름은 '이 게임에 로드되지 않음'입니다. 모드가 꺼져 있을 수 있으므로 그 기능 자체가 존재하지 않는다고 단정하지 마세요. 확인/설명 답변도 반드시 action:ask JSON입니다. 사용자가 '없어?', '찾아봐'라고 물어도 자유 형식 문장으로 응답하지 마세요.
 " : @"
 Feature editing and world geography:
@@ -28,7 +28,7 @@ Feature editing and world geography:
 - Materials and structure placement follow the text-region rules below. Feature names and fill material names are different catalogs.
 - Candidate groups distinguish additive, replacement-required and unavailable against the current plan. Respect these groups before proposing alternatives. Shared categories or overrides conflict. Never present a replacement-required feature as a harmless addition; remove_mutators requires the user to explicitly choose what to replace.
 - A vague yes after several alternatives neither selects one nor authorizes all. Offer one concrete compatible alternative or ask which option. Distinguish direct water/sand shapes from feature additions when retaining an existing spring or other internal feature.
-- Native HotSprings creates its own pools/rock bed: explicit additions may use flat tiles and biomes outside its natural-spawn whitelist. Follow Available/Unavailable rather than inventing a mountain requirement. River/shore conflict restrictions remain.
+- Native HotSprings creates its own pools/rock bed: explicit additions may use flat tiles and biomes outside its natural-spawn whitelist. Follow Available/Unavailable rather than inventing a mountain requirement. Explicit additions also support river/coastal tiles: preserve existing river/ocean/lakeshore water and generate springs on remaining land. Do not present natural-spawn preferences as engine impossibilities. Conflicts with other lake-category features still apply.
 - Missing from the active catalogs means not loaded in this game, not that the feature cannot exist. A supplying mod may be disabled. Every explanation or follow-up such as 'does it exist?' or 'look again' must still be action:ask JSON, never plain prose.
 ";
     }

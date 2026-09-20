@@ -1,0 +1,1 @@
+keep ruins when a direct road is blocked

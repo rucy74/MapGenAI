@@ -14,6 +14,16 @@ namespace MapGenAI.MapGen
     {
         public static bool HasRiver(Tile tile) => tile is SurfaceTile surface && surface.Rivers?.Count > 0;
 
+        public static bool NativeHotSpring(TileMutatorDef def) => def.Worker?.GetType().FullName == "RimWorld.TileMutatorWorker_HotSprings";
+
+        public static IList<TileMutatorDef> PostTerrainOrder(IList<TileMutatorDef> features, TileMapState state, bool worldWater)
+        {
+            if (!worldWater || state == null || !features.Any(d => NativeHotSpring(d) && state.mutators.Contains(d.defName))) return features;
+            // The river worker skips pre-existing non-river water. Finish world water first,
+            // then let the native spring worker use land while preserving that water.
+            return features.OrderBy(d => NativeHotSpring(d) && state.mutators.Contains(d.defName) ? 1 : 0).ToList();
+        }
+
         public static List<Tile> WaterNeighbors(Tile tile)
         {
             var neighbors = new List<PlanetTile>();
@@ -33,7 +43,7 @@ namespace MapGenAI.MapGen
                 // This native worker creates its own pool and rock bed on flat ground too.
                 // Its world-generation biome/hilliness preferences are not runtime prerequisites.
                 // Exact type only: an external subclass may add its own generation requirements.
-                bool explicitHotSpring = worker?.GetType().FullName == "RimWorld.TileMutatorWorker_HotSprings";
+                bool explicitHotSpring = NativeHotSpring(def);
                 bool riverWorker = IsWorker(worker, "RimWorld.TileMutatorWorker_River");
                 if ((def.categories.Contains("River") || riverWorker) && rivers == 0)
                     return "월드 강이 있는 타일에서만 가능합니다 / Requires an existing world river";
@@ -67,9 +77,9 @@ namespace MapGenAI.MapGen
                 if (!explicitHotSpring && ((def.minHilliness != Hilliness.Undefined && tile.hilliness < def.minHilliness) ||
                     (def.maxHilliness != Hilliness.Undefined && tile.hilliness > def.maxHilliness)))
                     return "월드 지형 조건 / World hilliness required: " + def.minHilliness + " ~ " + def.maxHilliness;
-                if (def.coastSidesRange != IntRange.Invalid && (water.Count < def.coastSidesRange.min || water.Count > def.coastSidesRange.max))
+                if (!explicitHotSpring && def.coastSidesRange != IntRange.Invalid && (water.Count < def.coastSidesRange.min || water.Count > def.coastSidesRange.max))
                     return "해안 접면 수 조건 / Coastal sides required: " + def.coastSidesRange;
-                if (rivers > 0 && !def.canSpawnOnRiver) return "강이 있는 타일에서는 생성할 수 없습니다 / Excludes river tiles";
+                if (!explicitHotSpring && rivers > 0 && !def.canSpawnOnRiver) return "강이 있는 타일에서는 생성할 수 없습니다 / Excludes river tiles";
                 if (surface?.Roads?.Count > 0 && !def.canSpawnOnRoad) return "도로가 있는 타일에서는 생성할 수 없습니다 / Excludes road tiles";
                 // Landmark placement itself is not being re-rolled. Internal features can be edited there.
                 // canSpawnOnLandmark/chanceOnNonLandmarkTile control random placement, not map generation.

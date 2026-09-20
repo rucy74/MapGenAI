@@ -1,0 +1,120 @@
+{
+  "ok": true,
+  "dllSha256": "47fa300bd24e0211559d4acdef338b2eee7a8897506bd48f0e7301f83cdb3ffb",
+  "offlineTests": 174,
+  "newProviderCalls": 2,
+  "rejectedBefore": 7,
+  "hotSpringFullMaps": 8,
+  "hotSpringPreviews": 8,
+  "unchangedImages": 41,
+  "naturalPostTerrainIdentical": true,
+  "oldDllNaturalFinalMapVaries": true,
+  "restoredWater": [
+    {
+      "id": "river-0",
+      "source": "full",
+      "restoredCells": 521
+    },
+    {
+      "id": "river-0",
+      "source": "preview",
+      "restoredCells": 521
+    },
+    {
+      "id": "river-1",
+      "source": "full",
+      "restoredCells": 148
+    },
+    {
+      "id": "river-1",
+      "source": "preview",
+      "restoredCells": 148
+    },
+    {
+      "id": "mouth-0",
+      "source": "full",
+      "restoredCells": 314
+    },
+    {
+      "id": "mouth-0",
+      "source": "preview",
+      "restoredCells": 314
+    },
+    {
+      "id": "mouth-1",
+      "source": "full",
+      "restoredCells": 273
+    },
+    {
+      "id": "mouth-1",
+      "source": "preview",
+      "restoredCells": 273
+    },
+    {
+      "id": "mouth-2",
+      "source": "full",
+      "restoredCells": 421
+    },
+    {
+      "id": "mouth-2",
+      "source": "preview",
+      "restoredCells": 421
+    }
+  ],
+  "auditPositiveControls": 3,
+  "maps": [
+    {
+      "id": "inland",
+      "image": "final-r2/inland-generated-preview.png",
+      "preview": "final-r2/inland-background-preview.png",
+      "springs": 415
+    },
+    {
+      "id": "coast-0",
+      "image": "final-r2/coast-0-generated-preview.png",
+      "preview": "final-r2/coast-0-background-preview.png",
+      "springs": 653
+    },
+    {
+      "id": "coast-1",
+      "image": "final-r2/coast-1-generated-preview.png",
+      "preview": "final-r2/coast-1-background-preview.png",
+      "springs": 502
+    },
+    {
+      "id": "river-0",
+      "image": "final-r2/river-0-generated-preview.png",
+      "preview": "final-r2/river-0-background-preview.png",
+      "springs": 708
+    },
+    {
+      "id": "river-1",
+      "image": "final-r2/river-1-generated-preview.png",
+      "preview": "final-r2/river-1-background-preview.png",
+      "springs": 649
+    },
+    {
+      "id": "mouth-0",
+      "image": "final-r2/mouth-0-generated-preview.png",
+      "preview": "final-r2/mouth-0-background-preview.png",
+      "springs": 715
+    },
+    {
+      "id": "mouth-1",
+      "image": "final-r2/mouth-1-generated-preview.png",
+      "preview": "final-r2/mouth-1-background-preview.png",
+      "springs": 1092
+    },
+    {
+      "id": "mouth-2",
+      "image": "final-r2/mouth-2-generated-preview.png",
+      "preview": "final-r2/mouth-2-background-preview.png",
+      "springs": 727
+    }
+  ],
+  "limitations": [
+    "Fixed world and isolated profile, not the user entire mod set.",
+    "Road bridges remain unsupported.",
+    "Exceptional worker exit restoration was not separately fault-injected."
+  ]
+}

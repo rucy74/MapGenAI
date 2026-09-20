@@ -1,0 +1,9 @@
+{
+  "sourceDllSha256": "50CAA50CF25B1F6FC820B30F78271F4E5943AB15B8DB194DF04845E425ECBA2A",
+  "pid": 75220,
+  "probeDllSha256": "F37152C813AC10E7B7A43F09875481560EFCD1153CD00821539ED22880FF6E8D",
+  "mod": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI_Probe_20260920-160612-563",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260920-160612-563",
+  "created": "2026-09-20T16:06:13.0155308+09:00",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-20-hot-springs-water\\natural-baseline"
+}

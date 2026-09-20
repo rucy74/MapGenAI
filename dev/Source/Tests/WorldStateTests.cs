@@ -9,6 +9,7 @@ using static CoreRegressionTests;
 
 static class WorldStateTests
 {
+    class CustomHotSpringWorker : RimWorld.TileMutatorWorker_HotSprings { }
     static void Apply(int tile, string json) => MapGenParams.ApplyPatch(MapParameterParser.Parse(SimpleJson.Parse(json)),tile);
     static void Setup()
     {
@@ -47,18 +48,35 @@ static class WorldStateTests
                 Throws(()=>MapGenParams.ValidatePatch(MapParameterParser.Parse(SimpleJson.Parse(bad)),1));Equal(before,MapStateCodec.Serialize(MapGenParams.CaptureState(1)));
             }
         });
-        Check("Explicit native hot springs allow flat biomes but retain river and shore constraints",()=>
+        Check("Explicit native hot springs allow flat biomes and preserve river and shore connections",()=>
         {
             Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.hilliness=RimWorld.Hilliness.Flat;
             var def=new TileMutatorDef{defName="HotSprings",Worker=new RimWorld.TileMutatorWorker_HotSprings(),minHilliness=RimWorld.Hilliness.Mountainous,
                 biomeWhitelist=new List<RimWorld.BiomeDef>{new RimWorld.BiomeDef{defName="OtherBiome"}},canSpawnOnRiver=false,coastSidesRange=new IntRange(0,0)};
             DefDatabase<TileMutatorDef>.Definitions[def.defName]=def;
             Apply(1,"{\"mutators\":[\"HotSprings\"]}");Equal("HotSprings",tile.Mutators.Single().defName);Equal(RimWorld.Hilliness.Flat,tile.hilliness);MapGenParams.ClearTile(1);
-            tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));tile.Rivers.Clear();
+            tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});Apply(1,"{\"mutators\":[\"HotSprings\"]}");Equal(1,tile.Rivers.Count);Equal(true,tile.Mutators.Any(d=>d.defName=="River"));MapGenParams.ClearTile(1);tile.Rivers.Clear();
             var neighbor=Find.WorldGrid[2];var oldBiome=neighbor.PrimaryBiome;neighbor.PrimaryBiome=RimWorld.BiomeDefOf.Ocean;
-            Find.WorldGrid.Neighbors[1]=new List<PlanetTile>{2};Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));
+            DefDatabase<TileMutatorDef>.Definitions["Coast"]=new TileMutatorDef{defName="Coast"};
+            Find.WorldGrid.Neighbors[1]=new List<PlanetTile>{2};Apply(1,"{\"mutators\":[\"HotSprings\"]}");Equal(true,tile.Mutators.Any(d=>d.defName=="Coast"));MapGenParams.ClearTile(1);
             Find.WorldGrid.Neighbors.Clear();neighbor.PrimaryBiome=oldBiome;
             def.Worker=new TileMutatorWorker();Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));
+        });
+        Check("Hot spring water ordering changes only explicit native springs and keeps shared definitions unchanged",()=>
+        {
+            var spring=new TileMutatorDef{defName="HotSprings",Worker=new RimWorld.TileMutatorWorker_HotSprings()};
+            var river=new TileMutatorDef{defName="River"};var shore=new TileMutatorDef{defName="Coast"};
+            var features=new List<TileMutatorDef>{spring,river,shore};var state=new TileMapState();state.mutators.Add("HotSprings");
+            var order=FeaturePolicy.PostTerrainOrder(features,state,true);
+            Equal("River,Coast,HotSprings",string.Join(",",order.Select(d=>d.defName)));Equal("HotSprings,River,Coast",string.Join(",",features.Select(d=>d.defName)));
+            Equal(true,ReferenceEquals(features,FeaturePolicy.PostTerrainOrder(features,state,false)));
+            Equal(true,ReferenceEquals(features,FeaturePolicy.PostTerrainOrder(features,new TileMapState(),true)));
+            Equal(true,ReferenceEquals(features,FeaturePolicy.PostTerrainOrder(features,null,true)));
+            spring.Worker=new CustomHotSpringWorker();
+            Equal(true,ReferenceEquals(features,FeaturePolicy.PostTerrainOrder(features,state,true)));
+            Setup();var tile=(SurfaceTile)Find.WorldGrid[1];tile.Rivers.Add(new SurfaceTile.RiverLink{neighbor=2});
+            spring.canSpawnOnRiver=false;DefDatabase<TileMutatorDef>.Definitions[spring.defName]=spring;
+            Throws(()=>Apply(1,"{\"mutators\":[\"HotSprings\"]}"));
         });
         Check("World river deletion rejects the whole request and keeps map edits unchanged",()=>
         {
