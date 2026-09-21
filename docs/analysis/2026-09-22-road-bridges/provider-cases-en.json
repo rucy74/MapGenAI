@@ -1,0 +1,42 @@
+{
+  "cases": [
+    {
+      "id": "native-river-en",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "straight_river": true,
+        "river_direction": "vertical"
+      },
+      "request": "Add a dirt road from the west edge to the east edge, crossing the river with a bridge where needed.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "worldRiver": true
+    }
+  ]
+}

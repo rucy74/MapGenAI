@@ -1,0 +1,1655 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "label": "native-r1: complete",
+      "ok": true
+    },
+    {
+      "label": "baseline-native: complete",
+      "ok": true
+    },
+    {
+      "label": "19 paired fixture maps",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: generated",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: success",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: success",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "dirt-path: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "dirt-path: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "dirt-path: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: generated",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: success",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: success",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "dirt-road: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "dirt-road: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "dirt-road: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "dirt-road/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: generated",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: success",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: success",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "stone-road: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "stone-road: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "stone-road: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "stone-road/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "stone-road/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: generated",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: success",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: success",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "asphalt: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "asphalt: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "asphalt: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "asphalt/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "asphalt/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "highway/full: generated",
+      "ok": true
+    },
+    {
+      "label": "highway/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "highway/full: success",
+      "ok": true
+    },
+    {
+      "label": "highway/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "highway/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: success",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "highway: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "highway: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "highway: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "highway/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "highway/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtPath: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "bridge-DirtRoad: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "bridge-StoneRoad: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltRoad: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: success",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "bridge-AncientAsphaltHighway: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: generated",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: success",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: success",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/full: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "pond-dry-detour/preview: old map unchanged",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: generated",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: success",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: success",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "two-crossings/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "two-crossings: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "two-crossings: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "two-crossings: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: generated",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: success",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: success",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "diagonal-bridge: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/full: generated",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected/preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "deep-lake-rejected: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/full: generated",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected/preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "lava-rejected: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/full: generated",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected/preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "water-endpoint-rejected: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/full: generated",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected/preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "batch-preflight-rejected: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: generated",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: success",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "native-river/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: success",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "native-river/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-full: generated",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-preview: generated",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "native-river/old-preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "native-river: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "native-river: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "native-river: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/full: generated",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/full: success",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/preview: success",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "wet-ground/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "wet-ground: full-preview bridge layers",
+      "ok": true
+    },
+    {
+      "label": "wet-ground: full-preview roads",
+      "ok": true
+    },
+    {
+      "label": "wet-ground: all 62500 preview pixels",
+      "ok": true
+    },
+    {
+      "label": "Native river shallow and deep base preserved",
+      "ok": true
+    },
+    {
+      "label": "fault-native: complete",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/full: generated",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/full: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/full: five real writes occurred",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/preview: rejected without painting",
+      "ok": true
+    },
+    {
+      "label": "injected-fault/preview: five real writes occurred",
+      "ok": true
+    },
+    {
+      "label": "existing-native-r2: complete",
+      "ok": true
+    },
+    {
+      "label": "existing/full: generated",
+      "ok": true
+    },
+    {
+      "label": "existing/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "existing/full: success",
+      "ok": true
+    },
+    {
+      "label": "existing/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "existing/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "existing/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "existing/full: fixture actually present",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: success",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "existing/preview: fixture actually present",
+      "ok": true
+    },
+    {
+      "label": "ko: fresh first response",
+      "ok": true
+    },
+    {
+      "label": "provider-native-ko: complete",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: generated",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: success",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: success",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "provider-ko/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "ko: first response preview pixels",
+      "ok": true
+    },
+    {
+      "label": "en: fresh first response",
+      "ok": true
+    },
+    {
+      "label": "provider-native-en: complete",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: generated",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: success",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: bridge count",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "provider-en/full: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: generated",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: preserved layers/world links",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: success",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: bridge count",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: walkable continuous road",
+      "ok": true
+    },
+    {
+      "label": "provider-en/preview: road-bridge-road",
+      "ok": true
+    },
+    {
+      "label": "en: first response preview pixels",
+      "ok": true
+    },
+    {
+      "label": "native-r1: current DLL",
+      "ok": true
+    },
+    {
+      "label": "fault-native: current DLL",
+      "ok": true
+    },
+    {
+      "label": "existing-native-r2: current DLL",
+      "ok": true
+    },
+    {
+      "label": "provider-native-ko: current DLL",
+      "ok": true
+    },
+    {
+      "label": "provider-native-en: current DLL",
+      "ok": true
+    },
+    {
+      "label": "183 offline tests passed",
+      "ok": true
+    }
+  ],
+  "nativeChecks": 369,
+  "dllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+  "offlineTests": 183,
+  "currentFullMaps": 23,
+  "currentPreviews": 23,
+  "baselineFullMaps": 19,
+  "baselinePreviews": 19,
+  "unchangedDryMaps": [
+    "dirt-path/full",
+    "dirt-path/preview",
+    "dirt-road/full",
+    "dirt-road/preview",
+    "stone-road/full",
+    "stone-road/preview",
+    "asphalt/full",
+    "asphalt/preview",
+    "highway/full",
+    "highway/preview",
+    "pond-dry-detour/full",
+    "pond-dry-detour/preview"
+  ],
+  "successfulFixturePixelMatches": 15,
+  "providerCalls": [
+    {
+      "id": "native-river",
+      "action": "generate",
+      "model": "gemini-3.8-flash",
+      "inputTokens": 15218,
+      "outputTokens": 85
+    },
+    {
+      "id": "bridge-DirtPath",
+      "action": "generate",
+      "model": "gemini-3.8-flash",
+      "inputTokens": 12533,
+      "outputTokens": 80
+    }
+  ],
+  "maps": [
+    {
+      "id": "dirt-path",
+      "image": "native-r1/dirt-path-generated-preview.png",
+      "preview": "native-r1/dirt-path-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "dirt-road",
+      "image": "native-r1/dirt-road-generated-preview.png",
+      "preview": "native-r1/dirt-road-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "stone-road",
+      "image": "native-r1/stone-road-generated-preview.png",
+      "preview": "native-r1/stone-road-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "asphalt",
+      "image": "native-r1/asphalt-generated-preview.png",
+      "preview": "native-r1/asphalt-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "highway",
+      "image": "native-r1/highway-generated-preview.png",
+      "preview": "native-r1/highway-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "bridge-DirtPath",
+      "image": "native-r1/bridge-DirtPath-generated-preview.png",
+      "preview": "native-r1/bridge-DirtPath-background-preview.png",
+      "bridgeCells": 153,
+      "expectedFailure": false
+    },
+    {
+      "id": "bridge-DirtRoad",
+      "image": "native-r1/bridge-DirtRoad-generated-preview.png",
+      "preview": "native-r1/bridge-DirtRoad-background-preview.png",
+      "bridgeCells": 153,
+      "expectedFailure": false
+    },
+    {
+      "id": "bridge-StoneRoad",
+      "image": "native-r1/bridge-StoneRoad-generated-preview.png",
+      "preview": "native-r1/bridge-StoneRoad-background-preview.png",
+      "bridgeCells": 153,
+      "expectedFailure": false
+    },
+    {
+      "id": "bridge-AncientAsphaltRoad",
+      "image": "native-r1/bridge-AncientAsphaltRoad-generated-preview.png",
+      "preview": "native-r1/bridge-AncientAsphaltRoad-background-preview.png",
+      "bridgeCells": 153,
+      "expectedFailure": false
+    },
+    {
+      "id": "bridge-AncientAsphaltHighway",
+      "image": "native-r1/bridge-AncientAsphaltHighway-generated-preview.png",
+      "preview": "native-r1/bridge-AncientAsphaltHighway-background-preview.png",
+      "bridgeCells": 357,
+      "expectedFailure": false
+    },
+    {
+      "id": "pond-dry-detour",
+      "image": "native-r1/pond-dry-detour-generated-preview.png",
+      "preview": "native-r1/pond-dry-detour-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": false
+    },
+    {
+      "id": "two-crossings",
+      "image": "native-r1/two-crossings-generated-preview.png",
+      "preview": "native-r1/two-crossings-background-preview.png",
+      "bridgeCells": 246,
+      "expectedFailure": false
+    },
+    {
+      "id": "diagonal-bridge",
+      "image": "native-r1/diagonal-bridge-generated-preview.png",
+      "preview": "native-r1/diagonal-bridge-background-preview.png",
+      "bridgeCells": 238,
+      "expectedFailure": false
+    },
+    {
+      "id": "deep-lake-rejected",
+      "image": "native-r1/deep-lake-rejected-generated-preview.png",
+      "preview": "native-r1/deep-lake-rejected-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": true
+    },
+    {
+      "id": "lava-rejected",
+      "image": "native-r1/lava-rejected-generated-preview.png",
+      "preview": "native-r1/lava-rejected-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": true
+    },
+    {
+      "id": "water-endpoint-rejected",
+      "image": "native-r1/water-endpoint-rejected-generated-preview.png",
+      "preview": "native-r1/water-endpoint-rejected-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": true
+    },
+    {
+      "id": "batch-preflight-rejected",
+      "image": "native-r1/batch-preflight-rejected-generated-preview.png",
+      "preview": "native-r1/batch-preflight-rejected-background-preview.png",
+      "bridgeCells": 0,
+      "expectedFailure": true
+    },
+    {
+      "id": "native-river",
+      "image": "native-r1/native-river-generated-preview.png",
+      "preview": "native-r1/native-river-background-preview.png",
+      "bridgeCells": 42,
+      "expectedFailure": false
+    },
+    {
+      "id": "wet-ground",
+      "image": "native-r1/wet-ground-generated-preview.png",
+      "preview": "native-r1/wet-ground-background-preview.png",
+      "bridgeCells": 153,
+      "expectedFailure": false
+    }
+  ],
+  "scope": "Native RimWorld 1.6 controlled maps and two fresh model requests. No claim for all mod combinations or unrelated MG23 crashes."
+}

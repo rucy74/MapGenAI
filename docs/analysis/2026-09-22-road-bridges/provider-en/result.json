@@ -1,0 +1,1 @@
+{"requestsCompleted":1,"transportAndEnvelopeOk":true,"results":[{"id":"bridge-DirtPath","action":"generate","model":"gemini-3.8-flash","inputTokens":12533,"outputTokens":80}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

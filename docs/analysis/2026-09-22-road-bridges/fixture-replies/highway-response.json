@@ -1,0 +1,25 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "road_1",
+          "kind": "AncientAsphaltHighway",
+          "route": "direct",
+          "points": [
+            [
+              0.02,
+              0.5
+            ],
+            [
+              0.98,
+              0.5
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

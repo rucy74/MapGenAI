@@ -1,0 +1,43 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "bridge",
+          "kind": "DirtPath",
+          "route": "direct",
+          "points": [
+            [
+              0.1,
+              0.3
+            ],
+            [
+              0.65,
+              0.3
+            ]
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "road": {
+          "id": "blocked",
+          "kind": "DirtRoad",
+          "route": "direct",
+          "points": [
+            [
+              0.1,
+              0.7
+            ],
+            [
+              0.95,
+              0.7
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1032 @@
+{
+  "cases": [
+    {
+      "id": "dirt-path",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "dirt-path",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "dirt-road",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "dirt-road",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "stone-road",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "stone-road",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "asphalt",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "asphalt",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "highway",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "highway",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "bridge-DirtPath",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "bridge-DirtPath",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "bridge-DirtRoad",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "bridge-DirtRoad",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "bridge-StoneRoad",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "bridge-StoneRoad",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "bridge-AncientAsphaltRoad",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "bridge-AncientAsphaltRoad",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "bridge-AncientAsphaltHighway",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "bridge-AncientAsphaltHighway",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "pond-dry-detour",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "pond",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.15,
+                "h": 0.28
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "pond-dry-detour",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "two-crossings",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "west_water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.3,
+                  0.5
+                ],
+                "w": 0.08,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          },
+          {
+            "id": "east_water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.7,
+                  0.5
+                ],
+                "w": 0.08,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "two-crossings",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "diagonal-bridge",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "diagonal-bridge",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "deep-lake-rejected",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "deep",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterDeep"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "deep-lake-rejected",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "lava-rejected",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "lava",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "LavaDeep"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "lava-rejected",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "water-endpoint-rejected",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "water-endpoint-rejected",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "batch-preflight-rejected",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "water",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": -0.5,
+                "fill": "WaterShallow"
+              }
+            ]
+          },
+          {
+            "id": "mountain",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.8,
+                  0.5
+                ],
+                "w": 0.08,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 1,
+                "fill": null
+              }
+            ]
+          }
+        ]
+      },
+      "request": "batch-preflight-rejected",
+      "omitAmbientRuins": true,
+      "preview": true
+    },
+    {
+      "id": "native-river",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          }
+        ],
+        "straight_river": true,
+        "river_direction": "vertical"
+      },
+      "request": "서쪽에서 동쪽 끝까지 흙길을 연결해 줘. 중간의 강은 다리를 놓아서 건너줘.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "worldRiver": true
+    },
+    {
+      "id": "wet-ground",
+      "kind": "local-roads",
+      "beforeParams": {
+        "elevation_shapes": [
+          {
+            "id": "ground",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 1,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "soil"
+              }
+            ]
+          },
+          {
+            "id": "mud",
+            "type": "composite",
+            "shapes": [
+              {
+                "id": "s",
+                "prim": "rect",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "w": 0.12,
+                "h": 1
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "s",
+                "e": 0.05,
+                "fill": "Mud"
+              }
+            ]
+          }
+        ]
+      },
+      "request": "wet-ground",
+      "omitAmbientRuins": true,
+      "preview": true
+    }
+  ]
+}

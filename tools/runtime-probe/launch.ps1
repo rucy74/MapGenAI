@@ -31,6 +31,8 @@
     [string]$LandformSuite='',
     [string]$LandformReplies='',
     [int]$LandformSample=0,
+    [ValidateRange(0,100000)][int]$RoadBridgeFaultAfter=0,
+    [switch]$RoadBridgeExisting,
     [string]$Coverage='',
     [string]$CoverageReplies='',
     [string]$FeedbackResponses='',
@@ -92,6 +94,8 @@ if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
 if($LandformSuite){$arguments+='-mapgenAILandformSuite="'+[IO.Path]::GetFullPath($LandformSuite)+'"';$arguments+='-mapgenAILandformSample='+$LandformSample}
 if($LandformReplies){$arguments+='-mapgenAILandformReplies="'+[IO.Path]::GetFullPath($LandformReplies)+'"'}
+if($RoadBridgeFaultAfter){$arguments+='-mapgenAIRoadBridgeFaultAfter='+$RoadBridgeFaultAfter}
+if($RoadBridgeExisting){$arguments+='-mapgenAIRoadBridgeExisting=true'}
 if($Coverage){$arguments+='-mapgenAICoverage="'+[IO.Path]::GetFullPath($Coverage)+'"'}
 if($CoverageReplies){$arguments+='-mapgenAICoverageReplies="'+[IO.Path]::GetFullPath($CoverageReplies)+'"'}
 if($Settings){$arguments+='-mapgenAISettingsProbe=true'}

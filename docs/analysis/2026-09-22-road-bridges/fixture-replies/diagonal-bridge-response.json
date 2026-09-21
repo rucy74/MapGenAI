@@ -1,0 +1,25 @@
+{
+  "action": "generate",
+  "params": {
+    "road_ops": [
+      {
+        "op": "add",
+        "road": {
+          "id": "road_1",
+          "kind": "StoneRoad",
+          "route": "direct",
+          "points": [
+            [
+              0.08,
+              0.15
+            ],
+            [
+              0.92,
+              0.85
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

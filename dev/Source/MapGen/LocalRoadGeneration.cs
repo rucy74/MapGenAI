@@ -28,8 +28,8 @@ namespace MapGenAI.MapGen
             {
                 var terrain=map.terrainGrid.TerrainAt(cell);
                 // Map Preview omits rocks and other Things. Elevation/terrain are the shared input.
-                ground[cell.z*cols+cell.x]=!terrain.IsWater && !terrain.IsRiver && !terrain.dangerous && !terrain.bridge
-                    && !terrain.isFoundation && terrain.passability!=Traversability.Impassable && MapGenerator.Elevation[cell]<.7f;
+                ground[cell.z*cols+cell.x]=!terrain.IsWater && !terrain.IsRiver && !terrain.dangerous
+                    && (!terrain.isFoundation || terrain.bridge) && terrain.passability!=Traversability.Impassable && MapGenerator.Elevation[cell]<.7f;
             }
             var jobs=new List<Job>();
             foreach(var plan in plans)
@@ -40,10 +40,19 @@ namespace MapGenAI.MapGen
                     throw new InvalidOperationException("Unsupported terrain profile for road: "+plan.kind);
                 float radius=layers.Max(s=>s.chancePerPositionCurve.Points.Max(p=>p.x)+Math.Abs(s.antialiasingMultiplier)*.5f);
                 if(radius<=0 || radius>12)throw new InvalidOperationException("Unsupported road profile width");
+                var bridgeLayer=def.roadGenSteps.OfType<RoadDefGenStep_Place>().FirstOrDefault(s=>s.place is TerrainDef t && t.bridge && t.isFoundation);
+                var bridge=bridgeLayer?.place as TerrainDef;
+                if(bridgeLayer!=null && (bridgeLayer.chancePerPositionCurve==null || bridgeLayer.periodicSpacing!=0 || bridgeLayer.antialiasingMultiplier!=0 || bridgeLayer.chancePerPositionCurve.Evaluate(0)<1))
+                    throw new InvalidOperationException("Unsupported bridge profile for road: "+plan.kind);
+                float bridgeRadius=bridgeLayer==null?0:bridgeLayer.chancePerPositionCurve.Points.Max(p=>p.x);
+                if(bridgeRadius>12)throw new InvalidOperationException("Unsupported road bridge width");
+                radius=Math.Max(radius,bridgeRadius);
+                var bridgeable=new bool[ground.Length];
+                foreach(var cell in map.AllCells)bridgeable[cell.z*cols+cell.x]=MapGenerator.Elevation[cell]<.7f && RoadBridges.Supports(map,cell,bridge);
                 List<int> path;
-                try{path=RoadRouting.Plan(cols,rows,ground,plan.points,plan.route,radius);}
+                try{path=RoadRouting.PlanWithBridges(cols,rows,ground,bridgeable,plan.points,plan.route,radius);}
                 catch(Exception e){throw new InvalidOperationException(RoadPlans.Label(plan.kind,true)+" / "+RoadPlans.Label(plan.kind,false)+": "+e.Message,e);}
-                var distance=Distances(cols,rows,path,radius);
+                var distance=Distances(cols,rows,path,radius,bridgeable,out var bridgeOrigins);
                 var job=new Job{plan=plan,result=new RoadPlacement{id=plan.id,kind=plan.kind,length=path.Count},footprint=new bool[ground.Length]};
                 foreach(int i in path)job.result.path.Add(new[]{i%cols,i/cols});
                 int seed=Gen.HashCombineInt(Gen.HashCombineInt(GenText.StableStringHash(plan.id),plan.seed),(int)map.Tile);
@@ -57,13 +66,22 @@ namespace MapGenAI.MapGen
                 for(int i=0;i<distance.Length;i++)
                 {
                     if(distance[i]>radius)continue;
-                    job.footprint[i]=true;job.result.footprint.Add(new[]{i%cols,i/cols});
                     var cell=new IntVec3(i%cols,0,i/cols);
                     var before=map.terrainGrid.TerrainAt(cell);
-                    if(!ground[i] || cell.GetEdifice(map)!=null || cell.GetThingList(map).Any(t=>t is Pawn))
+                    if((!ground[i] && !bridgeable[i]) || cell.GetEdifice(map)!=null || map.terrainGrid.TempTerrainAt(cell)!=null || cell.GetThingList(map).Any(t=>t is Pawn || t is Blueprint || t is Frame))
                         throw new InvalidOperationException("도로 공간에 기존 장애물이 있습니다. 위치를 조정하세요. / Existing obstacles occupy the road footprint; adjust its route. No local roads were painted.");
+                    if(bridgeable[i])
+                    {
+                        // Wet shoulders remain water. Use the road's native solid
+                        // bridge width only where the centerline also crosses water.
+                        if(!bridgeOrigins[i] || bridgeLayer.chancePerPositionCurve.Evaluate(distance[i])<1f)continue;
+                        job.paint[i]=bridge;
+                        job.footprint[i]=true;job.result.footprint.Add(new[]{i%cols,i/cols});
+                        continue;
+                    }
+                    job.footprint[i]=true;job.result.footprint.Add(new[]{i%cols,i/cols});
                     // Preserve existing native roads/floors, including stone roads without a Road tag.
-                    if(before.HasTag("Road") || before.designationCategory!=null || before.costList?.Count>0 || before.costStuffCount>0)
+                    if(before.bridge || map.terrainGrid.FoundationAt(cell)!=null || before.HasTag("Road") || before.designationCategory!=null || before.costList?.Count>0 || before.costStuffCount>0)
                     {job.result.protectedCells++;continue;}
                     float d=distance[i];
                     for(int n=0;n<layers.Count;n++)
@@ -79,21 +97,22 @@ namespace MapGenAI.MapGen
                 jobs.Add(job);
             }
             // Plan/check the entire batch first. Road RNG never advances world/map generation RNG.
-            var original=new Dictionary<int,TerrainDef>();var regions=GenerationContext.Regions(map);
+            var original=new Dictionary<int,RoadBridges.Snapshot>();var regions=GenerationContext.Regions(map);
             try
             {
                 using(map.pathing.DisableIncrementalScope())
                 foreach(var job in jobs)foreach(var entry in job.paint)
                 {
                     var cell=new IntVec3(entry.Key%cols,0,entry.Key/cols);
-                    if(!original.ContainsKey(entry.Key))original[entry.Key]=map.terrainGrid.TerrainAt(cell);
-                    map.terrainGrid.SetTerrain(cell,entry.Value);
+                    if(!original.ContainsKey(entry.Key))original[entry.Key]=new RoadBridges.Snapshot(map,cell);
+                    if(entry.Value.bridge)RoadBridges.Place(map,cell,entry.Value);
+                    else map.terrainGrid.SetTerrain(cell,entry.Value);
                     job.result.paintedCells++;
                 }
             }
             catch
             {
-                foreach(var entry in original)map.terrainGrid.SetTerrain(new IntVec3(entry.Key%cols,0,entry.Key/cols),entry.Value);
+                foreach(var entry in original)entry.Value.Restore(map,new IntVec3(entry.Key%cols,0,entry.Key/cols));
                 throw;
             }
             foreach(var job in jobs)
@@ -112,8 +131,9 @@ namespace MapGenAI.MapGen
                 return (x&0xffffff)/16777216f;
             }
         }
-        static float[] Distances(int cols,int rows,List<int> path,float radius)
+        static float[] Distances(int cols,int rows,List<int> path,float radius,bool[] bridgeable,out bool[] bridgeOrigins)
         {
+            bridgeOrigins=new bool[cols*rows];
             var values=Enumerable.Repeat(float.PositiveInfinity,cols*rows).ToArray();int bound=(int)Math.Ceiling(radius);
             for(int n=1;n<path.Count;n++)
             {
@@ -125,7 +145,7 @@ namespace MapGenAI.MapGen
                     float t=den==0?0:Math.Max(0,Math.Min(1,((x-ax)*dx+(z-az)*dz)/den));
                     float cx=x-ax-t*dx,cz=z-az-t*dz;
                     float distance=(float)Math.Sqrt(cx*cx+cz*cz);int i=z*cols+x;
-                    if(distance<values[i])values[i]=distance;
+                    if(distance<values[i]){values[i]=distance;bridgeOrigins[i]=bridgeable[path[n-1]] || bridgeable[path[n]];}
                 }
             }
             return values;

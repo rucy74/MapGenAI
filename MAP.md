@@ -64,9 +64,10 @@
 ## 지역 맵 도로 구현
 
 - `MapGen/RoadPlans.cs`, `RoadPrompt.cs`: localRoads/road_ops 계약, 종류별 읽기 쉬운 설명, 기존 저장의 기본값. 월드 도로 연결과 legacy roads bool은 변경하지 않는다.
-- `MapGen/RoadRouting.cs`, `LocalRoadGeneration.cs`, `RoadPlacement.cs`: 순수 경로 탐색·폭 검사 후 RoadDef 노면을 단계410에서 적용한다. 도로 없는 상태는 단계 삽입/RNG 소비 없음. 자동 Bulldoze/다리/터널/부속 건물 미지원. 기존 바닥과 높이를 보존한다.
+- `MapGen/RoadRouting.cs`, `LocalRoadGeneration.cs`, `RoadBridges.cs`, `RoadPlacement.cs`: 순수 경로 탐색·폭 검사 후 RoadDef 노면과 기본 폭의 Bridge foundation을 단계410에서 적용한다. 성공하던 육지 경로를 우선하고 필요시 Bridgeable 물을 건넌다. 강의 깊은 물도 지원하며 깊은 호수/바다·용암·빈 우주는 제외한다. 원래 물·기존 바닥·다리·높이 보존, 일괄 사전검사·실패 시 층 복원. Preview는 최소 Map에 없는 component를 피하고 자체 foundation grid에만 반영한다. 도로 없는 상태는 단계 삽입/RNG 소비 없음. 자동 Bulldoze/터널/부속 건물 미지원. Map Preview 배포 DLL은 수정하지 않는다.
 - 도로 영역은 비율 채움과 위치 지정 구조물에서 보호된다. `AuthoringGeneration.RoadFailure`는 기존 구조물 생성을 막지 않으며 일반 작성 오류의 차단 동작은 유지한다. native 월드 Roads가 생략되는 Map Preview의 교차 부분 한계는 일반/추천 화면에 표시한다.
 - `Tests/RoadPlanTests.cs`, `RoadRoutingTests.cs`, `tools/runtime-probe/RoadProbeAudit.cs`, `tools/evaluate_local_roads.py`: 상태·경로·실게임·배경 미리보기와 기존 맵 동일성 검사. [검증 보고서](docs/analysis/2026-09-19-local-roads/report.md).
+- `Tests/RoadBridgeRoutingTests.cs`, `tools/evaluate_road_bridges.py`: 이전 DLL과 육지 경로 비교, 다섯 도로의 다리·원래 강물·양안 연결·층 보존·중간 쓰기 실패 복원 검증. [자동 다리 보고서](docs/analysis/2026-09-22-road-bridges/report.md).
 
 ## 추천 계약과 미리보기
 

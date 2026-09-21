@@ -1,0 +1,1 @@
+{"action":"generate","description":"Add a straight dirt road from west to east across the map, naturally bridging the water channel.","params":{"road_ops":[{"op":"add","road":{"id":"east_west_dirt_road","kind":"DirtRoad","points":[[0.0,0.5],[1.0,0.5]],"route":"direct"}}]}}

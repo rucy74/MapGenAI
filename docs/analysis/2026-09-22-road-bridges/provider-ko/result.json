@@ -1,0 +1,1 @@
+{"requestsCompleted":1,"transportAndEnvelopeOk":true,"results":[{"id":"native-river","action":"generate","model":"gemini-3.8-flash","inputTokens":15218,"outputTokens":85}],"scope":"Raw first responses only. Intent and actual maps are evaluated separately."}

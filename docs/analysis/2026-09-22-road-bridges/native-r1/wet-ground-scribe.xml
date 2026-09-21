@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>ground</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":1,"id":"s","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":1}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.05,"fill":"soil","from":null,"k":0,"op":"add","outId":null,"s":"s"}]}</compositeJson>
+				</li>
+				<li>
+					<id>mud</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.5,0.5],"h":1,"id":"s","n":0,"prim":"rect","r":0,"r2":0,"rot":0,"size":0,"verts":null,"w":0.12}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.05,"fill":"Mud","from":null,"k":0,"op":"add","outId":null,"s":"s"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads>
+				<li>
+					<plan>{"id":"road_1","kind":"DirtRoad","points":[[0.02,0.5],[0.98,0.5]],"route":"direct","seed":0}</plan>
+				</li>
+			</localRoads>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

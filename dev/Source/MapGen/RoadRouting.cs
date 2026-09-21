@@ -7,6 +7,24 @@ namespace MapGenAI.MapGen
     // Pure deterministic routing. No world/map mutation, RNG or game pathfinder.
     public static class RoadRouting
     {
+        // Keep every previously successful dry route exactly as it was. Only
+        // retry with bridge support when those same waypoints cannot connect.
+        public static List<int> PlanWithBridges(int cols,int rows,bool[] ground,bool[] bridgeable,float[][] points,string mode,float radius)
+        {
+            try { return Plan(cols,rows,ground,points,mode,radius); }
+            catch(InvalidOperationException)
+            {
+                if(bridgeable==null || bridgeable.Length!=ground.Length)throw;
+                int Index(float[] p)=>(int)Math.Round(p[1]*(rows-1),MidpointRounding.AwayFromZero)*cols+(int)Math.Round(p[0]*(cols-1),MidpointRounding.AwayFromZero);
+                if(!ground[Index(points[0])] || !ground[Index(points[points.Length-1])])
+                    throw new InvalidOperationException("다리를 포함한 도로의 시작과 끝은 육지나 기존 다리에 두세요. / Road endpoints must be on land or an existing bridge.");
+                var supported=new bool[ground.Length];
+                for(int i=0;i<supported.Length;i++)supported[i]=ground[i] || bridgeable[i];
+                try{return Plan(cols,rows,supported,points,mode,radius);}
+                catch(InvalidOperationException error)
+                {throw new InvalidOperationException("도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints.",error);}
+            }
+        }
         public static List<int> Plan(int cols,int rows,bool[] ground,float[][] points,string mode,float radius)
         {
             if(cols<2 || rows<2 || ground==null || ground.Length!=cols*rows)throw new ArgumentException("Invalid road grid");

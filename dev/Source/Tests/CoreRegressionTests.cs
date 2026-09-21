@@ -83,6 +83,7 @@ static class CoreRegressionTests
         AncientPlanTests.RunAll();
         RoadPlanTests.RunAll();
         RoadRoutingTests.RunAll();
+        RoadBridgeRoutingTests.RunAll();
         Console.WriteLine($"CoreRegressionTests: {passed} PASS / {failed} FAIL");
         if (failed > 0) throw new Exception($"{failed} regression tests failed");
     }
