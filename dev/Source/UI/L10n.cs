@@ -44,8 +44,8 @@ namespace MapGenAI.UI
 
             // Welcome
             {"MapGenAI_Welcome", (
-                "원하는 맵을 설명하거나, 추천 그림부터 비교해 보세요!\n\n추천받기:\n  \"이 타일에 어울리는 지형 추천해 줘\"\n그림을 눌러 확대하고 번호로 선택하세요.\n선택 전 수정: \"2번을 좀 더 자연스럽게 해 줘\"\n\n직접 만들기:\n  \"남쪽에 출구가 있는 자연스러운 도넛 산\"\n  \"중앙에 호수, 북쪽에 산, 남쪽에 넓은 평지\"\n후속 수정: \"도넛 안쪽의 70%만 비옥한 토양으로\"",
-                "Describe a map, or compare recommended maps first!\n\nGet recommendations:\n  \"Suggest landscapes for this tile.\"\nClick an image to zoom; choose its number to apply.\nBefore choosing: \"Make option 2 more natural.\"\n\nCreate your own:\n  \"A natural mountain ring with a southern exit.\"\n  \"A central lake, northern mountains and open land south.\"\nThen refine: \"Fill 70% of the ring's interior with rich soil.\""
+                "원하는 맵을 설명하거나, 추천 그림부터 비교해 보세요!\n\n추천받기:\n  \"이 타일에 어울리는 지형 추천해 줘\"\n그림을 눌러 확대하고 번호로 선택하세요.\n마음에 드는 후보가 없으면 ‘다시 추천받기’ 또는 ‘선택 안 함’.\n선택 전 수정: \"2번을 좀 더 자연스럽게 해 줘\"\n\n직접 만들기:\n  \"남쪽에 출구가 있는 자연스러운 도넛 산\"\n  \"중앙에 호수, 북쪽에 산, 남쪽에 넓은 평지\"\n후속 수정: \"도넛 안쪽의 70%만 비옥한 토양으로\"",
+                "Describe a map, or compare recommended maps first!\n\nGet recommendations:\n  \"Suggest landscapes for this tile.\"\nClick an image to zoom; choose its number to apply.\nNo match? Use New suggestions or Select none.\nBefore choosing: \"Make option 2 more natural.\"\n\nCreate your own:\n  \"A natural mountain ring with a southern exit.\"\n  \"A central lake, northern mountains and open land south.\"\nThen refine: \"Fill 70% of the ring's interior with rich soil.\""
             )},
 
             // Preset loaded

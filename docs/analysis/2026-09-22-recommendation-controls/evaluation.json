@@ -1,0 +1,65 @@
+{
+  "ok": true,
+  "dllSha256": "7f29ee77ae97e903882b96177b6c79af401dc501848ac54bb6cf369478e4117c",
+  "offlineTests": 178,
+  "nativeChecks": 218,
+  "nativeChecksByLanguage": [
+    109,
+    109
+  ],
+  "newProviderCalls": 0,
+  "fableCalls": 0,
+  "thumbnailScreens": [
+    {
+      "language": "ko",
+      "initialGreyColors": [
+        1,
+        1,
+        1
+      ],
+      "finalThumbnailColors": [
+        10,
+        11,
+        10
+      ]
+    },
+    {
+      "language": "en",
+      "initialGreyColors": [
+        1,
+        1,
+        1
+      ],
+      "finalThumbnailColors": [
+        10,
+        11,
+        10
+      ]
+    }
+  ],
+  "unchangedOriginalImages": [
+    "ko/recommend-plain-1.png",
+    "ko/recommend-plain-2.png",
+    "ko/recommend-plain-3.png",
+    "ko/recommend-existing-1.png",
+    "ko/recommend-existing-2.png",
+    "ko/recommend-existing-3.png",
+    "ko/native-features-1.png",
+    "ko/native-features-2.png",
+    "ko/native-features-3.png",
+    "en/recommend-plain-1.png",
+    "en/recommend-plain-2.png",
+    "en/recommend-plain-3.png",
+    "en/recommend-existing-1.png",
+    "en/recommend-existing-2.png",
+    "en/recommend-existing-3.png",
+    "en/native-features-1.png",
+    "en/native-features-2.png",
+    "en/native-features-3.png"
+  ],
+  "selectedPreviewPixelMatches": 20,
+  "screenshotsVisuallyReviewed": true,
+  "originalGreyRunsRetained": true,
+  "completeMapRuns": 0,
+  "unresolvedPriorNativeCrashes": 1
+}

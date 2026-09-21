@@ -41,11 +41,12 @@ namespace MapGenAI.UI
         private string _previewError;
         private int _nextRecommendationCheck;
         private List<RecommendationPlan> _requestedCandidates;
+        private bool _previewsCollapsed;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
 
-        public override Vector2 InitialSize => new Vector2(620f, 520f);
+        public override Vector2 InitialSize => new Vector2(Mathf.Min(900f, Verse.UI.screenWidth - 40f), Mathf.Min(760f, Verse.UI.screenHeight - 40f));
 
         // 바닐라 기본 mutator defName (자동 관리되므로 LLM 목록에서 제외)
         private static readonly HashSet<string> VanillaAutoMutators = new HashSet<string>
@@ -382,6 +383,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             doCloseButton = false;
             doCloseX = true;
             closeOnAccept = false;
+            draggable = true;
             forcePause = false;  // Map Preview와 공존하기 위해 pause 안 함
             absorbInputAroundWindow = true;
             preventCameraMotion = false;
@@ -456,17 +458,18 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
-            float previewHeight = _recommendations == null ? 0f : Mathf.Min(190f, (inRect.width - 12f) / _recommendations.Count) + 28f;
-            float choiceHeight = _recommendations == null ? 0f : previewHeight + 32f;
-            float bottomReserve = InputHeight + 50f + choiceHeight;
-            var chatRect = new Rect(inRect.x, topOffset, inRect.width, inRect.height - topOffset - bottomReserve + inRect.y);
+            var layout = new RecommendationLayout(inRect.width, inRect.height, _recommendations?.Count ?? 0, _previewsCollapsed);
+            float previewHeight = layout.PreviewHeight;
+            float choiceHeight = layout.ChoiceHeight;
+            var chatRect = new Rect(inRect.x, topOffset, inRect.width, layout.ChatHeight);
             DrawChat(chatRect);
 
             // 입력창 + 전송 버튼
             if (_recommendations != null)
             {
-                DrawRecommendationPreviews(new Rect(inRect.x, chatRect.yMax + 4f, inRect.width, previewHeight));
+                if (previewHeight > 0f) DrawRecommendationPreviews(new Rect(inRect.x, chatRect.yMax + 4f, inRect.width, previewHeight));
                 int count=_recommendations.Count;
+                GUI.enabled = !_isWaiting;
                 for(int i=0;i<count;i++)
                 {
                     float width=(inRect.width-6f*(count-1))/count;
@@ -474,6 +477,19 @@ For recommendations follow the rules below and this tile's terrain and shore con
                         IsKorean()?(i+1)+"번 적용":"Apply option "+(i+1)))
                     { ApplyRecommendation(i+1); break; }
                 }
+                GUI.enabled = true;
+                // These controls do not apply an option or reset the map/Undo history.
+                float controlsY = chatRect.yMax + 4f + previewHeight + 32f;
+                float controlsWidth = (inRect.width - 12f) / 3f;
+                if (Widgets.ButtonText(new Rect(inRect.x, controlsY, controlsWidth, 28f), IsKorean()?"다시 추천받기":"New suggestions"))
+                    RequestNewRecommendations();
+                if (Widgets.ButtonText(new Rect(inRect.x + controlsWidth + 6f, controlsY, controlsWidth, 28f), IsKorean()?"선택 안 함":"Select none"))
+                    DismissRecommendations();
+                GUI.enabled = _recommendations != null && new RecommendationLayout(inRect.width, inRect.height, count, false).PreviewHeight > 0f;
+                if (Widgets.ButtonText(new Rect(inRect.x + 2f * (controlsWidth + 6f), controlsY, controlsWidth, 28f),
+                    previewHeight > 0f ? (IsKorean()?"그림 접기":"Hide previews") : (IsKorean()?"그림 펼치기":"Show previews")))
+                    _previewsCollapsed = !_previewsCollapsed;
+                GUI.enabled = true;
             }
             var inputAreaY = chatRect.yMax + choiceHeight + 8f;
             var inputRect = new Rect(inRect.x, inputAreaY, inRect.width - SendButtonWidth - 8f, InputHeight);
@@ -634,21 +650,28 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var text = _inputText.Trim();
             if (text == "" || _isWaiting) return;
             _inputText = "";
+            SendText(text);
+        }
+
+        private void SendText(string text)
+        {
             _history.Add(new ChatMessage("user", text));
             if (_recommendations != null)
             {
+                if (RecommendationPlan.IsDismissal(text)) { DismissRecommendations(); return; }
                 int selected=RecommendationPlan.Selection(text);
                 if(selected>0){ApplyRecommendation(selected);return;}
                 if(RecommendationPlan.IsAmbiguousAcceptance(text))
                 {
                     if(_recommendations.Count==1){ApplyRecommendation(1);return;}
-                    _history.Add(new ChatMessage("assistant",IsKorean()?"적용할 번호를 선택해 주세요. 위 추천의 설정은 아직 적용하지 않았습니다.":"Choose an option number. The proposed settings have not been applied."));
+                    _history.Add(new ChatMessage("assistant",IsKorean()?"적용할 번호를 선택해 주세요. 마음에 들지 않으면 ‘다시 추천받기’나 ‘선택 안 함’을 누르세요. 아직 맵에는 적용하지 않았습니다.":"Choose an option number, or use New suggestions or Select none. Your map has not changed yet."));
                     return;
                 }
             }
-            _requestedCandidates=RecommendationPlan.RequestsDirectEdit(text)?null:_recommendations;
+            bool newOptions = RecommendationPlan.RequestsNewOptions(text);
+            _requestedCandidates=newOptions || RecommendationPlan.RequestsDirectEdit(text)?null:_recommendations;
             if(_requestedCandidates==null)ClearRecommendations();
-            _recommendationsRequested=_requestedCandidates==null && RecommendationPlan.IsRequest(text);
+            _recommendationsRequested=_requestedCandidates==null && (newOptions || RecommendationPlan.IsRequest(text));
             _recommendationRepairUsed=false;
             var settings = MapGenAIMod.Settings;
             var clients = new List<ILLMClient>();
@@ -890,6 +913,36 @@ For recommendations follow the rules below and this tile's terrain and shore con
         {
             _recommendationPreviews?.Dispose(); _recommendationPreviews=null; _previewError=null;
             _recommendations=null;_recommendationState=null;
+        }
+
+        private void CancelCandidateRequest()
+        {
+            _requests.Cancel();
+            _isWaiting=false; _statusText="";
+            _requestedCandidates=null;
+            _repairRecommendations=null; _explainInvalidReply=null;
+            _recommendationsRequested=false; _recommendationRepairUsed=false; _explanationOnly=false;
+            ClearRecommendations();
+        }
+
+        private void DismissRecommendations()
+        {
+            if (_recommendations == null) return;
+            CancelCandidateRequest();
+            var message = new ChatMessage("assistant", IsKorean()?
+                "추천을 모두 취소했습니다. 맵 설정은 그대로입니다. 새 요청을 입력하거나 다시 추천받을 수 있습니다.":
+                "All suggestions discarded. Your map settings are unchanged. Enter a new request or ask for more suggestions.");
+            _history.Add(message);
+            _llmContext.Add(message);
+        }
+
+        private void RequestNewRecommendations()
+        {
+            if (_recommendations == null) return;
+            CancelCandidateRequest();
+            // Preserve the draft and conversation preferences, but plan against the actual map.
+            SendText(IsKorean()?"이 추천들은 마음에 안 들어. 현재 맵에 맞게 다른 선택지로 다시 추천해 줘.":
+                "I don't like these suggestions. Recommend different options for my current map.");
         }
 
         private void UpdateRecommendationPreviews()

@@ -87,6 +87,11 @@ Recommendations and selectable alternatives:
             return match.Success?int.Parse(match.Groups[1].Value):-1;
         }
         public static bool IsAmbiguousAcceptance(string text)=>Regex.IsMatch((text??"").Trim(),@"^(그래|응|네|좋아|yes|ok|okay|go ahead)[.!]?$",RegexOptions.IgnoreCase);
+        public static bool IsDismissal(string text)=>Regex.IsMatch((text??"").Trim(),
+            @"^(?:(?:추천|후보|선택지)\s*(?:모두\s*)?취소(?:해\s*줘|해주세요)?|(?:아무것도\s*)?선택\s*안\s*(?:함|할래|할게)|none of these|select none|(?:cancel|discard|skip)\s+(?:all\s+|the\s+)?(?:recommendations|suggestions|options|candidates))[.!]?$",RegexOptions.IgnoreCase);
+        public static bool RequestsNewOptions(string text)=>!IsDismissal(text) && !RequestsDirectEdit(text) &&
+            !Regex.IsMatch(text??"",@"[1-9]\s*번|\b(?:option|candidate)\s*[1-9]\b",RegexOptions.IgnoreCase) &&
+            Regex.IsMatch(text??"",@"다시\s*추천|(?:새로운?|다른)\s*(?:추천|선택지|후보)|다른\s*(?:걸|거|것).{0,12}추천|\b(?:new|different|more|other)\s+(?:recommendations|suggestions|options|ideas)\b|\b(?:recommend|suggest)\b.{0,30}\bagain\b",RegexOptions.IgnoreCase);
         public static bool RequestsDirectEdit(string text)=>Regex.IsMatch(text??"",@"(?:추천|후보|선택지)\s*(?:말고|무시|취소)|(?:현재|실제)\s*맵에?\s*(?:바로|직접)|\b(?:ignore|cancel|skip)\s+(?:the\s+)?(?:recommendations|options|candidates)\b",RegexOptions.IgnoreCase);
         public static List<SimpleJsonObject> Options(SimpleJsonObject command)
         {

@@ -126,7 +126,9 @@ namespace MapGenAI.UI
                     Texture2D texture = null;
                     try
                     {
-                        texture = new Texture2D(mapSize.x, mapSize.z) { filterMode = FilterMode.Point };
+                        // Apply(false) uploads only the base level. Do not allocate
+                        // empty mip levels that turn smaller thumbnail cards grey.
+                        texture = new Texture2D(mapSize.x, mapSize.z, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point };
                         result.CopyToTexture(texture);
                         texture.Apply(false);
                         item.Texture = texture;

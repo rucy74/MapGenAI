@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 추천 취소/재추천/접기: `Dialog_TextToMap`의 `DismissRecommendations`는 RequestGate와 후보만 취소하고 현재 맵/Undo/draft를 보존한다. `RequestNewRecommendations`와 `RecommendationPlan.RequestsNewOptions`는 후보 편집 컨텍스트 없이 실제 맵을 기준으로 새 추천을 요청한다. `RecommendationLayout`은 채팅 공간을 먼저 확보한다. [MG28 검증](docs/analysis/2026-09-22-recommendation-controls/report.md).
+
 - 일반 추천의 고정 도넛/측면산/직사각형 협곡 반복 완화: `RecommendationPlan.Rules`에서 타일의 바이옴·산악도·물 연결 및 넓은 정착 공간을 우선한다. 명시적 기하 요청/기존 맵 보존은 유지한다. 지상 추천에 `UndergroundCave`를 새로 넣지 않도록 안내. 품질 자동 판정은 없으며 모델 의존 한계가 남는다. 시작 추천 문구는 숫자를 생략했지만 후보 최대3개는 그대로다. [검증·실패·원문 출처](docs/analysis/2026-09-19-contextual-recommendations/report.md), [실제 그림](docs/analysis/2026-09-19-contextual-recommendations/gallery.html), `tools/evaluate_contextual_recommendations.py`.
 
 - 첫 안내 문구: `L10n.cs`의 `MapGenAI_Welcome`와 한/영 Keyed XML을 함께 관리한다. 추천3그림·확대·후보 수정·번호 선택을 먼저 안내하고, 직접 지형 묘사와 부분 수정 예시를 제공한다. 일반 대화/생성 프롬프트는 이 문구 변경의 대상이 아니다.

@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-09-22T00:32:17.722136+09:00",
+  "filesScanned": 183,
+  "secretMatches": 0,
+  "positiveControls": 3,
+  "localLinksChecked": 38,
+  "isolatedRunsCleaned": [
+    "native-en",
+    "native-final-en",
+    "native-final-ko",
+    "native-ko"
+  ],
+  "evaluationOk": true,
+  "dllSha256": "7f29ee77ae97e903882b96177b6c79af401dc501848ac54bb6cf369478e4117c"
+}
