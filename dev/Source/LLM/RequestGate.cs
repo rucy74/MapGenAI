@@ -13,6 +13,7 @@ namespace MapGenAI.LLM
         public sealed class Reply
         {
             public string Text, Error;
+            public object Context;
         }
         private readonly object sync = new object();
         private int version;
@@ -27,11 +28,11 @@ namespace MapGenAI.LLM
                 return new Ticket { Version=version, Token=cancellation.Token };
             }
         }
-        public void Complete(Ticket ticket, string text, string error)
+        public void Complete(Ticket ticket, string text, string error, object context=null)
         {
             lock(sync)
                 if(ticket.Version==version && !ticket.Token.IsCancellationRequested)
-                    pending=new Reply { Text=text, Error=error };
+                    pending=new Reply { Text=text, Error=error, Context=context };
         }
         public Reply Take()
         {

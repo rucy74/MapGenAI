@@ -14,17 +14,18 @@ namespace MapGenAI.LLM
             "Do not invent unavailable features or apply an alternative without the user's agreement. No text outside JSON. For recommendations or selectable alternatives use action recommend with options:[{params:{...}},...], 1..3 independent executable patches. For pending candidate edits use action revise with option:1..3 and params:{...}, a patch against that candidate. Never offer unvalidated numbered concepts in ask.";
 
         // null = first attempt; otherwise the previous malformed answer, for a fresh repair history.
-        public static async Task<string> SendAsync(Func<string,CancellationToken,Task<string>> send,CancellationToken token=default,bool requireRecommendations=false)
+        public static async Task<string> SendAsync(Func<string,CancellationToken,Task<string>> send,CancellationToken token=default,bool requireRecommendations=false,Func<string,string> reject=null)
         {
             token.ThrowIfCancellationRequested();
             string response=await send(null,token);
             token.ThrowIfCancellationRequested();
-            try{ValidateEnvelope(response,requireRecommendations);return response;}
+            string rejection=null;
+            try{ValidateEnvelope(response,requireRecommendations);rejection=reject?.Invoke(response);if(rejection==null)return response;}
             catch(FormatException){ }
             token.ThrowIfCancellationRequested();
-            string repaired=await send(string.IsNullOrWhiteSpace(response)?"[empty response]":response,token);
+            string repaired=await send((string.IsNullOrWhiteSpace(response)?"[empty response]":response)+(rejection==null?"":"\nREJECTED BEFORE APPLYING: "+rejection),token);
             token.ThrowIfCancellationRequested();
-            try{ValidateEnvelope(repaired,requireRecommendations);return repaired;}
+            try{ValidateEnvelope(repaired,requireRecommendations);var reason=reject?.Invoke(repaired);if(reason!=null)throw new FormatException(reason);return repaired;}
             catch(FormatException error)
             {
                 throw new FormatException("AI 응답 형식을 한 번 다시 요청했지만 올바른 JSON을 받지 못했습니다. 맵 설정은 변경하지 않았습니다. / The AI returned an invalid response after one format retry; no settings were changed.",error);

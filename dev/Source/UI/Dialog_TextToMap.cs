@@ -13,7 +13,8 @@ namespace MapGenAI.UI
     public class Dialog_TextToMap : Window
     {
         private readonly List<ChatMessage> _history = new List<ChatMessage>(); // UI 표시용
-        private readonly List<ChatMessage> _llmContext = new List<ChatMessage>(); // LLM 전송용 (generate 후 초기화)
+        private readonly List<ChatMessage> _llmContext = new List<ChatMessage>(); // Full dialog transcript, retained through successful edits.
+        private ConversationMemory.Checkpoint _conversationMemory;
         private string _inputText = "";
         private string _statusText = "";
         private bool _isWaiting = false;
@@ -410,8 +411,16 @@ For recommendations follow the rules below and this tile's terrain and shore con
             {
                 _isWaiting = false;
                 _statusText = "";
+                if(reply.Context is ConversationMemory.Prepared prepared)
+                {
+                    _conversationMemory=prepared.Memory;
+                    if(prepared.Warning!=null)_history.Add(new ChatMessage("assistant",prepared.Warning));
+                }
                 if (reply.Error != null)
+                {
+                    _llmContext.Add(new ChatMessage("assistant","NOT APPLIED\n"+reply.Error));
                     _history.Add(new ChatMessage("assistant", "MapGenAI_Error".Translate(reply.Error)));
+                }
                 else HandleResponse(reply.Text);
             }
         }
@@ -656,6 +665,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
         private void SendText(string text)
         {
             _history.Add(new ChatMessage("user", text));
+            _llmContext.Add(new ChatMessage("user", text));
             if (_recommendations != null)
             {
                 if (RecommendationPlan.IsDismissal(text)) { DismissRecommendations(); return; }
@@ -695,14 +705,16 @@ For recommendations follow the rules below and this tile's terrain and shore con
             }
             var systemPrompt = BuildSystemPrompt(_openedTileId);
             if(_requestedCandidates!=null)systemPrompt+=RecommendationPlan.PendingInstruction(_requestedCandidates,MapGenParams.CaptureState(_openedTileId));
-            _llmContext.Add(new ChatMessage("user", text));
-            var historySnapshot = new List<ChatMessage>(_llmContext);
+            var historySnapshot = ConversationMemory.Copy(_llmContext);
             StartChat(clients,historySnapshot,systemPrompt,false);
         }
 
         // Only the provider call runs on a worker. Candidate planning and repair decisions stay on the UI thread.
         private void StartChat(List<ILLMClient> clients,List<ChatMessage> historySnapshot,string systemPrompt,bool explanationOnly)
         {
+            if(!systemPrompt.Contains(ConversationMemory.Rules))systemPrompt+=ConversationMemory.Rules;
+            var memorySnapshot=_conversationMemory;
+            int budgetOverride=MapGenAIMod.Settings.conversationInputBudget;
             _explanationOnly=explanationOnly;
             _repairRecommendations=explanationOnly || _recommendationRepairUsed?null:(Action<string,string>)((rejected,reason)=>
             {
@@ -727,22 +739,38 @@ For recommendations follow the rules below and this tile's terrain and shore con
             Task.Run(async () =>
             {
                 string result=null, error=null;
+                ConversationMemory.Prepared prepared=null;
                 foreach (var client in clients)
                 {
                     try
                     {
                         ticket.Token.ThrowIfCancellationRequested();
-                        result=await StructuredChat.SendAsync((malformed, token)=>
+                        var budget=client is IContextBudgetClient budgetClient?await budgetClient.GetContextBudgetAsync(ticket.Token):ContextBudget.Fallback;
+                        int effectiveBudget=budgetOverride>=1024?(budget.Known?Math.Min(budget.InputTokens,budgetOverride):budgetOverride):budget.InputTokens;
+                        prepared=await ConversationMemory.PrepareAsync(historySnapshot,systemPrompt,memorySnapshot,effectiveBudget,
+                            (messages,prompt,ct)=>client.SendChatAsync(messages,prompt,ct),
+                            client is IChatTokenCounter counter?(Func<List<ChatMessage>,string,System.Threading.CancellationToken,Task<int?>>)counter.CountInputTokensAsync:null,
+                            ticket.Token,budget.Known || budgetOverride>=1024);
+                        Log.Message("[MapGenAI] Conversation input "+prepared.InputTokens+"/"+effectiveBudget+(prepared.ExactCount?" tokens":" estimated tokens")+
+                            "; budget="+budget.Source+"; summary calls="+prepared.SummaryCalls+"; retained messages="+historySnapshot.Count);
+                        result=await StructuredChat.SendAsync(async (malformed, token)=>
                         {
-                            var attempt=new List<ChatMessage>(historySnapshot);
+                            var attempt=ConversationMemory.Copy(prepared.Messages);
                             if(malformed!=null)
                             {
                                 Log.Warning("[MapGenAI] Retrying malformed chat response format once; no settings applied.");
                                 attempt.Add(new ChatMessage("assistant",malformed));
                                 attempt.Add(new ChatMessage("user",StructuredChat.RepairInstruction));
+                                // Repair text can itself exceed a small window. Any checkpoint here
+                                // is temporary: rejected output must not enter the dialog's memory.
+                                var repair=await ConversationMemory.PrepareAsync(attempt,systemPrompt,null,effectiveBudget,
+                                    (messages,prompt,ct)=>client.SendChatAsync(messages,prompt,ct),
+                                    client is IChatTokenCounter repairCounter?(Func<List<ChatMessage>,string,System.Threading.CancellationToken,Task<int?>>)repairCounter.CountInputTokensAsync:null,
+                                    token,budget.Known || budgetOverride>=1024);
+                                attempt=repair.Messages;
                             }
-                            return client.SendChatAsync(attempt,systemPrompt,token);
-                        },ticket.Token,requireRecommendations);
+                            return await client.SendChatAsync(attempt,systemPrompt,token);
+                        },ticket.Token,requireRecommendations,response=>EditIntentGuard.Rejection(historySnapshot,response));
                         error=null;
                         break;
                     }
@@ -750,7 +778,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                     catch (OperationCanceledException) { error = "요청 시간이 초과되었습니다. 다시 시도해 주세요. / Request timed out."; }
                     catch (Exception e) { error=e.Message; }
                 }
-                _requests.Complete(ticket,result,error);
+                _requests.Complete(ticket,result,error,prepared);
             });
         }
 
@@ -830,6 +858,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 }
                 else if (action == "generate")
                 {
+                    var wrongTarget=EditIntentGuard.Rejection(_llmContext,response);
+                    if(wrongTarget!=null)throw new FormatException(wrongTarget);
                     if(_requestedCandidates!=null)throw new FormatException(IsKorean()?"후보 수정은 아직 맵에 적용하지 않습니다. 번호를 지정해 수정을 다시 요청해 주세요.":"Candidate edits must remain proposals. Request a revision by option number.");
                     if(_explanationOnly)throw new FormatException(IsKorean()?"충돌 안내 대신 다른 변경 명령을 받아 적용하지 않았습니다. 유지할 특징이나 교체할 특징을 명시해 주세요.":"Expected a conflict explanation; no alternative edit was applied. Specify which features to keep or replace.");
                     MapParamsData data;
@@ -845,7 +875,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                         throw;
                     }
 
-                    ApplyEdits(new[]{data});
+                    ApplyEdits(new[]{data},SimpleJson.Serialize(parsed.Values));
                 }
                 else throw new FormatException("Unsupported response action: " + action);
                 _explainInvalidReply=null;_repairRecommendations=null;_requestedCandidates=null;
@@ -856,6 +886,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 _explainInvalidReply=null;_repairRecommendations=null;
                 if(_requestedCandidates==null && _recommendations==null)ClearRecommendations();
                 _requestedCandidates=null;
+                _llmContext.Add(new ChatMessage("assistant","NOT APPLIED\n"+e.Message));
                 _history.Add(new ChatMessage("assistant",
                     (IsKorean() ? "응답을 적용하지 못했습니다: " : "Response was not applied: ") + e.Message));
                 _statusText = "";
@@ -865,7 +896,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
         private bool RecommendationsCurrent()=>_recommendations!=null && RecommendationState()==_recommendationState &&
             (_recommendationPreviews==null || _recommendationPreviews.ContextMatches());
 
-        private void ApplyEdits(IReadOnlyList<MapParamsData> edits)
+        private void ApplyEdits(IReadOnlyList<MapParamsData> edits,string command=null)
         {
             MapGenParams.ValidatePatches(edits,_openedTileId);
             var warnings = new List<string>();
@@ -886,7 +917,6 @@ For recommendations follow the rules below and this tile's terrain and shore con
             {
                 _paramStack.Push(previous);
                 _paramsReady = true;
-                _llmContext.Clear();
                 desc = (IsKorean()?"변경한 내용:\n":"Changes applied:\n")+new MapPlanDescription(IsKorean(),DefinitionText).Describe(before,MapGenParams.CaptureState(_openedTileId));
                 var currentFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();
                 var actualAdded=currentFeatures.Except(oldFeatures).ToList();var actualRemoved=oldFeatures.Except(currentFeatures).ToList();
@@ -906,6 +936,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
             _history.Add(new ChatMessage("assistant",
                 $"{desc}{warningText}\n\n{"MapGenAI_ModifyHint".Translate()}"));
+            _llmContext.Add(new ChatMessage("assistant",(changes.Count>0?"APPLIED\n":"NO CHANGE\n")+(command??"{}")+
+                "\nActual changes: "+desc+warningText+"\nSettings accepted only; actual generation may still report placement failures."));
             _statusText = "";
         }
 
@@ -1031,14 +1063,23 @@ For recommendations follow the rules below and this tile's terrain and shore con
             { _history.Add(new ChatMessage("assistant",IsKorean()?"목록에 있는 번호를 선택해 주세요.":"Choose a number from the list."));return; }
             if(RecommendationState()!=_recommendationState || (_recommendationPreviews!=null && !_recommendationPreviews.ContextMatches()))
             {
-                ClearRecommendations();_llmContext.Clear();
+                ClearRecommendations();
+                _llmContext.Add(new ChatMessage("assistant","STATE REPLACED\nSettings changed externally. These suggestions are no longer valid; nothing selected."));
                 _history.Add(new ChatMessage("assistant",IsKorean()?"추천 후 현재 설정이 바뀌었습니다. 새 추천을 요청해 주세요.":"Settings changed after these options were prepared. Please request new recommendations."));return;
             }
             var plan=_recommendations[number-1];
+            _llmContext.Add(new ChatMessage("user","[UI selection] Apply option "+number+" only."));
             _explanationOnly=false;_explainInvalidReply=null;_repairRecommendations=null;_requestedCandidates=null;
-            try { ApplyEdits(plan.Edits()); }
+            try
+            {
+                // A refined candidate applies every revision atomically, not only
+                // its original command. Keep that distinction in conversation memory.
+                string receipt=plan.Commands.Count==1?plan.Command:
+                    "{\"action\":\"applied_plan\",\"commands\":["+string.Join(",",plan.Commands)+"]}";
+                ApplyEdits(plan.Edits(),receipt);
+            }
             catch(Exception error)
-            { _history.Add(new ChatMessage("assistant",(IsKorean()?"후보를 적용하지 못했습니다: ":"Could not apply candidate: ")+error.Message)); }
+            { _llmContext.Add(new ChatMessage("assistant","NOT APPLIED\n"+error.Message));_history.Add(new ChatMessage("assistant",(IsKorean()?"후보를 적용하지 못했습니다: ":"Could not apply candidate: ")+error.Message)); }
         }
 
         private MapParamsData ParseParams(SimpleJsonObject obj) => MapParameterParser.Parse(obj);
@@ -1059,7 +1100,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
             _paramStack.Pop();
             ClearRecommendations();
             _paramsReady = prev != null;
-            _llmContext.Clear();
+            _llmContext.Add(new ChatMessage("user","[UI action] Undo the last applied change."));
+            _llmContext.Add(new ChatMessage("assistant","STATE REPLACED\nThe last change was undone. Use the latest current map state; do not reapply it."));
 
             _history.Add(new ChatMessage("assistant",
                 IsKorean() ? "이전 상태로 되돌렸습니다." : "Reverted to previous state."));
@@ -1074,6 +1116,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             if (!TryRestore(_initialSnapshot)) return;
             _paramStack.Clear();
             _llmContext.Clear();
+            _conversationMemory=null;
             _paramsReady = _initialSnapshot != null;
             _history.Clear();
             _history.Add(new ChatMessage("assistant", "MapGenAI_Welcome".Translate()));
@@ -1135,7 +1178,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var before=MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
             if (!TryRestore(data)) return;
             if(MapStateCodec.ChangedFields(before ?? new TileMapState(),data).Count>0) _paramStack.Push(before);
-            _llmContext.Clear();
+            _llmContext.Add(new ChatMessage("user","[UI action] Load preset: "+presetName));
+            _llmContext.Add(new ChatMessage("assistant","STATE REPLACED\nPreset loaded. Earlier settings are superseded by the current map state."));
             _paramsReady=true;
             _statusText="";
             _history.Add(new ChatMessage("assistant", (IsKorean() ? "프리셋을 불러왔습니다: " : "Loaded preset: ") + presetName));
@@ -1173,7 +1217,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
             if(MapStateCodec.ChangedFields(before??new TileMapState(),updated).Count==0)return true;
             if(!TryRestore(updated))return false;
             ClearRecommendations();
-            _paramStack.Push(before);_paramsReady=true;_llmContext.Clear();
+            _paramStack.Push(before);_paramsReady=true;
+            _llmContext.Add(new ChatMessage("assistant","STATE REPLACED\nImage settings replaced. Use the latest current map state."));
             _history.Add(new ChatMessage("assistant",MapStateDescription.Describe(before??new TileMapState(),MapGenParams.CaptureState(_openedTileId),IsKorean())+
                 (IsKorean()?"\nMap Preview에서 실제 생성 결과를 확인하세요.":"\nInspect the generated result in Map Preview.")));
             return true;

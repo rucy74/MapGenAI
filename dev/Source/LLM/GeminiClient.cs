@@ -8,7 +8,7 @@ using Verse;
 
 namespace MapGenAI.LLM
 {
-    public class GeminiClient : ILLMClient, IVisionClient
+    public class GeminiClient : ILLMClient, IVisionClient, IContextBudgetClient, IChatTokenCounter
     {
         private readonly string _apiKey;
         private readonly string _model;
@@ -23,6 +23,11 @@ namespace MapGenAI.LLM
             _apiKey = apiKey;
             _model = (model ?? "").Trim();
         }
+
+        public Task<ContextBudget> GetContextBudgetAsync(CancellationToken token)
+            => ProviderContextBudgets.GeminiAsync(_apiKey,_model,token);
+        public Task<int?> CountInputTokensAsync(List<ChatMessage> history,string systemPrompt,CancellationToken token)
+            => ProviderContextBudgets.CountGeminiAsync(_apiKey,_model,history,systemPrompt,token);
 
         public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default)
         {
@@ -40,7 +45,7 @@ namespace MapGenAI.LLM
             // Keep the temperature used in the recorded development benchmarks.
             // This does not guarantee determinism; compare Gemini 3 defaults before changing it.
             // JSON mode requests structured output; ProviderResponse still validates the result.
-            contents.Append("],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":16384,\"responseMimeType\":\"application/json\"" +
+            contents.Append("],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":"+ProviderContextBudgets.GeminiOutputTokens(_apiKey,_model,16384)+",\"responseMimeType\":\"application/json\"" +
                 (_model.StartsWith("gemini-3",System.StringComparison.OrdinalIgnoreCase)?",\"thinkingConfig\":{\"thinkingLevel\":\"low\"}":"")+"}}");
 
             return await SendBodyAsync(contents.ToString(), cancellationToken);
@@ -55,7 +60,7 @@ namespace MapGenAI.LLM
                 ? ",\"thinkingConfig\":{\"thinkingLevel\":\"low\"}" : "";
             var body = "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":" + EscapeJson(instruction) +
                 "},{\"inline_data\":{\"mime_type\":" + EscapeJson(mimeType) + ",\"data\":\"" + System.Convert.ToBase64String(image) +
-                "\"}}]}],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":8192,\"responseMimeType\":\"application/json\"" + visionThinking + "}}";
+                "\"}}]}],\"generationConfig\":{\"temperature\":0.2,\"maxOutputTokens\":"+ProviderContextBudgets.GeminiOutputTokens(_apiKey,_model,8192)+",\"responseMimeType\":\"application/json\"" + visionThinking + "}}";
             return SendBodyAsync(body, cancellationToken);
         }
 

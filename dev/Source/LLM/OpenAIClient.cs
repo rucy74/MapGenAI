@@ -9,7 +9,7 @@ using Verse;
 
 namespace MapGenAI.LLM
 {
-    public class OpenAIClient : ILLMClient, IVisionClient
+    public class OpenAIClient : ILLMClient, IVisionClient, IContextBudgetClient
     {
         private readonly string _apiKey;
         private readonly string _model;
@@ -23,6 +23,12 @@ namespace MapGenAI.LLM
             _baseUrl = (baseUrl ?? "").TrimEnd('/');
             if (!System.Uri.TryCreate(_baseUrl, System.UriKind.Absolute, out var uri) || (uri.Scheme != "https" && uri.Scheme != "http"))
                 throw new System.ArgumentException("Expected an http(s) provider URL");
+        }
+
+        public Task<ContextBudget> GetContextBudgetAsync(CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+            return Task.FromResult(ContextBudget.Fallback);
         }
 
         public async Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default)

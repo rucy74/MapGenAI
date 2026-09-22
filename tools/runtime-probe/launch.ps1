@@ -24,6 +24,7 @@
     [string]$Recommendations='',
     [string]$RecommendationReplies='',
     [switch]$RecommendationScreen,
+    [switch]$ChatMemory,
     [string]$CandidatePreviews='',
     [ValidateRange(1,100)][int]$CandidateStressRounds=1,
     [switch]$CandidateQueueLoss,
@@ -40,6 +41,7 @@
     [string]$FeatureResponses='',
     [switch]$DeltaDiagnostics,
     [string]$SourceDll='',
+    [string]$ProbeAssembly='',
     [switch]$InstalledRelease,
     [string]$ModelConfig='',
     [string]$Language='',
@@ -61,7 +63,7 @@ $gameExe=Join-Path $GameRoot 'RimWorldWin64.exe'
 $releaseRoot=Join-Path $GameRoot 'Mods/MapGenAI'
 if($InstalledRelease -and $SourceDll){throw 'Use InstalledRelease or SourceDll, not both'}
 $mainDll=if($InstalledRelease){Join-Path $releaseRoot 'Assemblies/MapGenAI.dll'}elseif($SourceDll){[IO.Path]::GetFullPath($SourceDll)}else{Join-Path $probeRepo 'dev/Assemblies/MapGenAI.dll'}
-$probeDll=Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.RuntimeProbe.dll'
+$probeDll=if($ProbeAssembly){[IO.Path]::GetFullPath($ProbeAssembly)}else{Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.RuntimeProbe.dll'}
 foreach($required in @($gameExe,$mainDll,$probeDll)) {if(-not (Test-Path -LiteralPath $required)) {throw "Missing required file: $required"}}
 New-Item -ItemType Directory -Path $probeOutput,(Join-Path $probeProfile 'Config'),(Join-Path $probeModPath 'About'),(Join-Path $probeModPath 'Assemblies') -Force | Out-Null
 $probePackage='choco.mapgenai.probe.'+$probeStamp.Replace('-','')
@@ -122,6 +124,7 @@ if($EditPreflight){$arguments+=('-mapgenAIEditPreflight="'+[IO.Path]::GetFullPat
 if($EditReplies){$arguments+=('-mapgenAIEditReplies="'+[IO.Path]::GetFullPath($EditReplies)+'"')}
 if($Recommendations){$arguments+=('-mapgenAIRecommendations="'+[IO.Path]::GetFullPath($Recommendations)+'"')}
 if($RecommendationScreen){$arguments+='-mapgenAIRecommendationScreen=true'}
+if($ChatMemory){$arguments+='-mapgenAIChatMemory=true'}
 if($CandidatePreviews){
     $arguments+='-mapgenAICandidatePreviews="'+[IO.Path]::GetFullPath($CandidatePreviews)+'"'
     $arguments+='-mapgenAICandidateStressRounds='+$CandidateStressRounds

@@ -48,6 +48,7 @@ namespace MapGenAI.RuntimeProbe
                 {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 LandformSuiteProbe.Configure();
                 CandidatePreviewProbe.Configure();
+                ChatMemoryProbe.Configure();
                 SaveLoadProbe();
                 var catalog = DefDatabase<TileMutatorDef>.AllDefsListForReading.Select(d => new Dictionary<string,object> {
                     {"def",d.defName},{"categories",d.categories},{"overrideCategories",d.overrideCategories},{"priority",d.priority}
@@ -123,6 +124,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIChatMemory",out _))
+                {ChatMemoryProbe.Run(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAICandidatePreviews",out var candidateFixtures))
                 {CandidatePreviewProbe.Run(output,candidateFixtures);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAILandformSuite",out var suite))
@@ -324,6 +327,7 @@ namespace MapGenAI.RuntimeProbe
         }
         public static void Update()
         {
+            ChatMemoryProbe.Tick();
             TextRegionProbe.Tick();
             SpatialProbe.Tick();
             AncientProbe.Tick();

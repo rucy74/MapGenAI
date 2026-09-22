@@ -15,18 +15,6 @@ namespace MapGenAI.LLM
         Task<string> SendImageAsync(byte[] image, string mimeType, string instruction, CancellationToken cancellationToken = default);
     }
 
-    public class ChatMessage
-    {
-        public string Role { get; set; }
-        public string Content { get; set; }
-
-        public ChatMessage(string role, string content)
-        {
-            Role = role;
-            Content = content;
-        }
-    }
-
     public static class LLMClientFactory
     {
         public static ILLMClient Create(ApiConfig config, string fallbackLocalUrl = "http://localhost:11434")

@@ -22,6 +22,8 @@ namespace MapGenAI
 
         public string localBaseUrl = "http://localhost:11434";
         public string localModel = "llama3";
+        public int conversationInputBudget; // 0 = provider metadata, otherwise an input-only budget.
+        private string _conversationBudgetText;
 
         // ── UI 상태 (저장 안 함) ─────────────────────────────────────────────
         private Vector2 _configScrollPos = Vector2.zero;
@@ -56,6 +58,7 @@ namespace MapGenAI
             Scribe_Values.Look(ref currentConfigIndex, "currentConfigIndex", 0);
             Scribe_Values.Look(ref localBaseUrl, "localBaseUrl", "http://localhost:11434");
             Scribe_Values.Look(ref localModel, "localModel", "llama3");
+            Scribe_Values.Look(ref conversationInputBudget,"conversationInputBudget",0);
 
             if (cloudConfigs == null) cloudConfigs = new List<ApiConfig>();
             base.ExposeData();
@@ -132,6 +135,13 @@ namespace MapGenAI
                 float usedY;
                 try
                 {
+                    if(advanced)
+                    {
+                        listing.Label(MapGenAI.UI.L10n.IsKorean()?"대화 입력 예산 (토큰, 0 = 자동)":"Conversation input budget (tokens, 0 = automatic)");
+                        _conversationBudgetText=Widgets.TextField(listing.GetRect(26f),_conversationBudgetText??conversationInputBudget.ToString());
+                        if(int.TryParse(_conversationBudgetText,out var n) && (n==0 || n>=1024))conversationInputBudget=Math.Min(n,10000000);
+                        listing.Gap(4f);
+                    }
                     if (advanced) DrawAdvancedSettings(listing, inRect);
                     else DrawSimpleSettings(listing, inRect);
                     usedY=listing.CurHeight;
@@ -549,6 +559,7 @@ namespace MapGenAI
                 var url = $"https://generativelanguage.googleapis.com/v1beta/models?key={apiKey}&pageSize=100";
                 if (pageToken != null) url += $"&pageToken={Uri.EscapeDataString(pageToken)}";
                 var response = await Http.GetStringAsync(url);
+                LLM.ProviderContextBudgets.RegisterGeminiModels(apiKey,response);
                 var parts = response.Split('"');
                 pageToken = null;
                 for (int i = 0; i < parts.Length - 2; i++)

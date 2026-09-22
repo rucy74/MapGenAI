@@ -75,6 +75,9 @@ static class CoreRegressionTests
         RecordedLandformTests.RunAll();
         ManualFailureTests.RunAll();
         StructuredChatTests.RunAll();
+        ProviderBudgetTests.RunAll();
+        ConversationMemoryTests.RunAll();
+        EditIntentGuardTests.RunAll();
         MapPlanDescriptionTests.RunAll();
         RecommendationControlsTests.RunAll();
         RegionCoverageTests.RunAll();

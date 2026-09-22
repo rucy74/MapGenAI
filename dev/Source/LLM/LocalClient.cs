@@ -7,7 +7,7 @@ namespace MapGenAI.LLM
     /// <summary>
     /// Ollama / LM Studio 등 OpenAI 호환 로컬 서버
     /// </summary>
-    public class LocalClient : ILLMClient, IVisionClient
+    public class LocalClient : ILLMClient, IVisionClient, IContextBudgetClient
     {
         private readonly OpenAIClient _inner;
 
@@ -16,6 +16,8 @@ namespace MapGenAI.LLM
             // OpenAI 호환 엔드포인트 재사용
             _inner = new OpenAIClient(apiKey: "local", model: model, baseUrl: baseUrl);
         }
+
+        public Task<ContextBudget> GetContextBudgetAsync(CancellationToken token)=>_inner.GetContextBudgetAsync(token);
 
         public Task<string> SendChatAsync(List<ChatMessage> history, string systemPrompt, CancellationToken cancellationToken = default)
         {

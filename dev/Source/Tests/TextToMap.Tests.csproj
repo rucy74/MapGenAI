@@ -67,5 +67,9 @@
     <Compile Include="../LLM/RecommendationPlan.cs" Link="RecommendationPlan.cs" />
     <Compile Include="../UI/RecommendationLayout.cs" Link="RecommendationLayout.cs" />
     <Compile Include="../LLM/StructuredChat.cs" Link="StructuredChat.cs" />
+    <Compile Include="../LLM/ChatMessage.cs" Link="ChatMessage.cs" />
+    <Compile Include="../LLM/ConversationMemory.cs" Link="ConversationMemory.cs" />
+    <Compile Include="../LLM/ContextBudget.cs" Link="ContextBudget.cs" />
+    <Compile Include="../LLM/EditIntentGuard.cs" Link="EditIntentGuard.cs" />
   </ItemGroup>
 </Project>
