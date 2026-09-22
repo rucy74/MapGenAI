@@ -1,18 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <ModMetaData>
     <packageId>Choco.MapGenAI</packageId>
     <name>MapGen AI</name>
     <author>Choco</author>
-    <supportedVersions>
-        <li>1.5</li>
-        <li>1.6</li>
-    </supportedVersions>
-    <description>Describe your map in natural language - AI generates it for you.
-
-Type anything: snowy forest with a river on the right, Nordic vibe, or just surprise me and let the AI decide.
-
-Powered by Gemini, OpenAI, or local LLMs (Ollama / LM Studio).
-Set your API key in Mod Settings and start generating.</description>
+    <supportedVersions><li>1.6</li></supportedVersions><description>Describe and refine RimWorld maps in natural language, with live Map Preview.
+Includes cumulative edits, natural outlines, partial soil/material fills, positioned ruins, hot springs, local roads with automatic wooden bridges, and selectable recommendation previews.
+Recommendations can be dismissed, refreshed or collapsed to leave more room for chat.
+Current build targets RimWorld 1.6. Image input is temporarily disabled.
+Configure your provider and API key in Mod Settings. Enable MapGen AI without MapGen AI [DEV].</description>
     <modDependencies>
         <li>
             <packageId>brrainz.harmony</packageId>
@@ -32,4 +27,4 @@ Set your API key in Mod Settings and start generating.</description>
         <li>m00nl1ght.MapPreview</li>
         <li>m00nl1ght.GeologicalLandforms</li>
     </loadAfter>
-</ModMetaData>
+<incompatibleWith><li>Choco.MapGenAI.Dev</li></incompatibleWith></ModMetaData>

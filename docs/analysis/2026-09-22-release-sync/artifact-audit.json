@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-09-22T23:29:43.003997+09:00",
+  "filesScanned": 51,
+  "secretMatches": 0,
+  "positiveControls": 3,
+  "localLinksChecked": 45,
+  "isolatedRunsCleaned": [
+    "native-installed"
+  ],
+  "evaluationOk": true,
+  "dllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549"
+}

@@ -1,0 +1,201 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "label": "Assemblies/MapGenAI.dll dev/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/English/Keyed/MapGenAI.xml dev/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/Korean/Keyed/MapGenAI.xml dev/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/Japanese/Keyed/MapGenAI.xml dev/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/ChineseSimplified/Keyed/MapGenAI.xml dev/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "9 archive files",
+      "ok": true
+    },
+    {
+      "label": "About/About.xml ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "About/Preview.png ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Assemblies/MapGenAI.dll ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/ChineseSimplified/Keyed/MapGenAI.xml ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/English/Keyed/MapGenAI.xml ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/Japanese/Keyed/MapGenAI.xml ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "Languages/Korean/Keyed/MapGenAI.xml ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "README.txt ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "build.json ZIP/dist/install identity",
+      "ok": true
+    },
+    {
+      "label": "normal identity",
+      "ok": true
+    },
+    {
+      "label": "1.6 and DEV exclusion",
+      "ok": true
+    },
+    {
+      "label": "Workshop id retained",
+      "ok": true
+    },
+    {
+      "label": "old translation backup preserved outside mod",
+      "ok": true
+    },
+    {
+      "label": "offline183",
+      "ok": true
+    },
+    {
+      "label": "actual installed DLL loaded",
+      "ok": true
+    },
+    {
+      "label": "normal package active, DEV excluded",
+      "ok": true
+    },
+    {
+      "label": "native completed",
+      "ok": true
+    },
+    {
+      "label": "full exercised ids",
+      "ok": true
+    },
+    {
+      "label": "full/dirt-path success",
+      "ok": true
+    },
+    {
+      "label": "full/dirt-path preserved",
+      "ok": true
+    },
+    {
+      "label": "full/dirt-path connected",
+      "ok": true
+    },
+    {
+      "label": "full/native-river success",
+      "ok": true
+    },
+    {
+      "label": "full/native-river preserved",
+      "ok": true
+    },
+    {
+      "label": "full/native-river connected",
+      "ok": true
+    },
+    {
+      "label": "full native bridge",
+      "ok": true
+    },
+    {
+      "label": "preview exercised ids",
+      "ok": true
+    },
+    {
+      "label": "preview/dirt-path success",
+      "ok": true
+    },
+    {
+      "label": "preview/dirt-path preserved",
+      "ok": true
+    },
+    {
+      "label": "preview/dirt-path connected",
+      "ok": true
+    },
+    {
+      "label": "preview/native-river success",
+      "ok": true
+    },
+    {
+      "label": "preview/native-river preserved",
+      "ok": true
+    },
+    {
+      "label": "preview/native-river connected",
+      "ok": true
+    },
+    {
+      "label": "preview native bridge",
+      "ok": true
+    },
+    {
+      "label": "dirt-path full/preview pixel match",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/generated previous DEV pixels",
+      "ok": true
+    },
+    {
+      "label": "dirt-path/background previous DEV pixels",
+      "ok": true
+    },
+    {
+      "label": "native-river full/preview pixel match",
+      "ok": true
+    },
+    {
+      "label": "native-river/generated previous DEV pixels",
+      "ok": true
+    },
+    {
+      "label": "native-river/background previous DEV pixels",
+      "ok": true
+    },
+    {
+      "label": "settings and DEV preserved",
+      "ok": true
+    },
+    {
+      "label": "probe removed",
+      "ok": true
+    }
+  ],
+  "checksPassed": 47,
+  "dllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+  "archiveSha256": "81dfa2a382516c7b8fdebc39fb340349a508062621fb4ad01b267ceaf17ae6f9",
+  "sourceCommit": "0b42e65ac3a98206933e3112c55382fdf9a52236",
+  "offlineTests": 183,
+  "actualReleaseFullMaps": 2,
+  "actualReleasePreviews": 2,
+  "newProviderCalls": 0
+}

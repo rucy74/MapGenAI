@@ -1,6 +1,6 @@
 # MapGen AI
 
-> **Development version:** [한국어 모드 소개·사용법](docs/description-ko.md) covers native material fills, terrain-relative ruins and ancient dangers, and cumulative text editing (image generation is temporarily paused) on `dev`. The separate **MapGen AI [DEV]** package targets RimWorld 1.6; the preserved version is tagged `v1.6`.
+> **Current test build:** `dist` and the separate **MapGen AI [DEV]** package now contain the same verified DLL and translations for RimWorld 1.6. [한국어 모드 소개·사용법](docs/description-ko.md) covers the current features; image input remains paused. Enable one package at a time. The previous release is preserved at tag `v1.6`. This local package synchronization does not publish a Steam update or a new GitHub Release.
 
 ![Preview](docs/assets/preview_composite.png)
 
@@ -73,7 +73,7 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 
 ## Compatibility
 
-- RimWorld 1.5 / 1.6
+- Current `dev` and `dist`: RimWorld 1.6
 - Odyssey DLC — Supported (enables 60+ additional terrain mutators)
 
 ## Project Structure
@@ -88,6 +88,14 @@ dev/            — Full mod + source (development)
 dist/           — Release-ready (copy to RimWorld/Mods/)
 docs/           — Dev logs, workshop description, prompt engineering notes
 ```
+
+Promote an already verified, clean DEV archive without rebuilding its DLL:
+
+```powershell
+python tools/sync_release.py <MapGenAI-Dev.zip> <new-output-directory>
+```
+
+This updates `dist` and creates `MapGenAI.zip`, keeping the normal `Choco.MapGenAI` package identity. It does not install or publish the package. [Current synchronization checks](docs/analysis/2026-09-22-release-sync/report.md).
 
 ## License
 

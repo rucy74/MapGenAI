@@ -68,6 +68,7 @@
 - 도로 영역은 비율 채움과 위치 지정 구조물에서 보호된다. `AuthoringGeneration.RoadFailure`는 기존 구조물 생성을 막지 않으며 일반 작성 오류의 차단 동작은 유지한다. native 월드 Roads가 생략되는 Map Preview의 교차 부분 한계는 일반/추천 화면에 표시한다.
 - `Tests/RoadPlanTests.cs`, `RoadRoutingTests.cs`, `tools/runtime-probe/RoadProbeAudit.cs`, `tools/evaluate_local_roads.py`: 상태·경로·실게임·배경 미리보기와 기존 맵 동일성 검사. [검증 보고서](docs/analysis/2026-09-19-local-roads/report.md).
 - `Tests/RoadBridgeRoutingTests.cs`, `tools/evaluate_road_bridges.py`: 이전 DLL과 육지 경로 비교, 다섯 도로의 다리·원래 강물·양안 연결·층 보존·중간 쓰기 실패 복원 검증. [자동 다리 보고서](docs/analysis/2026-09-22-road-bridges/report.md).
+- `tools/sync_release.py`: 검증된 clean DEV ZIP의 DLL/번역을 그대로 dist/일반 MapGenAI ZIP으로 승격. 소스 commit/파일일치 검사, 정식 packageId·1.6 메타데이터 유지, 공개 업로드/설정 변경 없음. runtime-probe의 `-InstalledRelease`는 실제 설치된 일반 패키지를 별도 프로필에서 읽으며 `product-load.json`에 로드 경로·해시·활성 패키지를 기록한다. [동기화 검증](docs/analysis/2026-09-22-release-sync/report.md).
 
 ## 추천 계약과 미리보기
 

@@ -40,6 +40,7 @@
     [string]$FeatureResponses='',
     [switch]$DeltaDiagnostics,
     [string]$SourceDll='',
+    [switch]$InstalledRelease,
     [string]$ModelConfig='',
     [string]$Language='',
     [string]$ImageInputs='',
@@ -57,20 +58,25 @@ $probeModPath=[IO.Path]::GetFullPath($ProbeMod)
 if (Test-Path -LiteralPath $probeProfile) {throw 'Use a fresh isolated profile.'}
 if (Test-Path -LiteralPath $probeModPath) {throw 'Use a fresh probe mod folder.'}
 $gameExe=Join-Path $GameRoot 'RimWorldWin64.exe'
-$mainDll=if($SourceDll){[IO.Path]::GetFullPath($SourceDll)}else{Join-Path $probeRepo 'dev/Assemblies/MapGenAI.dll'}
+$releaseRoot=Join-Path $GameRoot 'Mods/MapGenAI'
+if($InstalledRelease -and $SourceDll){throw 'Use InstalledRelease or SourceDll, not both'}
+$mainDll=if($InstalledRelease){Join-Path $releaseRoot 'Assemblies/MapGenAI.dll'}elseif($SourceDll){[IO.Path]::GetFullPath($SourceDll)}else{Join-Path $probeRepo 'dev/Assemblies/MapGenAI.dll'}
 $probeDll=Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.RuntimeProbe.dll'
 foreach($required in @($gameExe,$mainDll,$probeDll)) {if(-not (Test-Path -LiteralPath $required)) {throw "Missing required file: $required"}}
 New-Item -ItemType Directory -Path $probeOutput,(Join-Path $probeProfile 'Config'),(Join-Path $probeModPath 'About'),(Join-Path $probeModPath 'Assemblies') -Force | Out-Null
 $probePackage='choco.mapgenai.probe.'+$probeStamp.Replace('-','')
-[xml]$about=Get-Content -LiteralPath (Join-Path $probeRepo 'dev/About/About.xml') -Raw
+$aboutSource=if($InstalledRelease){Join-Path $releaseRoot 'About/About.xml'}else{Join-Path $probeRepo 'dev/About/About.xml'}
+[xml]$about=Get-Content -LiteralPath $aboutSource -Raw
+if($InstalledRelease -and $about.ModMetaData.packageId -ne 'Choco.MapGenAI'){throw 'Unexpected installed release package identity'}
 $about.ModMetaData.packageId=$probePackage
 $about.ModMetaData.name='MapGenAI isolated development probe'
 $about.Save((Join-Path $probeModPath 'About/About.xml'))
 foreach($folder in @('Languages','Textures','Defs','Patches')) {
     $source=Join-Path $probeRepo "dev/$folder"
-    if(Test-Path -LiteralPath $source) {Copy-Item -LiteralPath $source -Destination $probeModPath -Recurse}
+    if(-not $InstalledRelease -and (Test-Path -LiteralPath $source)) {Copy-Item -LiteralPath $source -Destination $probeModPath -Recurse}
 }
-Copy-Item -LiteralPath $mainDll,$probeDll -Destination (Join-Path $probeModPath 'Assemblies')
+if(-not $InstalledRelease){Copy-Item -LiteralPath $mainDll -Destination (Join-Path $probeModPath 'Assemblies')}
+Copy-Item -LiteralPath $probeDll -Destination (Join-Path $probeModPath 'Assemblies')
 $known=@()
 foreach($dlc in Get-ChildItem -LiteralPath (Join-Path $GameRoot 'Data') -Directory) {
     $dlcAbout=Join-Path $dlc.FullName 'About/About.xml'
@@ -79,6 +85,7 @@ foreach($dlc in Get-ChildItem -LiteralPath (Join-Path $GameRoot 'Data') -Directo
 $expansionOrder=@('ludeon.rimworld','ludeon.rimworld.royalty','ludeon.rimworld.ideology','ludeon.rimworld.biotech','ludeon.rimworld.anomaly','ludeon.rimworld.odyssey')
 $active=@('brrainz.harmony')+@($expansionOrder | Where-Object { $known -contains $_ })+@('m00nl1ght.mappreview',$probePackage)
 if($Landmarks){$active=@('brrainz.harmony')+@($expansionOrder | Where-Object { $known -contains $_ })+@('oskarpotocki.vanillafactionsexpanded.core','vanillaexpanded.vexploratione','m00nl1ght.mappreview',$probePackage)}
+if($InstalledRelease){$active=@($active | Where-Object {$_ -ne $probePackage})+@('choco.mapgenai',$probePackage)}
 $version=(Get-Content -LiteralPath (Join-Path $GameRoot 'Version.txt') -Raw).Trim()
 $config='<?xml version="1.0" encoding="utf-8"?><ModsConfigData><version>'+$version+'</version><activeMods>'+ (($active|ForEach-Object {'<li>'+$_+'</li>'}) -join '') + '</activeMods><knownExpansions>'+ (($known|ForEach-Object {'<li>'+$_+'</li>'}) -join '') +'</knownExpansions></ModsConfigData>'
 [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/ModsConfig.xml'),$config,[Text.UTF8Encoding]::new($false))

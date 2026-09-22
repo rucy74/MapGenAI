@@ -140,6 +140,11 @@ namespace MapGenAI.RuntimeProbe
         static Dictionary<string,object> Obj(params object[] pairs){var d=new Dictionary<string,object>();for(int i=0;i<pairs.Length;i+=2)d[(string)pairs[i]]=pairs[i+1];return d;}
         public static void Run(string output,string manifest,string replies,int sample)
         {
+            var assembly=typeof(MapGenAIMod).Assembly;
+            string assemblyHash;
+            using(var sha=SHA256.Create())assemblyHash=BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(assembly.Location))).Replace("-","").ToLowerInvariant();
+            File.WriteAllText(Path.Combine(output,"product-load.json"),SimpleJson.Serialize(Obj("assemblyPath",assembly.Location,"dllSha256",assemblyHash,
+                "activePackages",LoadedModManager.RunningModsListForReading.Select(m=>m.PackageId).ToArray())));
             var results=new List<object>();var tiles=new List<object>();bool complete=false;string fatal=null;seedOffset=sample;
             try
             {

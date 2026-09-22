@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "0b42e65ac3a98206933e3112c55382fdf9a52236",
+  "dllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+  "packageId": "Choco.MapGenAI",
+  "gameVersion": "1.6",
+  "promotedFrom": "Choco.MapGenAI.Dev",
+  "developmentArchiveSha256": "aabf2f8f699ddf914672dafeea140025221e54f4dc71fbdae920071edf4026d2",
+  "createdUtc": "2026-09-22T14:24:04.062498+00:00"
+}
