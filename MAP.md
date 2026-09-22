@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- MG31 대화 연속성: `ConversationMemory.cs`는 원문과 전송용 요약 checkpoint를 분리한다. 입력예산80%에서 요약/55%목표, 최신3유저턴 원문, 실패시원문보존. `ContextBudget.cs`는 Gemini metadata/countTokens 및 미확인공급자 fallback. `Dialog_TextToMap`은 APPLIED/NOT APPLIED/STATE REPLACED를 보존하고 Reset만 지운다. refinement 선택은 모든 명령을 영수증에 기록한다. `EditIntentGuard`는 명시도로/확실한후속의 다른대상응답을 StructuredChat의1회수정전에차단한다. 재시도에도입력예산검사; 생성엔진불변. [MG31 검증](docs/analysis/2026-09-23-chat-memory/report.md). 이번에는 DEV만 설치하고 일반판/dist/main은 유지한다.
+
 - 추천 취소/재추천/접기: `Dialog_TextToMap`의 `DismissRecommendations`는 RequestGate와 후보만 취소하고 현재 맵/Undo/draft를 보존한다. `RequestNewRecommendations`와 `RecommendationPlan.RequestsNewOptions`는 후보 편집 컨텍스트 없이 실제 맵을 기준으로 새 추천을 요청한다. `RecommendationLayout`은 채팅 공간을 먼저 확보한다. [MG28 검증](docs/analysis/2026-09-22-recommendation-controls/report.md).
 
 - 일반 추천의 고정 도넛/측면산/직사각형 협곡 반복 완화: `RecommendationPlan.Rules`에서 타일의 바이옴·산악도·물 연결 및 넓은 정착 공간을 우선한다. 명시적 기하 요청/기존 맵 보존은 유지한다. 지상 추천에 `UndergroundCave`를 새로 넣지 않도록 안내. 품질 자동 판정은 없으며 모델 의존 한계가 남는다. 시작 추천 문구는 숫자를 생략했지만 후보 최대3개는 그대로다. [검증·실패·원문 출처](docs/analysis/2026-09-19-contextual-recommendations/report.md), [실제 그림](docs/analysis/2026-09-19-contextual-recommendations/gallery.html), `tools/evaluate_contextual_recommendations.py`.

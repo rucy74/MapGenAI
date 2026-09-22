@@ -1,0 +1,6 @@
+{
+  "reason": "Baseline probe failed assembly load because old DLL has no new context budget interface",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260923-002442-932",
+  "verifiedOwned": true,
+  "pid": 52660
+}

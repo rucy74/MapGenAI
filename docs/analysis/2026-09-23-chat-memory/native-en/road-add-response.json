@@ -1,0 +1,1 @@
+{"action":"generate","params":{"road_ops":[{"op":"add","road":{"id":"west_east","kind":"DirtPath","seed":17,"points":[[0,0.4],[1,0.6]]}},{"op":"add","road":{"id":"south_north","kind":"DirtPath","seed":23,"points":[[0.4,0],[0.6,1]]}}]}}

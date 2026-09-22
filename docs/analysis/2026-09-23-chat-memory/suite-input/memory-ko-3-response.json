@@ -1,0 +1,1 @@
+{"action":"generate","description":"북동쪽에 자연스러운 윤곽의 작은 호수 추가","params":{"shape_ops":[{"op":"add","shape":{"id":"ne_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"c1","prim":"circle","center":[0.75,0.75],"r":0.12}],"compose":[{"op":"add","s":"c1","fill":"water","e":0,"f":0.015}]}}]}}

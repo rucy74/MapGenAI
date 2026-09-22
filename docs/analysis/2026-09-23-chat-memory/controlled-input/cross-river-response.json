@@ -1,0 +1,1 @@
+{"action":"generate","description":"맵 정중앙(0.5, 0.5)에서 정확히 교차하는 일자 십자 흙길","params":{"road_ops":[{"op":"update","id":"cross_road_h","changes":{"route":"direct","points":[[0,0.5],[1,0.5]]}},{"op":"update","id":"cross_road_v","changes":{"route":"direct","points":[[0.5,0],[0.5,1]]}}]}}

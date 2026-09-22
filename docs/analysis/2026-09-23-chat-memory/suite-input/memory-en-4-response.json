@@ -1,0 +1,1 @@
+{"action":"generate","description":"Change both cross dirt paths to stone roads","params":{"road_ops":[{"op":"update","id":"path_ns","changes":{"kind":"StoneRoad"}},{"op":"update","id":"path_we","changes":{"kind":"StoneRoad"}}]}}

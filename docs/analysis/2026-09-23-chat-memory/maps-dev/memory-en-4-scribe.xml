@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<animalDensity>1.13</animalDensity>
+			<elevationShapes>
+				<li>
+					<id>ne_lake</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<compositeJson>{"shapes":[{"center":[0.75,0.75],"h":0,"id":"lake_body","n":0,"prim":"circle","r":0.12,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0,"f":0.015,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"lake_body"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads>
+				<li>
+					<plan>{"id":"path_ns","kind":"StoneRoad","points":[[0.5,1],[0.5,0]],"route":"direct","seed":0}</plan>
+				</li>
+				<li>
+					<plan>{"id":"path_we","kind":"StoneRoad","points":[[0,0.5],[1,0.5]],"route":"direct","seed":0}</plan>
+				</li>
+			</localRoads>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

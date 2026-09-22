@@ -1,0 +1,528 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "ko native dialog checks",
+      "ok": true
+    },
+    {
+      "name": "ko fresh multi-turn and summary",
+      "ok": true
+    },
+    {
+      "name": "ko actual summary reduction",
+      "ok": true
+    },
+    {
+      "name": "en native dialog checks",
+      "ok": true
+    },
+    {
+      "name": "en fresh multi-turn and summary",
+      "ok": true
+    },
+    {
+      "name": "en actual summary reduction",
+      "ok": true
+    },
+    {
+      "name": "maps-dev maps complete",
+      "ok": true
+    },
+    {
+      "name": "maps-baseline-r2 maps complete",
+      "ok": true
+    },
+    {
+      "name": "same replay IDs",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-generated-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-generated-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-generated-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-generated-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "maps-dev preview complete",
+      "ok": true
+    },
+    {
+      "name": "maps-baseline-r2 preview complete",
+      "ok": true
+    },
+    {
+      "name": "same replay IDs",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-1-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-2-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-3-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-ko-4-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-1-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-2-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-3-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "memory-en-4-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-background-preview.png terrain/road layers unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-background-preview.png image unchanged from released DLL",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-background-preview.png preserves world links",
+      "ok": true
+    },
+    {
+      "name": "centered-cross-river-background-preview.png protected obstacle rejection is atomic",
+      "ok": true
+    },
+    {
+      "name": "controlled-native-r2 maps complete",
+      "ok": true
+    },
+    {
+      "name": "cross-dryFalse two successful roads",
+      "ok": true
+    },
+    {
+      "name": "cross-dryFalse both orthogonal center axes",
+      "ok": true
+    },
+    {
+      "name": "cross-dryFalse walkable and connected",
+      "ok": true
+    },
+    {
+      "name": "cross-dryFalse no lost water or world links",
+      "ok": true
+    },
+    {
+      "name": "cross-riverFalse two successful roads",
+      "ok": true
+    },
+    {
+      "name": "cross-riverFalse both orthogonal center axes",
+      "ok": true
+    },
+    {
+      "name": "cross-riverFalse walkable and connected",
+      "ok": true
+    },
+    {
+      "name": "cross-riverFalse no lost water or world links",
+      "ok": true
+    },
+    {
+      "name": "native river gets walkable bridges False",
+      "ok": true
+    },
+    {
+      "name": "controlled-native-r2 preview complete",
+      "ok": true
+    },
+    {
+      "name": "cross-dryTrue two successful roads",
+      "ok": true
+    },
+    {
+      "name": "cross-dryTrue both orthogonal center axes",
+      "ok": true
+    },
+    {
+      "name": "cross-dryTrue walkable and connected",
+      "ok": true
+    },
+    {
+      "name": "cross-dryTrue no lost water or world links",
+      "ok": true
+    },
+    {
+      "name": "cross-riverTrue two successful roads",
+      "ok": true
+    },
+    {
+      "name": "cross-riverTrue both orthogonal center axes",
+      "ok": true
+    },
+    {
+      "name": "cross-riverTrue walkable and connected",
+      "ok": true
+    },
+    {
+      "name": "cross-riverTrue no lost water or world links",
+      "ok": true
+    },
+    {
+      "name": "native river gets walkable bridges True",
+      "ok": true
+    }
+  ],
+  "placementFailures": [
+    {
+      "id": "memory-ko-1",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-2",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-3",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-4",
+      "preview": false,
+      "issues": [
+        "돌길 / Stone road: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-1",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-3",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-4",
+      "preview": false,
+      "issues": [
+        "돌길 / Stone road: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "centered-cross-river",
+      "preview": false,
+      "issues": [
+        "흙길 / Dirt path: 다리를 포함한 도로의 시작과 끝은 육지나 기존 다리에 두세요. / Road endpoints must be on land or an existing bridge."
+      ]
+    },
+    {
+      "id": "memory-ko-1",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-2",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-3",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-ko-4",
+      "preview": true,
+      "issues": [
+        "돌길 / Stone road: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-1",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-3",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "memory-en-4",
+      "preview": true,
+      "issues": [
+        "돌길 / Stone road: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."
+      ]
+    },
+    {
+      "id": "centered-cross-river",
+      "preview": true,
+      "issues": [
+        "흙길 / Dirt path: 다리를 포함한 도로의 시작과 끝은 육지나 기존 다리에 두세요. / Road endpoints must be on land or an existing bridge."
+      ]
+    }
+  ],
+  "scope": "Intent and history repaired; raw natural obstructions remain protected. Placement failure is not a successful cross."
+}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"Ensure dirt paths form a perfect centered cross","params":{"road_ops":[{"op":"update","id":"path_ns","changes":{"points":[[0.5,1],[0.5,0]],"route":"direct"}},{"op":"update","id":"path_we","changes":{"points":[[0,0.5],[1,0.5]],"route":"direct"}}]}}

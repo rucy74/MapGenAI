@@ -1,0 +1,86 @@
+{
+  "cases": [
+    {
+      "id": "memory-ko-1",
+      "kind": "local-roads",
+      "beforeFile": "memory-ko-1-before.json",
+      "request": "맵의 북쪽에서 남쪽, 서쪽에서 동쪽으로 십자가 모양 흙길 두 개를 깔아줘. 맵 중앙에서 만나게 해 줘.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-ko-2",
+      "kind": "local-roads",
+      "beforeFile": "memory-ko-2-before.json",
+      "request": "아니 완전한 십자가 모양. 십자가가 만나는 점이 맵의 중심.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-ko-3",
+      "kind": "local-roads",
+      "beforeFile": "memory-ko-3-before.json",
+      "request": "이번엔 북동쪽에 작은 자연스러운 호수 하나 추가해 줘.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-ko-4",
+      "kind": "local-roads",
+      "beforeFile": "memory-ko-4-before.json",
+      "request": "아까 만들었던 십자가 흙길 두 개만 돌길로 바꿔줘.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-en-1",
+      "kind": "local-roads",
+      "beforeFile": "memory-en-1-before.json",
+      "request": "Add two dirt paths in a cross from north to south and west to east, meeting in the map center.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-en-2",
+      "kind": "local-roads",
+      "beforeFile": "memory-en-2-before.json",
+      "request": "No, a perfect cross. They must meet at the exact center of the map.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-en-3",
+      "kind": "local-roads",
+      "beforeFile": "memory-en-3-before.json",
+      "request": "Now add a small natural lake in the northeast.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "memory-en-4",
+      "kind": "local-roads",
+      "beforeFile": "memory-en-4-before.json",
+      "request": "Change only the two cross-shaped dirt paths from earlier to stone roads.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true
+    },
+    {
+      "id": "centered-cross-river",
+      "kind": "local-roads",
+      "beforeFile": "centered-cross-river-before.json",
+      "request": "아니 완전한 십자가 모양. 십자가가 만나는 점이 맵의 중심.",
+      "omitAmbientRuins": true,
+      "preview": true,
+      "generateUnchanged": true,
+      "worldRiver": true
+    }
+  ]
+}

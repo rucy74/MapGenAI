@@ -1,0 +1,1 @@
+Controlled dry-floor fixture: replay the actual centered-cross correction. Preserve native river water.

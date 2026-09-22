@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandformSuite>
+	<fixture>
+		<state>
+			<animalDensity>1.13</animalDensity>
+			<elevationShapes />
+			<structures />
+			<localRoads>
+				<li>
+					<plan>{"id":"cross_road_h","kind":"DirtPath","points":[[0,0.5],[1,0.5]],"route":"direct","seed":0}</plan>
+				</li>
+				<li>
+					<plan>{"id":"cross_road_v","kind":"DirtPath","points":[[0.5,0],[0.5,1]],"route":"direct","seed":0}</plan>
+				</li>
+			</localRoads>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+		<component IsNull="True" />
+		<settings IsNull="True" />
+	</fixture>
+</LandformSuite>

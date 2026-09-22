@@ -1,0 +1,1 @@
+Disposable TemperateForest flat inland tile; controlled initial animal_density=1.13 protects unrelated-state preservation. All provider traffic is intercepted and replayed. This probe validates dialog/state wiring, not rendered terrain or real provider quality.

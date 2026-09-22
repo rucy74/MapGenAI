@@ -1,0 +1,1 @@
+{"action":"generate","description":"십자 길 두 개를 돌길로 변경","params":{"road_ops":[{"op":"update","id":"cross_road_h","changes":{"kind":"StoneRoad"}},{"op":"update","id":"cross_road_v","changes":{"kind":"StoneRoad"}}]}}

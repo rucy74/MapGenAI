@@ -1,0 +1,1 @@
+{"action":"generate","description":"Add a small natural lake in the northeast","params":{"shape_ops":[{"op":"add","shape":{"id":"ne_lake","type":"composite","edge_roughness":"medium","shapes":[{"id":"lake_body","prim":"circle","center":[0.75,0.75],"r":0.12}],"compose":[{"op":"add","s":"lake_body","fill":"WaterShallow","e":0,"f":0.015}]}}]}}
