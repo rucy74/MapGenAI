@@ -12,6 +12,7 @@ namespace MapGenAI.MapGen
         internal bool blockStructures;
         public bool nativeRoadPreviewLimited;
         public int terrainCells, protectedCells;
+        public int surfaceBlendCells,vegetationPlanCells;
         public bool preview;
     }
     public sealed class CoverageResult

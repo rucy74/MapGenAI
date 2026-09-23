@@ -19,7 +19,7 @@ namespace MapGenAI.MapGen
     public static class ShapeEdits
     {
         public const int MaxShapes = 32;
-        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout" };
+        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout", "details" };
 
         public static void AssignIds(List<ElevationShape> shapes)
         {
@@ -145,6 +145,7 @@ namespace MapGenAI.MapGen
                     // Default only NEW additions. Loading/patching a legacy snapshot must not
                     // change its mountains, source mask, dependent fill or ruin placement.
                     if(added.type=="landform" && added.layout==null)added.layout="organic";
+                    if(added.type=="landform" && added.details==null)added.details="natural";
                     if (shapes.Any(s => s.id == added.id && added.id != null)) throw new FormatException("Terrain ID already exists: " + added.id);
                     shapes.Add(added); AssignIds(shapes);
                 }

@@ -10,6 +10,7 @@ namespace MapGenAI.MapGen
         public readonly string[] Materials;
         public readonly bool[] Flatten;
         public readonly bool[] LocalRoadCells;
+        public float[] VegetationWeights; // optional, generated once; never retained outside this generation scope
         readonly Dictionary<string,bool[]> masks = new Dictionary<string,bool[]>();
         readonly System.Action<string,int,string> observeMaterial;
         internal readonly Dictionary<int,CoverageCell> CoverageOriginal = new Dictionary<int,CoverageCell>();

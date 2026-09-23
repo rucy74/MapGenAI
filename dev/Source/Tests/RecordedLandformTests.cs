@@ -53,7 +53,7 @@ static class RecordedLandformTests
             var entries=new List<object>();
             foreach(var shape in shapes)
             {
-                foreach(string key in new[]{"landform","variant","opening","layout"})if(!shape.ContainsKey(key))shape.Values[key]=null;
+                foreach(string key in new[]{"landform","variant","opening","layout","details"})if(!shape.ContainsKey(key))shape.Values[key]=null;
                 entries.Add(new SortedDictionary<string,object>(shape.Values,StringComparer.Ordinal));
             }
             state.Values["elevationShapes"]=entries;

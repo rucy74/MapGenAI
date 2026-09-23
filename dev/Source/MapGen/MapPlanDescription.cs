@@ -58,6 +58,7 @@ namespace MapGenAI.MapGen
                     if(old.scope!=shape.scope)changes.Add(T("통로 적용 범위 조정","passage scope adjusted"));
                     if(old.direction!=shape.direction)changes.Add(T("방향 조정","direction adjusted"));
                     if(old.variant!=shape.variant || old.landform!=shape.landform || old.layout!=shape.layout)changes.Add(T("자연지형 배치 조정","natural landscape layout adjusted"));
+                    if(old.details!=shape.details)changes.Add(shape.details=="natural"?T("물가·산기슭의 바닥과 식생 조화","blend shores, foothill ground and vegetation"):T("주변 바닥·식생 자동 조화 끄기","disable automatic ground and vegetation blending"));
                     if(old.opening!=shape.opening)changes.Add(T("출구 폭 조정","exit width adjusted"));
                     if(old.fade!=shape.fade || old.noise_amount!=shape.noise_amount)changes.Add(T("산맥의 폭·굴곡 조정","ridge width/irregularity adjusted"));
                     lines.Add(description+" — "+(changes.Count==0?T("설정 조정","settings adjusted"):string.Join(", ",changes)));
@@ -176,7 +177,7 @@ namespace MapGenAI.MapGen
                 var center=ElevationShape.ParsePosition(s.position);
                 string direction=Direction(ElevationShape.ParseDirection(s.direction));
                 string landscape=s.landform=="open_basin"?T(direction+"으로 열린 자연스러운 분지", "natural basin opening to the "+direction):s.landform=="winding_valley"?T(direction+" 방향으로 굽이치는 넓은 골짜기","broad winding valley along the "+direction+" axis"):T(direction+" 산기슭과 이어지는 평야","branching foothills to the "+direction+" beside an open plain");
-                return Position(center.x,center.y)+" — "+landscape;
+                return Position(center.x,center.y)+" — "+landscape+(s.details=="natural"?T(" · 물가·산기슭 바닥과 식생 조화"," · blended shores, foothill ground and vegetation"):"");
             }
             if(s.type=="passage")return (ContourWarp.Amount(s.edge_roughness)>0?T("자연스러운 가장자리 · 최소 폭 ","Natural edges · minimum width "):T("폭 ","Dry passage, "))+s.width+T("칸의 마른 통로 — "," cells wide — ")+Name("terrain",s.fill)+", "+Position(s.points[0][0],s.points[0][1])+" → "+Position(s.points.Last()[0],s.points.Last()[1])+(s.scope=="mountains"?T(" (산 부분만, 평지 유지)"," (mountains only; open ground preserved)"):T(" (전체 경로)"," (entire route)"));
             if(s.type=="region_fill")return T(s.region_part=="enclosed"?"둘러싸인 내부의 채울 수 있는 땅":"지정 영역의 채울 수 있는 땅",s.region_part=="enclosed"?"usable area enclosed by the terrain":"usable area within the region")+" "+(float.Parse(s.coverage,CultureInfo.InvariantCulture)*100).ToString("0.#",CultureInfo.InvariantCulture)+"% — "+Name("terrain",s.fill)+T(" 채움"," fill");

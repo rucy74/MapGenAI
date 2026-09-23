@@ -20,6 +20,7 @@ namespace MapGenAI.MapGen
             {
                 if(shape.landform!="open_basin" && shape.landform!="winding_valley" && shape.landform!="foothills")throw new FormatException("landform must be open_basin, winding_valley or foothills");
                 if(shape.layout!=null && shape.layout!="classic" && shape.layout!="organic")throw new FormatException("landform layout must be classic or organic");
+                if(shape.details!=null && shape.details!="none" && shape.details!="natural")throw new FormatException("landform details must be none or natural");
                 if(shape.variant!=null && (!int.TryParse(shape.variant,NumberStyles.None,CultureInfo.InvariantCulture,out var variant) || variant<0 || variant>999999))throw new FormatException("variant must be an integer from 0 to 999999");
                 Semantic(shape.direction,"left,right,top,bottom,top_left,top_right,bottom_left,bottom_right",0,360,"direction");
                 Semantic(shape.size,"small,medium,large",.35f,1,"landform size");
@@ -32,10 +33,10 @@ namespace MapGenAI.MapGen
                 if(shape.position!=null && !Positions.Split(',').Contains(shape.position))
                     ShapeEdits.ValidatePair(shape.position.Trim('[',']',' ').Split(',').Select(Number).ToArray());
                 if(shape.strength!=null || shape.fill!=null || shape.fade!=null || shape.noise_amount!=null || shape.edge_roughness!=null || shape.region!=null || shape.region_part!=null || shape.coverage!=null || shape.points!=null || shape.width!=0 || shape.scope!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
-                    throw new FormatException("landform uses landform/layout/variant/position/size/direction/gap/opening; use region_fill for floor materials");
+                    throw new FormatException("landform uses landform/layout/details/variant/position/size/direction/gap/opening; use region_fill for floor materials");
                 return;
             }
-            if(shape.landform!=null || shape.variant!=null || shape.opening!=null || shape.layout!=null)throw new FormatException("landform/layout/variant/opening require landform geometry");
+            if(shape.landform!=null || shape.variant!=null || shape.opening!=null || shape.layout!=null || shape.details!=null)throw new FormatException("landform/layout/details/variant/opening require landform geometry");
             Fill(shape.fill);
             if(shape.type=="passage")
             {

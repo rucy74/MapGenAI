@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 자연지형 표면·식생 연결(로컬 DEV): `LandscapeBlendField/Generation`은 `details:natural`인 육상 자연지형의 평지에서 실제 물·산 경계를 따라 좁은 모래/자갈 구간을 만든다. 명시 도형·재료·비율 채움 전체 영역·도로·특수 지형은 제외한다. 새 `shape_ops add`만 기본 적용하고 저장된 null/none은 유지한다. 420 단계에서 바닥과 초기 식생 가중치를 계산하며, `LandscapeVegetationPatch`는 Plants 단계에만 작동한다. 사막·랜드마크 밀도 예외/바이옴 식물 종류/이후 재성장은 native 경로다. 물·특징을 새로 만들거나 옮기지 않으며 Preview는 식물을 그리지 않는다. [설계](docs/analysis/2026-09-23-landscape-blending/plan.md) · [사용자 검사](docs/analysis/2026-09-23-landscape-blending/manual-tests-ko.md).
+
 - 자연 육상 지형(로컬 DEV): `NaturalLandformGeometry`는 열린 분지·넓은 굽은 골짜기·산기슭 평야의 산과 평지를 한 필드로 만들며 전역 RNG를 소비하지 않는다. `NaturalLandformGeneration`은 `type:landform`만 처리한다. ID의 `inside`는 평지이며 `enclosed`는 거부한다. `landform/variant/opening/layout`은 parser/Clone/Scribe/preset에 보존된다. 새 `shape_ops add`는 `layout:organic`으로 `OrganicLandformGeometry`의 비대칭 능선·굽은 지류·완만한 접합을 사용한다. 저장된 null/classic은 종전 수식을 유지하며 전체 배열로 새 지형을 만드는 응답은 organic 명시가 필요하다. 기존 도형 경로는 유지된다. [기본 배치 개선](docs/analysis/2026-09-23-landform-design/report.md). GL 원본 연동이 아니며 원본 설치·push는 별도다.
 
 - MG31 대화 연속성: `ConversationMemory.cs`는 원문과 전송용 요약 checkpoint를 분리한다. 입력예산80%에서 요약/55%목표, 최신3유저턴 원문, 실패시원문보존. `ContextBudget.cs`는 Gemini metadata/countTokens 및 미확인공급자 fallback. `Dialog_TextToMap`은 APPLIED/NOT APPLIED/STATE REPLACED를 보존하고 Reset만 지운다. refinement 선택은 모든 명령을 영수증에 기록한다. `EditIntentGuard`는 명시도로/확실한후속의 다른대상응답을 StructuredChat의1회수정전에차단한다. 재시도에도입력예산검사; 생성엔진불변. [MG31 검증](docs/analysis/2026-09-23-chat-memory/report.md). 이번에는 DEV만 설치하고 일반판/dist/main은 유지한다.

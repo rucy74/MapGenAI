@@ -26,6 +26,8 @@ namespace MapGenAI.Patches
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
             }).ToList();
             if(state.localRoads.Count>0)genStepDefs=genStepDefs.Concat(new[]{new GenStepWithParams(new GenStepDef {defName="MapGenAI_LocalRoads",order=410,genStep=new LocalRoadStep()},default)}).ToList();
+            if(state.elevationShapes.Any(s=>s.type=="landform" && s.details=="natural"))
+                genStepDefs=genStepDefs.Concat(new[]{new GenStepWithParams(new GenStepDef {defName="MapGenAI_LandscapeBlend",order=420,genStep=new LandscapeBlendStep()},default)}).ToList();
         }
         static void Postfix(Map map)
         {
@@ -47,6 +49,12 @@ namespace MapGenAI.Patches
         public override int SeedPart=>214536713;
         public override void Generate(Map map,GenStepParams parms)
         {try{LocalRoadGeneration.Apply(map);}catch(Exception e){AuthoringGeneration.RoadFailure(e);}}
+    }
+    sealed class LandscapeBlendStep : GenStep
+    {
+        public override int SeedPart=>214536714;
+        public override void Generate(Map map,GenStepParams parms)
+        {try{LandscapeBlendGeneration.Apply(map);}catch(Exception e){AuthoringGeneration.Fail(e);}}
     }
     sealed class PositionedStructureStep : GenStep
     {
