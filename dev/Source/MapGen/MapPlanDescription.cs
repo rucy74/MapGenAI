@@ -57,7 +57,7 @@ namespace MapGenAI.MapGen
                     if(old.edge_roughness!=shape.edge_roughness)changes.Add(T("윤곽 조정","outline adjusted"));
                     if(old.scope!=shape.scope)changes.Add(T("통로 적용 범위 조정","passage scope adjusted"));
                     if(old.direction!=shape.direction)changes.Add(T("방향 조정","direction adjusted"));
-                    if(old.variant!=shape.variant || old.landform!=shape.landform)changes.Add(T("자연지형 배치 조정","natural landscape layout adjusted"));
+                    if(old.variant!=shape.variant || old.landform!=shape.landform || old.layout!=shape.layout)changes.Add(T("자연지형 배치 조정","natural landscape layout adjusted"));
                     if(old.opening!=shape.opening)changes.Add(T("출구 폭 조정","exit width adjusted"));
                     if(old.fade!=shape.fade || old.noise_amount!=shape.noise_amount)changes.Add(T("산맥의 폭·굴곡 조정","ridge width/irregularity adjusted"));
                     lines.Add(description+" — "+(changes.Count==0?T("설정 조정","settings adjusted"):string.Join(", ",changes)));

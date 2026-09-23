@@ -1,0 +1,12 @@
+PASS gap only accepted
+PASS gap rejects unrelated size
+PASS gap rejects unrelated position
+PASS gap rejects unrelated opening
+PASS gap rejects unrelated vegetation
+PASS gap rejects unrelated extra-shape
+PASS direction only accepted
+PASS direction rejects unrelated size
+PASS direction rejects unrelated position
+PASS direction rejects unrelated opening
+PASS direction rejects unrelated vegetation
+PASS direction rejects unrelated extra-shape

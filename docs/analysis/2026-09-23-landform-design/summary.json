@@ -1,0 +1,2196 @@
+{
+  "finalDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+  "pureTests": {
+    "pass": 256,
+    "fail": 0,
+    "defaultLayouts": 1200,
+    "boundaryLayouts": 300
+  },
+  "independent": {
+    "ok": true,
+    "current": {
+      "Path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\mapgenai-design-provider-d2\\TextToMap.Tests.dll",
+      "Hash": "e1b206c70412e11347cc02e36425cb4bbd55125faeb5290bbbd20e087339c718"
+    },
+    "frozen": {
+      "Path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\mapgenai-natural-tests-r7\\TextToMap.Tests.dll",
+      "Hash": "804d98d62c5e879dd870a2b1d240f36ff76dca3ed77a4fb94ba150ed7cb44c85"
+    },
+    "resolution": 80,
+    "baseHeight": 0.2,
+    "seedsPerKind": 160,
+    "kinds": [
+      "open_basin",
+      "winding_valley",
+      "foothills"
+    ],
+    "layouts": 1440,
+    "organicFailures": 0,
+    "failureFiles": [],
+    "classicComparedCells": 9216000,
+    "comparisonFields": "bit-exact influence/elevation and exact floor for both current null and classic against frozen r7",
+    "legacyDifferentCells": 0,
+    "organicSameAsClassic": 0,
+    "detectorControl": true,
+    "intactControl": {
+      "Failed": false,
+      "Finite": true,
+      "ValidInfluence": true,
+      "MainLowAreaReachesEdge": true,
+      "PassableCells": 4496,
+      "LowCells": 3682,
+      "LowComponents": 1,
+      "MissingLowCells": 0,
+      "PassableComponents": 1,
+      "LargestLowSquare": 38,
+      "ComponentAreas": [
+        4496
+      ],
+      "ComponentLowAreas": [
+        3682
+      ],
+      "ComponentMinimumHeights": [
+        0.05
+      ]
+    },
+    "severedControl": {
+      "Failed": true,
+      "Finite": true,
+      "ValidInfluence": true,
+      "MainLowAreaReachesEdge": true,
+      "PassableCells": 4416,
+      "LowCells": 3602,
+      "LowComponents": 2,
+      "MissingLowCells": 908,
+      "PassableComponents": 2,
+      "LargestLowSquare": 34,
+      "ComponentAreas": [
+        1296,
+        3120
+      ],
+      "ComponentLowAreas": [
+        908,
+        2694
+      ],
+      "ComponentMinimumHeights": [
+        0.05,
+        0.05
+      ]
+    },
+    "seconds": 26.9637011,
+    "boundary": "Centered layouts on neutral .2 base. 4-neighbor passability at mixed height <.7; usable lowland at height <.1. No floor flags used for BFS. Tiny higher mountain-wall pockets are not required to join the settlement floor. No claim about moved/clipped maps, native water/structures, visuals or real model quality."
+  },
+  "nativeRuns": [
+    {
+      "run": "native-n13",
+      "productDllSha256": "2a172c35aa4d30c6c3cd9e60c7d571eabd68650bba67964fcc19228d00347471",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1688758,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-0",
+          "seconds": 0.271855,
+          "geometryMs": 72.7204,
+          "audit": {
+            "water": 143,
+            "mountains": 11252,
+            "plannedFloor": 13356,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-11",
+          "seconds": 0.24055189999999999,
+          "geometryMs": 71.4137,
+          "audit": {
+            "water": 143,
+            "mountains": 11340,
+            "plannedFloor": 13917,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-23",
+          "seconds": 0.256472,
+          "geometryMs": 70.45920000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 10670,
+            "plannedFloor": 12920,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-47",
+          "seconds": 0.2385485,
+          "geometryMs": 69.9748,
+          "audit": {
+            "water": 143,
+            "mountains": 9735,
+            "plannedFloor": 13885,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-89",
+          "seconds": 0.2602887,
+          "geometryMs": 70.2993,
+          "audit": {
+            "water": 143,
+            "mountains": 11742,
+            "plannedFloor": 13542,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n14",
+      "productDllSha256": "2a172c35aa4d30c6c3cd9e60c7d571eabd68650bba67964fcc19228d00347471",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.16546439999999998,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-0",
+          "seconds": 0.2877499,
+          "geometryMs": 85.9671,
+          "audit": {
+            "water": 143,
+            "mountains": 20593,
+            "plannedFloor": 17130,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-11",
+          "seconds": 0.26144049999999996,
+          "geometryMs": 83.02810000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 20267,
+            "plannedFloor": 18523,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-23",
+          "seconds": 0.2858012,
+          "geometryMs": 82.331,
+          "audit": {
+            "water": 143,
+            "mountains": 21371,
+            "plannedFloor": 17478,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-47",
+          "seconds": 0.26664119999999997,
+          "geometryMs": 85.3836,
+          "audit": {
+            "water": 143,
+            "mountains": 21648,
+            "plannedFloor": 17307,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-89",
+          "seconds": 0.3780591,
+          "geometryMs": 83.6055,
+          "audit": {
+            "water": 143,
+            "mountains": 23181,
+            "plannedFloor": 16960,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n15",
+      "productDllSha256": "2a172c35aa4d30c6c3cd9e60c7d571eabd68650bba67964fcc19228d00347471",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1689636,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-0",
+          "seconds": 0.28559419999999996,
+          "geometryMs": 78.3871,
+          "audit": {
+            "water": 143,
+            "mountains": 21252,
+            "plannedFloor": 31972,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-11",
+          "seconds": 0.25475939999999997,
+          "geometryMs": 77.096,
+          "audit": {
+            "water": 143,
+            "mountains": 21106,
+            "plannedFloor": 31847,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-23",
+          "seconds": 0.27577029999999997,
+          "geometryMs": 77.1679,
+          "audit": {
+            "water": 143,
+            "mountains": 22510,
+            "plannedFloor": 30615,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-47",
+          "seconds": 0.2553144,
+          "geometryMs": 77.333,
+          "audit": {
+            "water": 143,
+            "mountains": 21817,
+            "plannedFloor": 31241,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-89",
+          "seconds": 0.2760626,
+          "geometryMs": 77.1038,
+          "audit": {
+            "water": 143,
+            "mountains": 21455,
+            "plannedFloor": 31666,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n16",
+      "productDllSha256": "67907d0fb457b9ab1640faf69b236dad15921296e4db1b3d5119038dd23b3736",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1760223,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-0",
+          "seconds": 0.2569093,
+          "geometryMs": 75.64880000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 13332,
+            "plannedFloor": 12774,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-11",
+          "seconds": 0.24425029999999998,
+          "geometryMs": 72.42360000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 13451,
+            "plannedFloor": 12877,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-23",
+          "seconds": 0.24478509999999998,
+          "geometryMs": 71.8904,
+          "audit": {
+            "water": 143,
+            "mountains": 13767,
+            "plannedFloor": 12464,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-47",
+          "seconds": 0.2525765,
+          "geometryMs": 72.2977,
+          "audit": {
+            "water": 143,
+            "mountains": 12894,
+            "plannedFloor": 12797,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-89",
+          "seconds": 0.2517906,
+          "geometryMs": 73.59530000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 13943,
+            "plannedFloor": 12875,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n17",
+      "productDllSha256": "67907d0fb457b9ab1640faf69b236dad15921296e4db1b3d5119038dd23b3736",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.16591609999999998,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-0",
+          "seconds": 0.3001481,
+          "geometryMs": 108.77690000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 17889,
+            "plannedFloor": 18213,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-11",
+          "seconds": 0.2834813,
+          "geometryMs": 107.4696,
+          "audit": {
+            "water": 143,
+            "mountains": 18515,
+            "plannedFloor": 19139,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-23",
+          "seconds": 0.3227758,
+          "geometryMs": 113.0664,
+          "audit": {
+            "water": 143,
+            "mountains": 18804,
+            "plannedFloor": 18420,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-47",
+          "seconds": 0.30056089999999996,
+          "geometryMs": 112.4911,
+          "audit": {
+            "water": 143,
+            "mountains": 18087,
+            "plannedFloor": 18638,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-89",
+          "seconds": 0.4120907,
+          "geometryMs": 109.0875,
+          "audit": {
+            "water": 143,
+            "mountains": 19940,
+            "plannedFloor": 18259,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n18",
+      "productDllSha256": "67907d0fb457b9ab1640faf69b236dad15921296e4db1b3d5119038dd23b3736",
+      "isFinalDll": false,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1779116,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-0",
+          "seconds": 0.2762613,
+          "geometryMs": 92.20620000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 18722,
+            "plannedFloor": 32899,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-11",
+          "seconds": 0.285111,
+          "geometryMs": 92.134,
+          "audit": {
+            "water": 143,
+            "mountains": 18277,
+            "plannedFloor": 33007,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-23",
+          "seconds": 0.2668371,
+          "geometryMs": 89.53330000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 19977,
+            "plannedFloor": 31588,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-47",
+          "seconds": 0.37206649999999997,
+          "geometryMs": 89.7902,
+          "audit": {
+            "water": 143,
+            "mountains": 18311,
+            "plannedFloor": 32828,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-89",
+          "seconds": 0.26459699999999997,
+          "geometryMs": 89.89330000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 18525,
+            "plannedFloor": 32893,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n19",
+      "productDllSha256": "67907d0fb457b9ab1640faf69b236dad15921296e4db1b3d5119038dd23b3736",
+      "isFinalDll": false,
+      "checks": 23,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1833753,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-wider",
+          "seconds": 0.2525512,
+          "geometryMs": 74.87780000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-soil-ruin",
+          "seconds": 0.31269769999999997,
+          "geometryMs": 72.048,
+          "audit": {
+            "water": 58,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 11748,
+            "coverage": [
+              {
+                "eligible": 16783,
+                "existing": 1047,
+                "id": "interior_soil",
+                "selected": 11748
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 124,
+                  "z": 117
+                },
+                "roofCells": 0,
+                "spawnedWalls": 0,
+                "wallCells": [
+                  [
+                    125,
+                    117
+                  ],
+                  [
+                    126,
+                    117
+                  ],
+                  [
+                    127,
+                    117
+                  ],
+                  [
+                    130,
+                    117
+                  ],
+                  [
+                    131,
+                    117
+                  ],
+                  [
+                    132,
+                    117
+                  ],
+                  [
+                    124,
+                    118
+                  ],
+                  [
+                    124,
+                    119
+                  ],
+                  [
+                    132,
+                    119
+                  ],
+                  [
+                    124,
+                    120
+                  ],
+                  [
+                    132,
+                    120
+                  ],
+                  [
+                    132,
+                    121
+                  ],
+                  [
+                    124,
+                    122
+                  ],
+                  [
+                    124,
+                    123
+                  ],
+                  [
+                    125,
+                    123
+                  ],
+                  [
+                    126,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    129,
+                    123
+                  ],
+                  [
+                    132,
+                    123
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "river-baseline",
+          "seconds": 0.3927886,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9676,
+            "mountains": 1941,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "valley-existing-river",
+          "seconds": 0.3904546,
+          "geometryMs": 106.24260000000001,
+          "audit": {
+            "water": 9676,
+            "mountains": 14811,
+            "plannedFloor": 18420,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "coast-baseline",
+          "seconds": 0.252214,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9339,
+            "mountains": 2822,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-existing-coast",
+          "seconds": 0.3402672,
+          "geometryMs": 89.0571,
+          "audit": {
+            "water": 9339,
+            "mountains": 15036,
+            "plannedFloor": 31588,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "fullmap-basin-soil-ruin",
+          "seconds": 4.7024105,
+          "geometryMs": 72.1748,
+          "audit": {
+            "water": 112,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 11585,
+            "coverage": [
+              {
+                "eligible": 16550,
+                "existing": 1044,
+                "id": "interior_soil",
+                "selected": 11585
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 124,
+                  "z": 117
+                },
+                "roofCells": 0,
+                "spawnedWalls": 19,
+                "wallCells": [
+                  [
+                    125,
+                    117
+                  ],
+                  [
+                    126,
+                    117
+                  ],
+                  [
+                    127,
+                    117
+                  ],
+                  [
+                    130,
+                    117
+                  ],
+                  [
+                    131,
+                    117
+                  ],
+                  [
+                    132,
+                    117
+                  ],
+                  [
+                    124,
+                    118
+                  ],
+                  [
+                    124,
+                    119
+                  ],
+                  [
+                    132,
+                    119
+                  ],
+                  [
+                    124,
+                    120
+                  ],
+                  [
+                    132,
+                    120
+                  ],
+                  [
+                    132,
+                    121
+                  ],
+                  [
+                    124,
+                    122
+                  ],
+                  [
+                    124,
+                    123
+                  ],
+                  [
+                    125,
+                    123
+                  ],
+                  [
+                    126,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    129,
+                    123
+                  ],
+                  [
+                    132,
+                    123
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          }
+        }
+      ]
+    },
+    {
+      "run": "native-n20",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1699827,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-0",
+          "seconds": 0.3206293,
+          "geometryMs": 113.8589,
+          "audit": {
+            "water": 143,
+            "mountains": 18244,
+            "plannedFloor": 32895,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-11",
+          "seconds": 0.289603,
+          "geometryMs": 111.79140000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 17950,
+            "plannedFloor": 33104,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-23",
+          "seconds": 0.3070809,
+          "geometryMs": 111.72720000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 19401,
+            "plannedFloor": 31620,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-47",
+          "seconds": 0.28947839999999997,
+          "geometryMs": 111.89630000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 17887,
+            "plannedFloor": 32675,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-89",
+          "seconds": 0.4068771,
+          "geometryMs": 110.8495,
+          "audit": {
+            "water": 143,
+            "mountains": 18622,
+            "plannedFloor": 32816,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n21",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.21001809999999999,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-0",
+          "seconds": 0.3612783,
+          "geometryMs": 160.0111,
+          "audit": {
+            "water": 143,
+            "mountains": 17374,
+            "plannedFloor": 18726,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-11",
+          "seconds": 0.3836595,
+          "geometryMs": 159.2406,
+          "audit": {
+            "water": 143,
+            "mountains": 17971,
+            "plannedFloor": 19653,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-23",
+          "seconds": 0.3679174,
+          "geometryMs": 164.0439,
+          "audit": {
+            "water": 143,
+            "mountains": 18285,
+            "plannedFloor": 18884,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-47",
+          "seconds": 0.4783453,
+          "geometryMs": 157.4813,
+          "audit": {
+            "water": 143,
+            "mountains": 17640,
+            "plannedFloor": 19099,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "winding_valley-89",
+          "seconds": 0.3543048,
+          "geometryMs": 157.6439,
+          "audit": {
+            "water": 143,
+            "mountains": 19596,
+            "plannedFloor": 18630,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n22",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 16,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1696951,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-0",
+          "seconds": 0.2759224,
+          "geometryMs": 75.6298,
+          "audit": {
+            "water": 143,
+            "mountains": 13332,
+            "plannedFloor": 12774,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-11",
+          "seconds": 0.24619329999999998,
+          "geometryMs": 72.3058,
+          "audit": {
+            "water": 143,
+            "mountains": 13451,
+            "plannedFloor": 12877,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-23",
+          "seconds": 0.2597498,
+          "geometryMs": 72.70020000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 13767,
+            "plannedFloor": 12464,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-47",
+          "seconds": 0.2461707,
+          "geometryMs": 72.80080000000001,
+          "audit": {
+            "water": 143,
+            "mountains": 12894,
+            "plannedFloor": 12797,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "open_basin-89",
+          "seconds": 0.2632136,
+          "geometryMs": 71.8719,
+          "audit": {
+            "water": 143,
+            "mountains": 13943,
+            "plannedFloor": 12875,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        }
+      ]
+    },
+    {
+      "run": "native-n23",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 23,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1692677,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-wider",
+          "seconds": 0.29483709999999996,
+          "geometryMs": 86.1701,
+          "audit": {
+            "water": 143,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-soil-ruin",
+          "seconds": 0.3420413,
+          "geometryMs": 75.2851,
+          "audit": {
+            "water": 58,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 11748,
+            "coverage": [
+              {
+                "eligible": 16783,
+                "existing": 1047,
+                "id": "interior_soil",
+                "selected": 11748
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 124,
+                  "z": 117
+                },
+                "roofCells": 0,
+                "spawnedWalls": 0,
+                "wallCells": [
+                  [
+                    125,
+                    117
+                  ],
+                  [
+                    126,
+                    117
+                  ],
+                  [
+                    127,
+                    117
+                  ],
+                  [
+                    130,
+                    117
+                  ],
+                  [
+                    131,
+                    117
+                  ],
+                  [
+                    132,
+                    117
+                  ],
+                  [
+                    124,
+                    118
+                  ],
+                  [
+                    124,
+                    119
+                  ],
+                  [
+                    132,
+                    119
+                  ],
+                  [
+                    124,
+                    120
+                  ],
+                  [
+                    132,
+                    120
+                  ],
+                  [
+                    132,
+                    121
+                  ],
+                  [
+                    124,
+                    122
+                  ],
+                  [
+                    124,
+                    123
+                  ],
+                  [
+                    125,
+                    123
+                  ],
+                  [
+                    126,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    129,
+                    123
+                  ],
+                  [
+                    132,
+                    123
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "river-baseline",
+          "seconds": 0.3092952,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9676,
+            "mountains": 1941,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "valley-existing-river",
+          "seconds": 0.7143782,
+          "geometryMs": 166.0747,
+          "audit": {
+            "water": 9676,
+            "mountains": 14437,
+            "plannedFloor": 18884,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "coast-baseline",
+          "seconds": 0.2680102,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9339,
+            "mountains": 2822,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-existing-coast",
+          "seconds": 0.39812,
+          "geometryMs": 121.3015,
+          "audit": {
+            "water": 9339,
+            "mountains": 14495,
+            "plannedFloor": 31620,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "fullmap-basin-soil-ruin",
+          "seconds": 5.336392399999999,
+          "geometryMs": 104.60220000000001,
+          "audit": {
+            "water": 107,
+            "mountains": 8835,
+            "plannedFloor": 16811,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 11581,
+            "coverage": [
+              {
+                "eligible": 16545,
+                "existing": 1043,
+                "id": "interior_soil",
+                "selected": 11581
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 124,
+                  "z": 117
+                },
+                "roofCells": 0,
+                "spawnedWalls": 19,
+                "wallCells": [
+                  [
+                    125,
+                    117
+                  ],
+                  [
+                    126,
+                    117
+                  ],
+                  [
+                    127,
+                    117
+                  ],
+                  [
+                    130,
+                    117
+                  ],
+                  [
+                    131,
+                    117
+                  ],
+                  [
+                    132,
+                    117
+                  ],
+                  [
+                    124,
+                    118
+                  ],
+                  [
+                    124,
+                    119
+                  ],
+                  [
+                    132,
+                    119
+                  ],
+                  [
+                    124,
+                    120
+                  ],
+                  [
+                    132,
+                    120
+                  ],
+                  [
+                    132,
+                    121
+                  ],
+                  [
+                    124,
+                    122
+                  ],
+                  [
+                    124,
+                    123
+                  ],
+                  [
+                    125,
+                    123
+                  ],
+                  [
+                    126,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    129,
+                    123
+                  ],
+                  [
+                    132,
+                    123
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          }
+        }
+      ]
+    },
+    {
+      "run": "native-n24",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 36,
+      "newProviderCalls": 0,
+      "measurements": []
+    },
+    {
+      "run": "native-n25",
+      "productDllSha256": "fd1327816da1a171f347bed08577cd7aac27d898954d70edb0b8104b93cfd284",
+      "isFinalDll": true,
+      "checks": 23,
+      "newProviderCalls": 0,
+      "measurements": [
+        {
+          "id": "baseline",
+          "seconds": 0.1650703,
+          "geometryMs": 0,
+          "audit": {
+            "water": 143,
+            "mountains": 2788,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-wider",
+          "seconds": 0.2241927,
+          "geometryMs": 48.9836,
+          "audit": {
+            "water": 143,
+            "mountains": 8817,
+            "plannedFloor": 14470,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "basin-soil-ruin",
+          "seconds": 0.2832415,
+          "geometryMs": 47.749,
+          "audit": {
+            "water": 58,
+            "mountains": 8817,
+            "plannedFloor": 14470,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 10109,
+            "coverage": [
+              {
+                "eligible": 14442,
+                "existing": 1082,
+                "id": "interior_soil",
+                "selected": 10109
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 119,
+                  "z": 121
+                },
+                "roofCells": 0,
+                "spawnedWalls": 0,
+                "wallCells": [
+                  [
+                    120,
+                    121
+                  ],
+                  [
+                    121,
+                    121
+                  ],
+                  [
+                    122,
+                    121
+                  ],
+                  [
+                    125,
+                    121
+                  ],
+                  [
+                    126,
+                    121
+                  ],
+                  [
+                    127,
+                    121
+                  ],
+                  [
+                    119,
+                    122
+                  ],
+                  [
+                    119,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    119,
+                    124
+                  ],
+                  [
+                    127,
+                    124
+                  ],
+                  [
+                    127,
+                    125
+                  ],
+                  [
+                    119,
+                    126
+                  ],
+                  [
+                    119,
+                    127
+                  ],
+                  [
+                    120,
+                    127
+                  ],
+                  [
+                    121,
+                    127
+                  ],
+                  [
+                    122,
+                    127
+                  ],
+                  [
+                    124,
+                    127
+                  ],
+                  [
+                    127,
+                    127
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "river-baseline",
+          "seconds": 0.27113909999999997,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9676,
+            "mountains": 1941,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "valley-existing-river",
+          "seconds": 0.44605599999999995,
+          "geometryMs": 51.9149,
+          "audit": {
+            "water": 9676,
+            "mountains": 27601,
+            "plannedFloor": 14691,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "coast-baseline",
+          "seconds": 0.2414497,
+          "geometryMs": 0,
+          "audit": {
+            "water": 9339,
+            "mountains": 2822,
+            "plannedFloor": 0,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "foothills-existing-coast",
+          "seconds": 0.30566689999999996,
+          "geometryMs": 53.2143,
+          "audit": {
+            "water": 9339,
+            "mountains": 15268,
+            "plannedFloor": 34053,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 0,
+            "coverage": [],
+            "placements": [],
+            "issues": []
+          },
+          "warning": ""
+        },
+        {
+          "id": "fullmap-basin-soil-ruin",
+          "seconds": 4.6303423,
+          "geometryMs": 49.332100000000004,
+          "audit": {
+            "water": 113,
+            "mountains": 8817,
+            "plannedFloor": 14470,
+            "rocksInPlannedFloor": 0,
+            "actualSelectedSoil": 10023,
+            "coverage": [
+              {
+                "eligible": 14319,
+                "existing": 1078,
+                "id": "interior_soil",
+                "selected": 10023
+              }
+            ],
+            "placements": [
+              {
+                "caskets": 0,
+                "containedThings": 0,
+                "defenders": 0,
+                "floors": 28,
+                "id": "interior_ruin",
+                "kind": "ruin",
+                "lootThings": 0,
+                "rect": {
+                  "height": 7,
+                  "width": 9,
+                  "x": 119,
+                  "z": 121
+                },
+                "roofCells": 0,
+                "spawnedWalls": 19,
+                "wallCells": [
+                  [
+                    120,
+                    121
+                  ],
+                  [
+                    121,
+                    121
+                  ],
+                  [
+                    122,
+                    121
+                  ],
+                  [
+                    125,
+                    121
+                  ],
+                  [
+                    126,
+                    121
+                  ],
+                  [
+                    127,
+                    121
+                  ],
+                  [
+                    119,
+                    122
+                  ],
+                  [
+                    119,
+                    123
+                  ],
+                  [
+                    127,
+                    123
+                  ],
+                  [
+                    119,
+                    124
+                  ],
+                  [
+                    127,
+                    124
+                  ],
+                  [
+                    127,
+                    125
+                  ],
+                  [
+                    119,
+                    126
+                  ],
+                  [
+                    119,
+                    127
+                  ],
+                  [
+                    120,
+                    127
+                  ],
+                  [
+                    121,
+                    127
+                  ],
+                  [
+                    122,
+                    127
+                  ],
+                  [
+                    124,
+                    127
+                  ],
+                  [
+                    127,
+                    127
+                  ]
+                ],
+                "walls": 19,
+                "warningThings": 0
+              }
+            ],
+            "issues": []
+          }
+        }
+      ]
+    }
+  ],
+  "finalNativeChecks": 130,
+  "oldMapComparisons": [
+    {
+      "image": "guided-map-1.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "guided-map-2.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "guided-map-3.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "quick-map-1.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "quick-map-2.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "quick-map-3.png",
+      "scope": "recorded-recommendation",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "baseline.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "basin-soil-ruin.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "basin-wider.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "coast-baseline.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "foothills-existing-coast.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "river-baseline.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    },
+    {
+      "image": "valley-existing-river.png",
+      "scope": "saved-classic-layout",
+      "pixels": 62500,
+      "differentPixels": 0
+    }
+  ],
+  "pixelComparatorPositiveControl": {
+    "changed": 1,
+    "detected": 1
+  },
+  "waterCellComparison": [
+    {
+      "feature": "riverCells",
+      "before": 9082,
+      "after": 9082,
+      "lost": 0,
+      "new": 0
+    },
+    {
+      "feature": "oceanCells",
+      "before": 9213,
+      "after": 9213,
+      "lost": 0,
+      "new": 0
+    }
+  ],
+  "providerAttempt": {
+    "calls": 1,
+    "results": [
+      {
+        "id": "design-01",
+        "intended": false,
+        "errorType": "HttpRequestException",
+        "transportOrEnvelopeFailure": true
+      }
+    ],
+    "scope": "Fresh first responses. Schema/intent only; actual native maps and aesthetics are evaluated separately."
+  },
+  "limitations": [
+    "Native fixtures are controlled parameters, not successful live provider output.",
+    "Authored variants share one native map seed; no multi-biome or long-play guarantee.",
+    "Connectivity corpus is centered on neutral ground; preserved world features may divide final paths.",
+    "Visual composition was inspected, not a promise that every user likes every variant.",
+    "Original integration, game installation and push are pending."
+  ]
+}

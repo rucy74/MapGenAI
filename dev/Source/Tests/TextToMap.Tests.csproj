@@ -42,6 +42,7 @@
     <Compile Include="../MapGen/SdfComposite.cs" Link="SdfComposite.cs" />
     <Compile Include="../MapGen/ContourWarp.cs" Link="ContourWarp.cs" />
     <Compile Include="../MapGen/NaturalLandformGeometry.cs" Link="NaturalLandformGeometry.cs" />
+    <Compile Include="../MapGen/OrganicLandformGeometry.cs" Link="OrganicLandformGeometry.cs" />
     <Compile Include="../MapGen/NaturalLandformGeneration.cs" Link="NaturalLandformGeneration.cs" />
     <Compile Include="../../../tools/fixtures/NaturalShapeFixtures.cs" Link="NaturalShapeFixtures.cs" />
     <Compile Include="../UI/SimpleJson.cs" Link="SimpleJson.cs" />

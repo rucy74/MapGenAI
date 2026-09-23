@@ -1,0 +1,12 @@
+Current e1b206c70412e11347cc02e36425cb4bbd55125faeb5290bbbd20e087339c718
+Frozen 804d98d62c5e879dd870a2b1d240f36ff76dca3ed77a4fb94ba150ed7cb44c85
+Cases=160 organicFailures=0 legacyDifferentCells=0
+Cases=320 organicFailures=0 legacyDifferentCells=0
+Cases=480 organicFailures=0 legacyDifferentCells=0
+Cases=640 organicFailures=0 legacyDifferentCells=0
+Cases=800 organicFailures=0 legacyDifferentCells=0
+Cases=960 organicFailures=0 legacyDifferentCells=0
+Cases=1120 organicFailures=0 legacyDifferentCells=0
+Cases=1280 organicFailures=0 legacyDifferentCells=0
+Cases=1440 organicFailures=0 legacyDifferentCells=0
+Finished ok=True layouts=1440 organicFailures=0 legacyDifferentCells=0 detectorControl=True seconds=26.9637011

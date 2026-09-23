@@ -18,9 +18,11 @@ namespace MapGenAI.MapGen
         readonly Vector2 center;
         readonly float span, gap, opening, cos, sin, phase, phase2;
         readonly uint seed;
+        readonly OrganicLandformGeometry organic;
 
         public NaturalLandformGeometry(ElevationShape shape)
         {
+            if(shape.layout=="organic"){organic=new OrganicLandformGeometry(shape);return;}
             kind=shape.landform; center=ElevationShape.ParsePosition(shape.position);
             span=Span(shape.size); gap=Gap(shape); opening=Value(shape.opening,.14f);
             float angle=ElevationShape.ParseDirection(shape.direction)*Mathf.Deg2Rad;
@@ -40,6 +42,7 @@ namespace MapGenAI.MapGen
 
         public Cell Sample(float x,float z)
         {
+            if(organic!=null)return organic.Sample(x,z);
             float dx=(x-center.x)/span, dz=(z-center.y)/span;
             // Deform the whole field together, so a valley floor and its walls never use
             // mismatching edge noise. Two small smooth steps avoid folding the coordinates.

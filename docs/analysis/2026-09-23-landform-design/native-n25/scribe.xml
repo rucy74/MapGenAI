@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NaturalLandformProbe>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>landscape</id>
+					<type>landform</type>
+					<direction>bottom</direction>
+					<gap>0.3</gap>
+					<landform>open_basin</landform>
+					<variant>23</variant>
+					<layout>classic</layout>
+				</li>
+				<li>
+					<id>interior_soil</id>
+					<type>region_fill</type>
+					<fill>rich_soil</fill>
+					<region>landscape</region>
+					<region_part>inside</region_part>
+					<coverage>0.7</coverage>
+				</li>
+			</elevationShapes>
+			<structures>
+				<li>
+					<plan>{"bounds":null,"count":1,"height":7,"id":"interior_ruin","kind":"ruin","position":null,"region":"landscape","region_part":"inside","relation":null,"rotation":0,"seed":0,"spacing":1,"width":9}</plan>
+				</li>
+			</structures>
+			<localRoads />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+	</fixture>
+</NaturalLandformProbe>

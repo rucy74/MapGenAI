@@ -20,7 +20,7 @@ namespace MapGenAI.NaturalProbe
     public static class Probe
     {
         sealed class Job { public string name;public TileMapState state;public int tile; }
-        static string output,group;static bool booting,active;static int target;static DateTime deadline;
+        static string output,group,layout;static bool booting,active;static int target;static DateTime deadline;
         static readonly Queue<Job> jobs=new Queue<Job>();static Job current;static RecommendationPreviews preview;
         static readonly List<string> checks=new List<string>();static readonly List<object> results=new List<object>();
         static Dictionary<string,object> audit;static double geometryMs;
@@ -31,6 +31,7 @@ namespace MapGenAI.NaturalProbe
         {
             if(!GenCommandLine.TryGetCommandLineArg("mapgenAIProbe",out output))return;
             GenCommandLine.TryGetCommandLineArg("mapgenAIProbeSet",out group);
+            GenCommandLine.TryGetCommandLineArg("mapgenAIProbeLayout",out layout);
             if(!GenCommandLine.TryGetCommandLineArg("savedatafolder",out string profile) || !File.Exists(Path.Combine(profile,"MAPGENAI_DISPOSABLE")))throw new Exception("Marked disposable profile required");
             var h=new Harmony("choco.mapgenai.natural-probe");
             h.Patch(AccessTools.Method(typeof(WorldGenerator),"GenerateWorld"),prefix:new HarmonyMethod(typeof(Probe),nameof(Seed)));
@@ -56,7 +57,7 @@ namespace MapGenAI.NaturalProbe
         }
         static TileMapState State(string kind,int variant)
         {
-            var s=new TileMapState();s.elevationShapes.Add(new ElevationShape{id="landscape",type="landform",landform=kind,direction=kind=="foothills"?"left":kind=="winding_valley"?"top":"bottom",variant=variant.ToString()});return s;
+            var s=new TileMapState();s.elevationShapes.Add(new ElevationShape{id="landscape",type="landform",landform=kind,layout=layout,direction=kind=="foothills"?"left":kind=="winding_valley"?"top":"bottom",variant=variant.ToString()});return s;
         }
         static TileMapState Edit(TileMapState s,string text)=>MapStateEditor.Merge(s,MapParameterParser.Parse(SimpleJson.Parse(text)));
         public static void Started()
@@ -70,6 +71,7 @@ namespace MapGenAI.NaturalProbe
                     Find.TickManager.CurTimeSpeed=TimeSpeed.Paused;
                     Save("tile.json",SimpleJson.Serialize(new Dictionary<string,object>{{"tile",target},{"biome",tile.PrimaryBiome.defName},{"hilliness",tile.hilliness.ToString()},{"worldSeed",WorldSeed},{"mapSize",250}}));
                     MapGenParams.RestoreSnapshot(new TileMapState(),target);
+                    Save("system-prompt.txt",(string)AccessTools.Method(typeof(Dialog_TextToMap),"BuildSystemPrompt").Invoke(null,new object[]{target}));
                     jobs.Enqueue(new Job{name="baseline",state=new TileMapState(),tile=target});
                     foreach(string kind in new[]{"open_basin","winding_valley","foothills"})foreach(int variant in new[]{0,11,23,47,89})jobs.Enqueue(new Job{name=kind+"-"+variant,state=State(kind,variant),tile=target});
                     var basis=State("open_basin",23);

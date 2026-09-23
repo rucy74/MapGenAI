@@ -16,10 +16,12 @@ class Program
     {
         if(args.Length<3){Console.WriteLine("Usage: <repo> <output> vision|text [runtime production-system-prompt.txt]");return 2;}
         output=Path.GetFullPath(args[1]);Directory.CreateDirectory(output);
+        if(args[2]=="design-audit-selftest")return DesignBench.AuditSelfTest(output);
         var config=SimpleJson.Parse(File.ReadAllText(Path.Combine(args[0],"docs/dev_config.json")));
         string modelOverride=Environment.GetEnvironmentVariable("MAPGENAI_PROBE_MODEL");
         if(!string.IsNullOrWhiteSpace(modelOverride))config.SetString("gemini_model",modelOverride);
         var client=new GeminiClient(config.GetString("gemini_api_key"),config.GetString("gemini_model"));
+        if(args[2]=="design")return await DesignBench.Run(client,args[3],output);
         if(args[2]=="conversation")return await ConversationBench.Run(client,args[3],output,args.Length<5 || args[4]!="en");
         if(args[2]=="candidate-refinement")return await CandidateRefinementBench.Run(client,args[3],output,args.Length<5 || args[4]!="en");
         if(args[2]=="natural")return await NaturalTextBench.Run(client,args[3],output);

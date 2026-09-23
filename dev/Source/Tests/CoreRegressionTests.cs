@@ -69,6 +69,7 @@ static class CoreRegressionTests
         ShapeEditTests.RunAll();
         NaturalShapeTests.RunAll();
         NaturalLandformTests.RunAll();
+        OrganicLandformTests.RunAll();
         WorldStateTests.RunAll();
         ImageMapTests.RunAll();
         TextRegionTests.RunAll();
