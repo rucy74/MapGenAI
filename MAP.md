@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 자연 육상 지형(로컬 DEV): `NaturalLandformGeometry`는 열린 분지·넓은 굽은 골짜기·산기슭 평야의 산과 평지를 한 필드로 만들며 전역 RNG를 소비하지 않는다. `NaturalLandformGeneration`은 `type:landform`만 처리한다. ID의 `inside`는 평지이며 `enclosed`는 거부한다. `landform/variant/opening`은 parser/Clone/Scribe/preset에 보존되고 기존 도형 경로는 유지된다. [설계·검증 범위](docs/analysis/2026-09-23-natural-landforms/plan.md). GL 원본 연동이 아니며 원본 설치·push는 별도다.
+
 - MG31 대화 연속성: `ConversationMemory.cs`는 원문과 전송용 요약 checkpoint를 분리한다. 입력예산80%에서 요약/55%목표, 최신3유저턴 원문, 실패시원문보존. `ContextBudget.cs`는 Gemini metadata/countTokens 및 미확인공급자 fallback. `Dialog_TextToMap`은 APPLIED/NOT APPLIED/STATE REPLACED를 보존하고 Reset만 지운다. refinement 선택은 모든 명령을 영수증에 기록한다. `EditIntentGuard`는 명시도로/확실한후속의 다른대상응답을 StructuredChat의1회수정전에차단한다. 재시도에도입력예산검사; 생성엔진불변. [MG31 검증](docs/analysis/2026-09-23-chat-memory/report.md). 이번에는 DEV만 설치하고 일반판/dist/main은 유지한다.
 
 - 추천 취소/재추천/접기: `Dialog_TextToMap`의 `DismissRecommendations`는 RequestGate와 후보만 취소하고 현재 맵/Undo/draft를 보존한다. `RequestNewRecommendations`와 `RecommendationPlan.RequestsNewOptions`는 후보 편집 컨텍스트 없이 실제 맵을 기준으로 새 추천을 요청한다. `RecommendationLayout`은 채팅 공간을 먼저 확보한다. [MG28 검증](docs/analysis/2026-09-22-recommendation-controls/report.md).

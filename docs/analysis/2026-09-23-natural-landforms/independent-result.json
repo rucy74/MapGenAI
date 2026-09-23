@@ -1,0 +1,190 @@
+{
+  "assembly": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\natural-independent-review-r7\\bin\\Debug\\net10.0\\TextToMap.Tests.dll",
+  "reports": [
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "38",
+        "Size": "large",
+        "Gap": "0.1",
+        "Direction": "134",
+        "Resolution": 80,
+        "PassableCells": 3729,
+        "LowCells": 3009,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 8,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          3009
+        ]
+      }
+    },
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "38",
+        "Size": "large",
+        "Gap": "0.1",
+        "Direction": "134",
+        "Resolution": 81,
+        "PassableCells": 3824,
+        "LowCells": 3089,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 8,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          3089
+        ]
+      }
+    },
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "38",
+        "Size": "large",
+        "Gap": "0.1",
+        "Direction": "134",
+        "Resolution": 250,
+        "PassableCells": 36436,
+        "LowCells": 29407,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 9,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          29407
+        ]
+      }
+    },
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "95",
+        "Size": "1",
+        "Gap": "0.32",
+        "Direction": "155",
+        "Resolution": 80,
+        "PassableCells": 5371,
+        "LowCells": 4825,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 1,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          4825
+        ]
+      }
+    },
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "95",
+        "Size": "1",
+        "Gap": "0.32",
+        "Direction": "155",
+        "Resolution": 81,
+        "PassableCells": 5505,
+        "LowCells": 4941,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 1,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          4941
+        ]
+      }
+    },
+    {
+      "test": "previous corner disconnection",
+      "measurement": {
+        "Kind": "foothills",
+        "Seed": "95",
+        "Size": "1",
+        "Gap": "0.32",
+        "Direction": "155",
+        "Resolution": 250,
+        "PassableCells": 52456,
+        "LowCells": 47052,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 1,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          47052
+        ]
+      }
+    },
+    {
+      "test": "opening subtype cleanup",
+      "kind": "winding_valley",
+      "ok": true,
+      "geometry": {
+        "Kind": "winding_valley",
+        "Seed": "38",
+        "Size": "large",
+        "Gap": "0.1",
+        "Direction": "134",
+        "Resolution": 80,
+        "PassableCells": 3575,
+        "LowCells": 1653,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 6,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          1653
+        ]
+      }
+    },
+    {
+      "test": "opening subtype cleanup",
+      "kind": "foothills",
+      "ok": true,
+      "geometry": {
+        "Kind": "foothills",
+        "Seed": "38",
+        "Size": "large",
+        "Gap": "0.1",
+        "Direction": "134",
+        "Resolution": 80,
+        "PassableCells": 3729,
+        "LowCells": 3009,
+        "LowComponents": 1,
+        "MissedLowCells": 0,
+        "PassableComponents": 8,
+        "LowAreaReachesEdge": true,
+        "Finite": true,
+        "ComponentLowAreas": [
+          3009
+        ]
+      }
+    },
+    {
+      "test": "opening null and explicit invalid opening",
+      "ok": true,
+      "maxElevationDifference": 0
+    },
+    {
+      "test": "fresh corpus",
+      "seedFirst": 1000,
+      "seedsPerKind": 160,
+      "layouts": 960,
+      "failures": 0
+    }
+  ],
+  "failures": []
+}

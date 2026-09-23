@@ -68,6 +68,7 @@ static class CoreRegressionTests
         MdpApplyTests.RunAll();
         ShapeEditTests.RunAll();
         NaturalShapeTests.RunAll();
+        NaturalLandformTests.RunAll();
         WorldStateTests.RunAll();
         ImageMapTests.RunAll();
         TextRegionTests.RunAll();

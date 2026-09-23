@@ -117,7 +117,7 @@ namespace MapGenAI.Patches
         private static void ApplyShape(ElevationShape shape, Map map, MapGenFloatGrid grid)
         {
             var regions=GenerationContext.Regions(map);
-            var flatBefore=shape.type!="composite" && string.IsNullOrEmpty(shape.fill) ? regions?.CaptureFlattened(grid) : null;
+            var flatBefore=shape.type!="composite" && shape.type!="landform" && string.IsNullOrEmpty(shape.fill) ? regions?.CaptureFlattened(grid) : null;
             switch (shape.type)
             {
                 case "ridge":  ApplyRidge(shape, map, grid);  break;
@@ -128,6 +128,7 @@ namespace MapGenAI.Patches
                 case "slope":     ApplySlope(shape, map, grid); break;
                 case "split":     ApplySplit(shape, map, grid); break;
                 case "composite": ApplyCompositeShape(shape, map, grid); break;
+                case "landform": NaturalLandformGeneration.Apply(shape,map,grid); break;
                 case "region_fill": break; // Count and paint after native terrain/structures exist.
                 case "passage": break; // Explicit clear route applied after legacy height/water shapes.
                 default:

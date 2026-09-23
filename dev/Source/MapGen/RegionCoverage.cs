@@ -12,8 +12,9 @@ namespace MapGenAI.MapGen
             foreach(var fill in state.elevationShapes.Where(s=>s.type=="region_fill"))
             {
                 var source=state.elevationShapes.Find(s=>s.id==fill.region);
-                if(source==null || (source.type!="composite" && source.type!="bump" && source.type!="ring"))
+                if(source==null || (source.type!="composite" && source.type!="bump" && source.type!="ring" && source.type!="landform"))
                     throw new FormatException("채움의 기준 영역이 없습니다. 함께 제거하거나 다시 지정하세요. / Missing fill source; remove or rebind the fill too: "+fill.region);
+                if(source.type=="landform" && fill.region_part!="inside")throw new FormatException("자연지형의 평지는 inside로 지정하세요. / Use inside for a landform's planned floor.");
             }
         }
         public static bool[] Enclosed(int cols,int rows,bool[] boundary)

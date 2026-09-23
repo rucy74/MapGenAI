@@ -155,7 +155,8 @@ namespace MapGenAI.MapGen
                 {
                     var shape = state.elevationShapes.Find(s => s.id == p.region);
                     if (shape == null) throw new FormatException("유적이 참조하는 영역이 없습니다. 함께 제거하거나 다시 지정하세요. / Missing structure region; remove or rebind the structure too: " + p.region);
-                    if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring" && shape.type != "region_fill") throw new FormatException("Structure region requires composite, bump, ring or region_fill geometry");
+                    if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring" && shape.type != "region_fill" && shape.type != "landform") throw new FormatException("Structure region requires composite, bump, ring, landform or region_fill geometry");
+                    if(shape.type=="landform" && p.region_part=="enclosed")throw new FormatException("Use inside for a landform's planned floor");
                     if(p.region_part=="enclosed" && shape.type=="region_fill")throw new FormatException("For an enclosed interior, reference the original ring, not its partial material fill");
                 }
             }

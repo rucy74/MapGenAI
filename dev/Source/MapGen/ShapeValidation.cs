@@ -8,7 +8,7 @@ namespace MapGenAI.MapGen
     // Bounds also cap SDF expression depth/work before any terrain or world state is changed.
     public static class ShapeValidation
     {
-        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite", "region_fill", "passage" };
+        static readonly HashSet<string> Types = new HashSet<string> { "ridge", "slope", "split", "radial", "bump", "noise", "ring", "composite", "region_fill", "passage", "landform" };
         static readonly HashSet<string> Fills = new HashSet<string> { "water", "sand", "soil", "rich_soil", "marsh", "mud", "ice" };
         const string Positions = "center,top_left,top,top_right,left,right,bottom_left,bottom,bottom_right";
 
@@ -16,6 +16,25 @@ namespace MapGenAI.MapGen
         {
             if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
             if (shape.id != null) Id(shape.id);
+            if(shape.type=="landform")
+            {
+                if(shape.landform!="open_basin" && shape.landform!="winding_valley" && shape.landform!="foothills")throw new FormatException("landform must be open_basin, winding_valley or foothills");
+                if(shape.variant!=null && (!int.TryParse(shape.variant,NumberStyles.None,CultureInfo.InvariantCulture,out var variant) || variant<0 || variant>999999))throw new FormatException("variant must be an integer from 0 to 999999");
+                Semantic(shape.direction,"left,right,top,bottom,top_left,top_right,bottom_left,bottom_right",0,360,"direction");
+                Semantic(shape.size,"small,medium,large",.35f,1,"landform size");
+                if(shape.gap!=null)Range(Number(shape.gap),.1f,.32f,"landform gap");
+                if(shape.opening!=null)
+                {
+                    if(shape.landform!="open_basin")throw new FormatException("opening requires open_basin");
+                    Range(Number(shape.opening),.08f,.3f,"basin opening");
+                }
+                if(shape.position!=null && !Positions.Split(',').Contains(shape.position))
+                    ShapeEdits.ValidatePair(shape.position.Trim('[',']',' ').Split(',').Select(Number).ToArray());
+                if(shape.strength!=null || shape.fill!=null || shape.fade!=null || shape.noise_amount!=null || shape.edge_roughness!=null || shape.region!=null || shape.region_part!=null || shape.coverage!=null || shape.points!=null || shape.width!=0 || shape.scope!=null || shape.compositeShapes!=null || shape.compositeOps!=null)
+                    throw new FormatException("landform uses landform/variant/position/size/direction/gap/opening; use region_fill for floor materials");
+                return;
+            }
+            if(shape.landform!=null || shape.variant!=null || shape.opening!=null)throw new FormatException("landform/variant/opening require landform geometry");
             Fill(shape.fill);
             if(shape.type=="passage")
             {

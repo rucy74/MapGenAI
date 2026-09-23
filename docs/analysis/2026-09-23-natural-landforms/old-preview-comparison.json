@@ -1,0 +1,50 @@
+[
+  {
+    "image": "guided-map-1.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  },
+  {
+    "image": "guided-map-2.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  },
+  {
+    "image": "guided-map-3.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  },
+  {
+    "image": "quick-map-1.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  },
+  {
+    "image": "quick-map-2.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  },
+  {
+    "image": "quick-map-3.png",
+    "size": [
+      250,
+      250
+    ],
+    "differentPixels": 0
+  }
+]

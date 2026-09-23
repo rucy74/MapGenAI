@@ -19,7 +19,7 @@ namespace MapGenAI.MapGen
     public static class ShapeEdits
     {
         public const int MaxShapes = 32;
-        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope" };
+        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening" };
 
         public static void AssignIds(List<ElevationShape> shapes)
         {
@@ -76,7 +76,7 @@ namespace MapGenAI.MapGen
                     ValidatePair(pair);
                     value = PairText(pair[0], pair[1]);
                 }
-                if (value == null && name != "fill") throw new FormatException("Invalid terrain field: " + name);
+                if (value == null && name != "fill" && !(name=="opening" && shape.type=="landform")) throw new FormatException("Invalid terrain field: " + name);
                 typeof(ElevationShape).GetField(name).SetValue(shape, value);
             }
             if (shape.type == "composite")
@@ -156,6 +156,7 @@ namespace MapGenAI.MapGen
                         case "update":
                             var fields = ToObject(target);
                             foreach (string key in edit.values.Keys) fields[key] = edit.values.Values[key];
+                            if(target.type=="landform" && edit.values.ContainsKey("landform") && edit.values.GetString("landform")!="open_basin" && !edit.values.ContainsKey("opening"))fields.Remove("opening");
                             shapes[index] = ParseShape(SimpleJson.Parse(SimpleJson.Serialize(fields)));
                             break;
                         case "move": Move(target, edit, shapes); break;
@@ -167,7 +168,7 @@ namespace MapGenAI.MapGen
 
         static Vector2 Center(ElevationShape shape)
         {
-            if (shape.type == "bump" || shape.type == "ring") return ElevationShape.ParsePosition(shape.position);
+            if (shape.type == "bump" || shape.type == "ring" || shape.type == "landform") return ElevationShape.ParsePosition(shape.position);
             if (shape.type == "passage") return new Vector2(shape.points.Average(p=>p[0]),shape.points.Average(p=>p[1]));
             if (shape.type != "composite") throw new FormatException("Only bump, ring and composite terrain can be moved by position");
             var points = shape.compositeShapes.SelectMany(p => p.prim == "tri" || p.prim == "poly" ? p.verts : new[] { p.center ?? new[] { .5f, .5f } }).ToList();

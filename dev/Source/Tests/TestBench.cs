@@ -571,7 +571,8 @@ class TestBench
     {
         if (args.Length == 0 || args[0].Equals("regression", StringComparison.OrdinalIgnoreCase) || args[0].Equals("mdp", StringComparison.OrdinalIgnoreCase))
         {
-            CoreRegressionTests.RunAll();
+            try { CoreRegressionTests.RunAll(); }
+            catch(Exception error) { Console.Error.WriteLine(error);Environment.ExitCode=1; }
             return;
         }
         if (!args[0].Equals("live", StringComparison.OrdinalIgnoreCase))

@@ -1,0 +1,1 @@
+Headless test; this is not a UI screenshot.

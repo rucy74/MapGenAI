@@ -29,6 +29,7 @@ namespace MapGenAI.MapGen
         public string fade;         // ridge용: small(0.3)/medium(0.5)/large(0.7) 또는 0~1
         public string noise_amount; // ridge용: none(0)/low(0.3)/medium(0.6)/high(1.0) 또는 0~1.5
         public string edge_roughness; // composite contour or passage edges: omitted/none=precise
+        public string landform, variant, opening; // natural layout kind, persisted variation and basin exit width
 
         public string region, region_part, coverage; // region_fill: source area and counted cell fraction
         public float[][] points; // passage: ordered normalized centerline, distinct from legacy SDF geometry
@@ -53,6 +54,9 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref fade, "fade");
             Scribe_Values.Look(ref noise_amount, "noise_amount");
             Scribe_Values.Look(ref edge_roughness, "edge_roughness");
+            Scribe_Values.Look(ref landform, "landform");
+            Scribe_Values.Look(ref variant, "variant");
+            Scribe_Values.Look(ref opening, "opening");
             Scribe_Values.Look(ref region, "region");
             Scribe_Values.Look(ref region_part, "region_part");
             Scribe_Values.Look(ref coverage, "coverage");
@@ -80,6 +84,7 @@ namespace MapGenAI.MapGen
                 type = type, direction = direction, strength = strength,
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount, edge_roughness = edge_roughness,
+                landform = landform, variant = variant, opening = opening,
                 region = region, region_part = region_part, coverage = coverage,
                 width = width, scope = scope, points = points?.Select(p => (float[])p.Clone()).ToArray(),
                 compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),

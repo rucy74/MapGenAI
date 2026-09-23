@@ -46,6 +46,18 @@ static class RecordedLandformTests
             var normalized=SimpleJson.Parse(MapStateCodec.Serialize(MapStateCodec.Deserialize(text))).GetObject("state");
             state.Values["localRoads"]=normalized.Values["localRoads"];
         }
+        // Only the three new optional fields may be added to old fixtures. Preserve every
+        // recorded value and unknown field instead of reserializing expectations via production.
+        if(state.GetObjectArray("elevationShapes") is List<SimpleJsonObject> shapes)
+        {
+            var entries=new List<object>();
+            foreach(var shape in shapes)
+            {
+                foreach(string key in new[]{"landform","variant","opening"})if(!shape.ContainsKey(key))shape.Values[key]=null;
+                entries.Add(new SortedDictionary<string,object>(shape.Values,StringComparer.Ordinal));
+            }
+            state.Values["elevationShapes"]=entries;
+        }
         stored.Values["state"]=new SortedDictionary<string,object>(state.Values,StringComparer.Ordinal);
         return SimpleJson.Serialize(stored);
     }
