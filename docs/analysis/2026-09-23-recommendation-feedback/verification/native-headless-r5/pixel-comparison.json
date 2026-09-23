@@ -1,0 +1,80 @@
+[
+  {
+    "name": "guided-map-1.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 51063
+  },
+  {
+    "name": "guided-map-2.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 49680
+  },
+  {
+    "name": "guided-map-3.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 52914
+  },
+  {
+    "name": "quick-map-1.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 53356
+  },
+  {
+    "name": "quick-map-2.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 59880
+  },
+  {
+    "name": "quick-map-3.png",
+    "old_size": [
+      250,
+      250
+    ],
+    "new_size": [
+      250,
+      250
+    ],
+    "pixels_equal": false,
+    "changed_pixels": 59686
+  }
+]

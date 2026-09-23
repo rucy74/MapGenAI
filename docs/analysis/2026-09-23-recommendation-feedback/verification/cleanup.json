@@ -1,0 +1,9 @@
+{
+  "reason": "Recursive removal command rejected: blocked by policy. No retry or workaround.",
+  "originalGameTouched": false,
+  "status": "cleanup_pending_automatic_policy_rejection",
+  "root": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime",
+  "originalModsFolderTouched": false,
+  "utc": "2026-09-23T07:59:22.8482874Z",
+  "runtimeDeleted": false
+}

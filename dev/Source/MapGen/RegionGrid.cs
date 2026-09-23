@@ -11,8 +11,10 @@ namespace MapGenAI.MapGen
         public readonly bool[] Flatten;
         public readonly bool[] LocalRoadCells;
         readonly Dictionary<string,bool[]> masks = new Dictionary<string,bool[]>();
+        readonly System.Action<string,int,string> observeMaterial;
         internal readonly Dictionary<int,CoverageCell> CoverageOriginal = new Dictionary<int,CoverageCell>();
-        public RegionGrid(Map map) { Map = map; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; LocalRoadCells = new bool[Materials.Length]; }
+        public RegionGrid(Map map) : this(map,null) { }
+        public RegionGrid(Map map, System.Action<string,int,string> observeMaterial) { Map = map; this.observeMaterial=observeMaterial; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; LocalRoadCells = new bool[Materials.Length]; }
         public int Index(IntVec3 cell) => cell.z * Map.Size.x + cell.x;
         public Dictionary<int,float> CaptureFlattened(MapGenFloatGrid elevation)
         {
@@ -36,7 +38,11 @@ namespace MapGenAI.MapGen
                 if (!masks.TryGetValue(id, out var mask)) masks[id] = mask = new bool[Materials.Length];
                 mask[i] = true;
             }
-            if (!string.IsNullOrEmpty(fill)) Materials[i] = TerrainMaterials.DefName(fill, deep);
+            if (!string.IsNullOrEmpty(fill))
+            {
+                Materials[i] = TerrainMaterials.DefName(fill, deep);
+                if(inside)observeMaterial?.Invoke(id,i,Materials[i]);
+            }
         }
         public bool[] Mask(string id) => masks.TryGetValue(id,out var mask)?(bool[])mask.Clone():new bool[Materials.Length];
         // The source mask precedes passage cuts, so an exit does not erase a ring's interior.

@@ -1,0 +1,15 @@
+{
+  "dllSha256": "b5f55dd88137458ac9d26a7ad9c38ce22b38cf33f8174dcfd679bcde2f814ea6",
+  "regressionPassed": 239,
+  "regressionFailed": 0,
+  "nativeChecks": 36,
+  "nativeFailed": 0,
+  "baselineChecks": 18,
+  "identicalMaps": 6,
+  "comparedPixels": 375000,
+  "newProviderCalls": 0,
+  "guiLayoutTested": false,
+  "liveModelQualityTested": false,
+  "installed": false,
+  "pushed": false
+}

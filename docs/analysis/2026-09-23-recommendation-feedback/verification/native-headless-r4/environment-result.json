@@ -1,0 +1,8 @@
+{
+  "resultUtc": "2026-09-23T07:49:45.915136Z",
+  "correction": "The initial graphics-error assessment was premature. The native harness continued and completed all assertions; the actual result.json takes precedence. No GUI visual check was performed.",
+  "checksExecuted": 33,
+  "verifiedUtc": "2026-09-23T07:53:42.1428611Z",
+  "status": "passed_native_assertions_with_headless_graphics_errors",
+  "newProviderCalls": 0
+}

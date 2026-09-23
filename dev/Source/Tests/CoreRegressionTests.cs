@@ -81,6 +81,7 @@ static class CoreRegressionTests
         MapPlanDescriptionTests.RunAll();
         RecommendationControlsTests.RunAll();
         RecommendationGuideTests.RunAll();
+        RecommendationFeedbackTests.RunAll();
         RegionCoverageTests.RunAll();
         PassageTests.RunAll();
         SpatialRelationTests.RunAll();

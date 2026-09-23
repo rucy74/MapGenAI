@@ -1,0 +1,4 @@
+• 폐허 추가 — 고대 정착지의 잔해입니다. 이 폐허에는 다양한 위협이 도사리고 있을 수 있습니다.
+• 지도 중앙 — 폐허 1개, 11×9칸 배치 계획
+• 흙도로 · 지도 서쪽 → 지도 동쪽 · 장애물 우회 배치 계획 추가
+흙도로 / Dirt road: 도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints.

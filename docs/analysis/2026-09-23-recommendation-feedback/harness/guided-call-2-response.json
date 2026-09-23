@@ -1,0 +1,107 @@
+{
+  "action": "recommend",
+  "options": [
+    {
+      "params": {
+        "elevation_shapes": [
+          {
+            "type": "ridge",
+            "direction": "left",
+            "strength": "medium",
+            "fade": "small",
+            "noise_amount": "medium"
+          },
+          {
+            "type": "bump",
+            "position": [0.65, 0.45],
+            "size": "small",
+            "strength": "negative_medium",
+            "fill": "water"
+          }
+        ]
+      }
+    },
+    {
+      "params": {
+        "elevation_shapes": [
+          {
+            "type": "ridge",
+            "direction": "top",
+            "strength": "medium",
+            "fade": "small",
+            "noise_amount": "low"
+          },
+          {
+            "type": "composite",
+            "edge_roughness": "medium",
+            "shapes": [
+              {
+                "id": "small_ridge_shape",
+                "prim": "ellipse",
+                "center": [0.35, 0.35],
+                "w": 0.22,
+                "h": 0.08
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "small_ridge_shape",
+                "e": 0.6,
+                "f": 0.03
+              }
+            ]
+          },
+          {
+            "type": "bump",
+            "position": [0.75, 0.3],
+            "size": "small",
+            "strength": "negative_medium",
+            "fill": "water"
+          }
+        ]
+      }
+    },
+    {
+      "params": {
+        "elevation_shapes": [
+          {
+            "type": "ridge",
+            "direction": "bottom_left",
+            "strength": "medium",
+            "fade": "small",
+            "noise_amount": "high"
+          },
+          {
+            "type": "composite",
+            "edge_roughness": "medium",
+            "shapes": [
+              {
+                "id": "clearing_soil",
+                "prim": "circle",
+                "center": [0.55, 0.65],
+                "r": 0.14
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "clearing_soil",
+                "fill": "SoilRich",
+                "e": 0.05,
+                "f": 0.02
+              }
+            ]
+          },
+          {
+            "type": "bump",
+            "position": [0.6, 0.65],
+            "size": 0.08,
+            "strength": "negative_medium",
+            "fill": "water"
+          }
+        ]
+      }
+    }
+  ]
+}

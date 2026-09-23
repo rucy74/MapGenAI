@@ -66,6 +66,9 @@
     <Compile Include="../LLM/RequestGate.cs" Link="RequestGate.cs" />
     <Compile Include="../LLM/RecommendationPlan.cs" Link="RecommendationPlan.cs" />
     <Compile Include="../LLM/RecommendationGuide.cs" Link="RecommendationGuide.cs" />
+    <Compile Include="../LLM/RecommendationFeedback.cs" Link="RecommendationFeedback.cs" />
+    <Compile Include="../LLM/RecommendationQuality.cs" Link="RecommendationQuality.cs" />
+    <Compile Include="../LLM/PreferenceClarification.cs" Link="PreferenceClarification.cs" />
     <Compile Include="../UI/RecommendationLayout.cs" Link="RecommendationLayout.cs" />
     <Compile Include="../LLM/StructuredChat.cs" Link="StructuredChat.cs" />
     <Compile Include="../LLM/ChatMessage.cs" Link="ChatMessage.cs" />

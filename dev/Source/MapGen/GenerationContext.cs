@@ -16,7 +16,7 @@ namespace MapGenAI.MapGen
         public static RegionGrid Regions(Map map)
         {
             if (current == null) return null;
-            if (current.Regions == null || current.Regions.Map != map) current.Regions = new RegionGrid(map);
+            if (current.Regions == null || current.Regions.Map != map) current.Regions = new RegionGrid(map,current.ObserveMaterial);
             return current.Regions;
         }
 
@@ -43,12 +43,13 @@ namespace MapGenAI.MapGen
             }
         }
 
-        public static IDisposable Enter(int tileId, TileMapState state)
+        public static IDisposable Enter(int tileId, TileMapState state) => Enter(tileId,state,null);
+        public static IDisposable Enter(int tileId, TileMapState state, Action<string,int,string> observeMaterial)
         {
             var frozen = state?.Clone();
             if (frozen != null && !ImageInput.ImageFeatureGate.Enabled) frozen.imageMap = null;
             Monitor.Enter(GenerationLock);
-            var scope = new Scope { Previous = current, TileId = tileId, State = frozen };
+            var scope = new Scope { Previous = current, TileId = tileId, State = frozen, ObserveMaterial=observeMaterial };
             current = scope;
             return scope;
         }
@@ -59,6 +60,7 @@ namespace MapGenAI.MapGen
             public int TileId;
             public TileMapState State;
             public RegionGrid Regions;
+            public Action<string,int,string> ObserveMaterial;
             public AuthoringResult Report;
             public Map ImageMap;
             public float[] ImageElevation;

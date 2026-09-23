@@ -19,6 +19,7 @@ namespace MapGenAI.UI
             public Texture2D Texture;
             public string Error;
             public string Warning;
+            public string Rejection;
             public double Seconds;
             public bool Complete;
         }
@@ -50,14 +51,14 @@ namespace MapGenAI.UI
             foreach (var plan in plans)
             {
                 Items.Add(new Item());
-                snapshots.Add(new CandidatePreviewSnapshot(tileId, plan.Resolve(before)));
+                snapshots.Add(new CandidatePreviewSnapshot(tileId, plan.Resolve(before), before));
             }
         }
 
         // Preserve the other textures. A previous in-flight version may finish but cannot publish.
         public void Replace(int index,RecommendationPlan plan,TileMapState before)
         {
-            var snapshot=new CandidatePreviewSnapshot(tileId,plan.Resolve(before));
+            var snapshot=new CandidatePreviewSnapshot(tileId,plan.Resolve(before),before);
             var old=Items[index];
             if(old.Texture!=null)UnityEngine.Object.Destroy(old.Texture);
             Items[index]=new Item();snapshots[index]=snapshot;
@@ -123,6 +124,8 @@ namespace MapGenAI.UI
                     if(!ReferenceEquals(pending,attempt))return;
                     pending = null;
                     if (disposed || !ReferenceEquals(item,Items[index])) return;
+                    // Preserve known placement failures even if texture allocation/upload fails.
+                    item.Rejection = RecommendationQuality.Rejection(snapshot.Report?.issues,snapshot.IntendedWater,snapshot.ActualWater,L10n.IsKorean());
                     Texture2D texture = null;
                     try
                     {
@@ -143,7 +146,11 @@ namespace MapGenAI.UI
                     CandidatePreviewContext.Requests.Remove(ticket);
                     if(!ReferenceEquals(pending,attempt))return;
                     pending = null;
-                    if (!disposed) { item.Error = error.Message; item.Complete = true; }
+                    if (!disposed)
+                    {
+                        item.Rejection=RecommendationQuality.Rejection(snapshot.Report?.issues,snapshot.Report==null?0:snapshot.IntendedWater,snapshot.ActualWater,L10n.IsKorean());
+                        item.Error = error.Message; item.Complete = true;
+                    }
                 });
             }
             catch (Exception error)

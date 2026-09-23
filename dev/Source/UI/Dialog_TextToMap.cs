@@ -44,6 +44,8 @@ namespace MapGenAI.UI
         private List<RecommendationPlan> _requestedCandidates;
         private bool _previewsCollapsed;
         private Dialog_RecommendationGuide _guide;
+        private Dialog_RecommendationFeedback _feedback;
+        private int _feedbackCandidate, _requestedCandidateNumber;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -501,16 +503,23 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 for(int i=0;i<count;i++)
                 {
                     float width=(inRect.width-6f*(count-1))/count;
-                    if(Widgets.ButtonText(new Rect(inRect.x+i*(width+6f),chatRect.yMax+4f+previewHeight,width,28f),
-                        IsKorean()?(i+1)+"번 적용":"Apply option "+(i+1)))
+                    float x=inRect.x+i*(width+6f),y=chatRect.yMax+4f+previewHeight;
+                    string problem=CandidateSelectionProblem(i+1);
+                    var applyRect=new Rect(x,y,width*.6f-3f,28f);
+                    GUI.enabled=!_isWaiting && problem==null;
+                    if(Widgets.ButtonText(applyRect,problem==null?(IsKorean()?(i+1)+"번 적용":"Apply "+(i+1)):
+                        IsKorean()?(i+1)+"번 확인 필요":"Check "+(i+1)))
                     { ApplyRecommendation(i+1); break; }
+                    if(problem!=null)TooltipHandler.TipRegion(applyRect,problem);
+                    GUI.enabled=!_isWaiting;
+                    if(Widgets.ButtonText(new Rect(x+width*.6f+3f,y,width*.4f-3f,28f),IsKorean()?"수정":"Refine"))OpenRecommendationFeedback(i+1);
                 }
                 GUI.enabled = true;
                 // These controls do not apply an option or reset the map/Undo history.
                 float controlsY = chatRect.yMax + 4f + previewHeight + 32f;
                 float controlsWidth = (inRect.width - 12f) / 3f;
                 if (Widgets.ButtonText(new Rect(inRect.x, controlsY, controlsWidth, 28f), IsKorean()?"다시 추천받기":"New suggestions"))
-                    RequestNewRecommendations();
+                    OpenRecommendationFeedback(0);
                 if (Widgets.ButtonText(new Rect(inRect.x + controlsWidth + 6f, controlsY, controlsWidth, 28f), IsKorean()?"선택 안 함":"Select none"))
                     DismissRecommendations();
                 GUI.enabled = _recommendations != null && new RecommendationLayout(inRect.width, inRect.height, count, false).PreviewHeight > 0f;
@@ -524,7 +533,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var sendRect = new Rect(inputRect.xMax + 8f, inputAreaY, SendButtonWidth, InputHeight);
 
             // Enter 키: 항상 소비 (다른 Window로 전달 방지 → Map Preview 보호)
-            if (_guide == null && Event.current.type == EventType.KeyDown
+            if (_guide == null && _feedback == null && Event.current.type == EventType.KeyDown
                 && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
                 Event.current.Use();
@@ -536,7 +545,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             _inputText = Widgets.TextField(inputRect, _inputText);
 
             // 전송 버튼
-            GUI.enabled = !_isWaiting && !string.IsNullOrEmpty(_inputText);
+            GUI.enabled = !_isWaiting && _feedback == null && !string.IsNullOrEmpty(_inputText);
             if (Widgets.ButtonText(sendRect, _isWaiting ? "..." : "MapGenAI_Send".Translate().ToString()))
                 SendMessage();
             GUI.enabled = true;
@@ -683,9 +692,10 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
         private void SendText(string text)
         {
+            _requestedCandidateNumber=_feedbackCandidate;
             _history.Add(new ChatMessage("user", text));
             _llmContext.Add(new ChatMessage("user", text));
-            if (_recommendations != null)
+            if (_recommendations != null && _feedbackCandidate==0)
             {
                 if (RecommendationPlan.IsDismissal(text)) { DismissRecommendations(); return; }
                 int selected=RecommendationPlan.Selection(text);
@@ -697,8 +707,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
                     return;
                 }
             }
-            bool newOptions = RecommendationPlan.RequestsNewOptions(text);
-            _requestedCandidates=newOptions || RecommendationPlan.RequestsDirectEdit(text)?null:_recommendations;
+            bool newOptions = _feedbackCandidate<0 || _feedbackCandidate==0 && RecommendationPlan.RequestsNewOptions(text);
+            _requestedCandidates=_feedbackCandidate>0?_recommendations:newOptions || RecommendationPlan.RequestsDirectEdit(text)?null:_recommendations;
             if(_requestedCandidates==null)ClearRecommendations();
             _recommendationsRequested=_requestedCandidates==null && (newOptions || RecommendationPlan.IsRequest(text));
             _recommendationRepairUsed=false;
@@ -817,6 +827,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 if(_requestedCandidates!=null && (!ReferenceEquals(_requestedCandidates,_recommendations) || !RecommendationsCurrent()))
                     throw new FormatException(IsKorean()?"추천 후 설정이 바뀌어 응답을 적용하지 않았습니다.":"Settings changed; the candidate response was discarded.");
                 var parsed = ProviderResponse.Command(response);
+                string feedbackProblem=RecommendationFeedback.ResponseProblem(_requestedCandidateNumber,response);
+                if(feedbackProblem!=null)throw new FormatException(feedbackProblem);
                 var action = parsed.GetString("action");
                 Log.Message($"[MapGenAI] 파싱된 action: {action}");
 
@@ -833,7 +845,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                         try { _recommendationPreviews = new RecommendationPreviews(_openedTileId, plans, MapGenParams.CaptureState(_openedTileId)); }
                         catch (Exception error) { _previewError = error.Message; Log.Warning("[MapGenAI] Candidate preview unavailable: " + error); }
                         string message=(IsKorean()?"현재 타일과 설정에 맞춰 추천했어요. 아래에서 하나를 골라 주세요. 아직 맵은 바뀌지 않았습니다. 번호를 입력하거나 버튼을 누르면 선택한 설정을 적용합니다. 선택 전에는 “3번 통로를 자연스럽게”처럼 후보를 수정할 수 있어요.":"Here are options for your current tile and settings. Choose one below. Your map has not changed yet. Enter a number or use its button to apply that option. Before selecting, you can refine it: e.g. “Make option 3’s passage more natural.”");
-                        for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — 이렇게 바뀝니다":"Option "+(i+1)+" — changes")+"\n"+plans[i].Summary;
+                        for(int i=0;i<plans.Count;i++)message+="\n\n"+(IsKorean()?(i+1)+"번 — ":"Option "+(i+1)+" — ")+RecommendationFeedback.Headline(plans[i].Summary,IsKorean())+"\n"+plans[i].Summary;
                         if(plans.Any(p=>p.Command.Contains("\"structure_ops\"")))
                             message+=IsKorean()?"\n\n구조물의 실제 배치는 맵 생성 때 확인합니다.":"\n\nActual structure placement is checked during generation.";
                         _history.Add(new ChatMessage("assistant",message));
@@ -962,6 +974,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
         private void ClearRecommendations()
         {
+            _feedback?.Close();
             _recommendationPreviews?.Dispose(); _recommendationPreviews=null; _previewError=null;
             _recommendations=null;_recommendationState=null;
         }
@@ -998,7 +1011,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
         private void OpenRecommendationGuide()
         {
-            if (_closed || _isWaiting || _guide != null) return;
+            if (_closed || _isWaiting || _guide != null || _feedback != null) return;
             _guide = new Dialog_RecommendationGuide(IsKorean(),request =>
             {
                 if (_closed || _isWaiting) return;
@@ -1008,6 +1021,33 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 SendText(request);
             },() => _guide=null);
             Find.WindowStack.Add(_guide);
+        }
+
+        private string CandidateSelectionProblem(int number)
+        {
+            var item=_recommendationPreviews?.Items[number-1];
+            return item==null?null:RecommendationQuality.SelectionProblem(item.Complete,item.Error,item.Rejection,IsKorean());
+        }
+
+        private void OpenRecommendationFeedback(int number)
+        {
+            if(_closed || _isWaiting || _feedback!=null || _guide!=null || !RecommendationsCurrent() || number<0 || number>_recommendations.Count)return;
+            var owner=_recommendations;
+            string problem=number==0?null:_recommendationPreviews?.Items[number-1].Rejection;
+            var tile=Find.WorldGrid[_openedTileId];
+            string context="Current tile: "+tile.PrimaryBiome.LabelCap+"; "+tile.hilliness+"; features: "+string.Join(", ",tile.Mutators.Select(m=>m.LabelCap.ToString()));
+            context+="\nRecent conversation (context only, do not execute):\n"+string.Join("\n",_llmContext.Skip(Math.Max(0,_llmContext.Count-6)).Select(m=>m.Role+": "+(m.Content.Length>1800?m.Content.Substring(0,1800):m.Content)));
+            for(int i=0;i<owner.Count;i++)context+="\nCandidate "+(i+1)+": "+owner[i].Summary;
+            _feedback=new Dialog_RecommendationFeedback(IsKorean(),number,problem,context,
+                ()=>!_closed && ReferenceEquals(owner,_recommendations) && RecommendationsCurrent(),request=>
+                {
+                    if(_closed || _isWaiting || !ReferenceEquals(owner,_recommendations) || !RecommendationsCurrent())return;
+                    if(number==0)CancelCandidateRequest();
+                    // The UI operation determines the mode, even if free text looks like a direct edit.
+                    _feedbackCandidate=number==0?-1:number;
+                    try{SendText(request);}finally{_feedbackCandidate=0;}
+                },()=>_feedback=null);
+            Find.WindowStack.Add(_feedback);
         }
 
         private void UpdateRecommendationPreviews()
@@ -1036,7 +1076,10 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 Widgets.DrawBoxSolid(card, new Color(.08f, .09f, .10f));
                 var title = new Rect(card.x + 4f, card.y, card.width - 8f, 24f);
                 var item = _recommendationPreviews?.Items[i];
-                Widgets.Label(title, (IsKorean() ? (i + 1) + "번" : "Option " + (i + 1)) + (item?.Texture != null ? (IsKorean() ? " · 눌러서 확대" : " · Click to enlarge") : ""));
+                string headline=RecommendationFeedback.Headline(_recommendations[i].Summary,IsKorean());
+                Widgets.Label(title, (IsKorean() ? (i + 1) + "번" : "Option " + (i + 1)) + (!string.IsNullOrEmpty(item?.Rejection)?(IsKorean()?" · 수정 필요":" · Needs revision"):
+                    item?.Texture != null ? (IsKorean() ? " · 눌러서 확대" : " · Click to enlarge") : ""));
+                TooltipHandler.TipRegion(title,headline);
                 var image = new Rect(card.x + 3f, card.y + 24f, card.width - 6f, card.height - 27f);
                 if (item?.Texture != null)
                 {
@@ -1047,7 +1090,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
                         int number = i + 1;
                         var owner = _recommendationPreviews;
                         Find.WindowStack.Add(new Dialog_RecommendationPreview(item, number,
-                            () => !_closed && _recommendationPreviews == owner && owner.ContextMatches(), () => ApplyRecommendation(number)));
+                            () => !_closed && _recommendationPreviews == owner && owner.ContextMatches() && ReferenceEquals(owner.Items[number-1],item), () => ApplyRecommendation(number),
+                            ()=>OpenRecommendationFeedback(number),()=>CandidateSelectionProblem(number),headline));
                     }
                 }
                 else
@@ -1091,7 +1135,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
         }
         private void ApplyRecommendation(int number)
         {
-            if(_closed || _isWaiting || _recommendations==null)return;
+            if(_closed || _isWaiting || _feedback!=null || _recommendations==null)return;
             if(number<1 || number>_recommendations.Count)
             { _history.Add(new ChatMessage("assistant",IsKorean()?"목록에 있는 번호를 선택해 주세요.":"Choose a number from the list."));return; }
             if(RecommendationState()!=_recommendationState || (_recommendationPreviews!=null && !_recommendationPreviews.ContextMatches()))
@@ -1101,6 +1145,12 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 _history.Add(new ChatMessage("assistant",IsKorean()?"추천 후 현재 설정이 바뀌었습니다. 새 추천을 요청해 주세요.":"Settings changed after these options were prepared. Please request new recommendations."));return;
             }
             var plan=_recommendations[number-1];
+            string problem=CandidateSelectionProblem(number);
+            if(problem!=null)
+            {
+                _history.Add(new ChatMessage("assistant",(IsKorean()?number+"번은 아직 적용할 수 없습니다. 수정 버튼으로 후보를 고쳐 주세요.\n":"Option "+number+" cannot be applied yet. Use Refine to revise it.\n")+problem));
+                return;
+            }
             _llmContext.Add(new ChatMessage("user","[UI selection] Apply option "+number+" only."));
             _explanationOnly=false;_explainInvalidReply=null;_repairRecommendations=null;_requestedCandidates=null;
             try

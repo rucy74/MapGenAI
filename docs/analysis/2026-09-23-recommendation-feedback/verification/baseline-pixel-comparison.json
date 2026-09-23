@@ -1,0 +1,32 @@
+[
+  {
+    "name": "guided-map-1.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  },
+  {
+    "name": "guided-map-2.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  },
+  {
+    "name": "guided-map-3.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  },
+  {
+    "name": "quick-map-1.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  },
+  {
+    "name": "quick-map-2.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  },
+  {
+    "name": "quick-map-3.png",
+    "pixels_equal": true,
+    "changed_pixels": 0
+  }
+]

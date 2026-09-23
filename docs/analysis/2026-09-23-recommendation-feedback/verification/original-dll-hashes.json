@@ -1,0 +1,14 @@
+[
+  {
+    "sha256": "9dbedd51bec25d5fcbda157c04b6be5ca314db1a2040d1cb21ec54c314acb578",
+    "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "sha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+    "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "sha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+    "path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dist\\Assemblies\\MapGenAI.dll"
+  }
+]

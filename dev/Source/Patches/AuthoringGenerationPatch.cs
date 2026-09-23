@@ -31,6 +31,8 @@ namespace MapGenAI.Patches
         {
             try {PassageGeneration.Check(map);}catch(Exception e){AuthoringGeneration.Fail(e);}
             try {LocalRoadGeneration.Check(map);}catch(Exception e){AuthoringGeneration.RoadFailure(e);}
+            // Candidate-only observation; does not alter generation or direct map edits.
+            try {CandidatePreviewContext.Current?.InspectWater(map);}catch(Exception e){Log.Warning("[MapGenAI] Candidate water observation unavailable: "+e.Message);}
             AuthoringGeneration.Finish((int)map.Tile);
         }
     }

@@ -74,6 +74,9 @@
 
 ## 추천 계약과 미리보기
 
+- `RecommendationFeedback`, `Dialog_RecommendationFeedback`: 후보별 피드백과 전체 재추천 이유, 선택적 AI 추가 객관식 질문. UI 진입의 전체 재추천은 `-1`, 후보 수정은 `1..3`으로 모드를 고정하여 자유입력의 직접 편집 표현이나 모델 `generate` 응답이 맵에 적용되지 않게 한다. `PreferenceClarification`은 명령 없는 questions 데이터만 파싱한다. 각 modal의 RequestGate가 취소/늦은 응답을 격리한다.
+- `RecommendationQuality`: 미리보기 렌더와 배치 실패를 구분하고, 확인된 실패·진행 중 후보의 버튼/번호 적용을 차단한다. `CandidatePreviewSnapshot`은 변경한 도형의 물 의도를 덮어쓰기 전에 관측하고 최종 실제 물과 비교한다. `GenerationContext`/`RegionGrid`의 선택적 콜백은 후보 범위에만 존재하며 생성 규칙/RNG/저장 형식을 바꾸지 않는다. 작은 물·미관·전체 정착성 판정은 포함하지 않는다. [검증 결과와 미실행 항목](docs/analysis/2026-09-23-recommendation-feedback/report.md).
+
 - `MapPlanDescription.cs`: 검증 전후 상태로 플레이어용 설명을 작성한다. `Dialog_TextToMap.DefinitionText`는 실행 시점의 DefDatabase label/description을 제공하므로 원래 defName이나 생성한 ID를 선택 문구로 노출하지 않는다. 기존 MapStateDescription은 진단용으로 보존한다. [표시 개선 근거](docs/analysis/2026-09-15-readable-choices/report.md).
 
 - `dev/Source/LLM/RecommendationPlan.cs`: recommend/options 계약, 독립 patch 검증, 직렬화한 명령과 실제 변경 요약 보관. 임의 제목·설명을 실제 효과로 표시하지 않는다.
