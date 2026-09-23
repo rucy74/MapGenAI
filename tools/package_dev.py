@@ -41,6 +41,7 @@ def package(output: Path) -> Path:
         'Mountain exits cut only mountain cells and preserve open ground; explicitly request a soil path across the entire route to paint the plains.\n'
         'Combine ring mountains, exits, interior soil fractions and ruins. Ruins can reference an enclosed interior and avoid the complete planned passage route.\n'
         'Describe calderas, open basins and canyons; edit their interiors and exits using existing terrain components. This is not a Geological Landforms generator integration.\n'
+        'Start with quick suggestions or an optional local preference interview about space, mountains, water and distinctive terrain. Review answers before requesting suggestions; questions do not call the model.\n'
         'Ask for three distinct landscape options, or complementary ideas for your edited map. Validated candidates automatically show local Map Preview images; click to enlarge and select by number or button without another model call.\n'
         'Discard all candidates or request different suggestions without changing your map. The larger chat window offers collapsible previews. New suggestions use a model request; discarding and folding do not.\n'
         'Refine an option by number before selecting it; only its preview refreshes. Natural passage edges preserve the route and minimum clear width; precise edges remain the default.\n'

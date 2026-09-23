@@ -43,6 +43,7 @@ namespace MapGenAI.UI
         private int _nextRecommendationCheck;
         private List<RecommendationPlan> _requestedCandidates;
         private bool _previewsCollapsed;
+        private Dialog_RecommendationGuide _guide;
 
         private const float InputHeight = 36f;
         private const float SendButtonWidth = 80f;
@@ -459,6 +460,13 @@ For recommendations follow the rules below and this tile's terrain and shore con
             Widgets.Label(titleRect, "MapGen AI");
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
+            bool showRecommendationStart = _llmContext.Count == 0 && _recommendations == null;
+            if (!showRecommendationStart && !MapGenAI.ImageInput.ImageFeatureGate.Enabled)
+            {
+                GUI.enabled = !_isWaiting && _guide == null;
+                if (Widgets.ButtonText(new Rect(titleRect.xMax-140f,titleRect.y,140f,28f),IsKorean()?"취향 문답":"Preferences")) OpenRecommendationGuide();
+                GUI.enabled = true;
+            }
             if (MapGenAI.ImageInput.ImageFeatureGate.Enabled)
             {
                 var imageButton = new Rect(titleRect.xMax-145f,titleRect.y,140f,28f);
@@ -467,7 +475,18 @@ For recommendations follow the rules below and this tile's terrain and shore con
 
             // 채팅 영역 (타이틀 아래)
             float topOffset = titleRect.yMax + 4f;
-            var layout = new RecommendationLayout(inRect.width, inRect.height, _recommendations?.Count ?? 0, _previewsCollapsed);
+            float startHeight = showRecommendationStart ? 40f : 0f;
+            if (showRecommendationStart)
+            {
+                float width=(inRect.width-6f)/2f;
+                GUI.enabled = !_isWaiting && _guide == null;
+                if (Widgets.ButtonText(new Rect(inRect.x,topOffset,width,34f),IsKorean()?"바로 추천받기":"Quick suggestions"))
+                    SendText(IsKorean()?"그냥 추천해 줘":"Recommend a map.");
+                if (Widgets.ButtonText(new Rect(inRect.x+width+6f,topOffset,width,34f),IsKorean()?"취향에 맞춰 추천받기":"Find my preferences")) OpenRecommendationGuide();
+                GUI.enabled = true;
+            }
+            topOffset += startHeight;
+            var layout = new RecommendationLayout(inRect.width, inRect.height-startHeight, _recommendations?.Count ?? 0, _previewsCollapsed);
             float previewHeight = layout.PreviewHeight;
             float choiceHeight = layout.ChoiceHeight;
             var chatRect = new Rect(inRect.x, topOffset, inRect.width, layout.ChatHeight);
@@ -505,7 +524,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var sendRect = new Rect(inputRect.xMax + 8f, inputAreaY, SendButtonWidth, InputHeight);
 
             // Enter 키: 항상 소비 (다른 Window로 전달 방지 → Map Preview 보호)
-            if (Event.current.type == EventType.KeyDown
+            if (_guide == null && Event.current.type == EventType.KeyDown
                 && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
                 Event.current.Use();
@@ -977,6 +996,20 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 "I don't like these suggestions. Recommend different options for my current map.");
         }
 
+        private void OpenRecommendationGuide()
+        {
+            if (_closed || _isWaiting || _guide != null) return;
+            _guide = new Dialog_RecommendationGuide(IsKorean(),request =>
+            {
+                if (_closed || _isWaiting) return;
+                // Only explicit confirmation retires old candidates. Cancel/Back do not touch the map,
+                // chat draft, conversation or Undo. Reuse the normal request against the latest state.
+                CancelCandidateRequest();
+                SendText(request);
+            },() => _guide=null);
+            Find.WindowStack.Add(_guide);
+        }
+
         private void UpdateRecommendationPreviews()
         {
             if (_recommendations == null || _closed) return;
@@ -1245,6 +1278,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
         public override void PostClose()
         {
             _closed=true;
+            _guide?.Close();
             ClearRecommendations();
             _requests.Cancel();
             base.PostClose();
