@@ -1,0 +1,1 @@
+{"action":"generate","description":"넓은 정착 평지를 갖춘 자연스러운 열린 분지","params":{"shape_ops":[{"op":"add","shape":{"id":"open_basin_main","type":"landform","landform":"open_basin","direction":"bottom","size":0.9,"gap":0.3,"opening":0.16,"layout":"organic","details":"natural"}}]}}

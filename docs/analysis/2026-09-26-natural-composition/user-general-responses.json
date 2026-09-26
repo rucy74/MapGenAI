@@ -1,0 +1,285 @@
+[
+  {
+    "action": "generate",
+    "description": "자연스러운 열린 분지, 넓은 정착 평지",
+    "params": {
+      "shape_ops": [
+        {
+          "op": "add",
+          "shape": {
+            "id": "basin_plain",
+            "type": "composite",
+            "edge_roughness": "medium",
+            "shapes": [
+              {
+                "id": "p_circle",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.3
+              }
+            ],
+            "compose": [
+              {
+                "op": "add",
+                "s": "p_circle",
+                "fill": "Soil",
+                "e": 0.05,
+                "f": 0.01
+              }
+            ]
+          }
+        },
+        {
+          "op": "add",
+          "shape": {
+            "id": "basin_mountain_ring",
+            "type": "composite",
+            "edge_roughness": "medium",
+            "shapes": [
+              {
+                "id": "outer_ring",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.4
+              },
+              {
+                "id": "inner_hole",
+                "prim": "circle",
+                "center": [
+                  0.5,
+                  0.5
+                ],
+                "r": 0.32
+              }
+            ],
+            "compose": [
+              {
+                "op": "sub",
+                "a": "inner_hole",
+                "from": "outer_ring",
+                "out": "ring_shape"
+              },
+              {
+                "op": "add",
+                "s": "ring_shape",
+                "e": 0.8,
+                "f": 0.01
+              }
+            ]
+          }
+        },
+        {
+          "op": "add",
+          "shape": {
+            "id": "basin_exit",
+            "type": "passage",
+            "points": [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0
+              ]
+            ],
+            "width": 12,
+            "scope": "mountains",
+            "fill": "Soil",
+            "edge_roughness": "medium"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "generate",
+    "params": {
+      "shape_ops": [
+        {
+          "op": "add",
+          "shape": {
+            "id": "small_pond",
+            "type": "bump",
+            "position": [
+              0.3,
+              0.3
+            ],
+            "strength": "negative_strong",
+            "size": "small",
+            "fill": "WaterDeep"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "ask",
+    "message": "죄송합니다. '자동 바닥·식생 조화 효과'를 직접 끄거나 조절하는 기능은 맵 생성 파라미터에 포함되어 있지 않습니다. 이 기능이 어떤 효과를 말씀하시는지 좀 더 자세히 설명해 주시겠어요? 현재 산과 연못 모양은 그대로 유지하겠습니다."
+  },
+  {
+    "action": "recommend",
+    "options": [
+      {
+        "description": "지형 가장자리를 더 정확하고 깔끔하게 만듭니다. 현재의 '중간' 자연스러운 윤곽을 제거합니다.",
+        "params": {
+          "shape_ops": [
+            {
+              "op": "update",
+              "id": "basin_plain",
+              "changes": {
+                "edge_roughness": "none"
+              }
+            },
+            {
+              "op": "update",
+              "id": "basin_mountain_ring",
+              "changes": {
+                "edge_roughness": "none"
+              }
+            },
+            {
+              "op": "update",
+              "id": "basin_exit",
+              "changes": {
+                "edge_roughness": "none"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "description": "지형 가장자리를 더 불규칙하고 자연스럽게 만듭니다. 현재의 '중간' 자연스러운 윤곽보다 더 거칠게 표현합니다.",
+        "params": {
+          "shape_ops": [
+            {
+              "op": "update",
+              "id": "basin_plain",
+              "changes": {
+                "edge_roughness": "high"
+              }
+            },
+            {
+              "op": "update",
+              "id": "basin_mountain_ring",
+              "changes": {
+                "edge_roughness": "high"
+              }
+            },
+            {
+              "op": "update",
+              "id": "basin_exit",
+              "changes": {
+                "edge_roughness": "high"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "action": "recommend",
+    "options": [
+      {
+        "description": "분지 내부를 더 비옥하게 만들고, 산의 전체적인 높이를 약간 낮춰 덜 험준하게 만듭니다.",
+        "params": {
+          "fertility_offset": 0.5,
+          "hill_amount": 0.8
+        }
+      },
+      {
+        "description": "식물과 동물이 더 풍부한 환경을 조성하고, 연못을 더 크고 깊게 만듭니다.",
+        "params": {
+          "vegetation_density": 1.5,
+          "animal_density": 1.5,
+          "shape_ops": [
+            {
+              "op": "update",
+              "id": "small_pond",
+              "changes": {
+                "size": "medium"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "description": "분지 내부에 고대 폐허를 추가하여 탐험 요소를 더하고, 출구 통로를 더 넓게 만듭니다.",
+        "params": {
+          "shape_ops": [
+            {
+              "op": "update",
+              "id": "basin_exit",
+              "changes": {
+                "width": 18
+              }
+            }
+          ],
+          "structure_ops": [
+            {
+              "op": "add",
+              "structure": {
+                "id": "basin_ruins",
+                "kind": "ruin",
+                "region": "basin_plain",
+                "width": 12,
+                "height": 10,
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "action": "generate",
+    "params": {
+      "road_ops": [
+        {
+          "op": "add",
+          "road": {
+            "id": "basin_dirt_path",
+            "kind": "DirtPath",
+            "route": "avoid",
+            "points": [
+              [
+                0.4,
+                0.5
+              ],
+              [
+                0.6,
+                0.5
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "action": "generate",
+    "params": {
+      "shape_ops": [
+        {
+          "op": "add",
+          "shape": {
+            "id": "basin_rich_soil_fill",
+            "type": "region_fill",
+            "region": "basin_mountain_ring",
+            "region_part": "enclosed",
+            "coverage": 0.7,
+            "fill": "SoilRich"
+          }
+        }
+      ]
+    }
+  }
+]

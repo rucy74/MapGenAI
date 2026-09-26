@@ -459,7 +459,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             Text.Anchor = TextAnchor.MiddleCenter;
             var oldColor = GUI.color;
             GUI.color = new Color(0.9f, 0.95f, 1f);
-            Widgets.Label(titleRect, "MapGen AI");
+            Widgets.Label(titleRect, MapGenAIMod.DisplayName);
             GUI.color = oldColor;
             Text.Anchor = oldAnchor;
             bool showRecommendationStart = _llmContext.Count == 0 && _recommendations == null;

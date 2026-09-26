@@ -1,0 +1,1 @@
+{"action":"generate","description":"분지의 지면 및 식생 조화 효과 비활성화","params":{"shape_ops":[{"op":"update","id":"open_basin_main","changes":{"details":"none"}}]}}

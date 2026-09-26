@@ -72,6 +72,16 @@ namespace MapGenAI.NaturalProbe
                     Save("tile.json",SimpleJson.Serialize(new Dictionary<string,object>{{"tile",target},{"biome",tile.PrimaryBiome.defName},{"hilliness",tile.hilliness.ToString()},{"worldSeed",WorldSeed},{"mapSize",250}}));
                     MapGenParams.RestoreSnapshot(new TileMapState(),target);
                     Save("system-prompt.txt",(string)AccessTools.Method(typeof(Dialog_TextToMap),"BuildSystemPrompt").Invoke(null,new object[]{target}));
+                    if(GenCommandLine.TryGetCommandLineArg("mapgenAIProbeStates",out string states))
+                    {
+                        foreach(string path in Directory.GetFiles(states,"*.json").OrderBy(p=>p,StringComparer.Ordinal))
+                        {
+                            var replay=MapStateCodec.Deserialize(File.ReadAllText(path));MapStateValidation.Validate(replay);
+                            jobs.Enqueue(new Job{name=Path.GetFileNameWithoutExtension(path),state=replay,tile=target});
+                        }
+                        Check(jobs.Count>0,"Recorded provider states supplied");
+                        active=true;Next();return;
+                    }
                     jobs.Enqueue(new Job{name="baseline",state=new TileMapState(),tile=target});
                     foreach(string kind in new[]{"open_basin","winding_valley","foothills"})foreach(int variant in new[]{0,11,23,47,89})jobs.Enqueue(new Job{name=kind+"-"+variant,state=State(kind,variant),tile=target});
                     var basis=State("open_basin",23);

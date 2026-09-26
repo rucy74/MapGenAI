@@ -8,6 +8,7 @@
     <Compile Include="../../dev/Source/LLM/OpenAIClient.cs" Link="OpenAIClient.cs" />
     <Compile Include="../../dev/Source/LLM/LocalClient.cs" Link="LocalClient.cs" />
     <Compile Include="../../dev/Source/LLM/VisionPayload.cs" Link="VisionPayload.cs" />
+    <Compile Include="../../dev/Source/MapGen/LandformPrompt.cs" Link="LandformPrompt.cs" />
     <Compile Include="../../dev/Source/Core/ApiConfig.cs" Link="ApiConfig.cs" />
     <Compile Include="../../dev/Source/Core/LLMProviders.cs" Link="LLMProviders.cs" />
   </ItemGroup>

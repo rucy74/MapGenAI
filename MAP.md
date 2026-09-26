@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 첫 자연 풍경 구성(DEV): `LandformPrompt`는 빈 설정의 짧은 풍경 요청에서 주 지형과 작은 물 요소를 함께 계획하되, 바이옴 토양 원판 덮기·전역 보너스·후속 편집의 추가 요소를 피하도록 안내한다. `RecommendationPlan.Rules`도 무관한 전역 수치/비옥토 대신 국소 배치를 우선한다. 모델 지침이며 미관 자동 보장은 아니다. `MapGenAIMod.DisplayName`은 설치 packageId로 DEV 제목을 구분한다. [일반판 제보 구분·실제 응답과 프리뷰](docs/analysis/2026-09-26-natural-composition/report.md).
+
 - 자연지형 표면·식생 연결(로컬 DEV): `LandscapeBlendField/Generation`은 `details:natural`인 육상 자연지형의 평지에서 실제 물·산 경계를 따라 좁은 모래/자갈 구간을 만든다. 명시 도형·재료·비율 채움 전체 영역·도로·특수 지형은 제외한다. 새 `shape_ops add`만 기본 적용하고 저장된 null/none은 유지한다. 420 단계에서 바닥과 초기 식생 가중치를 계산하며, `LandscapeVegetationPatch`는 Plants 단계에만 작동한다. 사막·랜드마크 밀도 예외/바이옴 식물 종류/이후 재성장은 native 경로다. 물·특징을 새로 만들거나 옮기지 않으며 Preview는 식물을 그리지 않는다. [설계](docs/analysis/2026-09-23-landscape-blending/plan.md) · [사용자 검사](docs/analysis/2026-09-23-landscape-blending/manual-tests-ko.md).
 
 - 자연 육상 지형(로컬 DEV): `NaturalLandformGeometry`는 열린 분지·넓은 굽은 골짜기·산기슭 평야의 산과 평지를 한 필드로 만들며 전역 RNG를 소비하지 않는다. `NaturalLandformGeneration`은 `type:landform`만 처리한다. ID의 `inside`는 평지이며 `enclosed`는 거부한다. `landform/variant/opening/layout`은 parser/Clone/Scribe/preset에 보존된다. 새 `shape_ops add`는 `layout:organic`으로 `OrganicLandformGeometry`의 비대칭 능선·굽은 지류·완만한 접합을 사용한다. 저장된 null/classic은 종전 수식을 유지하며 전체 배열로 새 지형을 만드는 응답은 organic 명시가 필요하다. 기존 도형 경로는 유지된다. [기본 배치 개선](docs/analysis/2026-09-23-landform-design/report.md). GL 원본 연동이 아니며 원본 설치·push는 별도다.

@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-09-26T20:00:41.929005+09:00",
+  "sourceLogSha256": "4dd44a4675f31c98539165a824ec530a2db9ba42c10741732ff5817d8329050a",
+  "sourceLogMtime": 1790419534.6769748,
+  "activeMapgenPackages": [
+    "choco.mapgenai"
+  ],
+  "generalDllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
+  "installedDevBeforeSha256": "6d854073d57fc6a20e8735aeae7a49cb13d481cdadc5061f5ab34d841b92285e",
+  "nativeTestedDllSha256": "2533bd657e24ff6aa4b17b86935aa91daf73e4ace43f45a4588edbdc735866f4"
+}

@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "Real off response changes only existing landform details",
+      "pass": true
+    },
+    {
+      "name": "Real on response restores the entire original state",
+      "pass": true
+    },
+    {
+      "name": "Same detector rejects changed mountain variant",
+      "pass": true
+    },
+    {
+      "name": "Same detector rejects unrelated fertility bonus",
+      "pass": true
+    },
+    {
+      "name": "First whole-landscape request has no Soil/SoilRich repaint",
+      "pass": true
+    },
+    {
+      "name": "Same soil detector rejects observed first recommendation",
+      "pass": true
+    },
+    {
+      "name": "Revised recommendation 1 has no unrequested soil repaint",
+      "pass": true
+    },
+    {
+      "name": "Revised recommendation 2 has no unrequested soil repaint",
+      "pass": true
+    },
+    {
+      "name": "Revised recommendation 3 has no unrequested soil repaint",
+      "pass": true
+    },
+    {
+      "name": "Both recorded states rendered through native MapPreview",
+      "pass": true
+    },
+    {
+      "name": "Both native previews contain water and usable floor",
+      "pass": true
+    },
+    {
+      "name": "Water and mountain counts are retained when details are disabled",
+      "pass": true
+    }
+  ],
+  "retainedQualityFailure": "provider-ko option 1 proposed unsolicited 35% rich soil; corrected prompt tested separately",
+  "limits": "Native counts are not full-map cell identity; preview aesthetics and user grassland compatibility remain separate."
+}
