@@ -10,7 +10,7 @@ namespace MapGenAI.MapGen
         public static void Apply(Map map)
         {
             var state=GenerationContext.State;
-            var shapes=state?.elevationShapes.Where(s=>s.type=="landform" && s.details=="natural").ToList();
+            var shapes=state?.elevationShapes.Where(s=>(s.type=="landform" || s.type=="composite") && s.details=="natural").ToList();
             if(shapes==null || shapes.Count==0)return;
             var regions=GenerationContext.Regions(map);int cols=map.Size.x,rows=map.Size.z,count=cols*rows;
             var owners=new LandscapeBlendField[count];var water=new bool[count];var rock=new bool[count];var locked=new bool[count];

@@ -31,6 +31,7 @@ namespace MapGenAI.MapGen
         public string edge_roughness; // composite contour or passage edges: omitted/none=precise
         public string landform, variant, opening, layout; // null layout preserves the original natural generator
         public string details; // natural = local shore/foothill surfaces and initial biome vegetation; null/none preserves legacy
+        public string anchor, placement; // composite: persistent area relationship (inside/edge/beside)
 
         public string region, region_part, coverage; // region_fill: source area and counted cell fraction
         public float[][] points; // passage: ordered normalized centerline, distinct from legacy SDF geometry
@@ -60,6 +61,8 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref opening, "opening");
             Scribe_Values.Look(ref layout, "layout");
             Scribe_Values.Look(ref details, "details");
+            Scribe_Values.Look(ref anchor, "landscapeAnchor");
+            Scribe_Values.Look(ref placement, "landscapePlacement");
             Scribe_Values.Look(ref region, "region");
             Scribe_Values.Look(ref region_part, "region_part");
             Scribe_Values.Look(ref coverage, "coverage");
@@ -88,7 +91,7 @@ namespace MapGenAI.MapGen
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount, edge_roughness = edge_roughness,
                 landform = landform, variant = variant, opening = opening, layout = layout,
-                details = details,
+                details = details, anchor = anchor, placement = placement,
                 region = region, region_part = region_part, coverage = coverage,
                 width = width, scope = scope, points = points?.Select(p => (float[])p.Clone()).ToArray(),
                 compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),

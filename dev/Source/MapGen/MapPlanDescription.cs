@@ -56,6 +56,7 @@ namespace MapGenAI.MapGen
                     if(old.fill!=shape.fill || old.coverage!=shape.coverage || old.region!=shape.region || old.region_part!=shape.region_part || SimpleJson.Serialize(old.compositeOps)!=SimpleJson.Serialize(shape.compositeOps))changes.Add(T("영역의 높이·채움 조정","region height/fill adjusted"));
                     if(old.edge_roughness!=shape.edge_roughness)changes.Add(T("윤곽 조정","outline adjusted"));
                     if(old.scope!=shape.scope)changes.Add(T("통로 적용 범위 조정","passage scope adjusted"));
+                    if(old.anchor!=shape.anchor || old.placement!=shape.placement)changes.Add(T("다른 지형과의 배치 관계 조정","relationship to another terrain area adjusted"));
                     if(old.direction!=shape.direction)changes.Add(T("방향 조정","direction adjusted"));
                     if(old.variant!=shape.variant || old.landform!=shape.landform || old.layout!=shape.layout)changes.Add(T("자연지형 배치 조정","natural landscape layout adjusted"));
                     if(old.details!=shape.details)changes.Add(shape.details=="natural"?T("물가·산기슭의 바닥과 식생 조화","blend shores, foothill ground and vegetation"):T("주변 바닥·식생 자동 조화 끄기","disable automatic ground and vegetation blending"));
@@ -205,8 +206,10 @@ namespace MapGenAI.MapGen
                 if(parts?.Count==1)form=Primitive(parts[0].prim)+" ";
                 else if(parts?.Count==2 && parts.All(p=>p.prim=="circle") && s.compositeOps.Any(o=>o.op=="sub"))form=T("고리 모양 ","ring-shaped ");
                 else form=T("여러 모양을 합친 ","combined-shape ");
-                var centers=parts?.Select(p=>p.GetCenter()).ToList();
+                var centers=parts?.Select(p=>p.prim=="path" && p.verts?.Length>0?
+                    new UnityEngine.Vector2(p.verts.Average(v=>v[0]),p.verts.Average(v=>v[1])):p.GetCenter()).ToList();
                 where=centers?.Count>0?Position(centers.Average(c=>c.x),centers.Average(c=>c.y)):T("지정한 영역","the chosen area");
+                if(s.anchor!=null)where=T("기준 지형의 ","relative to the reference area: ")+(s.direction==null?"":Word(s.direction)+" ")+(s.placement=="inside"?T("안쪽","inside"):s.placement=="edge"?T("안쪽 가장자리","inner edge"):T("바깥 옆","adjacent outside"));
                 bool irregular=!string.IsNullOrEmpty(s.edge_roughness) && s.edge_roughness!="none" && s.edge_roughness!="0";
                 return where+" — "+form+material+T(" 영역"," area")+(irregular?T(" (불규칙한 가장자리)"," (irregular outline)"):"");
             }
@@ -215,6 +218,7 @@ namespace MapGenAI.MapGen
         }
         string Primitive(string prim)
         {
+            if(prim=="path")return T("곡선을 따라 이어진","curving connected");
             switch(prim){case "circle":return T("둥근","round");case "ellipse":return T("타원형","oval");case "rect":return T("직사각형","rectangular");case "tri":return T("삼각형","triangular");case "star":return T("별 모양","star-shaped");case "heart":return T("하트 모양","heart-shaped");default:return T("다각형","polygonal");}
         }
         string Category(string category)

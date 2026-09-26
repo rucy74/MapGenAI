@@ -15,10 +15,10 @@ namespace MapGenAI.UI
         private Vector2 scroll;
         public override Vector2 InitialSize => new Vector2(Mathf.Min(680f,Verse.UI.screenWidth-40f),Mathf.Min(700f,Verse.UI.screenHeight-40f));
         private string T(string ko,string en) => korean?ko:en;
-        public Dialog_RecommendationGuide(bool korean,Action<string> completed,Action closed)
+        public Dialog_RecommendationGuide(bool korean,Action<string> completed,Action closed,bool hasAuthoredTerrain=false)
         {
             this.korean=korean; this.completed=completed; this.closed=closed;
-            guide=new RecommendationGuide(korean);
+            guide=new RecommendationGuide(korean,hasAuthoredTerrain);
             doCloseX=true; closeOnAccept=false; absorbInputAroundWindow=true; forcePause=false;
             preventCameraMotion=true; layer=WindowLayer.Super;
         }

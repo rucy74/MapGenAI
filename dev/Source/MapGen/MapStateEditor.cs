@@ -218,6 +218,7 @@ namespace MapGenAI.MapGen
                 ShapeEdits.AssignIds(state.elevationShapes);
             if (state.elevationShapes.Count > ShapeEdits.MaxShapes) throw new FormatException("Too many terrain shapes");
             RegionCoverage.ValidateReferences(state);
+            LandscapePlacement.ValidateReferences(state);
             StructurePlans.Validate(state);
             RoadPlans.Validate(state);
             return state;

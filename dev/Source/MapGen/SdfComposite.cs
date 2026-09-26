@@ -217,7 +217,8 @@ namespace MapGenAI.MapGen
             List<ShapePrimitive> shapes,
             List<ComposeOp> compose,
             Map map,
-            MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null, string fillOverride = null)
+            MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null, string fillOverride = null,
+            string anchor = null, string placement = null, string direction = null, string variant = null)
         {
             if (shapes == null || shapes.Count == 0 || compose == null || compose.Count == 0)
                 return;
@@ -229,7 +230,7 @@ namespace MapGenAI.MapGen
             var sdfFuncs = new Dictionary<string, Func<Vector2, float>>();
             foreach (var s in shapes)
             {
-                var func = BuildSdfFunc(s);
+                var func = BuildNaturalSdfFunc(s,ContourWarp.Amount(edgeRoughness),(variant==null?shapeId:shapeId+"@"+variant)+"/"+s.id);
                 if (func != null)
                     sdfFuncs[s.id] = func;
             }
@@ -297,7 +298,59 @@ namespace MapGenAI.MapGen
 
             if (renderQueue.Count == 0) return;
             float roughness = ContourWarp.Amount(edgeRoughness);
-            var warp = roughness > 0 ? new ContourWarp(shapes, shapeId, roughness) : null;
+            var warp = roughness > 0 ? new ContourWarp(shapes, variant==null?shapeId:shapeId+"@"+variant, roughness) : null;
+            Vector2 translation=new Vector2();
+            if(anchor!=null)
+            {
+                int cols=map.Size.x,rows=map.Size.z;var footprint=new bool[cols*rows];bool clipped=false;
+                var origin=new Vector2();int coordinates=0;
+                foreach(var part in shapes)
+                {
+                    if((part.prim=="path" || part.prim=="poly" || part.prim=="tri") && part.verts!=null)
+                        foreach(var point in part.verts){origin+=new Vector2(point[0],point[1]);coordinates++;}
+                    else{origin+=part.GetCenter();coordinates++;}
+                }
+                origin=origin/coordinates-new Vector2(.5f,.5f);
+                for(int z=0;z<rows;z++)for(int x=0;x<cols;x++)
+                {
+                    var p=new Vector2(x/mapW,z/mapH)+origin;if(warp!=null)p=warp.Sample(p);
+                    foreach(var item in renderQueue)if(Smoothstep(item.falloff,0,item.sdf(p))>=.01f){footprint[z*cols+x]=true;break;}
+                    clipped|=footprint[z*cols+x] && (x==0 || z==0 || x==cols-1 || z==rows-1);
+                }
+                var regions=GenerationContext.Regions(map);
+                bool[] reserved=null;regions?.LandscapeReservations.TryGetValue(anchor,out reserved);
+                var source=regions?.Mask(anchor);
+                ElevationShape reference=null;
+                if(GenerationContext.State!=null)foreach(var candidate in GenerationContext.State.elevationShapes)if(candidate.id==anchor){reference=candidate;break;}
+                bool floorSource=reference?.type=="landform";
+                if(reference?.type=="composite" && reference.fill==null)
+                {
+                    bool flat=false,other=false;
+                    foreach(var op in reference.compositeOps){flat|=op.e>0 && op.e<.1f;other|=op.fill!=null || op.e>=.1f || op.e<0;}
+                    floorSource=flat && !other;
+                }
+                var blocked=reserved==null?new bool[cols*rows]:(bool[])reserved.Clone();
+                if(source!=null)
+                    foreach(var cell in CellRect.WholeMap(map))
+                    {
+                        int index=cell.z*cols+cell.x;
+                        bool obstacle=elevGrid[cell]>=.7f || regions.Materials[index]!=null;
+                        // Explicitly editing the source can cover that source; adjacent terrain is protected.
+                        blocked[index]|=obstacle && (floorSource || !source[index]);
+                        if(floorSource && obstacle)source[index]=false;
+                    }
+                int dx=0,dz=0;
+                if(clipped || regions==null || !LandscapePlacement.TryPlace(cols,rows,source,footprint,placement,direction,out dx,out dz,blocked))
+                {
+                    const string failure="요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.";
+                    if(GenerationContext.Report!=null)GenerationContext.Report.issues.Add(failure);
+                    Log.Warning("[MapGenAI] "+failure);
+                    return;
+                }
+                translation=new Vector2(dx/mapW,dz/mapH)-origin;
+                if(reserved==null)regions.LandscapeReservations[anchor]=reserved=new bool[cols*rows];
+                for(int i=0;i<footprint.Length;i++)if(footprint[i])reserved[(i/cols+dz)*cols+i%cols+dx]=true;
+            }
 
             // 3. 래스터라이즈 — 각 대상을 독립적으로 적용
             MapGenFloatGrid fertilityGrid = null;
@@ -314,7 +367,7 @@ namespace MapGenAI.MapGen
 
                 foreach (var cell in CellRect.WholeMap(map))
                 {
-                    Vector2 p = new Vector2(cell.x / mapW, cell.z / mapH);
+                    Vector2 p = new Vector2(cell.x / mapW, cell.z / mapH)-translation;
                     if (warp != null) p = warp.Sample(p);
                     float d = sdf(p);
                     float t = Smoothstep(falloff, 0f, d);
@@ -408,12 +461,13 @@ namespace MapGenAI.MapGen
         }
 
         /// <summary>ShapePrimitive → SDF 함수 빌드</summary>
-        private static Func<Vector2, float> BuildSdfFunc(ShapePrimitive s)
+        private static Func<Vector2,float> BuildSdfFunc(ShapePrimitive s) => BuildNaturalSdfFunc(s,0,null);
+        private static Func<Vector2, float> BuildNaturalSdfFunc(ShapePrimitive s,float natural,string id)
         {
-            var unrotated = BuildUnrotatedSdfFunc(s);
+            var unrotated = BuildUnrotatedSdfFunc(s,natural,id);
             if (unrotated == null || s.rot == 0) return unrotated;
             var center = s.GetCenter();
-            if ((s.prim == "tri" || s.prim == "poly") && s.verts != null)
+            if ((s.prim == "tri" || s.prim == "poly" || s.prim == "path") && s.verts != null)
             {
                 float x = 0, z = 0;
                 foreach (var point in s.verts) { x += point[0]; z += point[1]; }
@@ -427,7 +481,7 @@ namespace MapGenAI.MapGen
             };
         }
 
-        private static Func<Vector2, float> BuildUnrotatedSdfFunc(ShapePrimitive s)
+        private static Func<Vector2, float> BuildUnrotatedSdfFunc(ShapePrimitive s,float natural=0,string id=null)
         {
             switch (s.prim)
             {
@@ -449,6 +503,10 @@ namespace MapGenAI.MapGen
                     var pv = s.GetVerts();
                     if (pv == null || pv.Length < 3) return null;
                     return p => SdfPolygon(p, pv);
+
+                case "path":
+                    var path=new LandscapePath(s.GetVerts(),s.w,natural,id);
+                    return path.Sample;
 
                 case "star":
                     return p => SdfStar(p, s.GetCenter(), s.r, s.r2 > 0f ? s.r2 : s.r * 0.4f, s.n > 0 ? s.n : 5);

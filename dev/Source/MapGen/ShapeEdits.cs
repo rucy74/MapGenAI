@@ -19,7 +19,7 @@ namespace MapGenAI.MapGen
     public static class ShapeEdits
     {
         public const int MaxShapes = 32;
-        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout", "details" };
+        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout", "details", "anchor", "placement" };
 
         public static void AssignIds(List<ElevationShape> shapes)
         {
@@ -76,7 +76,7 @@ namespace MapGenAI.MapGen
                     ValidatePair(pair);
                     value = PairText(pair[0], pair[1]);
                 }
-                if (value == null && name != "fill" && !(name=="opening" && shape.type=="landform")) throw new FormatException("Invalid terrain field: " + name);
+                if (value == null && name != "fill" && name!="anchor" && name!="placement" && !(name=="opening" && shape.type=="landform")) throw new FormatException("Invalid terrain field: " + name);
                 typeof(ElevationShape).GetField(name).SetValue(shape, value);
             }
             if (shape.type == "composite")
@@ -175,12 +175,13 @@ namespace MapGenAI.MapGen
             if (shape.type == "bump" || shape.type == "ring" || shape.type == "landform") return ElevationShape.ParsePosition(shape.position);
             if (shape.type == "passage") return new Vector2(shape.points.Average(p=>p[0]),shape.points.Average(p=>p[1]));
             if (shape.type != "composite") throw new FormatException("Only bump, ring and composite terrain can be moved by position");
-            var points = shape.compositeShapes.SelectMany(p => p.prim == "tri" || p.prim == "poly" ? p.verts : new[] { p.center ?? new[] { .5f, .5f } }).ToList();
+            var points = shape.compositeShapes.SelectMany(p => p.prim == "tri" || p.prim == "poly" || p.prim == "path" ? p.verts : new[] { p.center ?? new[] { .5f, .5f } }).ToList();
             return new Vector2(points.Average(p => p[0]), points.Average(p => p[1]));
         }
 
         static void Move(ElevationShape shape, ShapeEdit edit, List<ElevationShape> shapes)
         {
+            if(shape.anchor!=null)throw new FormatException("This area follows its anchor; change direction/placement, or remove both anchor and placement before an absolute move");
             Vector2 old = Center(shape), next;
             if (edit.position != null) next = new Vector2(edit.position[0], edit.position[1]);
             else
@@ -207,7 +208,7 @@ namespace MapGenAI.MapGen
             {
                 var delta = next - old;
                 foreach (var part in shape.compositeShapes)
-                    if (part.prim == "tri" || part.prim == "poly")
+                    if (part.prim == "tri" || part.prim == "poly" || part.prim == "path")
                         foreach (var vertex in part.verts) { vertex[0] += delta.x; vertex[1] += delta.y; }
                     else { var center = part.GetCenter() + delta; part.center = new[] { center.x, center.y }; }
             }

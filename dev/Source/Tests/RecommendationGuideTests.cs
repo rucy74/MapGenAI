@@ -8,12 +8,12 @@ static class RecommendationGuideTests
     static void Pick(RecommendationGuide guide,string value) { Equal(true,guide.Select(value)); Equal(true,guide.Next()); }
     public static void RunAll()
     {
-        Check("Guide asks 5 or 6 local questions and never submits without review",()=>
+        Check("Guide includes spatial preferences and never submits without review",()=>
         {
             var guide=new RecommendationGuide(true);
-            Equal(5,guide.Questions.Count); Equal(false,guide.Next());
+            Equal(6,guide.Questions.Count); Equal(false,guide.Next());
             Equal(false,guide.Submit(out _)); Equal(false,guide.Select("1"));
-            Pick(guide,"space");Pick(guide,"open");Pick(guide,"existing");Pick(guide,"ordinary");Pick(guide,"layout");
+            Pick(guide,"space");Pick(guide,"open");Pick(guide,"existing");Pick(guide,"together");Pick(guide,"ordinary");Pick(guide,"layout");
             Equal(true,guide.Reviewing); Equal(false,guide.Finished);
             Equal(true,guide.Submit(out var request)); Equal(true,RecommendationPlan.IsRequest(request));
             Equal(false,guide.Submit(out _)); Equal(false,guide.Next());
@@ -25,9 +25,9 @@ static class RecommendationGuideTests
             foreach(var unusual in new[]{"ordinary","mixed","distinct","any"})
             {
                 var guide=new RecommendationGuide(false);
-                Pick(guide,"any");Pick(guide,mountain);Pick(guide,water);Pick(guide,unusual);
+                Pick(guide,"any");Pick(guide,mountain);Pick(guide,water);Pick(guide,"any");Pick(guide,unusual);
                 bool branch=unusual=="mixed" || unusual=="distinct";
-                Equal(branch?6:5,guide.Questions.Count);
+                Equal(branch?7:6,guide.Questions.Count);
                 Equal(branch?"focus":"features",guide.Current.Id);
                 if(branch)
                 {
@@ -42,7 +42,7 @@ static class RecommendationGuideTests
         Check("Changed earlier answer discards incompatible later answers",()=>
         {
             var guide=new RecommendationGuide(false);
-            Pick(guide,"scenery");Pick(guide,"sheltered");Pick(guide,"lakeside");Pick(guide,"distinct");Pick(guide,"mountain");Pick(guide,"include");
+            Pick(guide,"scenery");Pick(guide,"sheltered");Pick(guide,"lakeside");Pick(guide,"linked");Pick(guide,"distinct");Pick(guide,"mountain");Pick(guide,"include");
             Equal(true,guide.Summary().Contains("Spaces shaped by mountains"));
             guide.Back();guide.Back();guide.Back();
             Equal("distinctive",guide.Current.Id);
@@ -53,7 +53,7 @@ static class RecommendationGuideTests
         Check("Back without changing preserves answers and final feature choice preserves scenery focus",()=>
         {
             var guide=new RecommendationGuide(false);
-            Pick(guide,"space");Pick(guide,"edge");Pick(guide,"small");Pick(guide,"mixed");Pick(guide,"water");Pick(guide,"include");
+            Pick(guide,"space");Pick(guide,"edge");Pick(guide,"small");Pick(guide,"flowing");Pick(guide,"mixed");Pick(guide,"water");Pick(guide,"include");
             var summary=guide.Summary();
             guide.Back();guide.Back();
             Equal("focus",guide.Current.Id);Equal("water",guide.Selected);
@@ -75,7 +75,7 @@ static class RecommendationGuideTests
             {
                 var guide=new RecommendationGuide(ko);
                 while(!guide.Reviewing) guide.Skip();
-                Equal(5,guide.Questions.Count);Equal(true,guide.Submit(out var request));
+                Equal(6,guide.Questions.Count);Equal(true,guide.Submit(out var request));
                 Equal(true,request.Contains(ko?"지정한 취향이 없습니다":"No preferences selected"));
                 Equal(true,RecommendationPlan.IsRequest(request));
                 Equal(false,RecommendationPlan.RequestsDirectEdit(request));
@@ -104,9 +104,10 @@ static class RecommendationGuideTests
         {
             var random=new Random(3205);
             foreach(bool ko in new[]{true,false})
+            foreach(bool authored in new[]{true,false})
             for(int trial=0;trial<50;trial++)
             {
-                var guide=new RecommendationGuide(ko);
+                var guide=new RecommendationGuide(ko,authored);
                 for(int i=0;i<80;i++)
                 {
                     switch(random.Next(5))
@@ -125,6 +126,88 @@ static class RecommendationGuideTests
                 }
                 guide.Review();Equal(true,guide.Submit(out var request));Equal(true,RecommendationPlan.IsRequest(request));
             }
+        });
+        Check("Living-space answers reach the submitted request without relaxing mountain or water preferences",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            foreach(var space in new[]{"together","linked","flowing"})
+            {
+                var guide=new RecommendationGuide(ko);
+                Pick(guide,"space");Pick(guide,"open");Pick(guide,"existing");
+                var selected=guide.Current.Choices.Single(c=>c.Id==space);
+                Pick(guide,space);guide.Review();Equal(true,guide.Submit(out var request));
+                Equal(true,request.Contains(selected.Label));Equal(true,request.Contains(selected.Detail));
+                Equal(true,request.Contains(ko?"탁 트인 생활 공간":"Open living area"));
+                Equal(true,request.Contains(ko?"지금 있는 물만":"Keep existing water only"));
+                Equal(false,guide.Select("any"));
+            }
+        });
+        Check("Only an explicit replacement answer authorizes new authored layouts",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            {
+                var fresh=new RecommendationGuide(ko);
+                Equal("priority",fresh.Current.Id);Equal(false,fresh.Select("replace"));
+                foreach(var answer in new[]{"refine","replace","any"})
+                {
+                    var guide=new RecommendationGuide(ko,true);
+                    Equal("scope",guide.Current.Id);Pick(guide,answer);guide.Review();
+                    Equal(true,guide.Submit(out var request));
+                    Equal(answer=="replace",request.Contains("replace_shapes:true"));
+                    Equal(true,RecommendationPlan.IsRequest(request));
+                    Equal(false,RecommendationPlan.RequestsDirectEdit(request));
+                }
+            }
+        });
+        Check("Changing layout scope clears later preferences rather than retaining stale authorization",()=>
+        {
+            var guide=new RecommendationGuide(false,true);
+            Pick(guide,"replace");Pick(guide,"scenery");guide.Review();guide.Back();guide.Back();guide.Back();
+            Equal("scope",guide.Current.Id);Pick(guide,"refine");Equal(null,guide.Selected);
+            guide.Review();Equal(true,guide.Submit(out var request));
+            Equal(false,request.Contains("replace_shapes:true"));
+            Equal(false,request.Contains("Scenery"));
+        });
+        Check("New recommendation briefs vary independent composition axes and remain reproducible",()=>
+        {
+            var compositions=new System.Collections.Generic.HashSet<string>();
+            var positions=new System.Collections.Generic.HashSet<string>();
+            var concreteCompositions=new System.Collections.Generic.HashSet<string>();
+            foreach(int seed in Enumerable.Range(-20,60).Concat(new[]{int.MinValue,int.MaxValue}))
+            {
+                var directions=RecommendationVariation.Directions(seed);
+                Equal(3,directions.Count);
+                Equal(3,directions.Select(d=>d.Mass).Distinct().Count());
+                Equal(3,directions.Select(d=>d.Space).Distinct().Count());
+                Equal(3,directions.Select(d=>d.Relation).Distinct().Count());
+                Equal(3,directions.Select(d=>d.Sector).Distinct().Count());
+                Equal(3,directions.Select(d=>d.OccupiedPercent).Distinct().Count());
+                Equal(3,directions.Select(d=>d.OpenPercent).Distinct().Count());
+                Equal(3,directions.Select(d=>d.Variant).Distinct().Count());
+                string prompt=RecommendationVariation.Build(seed);
+                Equal(prompt,RecommendationVariation.Build(seed));
+                foreach(var direction in directions)
+                {
+                    Equal(true,direction.Variant>=0 && direction.Variant<=999999);
+                    Equal(true,prompt.Contains(direction.Mass) && prompt.Contains(direction.Space) && prompt.Contains(direction.Relation));
+                    Equal(true,prompt.Contains("variant hint: "+direction.Variant+"."));
+                    Equal(true,direction.CenterXPercent>=17 && direction.CenterXPercent<=83);
+                    Equal(true,direction.CenterZPercent>=17 && direction.CenterZPercent<=83);
+                    Equal(true,direction.OccupiedPercent>=10 && direction.OccupiedPercent<=23);
+                    Equal(true,direction.OpenPercent>=45 && direction.OpenPercent<=65);
+                    string coordinates="["+(direction.CenterXPercent/100.0).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture)+","+(direction.CenterZPercent/100.0).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture)+"]";
+                    Equal(true,prompt.Contains("in the "+direction.Sector+" around "+coordinates));
+                    Equal(true,prompt.Contains("occupy about "+direction.OccupiedPercent+"%"));
+                    Equal(true,prompt.Contains("at least "+direction.OpenPercent+"%"));
+                    compositions.Add(direction.Mass+"|"+direction.Space+"|"+direction.Relation);
+                    positions.Add(direction.Sector);
+                    concreteCompositions.Add(direction.Sector+"|"+direction.Mass+"|"+direction.OccupiedPercent);
+                }
+            }
+            // A fixed menu or one coupled axis cannot pass this across these fixed seeds.
+            Equal(true,compositions.Count>40);
+            Equal(8,positions.Count);
+            Equal(true,concreteCompositions.Count>65);
         });
     }
 }

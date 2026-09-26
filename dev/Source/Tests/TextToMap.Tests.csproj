@@ -19,6 +19,7 @@
     <None Include="../../../docs/analysis/2026-09-19-compound-plan/provider-baseline/compound-01-response.json" Link="compound-fixtures/compound-01-response.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-15-region-coverage/line-0058-response.json" Link="coverage-fixtures/line-0058-response.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../../../docs/analysis/2026-09-15-region-coverage/line-0072-response.json" Link="coverage-fixtures/line-0072-response.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../../docs/analysis/2026-09-26-landscape-relations/provider-final/landscape-06-followup-response.json" Link="landscape-fixtures/failed-move-response.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,12 +41,15 @@
     <Compile Include="../MapGen/SpatialRelation.cs" Link="SpatialRelation.cs" />
     <Compile Include="../MapGen/MapGenAIWorldComponent.cs" Link="MapGenAIWorldComponent.cs" />
     <Compile Include="../MapGen/SdfComposite.cs" Link="SdfComposite.cs" />
+    <Compile Include="../MapGen/LandscapePath.cs" Link="LandscapePath.cs" />
+    <Compile Include="../MapGen/LandscapePlacement.cs" Link="LandscapePlacement.cs" />
     <Compile Include="../MapGen/ContourWarp.cs" Link="ContourWarp.cs" />
     <Compile Include="../MapGen/NaturalLandformGeometry.cs" Link="NaturalLandformGeometry.cs" />
     <Compile Include="../MapGen/OrganicLandformGeometry.cs" Link="OrganicLandformGeometry.cs" />
     <Compile Include="../MapGen/LandscapeBlendField.cs" Link="LandscapeBlendField.cs" />
     <Compile Include="../MapGen/NaturalLandformGeneration.cs" Link="NaturalLandformGeneration.cs" />
     <Compile Include="../../../tools/fixtures/NaturalShapeFixtures.cs" Link="NaturalShapeFixtures.cs" />
+    <Compile Include="../../../tools/fixtures/LandscapeCompositionFixtures.cs" Link="LandscapeCompositionFixtures.cs" />
     <Compile Include="../UI/SimpleJson.cs" Link="SimpleJson.cs" />
     <Compile Include="../MapGen/MapParameterParser.cs" Link="MapParameterParser.cs" />
     <Compile Include="../MapGen/MapStateEditor.cs" Link="MapStateEditor.cs" />

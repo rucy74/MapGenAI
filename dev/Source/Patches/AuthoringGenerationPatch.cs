@@ -26,7 +26,7 @@ namespace MapGenAI.Patches
                 new GenStepWithParams(new GenStepDef {defName="MapGenAI_PositionedStructures",order=800,genStep=new PositionedStructureStep()},default)
             }).ToList();
             if(state.localRoads.Count>0)genStepDefs=genStepDefs.Concat(new[]{new GenStepWithParams(new GenStepDef {defName="MapGenAI_LocalRoads",order=410,genStep=new LocalRoadStep()},default)}).ToList();
-            if(state.elevationShapes.Any(s=>s.type=="landform" && s.details=="natural"))
+            if(state.elevationShapes.Any(s=>(s.type=="landform" || s.type=="composite") && s.details=="natural"))
                 genStepDefs=genStepDefs.Concat(new[]{new GenStepWithParams(new GenStepDef {defName="MapGenAI_LandscapeBlend",order=420,genStep=new LandscapeBlendStep()},default)}).ToList();
         }
         static void Postfix(Map map)

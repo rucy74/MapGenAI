@@ -56,16 +56,7 @@ namespace MapGenAI.Patches
             if (shapes.Count == 0 && Mathf.Abs(fertOffset) < 0.01f)
             {GenerationContext.CaptureImageElevation(map,elevGrid);return;}
 
-            foreach (var shape in shapes)
-            {
-                if (shape.fill != "water")
-                    ApplyShape(shape, map, elevGrid);
-            }
-            foreach (var shape in shapes)
-            {
-                if (shape.fill == "water")
-                    ApplyShape(shape, map, elevGrid);
-            }
+            foreach (var shape in LandscapePlacement.Order(shapes))ApplyShape(shape, map, elevGrid);
             PassageGeneration.Apply(map,elevGrid);
 
             // 3. Fertility 오프셋 적용 (기름진 토양 증감)
@@ -505,7 +496,7 @@ namespace MapGenAI.Patches
                 Log.Warning("[MapGenAI] composite shape에 shapes/compose 데이터 없음");
                 return;
             }
-            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id, shape.fill);
+            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id, shape.fill,shape.anchor,shape.placement,shape.direction,shape.variant);
         }
     }
 

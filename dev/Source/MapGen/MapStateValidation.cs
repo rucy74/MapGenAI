@@ -27,6 +27,7 @@ namespace MapGenAI.MapGen
                 throw new FormatException("Invalid suppressed feature categories");
             foreach (var shape in state.elevationShapes) ShapeValidation.Validate(shape);
             RegionCoverage.ValidateReferences(state);
+            LandscapePlacement.ValidateReferences(state);
             StructurePlans.Validate(state);
             RoadPlans.Validate(state);
             var ids = new System.Collections.Generic.HashSet<string>();

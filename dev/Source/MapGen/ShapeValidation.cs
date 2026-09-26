@@ -16,6 +16,13 @@ namespace MapGenAI.MapGen
         {
             if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
             if (shape.id != null) Id(shape.id);
+            if(shape.anchor!=null || shape.placement!=null)
+            {
+                if(shape.type!="composite")throw new FormatException("anchor/placement require composite geometry");
+                Id(shape.anchor);
+                if(shape.placement!="inside" && shape.placement!="edge" && shape.placement!="beside")throw new FormatException("placement must be inside, edge or beside");
+            }
+            if(shape.details!=null && shape.details!="none" && shape.details!="natural")throw new FormatException("details must be none or natural");
             if(shape.type=="landform")
             {
                 if(shape.landform!="open_basin" && shape.landform!="winding_valley" && shape.landform!="foothills")throw new FormatException("landform must be open_basin, winding_valley or foothills");
@@ -36,7 +43,8 @@ namespace MapGenAI.MapGen
                     throw new FormatException("landform uses landform/layout/details/variant/position/size/direction/gap/opening; use region_fill for floor materials");
                 return;
             }
-            if(shape.landform!=null || shape.variant!=null || shape.opening!=null || shape.layout!=null || shape.details!=null)throw new FormatException("landform/layout/details/variant/opening require landform geometry");
+            if(shape.landform!=null || (shape.variant!=null && shape.type!="composite") || shape.opening!=null || shape.layout!=null || (shape.details!=null && shape.type!="composite"))throw new FormatException("landform/layout/opening require landform geometry; details/variant also support composite");
+            if(shape.variant!=null && (!int.TryParse(shape.variant,NumberStyles.None,CultureInfo.InvariantCulture,out var compositeVariant) || compositeVariant<0 || compositeVariant>999999))throw new FormatException("variant must be an integer from 0 to 999999");
             Fill(shape.fill);
             if(shape.type=="passage")
             {
@@ -104,6 +112,13 @@ namespace MapGenAI.MapGen
                         break;
                     case "rect": case "ellipse":
                         Range(part.w, .001f, 2, "width"); Range(part.h, .001f, 2, "height"); break;
+                    case "path":
+                        Range(part.w,.008f,.7f,"path width");
+                        if(part.verts==null || part.verts.Length<2 || part.verts.Length>12)throw new FormatException("path requires 2..12 ordered control points");
+                        foreach(var point in part.verts)ShapeEdits.ValidatePair(point);
+                        for(int i=1;i<part.verts.Length;i++)if(part.verts[i].SequenceEqual(part.verts[i-1]))throw new FormatException("path has duplicate adjacent points");
+                        cost[part.id]=(part.verts.Length-1)*8;
+                        break;
                     case "heart": Range(part.size, 0, 1, "heart size"); break;
                     case "tri": case "poly": ValidatePolygon(part.verts, part.prim == "tri"); break;
                     default: throw new FormatException("Unknown primitive: " + part.prim);

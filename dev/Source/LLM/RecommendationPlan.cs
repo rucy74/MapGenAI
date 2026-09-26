@@ -66,20 +66,22 @@ Recommendations and selectable alternatives:
 - Format: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}},{""params"":{...}}]}.
 - Check the executable schema for EVERY option: elevation shape direction uses left/right/top/bottom/top_left/top_right/bottom_left/bottom_right or degrees, not north/south/east/west (those are coast_direction values). Buildings/ruins use structure_ops with structure:{kind:...}; never put them in shape_ops or elevation_shapes. Do not insert descriptive prose fields into params or shape data.
 - For an open-ended first recommendation (e.g. '추천해줘' / 'Recommend a map'), design visibly different, habitable LANDSCAPES from this tile's biome, hilliness, existing features and world water connections. Start from the selected landscape, not the worked examples elsewhere in this prompt. There is NO default ring/side-ridge/rectangular-canyon menu. Do not simply permute that trio, rotate a template, change IDs or vary resource bonuses. Vary the actual land/water balance, placement and usable settlement space. Native features are optional accents, not unrelated bonus bundles.
+- Plan the relationships before choosing shapes: where is the generous living space, which features border it, how does it connect to the map edge, and how does existing water participate? Compose reusable masses, open ground and water along these relationships. A named landform is optional, not the entire menu. Different candidates should differ in at least two meaningful aspects such as mass distribution, the shape/location of usable ground, or its relationship to water. Changing only a variant, rotation, outline noise or feature bonus is insufficient. Tight explicit preferences take priority over this variety goal.
+- Use ordinary open landscapes too: a low-hill or flat tile does not require a basin, valley or mountain backdrop in every candidate. Retain native ground and small terrain details, changing only what gives each proposal its composition. Terrain need not fill the whole preview to be noticeable. Never paint broad Soil disks to represent available living space; open ground and its native surface are separate decisions.
 - An unqualified recommendation is for an ordinary playable settlement, not an excavation challenge. Keep a broad connected outdoor settlement area and access to the rest of the map. On flat/low-hill tiles, retain predominantly open land with localized additions; do not manufacture a giant mountain enclosure or fill most of the map with rock. On mountainous tiles, work with the mountain setting while retaining a generous valley or settlement pocket. Respect a dry biome instead of automatically adding a lake to every option, and use actual river/shore context without inventing world connections. Do not flatten, repaint or replace the whole original map just to guarantee buildability.
-- Treat visual composition as a default responsibility even for a short request. Choose one readable main landform, balance its mass with a generous connected settlement area, and use at most a few subordinate accents when they help the concept. Favor unequal clusters and open space over evenly spaced repetitions, a central resource disk or several competing focal points. A new natural basin/valley/foothill uses the organic landform layout; its local generator supplies detail, so do not surround it with redundant bump/soil shapes. Small tile-appropriate changes can be preferable to any whole-map landform. Beauty requests do not authorize bonus bundles, biome changes or erasing existing features.
+- Treat visual composition as a default responsibility even for a short request. Give the landscape one readable organizing idea, balance any main mass with generous connected settlement space, and use only a few subordinate accents. Compose the common path/area primitives and anchor relationships described in the natural-composition schema; do not reduce every natural request to the three named landform presets. Existing landform geometry remains valid when it fits or is already authored. Favor unequal clusters and open space over evenly spaced repetitions, central resource disks or several competing focal points. Small tile-appropriate changes can be preferable to a whole-map landform. Beauty requests do not authorize bonus bundles, biome changes or erasing existing features.
 - Recommend surface-map features suited to the actual terrain. Do not ADD UndergroundCave: it is an underground-map generation worker, not a decorative surface cave, and can exhaust its generation attempts on surface terrain. Preserve existing features; ordinary Caves or a requested cave edit still follow their own terrain requirements. A catalog entry alone does not establish that its effect fits an ordinary settlement recommendation.
 - Choose organic layouts unless the user asks for geometric ones: asymmetric outlines, offset features and broad transitions. Use ridge/noise or irregular composites as appropriate. Merely setting edge_roughness on a huge rectangle or concentric circles does not make their overall layout natural. Avoid complete uniform rings and large solid rectangular mountain slabs in generic recommendations. Closed fortresses, thin enclosed corridors, nearly all-rock maps and challenge terrain belong to explicit requests; preserve support for those requests using the existing recipes. For open valleys leave substantial ground on both sides of a route; a 10-cell slit through a giant block is not a general-purpose settlement recommendation. Do not promise GL's unsupported sea islands, fjords or thick-roof caves.
 - If the user has already authored terrain/structures, an unqualified recommendation means three complementary additions or small edits to THAT map. Keep all existing shapes, passages, structures, materials, coverage, settings and native features unless the user asks to change them. Prefer additions that do not overlap existing authored areas. Do not silently replace a basin, repaint its interior or add another whole-map mountain formation. Only propose replacement layouts when explicitly requested.
 - A scoped request ('recommend soil changes', '온천에 어울리는 특징 추천') stays within that scope; the three-landscape rule does not override it. A request for more/different suggestions should avoid the pending alternatives when present in the conversation. Distinguish choices by meaningful geometry/location or the requested effect, not internal IDs, decorative titles, or tiny numerical variations. No candidate is applied until selected.
 - On a fresh map, compose the terrain and a few compatible accents together in each option. A small off-center shallow pond can complement a temperate basin or grassland plain when there is no existing water; a dry option remains valid. Use existing water first, preserve the biome's ground, and leave a broad connected settlement area. Do not repeat a mountain-only shape in all candidates and defer every supporting element to another user request.
 - A request for nicer/different recommendations is not permission for a global fertility, vegetation, animal, resource, ruin or hill-density boost. Keep those sliders unchanged unless requested. Preserve native soil too: do not suggest repainting a basin fraction with rich soil unless the user asks for farming/fertility/soil changes. On an authored map propose visibly distinct, localized changes that coexist with the current plan; do not offer the same map with only slider changes or progressively extreme roughness. If the user explicitly wants a completely different layout, recommend replacements with replace_shapes:true; rejection of pending suggestions alone never deletes the applied map.
-- Check each option's spatial composition: for a pool with a wider soil surround, add the soil FIRST and the water LAST, or subtract a water-sized hole from the soil. Never cover a proposed lake with a later solid soil disk. For a dry basin keep the hidden floor smooth beneath the irregular mountain ring. For existing maps read the actual extents: 'outside the basin' must be beyond its OUTER mountain boundary, not in the mountain wall. Only cut a new opening when proposing a clearly described additional passage. Keep suggestions small enough to coexist with the existing layout.
+- Check each option's spatial composition: for a requested pool with a wider soil surround, add the soil FIRST and the water LAST, or subtract a water-sized hole from the soil. Never cover a proposed lake with a later solid soil disk. Leave fill absent on open ground to preserve biome soil. Reuse named areas with anchor/placement for related features instead of guessing coordinates from a feature's center; the entire proposed footprint must fit. For existing maps read actual extents: 'outside' means beyond the source boundary, not inside its mountain wall. Only cut an extra opening when that is part of the suggestion, and keep additions small enough to coexist with the current layout.
 - The application validates every option before displaying it and applies the stored command when the user selects it. Do not put numbered concepts, alternative configurations, or promises in action:ask. ask is only for factual explanations or missing user information, with no executable alternatives. A recommendation request must not immediately generate.
 - Do not use titles/descriptions/messages to promise effects absent from params. The UI displays the actual planned changes. A dry run checks configuration compatibility; final building placement is still checked during generation.
 - Features individually available on this tile can conflict with EACH OTHER. Check their categories and overrides together, and preserve existing features. Never propose incompatible pairs such as HotSprings+Pond. Custom terrain does not require adding a native lake feature.
 - For an oasis-LIKE landscape when native Oasis is unavailable, preserve the biome and current features. After the user accepts an oasis-like substitute, compose a modest irregular pool with a surrounding localized fertile-soil area, optionally sand. Water alone is not an oasis. Prefer one custom water feature rather than Pond plus a second custom pool. Use separate top-level IDs for the surrounding soil and water, soil first then water, small explicit falloff f:0.01..0.015, and edge_roughness:medium. Do not claim specific plants or change global fertility/vegetation unless requested. Exact circle requests remain exact.
-- Oasis-like example geometry: surrounding SoilRich circle r:0.16 and WaterShallow circle r:0.10 at [0.5,0.5], each a composite with edge_roughness:medium, compose fill and e:0.05 (soil) / e:0 (water), f:0.01. Adapt size/location to the request and existing terrain. Use loaded material names only.
+- An oasis-like substitute should follow existing open ground and fit the requested scale. Use unequal, related outlines rather than mandatory concentric circles at the map center; keep any fertile-soil surround localized and water visible. Use loaded material names only.
 ";
         public static bool IsRequest(string text)=>!Regex.IsMatch(text??"",@"추천\s*(말고|하지\s*마|필요\s*없)|\b(don't|do not|no)\s+(recommend\w*|suggest\w*|options)\b",RegexOptions.IgnoreCase)
             && Regex.IsMatch(text??"",@"추천|\b(recommend\w*|suggest\w*|ideas|options)\b",RegexOptions.IgnoreCase);
@@ -120,6 +122,94 @@ Recommendations and selectable alternatives:
                 plans.Add(new RecommendationPlan(SimpleJson.Serialize(envelope),summary));
             }
             return plans; // Nothing is published when any option failed.
+        }
+    }
+
+    // Fresh design briefs are sampled only when requesting NEW candidates. This does not alter
+    // map generation's RNG or stored geometry. The caller retains the same string for retries.
+    public static class RecommendationVariation
+    {
+        public sealed class Direction
+        {
+            public readonly string Mass, Space, Relation, Sector;
+            public readonly int Variant, CenterXPercent, CenterZPercent, OccupiedPercent, OpenPercent;
+            internal Direction(string mass,string space,string relation,string sector,int x,int z,int occupied,int open,int variant)
+            { Mass=mass;Space=space;Relation=relation;Sector=sector;CenterXPercent=x;CenterZPercent=z;OccupiedPercent=occupied;OpenPercent=open;Variant=variant; }
+        }
+        private static readonly string[] Masses={
+            "one curved OPEN boundary with unequal ends; do not close it into a ring",
+            "TWO separated unequal clusters, one roughly twice the other's area, with broad usable ground between them",
+            "THREE small unequal groups with generous gaps; do not merge them into a single side wall",
+            "one branching mass with TWO unequal arms and broad open ground on both sides; no enclosure"};
+        private static readonly string[] Spaces={
+            "one broad continuous living area with irregular edges",
+            "an off-center broad living area opening toward the rest of the map",
+            "a broad gently bending living area, never a narrow slit",
+            "unequal usable clearings connected by generous open ground"};
+        private static readonly string[] Relations={
+            "place supporting scenery along a shared edge of the living space",
+            "put the visual focus near a meeting of features while keeping the center usable",
+            "let large and small features taper into a quieter open area",
+            "use an extended uneven boundary as the organizing feature, with a quiet opposite side"};
+        private static readonly string[] Sectors={"north","northeast","east","southeast","south","southwest","west","northwest"};
+        private static readonly int[] SectorX={50,73,79,73,50,27,21,27}, SectorZ={79,73,50,27,21,27,50,73};
+
+        // Own tiny deterministic stream: reproducible tests and no effect on RimWorld/Unity RNG.
+        private sealed class Stream
+        {
+            private uint state;
+            public Stream(int seed) { state=unchecked((uint)seed)^0x9e3779b9u;if(state==0)state=1; }
+            public int Next(int count) { state^=state<<13;state^=state>>17;state^=state<<5;return (int)(state%(uint)count); }
+            public T[] Shuffle<T>(T[] source)
+            {
+                var result=(T[])source.Clone();
+                for(int i=result.Length-1;i>0;i--){int j=Next(i+1);var item=result[i];result[i]=result[j];result[j]=item;}
+                return result;
+            }
+        }
+        public static IReadOnlyList<Direction> Directions(int seed)
+        {
+            var random=new Stream(seed);
+            var masses=random.Shuffle(Masses);var spaces=random.Shuffle(Spaces);var relations=random.Shuffle(Relations);
+            var sectors=random.Shuffle(new[]{0,1,2,3,4,5,6,7});
+            var occupied=random.Shuffle(new[]{10,16,23});var open=random.Shuffle(new[]{45,55,65});
+            var result=new List<Direction>();var variants=new HashSet<int>();
+            for(int i=0;i<3;i++)
+            {
+                int variant;do{variant=random.Next(1000000);}while(!variants.Add(variant));
+                int sector=sectors[i];
+                result.Add(new Direction(masses[i],spaces[i],relations[i],Sectors[sector],SectorX[sector]+random.Next(9)-4,SectorZ[sector]+random.Next(9)-4,occupied[i],open[i],variant));
+            }
+            return result;
+        }
+        public static string NextInstruction() => Build(Guid.NewGuid().GetHashCode());
+        public static string Build(int seed)
+        {
+            var text=new System.Text.StringBuilder(@"
+FRESH RECOMMENDATION DESIGN BRIEF (not additional user requirements):
+The following combine independently sampled geometry targets, NOT predefined terrain recipes.
+User preferences, current tile prerequisites, existing water and authored terrain take priority over every axis.
+On a fresh unconstrained layout, express these targets in actual executable geometry. Do not substitute a familiar default trio or satisfy the targets with new IDs/variants alone.
+Honor explicit directions, no-mountain/no-water preferences and native shore/river boundaries FIRST; adapt only the conflicting targets.
+Sector coordinates locate the main proposed visual mass, not the settlement or a mandatory mountain. Cluster count and open connections describe topology, not just edge noise.
+Occupancy is an approximate share of the WHOLE MAP for new dominant land/water masses combined. On flat tiles use sparse additions; on mountain tiles work around native mountains.
+The open-ground target is an aim for connected usable land, not permission to erase native terrain or paint a flat soil disk. Native ground can already satisfy it without any floor shape.
+For an existing authored map or a scoped request, apply the axes only to permitted local additions/edits.
+Do not create extra mountains/water, replace existing layouts, repaint ground or add bonuses merely to satisfy an axis.
+Use only supported executable fields. A seed below is a variant hint for NEW naturally seeded shapes only;
+preserve all existing variants on edits and never insert these prose axes as schema fields.
+Keep the actual map seed fixed. Repeated recommendations should explore different compositions, not just new edge noise.
+");
+            var directions=Directions(seed);
+            for(int i=0;i<directions.Count;i++)
+            {
+                var direction=directions[i];
+                string x=(direction.CenterXPercent/100.0).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture);
+                string z=(direction.CenterZPercent/100.0).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture);
+                text.AppendLine("Option "+(i+1)+" geometry targets: main visual mass in the "+direction.Sector+" around ["+x+","+z+"]; "+direction.Mass+". New dominant masses occupy about "+direction.OccupiedPercent+"% of the map; aim for at least "+direction.OpenPercent+"% connected usable ground where the tile allows it. Space: "+direction.Space+". Relationship: "+direction.Relation+". New-shape variant hint: "+direction.Variant+".");
+            }
+            text.AppendLine("Honor the requested option count; these directions are inspiration, not a requirement to return all three. Keep this brief internal and show executable candidates through action:recommend.");
+            return text.ToString();
         }
     }
 }

@@ -1,0 +1,1 @@
+{"action":"generate","description":"호수를 평지 안쪽 가장자리로 이동하여 연결","params":{"shape_ops":[{"op":"update","id":"natural_lake","changes":{"anchor":"settlement_clearing","placement":"edge","direction":"top","shapes":[{"id":"lake_body","prim":"ellipse","center":[0.5,0.5],"w":0.2,"h":0.12}],"compose":[{"op":"add","s":"lake_body","e":0.05,"f":0.015,"fill":"WaterShallow"}]}}]}}

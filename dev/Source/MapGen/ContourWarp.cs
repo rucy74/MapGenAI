@@ -50,7 +50,7 @@ namespace MapGenAI.MapGen
 
         static Vector2 Center(ShapePrimitive part)
         {
-            if ((part.prim != "poly" && part.prim != "tri") || part.verts == null) return part.GetCenter();
+            if ((part.prim != "poly" && part.prim != "tri" && part.prim != "path") || part.verts == null) return part.GetCenter();
             var sum = new Vector2();
             foreach (var p in part.verts) sum += new Vector2(p[0], p[1]);
             return sum / part.verts.Length;
@@ -60,6 +60,7 @@ namespace MapGenAI.MapGen
         {
             switch (part.prim)
             {
+                case "path": return part.w;
                 case "circle": case "star": return 2 * part.r;
                 case "ellipse": case "rect": return Mathf.Max(part.w, part.h);
                 case "heart": return 2 * (part.size > 0 ? part.size : .3f);

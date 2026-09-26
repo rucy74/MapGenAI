@@ -218,7 +218,7 @@ elevation_shapes 가이드:
   shapes: 도형 목록. compose: 합치기(union)/빼기(sub) 연산 체인 → 최종 형태.
   e>=0.1 = 언덕 추가, 0<e<0.1 = 기존 높이를 평지로 교체(마른 통로는 fill:soil + e:0.05). 호수는 fill:water를 명시하세요. fill 없는 e<0는 구버전 호수 표기이므로 통로에 사용하지 마세요. 원·별·하트·도넛 등 모양을 명시하면 composite. 모양 없는 일반 호수/언덕은 기존 bump. composite의 edge_roughness는 생략/none=정확, low/medium/high 또는0~1=자연스러운 윤곽.
   좌표계: [x,z] 정규화 0~1. x=0 왼쪽, x=1 오른쪽, z=0 아래, z=1 위. ""오른쪽 아래""=[0.75,0.25], ""왼쪽 위""=[0.25,0.75].
-  도형: circle(center,r), rect(center,w,h), tri(verts 3개), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
+  도형: circle(center,r), rect(center,w,h), tri(verts 3개), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h), path(verts 2..12개 곡선, w 전체 폭)
   연산: add(단일), union(합치기, k>0이면 매끄럽게), sub(빼기, 구멍)
   예: 별 언덕: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
   예: 하트 호수: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",fill:""water"",e:0}]
@@ -265,7 +265,7 @@ elevation_shapes guide:
   shapes: list of primitives. compose: boolean chain (union/sub) → final shape.
   e>=0.1 adds a hill; 0<e<0.1 sets an absolute flat height (dry passage: fill:soil + e:0.05). Lakes must explicitly use fill:water. Negative e without fill is legacy lake notation, never a dry cut. Explicit circle/star/heart/donut shapes use composite; generic lakes/hills use legacy bump. Composite edge_roughness omitted/none=precise, low/medium/high or0..1=natural outline.
   Coordinates: [x,z] normalized 0~1. x=0 left, x=1 right, z=0 bottom, z=1 top. ""bottom right""=[0.75,0.25], ""top left""=[0.25,0.75].
-  Primitives: circle(center,r), rect(center,w,h), tri(verts x3), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h)
+  Primitives: circle(center,r), rect(center,w,h), tri(verts x3), star(center,r,r2,n), heart(center,size), poly(verts), ellipse(center,w,h), path(verts 2..12 curve controls, w full width)
   Operations: add(single), union(combine, k>0 for smooth), sub(subtract, hole)
   Ex: Star hill: shapes:[{id:""s"",prim:""star"",center:[0.5,0.5],r:0.35,r2:0.15,n:5}], compose:[{op:""add"",s:""s"",e:0.8}]
   Ex: Heart lake: shapes:[{id:""h"",prim:""heart"",center:[0.5,0.45],size:0.3}], compose:[{op:""add"",s:""h"",fill:""water"",e:0}]
@@ -360,7 +360,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var outcome=AuthoringGeneration.Latest(tileId,MapGenParams.CaptureState(tileId));
             if(outcome?.issues.Count>0)currentParams += "\nLast generation failed: " + string.Join("\n",outcome.issues);
 
-            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + PassagePrompt.Rules(isKo) + LandformPrompt.Rules(isKo) + RoadPrompt.Rules(isKo) + RecommendationPlan.Rules;
+            string modExample = ShapeEditPrompt.Rules(isKo) + FeatureEditPrompt.Rules(isKo) + TextRegionPrompt.Rules(isKo) + PassagePrompt.Rules(isKo) + LandformPrompt.Rules(isKo,MapGenParams.ElevationShapes.Any(s=>s.type=="landform")) + RoadPrompt.Rules(isKo) + RecommendationPlan.Rules;
             // Whole-layout examples describe initial generation only.
             if (MapGenParams.ElevationShapes.Count > 0) fewShot = "";
 
@@ -733,7 +733,9 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 return;
             }
             var systemPrompt = BuildSystemPrompt(_openedTileId);
+            if(_recommendationsRequested)systemPrompt+=RecommendationVariation.NextInstruction();
             if(_requestedCandidates!=null)systemPrompt+=RecommendationPlan.PendingInstruction(_requestedCandidates,MapGenParams.CaptureState(_openedTileId));
+            if(_requestedCandidates!=null && !MapGenParams.ElevationShapes.Any(s=>s.type=="landform") && _requestedCandidates.Any(p=>p.Resolve(MapGenParams.CaptureState(_openedTileId)).elevationShapes.Any(s=>s.type=="landform")))systemPrompt+=LandformPrompt.SavedRules(IsKorean());
             var historySnapshot = ConversationMemory.Copy(_llmContext);
             StartChat(clients,historySnapshot,systemPrompt,false);
         }
@@ -861,6 +863,8 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 }
                 else if(action=="revise")
                 {
+                    var wrongTarget=EditIntentGuard.Rejection(_llmContext,response);
+                    if(wrongTarget!=null)throw new FormatException(wrongTarget);
                     if(_explanationOnly || _recommendations==null || !RecommendationsCurrent())throw new FormatException("No current candidate to revise");
                     int number=parsed.GetInt("option");
                     var before=MapGenParams.CaptureState(_openedTileId);
@@ -1019,7 +1023,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 // chat draft, conversation or Undo. Reuse the normal request against the latest state.
                 CancelCandidateRequest();
                 SendText(request);
-            },() => _guide=null);
+            },() => _guide=null,MapGenParams.CaptureState(_openedTileId).elevationShapes.Count>0);
             Find.WindowStack.Add(_guide);
         }
 

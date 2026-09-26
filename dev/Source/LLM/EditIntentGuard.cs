@@ -23,12 +23,15 @@ namespace MapGenAI.LLM
             SimpleJsonObject command;
             try { command = ProviderResponse.Command(response); }
             catch (FormatException) { return null; } // The existing envelope validator owns syntax errors.
-            if (command.GetString("action") != "generate") return null;
+            string action=command.GetString("action");
+            if (action != "generate" && action != "revise") return null;
             var parameters = command.GetObject("params");
             if (parameters == null) return null;
             int user = history.FindLastIndex(m => m?.Role == "user");
             if (user < 0) return null;
             string request = history[user].Content ?? "";
+            if(RelationshipMoveChangesGeometry(request,parameters))return "The user requested a location-only move, but this relationship update also replaces the area's shape, size or material. Nothing was applied. Preserve shapes/compose/fill/variant and update only anchor, placement and direction. If the existing footprint cannot fit, explain the limitation or ask whether resizing is acceptable; never silently shrink or replace it.";
+            if(action!="generate")return null; // Existing road-target guard applies to committed edits only.
             bool explicitRoad = Matches(request, RoadWords);
             if (explicitRoad)
             {
@@ -48,6 +51,16 @@ namespace MapGenAI.LLM
 
         static bool TerseCorrection(string text) => text.Length <= 220 &&
             !Matches(text, OtherWords) && Matches(text, CorrectionWords);
+
+        static bool RelationshipMoveChangesGeometry(string request,SimpleJsonObject parameters)
+        {
+            if(!Matches(request,@"옮겨|옮기|이동|\b(?:move|relocate|reposition)\b"))return false;
+            if(Matches(request,@"줄여|줄이|키워|넓혀|좁혀|작게|크게|모양.*바|추가|만들|\b(?:resize|shrink|enlarge|reshape|smaller|larger|add|create)\b"))return false;
+            var edits=parameters.GetObjectArray("shape_ops");if(edits==null)return false;
+            return edits.Any(e=>e.GetString("op")=="update" && e.GetObject("changes") is SimpleJsonObject c &&
+                (c.ContainsKey("anchor") || c.ContainsKey("placement") || c.ContainsKey("direction")) &&
+                c.Keys.Any(k=>k!="anchor" && k!="placement" && k!="direction"));
+        }
 
         static bool AdditionalTarget(string text)
         {
