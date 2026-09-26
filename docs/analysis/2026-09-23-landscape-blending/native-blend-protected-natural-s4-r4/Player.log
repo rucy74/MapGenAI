@@ -1,0 +1,51 @@
+Mono path[0] = 'C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/Managed'
+Mono config path = 'C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 11
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.081 seconds
+- Finished resetting the current domain, in  0.001 seconds
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.493300 ms
+Command line arguments: -mapgenAIBlendCase=protected -mapgenAIBlendDetails=natural -batchmode -savedatafolder=C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-headless-runtime\landscape-profile-blend-protected-natural-s4-r4 -mapgenAIBlendProbe=C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\docs\analysis\2026-09-23-landscape-blending\native-blend-protected-natural-s4-r4 -logFile C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\docs\analysis\2026-09-23-landscape-blending\native-blend-protected-natural-s4-r4\Player.log -force-d3d11
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-headless-runtime\landscape-profile-blend-protected-natural-s4-r4
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-natural-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-repeat-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s3-r1) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s3-r2) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-none-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-c-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-c-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-d-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-d-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-protected-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-protected-none-s4-r4) is not in valid format.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000002059D861620.dll
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000002059D7A2520.dll
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000002059DF16010.dll

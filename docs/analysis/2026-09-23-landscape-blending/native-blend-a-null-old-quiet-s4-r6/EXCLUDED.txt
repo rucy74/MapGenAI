@@ -1,0 +1,1 @@
+Harness launch raced an unfinished build and copied r5 probe 93c886, which has no QuietStructures support. Excluded from quiet comparisons. Raw launch and logs retained. No product failure claimed.

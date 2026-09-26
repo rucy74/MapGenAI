@@ -1,0 +1,236 @@
+{
+  "ok": false,
+  "before": "docs\\analysis\\2026-09-23-landscape-blending\\native-blend-a-null-old-quiet-s4-r7",
+  "after": "docs\\analysis\\2026-09-23-landscape-blending\\native-blend-a-null-new-quiet-s4-r7",
+  "legacy": true,
+  "checks": [
+    {
+      "ok": true,
+      "name": "Same fixture fixture"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture tile"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture worldSeed"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture mapSize"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture biome"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture hilliness"
+    },
+    {
+      "ok": true,
+      "name": "Same fixture worldLinks"
+    },
+    {
+      "ok": true,
+      "name": "Same controlled input setupRandSeed"
+    },
+    {
+      "ok": true,
+      "name": "Same controlled input ticksAbs"
+    },
+    {
+      "ok": true,
+      "name": "Same controlled input ticksGame"
+    },
+    {
+      "ok": true,
+      "name": "Same controlled input gameStartAbsTick"
+    },
+    {
+      "ok": true,
+      "name": "Same controlled input meanTileTemperature"
+    },
+    {
+      "ok": true,
+      "name": "Same complete authored state excluding details only"
+    },
+    {
+      "ok": true,
+      "name": "native-blend-a-null-old-quiet-s4-r7 native probe passed"
+    },
+    {
+      "ok": true,
+      "name": "native-blend-a-null-old-quiet-s4-r7 no provider attempted"
+    },
+    {
+      "ok": true,
+      "name": "native-blend-a-null-new-quiet-s4-r7 native probe passed"
+    },
+    {
+      "ok": true,
+      "name": "native-blend-a-null-new-quiet-s4-r7 no provider attempted"
+    },
+    {
+      "ok": true,
+      "name": "preview unchanged actual elevation"
+    },
+    {
+      "ok": true,
+      "name": "preview unchanged cave field"
+    },
+    {
+      "ok": true,
+      "name": "preview full terrain coverage"
+    },
+    {
+      "ok": true,
+      "name": "preview special surfaces and water unchanged"
+    },
+    {
+      "ok": true,
+      "name": "preview no ground changes outside authored floor"
+    },
+    {
+      "ok": true,
+      "name": "preview exact full terrain layers"
+    },
+    {
+      "ok": true,
+      "name": "preview old/new null exact plant coordinates, species and growth"
+    },
+    {
+      "ok": true,
+      "name": "full unchanged actual elevation"
+    },
+    {
+      "ok": true,
+      "name": "full unchanged cave field"
+    },
+    {
+      "ok": true,
+      "name": "full full terrain coverage"
+    },
+    {
+      "ok": true,
+      "name": "full special surfaces and water unchanged"
+    },
+    {
+      "ok": true,
+      "name": "full no ground changes outside authored floor"
+    },
+    {
+      "ok": true,
+      "name": "full exact full terrain layers"
+    },
+    {
+      "ok": false,
+      "name": "full old/new null exact plant coordinates, species and growth"
+    },
+    {
+      "ok": false,
+      "name": "Old/new null complete map plants identical after generation scope"
+    },
+    {
+      "ok": true,
+      "name": "Old/new null initial Plants900 coordinates species growth identical"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: water to soil is rejected by production terrain verdict"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: outside-floor soil change is rejected by production terrain verdict"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: permitted inside-floor surface change passes regular comparison"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: the same allowed surface change fails strict legacy equality"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: plant species mutation fails strict plant comparison"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: plant coordinate mutation fails strict plant comparison"
+    },
+    {
+      "ok": true,
+      "name": "Positive control: unchanged plants pass strict comparison"
+    }
+  ],
+  "metrics": {
+    "preview": {
+      "changedGroundCells": 0,
+      "specialSurfaceChanges": [],
+      "outsideChanges": [],
+      "beforePlants": 0,
+      "afterPlants": 0,
+      "sharedPlants": 0,
+      "removedPlants": 0,
+      "addedPlants": 0,
+      "beforeSpecies": {},
+      "afterSpecies": {},
+      "beforeUnexpectedSpecies": 0,
+      "afterUnexpectedSpecies": 0,
+      "beforeBelowNativeFertilityMinimum": 0,
+      "afterBelowNativeFertilityMinimum": 0
+    },
+    "full": {
+      "changedGroundCells": 0,
+      "specialSurfaceChanges": [],
+      "outsideChanges": [],
+      "beforePlants": 22479,
+      "afterPlants": 22493,
+      "sharedPlants": 22179,
+      "removedPlants": 300,
+      "addedPlants": 314,
+      "beforeSpecies": {
+        "Plant_Brambles": 2157,
+        "Plant_TallGrass": 4450,
+        "Plant_Grass": 10969,
+        "Plant_TreeOak": 1068,
+        "Plant_TreePoplar": 1090,
+        "Plant_Reeds": 128,
+        "Plant_Dandelion": 1123,
+        "Plant_Bush": 1267,
+        "Plant_HealrootWild": 100,
+        "Plant_Berry": 110,
+        "Plant_Bulrush": 7,
+        "Plant_TreeAnima": 1,
+        "Plant_LilyPad": 9
+      },
+      "afterSpecies": {
+        "Plant_Brambles": 2159,
+        "Plant_TallGrass": 4455,
+        "Plant_Grass": 10978,
+        "Plant_TreeOak": 1064,
+        "Plant_TreePoplar": 1087,
+        "Plant_Reeds": 128,
+        "Plant_Dandelion": 1119,
+        "Plant_Bush": 1278,
+        "Plant_HealrootWild": 100,
+        "Plant_Berry": 108,
+        "Plant_Bulrush": 7,
+        "Plant_TreeAnima": 1,
+        "Plant_LilyPad": 9
+      },
+      "beforeUnexpectedSpecies": 1,
+      "afterUnexpectedSpecies": 1,
+      "beforeBelowNativeFertilityMinimum": 144,
+      "afterBelowNativeFertilityMinimum": 144
+    },
+    "initialPlants900": {
+      "before": 23321,
+      "after": 23321,
+      "identical": true
+    }
+  },
+  "note": "Controlled native fixtures. Plant count or visual preference is not universally guaranteed; special-biome/native feature plant exceptions are reported, not silently excluded."
+}

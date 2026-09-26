@@ -1,0 +1,1344 @@
+{
+  "files": 191,
+  "originalBytes": 186459948,
+  "compressedBytes": 31149640,
+  "entries": [
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-after-blend.json.gz",
+      "originalBytes": 102527,
+      "compressedBytes": 5939,
+      "originalSha256": "7e6095f630d6ea520d1d5c3b337fb62503c83438754adc0f426ef7b2f0ade811",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-before-plants.json.gz",
+      "originalBytes": 104790,
+      "compressedBytes": 6106,
+      "originalSha256": "06cfdd23ef5507e874ef4defe3b81226568d177168203ad5b0974750df6f8eea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-plants-complete.json.gz",
+      "originalBytes": 1809407,
+      "compressedBytes": 175032,
+      "originalSha256": "c3554ce9db5455c87d0676bc1962169e9bf92f6625397861aa80d0d007a7ce69",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-plants.json.gz",
+      "originalBytes": 2336937,
+      "compressedBytes": 453498,
+      "originalSha256": "6cb7c867c95574f216cc1a0cb85fc82ba02dd3ae1ee24c23e6d18d913fc8f78d",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-plants900.json.gz",
+      "originalBytes": 1878225,
+      "compressedBytes": 181328,
+      "originalSha256": "c9274306393b189b1cdf4ca2d2ae9c14fd458ebdc0e35aff9b1a92d55925ad61",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-terrain.json.gz",
+      "originalBytes": 105969,
+      "compressedBytes": 6161,
+      "originalSha256": "0a096e35bcb2642331c93ba00b4f6e2f26f52ba3d632bb7aeedbe72003373621",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\full-vegetation-plan.json.gz",
+      "originalBytes": 736631,
+      "compressedBytes": 184345,
+      "originalSha256": "7a0ebc55533c17235473dc6b7098353958a5691b9d7ef063282fad0fe3a4f9f2",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\preview-after-blend.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\preview-terrain.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-quiet-s4-r7\\preview-vegetation-plan.json.gz",
+      "originalBytes": 736147,
+      "compressedBytes": 184274,
+      "originalSha256": "b59ba565d2e3f6d02602e154c2b1c4748ad9de1a990eaf3dae61616e3e43f1b7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-after-blend.json.gz",
+      "originalBytes": 102527,
+      "compressedBytes": 5939,
+      "originalSha256": "7e6095f630d6ea520d1d5c3b337fb62503c83438754adc0f426ef7b2f0ade811",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-before-plants.json.gz",
+      "originalBytes": 110726,
+      "compressedBytes": 6493,
+      "originalSha256": "c066c5465f92be72cd9a687278b526c013865ab5cb142cf4658021077d059268",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-plants-complete.json.gz",
+      "originalBytes": 1803455,
+      "compressedBytes": 175104,
+      "originalSha256": "17f607f01c74f1170d589b83fded72f16052299f483ed7aaaa60832950ccdfd5",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-plants.json.gz",
+      "originalBytes": 2328331,
+      "compressedBytes": 452606,
+      "originalSha256": "3e6393adeee0b0bfe753ad6288ec3baa5a792051545e2e447d7a7710da33bde9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-plants900.json.gz",
+      "originalBytes": 1870085,
+      "compressedBytes": 181256,
+      "originalSha256": "686d8a9dd082c575e12033e68dd0e00ce72cff81b39f5d97ff54c8e17032bd42",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-terrain.json.gz",
+      "originalBytes": 111904,
+      "compressedBytes": 6538,
+      "originalSha256": "14ee8586203aed3e561f3dac59434d795f08ad7bb9684c04ecad794ce2041733",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\full-vegetation-plan.json.gz",
+      "originalBytes": 737114,
+      "compressedBytes": 184474,
+      "originalSha256": "dff05989645897e37080f59d8f76773028f22b6b68aaf07ff9258aeba8326f4b",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\preview-after-blend.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\preview-terrain.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r3\\preview-vegetation-plan.json.gz",
+      "originalBytes": 736147,
+      "compressedBytes": 184274,
+      "originalSha256": "b59ba565d2e3f6d02602e154c2b1c4748ad9de1a990eaf3dae61616e3e43f1b7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-after-blend.json.gz",
+      "originalBytes": 102527,
+      "compressedBytes": 5939,
+      "originalSha256": "7e6095f630d6ea520d1d5c3b337fb62503c83438754adc0f426ef7b2f0ade811",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-before-plants.json.gz",
+      "originalBytes": 110770,
+      "compressedBytes": 6425,
+      "originalSha256": "1e53afe6925403b9b00348204fbeae8e3beeaee17a1b6a3229d8622db04f4f86",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 1800966,
+      "compressedBytes": 174838,
+      "originalSha256": "bcae18f14d0b7242973d1ed984073e4ff5e5f07bba8dc1f65ac675ecd935ee26",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2325268,
+      "compressedBytes": 451796,
+      "originalSha256": "b57fb9336a5727823c03e38e8dccaed30b839649474131bbcce8568127014bdd",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 1869180,
+      "compressedBytes": 180984,
+      "originalSha256": "be6600b1899afd2ab55865bc5b7e7d474e2917c1070223f47f626e2721f00e17",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-terrain.json.gz",
+      "originalBytes": 111948,
+      "compressedBytes": 6472,
+      "originalSha256": "8c09c0991b1ec10dea6682c5620c4886bc77b0b66a30a4cc1ba2024cd61a3dae",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 737114,
+      "compressedBytes": 184474,
+      "originalSha256": "dff05989645897e37080f59d8f76773028f22b6b68aaf07ff9258aeba8326f4b",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\preview-after-blend.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\preview-terrain.json.gz",
+      "originalBytes": 102664,
+      "compressedBytes": 5934,
+      "originalSha256": "5ed698a57f1a6665c60d82dd2ca495781ef7ac505fadbe3a22ab51cbff615388",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 736147,
+      "compressedBytes": 184274,
+      "originalSha256": "b59ba565d2e3f6d02602e154c2b1c4748ad9de1a990eaf3dae61616e3e43f1b7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-before-plants.json.gz",
+      "originalBytes": 107784,
+      "compressedBytes": 6244,
+      "originalSha256": "8a823a7c4a61467b8d37d5864b1fafd7fde00affd7088bf0dd77d313523b4eaa",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 1791436,
+      "compressedBytes": 173747,
+      "originalSha256": "43bf648b5eecffe8f3890583c95a559c8551ca9cb62f7346e0ba7a4320a394e5",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-plants.json.gz",
+      "originalBytes": 2315024,
+      "compressedBytes": 450074,
+      "originalSha256": "4a427a6f5617a179a6db6d0f5425f97f49639f93e6ff4fcee7069066916947b2",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 1856172,
+      "compressedBytes": 179475,
+      "originalSha256": "0f7db2b4bd84be4e6049a80ff39469dc75c60f87d740e44bf51dfff28ac01689",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-terrain.json.gz",
+      "originalBytes": 108962,
+      "compressedBytes": 6288,
+      "originalSha256": "78afe5bef29efc8f871ae5db4a3d6124aa554525b0a57f3ddc38fc67ef44f801",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 634797,
+      "compressedBytes": 126542,
+      "originalSha256": "995e2978839fd10ea2b891ab713ec62db754acf5720800032e9c16be81b92234",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-repeat-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s3-r1\\full-before-plants.json.gz",
+      "originalBytes": 107873,
+      "compressedBytes": 6292,
+      "originalSha256": "345a73a7c5c3b87d56cce22d7ae9e50c56785264c0250a2e97565d9e1cb38aed",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s3-r1\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-before-plants.json.gz",
+      "originalBytes": 108618,
+      "compressedBytes": 6288,
+      "originalSha256": "6557133bc6da59ad7874a7199c63b90e8c2d9ce5c8aadadea449124886b3298a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-plants-complete.json.gz",
+      "originalBytes": 1793432,
+      "compressedBytes": 173430,
+      "originalSha256": "9baf35e836284f00f5b4e7ea78932e93c0d9d1a38c77ce162aeb0904f55620c3",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-plants.json.gz",
+      "originalBytes": 2318087,
+      "compressedBytes": 450535,
+      "originalSha256": "103ee2c07b92c1662a3f1e8220be3fef0f96dd00508799da825fa880ef56b817",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-plants900.json.gz",
+      "originalBytes": 1856544,
+      "compressedBytes": 179176,
+      "originalSha256": "165081aa01134ab493ce2e440f9ca61e4fe321d687250f0b8970562a2a371513",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-terrain.json.gz",
+      "originalBytes": 109796,
+      "compressedBytes": 6335,
+      "originalSha256": "cb5b5d06aca1e659b0584da96f7ed69a6d6fb5647e064e6cf495f7bd414e9622",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\full-vegetation-plan.json.gz",
+      "originalBytes": 634797,
+      "compressedBytes": 126542,
+      "originalSha256": "995e2978839fd10ea2b891ab713ec62db754acf5720800032e9c16be81b92234",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-none-s4-r3\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-before-plants.json.gz",
+      "originalBytes": 102582,
+      "compressedBytes": 5955,
+      "originalSha256": "72803794605e81dc55dc8aaba6bf73fd67997b8572de1cbfd26001f8002ad6fb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-plants-complete.json.gz",
+      "originalBytes": 1799652,
+      "compressedBytes": 173818,
+      "originalSha256": "d36811f702bd3745257036e51356aab234dec2f4183b5ff94567c31d30c2de8b",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-plants.json.gz",
+      "originalBytes": 2325646,
+      "compressedBytes": 451552,
+      "originalSha256": "acb8a881dfd589fd7b3a0ec77dd6e03b27a4b4d8cd1307e913c6b6367030c4fb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-plants900.json.gz",
+      "originalBytes": 1865338,
+      "compressedBytes": 179859,
+      "originalSha256": "30fbb274d544dc07ccf1344564e8faecbccf3c9828b8f89805ed0613a0e17772",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-terrain.json.gz",
+      "originalBytes": 103761,
+      "compressedBytes": 6016,
+      "originalSha256": "0d09829b6dcd0017d5bde14c2737cf120668fb005fbc8cbd44ce71385518590f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\full-vegetation-plan.json.gz",
+      "originalBytes": 634314,
+      "compressedBytes": 126337,
+      "originalSha256": "d43e67e3a1ea0d4ec55c333f96aea7dc700eeaa48513c5fe7ee32f024a4e8430",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-quiet-s4-r7\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-before-plants.json.gz",
+      "originalBytes": 108571,
+      "compressedBytes": 6305,
+      "originalSha256": "656567bc9a37e3eafb315f1c7abdec0e040f571bdd88c41a55ac1e468a07fa83",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 1790351,
+      "compressedBytes": 173345,
+      "originalSha256": "cdf0abd8d3c54c42749414fa84f52dc8b0fd3c699503837e002b3eafd462c5b4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2313572,
+      "compressedBytes": 449659,
+      "originalSha256": "319ee04d43898e23df2fc0a3b7b1b020c969e7729bc581acf1f42834bdf1cefb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 1856193,
+      "compressedBytes": 179459,
+      "originalSha256": "45cc77ff75139936df1bc46beb1372c3ca5c24118e7bac3b76eca3a81772b33d",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-terrain.json.gz",
+      "originalBytes": 109749,
+      "compressedBytes": 6351,
+      "originalSha256": "b02e40f9540304c81237392f0accca270bf7e8e58c12128c4e2e8de86b15ead4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 634797,
+      "compressedBytes": 126542,
+      "originalSha256": "995e2978839fd10ea2b891ab713ec62db754acf5720800032e9c16be81b92234",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-new-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-before-plants.json.gz",
+      "originalBytes": 102582,
+      "compressedBytes": 5955,
+      "originalSha256": "72803794605e81dc55dc8aaba6bf73fd67997b8572de1cbfd26001f8002ad6fb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-plants-complete.json.gz",
+      "originalBytes": 1799385,
+      "compressedBytes": 173856,
+      "originalSha256": "b409fb4b4c867a3656de47a3a873aa74dd1b98c79d5cbab4cf9cce1a33321b82",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-plants.json.gz",
+      "originalBytes": 2325612,
+      "compressedBytes": 451771,
+      "originalSha256": "d845402f4abdc8c8a13b39defc161a65f922eac193cff8fa56839c0388e41381",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-plants900.json.gz",
+      "originalBytes": 1865338,
+      "compressedBytes": 179859,
+      "originalSha256": "30fbb274d544dc07ccf1344564e8faecbccf3c9828b8f89805ed0613a0e17772",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-terrain.json.gz",
+      "originalBytes": 103761,
+      "compressedBytes": 6016,
+      "originalSha256": "0d09829b6dcd0017d5bde14c2737cf120668fb005fbc8cbd44ce71385518590f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\full-vegetation-plan.json.gz",
+      "originalBytes": 634314,
+      "compressedBytes": 126337,
+      "originalSha256": "d43e67e3a1ea0d4ec55c333f96aea7dc700eeaa48513c5fe7ee32f024a4e8430",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-repeat-s4-r7\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-before-plants.json.gz",
+      "originalBytes": 109831,
+      "compressedBytes": 6363,
+      "originalSha256": "ddf753e331e5df46cb6625d9e4ad38af3fa20b4ef491fbcccb382ddd36bb4260",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-plants-complete.json.gz",
+      "originalBytes": 1793145,
+      "compressedBytes": 173973,
+      "originalSha256": "ac7399911eb9d7fbba20e33b0e9c3b4ab05b7ee131882c48e3e9b66cc1382cba",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-plants.json.gz",
+      "originalBytes": 2317628,
+      "compressedBytes": 450660,
+      "originalSha256": "efe49d3fe84fd9b261fc6970c68a10c2f33e54a17f48fb20c5a2175bc05d77b4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-plants900.json.gz",
+      "originalBytes": 1857213,
+      "compressedBytes": 179832,
+      "originalSha256": "59a2e5261e1272bd699579278f743d52ce69ab620be18c7dd658cc600f89d3e4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-terrain.json.gz",
+      "originalBytes": 111009,
+      "compressedBytes": 6417,
+      "originalSha256": "e2ad570a71f9020ec1b9ef6c6c1fbd98a20b6ac6e202526edbe8e32a000d3d1e",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\full-vegetation-plan.json.gz",
+      "originalBytes": 634797,
+      "compressedBytes": 126542,
+      "originalSha256": "995e2978839fd10ea2b891ab713ec62db754acf5720800032e9c16be81b92234",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r6\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-before-plants.json.gz",
+      "originalBytes": 102582,
+      "compressedBytes": 5955,
+      "originalSha256": "72803794605e81dc55dc8aaba6bf73fd67997b8572de1cbfd26001f8002ad6fb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-plants-complete.json.gz",
+      "originalBytes": 1798677,
+      "compressedBytes": 173801,
+      "originalSha256": "6c154418d6006b09efd6a053d229f0aa0238858a1b136ea2129d986ed31147c1",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-plants.json.gz",
+      "originalBytes": 2324865,
+      "compressedBytes": 451663,
+      "originalSha256": "f4d98505875b71462ac1cab95324101f8b596a48546751958e0e4e9a6ec045ac",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-plants900.json.gz",
+      "originalBytes": 1865338,
+      "compressedBytes": 179859,
+      "originalSha256": "30fbb274d544dc07ccf1344564e8faecbccf3c9828b8f89805ed0613a0e17772",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-terrain.json.gz",
+      "originalBytes": 103761,
+      "compressedBytes": 6016,
+      "originalSha256": "0d09829b6dcd0017d5bde14c2737cf120668fb005fbc8cbd44ce71385518590f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\full-vegetation-plan.json.gz",
+      "originalBytes": 634314,
+      "compressedBytes": 126337,
+      "originalSha256": "d43e67e3a1ea0d4ec55c333f96aea7dc700eeaa48513c5fe7ee32f024a4e8430",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-quiet-s4-r7\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-before-plants.json.gz",
+      "originalBytes": 108546,
+      "compressedBytes": 6293,
+      "originalSha256": "9c9af36d82105f68fbb189f3e8640d3d60c5c73723ee86d3cee61ed4aea3bfc9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 1791917,
+      "compressedBytes": 173559,
+      "originalSha256": "5cd67f17d7cbbeebba16105c524a3d7b530b3f2263a3c4467f5df512eeca7f07",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2315239,
+      "compressedBytes": 450152,
+      "originalSha256": "2d9718f356b8ab36060b4c71b6b33b4c98461c737df054534124c9490d21ce2c",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 1856391,
+      "compressedBytes": 179401,
+      "originalSha256": "98d605082b53ca7c5c98b1bdf4177cc73703a10990ab140c1012d7383cdd7734",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-terrain.json.gz",
+      "originalBytes": 109724,
+      "compressedBytes": 6338,
+      "originalSha256": "cf23f8d9f662ab40b325dd5f98f07e2f8d754100a8b11bd3fed6ff57371195da",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 634797,
+      "compressedBytes": 126542,
+      "originalSha256": "995e2978839fd10ea2b891ab713ec62db754acf5720800032e9c16be81b92234",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-a-null-old-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 633830,
+      "compressedBytes": 126224,
+      "originalSha256": "5802d657d2043a9175f457cc368e72767ada4ec240751ea80cec3c1169460aea",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-after-blend.json.gz",
+      "originalBytes": 135441,
+      "compressedBytes": 7097,
+      "originalSha256": "fb396917e96fdd271ba13b20fac6070ffe462971a3566d8d68f8ac8e5f98fe39",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-before-blend.json.gz",
+      "originalBytes": 135021,
+      "compressedBytes": 7068,
+      "originalSha256": "23f5a22d215a4af4a8406ea23f96907666ec5e939dd0963bed9a16bd3a87d7fd",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-before-plants.json.gz",
+      "originalBytes": 142995,
+      "compressedBytes": 7676,
+      "originalSha256": "fee164caae07528ba8cda675b6b6df079f0096549cc058eaaf75bd3d9be04eda",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 2028586,
+      "compressedBytes": 194195,
+      "originalSha256": "eb65a1060020098e4736151619d4e17a3b51275cc77d6ec3b32b735edb4eafa9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-plants.json.gz",
+      "originalBytes": 2258569,
+      "compressedBytes": 372227,
+      "originalSha256": "2cd506915112c4dc27b717f4e51d513beff3ad27d7a7a8e3e606a616e17e3a86",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 2163285,
+      "compressedBytes": 207296,
+      "originalSha256": "b9a9fc5bb426e65bfd86e768223ee73329793a86c4638c14f2183cb2acba73e4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-terrain.json.gz",
+      "originalBytes": 139906,
+      "compressedBytes": 7687,
+      "originalSha256": "e3865331e2ab33226c45c1e56b14036b53f9b4446e2bbab673c7711d162db769",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 1496011,
+      "compressedBytes": 404958,
+      "originalSha256": "412f909953f7f20e943fe4613bdb95f43279119cf1560c79857cdf2683bb83c9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\preview-after-blend.json.gz",
+      "originalBytes": 135510,
+      "compressedBytes": 7096,
+      "originalSha256": "27d60a24553c8dda581c73c9c798fa752e2ce373edd375b8eb14e70dfd1c734a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\preview-before-blend.json.gz",
+      "originalBytes": 135090,
+      "compressedBytes": 7073,
+      "originalSha256": "2960a5dc07dadb1dc472140c99c737066024a9746a4185cf6571688e3dc566fa",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\preview-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\preview-terrain.json.gz",
+      "originalBytes": 135510,
+      "compressedBytes": 7096,
+      "originalSha256": "27d60a24553c8dda581c73c9c798fa752e2ce373edd375b8eb14e70dfd1c734a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1651416,
+      "compressedBytes": 442363,
+      "originalSha256": "7dab351ead94572e58bcb4ed3bd1d5145308b92235eaf4b0d5e0d88f60322d8b",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-after-blend.json.gz",
+      "originalBytes": 135441,
+      "compressedBytes": 7097,
+      "originalSha256": "fb396917e96fdd271ba13b20fac6070ffe462971a3566d8d68f8ac8e5f98fe39",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-before-blend.json.gz",
+      "originalBytes": 135021,
+      "compressedBytes": 7068,
+      "originalSha256": "23f5a22d215a4af4a8406ea23f96907666ec5e939dd0963bed9a16bd3a87d7fd",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-before-plants.json.gz",
+      "originalBytes": 142995,
+      "compressedBytes": 7676,
+      "originalSha256": "fee164caae07528ba8cda675b6b6df079f0096549cc058eaaf75bd3d9be04eda",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 2027666,
+      "compressedBytes": 194161,
+      "originalSha256": "50773f225ea214badc91fecc17bed851f70e60056b940705122a1908a578df80",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2614486,
+      "compressedBytes": 496672,
+      "originalSha256": "fd9682818bd7aec420b963f7f4e5feb29e66b27be5422592fcb6ff54bbfa4ad2",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 2163285,
+      "compressedBytes": 207296,
+      "originalSha256": "b9a9fc5bb426e65bfd86e768223ee73329793a86c4638c14f2183cb2acba73e4",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-terrain.json.gz",
+      "originalBytes": 139906,
+      "compressedBytes": 7687,
+      "originalSha256": "e3865331e2ab33226c45c1e56b14036b53f9b4446e2bbab673c7711d162db769",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 1881271,
+      "compressedBytes": 500875,
+      "originalSha256": "818def0a666934abb252fb6321a362a5fed5b49557200b0172ee7d3d2cd8d860",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\preview-after-blend.json.gz",
+      "originalBytes": 135510,
+      "compressedBytes": 7096,
+      "originalSha256": "27d60a24553c8dda581c73c9c798fa752e2ce373edd375b8eb14e70dfd1c734a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\preview-before-blend.json.gz",
+      "originalBytes": 135090,
+      "compressedBytes": 7073,
+      "originalSha256": "2960a5dc07dadb1dc472140c99c737066024a9746a4185cf6571688e3dc566fa",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\preview-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\preview-terrain.json.gz",
+      "originalBytes": 135510,
+      "compressedBytes": 7096,
+      "originalSha256": "27d60a24553c8dda581c73c9c798fa752e2ce373edd375b8eb14e70dfd1c734a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1651416,
+      "compressedBytes": 442363,
+      "originalSha256": "7dab351ead94572e58bcb4ed3bd1d5145308b92235eaf4b0d5e0d88f60322d8b",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-before-plants.json.gz",
+      "originalBytes": 142575,
+      "compressedBytes": 7649,
+      "originalSha256": "7b955da6b9d3fe017873f964eabf267fbc1355bb41dfd601a8c1222a878d49f1",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 2104335,
+      "compressedBytes": 202495,
+      "originalSha256": "6b01555f9271b86f0c94d51de58fc3c02be212f29e0947c481c49c2314fbf921",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-plants.json.gz",
+      "originalBytes": 2701896,
+      "compressedBytes": 514695,
+      "originalSha256": "08cdf1bfd37cfe85f7df73973b32aecd787dbda5b6549f59e11439e952022aba",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 2172991,
+      "compressedBytes": 208657,
+      "originalSha256": "87fa608283f6e305b545c696c45f78a70f83b21865d9294d1fea67b7de6ca63a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-terrain.json.gz",
+      "originalBytes": 143670,
+      "compressedBytes": 7718,
+      "originalSha256": "1870ab8a564cbb557236b3b79586f4ba89c6ef8ff0426f8627408291f9a3d5ec",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 1461417,
+      "compressedBytes": 332116,
+      "originalSha256": "35d1790a7d59658bf16c0d26e1f7a6274f5ad8d3e8148893df3be24474bb637d",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\preview-floor-mask.json.gz",
+      "originalBytes": 193952,
+      "compressedBytes": 74966,
+      "originalSha256": "64d4d488658c64760647b5f607964f1d8bf04fee3007177050f1c722c5012538",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\preview-terrain.json.gz",
+      "originalBytes": 135090,
+      "compressedBytes": 7073,
+      "originalSha256": "2960a5dc07dadb1dc472140c99c737066024a9746a4185cf6571688e3dc566fa",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-b-none-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1457220,
+      "compressedBytes": 330684,
+      "originalSha256": "052c6b1cdcab2ec8c679dc2431aa96f72743b36e0696fe1b7caf5e65e6251dba",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-after-blend.json.gz",
+      "originalBytes": 116759,
+      "compressedBytes": 6681,
+      "originalSha256": "01e06066393cf0ceb2566ce5efb9853ff6fe716cc6104e603b5e401522d18a6f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-before-blend.json.gz",
+      "originalBytes": 116326,
+      "compressedBytes": 6623,
+      "originalSha256": "8388103e8c465a634c9e3ae230cd4326a7160aba0750d5a33ddc06604c92f27c",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-before-plants.json.gz",
+      "originalBytes": 125810,
+      "compressedBytes": 7175,
+      "originalSha256": "36f31731556f6162257e395fb3101fcfded85fa2c3265dc6bdc08ea7536417b9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 1763322,
+      "compressedBytes": 170325,
+      "originalSha256": "fdcab1bfb216f261f8061f796e6fc3146c808b2bdbbf78c9a78ce84eed74fadd",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-plants.json.gz",
+      "originalBytes": 2294146,
+      "compressedBytes": 446511,
+      "originalSha256": "9df7a1b6091237135f28ec02420385d9e10d9622c93e3658c23bfe595c94c16a",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 1826192,
+      "compressedBytes": 176120,
+      "originalSha256": "0c3126123c86a262020da0ec9046912ee1eae4a2e78af049928fd5133b8537cf",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-terrain.json.gz",
+      "originalBytes": 126988,
+      "compressedBytes": 7226,
+      "originalSha256": "90df5922dde651567cce36d9882aec77a866e27c965b1abc0a0bcb610b637757",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 882329,
+      "compressedBytes": 207960,
+      "originalSha256": "af5af6d4f99cb5e7dc71567d25040532694d5faed0e6f386f2dae95a8607bcd6",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\preview-after-blend.json.gz",
+      "originalBytes": 116851,
+      "compressedBytes": 6694,
+      "originalSha256": "67821f3f0dff385061f9d6d2b4bf51f93c606cd9e198c9a68d4ff107cc9f3fa7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\preview-before-blend.json.gz",
+      "originalBytes": 116418,
+      "compressedBytes": 6635,
+      "originalSha256": "045c1edd59fa6fd29f0a78681eb8efc398268715cf8de76a7b9db6fee0d2caad",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\preview-terrain.json.gz",
+      "originalBytes": 116851,
+      "compressedBytes": 6694,
+      "originalSha256": "67821f3f0dff385061f9d6d2b4bf51f93c606cd9e198c9a68d4ff107cc9f3fa7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 881452,
+      "compressedBytes": 207584,
+      "originalSha256": "210a2bddd3b8aca7373b5fc15ac2b6f965d593fc15cc6c01b24367dd0f4dccdb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-after-blend.json.gz",
+      "originalBytes": 116759,
+      "compressedBytes": 6681,
+      "originalSha256": "01e06066393cf0ceb2566ce5efb9853ff6fe716cc6104e603b5e401522d18a6f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-before-blend.json.gz",
+      "originalBytes": 116326,
+      "compressedBytes": 6623,
+      "originalSha256": "8388103e8c465a634c9e3ae230cd4326a7160aba0750d5a33ddc06604c92f27c",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-before-plants.json.gz",
+      "originalBytes": 125619,
+      "compressedBytes": 7194,
+      "originalSha256": "f7dc44ea1879badc82cb4d0a4090a1205ee23ac7c49e303ca6539a0de761a53d",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 1758787,
+      "compressedBytes": 169625,
+      "originalSha256": "0b140013d7d02d708996a11940fa0681ff05672ca7ad1a506776c89be3320c98",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2288389,
+      "compressedBytes": 445279,
+      "originalSha256": "12d4c4b4452ddef54f5a02cc1f19acd8bae91730bc446cae09d718e4e58f2c18",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 1826015,
+      "compressedBytes": 175651,
+      "originalSha256": "c64fc1000c397d9438bbf41dbd39e014a3a6fa99848a5ccbcc262d54dd4f8bb3",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-terrain.json.gz",
+      "originalBytes": 126797,
+      "compressedBytes": 7249,
+      "originalSha256": "1128480e4fc8d52468b570027c729086160b32578e8f57a33687533dde43a505",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 882329,
+      "compressedBytes": 207960,
+      "originalSha256": "af5af6d4f99cb5e7dc71567d25040532694d5faed0e6f386f2dae95a8607bcd6",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\preview-after-blend.json.gz",
+      "originalBytes": 116851,
+      "compressedBytes": 6694,
+      "originalSha256": "67821f3f0dff385061f9d6d2b4bf51f93c606cd9e198c9a68d4ff107cc9f3fa7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\preview-before-blend.json.gz",
+      "originalBytes": 116418,
+      "compressedBytes": 6635,
+      "originalSha256": "045c1edd59fa6fd29f0a78681eb8efc398268715cf8de76a7b9db6fee0d2caad",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\preview-terrain.json.gz",
+      "originalBytes": 116851,
+      "compressedBytes": 6694,
+      "originalSha256": "67821f3f0dff385061f9d6d2b4bf51f93c606cd9e198c9a68d4ff107cc9f3fa7",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 881452,
+      "compressedBytes": 207584,
+      "originalSha256": "210a2bddd3b8aca7373b5fc15ac2b6f965d593fc15cc6c01b24367dd0f4dccdb",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-before-plants.json.gz",
+      "originalBytes": 124377,
+      "compressedBytes": 7115,
+      "originalSha256": "eae3d3672c1763af72ade66b4494c4a5612602cf897fdcb04f045b64275224d5",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 1740518,
+      "compressedBytes": 167745,
+      "originalSha256": "90cc01eb3195eb246e9789af9fcbf0c01bcfcd38930be53e18dea3450dcc6153",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-plants.json.gz",
+      "originalBytes": 2265399,
+      "compressedBytes": 441586,
+      "originalSha256": "bbeecae1c2faaf5042c78c60ec073c8af5d4dbdb0362d0a077da58808abc03a2",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 1806173,
+      "compressedBytes": 173824,
+      "originalSha256": "3be57dc44c5942498d7f810c804c22e4c7106d345985bd1cfcc596bbeffd46e1",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-terrain.json.gz",
+      "originalBytes": 125555,
+      "compressedBytes": 7166,
+      "originalSha256": "be1af224403fb3b7dcd056173e4df8632a9a464cdd7a05b212767bfab8f62385",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 781491,
+      "compressedBytes": 149838,
+      "originalSha256": "8ae4c54a26fec2bef70fd7f489aabcf3e1438c7ea24e95365d61ab6e317a37b5",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\preview-terrain.json.gz",
+      "originalBytes": 116418,
+      "compressedBytes": 6635,
+      "originalSha256": "045c1edd59fa6fd29f0a78681eb8efc398268715cf8de76a7b9db6fee0d2caad",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-c-none-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 780615,
+      "compressedBytes": 149418,
+      "originalSha256": "27804dd5e77cf4a7ab55c6df08e1623cbf961dd8e4355c5a6f275c91b1fd065d",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r4\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 1322972,
+      "compressedBytes": 335325,
+      "originalSha256": "9c6750d130773d0c2f004dad7800680e01c206193dca281320dcda211f6b2197",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r4\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1318159,
+      "compressedBytes": 333834,
+      "originalSha256": "6b90de3100f779b71cdca9d173c139d69c8f39ecbcd1c0c5925eba871d699a74",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r5\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 1322972,
+      "compressedBytes": 335325,
+      "originalSha256": "9c6750d130773d0c2f004dad7800680e01c206193dca281320dcda211f6b2197",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r5\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1318159,
+      "compressedBytes": 333834,
+      "originalSha256": "6b90de3100f779b71cdca9d173c139d69c8f39ecbcd1c0c5925eba871d699a74",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-none-s4-r4\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-none-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 1322966,
+      "compressedBytes": 335309,
+      "originalSha256": "a1f2c7bcb5cb356fd2856d3a947b584702c0143b715d02e0664b6074713e3136",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-none-s4-r4\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-d-none-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1318153,
+      "compressedBytes": 333811,
+      "originalSha256": "106e6b902b8454124ec578731bff691840e98e08ef4c0f2c0ccea9bd6fa884ab",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 2383187,
+      "compressedBytes": 220077,
+      "originalSha256": "583c4e0d770064c08313717f42b95d33796b19f2876f393630d477245d4ef3e8",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\full-plants.json.gz",
+      "originalBytes": 3119297,
+      "compressedBytes": 673048,
+      "originalSha256": "802dc1f5395086d0a2c49ece7b590df7d29b649c13106b9ef75b03fbe615b3ab",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 2506616,
+      "compressedBytes": 230287,
+      "originalSha256": "681d4d357e2d4eb9b45a83265f39368845588d9d227ff1afd1f4fce65632c3b1",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 1916065,
+      "compressedBytes": 520569,
+      "originalSha256": "c493d9f96e5c717e42f71996bbf69abc04bb31b914711d048ce59c9b97e9c1d9",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1925967,
+      "compressedBytes": 618930,
+      "originalSha256": "5baeb499c81a8676af132fb02ca5859c062108970faee879d4c60ffe90d00970",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\full-plants-complete.json.gz",
+      "originalBytes": 2378971,
+      "compressedBytes": 220808,
+      "originalSha256": "632605add53219735dc620ba7484ed22d98cd8fe43b955d2c1ae3034c00cd6de",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\full-plants.json.gz",
+      "originalBytes": 3113309,
+      "compressedBytes": 672507,
+      "originalSha256": "4c44681207bb69d2df254c320f7810a0add369b7d7b5fa2ea4be6090900ea3e8",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\full-plants900.json.gz",
+      "originalBytes": 2506483,
+      "compressedBytes": 230908,
+      "originalSha256": "6f711e40c1b04adadbf3156a0a6387c0b4f4ced606af335e1543e7c27fee7c86",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\full-vegetation-plan.json.gz",
+      "originalBytes": 1915706,
+      "compressedBytes": 521290,
+      "originalSha256": "16d69d3995dc2347b172de6b03c522aa5a1b99a752c3866a38fb2b976b59a968",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-protected-none-s4-r4\\preview-vegetation-plan.json.gz",
+      "originalBytes": 1925967,
+      "compressedBytes": 618930,
+      "originalSha256": "5baeb499c81a8676af132fb02ca5859c062108970faee879d4c60ffe90d00970",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\full-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\full-plants-complete.json.gz",
+      "originalBytes": 1748087,
+      "compressedBytes": 168917,
+      "originalSha256": "c392a0ddcb3570171a981ee93b91ed9e883c222225539c8c8c43af4fadadf960",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\full-plants.json.gz",
+      "originalBytes": 2305027,
+      "compressedBytes": 514182,
+      "originalSha256": "4b5dbd6556e282242d193d790c201362f4c4c481a1f85883f91808b04ad92d7f",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\full-plants900.json.gz",
+      "originalBytes": 1811491,
+      "compressedBytes": 174763,
+      "originalSha256": "92bfa7f6b6a69fb64013b92801b23e0ebd778d90418a1812f1a217e8d5be1536",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\full-vegetation-plan.json.gz",
+      "originalBytes": 2092781,
+      "compressedBytes": 660626,
+      "originalSha256": "6cdb9fa791e1236328216c99a97e77a913559b913a7236b85f5bcd0dfca42893",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\preview-floor-mask.json.gz",
+      "originalBytes": 195724,
+      "compressedBytes": 73996,
+      "originalSha256": "59012da9dc131a3489538e3be1518ce3cb2ac6771cdb034b985ae20e43cc66ee",
+      "roundtripVerified": true
+    },
+    {
+      "path": "native-blend-road-natural-s4-r5\\preview-vegetation-plan.json.gz",
+      "originalBytes": 2090589,
+      "compressedBytes": 660257,
+      "originalSha256": "0137450cf7b7dbabf243800c200087271fb05be6274b9f150196f9d0a4ab5b3c",
+      "roundtripVerified": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandscapeBlendAudit>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>landscape</id>
+					<type>landform</type>
+					<direction>left</direction>
+					<gap>0.28</gap>
+					<landform>foothills</landform>
+					<variant>23</variant>
+					<layout>organic</layout>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads>
+				<li>
+					<plan>{"id":"protected_road","kind":"DirtPath","points":[[0.82,0.12],[0.82,0.88]],"route":"avoid","seed":47}</plan>
+				</li>
+			</localRoads>
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+	</fixture>
+</LandscapeBlendAudit>

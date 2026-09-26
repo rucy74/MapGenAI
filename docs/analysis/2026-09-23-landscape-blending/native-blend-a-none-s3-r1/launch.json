@@ -1,0 +1,12 @@
+{
+  "details": "none",
+  "sourceDllSha256": "551B78B4BF8B602791914C9658651E541795234B77CB066A2E11C2CA511586D5",
+  "sourceDll": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-guided\\repo\\dev\\Assemblies\\MapGenAI.dll",
+  "started": "2026-09-24T00:14:51.8174932+09:00",
+  "pid": 18744,
+  "case": "A",
+  "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\landscape-profile-blend-a-none-s3-r1",
+  "probeDllSha256": "E99496E098E63EF74854DF27BA1356821509DEB1D94CB8CE26E1ECB504A713EC",
+  "output": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-guided\\repo\\docs\\analysis\\2026-09-23-landscape-blending\\native-blend-a-none-s3-r1",
+  "root": "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime"
+}

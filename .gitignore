@@ -5,6 +5,7 @@ dev/Source/Tests/bin/
 dev/Assemblies/
 tools/**/bin/
 tools/**/obj/
+tools/**/__pycache__/
 docs/analysis/**/bin/
 docs/analysis/**/obj/
 

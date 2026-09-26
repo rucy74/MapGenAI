@@ -1,0 +1,17 @@
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(63,36): warning CS0649: 'CoverageCell.painted' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(63,27): warning CS0649: 'CoverageCell.original' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\AuthoringResult.cs(12,23): warning CS0649: 'AuthoringResult.blockStructures' 필드에는 할당되지 않으므로 항상 false 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(64,40): warning CS0649: 'CoverageCell.paintedElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(64,22): warning CS0649: 'CoverageCell.originalElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+
+빌드했습니다.
+
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(63,36): warning CS0649: 'CoverageCell.painted' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(63,27): warning CS0649: 'CoverageCell.original' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\AuthoringResult.cs(12,23): warning CS0649: 'AuthoringResult.blockStructures' 필드에는 할당되지 않으므로 항상 false 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(64,40): warning CS0649: 'CoverageCell.paintedElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\MapGen\RegionGrid.cs(64,22): warning CS0649: 'CoverageCell.originalElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [C:\Users\choco\Documents\Codex\2026-09-13\new-chat-2\work\mapgenai-guided\repo\dev\Source\Tests\TextToMap.Tests.csproj]
+    경고 5개
+    오류 0개
+
+경과 시간: 00:00:02.50

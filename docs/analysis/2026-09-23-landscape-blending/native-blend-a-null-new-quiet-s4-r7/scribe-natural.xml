@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LandscapeBlendAudit>
+	<fixture>
+		<state>
+			<ruinDensity>0</ruinDensity>
+			<dangerDensity>0</dangerDensity>
+			<elevationShapes>
+				<li>
+					<id>landscape</id>
+					<type>landform</type>
+					<direction>bottom</direction>
+					<gap>0.28</gap>
+					<landform>open_basin</landform>
+					<variant>23</variant>
+					<layout>organic</layout>
+					<details>natural</details>
+				</li>
+				<li>
+					<id>shallow_pond</id>
+					<type>composite</type>
+					<compositeJson>{"shapes":[{"center":[0.58,0.5],"h":0,"id":"pool","n":0,"prim":"circle","r":0.075,"r2":0,"rot":0,"size":0,"verts":null,"w":0}],"compose":[{"a":null,"b":null,"e":0,"f":0.05,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"pool"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+	</fixture>
+</LandscapeBlendAudit>
