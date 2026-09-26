@@ -1,0 +1,49 @@
+{
+  "id": "landscape-03-recommend",
+  "request": "\uADF8\uB0E5 \uCD94\uCC9C\uD574 \uC918.",
+  "called": true,
+  "ok": true,
+  "expectedAction": "recommend",
+  "variationSeed": 2025316363,
+  "featureValidator": "Not run: native feature/material validation is unavailable in this linked offline harness.",
+  "action": "recommend",
+  "optionCount": 3,
+  "options": [
+    {
+      "option": 1,
+      "schemaValid": true,
+      "noGlobalBonuses": true,
+      "guidedFeaturePreferencePreserved": true,
+      "usesCommonPath": false,
+      "persistentRelations": 1,
+      "hasWater": true,
+      "nativePlacementVerified": false
+    },
+    {
+      "option": 2,
+      "schemaValid": true,
+      "noGlobalBonuses": true,
+      "guidedFeaturePreferencePreserved": true,
+      "usesCommonPath": true,
+      "persistentRelations": 0,
+      "hasWater": true,
+      "nativePlacementVerified": false
+    },
+    {
+      "option": 3,
+      "schemaValid": true,
+      "noGlobalBonuses": true,
+      "guidedFeaturePreferencePreserved": true,
+      "usesCommonPath": false,
+      "persistentRelations": 0,
+      "hasWater": false,
+      "nativePlacementVerified": false
+    }
+  ],
+  "batchValid": true,
+  "inputSnapshotUntouched": true,
+  "modelVersion": "gemini-3.8-flash",
+  "inputTokens": 19090,
+  "outputTokens": 521,
+  "thinkingTokens": 0
+}

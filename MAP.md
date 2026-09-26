@@ -1,5 +1,8 @@
 # MapGenAI 개발 지도
 
+- 공통 지형 조합(DEV, 2026-09-26): `LandscapePath`의 곡선 영역을 산·평지·물에 재사용한다. `LandscapePlacement`는 `anchor/placement` 관계를 실제 mask에 배치하며 없는 참조·순환·공간 부족을 거부한다. 평지는 fill 없이 원래 바이옴 바닥을 유지한다. 기존 저장의 도형·landform 수식은 유지한다. `details:natural`은 composite에도 선택적으로 적용한다. [검증/한계](docs/analysis/2026-09-26-landscape-relations/report.md).
+- 추천/문답: `RecommendationVariation`은 새 추천 요청에만 위치·군집 수·연결·여백의 변주를 제안하며 월드 시드/저장 지형은 바꾸지 않는다. 문답에 생활 공간의 연결 및 기존 구도 유지/새 구도 비교를 추가했다. 다양성은 모델 지침이며 미관 보장이 아니다. [직접 테스트 64개](docs/text-landscape-test-ko.md) · [GL 지형 묘사 안내](docs/geological-landforms-prompts-ko.md).
+
 - 첫 자연 풍경 구성(DEV): `LandformPrompt`는 빈 설정의 짧은 풍경 요청에서 주 지형과 작은 물 요소를 함께 계획하되, 바이옴 토양 원판 덮기·전역 보너스·후속 편집의 추가 요소를 피하도록 안내한다. `RecommendationPlan.Rules`도 무관한 전역 수치/비옥토 대신 국소 배치를 우선한다. 모델 지침이며 미관 자동 보장은 아니다. `MapGenAIMod.DisplayName`은 설치 packageId로 DEV 제목을 구분한다. [일반판 제보 구분·실제 응답과 프리뷰](docs/analysis/2026-09-26-natural-composition/report.md).
 
 - 자연지형 표면·식생 연결(로컬 DEV): `LandscapeBlendField/Generation`은 `details:natural`인 육상 자연지형의 평지에서 실제 물·산 경계를 따라 좁은 모래/자갈 구간을 만든다. 명시 도형·재료·비율 채움 전체 영역·도로·특수 지형은 제외한다. 새 `shape_ops add`만 기본 적용하고 저장된 null/none은 유지한다. 420 단계에서 바닥과 초기 식생 가중치를 계산하며, `LandscapeVegetationPatch`는 Plants 단계에만 작동한다. 사막·랜드마크 밀도 예외/바이옴 식물 종류/이후 재성장은 native 경로다. 물·특징을 새로 만들거나 옮기지 않으며 Preview는 식물을 그리지 않는다. [설계](docs/analysis/2026-09-23-landscape-blending/plan.md) · [사용자 검사](docs/analysis/2026-09-23-landscape-blending/manual-tests-ko.md).

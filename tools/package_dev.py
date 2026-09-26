@@ -52,6 +52,8 @@ def package(output: Path) -> Path:
         'Use Refine to give feedback on naturalness, mountains, water or failed placement. Optional AI follow-up questions use a separate provider request; confirm answers before requesting revisions.\n'
         'Observed preview placement failures and completely missing proposed water areas block selection until revised. This does not guarantee visual quality or settlement suitability.\n'
         'Image input, interpretation and generation are paused, and the image button is hidden. Stored image data is retained but inactive.\n'
+        'Shared curved areas compose ridges, unpainted open ground and water. Attached areas can follow the inside, edge or outside of another authored area; a full footprint must fit. Existing saved geometry is retained.\n'
+        'Fresh suggestions vary their spatial design brief. The local preference interview also asks how usable space should connect and, when editing, whether to refine or compare a new layout.\n'
         'Gemini default: gemini-3.8-flash. Requires your own provider configuration.'
     )
     manifest = {
@@ -100,6 +102,7 @@ def package(output: Path) -> Path:
             '미리보기에서 확인된 도로·구조물 배치 실패나 새 물 영역의 완전 소실은 수정 필요로 표시하고 적용을 막습니다. 자동 미관·정착성 보장은 아니며 완성 맵을 확인해야 합니다.\n'
             '선택 전에는 3번 통로만 자연스럽게처럼 번호를 지정해 후보를 수정할 수 있습니다. 해당 그림만 갱신하며, 자연스러운 통로는 경로와 최소 폭을 유지하고 가장자리만 확장합니다. 반듯한 통로는 기본값입니다.\n'
             '현재 이미지 입력·해석·팔레트·생성 효과는 일시 중단이며 버튼도 숨깁니다. 저장된 이미지 데이터는 보존합니다.\n'
+            '공통 곡선 영역으로 산·평지·물을 조합합니다. 평지 안쪽/가장자리/옆의 관계를 유지하며 공간 부족은 안내합니다. 새 추천의 배치 구도를 바꾸고, 문답에 생활 공간 연결과 기존 구도 유지/교체 선택을 더했습니다. 기존 저장 지형의 모습은 유지합니다.\n'
             '원형/별/하트는 정확한 형태이며, 자연스러운/울퉁불퉁한 윤곽을 요청하면 선택적으로 굴곡을 추가합니다.\n'
             '살짝/많이로 강도를 바꾸거나 다시 정확한 원형으로 요청해 되돌릴 수 있습니다.\n'
             '월드 강·해안 연결을 보존합니다. 삼각주/피오르드만 제거하면 일반 강/해안이 남습니다.\n'

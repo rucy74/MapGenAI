@@ -1,0 +1,18 @@
+
+FRESH RECOMMENDATION DESIGN BRIEF (not additional user requirements):
+The following combine independently sampled geometry targets, NOT predefined terrain recipes.
+User preferences, current tile prerequisites, existing water and authored terrain take priority over every axis.
+On a fresh unconstrained layout, express these targets in actual executable geometry. Do not substitute a familiar default trio or satisfy the targets with new IDs/variants alone.
+Honor explicit directions, no-mountain/no-water preferences and native shore/river boundaries FIRST; adapt only the conflicting targets.
+Sector coordinates locate the main proposed visual mass, not the settlement or a mandatory mountain. Cluster count and open connections describe topology, not just edge noise.
+Occupancy is an approximate share of the WHOLE MAP for new dominant land/water masses combined. On flat tiles use sparse additions; on mountain tiles work around native mountains.
+The open-ground target is an aim for connected usable land, not permission to erase native terrain or paint a flat soil disk. Native ground can already satisfy it without any floor shape.
+For an existing authored map or a scoped request, apply the axes only to permitted local additions/edits.
+Do not create extra mountains/water, replace existing layouts, repaint ground or add bonuses merely to satisfy an axis.
+Use only supported executable fields. A seed below is a variant hint for NEW naturally seeded shapes only;
+preserve all existing variants on edits and never insert these prose axes as schema fields.
+Keep the actual map seed fixed. Repeated recommendations should explore different compositions, not just new edge noise.
+Option 1 geometry targets: main visual mass in the southwest around [0.24,0.30]; one curved OPEN boundary with unequal ends; do not close it into a ring. New dominant masses occupy about 10% of the map; aim for at least 45% connected usable ground where the tile allows it. Space: unequal usable clearings connected by generous open ground. Relationship: use an extended uneven boundary as the organizing feature, with a quiet opposite side. New-shape variant hint: 233879.
+Option 2 geometry targets: main visual mass in the south around [0.48,0.23]; THREE small unequal groups with generous gaps; do not merge them into a single side wall. New dominant masses occupy about 23% of the map; aim for at least 55% connected usable ground where the tile allows it. Space: an off-center broad living area opening toward the rest of the map. Relationship: put the visual focus near a meeting of features while keeping the center usable. New-shape variant hint: 503571.
+Option 3 geometry targets: main visual mass in the southeast around [0.76,0.29]; one branching mass with TWO unequal arms and broad open ground on both sides; no enclosure. New dominant masses occupy about 16% of the map; aim for at least 65% connected usable ground where the tile allows it. Space: a broad gently bending living area, never a narrow slit. Relationship: place supporting scenery along a shared edge of the living space. New-shape variant hint: 885877.
+Honor the requested option count; these directions are inspiration, not a requirement to return all three. Keep this brief internal and show executable candidates through action:recommend.

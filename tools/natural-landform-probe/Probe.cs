@@ -80,7 +80,14 @@ namespace MapGenAI.NaturalProbe
                             jobs.Enqueue(new Job{name=Path.GetFileNameWithoutExtension(path),state=replay,tile=target});
                         }
                         Check(jobs.Count>0,"Recorded provider states supplied");
+                        VerifyPersistence(jobs.Peek().state);
                         active=true;Next();return;
+                    }
+                    if(group=="composition")
+                    {
+                        foreach(string kind in new[]{"lakeside","winding_valley","branching_ridges","open_basin"})
+                            jobs.Enqueue(new Job{name=kind,state=MapGenAI.TestFixtures.LandscapeCompositionFixtures.Create(kind),tile=target});
+                        VerifyPersistence(jobs.Peek().state);active=true;Next();return;
                     }
                     jobs.Enqueue(new Job{name="baseline",state=new TileMapState(),tile=target});
                     foreach(string kind in new[]{"open_basin","winding_valley","foothills"})foreach(int variant in new[]{0,11,23,47,89})jobs.Enqueue(new Job{name=kind+"-"+variant,state=State(kind,variant),tile=target});
@@ -118,7 +125,7 @@ namespace MapGenAI.NaturalProbe
             var parameters=new Dictionary<string,object>{{"elevation_shapes",ShapeEdits.Describe(state.elevationShapes)},{"structure_ops",state.structures.Select(s=>new Dictionary<string,object>{{"op","add"},{"structure",s}}).ToList()}};
             var data=MapParameterParser.Parse(SimpleJson.Parse(SimpleJson.Serialize(parameters)));
             AccessTools.Method(typeof(Dialog_TextToMap),"ApplyEdits").Invoke(dialog,new object[]{new List<MapParamsData>{data},null});
-            Check(MapGenParams.CaptureState(target).elevationShapes.Any(s=>s.landform=="open_basin"),"Dialog applies a natural layout through normal edit pipeline");
+            Check(MapGenParams.CaptureState(target).elevationShapes.Count==state.elevationShapes.Count,"Dialog applies all fixture areas through normal edit pipeline");
             AccessTools.Method(typeof(Dialog_TextToMap),"DoUndo").Invoke(dialog,null);
             Check(MapStateCodec.Serialize(MapGenParams.CaptureState(target))==before,"Dialog Undo restores the original state");dialog.PostClose();
         }
@@ -126,18 +133,19 @@ namespace MapGenAI.NaturalProbe
         static void Next()
         {
             preview?.Dispose();preview=null;
-            if(jobs.Count==0){if(group=="followup")FullMap();Finish(null);return;}
+            if(jobs.Count==0){if(group=="followup")FullMap();else if(group=="composition")FullReplay(Path.Combine(output,"winding_valley-state.json"));else if(GenCommandLine.TryGetCommandLineArg("mapgenAIProbeFullState",out string fullState))FullReplay(fullState);Finish(null);return;}
             current=jobs.Dequeue();audit=null;geometryMs=0;deadline=DateTime.UtcNow.AddMinutes(3);
             Save("progress.txt",current.name);Save(current.name+"-state.json",MapStateCodec.Serialize(current.state));
-            var parameters=new Dictionary<string,object>{{"elevation_shapes",ShapeEdits.Describe(current.state.elevationShapes)},{"river",new Dictionary<string,object>{{"present",current.state.hasRiver}}}};
-            if(current.state.structures.Count>0)
-            {
-                var edits=new List<object>();foreach(var s in current.state.structures)edits.Add(new Dictionary<string,object>{{"op","add"},{"structure",s}});parameters["structure_ops"]=edits;
-            }
+            // Retain every scalar/feature/road setting in the baseline, and replay areas as changes
+            // so the production preview's new-water loss detector also observes their footprints.
+            var baseline=current.state.Clone();baseline.elevationShapes.Clear();baseline.structures.Clear();
+            var parameters=new Dictionary<string,object>{{"elevation_shapes",ShapeEdits.Describe(current.state.elevationShapes)}};
+            if(current.state.structures.Count>0)parameters["structure_ops"]=current.state.structures.Select(s=>new Dictionary<string,object>{{"op","add"},{"structure",s}}).ToList();
             string command=SimpleJson.Serialize(new Dictionary<string,object>{{"action","generate"},{"params",parameters}});
             // Also renders an intentional no-op baseline, which the suggestion UI does not offer.
             var plan=(RecommendationPlan)Activator.CreateInstance(typeof(RecommendationPlan),BindingFlags.Instance|BindingFlags.NonPublic,null,new object[]{command,"controlled native fixture"},null);
-            preview=new RecommendationPreviews(current.tile,new[]{plan},new TileMapState());
+            Check(MapStateCodec.Serialize(plan.Resolve(baseline))==MapStateCodec.Serialize(current.state),current.name+": replay preserves the complete provider state");
+            preview=new RecommendationPreviews(current.tile,new[]{plan},baseline);
         }
         public static void Tick()
         {
@@ -158,6 +166,8 @@ namespace MapGenAI.NaturalProbe
             if(current==null || GenerationContext.State==null)return;
             var regions=GenerationContext.Regions(map);var source=GenerationContext.State.elevationShapes.FirstOrDefault(s=>s.type=="landform");
             int water=0,mountains=0,floor=0,floorRocks=0,selectedSoil=0;var mask=source==null?new bool[map.Size.x*map.Size.z]:regions.Mask(source.id);
+            foreach(var shape in GenerationContext.State.elevationShapes.Where(s=>s.type=="composite" && s.fill==null && s.compositeOps.All(o=>o.fill==null) && s.compositeOps.Any(o=>o.e>0 && o.e<.1f)))
+            {var floorMask=regions.Mask(shape.id);for(int i=0;i<mask.Length;i++)mask[i]|=floorMask[i];}
             foreach(var c in map.AllCells)
             {
                 int i=c.z*map.Size.x+c.x;var terrain=map.terrainGrid.TerrainAt(c);if(terrain.IsWater)water++;if(MapGenerator.Elevation[c]>=.7f)mountains++;
@@ -168,6 +178,25 @@ namespace MapGenAI.NaturalProbe
             string rivers=string.Join(",",map.AllCells.Where(c=>map.terrainGrid.TerrainAt(c).IsRiver).Select(c=>c.z*map.Size.x+c.x));
             string oceans=string.Join(",",map.AllCells.Where(c=>map.terrainGrid.TerrainAt(c).defName.Contains("Ocean")).Select(c=>c.z*map.Size.x+c.x));
             audit=new Dictionary<string,object>{{"water",water},{"mountains",mountains},{"plannedFloor",floor},{"rocksInPlannedFloor",floorRocks},{"actualSelectedSoil",selectedSoil},{"coverage",report?.coverage},{"placements",report?.placements},{"issues",report?.issues},{"riverCells",rivers},{"oceanCells",oceans}};
+            var relations=new List<object>();
+            foreach(var shape in GenerationContext.State.elevationShapes.Where(s=>s.anchor!=null))
+            {
+                var child=regions.Mask(shape.id);var parent=regions.Mask(shape.anchor);int cells=0,violations=0;
+                for(int i=0;i<child.Length;i++)if(child[i]){cells++;if(parent[i]==(shape.placement=="beside"))violations++;}
+                relations.Add(new Dictionary<string,object>{{"id",shape.id},{"anchor",shape.anchor},{"placement",shape.placement},{"cells",cells},{"violations",violations}});
+            }
+            audit["relationships"]=relations;
+        }
+        static void FullReplay(string path)
+        {
+            current=new Job{name="fullmap-recorded",state=MapStateCodec.Deserialize(File.ReadAllText(path)),tile=target};
+            MapGenParams.RestoreSnapshot(current.state,target);
+            var parent=(MapParent)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);parent.Tile=target;parent.SetFaction(Faction.OfPlayer);Find.WorldObjects.Add(parent);
+            var timer=Stopwatch.StartNew();var map=MapGenerator.GenerateMap(new IntVec3(250,1,250),parent,DefDatabase<MapGeneratorDef>.GetNamed("Base_Player"));
+            var report=AuthoringGeneration.Latest(target,current.state);
+            Check(report!=null && report.issues.Count==0,"Recorded composition full map has no authoring failure");
+            Check(map.AllCells.Any(c=>map.terrainGrid.TerrainAt(c).IsWater),"Recorded full map retains actual water");
+            results.Add(new Dictionary<string,object>{{"id",current.name},{"seconds",timer.Elapsed.TotalSeconds},{"audit",audit},{"report",report}});
         }
         static void FullMap()
         {
@@ -185,7 +214,7 @@ namespace MapGenAI.NaturalProbe
         static void Finish(Exception error)
         {
             active=false;preview?.Dispose();preview=null;
-            Save("result.json",SimpleJson.Serialize(new Dictionary<string,object>{{"ok",error==null},{"checks",checks},{"results",results},{"error",error?.ToString()},{"newProviderCalls",0},{"note","Actual native MapPreview textures and full map in an owned disposable headless copy. Controlled fixtures, not live language-model or GUI screenshots."}}));
+            Save("result.json",SimpleJson.Serialize(new Dictionary<string,object>{{"ok",error==null},{"checks",checks},{"results",results},{"error",error?.ToString()},{"newProviderCalls",0},{"note","Actual native MapPreview textures in an owned disposable headless copy. A fullmap result row is present only when that stage ran. Inputs may be controlled fixtures or recorded provider states; these are not GUI screenshots."}}));
             if(error!=null)Log.Error("[NaturalProbe] "+error);Application.Quit();
         }
     }

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><TargetFramework>net472</TargetFramework><LangVersion>9</LangVersion><AssemblyName>MapGenAI.NaturalProbe</AssemblyName><GameManaged>G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed</GameManaged></PropertyGroup>
   <ItemGroup>
+    <Compile Include="../fixtures/LandscapeCompositionFixtures.cs" Link="LandscapeCompositionFixtures.cs" />
     <Reference Include="MapGenAI"><HintPath>../../dev/Assemblies/MapGenAI.dll</HintPath><Private>False</Private></Reference>
     <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)/Assembly-CSharp.dll</HintPath><Private>False</Private></Reference>
     <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)/UnityEngine.CoreModule.dll</HintPath><Private>False</Private></Reference>

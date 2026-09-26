@@ -1,0 +1,93 @@
+{
+  "action": "generate",
+  "description": "양쪽에 비대칭 능선이 배치된 완만하게 굽은 골짜기와 넓은 정착 평지",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "west_mountain_ridge",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "w_path",
+              "prim": "path",
+              "verts": [
+                [0.12, 0.05],
+                [0.22, 0.45],
+                [0.15, 0.95]
+              ],
+              "w": 0.26
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "w_path",
+              "e": 0.95,
+              "f": 0.04
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "east_mountain_ridge",
+          "type": "composite",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "e_path",
+              "prim": "path",
+              "verts": [
+                [0.85, 0.08],
+                [0.78, 0.55],
+                [0.88, 0.92]
+              ],
+              "w": 0.2
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "e_path",
+              "e": 0.9,
+              "f": 0.03
+            }
+          ]
+        }
+      },
+      {
+        "op": "add",
+        "shape": {
+          "id": "valley_clearing",
+          "type": "composite",
+          "details": "natural",
+          "edge_roughness": "low",
+          "shapes": [
+            {
+              "id": "c_path",
+              "prim": "path",
+              "verts": [
+                [0.48, 0.0],
+                [0.52, 0.5],
+                [0.5, 1.0]
+              ],
+              "w": 0.45
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "c_path",
+              "e": 0.05,
+              "f": 0.03
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

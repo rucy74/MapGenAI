@@ -1,0 +1,11 @@
+{
+  "capture": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-landscape-relations\\native-n2702\\system-prompt.txt",
+  "utc": "2026-09-26T11:52:00.5243215Z",
+  "recommendationSeeds": [
+    1772801137,
+    623930870,
+    1065105256
+  ],
+  "korean": true,
+  "scope": "Exact captured native prompt except its checked current-state section; current production variation is appended for new recommendations. The capture\u0027s initial few-shot examples remain in case 6, whereas the live dialog omits them after authored terrain exists. Schema and intent observations use linked production code with offline game stubs. Loaded TerrainDef, TileMutator feature prerequisites, native geometry placement, vegetation, aesthetics and visual candidate diversity are NOT validated here. No application to live game state."
+}

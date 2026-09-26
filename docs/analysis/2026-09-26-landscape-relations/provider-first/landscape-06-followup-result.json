@@ -1,0 +1,17 @@
+{
+  "id": "landscape-06-followup",
+  "request": "\uC5F0\uBABB\uC740 \uD3C9\uC9C0 \uC548\uCABD \uAC00\uC7A5\uC790\uB9AC\uB85C \uC62E\uACA8 \uC918. \uB098\uBA38\uC9C0\uB294 \uC720\uC9C0\uD574.",
+  "called": true,
+  "ok": false,
+  "expectedAction": "generate",
+  "variationSeed": null,
+  "featureValidator": "Not run: native feature/material validation is unavailable in this linked offline harness.",
+  "action": "ask",
+  "errorType": "InvalidOperationException",
+  "error": "Unexpected response action: ask",
+  "inputSnapshotUntouched": true,
+  "modelVersion": "gemini-3.8-flash",
+  "inputTokens": 19234,
+  "outputTokens": 88,
+  "thinkingTokens": 0
+}

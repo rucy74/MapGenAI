@@ -1,0 +1,21 @@
+{
+  "id": "landscape-02-valley",
+  "request": "\uC644\uB9CC\uD558\uAC8C \uAD7D\uC740 \uACE8\uC9DC\uAE30\uB97C \uB9CC\uB4E4\uC5B4 \uC918. \uC591\uCABD \uC0B0\uC904\uAE30\uB294 \uBE44\uB300\uCE6D\uC73C\uB85C, \uC815\uCC29\uD560 \uD3C9\uC9C0\uB294 \uB113\uAC8C.",
+  "called": true,
+  "ok": true,
+  "expectedAction": "generate",
+  "variationSeed": null,
+  "featureValidator": "Not run: native feature/material validation is unavailable in this linked offline harness.",
+  "action": "generate",
+  "schemaValid": true,
+  "intentCheck": true,
+  "sameGlobalSettings": true,
+  "usesCommonPath": true,
+  "hasWater": false,
+  "persistentRelations": 0,
+  "inputSnapshotUntouched": true,
+  "modelVersion": "gemini-3.8-flash",
+  "inputTokens": 17296,
+  "outputTokens": 670,
+  "thinkingTokens": 0
+}

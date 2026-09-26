@@ -1,0 +1,21 @@
+{
+  "id": "landscape-01-lakeside",
+  "request": "\uC0B0 \uC5C6\uC774 \uC790\uC5F0\uC2A4\uB7EC\uC6B4 \uD638\uC22B\uAC00 \uC815\uCC29\uC9C0\uB97C \uB9CC\uB4E4\uC5B4 \uC918. \uB113\uAC8C \uC774\uC5B4\uC9C4 \uB9C8\uB978 \uB545\uC744 \uB0A8\uACA8 \uC918.",
+  "called": true,
+  "ok": true,
+  "expectedAction": "generate",
+  "variationSeed": null,
+  "featureValidator": "Not run: native feature/material validation is unavailable in this linked offline harness.",
+  "action": "generate",
+  "schemaValid": true,
+  "intentCheck": true,
+  "sameGlobalSettings": false,
+  "usesCommonPath": true,
+  "hasWater": true,
+  "persistentRelations": 0,
+  "inputSnapshotUntouched": true,
+  "modelVersion": "gemini-3.8-flash",
+  "inputTokens": 17292,
+  "outputTokens": 259,
+  "thinkingTokens": 0
+}

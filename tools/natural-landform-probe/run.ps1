@@ -1,4 +1,4 @@
-param([string]$Run='n1',[string]$ProductDll,[string]$ProbeDll,[ValidateSet("open_basin","winding_valley","foothills","followup")][string]$Set="open_basin",[switch]$Graphics,[ValidateSet("classic","organic")][string]$Layout="classic",[string]$Evidence="2026-09-23-natural-landforms",[string]$StatesDirectory)
+param([string]$Run='n1',[string]$ProductDll,[string]$ProbeDll,[ValidateSet("open_basin","winding_valley","foothills","followup","composition")][string]$Set="open_basin",[switch]$Graphics,[ValidateSet("classic","organic")][string]$Layout="classic",[string]$Evidence="2026-09-23-natural-landforms",[string]$StatesDirectory,[string]$FullState)
 $ErrorActionPreference='Stop'
 if($Run -notmatch '^n[0-9]+$'){throw 'Invalid run id'}
 if($Evidence -notmatch '^20[0-9]{2}-[0-9]{2}-[0-9]{2}-[a-z-]+$'){throw 'Invalid evidence folder'}
@@ -30,6 +30,7 @@ $config='<ModsConfigData><version>'+$version+'</version><activeMods>'+ (($active
 $arguments=@(('-mapgenAIProbeSet='+$Set),('-mapgenAIProbeLayout='+$Layout),'-batchmode','-nographics',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$output+'"'),'-logFile',('"'+(Join-Path $output 'Player.log')+'"'))
 if($Graphics){$arguments=@($arguments | Where-Object {$_ -ne '-nographics'})+@('-force-d3d11')}
 if($StatesDirectory){$arguments+=('-mapgenAIProbeStates="'+(Resolve-Path -LiteralPath $StatesDirectory).Path+'"')}
+if($FullState){$arguments+=('-mapgenAIProbeFullState="'+(Resolve-Path -LiteralPath $FullState).Path+'"')}
 $process=Start-Process -FilePath (Join-Path $root 'RimWorldWin64.exe') -WorkingDirectory $root -ArgumentList $arguments -WindowStyle Hidden -PassThru
 @{pid=$process.Id;root=$root;profile=$probeProfile;output=$output;sourceDllSha256=(Get-FileHash -LiteralPath $ProductDll).Hash;started=(Get-Date).ToString('o')}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'launch.json') -Encoding utf8
 Write-Output ('Headless owned process '+$process.Id)

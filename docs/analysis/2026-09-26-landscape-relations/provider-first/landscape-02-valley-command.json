@@ -1,0 +1,1 @@
+{"action":"generate","description":"완만하게 굽은 비대칭 골짜기와 넓은 정착 평지","params":{"shape_ops":[{"op":"add","shape":{"id":"winding_valley_main","type":"landform","landform":"winding_valley","direction":"top","size":0.9,"gap":0.26,"layout":"organic","details":"natural","variant":412}}]}}

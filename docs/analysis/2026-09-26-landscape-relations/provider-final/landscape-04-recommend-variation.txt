@@ -1,0 +1,14 @@
+
+FRESH RECOMMENDATION DESIGN BRIEF (not additional user requirements):
+The following are independently combined composition axes, NOT predefined terrain recipes.
+User preferences, current tile prerequisites, existing water and authored terrain take priority over every axis.
+Use the brief to explore different arrangements within those constraints; adapt or discard any conflicting axis.
+For an existing authored map or a scoped request, apply the axes only to permitted local additions/edits.
+Do not create extra mountains/water, replace existing layouts, repaint ground or add bonuses merely to satisfy an axis.
+Use only supported executable fields. A seed below is a variant hint for NEW naturally seeded shapes only;
+preserve all existing variants on edits and never insert these prose axes as schema fields.
+Keep the actual map seed fixed. Repeated recommendations should explore different compositions, not just new edge noise.
+Option 1: let uneven branching boundaries shape open ground without enclosing it; unequal usable clearings connected by generous open ground; let large and small features taper into a quieter open area. New-shape variant hint: 270630.
+Option 2: use unequal offset groups rather than a centered enclosure; one broad continuous living area with irregular edges; use an extended uneven boundary as the organizing feature, with a quiet opposite side. New-shape variant hint: 916567.
+Option 3: use sparse, restrained accents within predominantly open ground; a broad gently bending living area, never a narrow slit; put the visual focus near a meeting of features while keeping the center usable. New-shape variant hint: 563418.
+Honor the requested option count; these directions are inspiration, not a requirement to return all three. Keep this brief internal and show executable candidates through action:recommend.

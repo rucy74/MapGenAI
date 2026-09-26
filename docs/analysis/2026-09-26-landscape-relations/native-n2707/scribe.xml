@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NaturalLandformProbe>
+	<fixture>
+		<state>
+			<elevationShapes>
+				<li>
+					<id>lakeside_water</id>
+					<type>composite</type>
+					<edge_roughness>medium</edge_roughness>
+					<variant>271</variant>
+					<details>natural</details>
+					<compositeJson>{"shapes":[{"center":null,"h":0,"id":"axis","n":0,"prim":"path","r":0,"r2":0,"rot":0,"size":0,"verts":[[0.18,0.3],[0.22,0.42],[0.16,0.56],[0.21,0.69]],"w":0.15}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.008,"fill":"WaterShallow","from":null,"k":0,"op":"add","outId":null,"s":"axis"}]}</compositeJson>
+				</li>
+				<li>
+					<id>lakeside_plain</id>
+					<type>composite</type>
+					<direction>right</direction>
+					<edge_roughness>low</edge_roughness>
+					<variant>272</variant>
+					<details>natural</details>
+					<landscapeAnchor>lakeside_water</landscapeAnchor>
+					<landscapePlacement>beside</landscapePlacement>
+					<compositeJson>{"shapes":[{"center":null,"h":0,"id":"axis","n":0,"prim":"path","r":0,"r2":0,"rot":0,"size":0,"verts":[[0.5,0.32],[0.47,0.44],[0.52,0.57],[0.51,0.69]],"w":0.45}],"compose":[{"a":null,"b":null,"e":0.05,"f":0.018,"fill":null,"from":null,"k":0,"op":"add","outId":null,"s":"axis"}]}</compositeJson>
+				</li>
+			</elevationShapes>
+			<structures />
+			<localRoads />
+			<imageMap IsNull="True" />
+			<mutators />
+			<removeMutators />
+			<removeFeatureCategories />
+			<rockTypes />
+		</state>
+	</fixture>
+</NaturalLandformProbe>

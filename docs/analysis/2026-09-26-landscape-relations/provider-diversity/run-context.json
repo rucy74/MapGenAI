@@ -1,0 +1,13 @@
+{
+  "mode": "landscape-diversity",
+  "plannedCalls": 3,
+  "capture": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-landscape-relations\\native-n2703\\system-prompt.txt",
+  "utc": "2026-09-26T12:03:32.9021102Z",
+  "recommendationSeeds": [
+    1202155448,
+    518191422,
+    849930709
+  ],
+  "korean": true,
+  "scope": "Exact captured native prompt except its checked current-state section; current production variation is appended for new recommendations. All three recommendation calls are independent and use the same empty authored state and captured native tile. Schema and intent observations use linked production code with offline game stubs. Loaded TerrainDef, TileMutator feature prerequisites, native geometry placement, vegetation, aesthetics and visual candidate diversity are NOT validated here. No application to live game state."
+}
