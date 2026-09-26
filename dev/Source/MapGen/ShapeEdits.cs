@@ -150,7 +150,7 @@ namespace MapGenAI.MapGen
                     // updates and explicit details:none retain their previous behavior.
                     if(added.type=="composite" && added.details==null &&
                         ContourWarp.Amount(added.edge_roughness)>0 &&
-                        added.compositeOps.Any(o=>LandscapeBlendField.OrdinaryFreshwater(added.fill ?? o.fill) || (added.fill ?? o.fill)=="water"))
+                        TerrainMaterials.HasRenderedFill(added,fill=>LandscapeBlendField.OrdinaryFreshwater(TerrainMaterials.DefName(fill))))
                         added.details="natural";
                     if (shapes.Any(s => s.id == added.id && added.id != null)) throw new FormatException("Terrain ID already exists: " + added.id);
                     shapes.Add(added); AssignIds(shapes);

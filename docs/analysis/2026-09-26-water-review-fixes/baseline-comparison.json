@@ -1,0 +1,102 @@
+[
+  {
+    "biome": "temperate",
+    "version": "old",
+    "phase": "preview",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46661,
+    "influencedCells": [
+      23868,
+      24114,
+      24118,
+      24364,
+      24365,
+      24366,
+      24367,
+      24368
+    ]
+  },
+  {
+    "biome": "temperate",
+    "version": "old",
+    "phase": "full",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46661,
+    "influencedCells": [
+      23868,
+      24114,
+      24118,
+      24364,
+      24365,
+      24366,
+      24367,
+      24368
+    ]
+  },
+  {
+    "biome": "temperate",
+    "version": "new",
+    "phase": "preview",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46661,
+    "influencedCells": []
+  },
+  {
+    "biome": "temperate",
+    "version": "new",
+    "phase": "full",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46661,
+    "influencedCells": []
+  },
+  {
+    "biome": "arid",
+    "version": "old",
+    "phase": "preview",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46808,
+    "influencedCells": [
+      23868,
+      24114,
+      24118,
+      24364,
+      24365,
+      24366,
+      24367,
+      24368
+    ]
+  },
+  {
+    "biome": "arid",
+    "version": "old",
+    "phase": "full",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46808,
+    "influencedCells": [
+      23868,
+      24114,
+      24118,
+      24364,
+      24365,
+      24366,
+      24367,
+      24368
+    ]
+  },
+  {
+    "biome": "arid",
+    "version": "new",
+    "phase": "preview",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46808,
+    "influencedCells": []
+  },
+  {
+    "biome": "arid",
+    "version": "new",
+    "phase": "full",
+    "inputDifferenceCells": 9,
+    "commonDryCells": 46808,
+    "influencedCells": []
+  }
+]

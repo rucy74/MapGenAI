@@ -107,9 +107,10 @@ static class RecommendationGuideTests
             foreach(bool ko in new[]{true,false})
             foreach(bool authored in new[]{true,false})
             foreach(bool existingWater in new[]{true,false})
+            foreach(bool authoredWater in new[]{true,false})
             for(int trial=0;trial<50;trial++)
             {
-                var guide=new RecommendationGuide(ko,authored,existingWater);
+                var guide=new RecommendationGuide(ko,authored,existingWater,authoredWater);
                 for(int i=0;i<80;i++)
                 {
                     switch(random.Next(5))
@@ -213,11 +214,72 @@ static class RecommendationGuideTests
         Check("Changing layout scope clears later preferences rather than retaining stale authorization",()=>
         {
             var guide=new RecommendationGuide(false,true);
-            Pick(guide,"replace");Pick(guide,"scenery");guide.Review();guide.Back();guide.Back();guide.Back();
+            Pick(guide,"replace");var chosenDetail=guide.Current.Choices.Single(c=>c.Id=="scenery").Detail;
+            Pick(guide,"scenery");guide.Review();guide.Back();guide.Back();guide.Back();
             Equal("scope",guide.Current.Id);Pick(guide,"refine");Equal(null,guide.Selected);
             guide.Review();Equal(true,guide.Submit(out var request));
             Equal(false,request.Contains("replace_shapes:true"));
-            Equal(false,request.Contains("Scenery"));
+            Equal(false,guide.Summary().Contains("Scenery"));Equal(false,request.Contains(chosenDetail));
+        });
+        Check("Replacement water choices use tile water rather than authored water being replaced",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            foreach(bool tileWater in new[]{true,false})
+            foreach(bool authoredWater in new[]{true,false})
+            foreach(var scope in new[]{"refine","replace","any"})
+            {
+                var guide=new RecommendationGuide(ko,true,tileWater,authoredWater);
+                Pick(guide,scope);Pick(guide,"scenery");
+                var open=guide.Current.Choices.Single(c=>c.Id=="open");
+                Equal(true,open.Detail.Contains(ko?"새 산을 더하지 않고":"without adding mountains"));
+                if(scope=="replace")
+                {
+                    Equal(true,open.Detail.Contains(ko?"타일의 원래 산은 살리고":"Keep the tile's original mountains"));
+                    Equal(true,open.Detail.Contains(ko?"직접 그린 산":"manually drawn mountains"));
+                }
+                Pick(guide,"open");
+                var existing=guide.Current.Choices.Single(c=>c.Id=="existing");
+                if(scope=="replace")
+                {
+                    Equal(true,existing.Detail.Contains(ko?"그려 넣은":"manually drawn"));
+                    Equal(true,existing.Detail.Contains(ko?"새 물은 추가하지":"add no new water"));
+                }
+                Pick(guide,"existing");
+                bool retainedWater=tileWater || (authoredWater && scope!="replace");
+                Equal(retainedWater,guide.Current.Choices.Any(c=>c.Id=="flowing"));
+                Pick(guide,retainedWater?"flowing":"together");Pick(guide,"distinct");
+                Equal(retainedWater,guide.Current.Id=="focus");
+                if(retainedWater) Pick(guide,"water");
+                Pick(guide,"layout");Equal(true,guide.Submit(out var request));
+                Equal(true,request.Contains(existing.Detail));
+                Equal(true,request.Contains(open.Detail));
+                Equal(true,request.Contains(ko?"어떤 우선순위도 명시한 금지":"any other priority must not override explicit restrictions"));
+                Equal(true,request.Contains(ko?"기존 특징 보존 조건을 무효화하지 않아":"requirements to preserve existing features"));
+                Equal(scope=="replace",request.Contains("replace_shapes:true"));
+                Equal(true,RecommendationPlan.IsRequest(request));
+            }
+        });
+        Check("Changing refine to replace drops authored-water follow-ups and Back can restore them",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            {
+                var guide=new RecommendationGuide(ko,true,false,true);
+                Pick(guide,"refine");Pick(guide,"scenery");Pick(guide,"open");Pick(guide,"existing");
+                var flowing=guide.Current.Choices.Single(c=>c.Id=="flowing");
+                Pick(guide,"flowing");Pick(guide,"distinct");Pick(guide,"water");Pick(guide,"layout");
+                Equal(true,guide.Reviewing);guide.Back();
+                while(guide.Position>0)guide.Back();
+                Pick(guide,"replace");
+                Equal(null,guide.Selected);Equal(false,guide.Summary().Contains(flowing.Detail));
+                Pick(guide,"scenery");Pick(guide,"open");Pick(guide,"existing");
+                Equal(false,guide.Select("flowing"));
+                Pick(guide,"together");Pick(guide,"distinct");Equal("features",guide.Current.Id);Equal(null,guide.Selected);
+                while(guide.Position>0)guide.Back();
+                Pick(guide,"refine");Pick(guide,"scenery");Pick(guide,"open");Pick(guide,"existing");
+                Equal(true,guide.Select("flowing"));Equal(true,guide.Next());
+                guide.Review();Equal(true,guide.Submit(out var request));
+                Equal(false,request.Contains("replace_shapes:true"));Equal(true,request.Contains(flowing.Detail));
+            }
         });
         Check("New recommendation briefs vary independent composition axes and remain reproducible",()=>
         {

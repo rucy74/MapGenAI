@@ -46,8 +46,8 @@ namespace MapGenAI.MapGen
                 freshwater[i]=water[i] && terrain.waterBodyType==WaterBodyType.Freshwater && LandscapeBlendField.OrdinaryFreshwater(terrain.defName);
                 shoreSources[i]=owners[i]!=null && !explicitAreas[i] && freshwater[i];
             }
-            var shoreDistance=new SpatialDistance(cols,rows,shoreSources);
-            var freshDistance=new SpatialDistance(cols,rows,freshwater);
+            var shoreWater=new ShorelineWater(cols,rows,shoreSources,freshwater,explicitAreas);
+            var shoreDistance=shoreWater.OriginDistance;
             var waterDistance=new SpatialDistance(cols,rows,water);var rockDistance=new SpatialDistance(cols,rows,rock);
             var plants=Enumerable.Repeat(1f,count).ToArray();regions.VegetationWeights=plants;
             using(map.pathing.DisableIncrementalScope())
@@ -63,23 +63,26 @@ namespace MapGenAI.MapGen
                 if(bank)
                 {
                     int source=shoreDistance.nearestZ[i]*cols+shoreDistance.nearestX[i];
-                    bool nativeMud=biome.terrainPatchMakers?.Any(p=>p?.thresholds?.Any(t=>t?.terrain==TerrainDefOf.Mud)==true)==true;
+                    bool nativeMud=NativeGround(biome,TerrainDefOf.Mud);
                     bool damp=LandscapeBlendField.DampSoilBank(soil && nativeMud,biome.wildPlantsCareAboutLocalFertility,map.TileInfo.temperature,map.TileInfo.rainfall,before.defName);
                     // The authored mask bounds permission, not the water's final feathered edge.
-                    // Measure material transitions from the actual generated freshwater boundary.
-                    var shore=owners[source].SampleShore(cell.x,cell.z,(float)Math.Sqrt(freshDistance.squared[i]),(float)Math.Sqrt(rockDistance.squared[i]),damp);
-                    sample.ground=shore.ground;
+                    // Follow only locally connected water, not a separate nearby river or pool.
+                    float rockGap=(float)Math.Sqrt(rockDistance.squared[i]);
+                    var shore=owners[source].SampleShore(cell.x,cell.z,(float)Math.Sqrt(shoreWater.WaterDistance.squared[i]),rockGap,damp,shoreWater.Influence(i));
+                    sample.ground=LandscapeBlendField.BankMaterial(shore.ground,before.defName,NativeGround(biome,TerrainDefOf.Sand),NativeGround(biome,TerrainDefOf.Gravel),rockGap);
                     if(owners[i]==null)sample.vegetation=shore.vegetation;
                 }
                 TerrainDef after=sample.ground==LandscapeBlendField.Ground.Sand?TerrainDefOf.Sand:
                     sample.ground==LandscapeBlendField.Ground.Gravel?TerrainDefOf.Gravel:
-                    sample.ground==LandscapeBlendField.Ground.Mud?TerrainDefOf.Mud:
-                    sample.ground==LandscapeBlendField.Ground.Soil && before!=TerrainDefOf.Sand?TerrainDefOf.Soil:before;
+                    sample.ground==LandscapeBlendField.Ground.Mud?TerrainDefOf.Mud:before;
+                // A Soil sample retains the current native Soil/Sand; details do not create farmland.
                 if(after!=before){map.terrainGrid.SetTerrain(cell,after);if(AuthoringGeneration.Current!=null)AuthoringGeneration.Current.surfaceBlendCells++;}
                 // Deserts and special native density rules keep their own distribution.
                 if(biome.wildPlantsCareAboutLocalFertility)
                 {plants[i]=sample.vegetation;if(AuthoringGeneration.Current!=null)AuthoringGeneration.Current.vegetationPlanCells++;}
             }
         }
+        static bool NativeGround(BiomeDef biome,TerrainDef terrain)=>biome.terrainsByFertility.Any(t=>t.terrain==terrain) ||
+            biome.terrainPatchMakers?.Any(p=>p?.thresholds?.Any(t=>t?.terrain==terrain)==true)==true;
     }
 }

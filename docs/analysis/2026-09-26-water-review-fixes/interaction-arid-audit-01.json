@@ -1,0 +1,521 @@
+{
+  "ok": false,
+  "checks": [
+    {
+      "name": "Paired detector ignores only the actually changed water input",
+      "ok": true
+    },
+    {
+      "name": "Paired detector catches one dry shore mutation beside changed water input",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-reference-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-water-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-connected-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-explicit-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-arid-special-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "All five interaction controls were exercised",
+      "ok": true
+    },
+    {
+      "name": "connected-water/preview: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "connected-water/preview: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "connected-water/preview: connected water changes at least one common dry shore cell",
+      "ok": false
+    },
+    {
+      "name": "connected-water/preview: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "connected-water/full: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "connected-water/full: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "connected-water/full: connected water changes at least one common dry shore cell",
+      "ok": false
+    },
+    {
+      "name": "connected-water/full: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/preview: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/preview: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/preview: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/preview: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/full: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/full: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/full: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "explicit-water/full: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/preview: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/preview: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/preview: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/preview: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/full: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/full: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/full: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "nearby-water/full: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "special-water/preview: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "special-water/preview: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "special-water/preview: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "special-water/preview: independently recorded connection polarity",
+      "ok": true
+    },
+    {
+      "name": "special-water/full: identical native input outside precisely recorded water injection",
+      "ok": true
+    },
+    {
+      "name": "special-water/full: measured common dry cells exist",
+      "ok": true
+    },
+    {
+      "name": "special-water/full: unrelated or explicit water cannot influence common dry shore cells",
+      "ok": true
+    },
+    {
+      "name": "special-water/full: independently recorded connection polarity",
+      "ok": true
+    }
+  ],
+  "dllSha256": "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084",
+  "summaries": [
+    {
+      "run": "shore-arid-reference-01",
+      "nativeChecks": 32,
+      "changedTo": {
+        "preview": {
+          "Sand": 105
+        },
+        "full": {
+          "Sand": 105
+        }
+      }
+    },
+    {
+      "run": "shore-arid-water-01",
+      "nativeChecks": 32,
+      "changedTo": {
+        "preview": {
+          "Sand": 105
+        },
+        "full": {
+          "Sand": 105
+        }
+      }
+    },
+    {
+      "run": "shore-arid-connected-01",
+      "nativeChecks": 32,
+      "changedTo": {
+        "preview": {
+          "Sand": 105
+        },
+        "full": {
+          "Sand": 105
+        }
+      }
+    },
+    {
+      "run": "shore-arid-explicit-01",
+      "nativeChecks": 32,
+      "changedTo": {
+        "preview": {
+          "Sand": 105
+        },
+        "full": {
+          "Sand": 105
+        }
+      }
+    },
+    {
+      "run": "shore-arid-special-01",
+      "nativeChecks": 32,
+      "changedTo": {
+        "preview": {
+          "Sand": 105
+        },
+        "full": {
+          "Sand": 105
+        }
+      }
+    }
+  ],
+  "interactionSummary": [
+    {
+      "case": "connected-water",
+      "phase": "preview",
+      "commonDryCells": 46805,
+      "influencedCells": []
+    },
+    {
+      "case": "connected-water",
+      "phase": "full",
+      "commonDryCells": 46805,
+      "influencedCells": []
+    },
+    {
+      "case": "explicit-water",
+      "phase": "preview",
+      "commonDryCells": 46805,
+      "influencedCells": []
+    },
+    {
+      "case": "explicit-water",
+      "phase": "full",
+      "commonDryCells": 46805,
+      "influencedCells": []
+    },
+    {
+      "case": "nearby-water",
+      "phase": "preview",
+      "commonDryCells": 46808,
+      "influencedCells": []
+    },
+    {
+      "case": "nearby-water",
+      "phase": "full",
+      "commonDryCells": 46808,
+      "influencedCells": []
+    },
+    {
+      "case": "special-water",
+      "phase": "preview",
+      "commonDryCells": 46808,
+      "influencedCells": []
+    },
+    {
+      "case": "special-water",
+      "phase": "full",
+      "commonDryCells": 46808,
+      "influencedCells": []
+    }
+  ],
+  "rawFileSha256": {
+    "native-shore-arid-reference-01/fixture.json": "8c72c98536945b7ab430deed33b70cf90ded79d064b071f9bc327c29548c2ef8",
+    "native-shore-arid-reference-01/full-after-blend.json": "baf6d991b6c54af1acc8a266d693de18ffe7c4ae397c9f6511d0e966ff89cbe8",
+    "native-shore-arid-reference-01/full-before-blend.json": "8c63d012fbad33c378ab65aeb6d9c0754075072fa2c57c1bb39c828686815155",
+    "native-shore-arid-reference-01/full-changes.json": "00fb25786b4df74b51e83f28552f9c8af922605a22536b85d457c8130b7b5aff",
+    "native-shore-arid-reference-01/full-complete-terrain.json": "b1d4062c1c741adc060767e5a6988c6704adb736b3d7d21040398678a681fa00",
+    "native-shore-arid-reference-01/full-injected-interaction.json": "7a6aea337384a52434c1fd2bab18d4801af694bc566fb8114068afbc985bbc47",
+    "native-shore-arid-reference-01/full-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-reference-01/full-phase-end-terrain.json": "ba8ea0cbdf6574ce20a2c590da615a8bff15174bbfd8027e36f73a6dfea899da",
+    "native-shore-arid-reference-01/launch.json": "9e7ef90ea3e24b03f9903fd0887f838feb589147777707149159532db5d63d4e",
+    "native-shore-arid-reference-01/Player.log": "0297cfb1376ab1404ab8833cec591307cd05581dcd6bea84ef81c676359b0440",
+    "native-shore-arid-reference-01/preview-after-blend.json": "7c10fc883efd981a06e4b36d0e82fce0d279eaf2e9cf5a85ddd3015d49462c88",
+    "native-shore-arid-reference-01/preview-before-blend.json": "4f66808aa8ed033e4b417237b62c3a4c90d79e19b9e6d0c3972a073085342456",
+    "native-shore-arid-reference-01/preview-changes.json": "00fb25786b4df74b51e83f28552f9c8af922605a22536b85d457c8130b7b5aff",
+    "native-shore-arid-reference-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-arid-reference-01/preview-injected-interaction.json": "7a6aea337384a52434c1fd2bab18d4801af694bc566fb8114068afbc985bbc47",
+    "native-shore-arid-reference-01/preview-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-reference-01/preview-phase-end-terrain.json": "7c10fc883efd981a06e4b36d0e82fce0d279eaf2e9cf5a85ddd3015d49462c88",
+    "native-shore-arid-reference-01/preview.png": "8915d454ed4c3349e27f31d70da386e7b26ada2ea43cf639dcf8ba671381614d",
+    "native-shore-arid-reference-01/result.json": "c37fab89043b9c16734fe1c534ce4b37b1c702a789eacc1b4127c2705d018514",
+    "native-shore-arid-reference-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-arid-water-01/fixture.json": "7f3d89b7f0961176c5ab671010136e888d223704ad97b159487a769d2bff58b4",
+    "native-shore-arid-water-01/full-after-blend.json": "259f63b349e78699ef956e2e3032bc36c70d54293ecf511e34ae1685f9c3c96d",
+    "native-shore-arid-water-01/full-before-blend.json": "f7ec52fc8dc981f0add9fc73df4eeb7642201cd0160e63b1558907fc10b244fa",
+    "native-shore-arid-water-01/full-changes.json": "d8849c9152b8c6599875e8f430ff9eabc9ac2352d5f297ccf996f9fc48e30be1",
+    "native-shore-arid-water-01/full-complete-terrain.json": "a3484756e081290907388565029545376e8c3a092c9f9d8e3e82be84320edd28",
+    "native-shore-arid-water-01/full-injected-interaction.json": "bf3425fa4f2cb7b5ee4bae1263db621591bc01bd47ec7b1acc2a5f7acaa5ee0e",
+    "native-shore-arid-water-01/full-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-water-01/full-phase-end-terrain.json": "f91c0afaacd7923441491ecd56ea9b51713c4192d42474179724448e6d63054e",
+    "native-shore-arid-water-01/launch.json": "6ca27bbaa206ba813b2028845c16614e73b2e755ac0d2f05233607c28b23d59d",
+    "native-shore-arid-water-01/Player.log": "8c1e8485aa1b6cb0c3cf68edc4fb4ea4aa292e10312b806562e9bdb35497b4aa",
+    "native-shore-arid-water-01/preview-after-blend.json": "b57eb7ef167788dff4a5bcdb9ea2f89ddc5e50f6bc18451ec19c511c0ae8b896",
+    "native-shore-arid-water-01/preview-before-blend.json": "7c8ceb06cc1cededd6c1706a4d6aec3b24e15cfe63710b77e7bf98ad2b59de0b",
+    "native-shore-arid-water-01/preview-changes.json": "d8849c9152b8c6599875e8f430ff9eabc9ac2352d5f297ccf996f9fc48e30be1",
+    "native-shore-arid-water-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-arid-water-01/preview-injected-interaction.json": "bf3425fa4f2cb7b5ee4bae1263db621591bc01bd47ec7b1acc2a5f7acaa5ee0e",
+    "native-shore-arid-water-01/preview-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-water-01/preview-phase-end-terrain.json": "b57eb7ef167788dff4a5bcdb9ea2f89ddc5e50f6bc18451ec19c511c0ae8b896",
+    "native-shore-arid-water-01/preview.png": "a58ca639e7d255bf18529f1505ac3eb9f29d582e8f24e0f1ba245711e3479266",
+    "native-shore-arid-water-01/result.json": "b10fdcf7e9d57fc062c2fd05adb11d2596a874f57c1e872a17fa25c26ac3dc01",
+    "native-shore-arid-water-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-arid-connected-01/fixture.json": "827432c651d6e51ee949ae465a7c41dd4e3483f1416cd4efa3ec1a05ff081866",
+    "native-shore-arid-connected-01/full-after-blend.json": "9d94ff2b0033b7873b878cf5b2e58f979a6197df274148bb6d4c3e9d608f72f7",
+    "native-shore-arid-connected-01/full-before-blend.json": "f8124dc78e77269ca2cff34e300f5bc6701118006f69a75970feb953a7677246",
+    "native-shore-arid-connected-01/full-changes.json": "a4b673f0860e6a6e37d24d464d84c096974995a70f3674fb67f361ea8292c3cc",
+    "native-shore-arid-connected-01/full-complete-terrain.json": "901265cd57f86e0369d5ffb7cf09b08ad8e595c842361b4890e2d70ae8d5dd24",
+    "native-shore-arid-connected-01/full-injected-interaction.json": "e62e871c1b0ac3794a08b64e3f1dda44d3661411c6b9ed77929dc630c707a8d2",
+    "native-shore-arid-connected-01/full-interaction-water.json": "24128c67b6832b5b32ff020e3a6c2d16a9edbfafa8ad4196f7ac7b1810a3a8d3",
+    "native-shore-arid-connected-01/full-phase-end-terrain.json": "151ae7a4fc6f816b596bf11383b93a202ece08e308389f42f62c0bfba74650c3",
+    "native-shore-arid-connected-01/launch.json": "7410215ff78f529dba55853363ec10c542ee4efbbdfea06d747dc34d8d5f9131",
+    "native-shore-arid-connected-01/Player.log": "2f4dd1a8fd79c59b09bfe028f3eb676b0e6c1a3d7b6da67098babf29e8754889",
+    "native-shore-arid-connected-01/preview-after-blend.json": "fd6440ce8b1aa7ac5397f2145a66fc3e02c29a8145f25713f480cdf6ee5bbae7",
+    "native-shore-arid-connected-01/preview-before-blend.json": "477ee11db3c10c72b18d36461f65ccacc438791f595ab490cad504cd3399908d",
+    "native-shore-arid-connected-01/preview-changes.json": "a4b673f0860e6a6e37d24d464d84c096974995a70f3674fb67f361ea8292c3cc",
+    "native-shore-arid-connected-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-arid-connected-01/preview-injected-interaction.json": "e62e871c1b0ac3794a08b64e3f1dda44d3661411c6b9ed77929dc630c707a8d2",
+    "native-shore-arid-connected-01/preview-interaction-water.json": "24128c67b6832b5b32ff020e3a6c2d16a9edbfafa8ad4196f7ac7b1810a3a8d3",
+    "native-shore-arid-connected-01/preview-phase-end-terrain.json": "fd6440ce8b1aa7ac5397f2145a66fc3e02c29a8145f25713f480cdf6ee5bbae7",
+    "native-shore-arid-connected-01/preview.png": "c53af455318513e330ba35b44c239ca0f2ec313cf2783648da61bd959d38fd6e",
+    "native-shore-arid-connected-01/result.json": "dc664f509fb5e94bf3cb3f22eb765abf766cea9639197f1eb7acbc6a059855bc",
+    "native-shore-arid-connected-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-arid-explicit-01/fixture.json": "eeee0ef8d18bfc18fcaab5f14b29e85ad82aafa2dfd3aa6b2858e47f81c8df40",
+    "native-shore-arid-explicit-01/full-after-blend.json": "9d94ff2b0033b7873b878cf5b2e58f979a6197df274148bb6d4c3e9d608f72f7",
+    "native-shore-arid-explicit-01/full-before-blend.json": "f8124dc78e77269ca2cff34e300f5bc6701118006f69a75970feb953a7677246",
+    "native-shore-arid-explicit-01/full-changes.json": "a4b673f0860e6a6e37d24d464d84c096974995a70f3674fb67f361ea8292c3cc",
+    "native-shore-arid-explicit-01/full-complete-terrain.json": "f3fe0253ae90a0783092cf6dccac71a9aebdbecb32aa86a4e189ee81a396ec4c",
+    "native-shore-arid-explicit-01/full-injected-interaction.json": "4c2f8ce05f44e0bb81be912c79e63dc1c06a79854d682d274519dd2db66e7317",
+    "native-shore-arid-explicit-01/full-interaction-water.json": "305cc60be952907d2c311eff81605969266a979ff952ec178cbecdfab1d050b1",
+    "native-shore-arid-explicit-01/full-phase-end-terrain.json": "8f0df67308589eb362bffaf4abba0c1452e3b2d3188df41403f88b3df4e8d926",
+    "native-shore-arid-explicit-01/launch.json": "fe221b3f6dfbe0437189696e0c24add7e8039cdf1ad4b4484af209026f718cff",
+    "native-shore-arid-explicit-01/Player.log": "8151af899d76247c19a75767e965163f552ee8a06860fd46d79e6770dedaf583",
+    "native-shore-arid-explicit-01/preview-after-blend.json": "fd6440ce8b1aa7ac5397f2145a66fc3e02c29a8145f25713f480cdf6ee5bbae7",
+    "native-shore-arid-explicit-01/preview-before-blend.json": "477ee11db3c10c72b18d36461f65ccacc438791f595ab490cad504cd3399908d",
+    "native-shore-arid-explicit-01/preview-changes.json": "a4b673f0860e6a6e37d24d464d84c096974995a70f3674fb67f361ea8292c3cc",
+    "native-shore-arid-explicit-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-arid-explicit-01/preview-injected-interaction.json": "4c2f8ce05f44e0bb81be912c79e63dc1c06a79854d682d274519dd2db66e7317",
+    "native-shore-arid-explicit-01/preview-interaction-water.json": "305cc60be952907d2c311eff81605969266a979ff952ec178cbecdfab1d050b1",
+    "native-shore-arid-explicit-01/preview-phase-end-terrain.json": "fd6440ce8b1aa7ac5397f2145a66fc3e02c29a8145f25713f480cdf6ee5bbae7",
+    "native-shore-arid-explicit-01/preview.png": "c53af455318513e330ba35b44c239ca0f2ec313cf2783648da61bd959d38fd6e",
+    "native-shore-arid-explicit-01/result.json": "0530891fc910a4788d948e130922f51a6b5ec6c50bb434db577ca6db6e0875de",
+    "native-shore-arid-explicit-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-arid-special-01/fixture.json": "997c2d8dd28bf9c5a7e2e7c8c6b1d61589d6b4c74f3fce2560cc4f7ebd067b60",
+    "native-shore-arid-special-01/full-after-blend.json": "c3588ab785d16bd6e0b3da3a3cef690d8c6a0ea02b959c2d7fb7d71c86db6ac2",
+    "native-shore-arid-special-01/full-before-blend.json": "43a20d2349d14a8b90a6166e6d579bdda1772db70cdc28bebd179b7c75002c52",
+    "native-shore-arid-special-01/full-changes.json": "e401c31f0d7bfad3f18f1d96cfac2ca3ec460383dc4298ad2cef20971a8b73bc",
+    "native-shore-arid-special-01/full-complete-terrain.json": "430c8db56436ab6a2f945ad1935d0189dce7f77a2b9f5aecff6d2c1c2277fa87",
+    "native-shore-arid-special-01/full-injected-interaction.json": "67ef61e4e11d24c5a5d4be206fab0bda36f9a037aa51432fdbabcdfc2df2917f",
+    "native-shore-arid-special-01/full-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-special-01/full-phase-end-terrain.json": "0e0001afb232d11e613b1eada662ea2a7167cbebc42b1894a2114394025bc378",
+    "native-shore-arid-special-01/launch.json": "e4be2153614008b487306797300797b114f9bf2959d2d2fe9fe87e62d446a7e7",
+    "native-shore-arid-special-01/Player.log": "915a5f5ab4c2ee9d8eea67fd21cd7e3937d6e90bcf301c9c8e8a35ef1824c7ad",
+    "native-shore-arid-special-01/preview-after-blend.json": "59e3a616bec9a31b3c45c46d75db560c9c8b60fe679ef6012fb60001c362e1dc",
+    "native-shore-arid-special-01/preview-before-blend.json": "761bd45549d42381eac0db881fc1934346294025d99131e52fdcc9698039a5f5",
+    "native-shore-arid-special-01/preview-changes.json": "e401c31f0d7bfad3f18f1d96cfac2ca3ec460383dc4298ad2cef20971a8b73bc",
+    "native-shore-arid-special-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-arid-special-01/preview-injected-interaction.json": "67ef61e4e11d24c5a5d4be206fab0bda36f9a037aa51432fdbabcdfc2df2917f",
+    "native-shore-arid-special-01/preview-interaction-water.json": "bc1e16c25224ecbe52a66566357bae4067df23bc45306e693a4bcddda98582e8",
+    "native-shore-arid-special-01/preview-phase-end-terrain.json": "59e3a616bec9a31b3c45c46d75db560c9c8b60fe679ef6012fb60001c362e1dc",
+    "native-shore-arid-special-01/preview.png": "2457bb5f7b52300efea6efc017ace1dfd3af5c7d7ddf73993d6183b35145b9b4",
+    "native-shore-arid-special-01/result.json": "7e7278deed31b3ab10e281140721cd0778525f07a2b45fe880414e078f008792",
+    "native-shore-arid-special-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155"
+  },
+  "limits": "Only the listed controlled cases; injected interaction/protection fixtures are labeled. No model calls, user-mod matrix, plant identity or visual-quality guarantee."
+}

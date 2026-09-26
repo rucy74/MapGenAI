@@ -1018,10 +1018,11 @@ For recommendations follow the rules below and this tile's terrain and shore con
             if (_closed || _isWaiting || _guide != null || _feedback != null) return;
             var current=MapGenParams.CaptureState(_openedTileId);
             var tile=Find.WorldGrid[_openedTileId];
-            bool knownWater=FeaturePolicy.HasRiver(tile) || FeaturePolicy.WaterNeighbors(tile).Count>0 ||
-                tile.Mutators.Any(m=>m.categories.Contains("Lake") && !current.removeMutators.Contains(m.defName) && !current.removeFeatureCategories.Contains("Lake")) ||
-                current.mutators.Any(n=>DefDatabase<TileMutatorDef>.GetNamedSilentFail(n)?.categories.Contains("Lake")==true) ||
-                current.elevationShapes.Any(s=>IsGuideWater(s.fill) || (s.compositeOps?.Any(o=>o.op=="add" && IsGuideWater(o.fill))==true));
+            bool tileWater=FeaturePolicy.HasRiver(tile) || FeaturePolicy.WaterNeighbors(tile).Count>0 ||
+                tile.Mutators.Any(m=>m.categories.Contains("Lake") && !current.removeMutators.Contains(m.defName) && !m.categories.Any(current.removeFeatureCategories.Contains)) ||
+                current.mutators.Select(n=>DefDatabase<TileMutatorDef>.GetNamedSilentFail(n))
+                    .Any(m=>m!=null && m.categories.Contains("Lake") && !m.categories.Any(current.removeFeatureCategories.Contains));
+            bool authoredWater=current.elevationShapes.Any(s=>TerrainMaterials.HasRenderedFill(s,IsGuideWater));
             _guide = new Dialog_RecommendationGuide(IsKorean(),request =>
             {
                 if (_closed || _isWaiting) return;
@@ -1029,7 +1030,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 // chat draft, conversation or Undo. Reuse the normal request against the latest state.
                 CancelCandidateRequest();
                 SendText(request);
-            },() => _guide=null,current.elevationShapes.Count>0,knownWater);
+            },() => _guide=null,current.elevationShapes.Count>0,tileWater,authoredWater);
             Find.WindowStack.Add(_guide);
         }
 

@@ -1,0 +1,17 @@
+{
+  "pid": 98360,
+  "root": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime",
+  "repo": "F:\\Projects\\Rimworld\\active\\mapgen_ai",
+  "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\shoreline-profile-shore-near-water-01",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-water-review-fixes\\native-shore-near-water-01",
+  "case": "nearby-water",
+  "biome": "temperate",
+  "details": "natural",
+  "bypassBlend": false,
+  "sourceDll": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll",
+  "sourceDllSha256": "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084",
+  "probeDllSha256": "715370c8a8370256d8e68bb19268d838696f38c5303e93c7356bec6d1d95e399",
+  "started": null,
+  "recoveredAt": "2026-09-27T00:03:04.301561+09:00",
+  "recoveryReason": "Runner launched PID 98360 (observed through Win32_Process) but failed before writing its receipt because Get-FileHash was unavailable in the Python child PowerShell. Current source and copied runtime DLLs matched byte hashes; result completed successfully. Start timestamp was not recorded. Original launch error is retained in outputs/mapgenai-water-review-fixes/matrix.log."
+}

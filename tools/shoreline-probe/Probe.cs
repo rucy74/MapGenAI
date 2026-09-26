@@ -22,12 +22,15 @@ namespace MapGenAI.ShorelineProbe
     {
         const string WorldSeed="mapgenai-guided-live-20260923";
         static string output,fixture,biomeChoice,details,phase="preview";
+        static string interactionLayout="single";
         static bool booting,active,finished,bypass;
         static int target,blockedProviders,blendCalls;
         static TileMapState state;
         static RecommendationPreviews preview;
         static DateTime deadline;
         static Snapshot before;
+        static bool[] interactionWater,interactionExplicit;
+        static bool Interaction=>fixture=="nearby-reference"||fixture=="nearby-water"||fixture=="connected-water"||fixture=="explicit-water"||fixture=="special-water";
         static readonly List<object> checks=new List<object>();
         static readonly Dictionary<string,object> results=new Dictionary<string,object>();
         static readonly HashSet<string> OrdinaryWater=new HashSet<string>{"WaterDeep","WaterShallow","WaterMovingChestDeep","WaterMovingShallow"};
@@ -38,6 +41,8 @@ namespace MapGenAI.ShorelineProbe
             GenCommandLine.TryGetCommandLineArg("mapgenAIShoreCase",out fixture);
             GenCommandLine.TryGetCommandLineArg("mapgenAIShoreBiome",out biomeChoice);
             GenCommandLine.TryGetCommandLineArg("mapgenAIShoreDetails",out details);
+            if(!GenCommandLine.TryGetCommandLineArg("mapgenAIShoreLayout",out interactionLayout))interactionLayout="single";
+            if(interactionLayout!="single"&&interactionLayout!="cardinal")throw new ArgumentException("Unknown interaction layout");
             bypass=GenCommandLine.TryGetCommandLineArg("mapgenAIShoreBypass",out string value)&&value=="true";
             var harmony=new Harmony("choco.mapgenai.shoreline-audit");
             harmony.Patch(AccessTools.Method(typeof(WorldGenerator),"GenerateWorld"),prefix:new HarmonyMethod(typeof(Probe),nameof(Seed)));
@@ -72,7 +77,7 @@ namespace MapGenAI.ShorelineProbe
                     var candidates=Find.WorldGrid.Tiles.Where(t=>!Find.WorldObjects.AnyMapParentAt(t.tile)&&FeaturePolicy.WaterNeighbors(t).Count==0&&!FeaturePolicy.HasRiver(t)&&t.hilliness==Hilliness.Flat&&t.Mutators.Count==0&&(!(t is SurfaceTile s)||s.Roads==null||s.Roads.Count==0)).ToList();
                     Tile tile;
                     if(biomeChoice=="cold")tile=candidates.FirstOrDefault(t=>t.PrimaryBiome.defName=="Tundra"&&t.temperature<=0)??candidates.First(t=>t.PrimaryBiome.defName=="IceSheet"&&t.temperature<=0);
-                    else tile=candidates.First(t=>t.PrimaryBiome.defName==(biomeChoice=="desert"?"Desert":"TemperateForest"));
+                    else tile=candidates.First(t=>t.PrimaryBiome.defName==(biomeChoice=="desert"?"Desert":biomeChoice=="boreal"?"BorealForest":biomeChoice=="arid"?"AridShrubland":"TemperateForest"));
                     target=tile.tile;Find.WorldSelector.SelectedTile=target;Find.World.info.initialMapSize=new IntVec3(250,1,250);Find.TickManager.CurTimeSpeed=TimeSpeed.Paused;
                     Find.TickManager.DebugSetTicksGame(0);Find.TickManager.gameStartAbsTick=3600000;
                     state=CreateState();MapStateValidation.Validate(state);MapGenParams.RestoreSnapshot(state,target);
@@ -138,6 +143,7 @@ namespace MapGenAI.ShorelineProbe
             if(!Ours(map))return true;
             blendCalls++;
             if(fixture=="protected")SeedProtectionControls(map);
+            if(Interaction)SeedInteractionControls(map);
             before=Snapshot.Read(map);
             return !bypass;
         }
@@ -145,18 +151,22 @@ namespace MapGenAI.ShorelineProbe
         {
             if(!Ours(map)||before==null)return;
             var after=Snapshot.Read(map);var regions=GenerationContext.Regions(map);var waterDistance=DistancesWithinSix(before.w,before.h,before.ordinaryWater);
+            var source=regions.Mask("pond");for(int i=0;i<source.Length;i++)source[i]&=before.ordinaryWater[i]&&!(interactionExplicit?[i]??false);
+            var sourceDistance=DistancesWithinSix(before.w,before.h,source);
+            var connected=ConnectedWithinSix(before.w,before.h,source,before.ordinaryWater,interactionExplicit,sourceDistance);
+            var connectedDistance=DistancesWithinSix(before.w,before.h,connected);
             var coverage=fixture=="protected"?regions.Mask("reserved_floor"):new bool[before.surface.Length];
             var rows=new List<object>();var violations=new List<object>();
             int eligibleShore=0,protectedShore=0,roadCount=0,foundationCount=0,coverageCount=0;
             for(int i=0;i<before.surface.Length;i++)
             {
                 bool ordinary=before.surface[i]=="Soil"||before.surface[i]=="Sand";
-                bool protectedCell=before.water[i]||before.rock[i]||!ordinary||before.foundation[i]||before.roof[i]||before.occupied[i]||before.road[i]||coverage[i]||regions.Materials[i]!=null;
+                bool protectedCell=before.water[i]||before.rock[i]||!ordinary||before.foundation[i]||before.roof[i]||before.occupied[i]||before.road[i]||coverage[i]||regions.Materials[i]!=null||(interactionExplicit?[i]??false);
                 bool near=waterDistance[i]>=0&&waterDistance[i]<=6;
                 if(near&&!before.water[i]){if(protectedCell)protectedShore++;else eligibleShore++;}
                 if(before.road[i])roadCount++;if(before.foundation[i])foundationCount++;if(coverage[i])coverageCount++;
                 var problem=Problems(before.surface[i],after.surface[i],before.layers[i],after.layers[i],before.elevation[i],after.elevation[i],before.caves[i],after.caves[i],protectedCell,waterDistance[i],biomeChoice=="desert"||biomeChoice=="cold",details=="none"||bypass||fixture=="hotspring");
-                if(before.layers[i]!=after.layers[i])rows.Add(new {x=i%before.w,z=i/before.w,from=before.surface[i],to=after.surface[i],waterDistance=waterDistance[i],protectedCell,water=before.water[i],rock=before.rock[i],road=before.road[i],foundation=before.foundation[i],coverage=coverage[i],ordinary});
+                if(before.layers[i]!=after.layers[i])rows.Add(new {x=i%before.w,z=i/before.w,from=before.surface[i],to=after.surface[i],waterDistance=waterDistance[i],sourceDistance=sourceDistance[i],connectedWaterDistance=connectedDistance[i],protectedCell,water=before.water[i],rock=before.rock[i],road=before.road[i],foundation=before.foundation[i],coverage=coverage[i],ordinary});
                 if(problem!=null)violations.Add(new {x=i%before.w,z=i/before.w,problem});
             }
             Check(violations.Count==0,phase+": shoreline stays within six cells and preserves protected terrain, layers and heights");
@@ -169,6 +179,16 @@ namespace MapGenAI.ShorelineProbe
             }
             if(fixture=="protected")
                 Check(roadCount>0&&foundationCount>0&&coverageCount>0,phase+": road, foundation and whole fill source protection are exercised");
+            if(Interaction)
+            {
+                var patch=Enumerable.Range(0,source.Length).Where(i=>interactionWater[i]).ToArray();
+                Check(patch.Length>0,phase+": controlled water target exists");
+                Check(patch.All(i=>!source[i]),phase+": controlled target is outside the authored water source");
+                Check(fixture=="connected-water"?patch.Any(i=>connected[i]):patch.All(i=>!connected[i]),phase+": independent four-neighbor reachability matches fixture");
+                Check(Enumerable.Range(0,source.Length).Where(i=>before.layers[i]!=after.layers[i]).All(i=>sourceDistance[i]>=0&&sourceDistance[i]<=6),phase+": changes stay within original opted-in source permission");
+                Save(phase+"-interaction-water.json",new {sourceCells=Indices(source),connectedCells=Indices(connected),explicitCells=Indices(interactionExplicit),controlledWaterCells=patch,
+                    note="Independent four-neighbor BFS restricted by independently measured six-cell source radius; no product distance or connectivity helper."});
+            }
             Save(phase+"-before-blend.json",before.Summary());Save(phase+"-after-blend.json",after.Summary());
             Save(phase+"-changes.json",new {changed=rows.Count,eligibleShore,protectedShore,roadCount,foundationCount,coverageCount,rows,violations});
             results[phase+"Blend"]=new {changed=rows.Count,eligibleShore,protectedShore,roadCount,foundationCount,coverageCount,violations=violations.Count,beforeTerrainHash=before.TerrainHash,afterTerrainHash=after.TerrainHash};
@@ -201,6 +221,109 @@ namespace MapGenAI.ShorelineProbe
             else map.terrainGrid.SetFoundation(bridgeCell,bridge);
             Check(map.terrainGrid.FoundationAt(bridgeCell)==bridge,phase+": explicit existing bridge foundation control exists");
             Save(phase+"-injected-controls.json",new {gravel=new[]{dry[0]%raw.w,dry[0]/raw.w},richSoil=new[]{dry[1]%raw.w,dry[1]/raw.w},bridge=new[]{bridgeCell.x,bridgeCell.z},note="Harness-injected protection controls before the measured stage, not generated content or a product feature. Preview uses its supported direct foundation storage, full map calls native SetFoundation."});
+        }
+        static void SeedInteractionControls(Map map)
+        {
+            var raw=Snapshot.Read(map);var regions=GenerationContext.Regions(map);var mask=regions.Mask("pond");
+            var source=Enumerable.Range(0,mask.Length).Select(i=>mask[i]&&raw.ordinaryWater[i]).ToArray();
+            var distance=DistancesWithinSix(raw.w,raw.h,source);
+            var directions=new[]{new[]{1,0},new[]{-1,0},new[]{0,1},new[]{0,-1}};
+            var candidates=Enumerable.Range(0,source.Length).Where(i=>raw.ordinaryWater[i]&&distance[i]>=0&&distance[i]<=2).ToArray();
+            var anchors=new List<int[]>();var reserved=new HashSet<int>();var survey=new List<object>();
+            string Reject(int i,int dx,int dz)
+            {
+                for(int s=1;s<=7;s++)for(int t=-3;t<=3;t++)
+                {
+                    int x=i%raw.w+dx*s-dz*t,z=i/raw.w+dz*s+dx*t;
+                    if(x<0||x>=raw.w||z<0||z>=raw.h)return "outside-map";
+                    int n=z*raw.w+x;
+                    if(reserved.Contains(n))return "overlaps-selected-strip";
+                    if(mask[n])return "authored-mask";if(raw.water[n])return "existing-water";if(raw.rock[n])return "rock";
+                    if(raw.road[n])return "road";if(raw.foundation[n])return "foundation";if(raw.roof[n])return "roof";
+                    if(raw.occupied[n])return "occupied";if(regions.Materials[n]!=null)return "explicit-material";
+                    if(raw.surface[n]!="Soil"&&raw.surface[n]!="Sand")return "nonordinary-ground";
+                }
+                int tip=(i/raw.w+dz*4)*raw.w+i%raw.w+dx*4;
+                return distance[tip]<0||distance[tip]>6?"outside-source-permission":null;
+            }
+            void Select(int i,int dx,int dz)
+            {
+                anchors.Add(new[]{i,dx,dz});
+                for(int s=1;s<=7;s++)for(int t=-3;t<=3;t++)reserved.Add((i/raw.w+dz*s+dx*t)*raw.w+i%raw.w+dx*s-dz*t);
+            }
+            if(interactionLayout=="single")
+            {
+                foreach(int i in candidates)
+                {
+                    foreach(var direction in directions)if(Reject(i,direction[0],direction[1])==null){Select(i,direction[0],direction[1]);break;}
+                    if(anchors.Count>0)break;
+                }
+            }
+            else
+            {
+                // Survey every fixed direction. Selection never reads noise, blend output or image colors.
+                foreach(var direction in directions)
+                {
+                    int dx=direction[0],dz=direction[1],selected=-1,attempted=0;var rejections=new Dictionary<string,int>();
+                    foreach(int i in candidates)
+                    {
+                        attempted++;var reason=Reject(i,dx,dz);
+                        if(reason==null){Select(i,dx,dz);selected=i;break;}
+                        rejections[reason]=rejections.TryGetValue(reason,out int count)?count+1:1;
+                    }
+                    survey.Add(new {direction=new[]{dx,dz},selected=selected>=0,anchor=selected<0?null:new[]{selected%raw.w,selected/raw.w},attempted,rejections});
+                }
+            }
+            var anchorReceipt=anchors.Select(a=>new {anchor=new[]{a[0]%raw.w,a[0]/raw.w},direction=new[]{a[1],a[2]}}).ToArray();
+            const string selectionRule="Single: first valid row-major anchor then east/west/north/south. Cardinal: survey all east/west/north/south directions, first valid row-major anchor in each, reject overlapping selected 7x7 strips; preserve all original protection/source-distance checks; no noise/material-outcome/seed search.";
+            Save(phase+"-interaction-selection.json",new {interactionLayout,selectionRule,anchors=anchorReceipt,survey,selectedCells=reserved.Count});
+            int required=interactionLayout=="cardinal"?3:1;
+            Check(anchors.Count>=required&&reserved.Count==49*anchors.Count,phase+": interaction layout has required disjoint protected 7x7 controls");
+            if(anchors.Count<required)throw new InvalidOperationException("Insufficient unobstructed interaction strips; see recorded direction/rejection survey. Keep failed fixture; do not change protected geometry or choose another seed for an output.");
+            interactionWater=new bool[source.Length];interactionExplicit=new bool[source.Length];
+            var injected=new List<object>();var patch=new bool[source.Length];var connector=new bool[source.Length];
+            foreach(var selected in anchors)
+            for(int s=1;s<=7;s++)for(int t=-3;t<=3;t++)
+            {
+                int anchor=selected[0],dirX=selected[1],dirZ=selected[2];
+                int x=anchor%raw.w+dirX*s-dirZ*t,z=anchor/raw.w+dirZ*s+dirX*t,n=z*raw.w+x;
+                patch[n]=s>=4&&s<=6&&Math.Abs(t)<=1;
+                connector[n]=s<=3&&t==0;
+                bool link=fixture=="connected-water"||fixture=="explicit-water";
+                bool fill=fixture!="nearby-reference"&&(patch[n]||link&&connector[n]);
+                var terrain=fill?DefDatabase<TerrainDef>.GetNamed(fixture=="special-water"?"HotSpring":"WaterShallow"):TerrainDefOf.Soil;
+                interactionWater[n]=patch[n];interactionExplicit[n]=fixture=="explicit-water"&&(patch[n]||connector[n]);
+                map.terrainGrid.SetTerrain(new IntVec3(x,0,z),terrain);
+                injected.Add(new {index=n,x,z,from=raw.surface[n],to=terrain.defName,patch=patch[n],connector=connector[n],explicitArea=interactionExplicit[n]});
+            }
+            if(fixture=="explicit-water")
+            {
+                // This recorded runtime control is deliberately not presented as generated authored content.
+                GenerationContext.State.elevationShapes.Add(new ElevationShape{id="probe_explicit_water",type="composite",details="none"});
+                regions.SetMask("probe_explicit_water",interactionExplicit);
+            }
+            var actual=Snapshot.Read(map);
+            Check(Enumerable.Range(0,raw.surface.Length).Where(i=>raw.water[i]).All(i=>raw.layers[i]==actual.layers[i]),phase+": existing generated water and feather remain untouched by the control injection");
+            Check(Indices(patch).All(i=>!mask[i]),phase+": controlled patch is outside authored pond mask");
+            Check(Enumerable.Range(0,raw.surface.Length).Any(i=>raw.ordinaryWater[i]&&!mask[i]&&distance[i]>0),phase+": native water feather outside authored mask exists");
+            Save(phase+"-injected-interaction.json",new {anchor=anchorReceipt[0].anchor,direction=anchorReceipt[0].direction,anchors=anchorReceipt,interactionLayout,selectionRule,survey,rows=injected,patchCells=Indices(patch),connectorCells=Indices(connector),
+                note="Harness-injected dry Soil strip and water/control patch after native pond generation. The original generated water/feather is untouched. All five variants start from this same controlled Soil strip. Explicit-water also injects a details=none mask and runtime shape before the measured stage; it is a policy control, not native authored generation evidence."});
+        }
+        static int[] Indices(bool[] mask)=>mask==null?Array.Empty<int>():Enumerable.Range(0,mask.Length).Where(i=>mask[i]).ToArray();
+        static bool[] ConnectedWithinSix(int width,int height,bool[] source,bool[] water,bool[] excluded,double[] distance)
+        {
+            var reached=new bool[source.Length];var queue=new Queue<int>();
+            for(int i=0;i<source.Length;i++)if(source[i]){reached[i]=true;queue.Enqueue(i);}
+            while(queue.Count>0)
+            {
+                int i=queue.Dequeue(),x=i%width,z=i/width;
+                foreach(int n in new[]{x>0?i-1:-1,x+1<width?i+1:-1,z>0?i-width:-1,z+1<height?i+width:-1})
+                {
+                    if(n<0||reached[n]||!water[n]||(excluded?[n]??false)||distance[n]<0||distance[n]>6)continue;
+                    reached[n]=true;queue.Enqueue(n);
+                }
+            }
+            return reached;
         }
         static void FinalMeasure(Map map){if(Ours(map))Save(phase+"-phase-end-terrain.json",Snapshot.Read(map).Summary());}
         sealed class Snapshot
@@ -251,6 +374,13 @@ namespace MapGenAI.ShorelineProbe
             Check(Problems("Soil","Mud","Soil|Soil|||","Mud|Mud|||",0,0,0,0,false,3,true,false)=="dry-or-frozen-soil-mud-created","Detector catches dry/frozen mud mutation");
             Check(Problems("Soil","Sand","Soil|Soil|||","Sand|Sand|||",0,0,0,0,false,-1,false,false)=="outside-six-cell-shore","Detector catches distant change");
             Check(Problems("Soil","Sand","Soil|Soil|||","Sand|Sand|||",0,0,0,0,false,3,false,true)=="inactive-or-special-water-changed","Detector catches bypass/off change");
+            var source=new bool[81];source[4*9+1]=true;var water=(bool[])source.Clone();water[4*9+3]=true;
+            var sourceDistance=DistancesWithinSix(9,9,source);var separate=ConnectedWithinSix(9,9,source,water,null,sourceDistance);
+            Check(!separate[4*9+3],"Independent connectivity detector excludes a separate water component");
+            water[4*9+2]=true;var connected=ConnectedWithinSix(9,9,source,water,null,sourceDistance);
+            Check(connected[4*9+3],"Independent connectivity detector reaches an ordinary four-neighbor bridge");
+            var excluded=new bool[81];excluded[4*9+2]=true;
+            Check(!ConnectedWithinSix(9,9,source,water,excluded,sourceDistance)[4*9+3],"Independent connectivity detector rejects an explicit connecting cell");
         }
         static object[] Rle(string[] values)
         {

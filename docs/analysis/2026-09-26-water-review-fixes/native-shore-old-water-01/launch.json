@@ -1,0 +1,15 @@
+﻿{
+    "biome":  "temperate",
+    "pid":  31020,
+    "case":  "nearby-water",
+    "sourceDll":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-water-review-fixes\\baseline-a4383a2.dll",
+    "profile":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\shoreline-profile-shore-old-water-01",
+    "details":  "natural",
+    "started":  "2026-09-27T00:06:53.6071323+09:00",
+    "repo":  "F:/Projects/Rimworld/active/mapgen_ai",
+    "sourceDllSha256":  "703A55DBE8BDA592CA9FDC87F79F85E3D0573025DD4450D9F0A118F81F70300B",
+    "output":  "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-water-review-fixes\\native-shore-old-water-01",
+    "root":  "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+    "probeDllSha256":  "715370C8A8370256D8E68BB19268D838696F38C5303E93C7356BEC6D1D95E399",
+    "bypassBlend":  false
+}

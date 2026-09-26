@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Verse;
 
@@ -14,8 +15,31 @@ namespace MapGenAI.MapGen
             {"marsh","MarshyTerrain"}, {"mud","Mud"}, {"ice","Ice"}, {"lava","LavaDeep"},
             {"cooled_lava","CooledLava"}, {"gravel","Gravel"}, {"volcanic_rock","VolcanicRock"}
         };
-        public static string DefName(string fill, bool deep = true) => fill == "water" && !deep ? "WaterShallow" :
+        public static string DefName(string fill, bool deep = true) => string.Equals(fill,"water",StringComparison.OrdinalIgnoreCase) && !deep ? "WaterShallow" :
             Aliases.TryGetValue(fill, out var name) ? name : fill;
+
+        // Query explicit fills on validated shapes using the composite render-queue rules.
+        // This describes planned paint, not whether later geometry/placement leaves a visible cell.
+        public static bool HasRenderedFill(ElevationShape shape, Func<string,bool> predicate)
+        {
+            if(shape==null)return false;
+            if(shape.type!="composite")
+            {
+                if(shape.type=="region_fill" && (!float.TryParse(shape.coverage,NumberStyles.Float,CultureInfo.InvariantCulture,out var coverage) || coverage<=0))return false;
+                return !string.IsNullOrEmpty(shape.fill) && predicate(shape.fill);
+            }
+            if(shape.compositeShapes==null || shape.compositeShapes.Count==0 || shape.compositeOps==null)return false;
+            for(int i=0;i<shape.compositeOps.Count;i++)
+            {
+                var op=shape.compositeOps[i];
+                // union/sub/inter can paint directly, while an out-only intermediate cannot.
+                bool renders=op.e!=0 || !string.IsNullOrEmpty(op.fill) ||
+                    (i==shape.compositeOps.Count-1 && !string.IsNullOrEmpty(shape.fill));
+                string fill=shape.fill ?? op.fill;
+                if(renders && !string.IsNullOrEmpty(fill) && predicate(fill))return true;
+            }
+            return false;
+        }
         public static bool Supported(TerrainDef def) => def != null && !def.temporary && !def.bridge && !def.isFoundation
             && def.defName != "Underwall"
             && !def.dontRender && !def.exposesToVacuum && !def.IsRiver && !def.HasTag("Road")

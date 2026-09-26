@@ -29,20 +29,28 @@ namespace MapGenAI.MapGen
         }
         // Dry-side banks only: narrow, interrupted patches leave buildable approaches to the water.
         // Mud has no heavy-building support in RimWorld, so it is restricted to damp soil at the edge.
-        public Cell SampleShore(int x,int z,float waterDistance,float rockDistance,bool dampSoil)
+        public Cell SampleShore(int x,int z,float waterDistance,float rockDistance,bool dampSoil,float influence=1f)
         {
             var keep=new Cell{ground=Ground.Keep,vegetation=1f};
             if(waterDistance<=0 || waterDistance>6)return keep;
             float broad=ContourWarp.Noise(x*.045f+31.7f,z*.045f-11.2f,seed^0xa511e9b3u);
             float patches=ContourWarp.Noise(x*.12f-8.3f,z*.12f+5.1f,seed^0x63d83595u);
-            float width=3.3f+2f*broad;
+            float width=(3.3f+2f*broad)*Mathf.Clamp01(influence);
             if(waterDistance>width || broad>.48f || waterDistance>1.6f && patches>.28f)return keep;
             Ground ground;
             if(dampSoil && rockDistance>3.5f && waterDistance<=1.7f+.6f*broad && broad>-.15f && patches<.12f)
                 ground=Ground.Mud;
             else if(rockDistance<3.5f || patches<-.3f)ground=Ground.Gravel;
             else ground=Ground.Sand;
-            return new Cell{ground=ground,vegetation=Mathf.Clamp(.95f+.10f*broad, .8f,1.08f)};
+            return new Cell{ground=ground,vegetation=1f+(Mathf.Clamp(.95f+.10f*broad, .8f,1.08f)-1f)*Mathf.Clamp01(influence)};
+        }
+        // Keep the native dry bank where this biome does not naturally supply the proposed
+        // material. Rock can supply gravel even on a sandy shore; this is not a biome-name preset.
+        public static Ground BankMaterial(Ground proposed,string before,bool nativeSand,bool nativeGravel,float rockDistance)
+        {
+            if(proposed==Ground.Sand && before!="Sand" && !nativeSand)return Ground.Keep;
+            if(proposed==Ground.Gravel && !nativeGravel && rockDistance>=3.5f)return Ground.Keep;
+            return proposed;
         }
         public static bool DampSoilBank(bool soilBiome,bool localFertilityPlants,float temperature,float rainfall,string ground)
             =>soilBiome && localFertilityPlants && temperature>0 && rainfall>=600 && ground=="Soil";

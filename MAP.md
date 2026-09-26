@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- Fable 검토 후속(DEV): `ShorelineWater`는 원 source6칸 허가 안의 4연결 담수만 재질 거리로 사용하고 명시 보호 영역을 제외한다. 물가4~6칸 끝 폭 감쇠, `LandscapeBlendField.BankMaterial`은 새 물가에서 native Sand/Gravel 또는 원래 모래/근처바위를 기준으로 원래 바닥을 보존한다. 산기슭 기존규칙은 유지. `TerrainMaterials.HasRenderedFill`은 실제 compose fill우선순위로 union/sub/inter도 판단하며 물 별칭의 얕은 가장자리 정규화를 통일한다. 문답은 tile/authored 물 구분과 교체 범위·명시금지우선 문구를 사용한다. [계약과 범위](docs/analysis/2026-09-26-water-review-fixes/plan.md).
+
 - 담수 외부 물가/문답 일관성(DEV): `LandscapeBlendGeneration`은 natural opt-in mask 안의 일반 담수만 출발점으로 최대6칸 육지에 `LandscapeBlendField.SampleShore`를 적용한다. 연결된 강 전체로 전파하지 않고 source/destination 모두 명시 영역 보호. Mud는 native biome threshold/기후/기존Soil 조건을 만족하는1~2칸 일부. 새 rough 담수 composite의 `shape_ops:add`에만 details 기본값을 적용하며 저장 null/none/일반 update는 보존. `RecommendationGuide`는 로컬 준비 질문이며 이전 산·물 선호와 확인된 수계에 따라 선택지·focus를 조정한다. `tools/shoreline-probe`는 provider 없이 native preview/full 표면을 검증한다. [검증 보고서](docs/analysis/2026-09-26-shoreline-blending/report.md).
 
 - 공통 지형 조합(DEV, 2026-09-26): `LandscapePath`의 곡선 영역을 산·평지·물에 재사용한다. `LandscapePlacement`는 `anchor/placement` 관계를 실제 mask에 배치하며 없는 참조·순환·공간 부족을 거부한다. 평지는 fill 없이 원래 바이옴 바닥을 유지한다. 기존 저장의 도형·landform 수식은 유지한다. `details:natural`은 composite에도 선택적으로 적용한다. [검증/한계](docs/analysis/2026-09-26-landscape-relations/report.md).

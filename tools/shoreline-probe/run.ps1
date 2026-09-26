@@ -1,9 +1,11 @@
 param(
   [Parameter(Mandatory=$true)][ValidatePattern('^shore-[a-z0-9-]+$')][string]$Run,
   [Parameter(Mandatory=$true)][string]$ProductDll,
-  [ValidateSet('pool','hotspring','protected')][string]$Case='pool',
-  [ValidateSet('temperate','desert','cold')][string]$Biome='temperate',
+  [ValidateSet('pool','hotspring','protected','nearby-reference','nearby-water','connected-water','explicit-water','special-water')][string]$Case='pool',
+  [ValidateSet('temperate','desert','cold','boreal','arid')][string]$Biome='temperate',
   [ValidateSet('none','natural')][string]$Details='natural',
+  [ValidateSet('single','cardinal')][string]$InteractionLayout='single',
+  [ValidatePattern('^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+$')][string]$AnalysisGroup='2026-09-26-shoreline-review',
   [string]$ProbeDll,[switch]$BypassBlend,[switch]$Graphics
 )
 $ErrorActionPreference='Stop'
@@ -19,7 +21,9 @@ foreach($directory in @($runtimeRoot,(Join-Path $runtimeRoot 'Mods'))){
 if(-not(Test-Path -LiteralPath (Join-Path $runtimeRoot 'RimWorldWin64.exe'))){throw 'Owned executable missing'}
 if(Get-CimInstance Win32_Process -Filter "name = 'RimWorldWin64.exe'" | Where-Object {$_.ExecutablePath -eq (Join-Path $runtimeRoot 'RimWorldWin64.exe')}){throw 'Another owned runtime process is active'}
 $profile=Join-Path $runtimeRoot ('shoreline-profile-'+$Run)
-$output=Join-Path $repoRoot ('docs/analysis/2026-09-26-shoreline-blending/native-'+$Run)
+$analysisRoot=Join-Path $repoRoot ('docs/analysis/'+$AnalysisGroup)
+if((Test-Path -LiteralPath $analysisRoot) -and ((Get-Item -LiteralPath $analysisRoot).Attributes -band [IO.FileAttributes]::ReparsePoint)){throw 'Analysis output parent cannot be a link'}
+$output=Join-Path $analysisRoot ('native-'+$Run)
 $mod=Join-Path $runtimeRoot ('Mods/ShorelineProbe-'+$Run)
 foreach($path in @($profile,$output,$mod)){if(Test-Path -LiteralPath $path){throw ('Fresh path required: '+$path)}}
 # Additions are inside the marked private runtime only. No installed game Mods or user configs.
@@ -38,9 +42,18 @@ $config='<ModsConfigData><version>'+$version+'</version><activeMods>'+(($active|
 [IO.File]::WriteAllText((Join-Path $profile 'Config/ModsConfig.xml'),$config)
 [IO.File]::WriteAllText((Join-Path $profile 'Config/Prefs.xml'),'<Prefs><langFolderName>Korean (한국어)</langFolderName><runInBackground>true</runInBackground></Prefs>')
 [IO.File]::WriteAllText((Join-Path $profile 'MAPGENAI_DISPOSABLE'),'Owned shoreline audit. No user saves or provider settings.')
-$arguments=@(('-mapgenAIShoreCase='+$Case),('-mapgenAIShoreBiome='+$Biome),('-mapgenAIShoreDetails='+$Details),'-batchmode','-nographics',('-savedatafolder="'+$profile+'"'),('-mapgenAIShoreProbe="'+$output+'"'),'-logFile',('"'+(Join-Path $output 'Player.log')+'"'))
+$arguments=@(('-mapgenAIShoreCase='+$Case),('-mapgenAIShoreBiome='+$Biome),('-mapgenAIShoreDetails='+$Details),('-mapgenAIShoreLayout='+$InteractionLayout),'-batchmode','-nographics',('-savedatafolder="'+$profile+'"'),('-mapgenAIShoreProbe="'+$output+'"'),'-logFile',('"'+(Join-Path $output 'Player.log')+'"'))
 if($BypassBlend){$arguments+='-mapgenAIShoreBypass=true'}
 if($Graphics){$arguments=@($arguments|Where-Object {$_ -ne '-nographics'})+@('-force-d3d11')}
+function FileSha256([string]$Path){
+  $algorithm=[Security.Cryptography.SHA256]::Create()
+  try{return [BitConverter]::ToString($algorithm.ComputeHash([IO.File]::ReadAllBytes($Path))).Replace('-','')}
+  finally{$algorithm.Dispose()}
+}
+# Resolve evidence before starting a game; a missing optional PowerShell module must not
+# leave an unrecorded process running when the runner is called from another runtime.
+$productHash=FileSha256 $ProductDll
+$probeHash=FileSha256 $ProbeDll
 $process=Start-Process -FilePath (Join-Path $runtimeRoot 'RimWorldWin64.exe') -WorkingDirectory $runtimeRoot -ArgumentList $arguments -WindowStyle Hidden -PassThru
-@{pid=$process.Id;root=$runtimeRoot;repo=$repoRoot;profile=$profile;output=$output;case=$Case;biome=$Biome;details=$Details;bypassBlend=[bool]$BypassBlend;sourceDll=$ProductDll;sourceDllSha256=(Get-FileHash -LiteralPath $ProductDll).Hash;probeDllSha256=(Get-FileHash -LiteralPath $ProbeDll).Hash;started=(Get-Date).ToString('o')}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'launch.json') -Encoding utf8
+@{pid=$process.Id;root=$runtimeRoot;repo=$repoRoot;profile=$profile;output=$output;case=$Case;biome=$Biome;details=$Details;interactionLayout=$InteractionLayout;bypassBlend=[bool]$BypassBlend;sourceDll=$ProductDll;sourceDllSha256=$productHash;probeDllSha256=$probeHash;started=(Get-Date).ToString('o')}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'launch.json') -Encoding utf8
 Write-Output ('Owned process '+$process.Id+'; result: '+$output)

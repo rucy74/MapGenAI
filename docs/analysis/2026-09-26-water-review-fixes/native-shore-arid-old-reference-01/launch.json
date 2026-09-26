@@ -1,0 +1,15 @@
+﻿{
+    "biome":  "arid",
+    "pid":  106784,
+    "case":  "nearby-reference",
+    "sourceDll":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-water-review-fixes\\baseline-a4383a2.dll",
+    "profile":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\shoreline-profile-shore-arid-old-reference-01",
+    "details":  "natural",
+    "started":  "2026-09-27T00:11:22.9867744+09:00",
+    "repo":  "F:/Projects/Rimworld/active/mapgen_ai",
+    "sourceDllSha256":  "703A55DBE8BDA592CA9FDC87F79F85E3D0573025DD4450D9F0A118F81F70300B",
+    "output":  "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-water-review-fixes\\native-shore-arid-old-reference-01",
+    "root":  "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+    "probeDllSha256":  "532B2EA67FDDB4786A1B0175DD57F304397FEE8BCA8C8B7EC5B8D701AB48F0AD",
+    "bypassBlend":  false
+}

@@ -20,12 +20,12 @@ namespace MapGenAI.LLM
             { Id=id; Title=title; Hint=hint; Choices=choices; }
         }
 
-        private readonly bool korean, hasAuthoredTerrain, hasExistingWater;
+        private readonly bool korean, hasAuthoredTerrain, hasTileWater, hasAuthoredWater;
         private readonly Dictionary<string,string> answers = new Dictionary<string,string>();
         private int position;
         private bool review, finished;
-        public RecommendationGuide(bool korean,bool hasAuthoredTerrain=false,bool hasExistingWater=false)
-        { this.korean=korean;this.hasAuthoredTerrain=hasAuthoredTerrain;this.hasExistingWater=hasExistingWater; }
+        public RecommendationGuide(bool korean,bool hasAuthoredTerrain=false,bool hasExistingWater=false,bool hasAuthoredWater=false)
+        { this.korean=korean;this.hasAuthoredTerrain=hasAuthoredTerrain;hasTileWater=hasExistingWater;this.hasAuthoredWater=hasAuthoredWater; }
         private string T(string ko,string en) => korean?ko:en;
         private Choice C(string id,string ko,string en,string detailKo,string detailEn) => new Choice(id,T(ko,en),T(detailKo,detailEn));
         private Choice Any() => C("any","상관없음","No preference","이 부분은 타일에 맞춰 맡길게요.","Let the selected tile guide this part.");
@@ -36,12 +36,17 @@ namespace MapGenAI.LLM
             get
             {
                 bool addMountains=Answer("mountains")!="open",addWater=Answer("water")!="existing";
-                bool useWater=addWater || hasExistingWater;
+                bool replacing=Answer("scope")=="replace";
+                // Tile water survives replacement; directly drawn water only survives refinement.
+                bool retainedWater=hasTileWater || (!replacing && hasAuthoredWater);
+                bool useWater=addWater || retainedWater;
                 var spaces=new List<Choice>{
                     C("together","넓게 이어진 한 공간","One broad connected space","기지와 농장이 한 덩어리로 자라고, 풍경은 주로 가장자리에 있으면 좋겠어요.","Room for one growing base and farms, with landscape features mainly along its edges."),
                     C("linked","이어지는 여러 빈터","Several connected clearings","크기가 다른 생활 공간을 넓은 땅으로 연결하고, 사이사이에 풍경이 있으면 좋겠어요.","Unequal clearings linked by broad usable ground, with scenery between them.")};
                 if(addMountains || useWater)
-                    spaces.Add(!addWater && hasExistingWater?
+                    spaces.Add(!addWater && retainedWater?
+                        replacing?
+                        C("flowing","타일의 물가를 따라 이어진 공간","Space along the tile's water","타일의 강·해안·호수 특징을 따라 생활 공간을 이어 주세요. 그려 넣은 물은 이어 쓰지 않고 새 물도 추가하지 않아요.","Connect living space along the tile's rivers, coast and lake features. Do not carry over manually drawn water or add new water."):
                         C("flowing","기존 물가를 따라 이어진 공간","Space along existing water","새 물을 추가하지 않고, 지금 있는 물가를 따라 넓은 생활 공간을 이어 주세요.","Connect broad living space along the current water, without adding any water."):
                         Answer("water")=="small" && !addMountains?
                         C("flowing","작은 물가 주변으로 이어진 공간","Space around a small pond","작은 연못 주변의 생활 공간을 부드럽게 연결해 주세요. 물을 늘리거나 새 산을 만들지는 않아요.","Gently connect living space around a small pond, without more water or new mountains."):
@@ -59,13 +64,19 @@ namespace MapGenAI.LLM
                         Answer("scope")=="replace"?
                             T("선택한 타일의 산악 정도에 맞는 새 구도를 비교합니다.","Compare new layouts suited to the selected tile's hilliness."):
                             T("지금 타일의 산과 기존에 만든 지형은 유지하면서 조정 가능한 범위로 추천합니다.","Suggestions work around this tile and terrain already in your map."),
+                        replacing?
+                        C("open","탁 트인 생활 공간","Open living area","새 산을 더하지 않고 넓게 연결된 땅을 우선해요. 타일의 원래 산은 살리고, 직접 그린 산은 새 구도에 맞춰 교체해요.","Favor connected open land without adding mountains. Keep the tile's original mountains; replace manually drawn mountains as part of the new layout."):
                         C("open","탁 트인 생활 공간","Open living area","새 산을 더하지 않고 넓게 연결된 땅을 우선해요. 기존 산은 임의로 지우지 않아요.","Favor connected open land without adding mountains. Keep existing mountains unless removal is requested."),
                         C("edge","한쪽에 산, 반대쪽은 평지","Mountains to one side","산을 등지고, 바깥으로 트인 곳에 기지를 짓고 싶어요.","Build against mountains with open land in front."),
                         C("scattered","작은 산과 언덕이 흩어진 곳","Scattered hills","산 사이로 여러 방향을 오갈 수 있는 배치가 좋아요.","Small hills with routes between them in several directions."),
                         C("sheltered","산이 어느 정도 감싸는 곳","Partly sheltered by mountains","산 안쪽 생활 공간과 바깥으로 나가는 길이 필요해요.","A sheltered settlement area with usable routes out."),
                         Any()),
                     new Question("water",T("물을 더한다면 어느 정도가 좋나요?","Would you like more water?"),
+                        replacing?
+                        T("그려 넣은 지형은 새 구도로 바뀌지만, 타일의 강·해안·호수 특징은 남습니다. 없는 세계 강이나 해안을 새로 만들지는 않습니다.","Drawn terrain is being replaced, while the tile's rivers, coast and lake features remain. This does not add a new world river or coast."):
                         T("기존 강·바다는 유지합니다. 없는 세계 강이나 해안을 새로 만들지는 않습니다.","Existing rivers and coast remain. This does not add a new world river or coast."),
+                        replacing?
+                        C("existing","타일의 물만 유지","Keep only the tile's water","타일의 강·해안·호수 특징만 유지해요. 그려 넣은 호수·연못은 이어 쓰지 않고 새 물은 추가하지 않아요.","Keep the tile's rivers, coast and lake features. Do not carry over manually drawn lakes or ponds, and add no new water."):
                         C("existing","지금 있는 물만","Keep existing water only","호수나 연못을 추가하지 않고 땅을 넓게 쓰고 싶어요.","No additional lakes or ponds; keep the land usable."),
                         C("small","작은 연못 하나 정도","A small pond","생활 공간을 크게 줄이지 않는 작은 물가가 좋아요.","A modest waterside spot that leaves plenty of land."),
                         C("lakeside","호숫가에 자리 잡기","A lakeside settlement","물은 눈에 띄되, 한쪽에는 넓고 연결된 생활 공간을 남겨 주세요.","Noticeable water with a broad connected settlement area beside it."),
@@ -92,6 +103,8 @@ namespace MapGenAI.LLM
                         choices.Add(C("mountain","산이 만드는 독특한 공간","Spaces shaped by mountains","골짜기, 산이 감싸는 생활 공간 등. 앞에서 고른 산 배치가 우선이에요.","Valleys or sheltered spaces, within your earlier mountain preference."));
                     if(useWater)
                         choices.Add(!addWater?
+                            replacing?
+                            C("water","타일의 물가와 어울리는 배치","Layout around the tile's water","타일의 강·해안·호수 특징과 생활 공간을 어울리게 해 주세요. 그려 넣은 물은 이어 쓰지 않고 새 물도 추가하지 않아요.","Fit living space around the tile's rivers, coast and lake features. Do not carry over manually drawn water or add new water."):
                             C("water","기존 물가와 어울리는 배치","Layout around existing water","지금 있는 물가와 생활 공간의 관계를 살리고, 새 연못이나 호수는 만들지 않아요.","Use the relationship between current water and living space, without new ponds or lakes."):
                             Answer("water")=="small"?
                             C("water","작은 연못 주변의 풍경","Scenery around a small pond","작은 연못의 윤곽과 주변 여백을 다듬고, 큰 호수나 만으로 키우지는 않아요.","Shape a small pond and its surrounding space, without enlarging it into a lake or inlet."):
@@ -168,8 +181,8 @@ namespace MapGenAI.LLM
                 T("기존 맵 요소는 보존하고 가능한 추가·배치를 추천해 줘. 지금 구도를 다른 구도로 교체하지 마.",
                   "Preserve existing map elements and suggest compatible additions and layouts. Do not replace the current composition.");
             request=T("다음 취향으로 현재 타일에 어울리는 맵을 추천해 줘.","Recommend landscapes for the current tile using these preferences.")+"\n\n"+Summary()+"\n\n"+
-                scope+"\n"+T("답하지 않은 항목은 현재 타일에 맞춰 정해 줘. 서로 맞지 않으면 중요하게 고른 우선순위와 구체적으로 고른 산·물의 양, 생활 공간의 연결을 먼저 지켜 줘. 특이한 지형 취향은 건설 공간이나 출입로를 포기하겠다는 뜻이 아니야. 질문의 예시는 정해진 맵 목록이 아니야. 같은 취향 안에서 공간의 위치, 지형과 물의 관계가 서로 다른 구도를 비교하게 해 줘. 세계지도 조건과 현재 특징의 제한을 지키고, 적용 전 후보 그림으로 비교하게 해 줘.",
-                "Use the current tile for unanswered preferences. Resolve conflicts using the chosen priority and specific mountain/water amounts and living-space connections before the distinctive scenery preference. Unusual terrain does not authorize sacrificing buildable space or access. Examples in the questions are not a fixed map menu. Compare distinct spatial arrangements and land/water relationships within these preferences. Respect world tile prerequisites and current feature constraints; show candidate previews before applying anything.");
+                scope+"\n"+T("답하지 않은 항목은 현재 타일에 맞춰 정해 줘. 서로 맞지 않으면 중요하게 고른 우선순위와 구체적으로 고른 산·물의 양, 생활 공간의 연결을 먼저 지켜 줘. 풍경이나 방어 등 어떤 우선순위도 명시한 금지(새 산·물 추가 금지 등)나 기존 특징 보존 조건을 무효화하지 않아. 특이한 지형 취향은 건설 공간이나 출입로를 포기하겠다는 뜻이 아니야. 질문의 예시는 정해진 맵 목록이 아니야. 같은 취향 안에서 공간의 위치, 지형과 물의 관계가 서로 다른 구도를 비교하게 해 줘. 세계지도 조건과 현재 특징의 제한을 지키고, 적용 전 후보 그림으로 비교하게 해 줘.",
+                "Use the current tile for unanswered preferences. Resolve conflicts using the chosen priority and specific mountain/water amounts and living-space connections before the distinctive scenery preference. Scenery, defense or any other priority must not override explicit restrictions, such as no new mountains or water, or requirements to preserve existing features. Unusual terrain does not authorize sacrificing buildable space or access. Examples in the questions are not a fixed map menu. Compare distinct spatial arrangements and land/water relationships within these preferences. Respect world tile prerequisites and current feature constraints; show candidate previews before applying anything.");
             return true;
         }
         public void Cancel() { finished=true; }

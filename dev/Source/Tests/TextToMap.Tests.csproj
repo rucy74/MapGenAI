@@ -47,6 +47,7 @@
     <Compile Include="../MapGen/NaturalLandformGeometry.cs" Link="NaturalLandformGeometry.cs" />
     <Compile Include="../MapGen/OrganicLandformGeometry.cs" Link="OrganicLandformGeometry.cs" />
     <Compile Include="../MapGen/LandscapeBlendField.cs" Link="LandscapeBlendField.cs" />
+    <Compile Include="../MapGen/ShorelineWater.cs" Link="ShorelineWater.cs" />
     <Compile Include="../MapGen/NaturalLandformGeneration.cs" Link="NaturalLandformGeneration.cs" />
     <Compile Include="../../../tools/fixtures/NaturalShapeFixtures.cs" Link="NaturalShapeFixtures.cs" />
     <Compile Include="../../../tools/fixtures/LandscapeCompositionFixtures.cs" Link="LandscapeCompositionFixtures.cs" />
