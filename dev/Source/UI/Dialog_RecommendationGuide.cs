@@ -15,10 +15,10 @@ namespace MapGenAI.UI
         private Vector2 scroll;
         public override Vector2 InitialSize => new Vector2(Mathf.Min(680f,Verse.UI.screenWidth-40f),Mathf.Min(700f,Verse.UI.screenHeight-40f));
         private string T(string ko,string en) => korean?ko:en;
-        public Dialog_RecommendationGuide(bool korean,Action<string> completed,Action closed,bool hasAuthoredTerrain=false)
+        public Dialog_RecommendationGuide(bool korean,Action<string> completed,Action closed,bool hasAuthoredTerrain=false,bool hasExistingWater=false)
         {
             this.korean=korean; this.completed=completed; this.closed=closed;
-            guide=new RecommendationGuide(korean,hasAuthoredTerrain);
+            guide=new RecommendationGuide(korean,hasAuthoredTerrain,hasExistingWater);
             doCloseX=true; closeOnAccept=false; absorbInputAroundWindow=true; forcePause=false;
             preventCameraMotion=true; layer=WindowLayer.Super;
         }
@@ -39,8 +39,8 @@ namespace MapGenAI.UI
                 Text.Font=GameFont.Small; Text.Anchor=TextAnchor.UpperLeft;
                 Widgets.DrawBoxSolid(new Rect(rect.x,rect.y,rect.width,30f),new Color(0.15f,0.35f,0.55f));
                 Widgets.Label(new Rect(rect.x+8f,rect.y+3f,rect.width-16f,24f),T("취향에 맞춰 추천받기","Suggestions for your preferences"));
-                string note=T("문답 중에는 AI를 호출하지 않습니다. 마지막에 취향을 확인하고 추천을 요청합니다.",
-                    "No AI calls during these questions. Review your preferences before requesting suggestions.");
+                string note=T("준비된 질문 중 앞선 답에 맞는 항목을 보여줍니다. 문답 중 AI 호출 없이, 마지막에 취향을 확인하고 추천을 요청합니다.",
+                    "Prepared questions adapt to earlier answers. No AI calls during the questions; review your preferences before requesting suggestions.");
                 float noteHeight=Text.CalcHeight(note,rect.width);
                 Widgets.Label(new Rect(rect.x,rect.y+38f,rect.width,noteHeight),note);
                 float top=rect.y+46f+noteHeight;

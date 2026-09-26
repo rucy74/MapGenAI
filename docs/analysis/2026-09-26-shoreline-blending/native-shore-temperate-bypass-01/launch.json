@@ -1,0 +1,15 @@
+{
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-shoreline-blending\\native-shore-temperate-bypass-01",
+  "pid": 48116,
+  "started": "2026-09-26T23:18:22.8643283+09:00",
+  "probeDllSha256": "2CCF32DE8E05FCFD34FF8F3A2E2BB9337055E5F74A5EE37EB2B185044C4F1ACE",
+  "biome": "temperate",
+  "sourceDll": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll",
+  "details": "natural",
+  "repo": "F:/Projects/Rimworld/active/mapgen_ai",
+  "sourceDllSha256": "AAB5774E8DE6CF6D90508F2C8763DC0111933197CA1C013CBFFF6822C1BB1108",
+  "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\shoreline-profile-shore-temperate-bypass-01",
+  "root": "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+  "case": "pool",
+  "bypassBlend": true
+}

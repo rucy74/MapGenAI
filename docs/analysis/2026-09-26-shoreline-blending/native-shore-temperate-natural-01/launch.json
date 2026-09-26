@@ -1,0 +1,15 @@
+{
+  "sourceDll": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll",
+  "probeDllSha256": "EF5BDD52F1AB20C9DD808561CFDE4B5CE847D95EA44CC94EF5559065308F676A",
+  "details": "natural",
+  "case": "pool",
+  "started": "2026-09-26T23:16:30.4921558+09:00",
+  "pid": 70744,
+  "biome": "temperate",
+  "repo": "F:/Projects/Rimworld/active/mapgen_ai",
+  "sourceDllSha256": "AAB5774E8DE6CF6D90508F2C8763DC0111933197CA1C013CBFFF6822C1BB1108",
+  "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\shoreline-profile-shore-temperate-natural-01",
+  "bypassBlend": false,
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-26-shoreline-blending\\native-shore-temperate-natural-01",
+  "root": "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime"
+}

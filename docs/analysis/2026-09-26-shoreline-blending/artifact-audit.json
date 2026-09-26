@@ -1,0 +1,432 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "shore-temperate-natural-05: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-natural-05/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-desert-natural-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-cold-natural-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-protected-natural-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-hotspring-natural-01/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-none-02: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-none-02: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-none-02/preview: off still generated a complete native map",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-none-02/full: off still generated a complete native map",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02: native checks and expected scheduling",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02: actual DLL",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/preview: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/preview: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/preview: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/full: complete lossless change receipt",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/full: local to opted-in pond; narrow mud accents",
+      "ok": true
+    },
+    {
+      "name": "shore-temperate-bypass-02/full: unchanged elevation and caves",
+      "ok": true
+    },
+    {
+      "name": "preview: identical input for effect comparison",
+      "ok": true
+    },
+    {
+      "name": "preview: late generators preserve precisely the measured surface changes",
+      "ok": true
+    },
+    {
+      "name": "preview: explicit off equals bypass",
+      "ok": true
+    },
+    {
+      "name": "full: identical input for effect comparison",
+      "ok": true
+    },
+    {
+      "name": "full: late generators preserve precisely the measured surface changes",
+      "ok": true
+    },
+    {
+      "name": "full: explicit off equals bypass",
+      "ok": true
+    }
+  ],
+  "dllSha256": "703a55dbe8bda592ca9fdc87f79f85e3d0573025dd4450d9f0a118f81f70300b",
+  "summaries": [
+    {
+      "run": "shore-temperate-natural-05",
+      "nativeChecks": 19,
+      "changedTo": {
+        "preview": {
+          "Gravel": 123,
+          "Sand": 179,
+          "Mud": 70
+        },
+        "full": {
+          "Gravel": 123,
+          "Sand": 179,
+          "Mud": 70
+        }
+      }
+    },
+    {
+      "run": "shore-desert-natural-01",
+      "nativeChecks": 15,
+      "changedTo": {
+        "preview": {
+          "Gravel": 132,
+          "Sand": 13
+        },
+        "full": {
+          "Gravel": 132,
+          "Sand": 13
+        }
+      }
+    },
+    {
+      "run": "shore-cold-natural-01",
+      "nativeChecks": 15,
+      "changedTo": {
+        "preview": {
+          "Gravel": 102,
+          "Sand": 199
+        },
+        "full": {
+          "Gravel": 102,
+          "Sand": 199
+        }
+      }
+    },
+    {
+      "run": "shore-protected-natural-01",
+      "nativeChecks": 21,
+      "changedTo": {
+        "preview": {
+          "Gravel": 102,
+          "Sand": 151,
+          "Mud": 56
+        },
+        "full": {
+          "Gravel": 102,
+          "Sand": 151,
+          "Mud": 56
+        }
+      }
+    },
+    {
+      "run": "shore-hotspring-natural-01",
+      "nativeChecks": 15,
+      "changedTo": {
+        "preview": {},
+        "full": {}
+      }
+    },
+    {
+      "run": "shore-temperate-none-02",
+      "nativeChecks": 11,
+      "changedTo": {}
+    },
+    {
+      "run": "shore-temperate-bypass-02",
+      "nativeChecks": 15,
+      "changedTo": {
+        "preview": {},
+        "full": {}
+      }
+    }
+  ],
+  "rawFileSha256": {
+    "native-shore-temperate-natural-05/fixture.json": "a141d4e1adf7120060151f603d0aee496f318afaabe7cc81a8a34cd7e4ead627",
+    "native-shore-temperate-natural-05/full-after-blend.json": "897b7962afaa92db298c23009e4952a9c4e376eb8b650f23bb98bf6958d71aba",
+    "native-shore-temperate-natural-05/full-before-blend.json": "1357e916af3e0cd43389a9f4ace14b8c300f1145ac646a33defb192c783d9a44",
+    "native-shore-temperate-natural-05/full-changes.json": "491f08e5032aa3c6e8b228cd0908d8119ba10061ed94040e57c4cda8b5c9b102",
+    "native-shore-temperate-natural-05/full-complete-terrain.json": "93f4991944b991b15b0f7d5bab6d7ac8e60ca9d8a495bd77adb27bdc709b55ac",
+    "native-shore-temperate-natural-05/full-phase-end-terrain.json": "6963378b23e3d5096014b999587d378fc67a85d171edcd51ecfe16974ea29b14",
+    "native-shore-temperate-natural-05/launch.json": "9f0cdb00711f3a223bd94baa9b9b0bec673ffa80b33dcc225eeefbfe6b5353ee",
+    "native-shore-temperate-natural-05/Player.log": "ed85ac5cd0c9039edb69165fe3c27afe4ab228b8c7924e052102c407f09a7664",
+    "native-shore-temperate-natural-05/preview-after-blend.json": "ed49eed757232caea68f8f32109b801531ba9598c1f34044b093090c024790d0",
+    "native-shore-temperate-natural-05/preview-before-blend.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "native-shore-temperate-natural-05/preview-changes.json": "491f08e5032aa3c6e8b228cd0908d8119ba10061ed94040e57c4cda8b5c9b102",
+    "native-shore-temperate-natural-05/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-temperate-natural-05/preview-phase-end-terrain.json": "ed49eed757232caea68f8f32109b801531ba9598c1f34044b093090c024790d0",
+    "native-shore-temperate-natural-05/preview.png": "9e22438281e0f30a58621779eeb51686adf759e54384147515e0d21c32f59f79",
+    "native-shore-temperate-natural-05/result.json": "f0b1a11263a0cd0aa4ad8ccc2b81789f6de1d03ec7f9a3e648733178f5c3cb05",
+    "native-shore-temperate-natural-05/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-desert-natural-01/fixture.json": "5482e426026a43c2c4e741568814eda3a47ab61b607e51b7f7c4188bf812794d",
+    "native-shore-desert-natural-01/full-after-blend.json": "472ba34225130a192da7703be0f2bf659fa6f0cc3549e8d1b1f4b2a364063442",
+    "native-shore-desert-natural-01/full-before-blend.json": "80d359f521979854aa9cba8b2712571972fe4309bd0786e09b092ef8658b0723",
+    "native-shore-desert-natural-01/full-changes.json": "beb8abbdab09d24ec533f44b341fa9358bc666051d94677087b807e107010453",
+    "native-shore-desert-natural-01/full-complete-terrain.json": "21301b9de3c5f6fc65601a6925f6a8b4d55b916e24350076520a2bcc44295501",
+    "native-shore-desert-natural-01/full-phase-end-terrain.json": "c66cdafd189d229fa1cd198ee1e89e1ca35a5d6d798830d4d9bb59266d975335",
+    "native-shore-desert-natural-01/launch.json": "3bdc86b6ad4fa752f8ebb203e5322397209112bc563a4ef0c2477a5f94027704",
+    "native-shore-desert-natural-01/Player.log": "b3faeff3988642ccc3eefe458b05e953918723ededc359add58a1d36de029482",
+    "native-shore-desert-natural-01/preview-after-blend.json": "324acd6f566ccbe82a54ee7c84c46e14d720c91693187b54314af79e19137dc2",
+    "native-shore-desert-natural-01/preview-before-blend.json": "9dc04c5f3a6cdfb23f57114833d60325a81886621f199aa3795bb18699ac40ca",
+    "native-shore-desert-natural-01/preview-changes.json": "beb8abbdab09d24ec533f44b341fa9358bc666051d94677087b807e107010453",
+    "native-shore-desert-natural-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-desert-natural-01/preview-phase-end-terrain.json": "324acd6f566ccbe82a54ee7c84c46e14d720c91693187b54314af79e19137dc2",
+    "native-shore-desert-natural-01/preview.png": "1acbc91caa5006ada5e9e51c5f8f144d4aa87588191098fccdfd5a077e542c5d",
+    "native-shore-desert-natural-01/result.json": "8e2087e3c65dde10cba17fb0938c5af5f141bd74f3616f3bf4db693dd35c53c1",
+    "native-shore-desert-natural-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-cold-natural-01/fixture.json": "f2a8436ee883ad8ae1ac19d75ad9191b72cca91d7096be3ebd491f58493acccc",
+    "native-shore-cold-natural-01/full-after-blend.json": "22bb14da89675f2af4dcef70967c2d9ca0685805808840cb8347de4ff8e4265c",
+    "native-shore-cold-natural-01/full-before-blend.json": "04e0fdd644db205a787d6aab44cbba451b3bb6715518820a01402234d6b7d0f1",
+    "native-shore-cold-natural-01/full-changes.json": "5e160d57b69fdea36fac24d10caabb3c75704383262b2f317d12fe9dcdb8e01c",
+    "native-shore-cold-natural-01/full-complete-terrain.json": "c70c4d1777610477b8e9dd3dc09f55973adf184850b1f377e7cfd49f4536c989",
+    "native-shore-cold-natural-01/full-phase-end-terrain.json": "561d3b612bafef9ed39ba4855e47d6d870dbb2209813c8ea607384d381accc42",
+    "native-shore-cold-natural-01/launch.json": "3597adea498f0883a827dd45b0d2a4617ac5e48f9a5cb7ed9747b140fcb24a66",
+    "native-shore-cold-natural-01/Player.log": "c3971918e46b4abc56483e5b9e6d01fb9ecaadd49ccd02c1e2f7ae38b65c7a69",
+    "native-shore-cold-natural-01/preview-after-blend.json": "2eb06082c17dc8bce0847284a25103bac3e80e065dda4b8a40020b3ca34059f2",
+    "native-shore-cold-natural-01/preview-before-blend.json": "e096a86e21630c629932913882134a195ee17c6103e2b652e0a29438f2d24af3",
+    "native-shore-cold-natural-01/preview-changes.json": "5e160d57b69fdea36fac24d10caabb3c75704383262b2f317d12fe9dcdb8e01c",
+    "native-shore-cold-natural-01/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-cold-natural-01/preview-phase-end-terrain.json": "2eb06082c17dc8bce0847284a25103bac3e80e065dda4b8a40020b3ca34059f2",
+    "native-shore-cold-natural-01/preview.png": "706038fe337fa06aa87ab48458be991ecd4595a2f918d0733e64af68349ebe9f",
+    "native-shore-cold-natural-01/result.json": "77b3e6d9d62213c19142ed63174ae68f767fe99ddfa5ad04083f9ca3ffe552cf",
+    "native-shore-cold-natural-01/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "native-shore-protected-natural-01/fixture.json": "997b4b5028bf914f06b8c29604cea0ae2949da49cc6fef33154009b86fa9622b",
+    "native-shore-protected-natural-01/full-after-blend.json": "7541006de88deed8e56545befbff81250e622b2491dcb2074f5aa1445657d412",
+    "native-shore-protected-natural-01/full-before-blend.json": "1aa15b105ba7d5aa6c7289f6d67742c8052a62c253c4df7e65029fd83bc20a61",
+    "native-shore-protected-natural-01/full-changes.json": "d2a22b157813df48ffc6d0e13d8ed83b42afaf8ccc8afb5f4d6e983773251d1d",
+    "native-shore-protected-natural-01/full-complete-terrain.json": "5cd9c8cdf2483d0c504918d97d2013f1695c79e17c1968018ebf115feb79dffb",
+    "native-shore-protected-natural-01/full-injected-controls.json": "27fb47524c59e8b331b8979b0875ffd15d8a02c59bba2219da5640b8fe533cf2",
+    "native-shore-protected-natural-01/full-phase-end-terrain.json": "9ad2201abc556498dd353627e72fcd8ca204a45e9dfc6f85be46f842bd3524bd",
+    "native-shore-protected-natural-01/launch.json": "3a47a6e9d13699fb1fafac35c4b241ce34feb5598602961a0dae95df84ff656e",
+    "native-shore-protected-natural-01/Player.log": "e2252b4a2dad22bdea5cff750e078df553f2634a7138ed9c2a178410ae6b836b",
+    "native-shore-protected-natural-01/preview-after-blend.json": "6418ac09a28f1f05bd3ef443ca9646f49c064b77fbbc0198368447a637754ece",
+    "native-shore-protected-natural-01/preview-before-blend.json": "26271cb8f2d38c5f95b8ee446cd5613c3f94b0378abddb08d5b27f0ed6d61e50",
+    "native-shore-protected-natural-01/preview-changes.json": "d2a22b157813df48ffc6d0e13d8ed83b42afaf8ccc8afb5f4d6e983773251d1d",
+    "native-shore-protected-natural-01/preview-command.json": "573dbbe8291c10f003d29fb936f34aa8a6b5ccb5b2823088a6ac77fbd509b718",
+    "native-shore-protected-natural-01/preview-injected-controls.json": "27fb47524c59e8b331b8979b0875ffd15d8a02c59bba2219da5640b8fe533cf2",
+    "native-shore-protected-natural-01/preview-phase-end-terrain.json": "d09b257e53a10b0037e551c38163eb6fbf3761017fd431e361f85815c5c30f5e",
+    "native-shore-protected-natural-01/preview.png": "92ab32b54081a3acfc9d7a141c9966fb387256ae8269c222b7f00080fa1c4f5e",
+    "native-shore-protected-natural-01/result.json": "c9b033fad13ab95799662311f1824a1be69134a9d5a93302208bd9e63eb4bb6c",
+    "native-shore-protected-natural-01/state.json": "5b6355b24ec62d51d9b14d31f03180628a009259ff5da92eb644ff37d957acaa",
+    "native-shore-hotspring-natural-01/fixture.json": "c77ae10bafddef16f2a67838c799debc87b0c3698979ea58341d9afd19d3af3c",
+    "native-shore-hotspring-natural-01/full-after-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "native-shore-hotspring-natural-01/full-before-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "native-shore-hotspring-natural-01/full-changes.json": "19aa692bb072366024c7be497d103b43a46db9cd2ff4824fa85e9b9b3d3ae0ba",
+    "native-shore-hotspring-natural-01/full-complete-terrain.json": "1853e908b596530dc7f8a4bcb4a5f3f4310e0d005b4c5e019cf9ec3188f00b20",
+    "native-shore-hotspring-natural-01/full-phase-end-terrain.json": "b69ffedd24631243b19cc702e64caa81ac47bceadc8c62ba3aa21a120ec0bfec",
+    "native-shore-hotspring-natural-01/launch.json": "0b74fe01a102edc664932637f81150cbe243a0a4ff70da09077082d941762bea",
+    "native-shore-hotspring-natural-01/Player.log": "f9acf9655596b1c4e647d51b40c1e4ce200f512c8147f405d0cb48a8761cade6",
+    "native-shore-hotspring-natural-01/preview-after-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "native-shore-hotspring-natural-01/preview-before-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "native-shore-hotspring-natural-01/preview-changes.json": "19aa692bb072366024c7be497d103b43a46db9cd2ff4824fa85e9b9b3d3ae0ba",
+    "native-shore-hotspring-natural-01/preview-command.json": "6e5495c1347ea297ae562fda0530e8781642c824044902e23eaeeb390abfb130",
+    "native-shore-hotspring-natural-01/preview-phase-end-terrain.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "native-shore-hotspring-natural-01/preview.png": "37f757b70c0315403c5d0afc5585429f5a9f8e681028b5e9f8a3f07e1cbc4616",
+    "native-shore-hotspring-natural-01/result.json": "015d269e10d7ef489f2b66c5ebe10e50b7a1df4d1f726f3aaa1843224ac783bd",
+    "native-shore-hotspring-natural-01/state.json": "3d7a53452aa4072951324022efccdaf7f251a08d9d7120e1a043ff8fe9a68e76",
+    "native-shore-temperate-none-02/fixture.json": "fbeb70508abfafb03e91eefbc03f9e0aa86d931db4d5c0c08e0370f70298bb54",
+    "native-shore-temperate-none-02/full-complete-terrain.json": "3eda2e429deae36602c16e6d5c359ae1d6309a76eb39bc41222b0cf3ee8b7712",
+    "native-shore-temperate-none-02/full-phase-end-terrain.json": "e697acd473e5f17befcdc9602d9196e7a565158d4e3b16e9fb253297591a78cc",
+    "native-shore-temperate-none-02/launch.json": "09870bcdf5299b1d3d50a0203477e474e83b613325ae307bcc3f94c783d4c64d",
+    "native-shore-temperate-none-02/Player.log": "a1dc96cf65f93f366f2a1b4f44ef37bfe107a25cddf517ca6b955769ef754893",
+    "native-shore-temperate-none-02/preview-command.json": "cdeb424553608350bfcc2d03bc763d0d065ea0af6f53ed488cbacfc92c86a8b1",
+    "native-shore-temperate-none-02/preview-phase-end-terrain.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "native-shore-temperate-none-02/preview.png": "84e17984f02f309a966e52006c431891338a65c89429a83f523422dac7496444",
+    "native-shore-temperate-none-02/result.json": "9aab90f1b1c850014cbd7c8abc75d526526a6361e5f2d2fb2d73e624a67af28f",
+    "native-shore-temperate-none-02/state.json": "237767d30c8b1d73b394d5c678b78b6c0eb62068fbd56c6a88255fc4eddba579",
+    "native-shore-temperate-bypass-02/fixture.json": "0e5fe89962ccb69d923d5f3ea6f5a4d2623778b3154196b3907b901607bc0d5e",
+    "native-shore-temperate-bypass-02/full-after-blend.json": "1357e916af3e0cd43389a9f4ace14b8c300f1145ac646a33defb192c783d9a44",
+    "native-shore-temperate-bypass-02/full-before-blend.json": "1357e916af3e0cd43389a9f4ace14b8c300f1145ac646a33defb192c783d9a44",
+    "native-shore-temperate-bypass-02/full-changes.json": "e2c3ed38c8d95f7bb337d7904ec261eacc0c87eca311aa927577c53fef29ff27",
+    "native-shore-temperate-bypass-02/full-complete-terrain.json": "0263c931cb3051df55d45bbc3ad1164a850c05aad6da4e71216e0582e38c348e",
+    "native-shore-temperate-bypass-02/full-phase-end-terrain.json": "74fce53e4f6ea4dd1e123618fd79c7e4bb5d84f04113532c0fc39fda86c8de33",
+    "native-shore-temperate-bypass-02/launch.json": "29486b7daf5bbe4e2a221da513ea7ab42211ba95bf1249176cf9c60a90226674",
+    "native-shore-temperate-bypass-02/Player.log": "557e79020897454935a3501bae5ef14913f5fed37943425ace8ceb3e2fa8e83c",
+    "native-shore-temperate-bypass-02/preview-after-blend.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "native-shore-temperate-bypass-02/preview-before-blend.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "native-shore-temperate-bypass-02/preview-changes.json": "e2c3ed38c8d95f7bb337d7904ec261eacc0c87eca311aa927577c53fef29ff27",
+    "native-shore-temperate-bypass-02/preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "native-shore-temperate-bypass-02/preview-phase-end-terrain.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "native-shore-temperate-bypass-02/preview.png": "84e17984f02f309a966e52006c431891338a65c89429a83f523422dac7496444",
+    "native-shore-temperate-bypass-02/result.json": "55b1613fe9fdbe8a21be3a5d10ccc684b4364ce30f17fc81a60b69e952b047c4",
+    "native-shore-temperate-bypass-02/state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155"
+  },
+  "limits": "Seven controlled cases. No new model calls, user-mod matrix, plant identity or visual-quality guarantee."
+}

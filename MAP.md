@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 담수 외부 물가/문답 일관성(DEV): `LandscapeBlendGeneration`은 natural opt-in mask 안의 일반 담수만 출발점으로 최대6칸 육지에 `LandscapeBlendField.SampleShore`를 적용한다. 연결된 강 전체로 전파하지 않고 source/destination 모두 명시 영역 보호. Mud는 native biome threshold/기후/기존Soil 조건을 만족하는1~2칸 일부. 새 rough 담수 composite의 `shape_ops:add`에만 details 기본값을 적용하며 저장 null/none/일반 update는 보존. `RecommendationGuide`는 로컬 준비 질문이며 이전 산·물 선호와 확인된 수계에 따라 선택지·focus를 조정한다. `tools/shoreline-probe`는 provider 없이 native preview/full 표면을 검증한다. [검증 보고서](docs/analysis/2026-09-26-shoreline-blending/report.md).
+
 - 공통 지형 조합(DEV, 2026-09-26): `LandscapePath`의 곡선 영역을 산·평지·물에 재사용한다. `LandscapePlacement`는 `anchor/placement` 관계를 실제 mask에 배치하며 없는 참조·순환·공간 부족을 거부한다. 평지는 fill 없이 원래 바이옴 바닥을 유지한다. 기존 저장의 도형·landform 수식은 유지한다. `details:natural`은 composite에도 선택적으로 적용한다. [검증/한계](docs/analysis/2026-09-26-landscape-relations/report.md).
 - 추천/문답: `RecommendationVariation`은 새 추천 요청에만 위치·군집 수·연결·여백의 변주를 제안하며 월드 시드/저장 지형은 바꾸지 않는다. 문답에 생활 공간의 연결 및 기존 구도 유지/새 구도 비교를 추가했다. 다양성은 모델 지침이며 미관 보장이 아니다. [직접 테스트 64개](docs/text-landscape-test-ko.md) · [GL 지형 묘사 안내](docs/geological-landforms-prompts-ko.md).
 

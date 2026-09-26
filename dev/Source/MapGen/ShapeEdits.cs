@@ -146,6 +146,12 @@ namespace MapGenAI.MapGen
                     // change its mountains, source mask, dependent fill or ruin placement.
                     if(added.type=="landform" && added.layout==null)added.layout="organic";
                     if(added.type=="landform" && added.details==null)added.details="natural";
+                    // Opt in only NEW rough-edged freshwater areas; old saves, exact geometry,
+                    // updates and explicit details:none retain their previous behavior.
+                    if(added.type=="composite" && added.details==null &&
+                        ContourWarp.Amount(added.edge_roughness)>0 &&
+                        added.compositeOps.Any(o=>LandscapeBlendField.OrdinaryFreshwater(added.fill ?? o.fill) || (added.fill ?? o.fill)=="water"))
+                        added.details="natural";
                     if (shapes.Any(s => s.id == added.id && added.id != null)) throw new FormatException("Terrain ID already exists: " + added.id);
                     shapes.Add(added); AssignIds(shapes);
                 }

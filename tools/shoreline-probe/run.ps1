@@ -1,0 +1,46 @@
+param(
+  [Parameter(Mandatory=$true)][ValidatePattern('^shore-[a-z0-9-]+$')][string]$Run,
+  [Parameter(Mandatory=$true)][string]$ProductDll,
+  [ValidateSet('pool','hotspring','protected')][string]$Case='pool',
+  [ValidateSet('temperate','desert','cold')][string]$Biome='temperate',
+  [ValidateSet('none','natural')][string]$Details='natural',
+  [string]$ProbeDll,[switch]$BypassBlend,[switch]$Graphics
+)
+$ErrorActionPreference='Stop'
+$runtimeRoot='C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime'
+$repoRoot='F:/Projects/Rimworld/active/mapgen_ai'
+if(-not $ProbeDll){$ProbeDll=Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.ShorelineProbe.dll'}
+$ProductDll=(Resolve-Path -LiteralPath $ProductDll).Path
+$ProbeDll=(Resolve-Path -LiteralPath $ProbeDll).Path
+if(-not(Test-Path -LiteralPath (Join-Path $runtimeRoot 'MAPGENAI_HEADLESS_OWNED'))){throw 'Owned runtime marker required'}
+foreach($directory in @($runtimeRoot,(Join-Path $runtimeRoot 'Mods'))){
+  if((Get-Item -LiteralPath $directory).Attributes -band [IO.FileAttributes]::ReparsePoint){throw ('Owned output parent cannot be a link: '+$directory)}
+}
+if(-not(Test-Path -LiteralPath (Join-Path $runtimeRoot 'RimWorldWin64.exe'))){throw 'Owned executable missing'}
+if(Get-CimInstance Win32_Process -Filter "name = 'RimWorldWin64.exe'" | Where-Object {$_.ExecutablePath -eq (Join-Path $runtimeRoot 'RimWorldWin64.exe')}){throw 'Another owned runtime process is active'}
+$profile=Join-Path $runtimeRoot ('shoreline-profile-'+$Run)
+$output=Join-Path $repoRoot ('docs/analysis/2026-09-26-shoreline-blending/native-'+$Run)
+$mod=Join-Path $runtimeRoot ('Mods/ShorelineProbe-'+$Run)
+foreach($path in @($profile,$output,$mod)){if(Test-Path -LiteralPath $path){throw ('Fresh path required: '+$path)}}
+# Additions are inside the marked private runtime only. No installed game Mods or user configs.
+New-Item -ItemType Directory -Path (Join-Path $profile 'Config'),$output,(Join-Path $mod 'About'),(Join-Path $mod 'Assemblies') -Force | Out-Null
+[xml]$about=Get-Content -LiteralPath (Join-Path $repoRoot 'dev/About/About.xml') -Raw
+$packageId='choco.mapgenai.shorelineprobe.'+$Run.Replace('-','')
+$about.ModMetaData.packageId=$packageId
+$about.ModMetaData.name='MapGenAI disposable shoreline audit'
+$about.Save((Join-Path $mod 'About/About.xml'))
+Copy-Item -LiteralPath $ProductDll -Destination (Join-Path $mod 'Assemblies/MapGenAI.dll')
+Copy-Item -LiteralPath $ProbeDll -Destination (Join-Path $mod 'Assemblies/MapGenAI.ShorelineProbe.dll')
+Copy-Item -LiteralPath (Join-Path $repoRoot 'dev/Languages') -Destination $mod -Recurse
+$active=@('brrainz.harmony','ludeon.rimworld','ludeon.rimworld.royalty','ludeon.rimworld.ideology','ludeon.rimworld.biotech','ludeon.rimworld.anomaly','ludeon.rimworld.odyssey','m00nl1ght.mappreview',$packageId)
+$version=(Get-Content -LiteralPath (Join-Path $runtimeRoot 'Version.txt') -Raw).Trim()
+$config='<ModsConfigData><version>'+$version+'</version><activeMods>'+(($active|ForEach-Object {'<li>'+$_+'</li>'}) -join '')+'</activeMods></ModsConfigData>'
+[IO.File]::WriteAllText((Join-Path $profile 'Config/ModsConfig.xml'),$config)
+[IO.File]::WriteAllText((Join-Path $profile 'Config/Prefs.xml'),'<Prefs><langFolderName>Korean (한국어)</langFolderName><runInBackground>true</runInBackground></Prefs>')
+[IO.File]::WriteAllText((Join-Path $profile 'MAPGENAI_DISPOSABLE'),'Owned shoreline audit. No user saves or provider settings.')
+$arguments=@(('-mapgenAIShoreCase='+$Case),('-mapgenAIShoreBiome='+$Biome),('-mapgenAIShoreDetails='+$Details),'-batchmode','-nographics',('-savedatafolder="'+$profile+'"'),('-mapgenAIShoreProbe="'+$output+'"'),'-logFile',('"'+(Join-Path $output 'Player.log')+'"'))
+if($BypassBlend){$arguments+='-mapgenAIShoreBypass=true'}
+if($Graphics){$arguments=@($arguments|Where-Object {$_ -ne '-nographics'})+@('-force-d3d11')}
+$process=Start-Process -FilePath (Join-Path $runtimeRoot 'RimWorldWin64.exe') -WorkingDirectory $runtimeRoot -ArgumentList $arguments -WindowStyle Hidden -PassThru
+@{pid=$process.Id;root=$runtimeRoot;repo=$repoRoot;profile=$profile;output=$output;case=$Case;biome=$Biome;details=$Details;bypassBlend=[bool]$BypassBlend;sourceDll=$ProductDll;sourceDllSha256=(Get-FileHash -LiteralPath $ProductDll).Hash;probeDllSha256=(Get-FileHash -LiteralPath $ProbeDll).Hash;started=(Get-Date).ToString('o')}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'launch.json') -Encoding utf8
+Write-Output ('Owned process '+$process.Id+'; result: '+$output)

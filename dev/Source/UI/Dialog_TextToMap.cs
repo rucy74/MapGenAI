@@ -1016,6 +1016,12 @@ For recommendations follow the rules below and this tile's terrain and shore con
         private void OpenRecommendationGuide()
         {
             if (_closed || _isWaiting || _guide != null || _feedback != null) return;
+            var current=MapGenParams.CaptureState(_openedTileId);
+            var tile=Find.WorldGrid[_openedTileId];
+            bool knownWater=FeaturePolicy.HasRiver(tile) || FeaturePolicy.WaterNeighbors(tile).Count>0 ||
+                tile.Mutators.Any(m=>m.categories.Contains("Lake") && !current.removeMutators.Contains(m.defName) && !current.removeFeatureCategories.Contains("Lake")) ||
+                current.mutators.Any(n=>DefDatabase<TileMutatorDef>.GetNamedSilentFail(n)?.categories.Contains("Lake")==true) ||
+                current.elevationShapes.Any(s=>IsGuideWater(s.fill) || (s.compositeOps?.Any(o=>o.op=="add" && IsGuideWater(o.fill))==true));
             _guide = new Dialog_RecommendationGuide(IsKorean(),request =>
             {
                 if (_closed || _isWaiting) return;
@@ -1023,8 +1029,15 @@ For recommendations follow the rules below and this tile's terrain and shore con
                 // chat draft, conversation or Undo. Reuse the normal request against the latest state.
                 CancelCandidateRequest();
                 SendText(request);
-            },() => _guide=null,MapGenParams.CaptureState(_openedTileId).elevationShapes.Count>0);
+            },() => _guide=null,current.elevationShapes.Count>0,knownWater);
             Find.WindowStack.Add(_guide);
+        }
+
+        private static bool IsGuideWater(string fill)
+        {
+            if(string.IsNullOrEmpty(fill))return false;
+            var terrain=DefDatabase<TerrainDef>.GetNamedSilentFail(TerrainMaterials.DefName(fill));
+            return terrain?.IsWater==true && !terrain.dangerous;
         }
 
         private string CandidateSelectionProblem(int number)

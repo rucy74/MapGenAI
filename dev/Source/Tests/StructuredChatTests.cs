@@ -74,7 +74,7 @@ static class StructuredChatTests
             // Different patches with the same effective state must not become separate choices.
             Throws(()=>RecommendationPlan.Validate(SimpleJson.Parse("{\"options\":[{\"params\":{\"fertility_offset\":0.2}},{\"params\":{\"vegetation_density\":1,\"fertility_offset\":0.2}}]}"),before,data=>{},false));
         });
-        foreach(string language in new[]{"ko","en"})Check("Recorded "+language+" landscape choices replay every stored native outcome without changing source",()=>
+        foreach(string language in new[]{"ko","en"})Check("Recorded "+language+" landscape choices preserve stored geometry and settings with new rough-pond bank defaults",()=>
         {
             string folder=Path.Combine(AppContext.BaseDirectory,"recommendation-fixtures",language);
             var names=language=="ko"?new[]{"plain","coast","existing","scoped","two"}:new[]{"plain","existing"};
@@ -89,6 +89,12 @@ static class StructuredChatTests
                 for(int i=0;i<plans.Count;i++)
                 {
                     var expected=MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(folder,id+"-option-"+(i+1)+"-after.json")));
+                    // Two independently inspected recorded additions intentionally acquire the new
+                    // opt-in default. Keep the original native evidence unchanged; compare every other field.
+                    if(language=="ko" && name=="coast" && i==1)
+                        expected.elevationShapes.Find(s=>s.id=="valley_lake").details="natural";
+                    if(language=="en" && name=="existing" && i==0)
+                        expected.elevationShapes.Find(s=>s.id=="northeast_lake").details="natural";
                     var after=MapStateEditor.Merge(before,MapParameterParser.Parse(ProviderResponse.Command(plans[i].Command).GetObject("params")));
                     Equal(MapStateCodec.Serialize(expected),MapStateCodec.Serialize(after));
                 }

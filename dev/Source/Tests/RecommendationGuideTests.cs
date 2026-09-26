@@ -20,19 +20,20 @@ static class RecommendationGuideTests
         });
         Check("Unusual scenery choices respect earlier open-land and water preferences",()=>
         {
+            foreach(bool existingWater in new[]{false,true})
             foreach(var mountain in new[]{"open","edge","scattered","sheltered","any"})
             foreach(var water in new[]{"existing","small","lakeside","any"})
             foreach(var unusual in new[]{"ordinary","mixed","distinct","any"})
             {
-                var guide=new RecommendationGuide(false);
+                var guide=new RecommendationGuide(false,false,existingWater);
                 Pick(guide,"any");Pick(guide,mountain);Pick(guide,water);Pick(guide,"any");Pick(guide,unusual);
-                bool branch=unusual=="mixed" || unusual=="distinct";
+                bool branch=(unusual=="mixed" || unusual=="distinct") && (mountain!="open" || water!="existing" || existingWater);
                 Equal(branch?7:6,guide.Questions.Count);
                 Equal(branch?"focus":"features",guide.Current.Id);
                 if(branch)
                 {
                     Equal(mountain!="open",guide.Current.Choices.Any(c=>c.Id=="mountain"));
-                    Equal(water!="existing",guide.Current.Choices.Any(c=>c.Id=="water"));
+                    Equal(water!="existing" || existingWater,guide.Current.Choices.Any(c=>c.Id=="water"));
                     Pick(guide,"subtle");
                 }
                 Pick(guide,"layout");
@@ -58,7 +59,7 @@ static class RecommendationGuideTests
             guide.Back();guide.Back();
             Equal("focus",guide.Current.Id);Equal("water",guide.Selected);
             Pick(guide,"water");Equal("include",guide.Selected);guide.Next();Equal(summary,guide.Summary());
-            guide.Back();Pick(guide,"layout");Equal(true,guide.Summary().Contains("Distinctive watersides"));
+            guide.Back();Pick(guide,"layout");Equal(true,guide.Summary().Contains("Scenery around a small pond"));
         });
         Check("Early finish reviews only actual answers and Back resumes the same question",()=>
         {
@@ -105,9 +106,10 @@ static class RecommendationGuideTests
             var random=new Random(3205);
             foreach(bool ko in new[]{true,false})
             foreach(bool authored in new[]{true,false})
+            foreach(bool existingWater in new[]{true,false})
             for(int trial=0;trial<50;trial++)
             {
-                var guide=new RecommendationGuide(ko,authored);
+                var guide=new RecommendationGuide(ko,authored,existingWater);
                 for(int i=0;i<80;i++)
                 {
                     switch(random.Next(5))
@@ -132,7 +134,7 @@ static class RecommendationGuideTests
             foreach(bool ko in new[]{true,false})
             foreach(var space in new[]{"together","linked","flowing"})
             {
-                var guide=new RecommendationGuide(ko);
+                var guide=new RecommendationGuide(ko,false,true);
                 Pick(guide,"space");Pick(guide,"open");Pick(guide,"existing");
                 var selected=guide.Current.Choices.Single(c=>c.Id==space);
                 Pick(guide,space);guide.Review();Equal(true,guide.Submit(out var request));
@@ -157,6 +159,55 @@ static class RecommendationGuideTests
                     Equal(true,RecommendationPlan.IsRequest(request));
                     Equal(false,RecommendationPlan.RequestsDirectEdit(request));
                 }
+            }
+        });
+        Check("No new mountains or water suppresses incompatible space choices and redundant focus questions",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            {
+                var guide=new RecommendationGuide(ko);
+                Pick(guide,"space");Pick(guide,"open");Pick(guide,"existing");
+                Equal("space",guide.Current.Id);
+                Equal(false,guide.Current.Choices.Any(c=>c.Id=="flowing"));Equal(false,guide.Select("flowing"));
+                Pick(guide,"together");Pick(guide,"distinct");
+                Equal("features",guide.Current.Id);Equal(false,guide.Questions.Any(q=>q.Id=="focus"));
+                Pick(guide,"layout");Equal(true,guide.Submit(out var request));
+                Equal(true,request.Contains(ko?"새 산을 더하지 않고":"without adding mountains"));
+                Equal(true,request.Contains(ko?"호수나 연못을 추가하지 않고":"No additional lakes or ponds"));
+                Equal(true,request.Contains(ko?"새 특징을 추가하지 않아요":"without adding new ones"));
+            }
+        });
+        Check("Existing water permits waterside preferences without authorizing additional water",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            {
+                var guide=new RecommendationGuide(ko,false,true);
+                Pick(guide,"scenery");Pick(guide,"open");Pick(guide,"existing");
+                var flowing=guide.Current.Choices.Single(c=>c.Id=="flowing");
+                Equal(true,flowing.Label.Contains(ko?"기존":"existing"));Pick(guide,"flowing");Pick(guide,"distinct");
+                Equal("focus",guide.Current.Id);Equal(false,guide.Current.Choices.Any(c=>c.Id=="mountain"));
+                var water=guide.Current.Choices.Single(c=>c.Id=="water");
+                Equal(true,water.Label.Contains(ko?"기존":"existing"));Pick(guide,"water");Pick(guide,"include");
+                Equal(true,guide.Submit(out var request));
+                Equal(true,request.Contains(water.Detail));Equal(true,request.Contains(flowing.Detail));
+                Equal(true,request.Contains(ko?"새 연못이나 호수는 만들지":"without new ponds or lakes"));
+            }
+        });
+        Check("Small-pond choices remain small and earlier water changes remove stale follow-ups",()=>
+        {
+            foreach(bool ko in new[]{true,false})
+            {
+                var guide=new RecommendationGuide(ko);
+                Pick(guide,"scenery");Pick(guide,"open");Pick(guide,"small");Pick(guide,"flowing");Pick(guide,"mixed");
+                var water=guide.Current.Choices.Single(c=>c.Id=="water");
+                Equal(true,water.Label.Contains(ko?"작은 연못":"small pond"));Pick(guide,"water");Pick(guide,"layout");
+                Equal(true,guide.Summary().Contains(water.Detail));
+                guide.Back();guide.Back();guide.Back();guide.Back();guide.Back();
+                Equal("water",guide.Current.Id);Pick(guide,"existing");
+                Equal("space",guide.Current.Id);Equal(null,guide.Selected);Equal(false,guide.Current.Choices.Any(c=>c.Id=="flowing"));
+                Equal(false,guide.Summary().Contains(water.Label));
+                Pick(guide,"together");Pick(guide,"ordinary");Equal("features",guide.Current.Id);Equal(null,guide.Selected);
+                Pick(guide,"layout");Equal(true,guide.Submit(out var request));Equal(false,request.Contains(water.Label));
             }
         });
         Check("Changing layout scope clears later preferences rather than retaining stale authorization",()=>

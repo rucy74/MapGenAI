@@ -20,11 +20,12 @@ namespace MapGenAI.LLM
             { Id=id; Title=title; Hint=hint; Choices=choices; }
         }
 
-        private readonly bool korean, hasAuthoredTerrain;
+        private readonly bool korean, hasAuthoredTerrain, hasExistingWater;
         private readonly Dictionary<string,string> answers = new Dictionary<string,string>();
         private int position;
         private bool review, finished;
-        public RecommendationGuide(bool korean,bool hasAuthoredTerrain=false) { this.korean=korean;this.hasAuthoredTerrain=hasAuthoredTerrain; }
+        public RecommendationGuide(bool korean,bool hasAuthoredTerrain=false,bool hasExistingWater=false)
+        { this.korean=korean;this.hasAuthoredTerrain=hasAuthoredTerrain;this.hasExistingWater=hasExistingWater; }
         private string T(string ko,string en) => korean?ko:en;
         private Choice C(string id,string ko,string en,string detailKo,string detailEn) => new Choice(id,T(ko,en),T(detailKo,detailEn));
         private Choice Any() => C("any","상관없음","No preference","이 부분은 타일에 맞춰 맡길게요.","Let the selected tile guide this part.");
@@ -34,6 +35,18 @@ namespace MapGenAI.LLM
         {
             get
             {
+                bool addMountains=Answer("mountains")!="open",addWater=Answer("water")!="existing";
+                bool useWater=addWater || hasExistingWater;
+                var spaces=new List<Choice>{
+                    C("together","넓게 이어진 한 공간","One broad connected space","기지와 농장이 한 덩어리로 자라고, 풍경은 주로 가장자리에 있으면 좋겠어요.","Room for one growing base and farms, with landscape features mainly along its edges."),
+                    C("linked","이어지는 여러 빈터","Several connected clearings","크기가 다른 생활 공간을 넓은 땅으로 연결하고, 사이사이에 풍경이 있으면 좋겠어요.","Unequal clearings linked by broad usable ground, with scenery between them.")};
+                if(addMountains || useWater)
+                    spaces.Add(!addWater && hasExistingWater?
+                        C("flowing","기존 물가를 따라 이어진 공간","Space along existing water","새 물을 추가하지 않고, 지금 있는 물가를 따라 넓은 생활 공간을 이어 주세요.","Connect broad living space along the current water, without adding any water."):
+                        Answer("water")=="small" && !addMountains?
+                        C("flowing","작은 물가 주변으로 이어진 공간","Space around a small pond","작은 연못 주변의 생활 공간을 부드럽게 연결해 주세요. 물을 늘리거나 새 산을 만들지는 않아요.","Gently connect living space around a small pond, without more water or new mountains."):
+                        C("flowing","지형을 따라 굽어 이어진 공간","Space following the landscape","앞에서 고른 지형을 따라 넓은 생활 공간이 굽어 이어지되, 길고 좁은 틈은 피하고 싶어요.","Broad living space bending along the chosen terrain, rather than narrow slits."));
+                spaces.Add(Any());
                 var list = new List<Question>
                 {
                     new Question("priority", T("가장 중요하게 생각하는 것은?","What matters most?"),
@@ -46,7 +59,7 @@ namespace MapGenAI.LLM
                         Answer("scope")=="replace"?
                             T("선택한 타일의 산악 정도에 맞는 새 구도를 비교합니다.","Compare new layouts suited to the selected tile's hilliness."):
                             T("지금 타일의 산과 기존에 만든 지형은 유지하면서 조정 가능한 범위로 추천합니다.","Suggestions work around this tile and terrain already in your map."),
-                        C("open","탁 트인 생활 공간","Open living area","큰 산을 새로 늘리기보다 넓게 연결된 땅을 우선해요.","Favor connected open land over adding large mountains."),
+                        C("open","탁 트인 생활 공간","Open living area","새 산을 더하지 않고 넓게 연결된 땅을 우선해요. 기존 산은 임의로 지우지 않아요.","Favor connected open land without adding mountains. Keep existing mountains unless removal is requested."),
                         C("edge","한쪽에 산, 반대쪽은 평지","Mountains to one side","산을 등지고, 바깥으로 트인 곳에 기지를 짓고 싶어요.","Build against mountains with open land in front."),
                         C("scattered","작은 산과 언덕이 흩어진 곳","Scattered hills","산 사이로 여러 방향을 오갈 수 있는 배치가 좋아요.","Small hills with routes between them in several directions."),
                         C("sheltered","산이 어느 정도 감싸는 곳","Partly sheltered by mountains","산 안쪽 생활 공간과 바깥으로 나가는 길이 필요해요.","A sheltered settlement area with usable routes out."),
@@ -58,16 +71,12 @@ namespace MapGenAI.LLM
                         C("lakeside","호숫가에 자리 잡기","A lakeside settlement","물은 눈에 띄되, 한쪽에는 넓고 연결된 생활 공간을 남겨 주세요.","Noticeable water with a broad connected settlement area beside it."),
                         Any()),
                     new Question("space",T("생활 공간은 어떻게 이어지면 좋나요?","How should living space connect?"),
-                        T("특정 지형 이름을 몰라도 됩니다. 앞에서 고른 산과 물 사이에 공간을 어떻게 남길지 정합니다.","No landform names needed. This describes usable ground between your chosen mountains and water."),
-                        C("together","넓게 이어진 한 공간","One broad connected space","기지와 농장이 한 덩어리로 자라고, 풍경은 주로 가장자리에 있으면 좋겠어요.","Room for one growing base and farms, with landscape features mainly along its edges."),
-                        C("linked","이어지는 여러 빈터","Several connected clearings","크기가 다른 생활 공간을 넓은 땅으로 연결하고, 사이사이에 풍경이 있으면 좋겠어요.","Unequal clearings linked by broad usable ground, with scenery between them."),
-                        C("flowing","물가나 골짜기를 따라 이어진 공간","Space following the landscape","생활 공간이 물가나 산기슭을 따라 굽어 이어지되, 길고 좁은 틈은 피하고 싶어요.","Broad living space following a waterside or foothill, with bends rather than narrow slits."),
-                        Any()),
-                    new Question("distinctive",T("특별한 지형도 보고 싶나요?","How unusual should the landscape be?"),
-                        T("특이한 모양을 골라도 건설 공간과 바깥으로 통하는 길을 남깁니다.","Distinctive terrain still needs buildable space and routes to the rest of the map."),
+                        T("특정 지형 이름을 몰라도 됩니다. 앞에서 고른 조건 안에서 생활 공간의 연결 방식을 정합니다.","No landform names needed. These connections stay within your earlier choices."),spaces.ToArray()),
+                    new Question("distinctive",T("풍경의 모양은 어느 정도 개성 있으면 좋나요?","How distinctive should the layout look?"),
+                        T("산·물의 양은 앞선 답대로입니다. 여기서는 공간의 모양과 배치만 고릅니다.","Mountain and water amounts still follow your earlier answers. This question concerns shape and arrangement only."),
                         C("ordinary","익숙하고 자연스러운 풍경","Familiar, natural landscapes","특이한 모양보다는 현재 타일에 잘 어울리는 배치를 원해요.","A landscape that feels at home on this tile."),
                         C("mixed","평범한 안과 독특한 안을 함께","A mix of familiar and unusual","일반적인 배치와 눈에 띄는 지형을 비교해 보고 싶어요.","Compare an ordinary layout with something more distinctive."),
-                        C("distinct","독특한 풍경 위주","Mostly distinctive landscapes","산에 둘러싸인 공간이나 굽은 물가처럼 기억에 남는 모습을 원해요.","Memorable shapes such as sheltered valleys or curved lakeshores."),
+                        C("distinct","독특한 풍경 위주","Mostly distinctive landscapes","고른 산·물의 양을 유지하면서, 공간의 연결과 윤곽이 개성 있으면 좋겠어요.","Distinctive connections and outlines within the chosen mountain and water amounts."),
                         Any())
                 };
                 if(hasAuthoredTerrain)
@@ -79,18 +88,28 @@ namespace MapGenAI.LLM
                 if (Answer("distinctive")=="mixed" || Answer("distinctive")=="distinct")
                 {
                     var choices=new List<Choice>();
-                    if(Answer("mountains")!="open")
+                    if(addMountains)
                         choices.Add(C("mountain","산이 만드는 독특한 공간","Spaces shaped by mountains","골짜기, 산이 감싸는 생활 공간 등. 앞에서 고른 산 배치가 우선이에요.","Valleys or sheltered spaces, within your earlier mountain preference."));
-                    if(Answer("water")!="existing")
-                        choices.Add(C("water","물가가 만드는 독특한 풍경","Distinctive watersides","굽은 호숫가나 작은 만처럼, 앞에서 고른 물의 양에 맞춰요.","Curved lakeshores or small inlets, within your chosen water amount."));
-                    choices.Add(C("subtle","탁 트인 땅에 작은 포인트","Small accents on open land","한쪽의 작은 능선이나 불규칙한 빈터처럼, 넓은 공간을 살려요.","A small ridge to one side or an irregular clearing, keeping open space."));
-                    choices.Add(Any());
-                    list.Add(new Question("focus",T("어떤 쪽의 특별함이 끌리나요?","What kind of distinctive scenery appeals?"),
-                        T("앞에서 고른 취향과 맞는 방향만 보여줍니다.","These directions respect your previous answers."),choices.ToArray()));
+                    if(useWater)
+                        choices.Add(!addWater?
+                            C("water","기존 물가와 어울리는 배치","Layout around existing water","지금 있는 물가와 생활 공간의 관계를 살리고, 새 연못이나 호수는 만들지 않아요.","Use the relationship between current water and living space, without new ponds or lakes."):
+                            Answer("water")=="small"?
+                            C("water","작은 연못 주변의 풍경","Scenery around a small pond","작은 연못의 윤곽과 주변 여백을 다듬고, 큰 호수나 만으로 키우지는 않아요.","Shape a small pond and its surrounding space, without enlarging it into a lake or inlet."):
+                            C("water","물가가 만드는 독특한 풍경","Distinctive watersides","앞에서 고른 물의 양 안에서, 물가와 넓은 생활 공간이 어울리는 배치를 원해요.","Distinctive waterside layouts with broad living space, within the chosen water amount."));
+                    choices.Add(C("subtle","탁 트인 땅에 작은 포인트","Small accents on open land","빈터의 윤곽과 연결로 넓은 공간을 살려요. 이를 위해 산이나 물을 더하지는 않아요.","Use clearing outlines and connections while keeping open space, without adding mountains or water for this accent."));
+                    // A sole compatible focus is already implied by the previous answers.
+                    if(choices.Count>1)
+                    {
+                        choices.Add(Any());
+                        list.Add(new Question("focus",T("어떤 쪽의 특별함이 끌리나요?","What kind of distinctive scenery appeals?"),
+                            T("앞에서 고른 취향과 맞는 방향만 보여줍니다.","These directions respect your previous answers."),choices.ToArray()));
+                    }
                 }
                 list.Add(new Question("features",T("지형 특징도 함께 추천할까요?","Include special map features?"),
-                    T("온천이나 유적 같은 특징입니다. 설치된 콘텐츠와 현재 타일에서 가능한 것만 검토합니다.","For example, hot springs or ruins. Only loaded content allowed on this tile will be considered."),
-                    C("include","어울리는 특징도 제안해 줘","Suggest suitable features too","기존 특징과 충돌하지 않고, 고른 풍경에 어울리는 경우에만요.","Only when they fit the landscape and do not conflict with existing features."),
+                    !addWater?
+                        T("풍경 모양과 별개인 유적 등의 게임 특징입니다. 새 물은 추가하지 않고, 설치된 콘텐츠 중 현재 조건에 맞는 것만 검토합니다.","Game features such as ruins, separate from the landscape's shape. Keep the no-new-water preference and consider only loaded, compatible content."):
+                        T("풍경 모양과 별개인 온천·유적 등의 게임 특징입니다. 앞서 고른 산·물의 양과 설치된 콘텐츠, 현재 타일 조건을 지킵니다.","Game features such as hot springs or ruins, separate from the landscape's shape. Respect the chosen mountain/water amounts, loaded content and tile conditions."),
+                    C("include","어울리는 특징도 제안해 줘","Suggest suitable features too","앞서 고른 조건을 바꾸거나 기존 특징과 충돌하지 않는 경우에만요.","Only when they respect earlier preferences and do not conflict with existing features."),
                     C("layout","모양과 배치에 집중해 줘","Focus on terrain layout","기존 특징은 유지하고 새 특징을 추가하지 않아요.","Keep current features without adding new ones."),
                     Any()));
                 return list;

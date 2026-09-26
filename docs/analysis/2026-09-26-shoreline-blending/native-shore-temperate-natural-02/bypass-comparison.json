@@ -1,0 +1,55 @@
+{
+  "after": "native-shore-temperate-natural-02",
+  "before": "native-shore-temperate-bypass-01",
+  "productDllIdentical": true,
+  "comparisons": [
+    {
+      "phase": "preview",
+      "step": "after-blend",
+      "preStageTerrainIdentical": true,
+      "preStageElevationIdentical": true,
+      "preStageCavesIdentical": true,
+      "changedCells": 120,
+      "outsideMeasuredBank": 0,
+      "originalWaterChanged": 0,
+      "elevationIdentical": true,
+      "cavesIdentical": true
+    },
+    {
+      "phase": "preview",
+      "step": "phase-end-terrain",
+      "preStageTerrainIdentical": true,
+      "preStageElevationIdentical": true,
+      "preStageCavesIdentical": true,
+      "changedCells": 120,
+      "outsideMeasuredBank": 0,
+      "originalWaterChanged": 0,
+      "elevationIdentical": true,
+      "cavesIdentical": true
+    },
+    {
+      "phase": "full",
+      "step": "after-blend",
+      "preStageTerrainIdentical": true,
+      "preStageElevationIdentical": true,
+      "preStageCavesIdentical": true,
+      "changedCells": 120,
+      "outsideMeasuredBank": 0,
+      "originalWaterChanged": 0,
+      "elevationIdentical": true,
+      "cavesIdentical": true
+    },
+    {
+      "phase": "full",
+      "step": "phase-end-terrain",
+      "preStageTerrainIdentical": true,
+      "preStageElevationIdentical": true,
+      "preStageCavesIdentical": true,
+      "changedCells": 120,
+      "outsideMeasuredBank": 0,
+      "originalWaterChanged": 0,
+      "elevationIdentical": true,
+      "cavesIdentical": true
+    }
+  ]
+}

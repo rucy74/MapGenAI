@@ -77,5 +77,55 @@ static class LandscapeBlendTests
             Equal(true,LandscapeBlendField.OrdinaryGround("Soil"));
             foreach(string name in new[]{"Gravel","SoilRich","WaterShallow","WaterMovingChestDeep","WaterOceanDeep","HotSpring","LavaDeep","VolcanicRock","Ice","MarshyTerrain","Mud","Bridge","PavedTile","CustomSoil","RoadDirt"})Equal(false,LandscapeBlendField.OrdinaryGround(name));
         });
+        // Break: turning every shore into a continuous unbuildable mud strip, or exporting fertile soil into deserts.
+        Check("Shore banks are local interrupted patches with climate and original ground constraints",()=>
+        {
+            int mud=0,gaps=0,dryChanges=0;
+            for(int seed=0;seed<20;seed++)
+            {
+                var field=new LandscapeBlendField(seed.ToString());
+                for(int z=0;z<120;z++)for(int distance=1;distance<=10;distance++)
+                {
+                    var wet=field.SampleShore(30,z,distance,20,true);
+                    var dry=field.SampleShore(30,z,distance,20,false);
+                    Equal(wet.ground,field.SampleShore(30,z,distance,20,true).ground);
+                    if(wet.ground==LandscapeBlendField.Ground.Mud){mud++;Equal(true,distance<=2);}
+                    Equal(false,dry.ground==LandscapeBlendField.Ground.Mud || dry.ground==LandscapeBlendField.Ground.Soil);
+                    if(distance>6){Equal(LandscapeBlendField.Ground.Keep,wet.ground);Equal(1f,wet.vegetation);}
+                    if(distance==2 && wet.ground==LandscapeBlendField.Ground.Keep)gaps++;
+                    if(dry.ground!=LandscapeBlendField.Ground.Keep)dryChanges++;
+                }
+            }
+            Equal(true,mud>30);Equal(true,gaps>30);Equal(true,dryChanges>100);
+            Equal(true,LandscapeBlendField.DampSoilBank(true,true,15,1000,"Soil"));
+            Equal(false,LandscapeBlendField.DampSoilBank(true,false,25,1000,"Soil"));
+            Equal(false,LandscapeBlendField.DampSoilBank(true,true,25,200,"Soil"));
+            Equal(false,LandscapeBlendField.DampSoilBank(true,true,-5,1000,"Soil"));
+            Equal(false,LandscapeBlendField.DampSoilBank(true,true,25,1000,"Sand"));
+            Equal(false,LandscapeBlendField.DampSoilBank(false,true,25,1000,"Soil"));
+            foreach(string name in new[]{"HotSpring","LavaDeep","WaterOceanShallow","Marsh","ToxicWater","CustomWater"})
+                Equal(false,LandscapeBlendField.OrdinaryFreshwater(name));
+            foreach(string name in new[]{"WaterDeep","WaterShallow","WaterMovingChestDeep","WaterMovingShallow"})
+                Equal(true,LandscapeBlendField.OrdinaryFreshwater(name));
+        });
+        // Break: omitted details silently leaving new natural ponds naked, or retroactively changing saved/exact ponds.
+        Check("Only new rough freshwater additions opt into banks, with explicit off and old saves preserved",()=>
+        {
+            const string shape="{\"id\":\"pond\",\"type\":\"composite\",ROUGH\"shapes\":[{\"id\":\"p\",\"prim\":\"ellipse\",\"center\":[0.5,0.5],\"w\":0.2,\"h\":0.1}],\"compose\":[{\"op\":\"add\",\"s\":\"p\",\"e\":0.05,\"fill\":\"WaterShallow\"}]}";
+            string natural=shape.Replace("ROUGH","\"edge_roughness\":\"medium\",");
+            var added=Edit(new TileMapState(),"{\"shape_ops\":[{\"op\":\"add\",\"shape\":"+natural+"}]}");
+            Equal("natural",added.elevationShapes[0].details);
+            foreach(string equivalent in new[]{natural.Replace("\"medium\"","\"0.5\""),
+                natural.Replace("\"edge_roughness\"","\"fill\":\"WaterShallow\",\"edge_roughness\"").Replace(",\"fill\":\"WaterShallow\"}","}")})
+                Equal("natural",Edit(new TileMapState(),"{\"shape_ops\":[{\"op\":\"add\",\"shape\":"+equivalent+"}]}").elevationShapes[0].details);
+            var old=Edit(new TileMapState(),"{\"elevation_shapes\":["+natural+"]}");
+            Equal(null,MapStateCodec.Deserialize(MapStateCodec.Serialize(old)).elevationShapes[0].details);
+            Equal(null,Edit(old,"{\"shape_ops\":[{\"op\":\"update\",\"id\":\"pond\",\"changes\":{\"variant\":\"9\"}}]}").elevationShapes[0].details);
+            foreach(string raw in new[]{shape.Replace("ROUGH",""),natural.Replace("WaterShallow","HotSpring"),natural.Replace("\"edge_roughness\"","\"details\":\"none\",\"edge_roughness\"")})
+            {
+                var result=Edit(new TileMapState(),"{\"shape_ops\":[{\"op\":\"add\",\"shape\":"+raw+"}]}");
+                Equal(false,result.elevationShapes[0].details=="natural");
+            }
+        });
     }
 }
