@@ -44,6 +44,7 @@
     <Compile Include="../MapGen/LandscapePath.cs" Link="LandscapePath.cs" />
     <Compile Include="../MapGen/LandscapePlacement.cs" Link="LandscapePlacement.cs" />
     <Compile Include="../MapGen/ContourWarp.cs" Link="ContourWarp.cs" />
+    <Compile Include="../MapGen/NativeWaterRaster.cs" Link="NativeWaterRaster.cs" />
     <Compile Include="../MapGen/NaturalLandformGeometry.cs" Link="NaturalLandformGeometry.cs" />
     <Compile Include="../MapGen/OrganicLandformGeometry.cs" Link="OrganicLandformGeometry.cs" />
     <Compile Include="../MapGen/LandscapeBlendField.cs" Link="LandscapeBlendField.cs" />

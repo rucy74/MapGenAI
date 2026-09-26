@@ -71,6 +71,8 @@ static class CoreRegressionTests
         NaturalLandformTests.RunAll();
         OrganicLandformTests.RunAll();
         LandscapeBlendTests.RunAll();
+        WaterProfileTests.RunAll();
+        NativeWaterRasterTests.RunAll();
         ShorelineWaterTests.RunAll();
         TerrainWaterSemanticsTests.RunAll();
         LandscapeCompositionTests.RunAll();

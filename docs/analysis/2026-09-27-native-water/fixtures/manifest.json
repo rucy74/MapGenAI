@@ -1,0 +1,33 @@
+{
+  "source": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new04-graphics-01\\state.json",
+  "sourceSha256": "56353c7604c6e4017b7592e7d7a63aa49113b7856fd11e70113a4bd31730eddb",
+  "note": "Deterministic explicit fixtures derived from recorded full state. These are controlled inputs, not provider outputs or screenshots. Exact/legacy pairs use one file under both DLLs. Native vs legacy differs only by water_profile. Ring subtracts inner from outer; full map must retain enclosed dry island.",
+  "generic-native": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\generic-native.json",
+    "sha256": "56353c7604c6e4017b7592e7d7a63aa49113b7856fd11e70113a4bd31730eddb"
+  },
+  "generic-native-off": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\generic-native-off.json",
+    "sha256": "7519175bce1daff8893ff8e274d5454c29a45c2ffabe82ffd95f9eb4950e95f4"
+  },
+  "generic-legacy": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\generic-legacy.json",
+    "sha256": "57a8ef5e94676959747f211b0d7ded7439f3c8f71f9a6835dd90ed78dcde8cf3"
+  },
+  "exact": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\exact.json",
+    "sha256": "63cc2ab2a69938aba14bd093309d50cb2b4b6c66755fb3fb43580090938d622a"
+  },
+  "shallow-native": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\shallow-native.json",
+    "sha256": "40ca34a72b46d3971329a06d3a7fea2f70205cf920691ee293def37818fad0fb"
+  },
+  "hotspring": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\hotspring.json",
+    "sha256": "3d7a53452aa4072951324022efccdaf7f251a08d9d7120e1a043ff8fe9a68e76"
+  },
+  "ring-native": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\ring-native.json",
+    "sha256": "13dcb252093beb7ba5965d56484a584e9a889e750d868d3db72dea7dac0a6e66"
+  }
+}

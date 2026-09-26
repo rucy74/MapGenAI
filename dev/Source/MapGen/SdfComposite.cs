@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -219,6 +220,12 @@ namespace MapGenAI.MapGen
             Map map,
             MapGenFloatGrid elevGrid, string edgeRoughness = null, string shapeId = null, string fillOverride = null,
             string anchor = null, string placement = null, string direction = null, string variant = null)
+            =>ApplyComposite(shapes,compose,map,elevGrid,edgeRoughness,shapeId,fillOverride,anchor,placement,direction,variant,null,null);
+
+        public static void ApplyComposite(
+            List<ShapePrimitive> shapes,List<ComposeOp> compose,Map map,MapGenFloatGrid elevGrid,
+            string edgeRoughness,string shapeId,string fillOverride,string anchor,string placement,string direction,string variant,
+            string waterProfile,string details)
         {
             if (shapes == null || shapes.Count == 0 || compose == null || compose.Count == 0)
                 return;
@@ -228,11 +235,15 @@ namespace MapGenAI.MapGen
 
             // 1. 각 shape에 대한 SDF 함수 생성
             var sdfFuncs = new Dictionary<string, Func<Vector2, float>>();
+            var operandParts=new Dictionary<string,List<ShapePrimitive>>();
             foreach (var s in shapes)
             {
                 var func = BuildNaturalSdfFunc(s,ContourWarp.Amount(edgeRoughness),(variant==null?shapeId:shapeId+"@"+variant)+"/"+s.id);
                 if (func != null)
+                {
                     sdfFuncs[s.id] = func;
+                    operandParts[s.id]=new List<ShapePrimitive>{s};
+                }
             }
 
             // 2. compose 체인 실행 — 각 add를 독립 래스터라이즈
@@ -282,8 +293,13 @@ namespace MapGenAI.MapGen
 
                 if (result != null)
                 {
+                    var inputs=op.op=="add"?new[]{op.s}:op.op=="sub"?new[]{op.a,op.from}:new[]{op.a,op.b};
+                    var parts=inputs.Where(id=>id!=null && operandParts.ContainsKey(id)).SelectMany(id=>operandParts[id]).Distinct().ToList();
                     if (!string.IsNullOrEmpty(op.outId))
+                    {
                         sdfFuncs[op.outId] = result;
+                        operandParts[op.outId]=parts;
+                    }
 
                     // e가 있거나 fill이 있으면 래스터라이즈 대상
                     if (op.e != 0f || !string.IsNullOrEmpty(op.fill) || (operationIndex == compose.Count - 1 && !string.IsNullOrEmpty(fillOverride)))
@@ -291,7 +307,7 @@ namespace MapGenAI.MapGen
                         float elev = op.e;
                         float fall = op.f > 0f ? op.f : 0.05f;
                         string fill = fillOverride ?? op.fill;
-                        renderQueue.Add(new RenderItem { sdf = result, elevation = elev, falloff = fall, fill = fill });
+                        renderQueue.Add(new RenderItem { sdf = result, elevation = elev, falloff = fall, fill = fill, parts=parts });
                     }
                 }
             }
@@ -299,6 +315,15 @@ namespace MapGenAI.MapGen
             if (renderQueue.Count == 0) return;
             float roughness = ContourWarp.Amount(edgeRoughness);
             var warp = roughness > 0 ? new ContourWarp(shapes, variant==null?shapeId:shapeId+"@"+variant, roughness) : null;
+            if(waterProfile=="native" && roughness>0)
+                foreach(var item in renderQueue)
+                {
+                    string fillName=item.fill??(item.elevation<0?"water":null);
+                    string material=fillName==null?null:TerrainMaterials.DefName(fillName);
+                    if(material=="WaterDeep" || material=="WaterShallow")
+                        item.water=new NativeWaterField(item.sdf,item.parts,mapW,mapH,roughness,
+                            GenerationContext.TileId+"/"+shapeId+"@"+(variant??"0"));
+                }
             Vector2 translation=new Vector2();
             if(anchor!=null)
             {
@@ -313,8 +338,13 @@ namespace MapGenAI.MapGen
                 origin=origin/coordinates-new Vector2(.5f,.5f);
                 for(int z=0;z<rows;z++)for(int x=0;x<cols;x++)
                 {
-                    var p=new Vector2(x/mapW,z/mapH)+origin;if(warp!=null)p=warp.Sample(p);
-                    foreach(var item in renderQueue)if(Smoothstep(item.falloff,0,item.sdf(p))>=.01f){footprint[z*cols+x]=true;break;}
+                    var p=new Vector2(x/mapW,z/mapH)+origin;
+                    foreach(var item in renderQueue)
+                    {
+                        bool occupied=item.water!=null?item.water.Sample(p)<=0:
+                            Smoothstep(item.falloff,0,item.sdf(warp!=null?warp.Sample(p):p))>=.01f;
+                        if(occupied){footprint[z*cols+x]=true;break;}
+                    }
                     clipped|=footprint[z*cols+x] && (x==0 || z==0 || x==cols-1 || z==rows-1);
                 }
                 var regions=GenerationContext.Regions(map);
@@ -364,10 +394,39 @@ namespace MapGenAI.MapGen
                 string fill = item.fill;
                 bool hasFill = !string.IsNullOrEmpty(fill);
                 bool isWater = fill == "water" || (!hasFill && elevation < 0f);
+                float[] waterField=null;bool[] deepWater=null;
+                if(item.water!=null)
+                {
+                    int count=map.Size.x*map.Size.z;waterField=new float[count];var waterMask=new bool[count];
+                    foreach(var c in CellRect.WholeMap(map))
+                    {
+                        int index=c.z*map.Size.x+c.x;
+                        waterField[index]=item.water.Sample(new Vector2(c.x/mapW,c.z/mapH)-translation);
+                        waterMask[index]=waterField[index]<=0;
+                    }
+                    deepWater=NativeWaterRaster.DeepMask(map.Size.x,map.Size.z,waterMask,item.water.Shelf*Mathf.Min(mapW,mapH));
+                }
 
                 foreach (var cell in CellRect.WholeMap(map))
                 {
                     Vector2 p = new Vector2(cell.x / mapW, cell.z / mapH)-translation;
+                    if(item.water!=null)
+                    {
+                        var regions=GenerationContext.Regions(map);
+                        int index=cell.z*map.Size.x+cell.x;
+                        float distance=waterField[index];
+                        if(distance<=0)
+                        {
+                            bool deep=TerrainMaterials.DefName(fill??"water")!="WaterShallow" && deepWater[index];
+                            RegionGrid.Record(map,shapeId,cell,true,"water",deep);
+                            if(regions!=null){regions.NativeWater[index]=(byte)(deep?2:1);regions.Flatten[index]=false;}
+                            if(fertilityGrid!=null)fertilityGrid[cell]=FillToFertility("water",deep);
+                            elevGrid[cell]=Mathf.Min(elevGrid[cell],.3f);
+                        }
+                        else if(details=="natural" && distance<=item.water.Shore && regions!=null)
+                            regions.NativeShore[index]=true;
+                        continue;
+                    }
                     if (warp != null) p = warp.Sample(p);
                     float d = sdf(p);
                     float t = Smoothstep(falloff, 0f, d);
@@ -444,12 +503,14 @@ namespace MapGenAI.MapGen
             }
         }
 
-        private struct RenderItem
+        private sealed class RenderItem
         {
             public Func<Vector2, float> sdf;
             public float elevation;
             public float falloff;
             public string fill;
+            public NativeWaterField water;
+            public List<ShapePrimitive> parts;
         }
 
         private static bool GetSdf(string id, Dictionary<string, Func<Vector2, float>> funcs, out Func<Vector2, float> func)

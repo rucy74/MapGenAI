@@ -16,6 +16,11 @@ namespace MapGenAI.MapGen
         {
             if (shape == null || shape.type == null || !Types.Contains(shape.type)) throw new FormatException("Unknown terrain type: " + shape?.type);
             if (shape.id != null) Id(shape.id);
+            if(shape.water_profile!=null)
+            {
+                if(shape.type!="composite")throw new FormatException("water_profile requires composite geometry");
+                if(shape.water_profile!="legacy" && shape.water_profile!="native")throw new FormatException("water_profile must be legacy or native");
+            }
             if(shape.anchor!=null || shape.placement!=null)
             {
                 if(shape.type!="composite")throw new FormatException("anchor/placement require composite geometry");

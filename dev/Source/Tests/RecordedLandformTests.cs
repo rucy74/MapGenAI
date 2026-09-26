@@ -29,10 +29,20 @@ static class RecordedLandformTests
             var after=MapStateEditor.Merge(before,MapParameterParser.Parse(response.GetObject("params")));
             MapStateValidation.Validate(after);
             string expected=NormalizeOptionalRoads(File.ReadAllText(Path.Combine(root,id+"-after.json")));
-            Equal(expected,MapStateCodec.Serialize(after));
-            Equal(expected,MapStateCodec.Serialize(MapStateCodec.Deserialize(expected)));
-            Equal(NormalizeOptionalRoads(beforeText),MapStateCodec.Serialize(before));
+            Equal(expected,OmitNullWaterProfiles(MapStateCodec.Serialize(after)));
+            Equal(expected,OmitNullWaterProfiles(MapStateCodec.Serialize(MapStateCodec.Deserialize(expected))));
+            Equal(NormalizeOptionalRoads(beforeText),OmitNullWaterProfiles(MapStateCodec.Serialize(before)));
         }
+    }
+
+    // Old snapshots lack this optional field. Ignore only an absent-equivalent null;
+    // an unexpected native/legacy profile must still fail the frozen state comparison.
+    static string OmitNullWaterProfiles(string text)
+    {
+        var stored=SimpleJson.Parse(text);
+        foreach(var shape in stored.GetObject("state").GetObjectArray("elevationShapes"))
+            if(shape.IsNull("water_profile"))shape.Values.Remove("water_profile");
+        return SimpleJson.Serialize(stored);
     }
 
     // The recorded files predate local roads. Add only this new optional default to

@@ -31,6 +31,7 @@ namespace MapGenAI.MapGen
         public string edge_roughness; // composite contour or passage edges: omitted/none=precise
         public string landform, variant, opening, layout; // null layout preserves the original natural generator
         public string details; // natural = local shore/foothill surfaces and initial biome vegetation; null/none preserves legacy
+        public string water_profile; // composite: native = coupled natural water depths; null/legacy keeps saved geometry
         public string anchor, placement; // composite: persistent area relationship (inside/edge/beside)
 
         public string region, region_part, coverage; // region_fill: source area and counted cell fraction
@@ -61,6 +62,7 @@ namespace MapGenAI.MapGen
             Scribe_Values.Look(ref opening, "opening");
             Scribe_Values.Look(ref layout, "layout");
             Scribe_Values.Look(ref details, "details");
+            Scribe_Values.Look(ref water_profile, "water_profile");
             Scribe_Values.Look(ref anchor, "landscapeAnchor");
             Scribe_Values.Look(ref placement, "landscapePlacement");
             Scribe_Values.Look(ref region, "region");
@@ -91,7 +93,7 @@ namespace MapGenAI.MapGen
                 position = position, size = size, gap = gap, fill = fill,
                 fade = fade, noise_amount = noise_amount, edge_roughness = edge_roughness,
                 landform = landform, variant = variant, opening = opening, layout = layout,
-                details = details, anchor = anchor, placement = placement,
+                details = details, water_profile = water_profile, anchor = anchor, placement = placement,
                 region = region, region_part = region_part, coverage = coverage,
                 width = width, scope = scope, points = points?.Select(p => (float[])p.Clone()).ToArray(),
                 compositeShapes = compositeShapes?.Select(s => s.Clone()).ToList(),

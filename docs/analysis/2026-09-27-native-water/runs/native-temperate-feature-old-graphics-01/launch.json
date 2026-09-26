@@ -1,0 +1,33 @@
+﻿{
+    "interactionLayout":  "single",
+    "output":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-feature-old-graphics-01",
+    "root":  "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+    "arguments":  [
+                      "-mapgenAINativeCase=native-feature",
+                      "-mapgenAINativeBiome=temperate",
+                      "-mapgenAINativeDetails=natural",
+                      "-mapgenAINativeLayout=single",
+                      "-batchmode",
+                      "-savedatafolder=\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\native-visual-profile-native-temperate-feature-old-graphics-01\"",
+                      "-mapgenAINativeProbe=\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-feature-old-graphics-01\"",
+                      "-logFile",
+                      "\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-feature-old-graphics-01\\Player.log\"",
+                      "-mapgenAINativeWaterFill=WaterShallow",
+                      "-force-d3d11"
+                  ],
+    "bypassBlend":  false,
+    "waterProfile":  "",
+    "pid":  76344,
+    "profile":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\native-visual-profile-native-temperate-feature-old-graphics-01",
+    "waterFill":  "WaterShallow",
+    "started":  "2026-09-27T00:53:09.7936017+09:00",
+    "probeDllSha256":  "3969DAABA7C4786CFA1EBD9C199969358228A2F4C634F1635E01FA25409F056E",
+    "details":  "natural",
+    "case":  "native-feature",
+    "biome":  "temperate",
+    "stateFile":  "",
+    "repo":  "F:/Projects/Rimworld/active/mapgen_ai",
+    "sourceDll":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\baseline-21e5614.dll",
+    "graphicsEnabled":  true,
+    "sourceDllSha256":  "B75DA4EFE80CE1333B75538A669EA0811DC4C81B98976BB94A15BEBA1CB5E084"
+}

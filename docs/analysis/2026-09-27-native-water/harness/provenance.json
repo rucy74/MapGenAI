@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "21e56141d4ec05d4e02599cee4aac2f1d70fda6a",
+  "sources": {
+    "F:\\Projects\\Rimworld\\active\\mapgen_ai\\tools\\shoreline-probe\\Probe.cs": "200b226eed9ccdc2102235474762cfc6c3c5100acb2aeadea8d7247d2a63b073",
+    "F:\\Projects\\Rimworld\\active\\mapgen_ai\\tools\\shoreline-probe\\run.ps1": "6521106fbe42ff29b1a1ebccaace0b63e8240e45d8f2db42d51fbd015cc466bf",
+    "F:\\Projects\\Rimworld\\active\\mapgen_ai\\tools\\shoreline-probe\\ShorelineProbe.csproj": "36b0c87d673343a3289ff92b3c6880490e330166e6265020e44464211f7c1b4b"
+  },
+  "note": "New isolated task-specific scaffold. No game launched by prepare.py. Native source snapshots and map rendering must be executed separately."
+}

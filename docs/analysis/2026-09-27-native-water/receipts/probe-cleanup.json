@@ -1,0 +1,1037 @@
+﻿{
+    "created":  "2026-09-27T01:24:47.3465945+09:00",
+    "ownedRuntime":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime",
+    "runtimeExecutable":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\RimWorldWin64.exe",
+    "runtimeProcessAbsent":  true,
+    "archiveRoot":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27",
+    "count":  27,
+    "plans":  [
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-desert-feature-old-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-desert-feature-old-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-desert-feature-old-graphics-01\\launch.json",
+                      "launchPid":  52284,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "ec01e00f7eeea9a358e1f8e931f130f377cd3e9ad9f602c98ba7262f7f167ae0"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "bec3aea431e5a49d98c6a77afdf4c2191a508f7bb2c1e7ce28db3f7b98a2bd68"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-desert-feature-old-graphics-02",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-desert-feature-old-graphics-02",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-desert-feature-old-graphics-02\\launch.json",
+                      "launchPid":  52000,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "8263221b87eb87ac8069930e2ad5a1cdc0aa27304f98d81844f9bc68a90fc241"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "cd48be764b3658cf0d65f8684348fdbd4b77196d8e7bab4866432a6f0d2c8440"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-desert-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-desert-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\launch.json",
+                      "launchPid":  97884,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "45c3324387c4703f1315ef7c87d5eb7fa7a3f79e27474c077dc9379b10d17866"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-desert-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-desert-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\launch.json",
+                      "launchPid":  58956,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "e7c8aa8a0c7f7232396a2356f19c7e5e0f3296d82ef5fc7224c7fab4b608726d"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-exact-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-exact-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\launch.json",
+                      "launchPid":  8416,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "57e0e28553714f961e87e89daf4cbb1b1e6ac0a45359193218904fb048805dd3"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-exact-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-exact-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\launch.json",
+                      "launchPid":  108872,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "39586e1871c93f6ec4501ac8d6092d9e95fb18246ef6908273163b275ed759f9"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-hotspring-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-hotspring-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\launch.json",
+                      "launchPid":  90560,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "5d3497dbbec3e2400ba236a78431967a63e4adedfcd0ed19176eab0d71602e4a"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-hotspring-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-hotspring-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\launch.json",
+                      "launchPid":  30664,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "cbb8e6c80f3596917690772ef89ec668225ac5ef72c2c29518f845e88afc57fc"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-legacy-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-legacy-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\launch.json",
+                      "launchPid":  10124,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "71c7ae7104c22237ef0f850fc14b674c46c835b4c76cdd40596a697430d4ebc6"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-off-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-off-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\launch.json",
+                      "launchPid":  60364,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "d7f4361eb905917c987b35598a86660e033942ea4a330366c9d619dfcef7a956"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-protected-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-protected-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\launch.json",
+                      "launchPid":  9432,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "e6ed4bd6750bb5855f5bb33be2923dda79e6bbb42af041ae228a078b43be7991"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-protected-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-protected-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\launch.json",
+                      "launchPid":  78232,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "2dfb5e0bf53b98da9e3ccfa5ec580e4de90f9fe859c7e877abe758dfe85101be"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-ring-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-ring-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\launch.json",
+                      "launchPid":  100016,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "63e57f116d7faf1392a8e666e797a00f9dd0cad454bb497474f0f007d12b724d"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-river-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-river-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\launch.json",
+                      "launchPid":  53644,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "3b568602d43d0b3caca5c050395f639d839d47a50a93e5b367d3f15646f8b090"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-river-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-river-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\launch.json",
+                      "launchPid":  90032,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "96e35eec6fa3c66e6c09bbb0587a9c76ebc461ecdc0dc591a0c5661f76e43c57"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-shallow-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-shallow-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\launch.json",
+                      "launchPid":  88992,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "575f6fd36f6d508ddd61db85e7208164179ad5fd093d448a1d1ad25297374e11"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-final-temp-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-final-temp-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\launch.json",
+                      "launchPid":  58496,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "603e8a38380c277b712713a8f0cf0e2e7b134afbfe65339bc96d96b06839cf6e"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-feature-old-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-feature-old-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-feature-old-graphics-01\\launch.json",
+                      "launchPid":  76344,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "96aff49b6ae6bc912d5d1428fb5ef2a0370bf34fec2b72c666258ff2ce702247"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "3969daaba7c4786cfa1ebd9c199969358228a2f4c634f1635e01fa25409f056e"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-pool-new-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-pool-new-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-01\\launch.json",
+                      "launchPid":  72876,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "6f264a390a9035ede3d1dc11975bf85e4ffdcaf9eaeb0384b5676d7bef91405a"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "fb11bbc4f5682196166613041baf0c8044290c84ef7b492aea7ec61959cd107a"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "32ffe1e5993e34b1764120806afbb35f70bc72b16874d1f8eb16fd3b4f49475f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-pool-new-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-pool-new-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\launch.json",
+                      "launchPid":  15412,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "a075af19df24c5c6c894f142f846ebbe4f19d4b25aa7db55db07feffc93a3c4a"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "fb11bbc4f5682196166613041baf0c8044290c84ef7b492aea7ec61959cd107a"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "3969daaba7c4786cfa1ebd9c199969358228a2f4c634f1635e01fa25409f056e"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-pool-old-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-pool-old-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-01\\launch.json",
+                      "launchPid":  88784,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "6fdf75777e97d30689f0c7cba3d84e63307a2ae7cb9352070e49d530b5b3e05d"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "32ffe1e5993e34b1764120806afbb35f70bc72b16874d1f8eb16fd3b4f49475f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-pool-old-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-pool-old-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\launch.json",
+                      "launchPid":  5404,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "02cd2bc46ff47a171a4c73e9cc35f9b8037505e5775dee3d4e9b30eebf1e3505"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "3969daaba7c4786cfa1ebd9c199969358228a2f4c634f1635e01fa25409f056e"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-water-new03-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-water-new03-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new03-graphics-01\\launch.json",
+                      "launchPid":  103776,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "a23b284f42a9d30000bfd74b1d19b5114158dd5bc5ed95ac963e27b973fd8f0d"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "82fa7faf8944a005273665b2ec4e89589171e90f71edf79833758c0db00ac047"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "cd48be764b3658cf0d65f8684348fdbd4b77196d8e7bab4866432a6f0d2c8440"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-water-new04-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-water-new04-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new04-graphics-01\\launch.json",
+                      "launchPid":  69424,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "656074902e4f1f1ea7cfdb3a52e602f44e5823c310c19dabb036b6b3bd3cbd86"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "105ea1b025bba5843157767801ea3ce144299ceac858930f37c3fcf0a860218b"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "8e00169c9148edef246816c24f7243a952b4db627f1986991d987ed08cca0b04"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-water-new05-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-water-new05-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new05-graphics-01\\launch.json",
+                      "launchPid":  103272,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "17e6f1acaf1dafd9b4ffb880ddc09b13c04bb8d83ae26cfa7fdf3b9d8044711f"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "d98bec4f9784f648de580f0da5eb5dea3108e795012bbb0b24ab0fe8f236c601"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "57a8c51fe688f0e109074c54da8c1c179bf5dc9f1ec5604ba1366c2b2eeb12f9"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-water-new06-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-water-new06-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\launch.json",
+                      "launchPid":  91312,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "54b2a5ff551c3b72473ef8a3ed6d11afb570c4fca17a68f40030ebd65bc06d9d"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "4908863336befac9c141ba35cb15bbfb47617ed87a9236cd21f7b3449abde019"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  },
+                  {
+                      "source":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\NativeVisualProbe-native-temperate-water-old-graphics-01",
+                      "destination":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\native-generation-2026-09-27\\NativeVisualProbe-native-temperate-water-old-graphics-01",
+                      "receipt":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-old-graphics-01\\launch.json",
+                      "launchPid":  82708,
+                      "launchPidGoneOrReusedByOtherExecutable":  true,
+                      "files":  [
+                                    {
+                                        "relative":  "About\\About.xml",
+                                        "sha256":  "d00ba7b3b008ff254548ab7348287541aeb5e53273a17cfe67579ede449f743b"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.dll",
+                                        "sha256":  "b75da4efe80ce1333b75538a669ea0811dc4c81b98976bb94a15beba1cb5e084"
+                                    },
+                                    {
+                                        "relative":  "Assemblies\\MapGenAI.NativeVisualProbe.dll",
+                                        "sha256":  "3969daaba7c4786cfa1ebd9c199969358228a2f4c634f1635e01fa25409f056e"
+                                    },
+                                    {
+                                        "relative":  "Languages\\ChineseSimplified\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3"
+                                    },
+                                    {
+                                        "relative":  "Languages\\English\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Japanese\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f"
+                                    },
+                                    {
+                                        "relative":  "Languages\\Korean\\Keyed\\MapGenAI.xml",
+                                        "sha256":  "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+                                    }
+                                ],
+                      "moved":  true
+                  }
+              ],
+    "scope":  "Only NativeVisualProbe folders named by this task launch receipts. No user processes, user config or actual installed game Mods touched. All outputs retained."
+}

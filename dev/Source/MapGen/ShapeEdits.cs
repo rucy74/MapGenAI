@@ -19,7 +19,7 @@ namespace MapGenAI.MapGen
     public static class ShapeEdits
     {
         public const int MaxShapes = 32;
-        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout", "details", "anchor", "placement" };
+        static readonly string[] TextFields = { "type", "direction", "strength", "position", "size", "gap", "fill", "fade", "noise_amount", "edge_roughness", "region", "region_part", "coverage", "scope", "landform", "variant", "opening", "layout", "details", "water_profile", "anchor", "placement" };
 
         public static void AssignIds(List<ElevationShape> shapes)
         {
@@ -76,7 +76,7 @@ namespace MapGenAI.MapGen
                     ValidatePair(pair);
                     value = PairText(pair[0], pair[1]);
                 }
-                if (value == null && name != "fill" && name!="anchor" && name!="placement" && !(name=="opening" && shape.type=="landform")) throw new FormatException("Invalid terrain field: " + name);
+                if (value == null && name != "fill" && name!="anchor" && name!="placement" && !(name=="water_profile" && obj.IsNull(name)) && !(name=="opening" && shape.type=="landform")) throw new FormatException("Invalid terrain field: " + name);
                 typeof(ElevationShape).GetField(name).SetValue(shape, value);
             }
             if (shape.type == "composite")
@@ -152,6 +152,12 @@ namespace MapGenAI.MapGen
                         ContourWarp.Amount(added.edge_roughness)>0 &&
                         TerrainMaterials.HasRenderedFill(added,fill=>LandscapeBlendField.OrdinaryFreshwater(TerrainMaterials.DefName(fill))))
                         added.details="natural";
+                    // Depth/outline selection is persistent and independent of the surface switch.
+                    // Only new natural standing freshwater opts in; moving/special water keeps its own generator.
+                    if(added.type=="composite" && added.water_profile==null && added.details!="none" &&
+                        ContourWarp.Amount(added.edge_roughness)>0 &&
+                        TerrainMaterials.HasRenderedFill(added,fill=>TerrainMaterials.DefName(fill)=="WaterDeep" || TerrainMaterials.DefName(fill)=="WaterShallow"))
+                        added.water_profile="native";
                     if (shapes.Any(s => s.id == added.id && added.id != null)) throw new FormatException("Terrain ID already exists: " + added.id);
                     shapes.Add(added); AssignIds(shapes);
                 }

@@ -1,0 +1,164 @@
+{
+  "ok": true,
+  "checks": {
+    "old_native_run_passed": true,
+    "new_native_run_passed": true,
+    "no_provider_attempts": true,
+    "same_fixture_context": true,
+    "same_state_except_profile": true,
+    "actual_preview_pngs": true,
+    "complete_map_layer_count": true
+  },
+  "old": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01",
+  "new": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01",
+  "profileOnlyIntentionalDifference": {
+    "old": [],
+    "new": [
+      {
+        "path": "$.state.elevationShapes[0].water_profile",
+        "value": "native"
+      }
+    ]
+  },
+  "oldLaunch": {
+    "biome": "temperate",
+    "pid": 5404,
+    "case": "pool",
+    "sourceDll": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\baseline-21e5614.dll",
+    "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\native-visual-profile-native-temperate-pool-old-graphics-01",
+    "interactionLayout": "single",
+    "details": "natural",
+    "stateFile": "",
+    "started": "2026-09-27T00:50:00.2944945+09:00",
+    "waterProfile": "",
+    "repo": "F:/Projects/Rimworld/active/mapgen_ai",
+    "sourceDllSha256": "B75DA4EFE80CE1333B75538A669EA0811DC4C81B98976BB94A15BEBA1CB5E084",
+    "output": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-pool-old-graphics-01",
+    "root": "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+    "probeDllSha256": "3969DAABA7C4786CFA1EBD9C199969358228A2F4C634F1635E01FA25409F056E",
+    "bypassBlend": false
+  },
+  "newLaunch": {
+    "interactionLayout": "single",
+    "output": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-pool-new-graphics-01",
+    "root": "C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime",
+    "arguments": [
+      "-mapgenAINativeCase=pool",
+      "-mapgenAINativeBiome=temperate",
+      "-mapgenAINativeDetails=natural",
+      "-mapgenAINativeLayout=single",
+      "-batchmode",
+      "-savedatafolder=\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\native-visual-profile-native-temperate-pool-new-graphics-01\"",
+      "-mapgenAINativeProbe=\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-pool-new-graphics-01\"",
+      "-logFile",
+      "\"C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-temperate-pool-new-graphics-01\\Player.log\"",
+      "-mapgenAINativeWaterProfile=native",
+      "-force-d3d11"
+    ],
+    "bypassBlend": false,
+    "waterProfile": "native",
+    "pid": 15412,
+    "profile": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\native-visual-profile-native-temperate-pool-new-graphics-01",
+    "graphicsEnabled": true,
+    "started": "2026-09-27T00:50:37.8647882+09:00",
+    "details": "natural",
+    "case": "pool",
+    "biome": "temperate",
+    "stateFile": "",
+    "repo": "F:/Projects/Rimworld/active/mapgen_ai",
+    "sourceDll": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll",
+    "probeDllSha256": "3969DAABA7C4786CFA1EBD9C199969358228A2F4C634F1635E01FA25409F056E",
+    "sourceDllSha256": "FB11BBC4F5682196166613041BAF0C8044290C84EF7B492AEA7EC61959CD107A"
+  },
+  "fullMapChangedCells": 717,
+  "oldGroundCounts": {
+    "Soil": 46402,
+    "Gravel": 3742,
+    "Granite_Rough": 1066,
+    "SoilRich": 2076,
+    "Mud": 306,
+    "WaterShallow": 3590,
+    "Slate_Rough": 1605,
+    "Limestone_Rough": 3513,
+    "AncientConcrete": 200
+  },
+  "newGroundCounts": {
+    "Soil": 46137,
+    "Gravel": 3759,
+    "Granite_Rough": 1066,
+    "SoilRich": 2121,
+    "Mud": 252,
+    "WaterShallow": 3355,
+    "Slate_Rough": 1619,
+    "Limestone_Rough": 3516,
+    "Sand": 475,
+    "AncientConcrete": 200
+  },
+  "phaseComparisons": {
+    "preview-native-terrain.json": {
+      "oldTerrainHash": "f15ab0f04e505f35d154f07e1a085c123ab5184781702f774a22ba25a1ff1aa5",
+      "newTerrainHash": "3de8f463b11e04d066ab852ada3a8274b5aa70274cf802d85c782b103a3dee6f",
+      "sameElevation": false,
+      "sameCaves": true
+    },
+    "full-native-terrain.json": {
+      "oldTerrainHash": "c9e290eccfe40731499b8cc1fc56addaae00ad2c8ac0ecbc539ef05a00bf1af7",
+      "newTerrainHash": "af0da8d27da64aa2367fe28c550be1b24f0044536eb9be854b52505f081c7ff8",
+      "sameElevation": false,
+      "sameCaves": true
+    },
+    "preview-phase-end-terrain.json": {
+      "oldTerrainHash": "752050acb624fdc6c03d492485dc29c044efbe39bab98335cfcb673599938968",
+      "newTerrainHash": "c551097ab6cb985d58bfc9cfbd141a7e0093e14f5d85a5b95dadb0e8deed2291",
+      "sameElevation": false,
+      "sameCaves": true
+    },
+    "full-phase-end-terrain.json": {
+      "oldTerrainHash": "cbcb932e31ccd862cf3e49f5d8c3c346a5cdc0dd93f7aa8c08eff7d5eae3d2d8",
+      "newTerrainHash": "8cb72ccc911eeb591f0a04617957c3b47336d91bb0c4d7cdceee57484b79a421",
+      "sameElevation": false,
+      "sameCaves": true
+    }
+  },
+  "files": {
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\fixture.json": "c8a135a85d4638a546c22cceba31c695c9960542beccb35a0b2db23632b1c825",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-after-blend.json": "348bd258c354bfc8719cdb1d6aefd01957cd12c86a06d54ee696ce23388cbd29",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-before-blend.json": "1357e916af3e0cd43389a9f4ace14b8c300f1145ac646a33defb192c783d9a44",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-complete-terrain.json": "31f6a571b878c6302aaed9c4c2e4d2863a48eae83f315e04ec908b4dcfb5c32c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-native-terrain.json": "45f2887eda2baee69d836c67ec7696c7d58001e0bce00e0ae85960c3d3ef72be",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\full-phase-end-terrain.json": "0abd8a750d5b98e879aad461e4c2847d68c5c2f13a348d3d812f50dafa3f8f95",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\harmony-patches.json": "3ec95995608a61a2a37d73c658d0048ac302b8729baedf7f3dc4f7c64cdf6065",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\launch.json": "030c524623ffda2dfd42f0e7b53b80d32ce0038fa008d559b92c60744d6e2bb0",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\Player.log": "72a6e5bfe771cd767db853639a73fa9a540ad6b4a392b7b5e68430f89cbec990",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview-after-blend.json": "13d4f71b05d044b0f7d0d9663f934e17c4229c405da0a93bf85fb8f92225928f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview-before-blend.json": "b15e3cdc5c9cc15c032dc323fff32c06a1291392a1b8c474256683de8922e0f7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview-command.json": "f0bed1e096da13aaea4c22f7dac35df3488df8c6e219abdcbe071557bb1a0ea3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview-native-terrain.json": "aa0cc94d75a7e2064be5badd19de24b1af188966b97f41e558448b4a9f0cbaa8",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview-phase-end-terrain.json": "13d4f71b05d044b0f7d0d9663f934e17c4229c405da0a93bf85fb8f92225928f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\preview.png": "f71cbdd4d9137b471b4a75808544871e337716bce04aeb05e0c33c07b426040c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\result.json": "155fbf18f5625dbea34cfa9046f9010310ca8f282584f1c1a5a2faa926415da6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-old-graphics-01\\state.json": "f0f28b20c9dea5ab5a1af6c3ed6a7170bfd9ea415044e17c3b72eac40d33b155",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\fixture.json": "42b8439fdba0211f3936c4013029aa5a8bf8c6f1a5e51ab82b8f6e3dd506da25",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-after-blend.json": "5200277edce8748e1cbbb17c25e37d30b3f60b79897f309b94bcecdddb72d6a4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-before-blend.json": "68163ade04a45318b50bb487ae3cd7b26974bec28c8b119053d1571105fa0be9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-complete-terrain.json": "073b0878b245b58790bb79c8764c596dab5bc05894c11ee936ea5b0aad360a7a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-native-terrain.json": "68163ade04a45318b50bb487ae3cd7b26974bec28c8b119053d1571105fa0be9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\full-phase-end-terrain.json": "289368c29a2f46b0f0c94ec468a396e4704bff5753f693eb27fcc98d5fbed59e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\harmony-patches.json": "3ec95995608a61a2a37d73c658d0048ac302b8729baedf7f3dc4f7c64cdf6065",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\launch.json": "fd0826615776acce195a90b8fc1eff5d92f879a47f630dad866e88bb8c4a6d7d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\Player.log": "7e624a7ea09d58f7525e8c20ac98e45e58ae923e3f2b41122208dad0e6e4f28b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview-after-blend.json": "e09213a145f0ea7515a8945212879f6e568925ef753116445d15c610a71daf21",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview-before-blend.json": "0827dac566b6fe87ac48b778eaab507372d7152e8e204d269e75f1915e4d59f9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview-command.json": "f80941c28c8d489eb1e829cb2c584d77e2fd4d49bfec457b961f22812b875dd1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview-native-terrain.json": "0827dac566b6fe87ac48b778eaab507372d7152e8e204d269e75f1915e4d59f9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview-phase-end-terrain.json": "e09213a145f0ea7515a8945212879f6e568925ef753116445d15c610a71daf21",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\preview.png": "82a25ae1758be7049c3f62ee514e018ab94e484c36fb7f921a4e630d13cfda9f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\result.json": "d2debf6d5f8c1899e6fc53bcba5d2011af99c4e8c1aec3282a4397ff6fb6abc8",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-pool-new-graphics-01\\state.json": "40ca34a72b46d3971329a06d3a7fea2f70205cf920691ee293def37818fad0fb"
+  },
+  "note": "Actual captured evidence and input equality only; no aesthetic score. Profile difference intentionally changes natural geometry; exact mode requires byte equality."
+}

@@ -17,6 +17,7 @@ namespace MapGenAI.MapGen
 - 기존 composite를 자연스럽게/다시 정확하게 바꿀 때는 해당 ID의 changes:{""edge_roughness"":""medium""} 또는 {""edge_roughness"":""none""}만 보냅니다. shapes/compose/크기/위치/높이/채움은 보존합니다. 이 필드는 composite와 passage에서 지원하며 ridge의 noise_amount와 다릅니다. passage에서는 최소 폭 바깥의 가장자리만 확장합니다. 기존 bump/ring 채움은 원래부터 불규칙한 윤곽입니다. 기존 bump/ring을 정확한 도형으로 바꿔야 하면 해당 대상만 remove+add로 composite로 변환합니다.
 - 예: 자연스러운 원형 호수 추가 {""action"":""generate"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""id"":""round_lake"",""type"":""composite"",""edge_roughness"":""medium"",""shapes"":[{""id"":""c"",""prim"":""circle"",""center"":[0.5,0.5],""r"":0.2}],""compose"":[{""op"":""add"",""s"":""c"",""fill"":""water"",""e"":0,""f"":0.015}]}}]}}. 자연스러운 별/하트도 같은 옵션을 사용하며, 도넛만 바깥 circle에서 안쪽 circle을 sub합니다.
 - 서로 다른 지형을 수십 개 나열해 그림을 흉내내지 마세요. 지형 최대32, composite당 primitive/operation 최대32. 표현 불가능한 건 구체적으로 설명하고 대안을 질문하세요.
+- 새 자연스러운 담수 composite는 기본적으로 water_profile:native로 생성되어 기본 게임 방식을 참고한 깊은 물·얕은 물 전이를 사용합니다. 명시한 WaterShallow는 얕은 물로 유지합니다. 기존 저장 지형과 정확한 도형은 자동 전환하지 않습니다. 기존 호수의 수심과 윤곽까지 자연스럽게 바꾸라는 요청에만 water_profile:native와 필요한 edge_roughness를 해당 ID에 설정하세요. details:none은 물가 바닥·식생 효과만 끄며 이미 선택한 물 윤곽·수심은 유지합니다. water_profile:legacy는 이전 물 생성 방식을 사용합니다.
 " : @"
 Terrain edit contract:
 - Use params.shape_ops for conversational edits. Target the id shown in current state. Unmentioned terrain is preserved by code; do not re-list it.
@@ -32,6 +33,7 @@ Terrain edit contract:
 - To make an existing composite natural or precise again, update ONLY its edge_roughness field to medium or none; preserve shapes/compose, size, position, height and fill. This field supports composite and passage, and is distinct from ridge noise_amount. On passages it expands only edges outside the minimum-width core. Legacy filled bump/ring already have irregular edges. To convert a legacy bump/ring to an exact shape, remove+add only that target as a composite.
 - Natural circle lake example: {""action"":""generate"",""params"":{""shape_ops"":[{""op"":""add"",""shape"":{""id"":""round_lake"",""type"":""composite"",""edge_roughness"":""medium"",""shapes"":[{""id"":""c"",""prim"":""circle"",""center"":[0.5,0.5],""r"":0.2}],""compose"":[{""op"":""add"",""s"":""c"",""fill"":""water"",""e"":0,""f"":0.015}]}}]}}. Stars/hearts use the same option; only a donut subtracts an inner circle from an outer one.
 - At most 32 terrain shapes, 32 primitives/operations per composite. Explain concrete representation limits and ask about alternatives when needed.
+- New natural freshwater composites default to water_profile:native, using engine-derived deep/shallow water transitions. Explicit WaterShallow stays shallow. Existing saved terrain and precise shapes are not automatically upgraded. Set water_profile:native and the required edge_roughness on an existing ID only when asked to naturalize its water depth and outline. details:none disables shore ground/vegetation blending only; it retains the selected water outline/depth. water_profile:legacy keeps the earlier water generator.
 ";
     }
 }

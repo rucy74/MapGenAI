@@ -1,0 +1,2 @@
+# Preserve the byte hashes of captured runtime evidence on every checkout.
+* -text

@@ -10,13 +10,15 @@ namespace MapGenAI.MapGen
         public readonly string[] Materials;
         public readonly bool[] Flatten;
         public readonly bool[] LocalRoadCells;
+        public readonly byte[] NativeWater; // 1 shallow, 2 deep; only water_profile:native
+        public readonly bool[] NativeShore; // same water field's dry-side band, details:natural
         public readonly Dictionary<string,bool[]> LandscapeReservations = new Dictionary<string,bool[]>();
         public float[] VegetationWeights; // optional, generated once; never retained outside this generation scope
         readonly Dictionary<string,bool[]> masks = new Dictionary<string,bool[]>();
         readonly System.Action<string,int,string> observeMaterial;
         internal readonly Dictionary<int,CoverageCell> CoverageOriginal = new Dictionary<int,CoverageCell>();
         public RegionGrid(Map map) : this(map,null) { }
-        public RegionGrid(Map map, System.Action<string,int,string> observeMaterial) { Map = map; this.observeMaterial=observeMaterial; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; LocalRoadCells = new bool[Materials.Length]; }
+        public RegionGrid(Map map, System.Action<string,int,string> observeMaterial) { Map = map; this.observeMaterial=observeMaterial; Materials = new string[map.Size.x * map.Size.z]; Flatten = new bool[Materials.Length]; LocalRoadCells = new bool[Materials.Length]; NativeWater=new byte[Materials.Length]; NativeShore=new bool[Materials.Length]; }
         public int Index(IntVec3 cell) => cell.z * Map.Size.x + cell.x;
         public Dictionary<int,float> CaptureFlattened(MapGenFloatGrid elevation)
         {
@@ -42,6 +44,7 @@ namespace MapGenAI.MapGen
             }
             if (!string.IsNullOrEmpty(fill))
             {
+                NativeWater[i]=0;NativeShore[i]=false;
                 Materials[i] = TerrainMaterials.DefName(fill, deep);
                 if(inside)observeMaterial?.Invoke(id,i,Materials[i]);
             }

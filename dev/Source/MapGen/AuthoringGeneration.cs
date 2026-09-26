@@ -55,7 +55,9 @@ namespace MapGenAI.MapGen
                 // Never paint across world river/ocean connections or roads after their workers run.
                 if(before.IsRiver || before.HasTag("Road") || before.defName.IndexOf("Ocean",StringComparison.OrdinalIgnoreCase)>=0)
                 {if(working!=null)working.protectedCells++;continue;}
-                var def=definitions[name];
+                byte nativeWater=regions.NativeWater[regions.Index(cell)];
+                var def=nativeWater==2?MapGenUtility.DeepFreshWaterTerrainAt(cell,map):
+                    nativeWater==1?MapGenUtility.ShallowFreshWaterTerrainAt(cell,map):definitions[name];
                 if(!def.supportsRock || regions.Flatten[regions.Index(cell)])
                     MapGenerator.Elevation[cell]=Math.Min(MapGenerator.Elevation[cell],.3f);
                 var rock=cell.GetEdifice(map);

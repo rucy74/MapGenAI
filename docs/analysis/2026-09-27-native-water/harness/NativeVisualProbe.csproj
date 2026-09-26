@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework><LangVersion>9</LangVersion>
+    <AssemblyName>MapGenAI.NativeVisualProbe</AssemblyName>
+    <GameManaged>G:/SteamLibrary/steamapps/common/RimWorld/RimWorldWin64_Data/Managed</GameManaged>
+    <ProductDll Condition="'$(ProductDll)'==''">C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/outputs/mapgenai-native-generation/baseline-21e5614.dll</ProductDll>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MapGenAI"><HintPath>$(ProductDll)</HintPath><Private>False</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(GameManaged)/Assembly-CSharp.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(GameManaged)/UnityEngine.CoreModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(GameManaged)/UnityEngine.IMGUIModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="UnityEngine.ImageConversionModule"><HintPath>$(GameManaged)/UnityEngine.ImageConversionModule.dll</HintPath><Private>False</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>G:/SteamLibrary/steamapps/workshop/content/294100/2009463077/Current/Assemblies/0Harmony.dll</HintPath><Private>False</Private></Reference>
+  </ItemGroup>
+</Project>

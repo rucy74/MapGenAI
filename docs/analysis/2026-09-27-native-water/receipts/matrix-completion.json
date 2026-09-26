@@ -1,0 +1,72 @@
+{
+  "initialMatrix": "matrix-progress.json",
+  "probeSha256": "1b686be3068be35dda32663d38aed9fe35622769525cee8e08147a37ca431e79",
+  "jobs": [
+    {
+      "id": "river-new",
+      "run": "native-final-river-new-01",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\run.ps1",
+        "-Run",
+        "native-final-river-new-01",
+        "-ProductDll",
+        "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\candidate-06.dll",
+        "-Graphics",
+        "-Case",
+        "pool",
+        "-WaterFill",
+        "water",
+        "-WaterProfile",
+        "native",
+        "-TileContext",
+        "river"
+      ],
+      "startedEpoch": 1790439494.1463497,
+      "launcherExit": 0,
+      "launcherOutput": "Owned process 53644; result: C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-final-river-new-01\n",
+      "pid": 53644,
+      "ok": false,
+      "checks": 10,
+      "error": null,
+      "endedEpoch": 1790439515.7585194,
+      "permanentRiverLayersUnchanged": true,
+      "onlyExpectedRawIceFailures": true
+    },
+    {
+      "id": "ring-new",
+      "run": "native-final-ring-new-01",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\run.ps1",
+        "-Run",
+        "native-final-ring-new-01",
+        "-ProductDll",
+        "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\candidate-06.dll",
+        "-Graphics",
+        "-Case",
+        "pool",
+        "-StateFile",
+        "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\fixtures\\ring-native.json"
+      ],
+      "startedEpoch": 1790439515.7660916,
+      "launcherExit": 0,
+      "launcherOutput": "Owned process 100016; result: C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\harness\\..\\runs\\native-final-ring-new-01\n",
+      "pid": 100016,
+      "ok": true,
+      "checks": 5,
+      "error": null,
+      "endedEpoch": 1790439536.3330247
+    }
+  ],
+  "reason": "Old river failed raw all-layer equality only after native ThinIce seasonal surface/temp overlays; permanent top/under/foundation remain identical, and before/after authored blend all-layer values match. Raw failures stay intact.",
+  "complete": true
+}

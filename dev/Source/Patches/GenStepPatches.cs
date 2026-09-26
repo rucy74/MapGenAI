@@ -496,7 +496,7 @@ namespace MapGenAI.Patches
                 Log.Warning("[MapGenAI] composite shape에 shapes/compose 데이터 없음");
                 return;
             }
-            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id, shape.fill,shape.anchor,shape.placement,shape.direction,shape.variant);
+            SdfComposite.ApplyComposite(shape.compositeShapes, shape.compositeOps, map, grid, shape.edge_roughness, shape.id, shape.fill,shape.anchor,shape.placement,shape.direction,shape.variant,shape.water_profile,shape.details);
         }
     }
 

@@ -1,0 +1,363 @@
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(67,27): warning CS0649: 'CoverageCell.original' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(68,22): warning CS0649: 'CoverageCell.originalElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(68,40): warning CS0649: 'CoverageCell.paintedElevation' 필드에는 할당되지 않으므로 항상 0 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\RegionGrid.cs(67,36): warning CS0649: 'CoverageCell.painted' 필드에는 할당되지 않으므로 항상 null 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+F:\Projects\Rimworld\active\mapgen_ai\dev\Source\MapGen\AuthoringResult.cs(12,23): warning CS0649: 'AuthoringResult.blockStructures' 필드에는 할당되지 않으므로 항상 false 기본값을 사용합니다. [F:\Projects\Rimworld\active\mapgen_ai\dev\Source\Tests\TextToMap.Tests.csproj]
+PASS Unicode escapes decode
+PASS Truncated root rejected
+PASS Empty object array preserved
+PASS Duplicate keys rejected
+PASS Malformed array terminates
+PASS JSON grammar boundaries
+PASS Escaped text roundtrip
+PASS Gemini envelope preserves escaped Korean
+PASS Provider incomplete output rejected
+PASS OpenAI envelope ignores unrelated content
+PASS Command fences preserve completeness
+PASS Reset rejects pending and late replies
+PASS Generated parser corpus terminates and accepts only valid JSON
+PASS Adding hills preserves earlier hills
+PASS Unrelated edits preserve complete geometry
+PASS Empty and unknown patches are no-op
+PASS Explicit empty shapes clear without regeneration
+PASS Null and wrong-type patches rejected
+PASS River X and Z edits remain independent
+PASS Removed features persist and can be re-added
+PASS Contradictory feature patch leaves original intact
+PASS Composite clone does not share nested arrays or ops
+PASS Preset v2 preserves every state field and composite vertices
+PASS Legacy preset loads without inventing explicitly empty shapes
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 10; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Apply targets supplied tile and snapshot restores exactly
+PASS Targeted edits preserve unrelated geometry through repeated changes
+PASS Unknown target rejects entire multi-operation patch
+PASS Whole-list omission cannot accidentally delete existing terrain
+PASS Legacy IDs remain stable after the first targeted edit and preset reload
+PASS Auto hills removal keeps a custom lake
+PASS Prompt geometry uses parser-compatible composite fields
+PASS Relative positions are bounded and preserve target size
+PASS Invalid geometry cannot silently become default terrain
+PASS Exponential SDF operand reuse is rejected before rendering
+PASS SDF lake changes intended cells and leaves the distant terrain unchanged
+PASS Natural contour patch is reversible and preserves unrelated geometry/preset/clone
+PASS Contour bounds reject malformed values and unsupported terrain types atomically
+PASS circle precise/default equality, natural deterministic outline and connected shape
+PASS star precise/default equality, natural deterministic outline and connected shape
+PASS heart precise/default equality, natural deterministic outline and connected shape
+PASS donut precise/default equality, natural deterministic outline and connected shape
+PASS Moving a natural composite translates its contour without rerolling
+PASS Narrow donut retains a hole and bridge across seeds at high roughness
+open_basin: 400 layouts, failures=0, unique masks=100, first=
+PASS Natural open_basin: 100 unfiltered variants x four directions retain connected usable ground
+winding_valley: 400 layouts, failures=0, unique masks=100, first=
+PASS Natural winding_valley: 100 unfiltered variants x four directions retain connected usable ground
+foothills: 400 layouts, failures=0, unique masks=100, first=
+PASS Natural foothills: 100 unfiltered variants x four directions retain connected usable ground
+PASS Natural edits preserve layout seed, dependent 70% soil, unrelated shape and preset/undo snapshot
+PASS Natural parameter bounds reject unsupported fields without changing prior state
+PASS Moving a basin exit retains the opposite walls; widening its floor retains the outer footprint
+PASS Natural layouts stay usable across supported scale and gap boundaries
+PASS Changing natural layout kind clears only the inapplicable basin opening and preserves references
+PASS Natural raster writes heights and floor region, preserves outside terrain and authored water/materials
+PASS Natural descriptions are localized without exposing internal kind names
+PASS Organic defaults apply only to new adds; legacy presets and follow-ups retain their layout
+PASS Organic connectivity detector rejects a deliberately severed settlement floor
+open_basin: 400 organic layouts, failures=0, min build square=25, unique=100, first=
+PASS Organic open_basin: 100 unfiltered variants retain open connected settlement space
+winding_valley: 400 organic layouts, failures=0, min build square=19, unique=100, first=
+PASS Organic winding_valley: 100 unfiltered variants retain open connected settlement space
+foothills: 400 organic layouts, failures=0, min build square=28, unique=100, first=
+PASS Organic foothills: 100 unfiltered variants retain open connected settlement space
+Organic boundaries:300 unfiltered layouts, failures=0, first=
+PASS Organic floor stays connected at valid scale width opening and arbitrary-angle boundaries
+PASS Organic floor widening preserves every existing floor cell and a basin exit edit preserves distant walls
+PASS Landscape details default only on new landforms and survive partial edits, clone and presets
+PASS Enabling surface details never changes the landform geometry
+Landscape fields:100 variants, failures=0, changed=1433..2044/6400, unique=100
+PASS Landscape surface fields: 100 unfiltered variants retain open ground and bounded coherent banks
+PASS Surface fields are repeatable and vegetation favors water over rocky edges
+PASS Automatic surfaces exclude water, rich soil, floors and native or mod feature terrain
+PASS Shore banks are local interrupted patches with climate and original ground constraints
+PASS Only new rough freshwater additions opt into banks, with explicit off and old saves preserved
+PASS Water profile defaults only for new rough standing freshwater additions
+PASS Special water and dry composites do not opt into the freshwater depth profile
+PASS Stored rough water never upgrades during load, movement or ordinary partial edits
+PASS Native profile survives partial edits, movement, cloning and preset roundtrip
+PASS Surface-off edit retains the chosen water profile and all authored water geometry
+PASS Water profile supports explicit upgrade, legacy opt-out and null without silent re-upgrade
+PASS Invalid water profile values and geometry types reject without changing the original state
+PASS Native water shelves use final raster distance and retain the water footprint
+PASS Native depth keeps thin water shallow and buffers dry islands on all eight sides
+PASS Banks follow connected feathered water without borrowing a separate pool
+PASS Protected and diagonal water cannot relay bank effects beyond local permission
+PASS Bank influence tapers near the local boundary without altering the inner shore
+PASS Forest banks keep native soil while sand and rocky banks retain fitting materials
+PASS Authored water detection follows rendered add union sub and intersection fills
+PASS Final composite top fill renders without an op fill while empty override suppresses nested water
+PASS Water alias capitalization retains the actual shallow feather material
+PASS Zero coverage and empty shapes do not advertise authored water
+PASS New rough ordinary water additions use normalized rendered fills for natural detail defaults
+PASS Natural water defaults preserve special materials exact geometry and saved or partial states
+PASS Recorded move-only relationship response cannot silently replace a lake with a smaller ellipse
+PASS Common components express independent lakeside fixture without placement failure
+PASS Common components express independent winding_valley fixture without placement failure
+PASS Common components express independent branching_ridges fixture without placement failure
+PASS Common components express independent open_basin fixture without placement failure
+PASS Shared path straight width/endpoints and wider footprint are geometric
+PASS Natural path has varied shoulders, connected centerline and stable translated geometry
+PASS Path parser/clone/preset/move retain original and translate geometry
+PASS Attached water including feather fits inside actual plain; source first is inferred
+PASS Attached siblings stay separate and parent move carries their relation
+[WRN] [MapGenAI] 요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.
+PASS Beside is outside and on requested side; no-space never silently crops
+PASS Relation resolves after later obstacles and re-centers the original shape without reshaping it
+[WRN] [MapGenAI] 요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.
+[WRN] [MapGenAI] 요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.
+PASS Beside cannot erase existing rock or explicit ground outside its anchor
+[WRN] [MapGenAI] 요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.
+PASS A relationship that cannot fit reports its failure without globally disabling structures
+PASS Relationships roundtrip; dangling/cyclic anchors and absolute attached moves reject atomically
+PASS New variant affects only requested contour; material edit preserves footprint
+PASS Plain area remains a counted coverage source without forced Soil
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Island] −[Lake]
+PASS Dry-run validation detects category and override conflicts without changing world state or warnings
+PASS Dry-run validates geometry material and geographic constraints before any partial change
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[HotSprings] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[HotSprings, River] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[HotSprings, Coast] −[]
+PASS Explicit native hot springs allow flat biomes and preserve river and shore connections
+PASS Hot spring water ordering changes only explicit native springs and keeps shared definitions unchanged
+PASS World river deletion rejects the whole request and keeps map edits unchanged
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[River] −[RiverDelta]
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Deleting a river variant retains plain river and Undo restores delta
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+PASS Resolved biome road hilliness and third-party worker conditions reject atomically
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+PASS Inland coast and unavailable presets reject; internal lakes remain allowed
+[WRN] [MapGenAI] 이전 개발판의 강·해안 제거 설정을 해제하고 월드 연결을 복원했습니다 / Restored world connections suppressed by an older dev build.
+PASS Stored legacy river suppression upgrades while imported suppression is rejected
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+PASS Pollution side effect rolls back on failed feature transaction and Reset
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[Lake]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+PASS Generic category suppression restores baseline and requires explicit re-enable for additions
+PASS Unknown removal targets and category contradictions reject the whole patch
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Legacy false river snapshots remain unspecified and missing removed mods allow unrelated edits
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 2; 실제 타일 특징 / Tile features: +[B] −[]
+PASS Editing tile B and clearing cache do not revert tile A
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Lake] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[Island] −[Lake]
+PASS Rejected category conflict preserves state and actual features
+PASS World add failure restores metadata and leaves no successful state
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[B] −[A]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[A] −[]
+[LOG] [MapGenAI] Applied state to tile 1; 실제 타일 특징 / Tile features: +[] −[A]
+PASS Original tile features survive edit remove undo and clear
+PASS Invalid tile cannot report an applied state
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS External feature additions and hilliness changes survive edits and clear
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Disabled baseline definitions do not lock tile editing
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 2
+PASS Generation uses its own tile snapshot despite UI selection changes
+PASS Paused image layer stays saved but cannot capture or restore generation elevation
+PASS Image base clears unwanted hills while legacy overlays and natural cells retain them
+PASS Color classification preserves winding one-cell channels, islands and isolated terrain
+PASS Color responses reject missing, duplicate, fractional IDs and unknown labels
+PASS Observed top-level shape shorthand is normalized without accepting ambiguous edits
+PASS Soil image labels preserve existing mountain elevation
+[WRN] [MapGenAI] 이미지 지형을 작은 맵으로 축소하므로 가는 통로나 작은 섬이 사라질 수 있습니다. / Downsampling image terrain may lose thin passages or small islands.
+PASS Downsampling limitation is detected for subcell corridors
+PASS Malformed named settings reject instead of silently becoming defaults
+PASS Shape prompt examples are complete applicable response envelopes
+[WRN] [MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+[WRN] [MapGenAI] 저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.
+PASS Corrupt saved image repairs explicitly while new presets stay strict
+PASS Shape difference identifies removals by stable ID
+PASS Image polygons preserve north/south and island ordering
+PASS Image geometry rejects malformed, intersecting and subcell regions
+PASS Oblique interpretation requires two alternatives with explanations
+PASS Region relabel affects only one connected component and undo is exact
+PASS Image presets retain label cells and interpretation notes
+PASS Image grid applies exact footprints and leaves natural cells unchanged
+PASS Image headers reject huge dimensions before texture decoding
+PASS Composite rotation changes the sampled long axis
+PASS Nested generation isolates terrain masks and diagnostics and unwinds after failure
+PASS Materials use active native defs; unavailable lava never becomes water
+PASS Loaded mod material extends catalog while temporary ocean road and floors are excluded
+PASS Structure edits preserve terrain density image and stable IDs through presets and cloning
+PASS Dangling region edits reject atomically; combined removal or rebind succeeds
+PASS Invalid structure kinds references sizes fractions bounds and duplicate IDs reject
+PASS CSG donut mask retains its hole under a material override and follows movement
+PASS Footprint planner avoids holes and keeps every cell inside irregular masks
+PASS Capacity failure leaves occupied mask untouched and never places a partial count
+PASS A later mountain or legacy height edit overrides earlier flattening without clearing distant flat land
+PASS Paused image policy persists old data through text edits and nested generation scopes
+PASS Recorded compound ring and ruins choose different areas only with explicit enclosed
+PASS Compound sequential width fraction count edits preserve every unrelated condition
+PASS Interior cannot silently fall back to entire map or selected paint when rebinding
+PASS Enclosed structure labels explain the hollow in Korean and English without IDs
+PASS Recorded basin resize move exit and coverage edits preserve reviewed states
+PASS Recorded basic mountains material contour and deletion edits preserve reviewed states
+PASS Recorded independent basin selection and deletion preserve the other basin
+PASS A soil-filled dry passage lowers an existing mountain before terrain generation
+PASS Legacy negative-height composites remain lakes across a saved-state roundtrip
+PASS Material-only replacement reaches an out/add moat without filling its hole
+PASS Candidate refinements compose privately and preserve other candidates and original map
+PASS Candidate revision envelope validates number and parameters without allowing immediate recommendation edits
+PASS Recommendation options are independent stored patches with authoritative summaries
+PASS One invalid recommendation rejects the entire batch without mutation
+PASS Recommendation schema bounds and empty changes are rejected
+PASS Recorded recommendations stay independent and duplicate outcomes reject atomically
+PASS Recorded ko landscape choices preserve stored geometry and settings with new natural freshwater defaults
+PASS Recorded en landscape choices preserve stored geometry and settings with new natural freshwater defaults
+PASS Selection accepts only a specific number without silently dropping edits
+PASS Unchecked numbered recommendations cannot pass the chat envelope
+PASS Recommendation requests repair prose once and still require a plan
+PASS Valid chat commands make one provider call
+PASS Plain prose and bad envelopes are repaired once without accepting prose as a command
+PASS Repeated malformed chat stops after two calls with no parsed command
+PASS Cancellation and transport errors do not trigger format repair
+PASS Input-only metadata keeps output separate and leaves safety headroom
+PASS Combined context budgets reserve completion room as well as input safety
+PASS Unknown capacity is labelled fallback and callers cannot mutate the shared default
+PASS Model-list limits reach the matching model and credentials without another lookup
+PASS Malformed optional model metadata does not prevent registering valid models
+PASS Token counting includes system instructions, every turn and Unicode text
+PASS Concurrent metadata requests load once and cache failures without repeated traffic
+PASS Cancelled metadata waiters preserve other callers and cancellation is not cached
+PASS Refreshing model metadata wins over an in-flight failed lookup
+PASS Cancelled public budget and token requests do not attempt network calls
+PASS Short conversation keeps every user and applied response without a summary call
+PASS 80 percent compacts old turns and keeps recent turns and raw original
+PASS Remote exact count below threshold overrides an oversized local estimate
+PASS Remote exact count at threshold triggers summary and recount
+PASS Existing checkpoint avoids repeat summaries until pressure recurs
+PASS Summary failure below hard budget retains every raw message
+PASS Summary failure over hard budget never falls through to an oversized edit
+PASS Cancellation during summary preserves raw conversation and propagates
+PASS Reset and changed prefix cannot resurrect stale summary
+PASS Fixed prompt pressure does not repeatedly summarize nonexistent older turns
+PASS Unknown fallback estimate cannot block a previously working short first request
+PASS Large fixed context and tiny old prefix do not cause repeated paid summaries
+PASS Changing count availability cannot disguise a larger summary
+PASS Oversized repair output is retained and blocked before another edit call
+PASS Unicode and fixed instructions count toward the same budget
+PASS Summary checkpoint cannot survive a cancelled queued request
+PASS Explicit Korean and English road edits cannot become terrain fills or mountains
+PASS Confirmed road followup stays on roads without repeating the noun
+PASS New terrain topics and explicit road plus terrain requests remain supported
+PASS Pending proposals and clarification responses never establish an applied road target
+PASS Undo preset and reset barriers stop stale target inference
+PASS Rejected proposal cannot supersede a confirmed target or invent an applied one
+PASS Mixed prior edits removed roads and unqualified requests are not guessed as roads
+PASS Road-only correction cannot smuggle unrelated edits alongside valid road operations
+PASS Refined road-only selection retains its target while mixed plans stay ambiguous
+PASS Guard is read-only and malformed envelopes remain owned by structured validation
+PASS Centered cross corrects existing road IDs while preserving unrelated map state
+PASS Exact cross centerlines stay centered through bridgeable water on even and odd maps
+PASS Recommendations use translated definition names and help without internal identifiers
+PASS Radial and split descriptions follow generator sign semantics
+PASS Shape display names location and effective fill without leaking shape identifiers
+PASS Readable moves and removals preserve source state and mention the actual operation
+PASS Structure region and relation display human terrain names and distances
+PASS Features removed and explicit cave settings stay visible in plain summaries
+PASS Composite explanations distinguish raised land from flattened ground and preserve fills
+PASS Discard phrases are local and do not swallow map edits
+PASS New suggestion requests leave the pending candidate editor
+PASS Recommendation layout prioritizes chat and keeps footer inside window
+PASS Folding gives preview space back to chat while keeping option controls
+PASS Guide includes spatial preferences and never submits without review
+PASS Unusual scenery choices respect earlier open-land and water preferences
+PASS Changed earlier answer discards incompatible later answers
+PASS Back without changing preserves answers and final feature choice preserves scenery focus
+PASS Early finish reviews only actual answers and Back resumes the same question
+PASS Skip and no-preference remain unconstrained and can complete without guessing
+PASS Cancel is terminal from questions and review, without returning a request
+PASS Guide changes neither localized recommendation selection nor existing direct edits
+PASS Guide lifecycle handles repeated navigation and stale hidden choices
+PASS Living-space answers reach the submitted request without relaxing mountain or water preferences
+PASS Only an explicit replacement answer authorizes new authored layouts
+PASS No new mountains or water suppresses incompatible space choices and redundant focus questions
+PASS Existing water permits waterside preferences without authorizing additional water
+PASS Small-pond choices remain small and earlier water changes remove stale follow-ups
+PASS Changing layout scope clears later preferences rather than retaining stale authorization
+PASS Replacement water choices use tile water rather than authored water being replaced
+PASS Changing refine to replace drops authored-water follow-ups and Back can restore them
+PASS New recommendation briefs vary independent composition axes and remain reproducible
+PASS Feedback routes batches to new proposals and individual edits to pending candidates
+PASS Feedback preserves custom wishes and carries observed placement failure only for repair
+PASS Candidate feedback cannot apply a map replace the batch or revise another candidate
+PASS Explicit batch feedback never accepts direct map edits from contradictory free text
+PASS Placement failure is not hidden by successful texture rendering
+PASS Pending checks wait while unavailable optional preview retains text-only selection
+PASS Titles use real geometry before feature bonus prose and bound their length
+PASS AI follow-up questions require explicit choices before producing a request
+PASS Follow-up parser rejects executable commands wrong types duplicate or oversized choices
+Recorded coverage reproduction: old=5013/5013, corrected=3509/5013
+PASS Recorded donut soil feathering covers the visible hole; counted coverage leaves thirty percent
+PASS Coverage percentages count usable cells and support direction without feathering
+PASS Enclosed region ignores exterior and open shapes cannot silently paint the whole map
+PASS Existing material counts toward the quota and excessive baseline is reported
+PASS Coverage follow-up updates soil alone and survives clone preset and source movement
+PASS Bad coverage references numbers and independent geometry reject atomically
+PASS Natural passage keeps every precise core cell, varies banks and is deterministic
+PASS Passage roughness-only edits survive storage and restore the original exact route
+PASS Mountain cuts keep irregular boundaries and leave low ground and holes untouched
+PASS Mountain scope survives clone presets move and width edits without converting old paths
+PASS Invalid passage scopes reject without changing old terrain
+PASS Passage width is counted in cells on rectangular maps and reaches endpoints
+PASS Bent passage covers requested waypoints and stays four-connected at one-cell width
+PASS Passage clone preset and partial edits preserve route width and other shapes
+PASS Bad passages reject atomically and do not extend legacy shape contracts
+PASS Spatial distance matches independent exhaustive Euclidean distances and nearest coordinates
+PASS Spatial distance handles all-target and target-free maps without invented geometry
+PASS River side and footprint distances apply to the nearest wall instead of the center
+PASS Configured spacing leaves the requested empty cells and capacity remains atomic
+PASS Region boundary includes internal holes and respects full-footprint inset
+PASS Relation rotation and spacing survive presets cloning and partial edits
+PASS Bad or unsupported relations reject before state mutation
+PASS Positioned ancient danger preserves density and survives state roundtrip
+PASS Native ancient danger limits reject unsupported size rotation and count atomically
+PASS Ancient danger total cap does not change the separate ruin allowance
+PASS Road-only edits preserve every other terrain structure river and legacy road field
+PASS Road kind and waypoint updates preserve unspecified fields and removal targets only its road
+PASS Road snapshots deep copy nested waypoints and codec preserves all fields
+PASS Old presets normalize missing or null road lists without inventing a road
+PASS Invalid road changes fail atomically after earlier valid terrain or road operations
+PASS Road input rejects malformed coordinates nulls unsupported fields and operation shapes
+PASS Road capacity and waypoint limits reject without partial state
+PASS Road summaries show translated types positions and operations without internal identifiers
+PASS Road recommendations refine one stored candidate and keep other candidates and base state
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+[LOG] [MapGenAI] Applied state to tile 1
+PASS Road application and snapshot undo stay on the selected local map and preserve world roads
+PASS Road direct route visits exact ordered waypoints on empty ground
+PASS Road normalized endpoints and midpoint work on a rectangular map
+PASS Road direct diagonal stays on its requested segment
+PASS Road avoid routes around a mountain or water footprint while direct rejects it
+PASS Road clearance rejects a passage too narrow for its full width
+PASS Road fully separated ground is rejected without changing inputs
+PASS Road later failed leg does not expose a partially planned road
+PASS Road blocked start end and intermediate waypoint are not silently relocated
+PASS Road avoid cannot cross diagonally touching obstacle corners
+PASS Road avoid finds a safe winding corridor with multiple bends
+PASS Road avoid preserves several requested waypoints instead of shortcutting them
+PASS Road routing is reproducible and leaves ground and waypoints immutable
+PASS Road clearance matches independent nearest-obstacle distances
+PASS Bridge fallback crosses a river that separates the two banks
+PASS Existing dry detours remain unchanged even when a shorter bridge is possible
+PASS Bridge fallback cannot turn unsupported barriers into a route
+PASS Bridge roads need supported land endpoints instead of ending in water
+PASS Bridge fallback still respects mountain clearance and all ordered waypoints
+CoreRegressionTests: 308 PASS / 0 FAIL

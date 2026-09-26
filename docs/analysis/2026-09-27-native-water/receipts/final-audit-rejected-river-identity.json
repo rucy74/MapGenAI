@@ -1,0 +1,1996 @@
+{
+  "ok": false,
+  "passed": 152,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "detector control: layer mutation rejected",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "detector control: water-mask mutation rejected",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "detector control: enclosed island recognized",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "detector control: open dry plane rejected",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "matrix contains exactly 16 unique fixtures",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-old: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-old: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "desert-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-old: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "exact-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "legacy-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "off-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "shallow-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-old: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "hotspring-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "ring-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: expected frozen product SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: frozen probe SHA",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: graphics enabled with PNG",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: no provider calls",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: complete map dimensions",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temp-new: raw run passed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "temperate: independently compared pair",
+      "ok": true,
+      "details": {
+        "old_native_run_passed": true,
+        "new_native_run_passed": true,
+        "no_provider_attempts": true,
+        "same_fixture_context": true,
+        "same_state_except_profile": true,
+        "actual_preview_pngs": true,
+        "complete_map_layer_count": true
+      }
+    },
+    {
+      "name": "desert: independently compared pair",
+      "ok": true,
+      "details": {
+        "old_native_run_passed": true,
+        "new_native_run_passed": true,
+        "no_provider_attempts": true,
+        "same_fixture_context": true,
+        "same_state_except_profile": true,
+        "actual_preview_pngs": true,
+        "complete_map_layer_count": true
+      }
+    },
+    {
+      "name": "exact: independently compared pair",
+      "ok": true,
+      "details": {
+        "old_native_run_passed": true,
+        "new_native_run_passed": true,
+        "no_provider_attempts": true,
+        "same_fixture_context": true,
+        "same_state_except_profile": true,
+        "actual_preview_pngs": true,
+        "complete_map_layer_count": true,
+        "exact_same_state": true,
+        "exact_preview_bytes": true,
+        "exact_complete_map_layers": true,
+        "exact_preview-native-terrain.json": true,
+        "exact_full-native-terrain.json": true,
+        "exact_preview-phase-end-terrain.json": true,
+        "exact_full-phase-end-terrain.json": true
+      }
+    },
+    {
+      "name": "legacy: independently compared pair",
+      "ok": true,
+      "details": {
+        "old_native_run_passed": true,
+        "new_native_run_passed": true,
+        "no_provider_attempts": true,
+        "same_fixture_context": true,
+        "same_state_except_profile": true,
+        "actual_preview_pngs": true,
+        "complete_map_layer_count": true,
+        "exact_same_state": true,
+        "exact_preview_bytes": true,
+        "exact_complete_map_layers": true,
+        "exact_preview-native-terrain.json": true,
+        "exact_full-native-terrain.json": true,
+        "exact_preview-phase-end-terrain.json": true,
+        "exact_full-phase-end-terrain.json": true
+      }
+    },
+    {
+      "name": "hotspring: independently compared pair",
+      "ok": true,
+      "details": {
+        "old_native_run_passed": true,
+        "new_native_run_passed": true,
+        "no_provider_attempts": true,
+        "same_fixture_context": true,
+        "same_state_except_profile": true,
+        "actual_preview_pngs": true,
+        "complete_map_layer_count": true,
+        "exact_same_state": true,
+        "exact_preview_bytes": true,
+        "exact_complete_map_layers": true,
+        "exact_preview-native-terrain.json": true,
+        "exact_full-native-terrain.json": true,
+        "exact_preview-phase-end-terrain.json": true,
+        "exact_full-phase-end-terrain.json": true
+      }
+    },
+    {
+      "name": "details off: same state except details",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "details off: all water masks identical",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "details off: deep/shallow water materials identical",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "explicit shallow: no deep water inserted",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: actual 70 percent coverage",
+      "ok": true,
+      "details": {
+        "id": "soil70",
+        "eligible": 3874,
+        "selected": 2712,
+        "existing": 341
+      }
+    },
+    {
+      "name": "protected-old: real road footprint exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: preview 4050-cell explicit region preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: full 4050-cell explicit region preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: full road layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-old: full road layers survive completed map",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: actual 70 percent coverage",
+      "ok": true,
+      "details": {
+        "id": "soil70",
+        "eligible": 3862,
+        "selected": 2703,
+        "existing": 421
+      }
+    },
+    {
+      "name": "protected-new: real road footprint exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: preview 4050-cell explicit region preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: full 4050-cell explicit region preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: full road layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "protected-new: full road layers survive completed map",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: only diagnosed raw overlay checks failed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: preview native river actually exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: preview river all layers unchanged before blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: preview river all layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: preview-phase-end-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: preview-phase-end-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full native river actually exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full river all layers unchanged before blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full river all layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full-phase-end-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full-phase-end-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full-complete-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-old: full-complete-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: only diagnosed raw overlay checks failed",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: preview native river actually exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: preview river all layers unchanged before blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: preview river all layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: preview-phase-end-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: preview-phase-end-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full native river actually exists",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full river all layers unchanged before blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full river all layers preserved through blend",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full-phase-end-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full-phase-end-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full-complete-terrain.json permanent river layers preserved",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river-new: full-complete-terrain.json changed layers exactly native ThinIce overlay",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river pair: identical fixture context",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river pair: state differs only profile",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "river pair: identical preview native river masks and layers",
+      "ok": false,
+      "details": null
+    },
+    {
+      "name": "river pair: identical full native river masks and layers",
+      "ok": false,
+      "details": null
+    },
+    {
+      "name": "ring: center dry island survived preview-phase-end-terrain.json",
+      "ok": true,
+      "details": {
+        "area": 2024,
+        "touchesEdge": false,
+        "bounds": [
+          100,
+          103,
+          151,
+          153
+        ]
+      }
+    },
+    {
+      "name": "ring: center dry island survived full-complete-terrain.json",
+      "ok": true,
+      "details": {
+        "area": 2024,
+        "touchesEdge": false,
+        "bounds": [
+          100,
+          103,
+          151,
+          153
+        ]
+      }
+    },
+    {
+      "name": "unfiltered production field/raster checks",
+      "ok": true,
+      "details": null
+    },
+    {
+      "name": "actual Scribe and helper integration checks",
+      "ok": true,
+      "details": null
+    }
+  ],
+  "observations": {
+    "temp-old": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:12:20.5398870+09:00",
+      "groundCounts": {
+        "Soil": 46388,
+        "Gravel": 3742,
+        "Granite_Rough": 1066,
+        "SoilRich": 2097,
+        "Mud": 299,
+        "WaterShallow": 238,
+        "Slate_Rough": 1605,
+        "Limestone_Rough": 3513,
+        "WaterDeep": 3352,
+        "AncientConcrete": 200
+      }
+    },
+    "desert-old": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:12:41.1288130+09:00",
+      "groundCounts": {
+        "Sand": 39846,
+        "Gravel": 4530,
+        "Sandstone_Rough": 2137,
+        "Limestone_Rough": 3438,
+        "Soil": 5360,
+        "SoftSand": 2954,
+        "Marble_Rough": 489,
+        "AncientConcrete": 250,
+        "WaterShallow": 144,
+        "WaterDeep": 3352
+      }
+    },
+    "desert-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:12:57.6909648+09:00",
+      "groundCounts": {
+        "Sand": 39805,
+        "Gravel": 4526,
+        "Sandstone_Rough": 2117,
+        "Limestone_Rough": 3438,
+        "Soil": 5538,
+        "SoftSand": 2947,
+        "Marble_Rough": 489,
+        "AncientConcrete": 250,
+        "WaterShallow": 2216,
+        "WaterDeep": 1174
+      }
+    },
+    "exact-old": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:13:15.2670810+09:00",
+      "groundCounts": {
+        "Soil": 46356,
+        "Gravel": 3749,
+        "Granite_Rough": 1066,
+        "SoilRich": 2104,
+        "Mud": 242,
+        "WaterShallow": 276,
+        "Slate_Rough": 1599,
+        "Limestone_Rough": 3511,
+        "WaterDeep": 3397,
+        "AncientConcrete": 200
+      }
+    },
+    "exact-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:13:34.9302511+09:00",
+      "groundCounts": {
+        "Soil": 46356,
+        "Gravel": 3749,
+        "Granite_Rough": 1066,
+        "SoilRich": 2104,
+        "Mud": 242,
+        "WaterShallow": 276,
+        "Slate_Rough": 1599,
+        "Limestone_Rough": 3511,
+        "WaterDeep": 3397,
+        "AncientConcrete": 200
+      }
+    },
+    "legacy-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:13:55.6813859+09:00",
+      "groundCounts": {
+        "Soil": 46388,
+        "Gravel": 3742,
+        "Granite_Rough": 1066,
+        "SoilRich": 2097,
+        "Mud": 299,
+        "WaterShallow": 238,
+        "Slate_Rough": 1605,
+        "Limestone_Rough": 3513,
+        "WaterDeep": 3352,
+        "AncientConcrete": 200
+      }
+    },
+    "off-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:14:20.3941749+09:00",
+      "groundCounts": {
+        "Soil": 46450,
+        "Gravel": 3749,
+        "Granite_Rough": 1066,
+        "SoilRich": 2146,
+        "Mud": 253,
+        "WaterShallow": 2247,
+        "Slate_Rough": 1645,
+        "Limestone_Rough": 3508,
+        "WaterDeep": 1236,
+        "AncientConcrete": 200
+      }
+    },
+    "shallow-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:14:42.0377134+09:00",
+      "groundCounts": {
+        "Soil": 46021,
+        "Gravel": 3749,
+        "Granite_Rough": 1066,
+        "SoilRich": 2146,
+        "Mud": 253,
+        "WaterShallow": 3483,
+        "Slate_Rough": 1645,
+        "Limestone_Rough": 3508,
+        "Sand": 429,
+        "AncientConcrete": 200
+      }
+    },
+    "protected-old": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "Actual 70 percent fill applied"
+        },
+        {
+          "ok": true,
+          "name": "Actual local road placed"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:15:03.6165975+09:00",
+      "groundCounts": {
+        "Soil": 44681,
+        "Gravel": 3588,
+        "Granite_Rough": 1066,
+        "SoilRich": 4482,
+        "Mud": 252,
+        "WaterShallow": 179,
+        "Slate_Rough": 1545,
+        "Limestone_Rough": 3507,
+        "WaterDeep": 2810,
+        "PackedDirt": 190,
+        "AncientConcrete": 200
+      },
+      "protection": {
+        "sourceRegionCells": 4050,
+        "roadFootprintCells": 476,
+        "coverage": {
+          "id": "soil70",
+          "eligible": 3874,
+          "selected": 2712,
+          "existing": 341
+        }
+      }
+    },
+    "protected-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "Actual 70 percent fill applied"
+        },
+        {
+          "ok": true,
+          "name": "Actual local road placed"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:15:25.2358100+09:00",
+      "groundCounts": {
+        "Soil": 44298,
+        "Gravel": 3570,
+        "Granite_Rough": 1066,
+        "SoilRich": 4464,
+        "Mud": 213,
+        "WaterShallow": 1878,
+        "Slate_Rough": 1545,
+        "Limestone_Rough": 3489,
+        "Sand": 351,
+        "WaterDeep": 1234,
+        "PackedDirt": 192,
+        "AncientConcrete": 200
+      },
+      "protection": {
+        "sourceRegionCells": 4050,
+        "roadFootprintCells": 476,
+        "coverage": {
+          "id": "soil70",
+          "eligible": 3862,
+          "selected": 2703,
+          "existing": 421
+        }
+      }
+    },
+    "hotspring-old": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:15:47.8549944+09:00",
+      "groundCounts": {
+        "Soil": 46472,
+        "Gravel": 3742,
+        "Granite_Rough": 1066,
+        "SoilRich": 2076,
+        "Mud": 236,
+        "WaterShallow": 94,
+        "Slate_Rough": 1605,
+        "Limestone_Rough": 3513,
+        "HotSpring": 3496,
+        "AncientConcrete": 200
+      }
+    },
+    "hotspring-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:16:07.4392349+09:00",
+      "groundCounts": {
+        "Soil": 46472,
+        "Gravel": 3742,
+        "Granite_Rough": 1066,
+        "SoilRich": 2076,
+        "Mud": 236,
+        "WaterShallow": 94,
+        "Slate_Rough": 1605,
+        "Limestone_Rough": 3513,
+        "HotSpring": 3496,
+        "AncientConcrete": 200
+      }
+    },
+    "river-old": {
+      "rawRunPassed": false,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "preview: actual native river worker produced river terrain"
+        },
+        {
+          "ok": true,
+          "name": "preview-phase-end: native river terrain layers preserved"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "full: actual native river worker produced river terrain"
+        },
+        {
+          "ok": false,
+          "name": "full-phase-end: native river terrain layers preserved"
+        },
+        {
+          "ok": false,
+          "name": "full-complete: native river terrain layers preserved"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:16:28.0413163+09:00",
+      "groundCounts": {
+        "Soil": 34601,
+        "Gravel": 4351,
+        "Slate_Rough": 4313,
+        "SoilRich": 2834,
+        "Granite_Rough": 518,
+        "Mud": 681,
+        "ThinIce": 7907,
+        "Limestone_Rough": 1463,
+        "Riverbank": 2258,
+        "WaterDeep": 3352,
+        "AncientConcrete": 222
+      },
+      "seasonalIce": [
+        {
+          "phase": "preview-phase-end-terrain.json",
+          "observed": 7256,
+          "changedSurfaceAndTemp": 0,
+          "permanentChanges": 0,
+          "changes": {}
+        },
+        {
+          "phase": "full-phase-end-terrain.json",
+          "observed": 7256,
+          "changedSurfaceAndTemp": 7256,
+          "permanentChanges": 0,
+          "changes": {
+            "WaterMovingShallow|WaterMovingShallow||| -> ThinIce|WaterMovingShallow|||ThinIce": 3758,
+            "WaterMovingChestDeep|WaterMovingChestDeep||| -> ThinIce|WaterMovingChestDeep|||ThinIce": 3498
+          }
+        },
+        {
+          "phase": "full-complete-terrain.json",
+          "observed": 7256,
+          "changedSurfaceAndTemp": 7256,
+          "permanentChanges": 0,
+          "changes": {
+            "WaterMovingShallow|WaterMovingShallow||| -> ThinIce|WaterMovingShallow|||ThinIce": 3758,
+            "WaterMovingChestDeep|WaterMovingChestDeep||| -> ThinIce|WaterMovingChestDeep|||ThinIce": 3498
+          }
+        }
+      ]
+    },
+    "river-new": {
+      "rawRunPassed": false,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "preview: actual native river worker produced river terrain"
+        },
+        {
+          "ok": true,
+          "name": "preview-phase-end: native river terrain layers preserved"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "full: actual native river worker produced river terrain"
+        },
+        {
+          "ok": false,
+          "name": "full-phase-end: native river terrain layers preserved"
+        },
+        {
+          "ok": false,
+          "name": "full-complete: native river terrain layers preserved"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:18:14.6965506+09:00",
+      "groundCounts": {
+        "Soil": 34786,
+        "Gravel": 4396,
+        "Slate_Rough": 4399,
+        "SoilRich": 2855,
+        "Granite_Rough": 518,
+        "Mud": 751,
+        "ThinIce": 9685,
+        "Limestone_Rough": 1463,
+        "Riverbank": 2378,
+        "AncientConcrete": 222,
+        "WaterDeep": 887,
+        "Sand": 160
+      },
+      "seasonalIce": [
+        {
+          "phase": "preview-phase-end-terrain.json",
+          "observed": 7302,
+          "changedSurfaceAndTemp": 0,
+          "permanentChanges": 0,
+          "changes": {}
+        },
+        {
+          "phase": "full-phase-end-terrain.json",
+          "observed": 7302,
+          "changedSurfaceAndTemp": 7302,
+          "permanentChanges": 0,
+          "changes": {
+            "WaterMovingShallow|WaterMovingShallow||| -> ThinIce|WaterMovingShallow|||ThinIce": 3802,
+            "WaterMovingChestDeep|WaterMovingChestDeep||| -> ThinIce|WaterMovingChestDeep|||ThinIce": 3500
+          }
+        },
+        {
+          "phase": "full-complete-terrain.json",
+          "observed": 7302,
+          "changedSurfaceAndTemp": 7302,
+          "permanentChanges": 0,
+          "changes": {
+            "WaterMovingShallow|WaterMovingShallow||| -> ThinIce|WaterMovingShallow|||ThinIce": 3802,
+            "WaterMovingChestDeep|WaterMovingChestDeep||| -> ThinIce|WaterMovingChestDeep|||ThinIce": 3500
+          }
+        }
+      ]
+    },
+    "ring-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:18:36.2685890+09:00",
+      "groundCounts": {
+        "Soil": 41964,
+        "Gravel": 3661,
+        "Granite_Rough": 1064,
+        "SoilRich": 1868,
+        "Mud": 210,
+        "WaterShallow": 4875,
+        "Slate_Rough": 1618,
+        "Limestone_Rough": 3660,
+        "Sand": 999,
+        "WaterDeep": 2381,
+        "AncientConcrete": 200
+      }
+    },
+    "temp-new": {
+      "rawRunPassed": true,
+      "rawChecks": [
+        {
+          "ok": true,
+          "name": "Preview command resolves to exact recorded full state"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview completes"
+        },
+        {
+          "ok": true,
+          "name": "MapPreview has no rejected placement"
+        },
+        {
+          "ok": true,
+          "name": "Full map has no authoring issue"
+        },
+        {
+          "ok": true,
+          "name": "100 unfiltered variants for each of six native field fixtures"
+        },
+        {
+          "ok": true,
+          "name": "Native Scribe state and helper palette restoration checks"
+        },
+        {
+          "ok": true,
+          "name": "No provider factory calls"
+        }
+      ],
+      "launchTime": "2026-09-27T01:10:41.9126493+09:00",
+      "groundCounts": {
+        "Soil": 46021,
+        "Gravel": 3749,
+        "Granite_Rough": 1066,
+        "SoilRich": 2146,
+        "Mud": 253,
+        "WaterShallow": 2247,
+        "Slate_Rough": 1645,
+        "Limestone_Rough": 3508,
+        "Sand": 429,
+        "WaterDeep": 1236,
+        "AncientConcrete": 200
+      }
+    },
+    "detailsToggle": {
+      "changedCells": 429,
+      "waterCells": 3483
+    },
+    "ringIsland": {
+      "preview-phase-end-terrain.json": {
+        "area": 2024,
+        "touchesEdge": false,
+        "bounds": [
+          100,
+          103,
+          151,
+          153
+        ]
+      },
+      "full-complete-terrain.json": {
+        "area": 2024,
+        "touchesEdge": false,
+        "bounds": [
+          100,
+          103,
+          151,
+          153
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "temperate": {
+      "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\temperate-comparison.json",
+      "changedCells": 2902,
+      "ok": true
+    },
+    "desert": {
+      "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\desert-comparison.json",
+      "changedCells": 2653,
+      "ok": true
+    },
+    "exact": {
+      "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\exact-comparison.json",
+      "changedCells": 0,
+      "ok": true
+    },
+    "legacy": {
+      "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\legacy-comparison.json",
+      "changedCells": 0,
+      "ok": true
+    },
+    "hotspring": {
+      "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\hotspring-comparison.json",
+      "changedCells": 0,
+      "ok": true
+    }
+  },
+  "files": {
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\fixture.json": "3a6670f45d8ba9fea0a1bf0e6789b58c38f8c023c05e2a870507e85f55876c1b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-after-blend.json": "ddfefded57788009b7e83846a6f92ead8724b84b8f702cfd5fba71aebeb0725d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-before-blend.json": "33ef67fbb5a07c34871ee932d1abf56757e0710c67bddf0aa47508a75addddff",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-complete-terrain.json": "a0567c2bf1e828a5d374d2a0b3f78582b206ca52a8e936e6e58808e6e8efd9ee",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-native-terrain.json": "33ef67fbb5a07c34871ee932d1abf56757e0710c67bddf0aa47508a75addddff",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\full-phase-end-terrain.json": "9490c989e639ead049a3cb83aabaed5c1371cff0dc8d43d8c72a10ffe2285aa4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\launch.json": "492b57792f477271facb77c579dbc6246ce1e203c6520871d27b604f170550ad",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\Player.log": "26134b408ba28725ab1a5d1c764fed2f4dd3aeead0b6664ad425eb6f5f4c9b5a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview-after-blend.json": "3f319f9b7594b4ca4655def93da12e493183bc0c9f241d66a25a3a928156a2c5",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview-before-blend.json": "8519171c0d734dc919cafca6df0860d89f894fad921cd08b367f1b4780bd2359",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview-command.json": "9d69a3d9108611f951f6694708416b4e973299cf82686b44321a47b28c4aff4e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview-native-terrain.json": "8519171c0d734dc919cafca6df0860d89f894fad921cd08b367f1b4780bd2359",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview-phase-end-terrain.json": "3f319f9b7594b4ca4655def93da12e493183bc0c9f241d66a25a3a928156a2c5",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\preview.png": "b3fb516297c6cb775073618b5897eba786c04c621b1439574985184487e10456",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\result.json": "2d08b4ad3700301628a63921696bf10dca73e2d437a1760b7c4fdca147e05adb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-temp-old-01\\state.json": "57a8ef5e94676959747f211b0d7ded7439f3c8f71f9a6835dd90ed78dcde8cf3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\fixture.json": "add9dfff47a37bba2a0b4a69b5e3bf02fa6ec746d0fa4dadf9601106a7f128b9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-after-blend.json": "0c24075595e0209b5dd5f69cc4d56af85d902fa21c0380c99efba940ee97b033",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-before-blend.json": "8dc3c88cca5184dbded90bf2cb287f3e1765cfccac9254a1fbed1f349d33e781",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-complete-terrain.json": "ba645b7bd757f2f529cd99acc01d43593276a4e8c3add15183630f06c4247868",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-native-terrain.json": "8dc3c88cca5184dbded90bf2cb287f3e1765cfccac9254a1fbed1f349d33e781",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\full-phase-end-terrain.json": "92f9d2529e3f3e0ddfe5cd451973b8aa924c82485950e21b6dc5e88db88b66e2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\launch.json": "8cb9df718aae48a19e5b1aae298e4db9290204d2a335b4de70debcd645099434",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\Player.log": "8f7c001b88618a3d58b65341a0735050742ab5b981112bf55271a6a81bd36131",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview-after-blend.json": "3815b204d98fe465359d4f5649e930d5ac15c0b6f3f8c8d0601ec160bf3cb4fd",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview-before-blend.json": "225f59ca985c32435b811db9eadb224d4071d4ba64bd1cab44b67f72f2b0eb95",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview-command.json": "9d69a3d9108611f951f6694708416b4e973299cf82686b44321a47b28c4aff4e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview-native-terrain.json": "225f59ca985c32435b811db9eadb224d4071d4ba64bd1cab44b67f72f2b0eb95",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview-phase-end-terrain.json": "3815b204d98fe465359d4f5649e930d5ac15c0b6f3f8c8d0601ec160bf3cb4fd",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\preview.png": "fd2292a0a250d639aa1fa1150e3ca9595b4044d45566cd0c3542064d56fe6733",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\result.json": "13264522896f58ec9004e436b89f3f3d4c44ca2837af8d5a5b51d8feb33b89aa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-old-01\\state.json": "57a8ef5e94676959747f211b0d7ded7439f3c8f71f9a6835dd90ed78dcde8cf3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\fixture.json": "97a1188d654a1637ac4fb45eabbc0db581d2fc42376950d47b9d1c21bdfc0b73",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-after-blend.json": "e1172e6d34bc982e11696ad9a58c7eb02f5d1538fdc3250a07ba60036f676b0e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-before-blend.json": "d1a2b11e41b91869fc875cbce3f107b6a43d973161ecb1675a7d7d5344484682",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-complete-terrain.json": "7d3fa7ffda66285bc79f75dd6aaf85b40bb7828677eda3efaa74943b8dbfe38c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-native-terrain.json": "d1a2b11e41b91869fc875cbce3f107b6a43d973161ecb1675a7d7d5344484682",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\full-phase-end-terrain.json": "69c679e4bd1b155c919e5fb932c10246f70fb0453469b25d342d9b2a5a11205d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\launch.json": "0d67c714a678a652a9cdc3f1edafe92ac4a9eee3625ded5be1fa6567a2141a6e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\Player.log": "f2ff34efce50c62a649c74cc7a305dfbb7f0830de76487a7f099a18fda49cae7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview-after-blend.json": "f17ba837764e5a49b0cb810adafe7e49f81d435a5704fbcc65b0351691fb750d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview-before-blend.json": "5eb9be5977679370651c386b2ed2b71ffab4c07f10a6072e1b31c44ed93b2a3f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview-command.json": "4d2ca00c2c40524faa0006e6372e06ce67962e05b8e9dcb58848accd129c0caa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview-native-terrain.json": "5eb9be5977679370651c386b2ed2b71ffab4c07f10a6072e1b31c44ed93b2a3f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview-phase-end-terrain.json": "f17ba837764e5a49b0cb810adafe7e49f81d435a5704fbcc65b0351691fb750d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\preview.png": "89bd6c478e70f34c117050c56d7b99334809cab442ed23256efc0721b960c37c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\result.json": "d609583e6eb61bc2b4eb235bc6db16cc6d410d2565a672d104cf2d1123477140",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-desert-new-01\\state.json": "56353c7604c6e4017b7592e7d7a63aa49113b7856fd11e70113a4bd31730eddb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\fixture.json": "fa55b518ff32773655b87e9fe4da81073b1d34a8a26c777a2f8381326b92ed5d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\full-complete-terrain.json": "2738240025395ec6197339304e7ebb4e258e07f9f28eb8bed885c91ac1cd4013",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\full-native-terrain.json": "316adefed2c3c439e3fc5eba19c1374b87bec668f4a73d75989a9c1b06d805dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\full-phase-end-terrain.json": "30b3b37e11044f68546133879e1f0abcc52635559912f4e57a7509179ef871d9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\launch.json": "2a898ee996daf5cda6f571cb40e3b95373dd1a7b84cf22e06fe0b61a2636d9f5",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\Player.log": "ebed53f8f463860a4d276cbfb812df5dc09a13e11180f1898337ccaf7e96d261",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\preview-command.json": "3edaf40f517a9b2cec922cd55ceec7352003811965cef175fd7d24637e4febe7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\preview-native-terrain.json": "928a20030c305e69eca5bedd4bd2b82557e2c77dfd612a5c6d27e3e4c32f75f4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\preview-phase-end-terrain.json": "928a20030c305e69eca5bedd4bd2b82557e2c77dfd612a5c6d27e3e4c32f75f4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\preview.png": "450b52ec9e7252c95636795941f12c736abc4311139ed7e14b8ff6ccb970241f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\result.json": "d43417153c6e9e96d6b1ccaa38fcd16396f157edc370d97bfc336dbccb824190",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-old-01\\state.json": "63cc2ab2a69938aba14bd093309d50cb2b4b6c66755fb3fb43580090938d622a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\fixture.json": "fa55b518ff32773655b87e9fe4da81073b1d34a8a26c777a2f8381326b92ed5d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\full-complete-terrain.json": "7ad9d044c1d20ccfb287e5c90872e1838792e590757625dbd14de6e5ef4e0a01",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\full-native-terrain.json": "316adefed2c3c439e3fc5eba19c1374b87bec668f4a73d75989a9c1b06d805dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\full-phase-end-terrain.json": "bf5216287698a60970d73e81500d91b728abce6b952180964ac6244536b9c596",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\launch.json": "07449367353c426ff1739383716b142810ea41cd0d3da1d72ab8c0dcad0380c2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\Player.log": "6d5a984c98630fd7fe5b84d971d437353ca7e37a7db476a229517f9f15c3cfca",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\preview-command.json": "3edaf40f517a9b2cec922cd55ceec7352003811965cef175fd7d24637e4febe7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\preview-native-terrain.json": "928a20030c305e69eca5bedd4bd2b82557e2c77dfd612a5c6d27e3e4c32f75f4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\preview-phase-end-terrain.json": "928a20030c305e69eca5bedd4bd2b82557e2c77dfd612a5c6d27e3e4c32f75f4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\preview.png": "450b52ec9e7252c95636795941f12c736abc4311139ed7e14b8ff6ccb970241f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\result.json": "8c5c0e1e9c9d118dc8ae0ed225afc7734918ff05afc99ad771c518feef148fbb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-exact-new-01\\state.json": "da340b06e88f09ca35ae9a97a8b10522c716a33d4bc725e45f3f8710b2e78c79",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\fixture.json": "3a6670f45d8ba9fea0a1bf0e6789b58c38f8c023c05e2a870507e85f55876c1b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-after-blend.json": "ddfefded57788009b7e83846a6f92ead8724b84b8f702cfd5fba71aebeb0725d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-before-blend.json": "33ef67fbb5a07c34871ee932d1abf56757e0710c67bddf0aa47508a75addddff",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-complete-terrain.json": "d2d15ff2cffe161e099e0c6fc6008f29b998b040cfa63a07e08f615a476cd9ce",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-native-terrain.json": "33ef67fbb5a07c34871ee932d1abf56757e0710c67bddf0aa47508a75addddff",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\full-phase-end-terrain.json": "513c363e0fdffc3284169f98ba3df26a8e0a6b76200845f45336e48b94cd3cd7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\launch.json": "d4335ae0cece4f54298252defbf7ed6ad4ed26ec60a7e6ef63c15e71d6b67714",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\Player.log": "153a9922ad894f2b46abfb991c56e003103e39088dccc5a4db62b2b05790cf96",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview-after-blend.json": "3f319f9b7594b4ca4655def93da12e493183bc0c9f241d66a25a3a928156a2c5",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview-before-blend.json": "8519171c0d734dc919cafca6df0860d89f894fad921cd08b367f1b4780bd2359",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview-command.json": "9d69a3d9108611f951f6694708416b4e973299cf82686b44321a47b28c4aff4e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview-native-terrain.json": "8519171c0d734dc919cafca6df0860d89f894fad921cd08b367f1b4780bd2359",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview-phase-end-terrain.json": "3f319f9b7594b4ca4655def93da12e493183bc0c9f241d66a25a3a928156a2c5",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\preview.png": "b3fb516297c6cb775073618b5897eba786c04c621b1439574985184487e10456",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\result.json": "c2ab552fa68524724a6117fc3aadb00991ad1015def6527bc99c1a452e5b33af",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-legacy-new-01\\state.json": "ae557bb95e9f09d8bfc748ca5273f89b2ab991a27b6e6df376db88e38d1c189f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\fixture.json": "3a6670f45d8ba9fea0a1bf0e6789b58c38f8c023c05e2a870507e85f55876c1b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\full-complete-terrain.json": "d7eef21822c938de2feb633600c2a08699c8d46c85d1ae1a9b605148b4c36662",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\full-native-terrain.json": "004832993871b779b36a1457111c563522afd690cce4f446fb2b1a9315cffe0e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\full-phase-end-terrain.json": "2f8196a4f039634ff34d558820e0865dfd115afeb40f51741538589b855bc86a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\launch.json": "f00384e25bdfaf64335a3b27ef14904b9f7e16f19d8e7f27c0afe0b912aaa532",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\Player.log": "61fd770fa93f480d9ca33bacdbffa597c4421d21353a14bf258b77f07811a106",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\preview-command.json": "1aeba47afca6a7af6aeb59375197d9303496988e0b9119e1d2ffd2d671993c66",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\preview-native-terrain.json": "5089b8a33ce9ae9f7298159f55c491fd5f96a171f9fd46fb3670a1ee3dbff3f1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\preview-phase-end-terrain.json": "5089b8a33ce9ae9f7298159f55c491fd5f96a171f9fd46fb3670a1ee3dbff3f1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\preview.png": "123bced3ac3b50039841d1747debb42cfca8f0cbff10bd1ffe86814cbf0020ff",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\result.json": "a54f96b43da3df62309b763bc6c90a07f82f5225e2dffcd5716bae06bd4fc7ec",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-off-new-01\\state.json": "7519175bce1daff8893ff8e274d5454c29a45c2ffabe82ffd95f9eb4950e95f4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\fixture.json": "3a6670f45d8ba9fea0a1bf0e6789b58c38f8c023c05e2a870507e85f55876c1b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-after-blend.json": "bfe5d4437940b18de972716efb74bd27bc693deab3de2b38c65e6b4003aae6a0",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-before-blend.json": "006c19d4affe8e7746b5e0821c725aa4d679a22a00037b6389637b674e9e12bd",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-complete-terrain.json": "7b49b6d7c40e0bb10493388fca1841d22cfebe96236725211a0ec27bcae89cc1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-native-terrain.json": "006c19d4affe8e7746b5e0821c725aa4d679a22a00037b6389637b674e9e12bd",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\full-phase-end-terrain.json": "e4eb5e70e50ed93f163c9752f98ac1ad448c07730626a9862b0a7393a536bd3c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\launch.json": "2bef8d7a21d062fd4f8d7e8df9bdc49e91195332a999fdec722827486b1326aa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\Player.log": "8e0e22cc6da61c3fe1fd08c4f9159d51b0b9e4f0ff688141e4b882c5c43b1c45",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview-after-blend.json": "3552f311e91ad4a915dcb42728962a9b94e58805fdf6b0634bb251d08f85708c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview-before-blend.json": "1e2dc7e775c4ea5fac9e08c5a29244302f7842b7c5aedede7009635ca9fa383f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview-command.json": "f80941c28c8d489eb1e829cb2c584d77e2fd4d49bfec457b961f22812b875dd1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview-native-terrain.json": "1e2dc7e775c4ea5fac9e08c5a29244302f7842b7c5aedede7009635ca9fa383f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview-phase-end-terrain.json": "3552f311e91ad4a915dcb42728962a9b94e58805fdf6b0634bb251d08f85708c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\preview.png": "02da8b75c265f1a952715af17cb2d9ed8d8c084ed00f47679f096b5fb30774d9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\result.json": "7da880942e2f57fa54f1e92a881af26f0bfa6a678212567689f99d1be08e6583",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-shallow-new-01\\state.json": "40ca34a72b46d3971329a06d3a7fea2f70205cf920691ee293def37818fad0fb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\fixture.json": "474adbecfde741deb70cb625164ecaee747b64fc014f869b45f34afc1be149dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-after-blend.json": "7b8051e59e4b6998ae81b7220fdd9066b1312276a64a52f5743dc1d32e10f9ec",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-before-blend.json": "ad16b2def7e5ddafec6079e6fface7f2e086cbdf81e4a0011870500627ef0ac9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-complete-terrain.json": "50533888e9d3ee0dc711f58ef0327e2aa16949c40bbc92162ef88dd2b7b99ca2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-native-terrain.json": "111817df72432efd03e6adcef5efc941ac79ce95dd34ed598660163229cba648",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\full-phase-end-terrain.json": "1d11146c908fd01e1e882d7312ac5849f8cca5dc3ce2e80635f63902a63357fa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\launch.json": "67006068cfd21a7d12540aab28491f1ac5b00a6dacd84826b48c3e0d88fd91f2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\Player.log": "c60784b69a7069cc304424a54c6bfb09e1cc6f71f67466b52f647ec86a825891",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview-after-blend.json": "17fb09cdc166b1d68ea2f8dc97d8d60abf5949448510151ef8af99ee968c2479",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview-before-blend.json": "6fd2421b68d569252a7950a6974d016589e847fac7389032a032cade1b7c5b5f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview-command.json": "84d6212dde904ddf6e5d541a60159f7e68f2a6eeb26edfb0c17707ec11c5c32d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview-native-terrain.json": "36618cebd155f901666fd0aeaf2839cb4b9c84d4843aae277c9c320216f9ff40",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview-phase-end-terrain.json": "acd862154f2c8888cf9dd82cdd004bd385fb858e82a22a27358598a086a7fb1a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\preview.png": "ad526d996888f62c805e25818c56ba467c78529adaa6bb0dc5a442776556b19a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\result.json": "b6d668171ac1686712df36d5e5f3bbbd36047a1b876a3eeb70adc2dcf1bec5cb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-old-01\\state.json": "55ee8efcd9176bf5cf2c4aac6a6bfb69061840c1f0dd2b7628ae95590afb6e70",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\fixture.json": "3d995b1a22a82acb39ce04c9b7df193ddec7041b1adcb0b0638d832d98d78196",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-after-blend.json": "164802dc1d4d60d606ee99bfe7ca6a2f8b62815d9d702ee9b371ad0619227c9c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-before-blend.json": "dabbff7e052a46c8187bc274be33e63ad3d1fd9ba38453bb88be319fad70e3f6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-complete-terrain.json": "538ccae027eb3537b696aadc32364dc8f7bb3bae6c8432e26bae8399c2ba354f",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-native-terrain.json": "91aa9769a8a3bdb76bbb5f855ce6c788d22b324e54e47985fdc8351e23758cef",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\full-phase-end-terrain.json": "3bde9afa01bffa60b5a54153d6fba7f46d301dc339bfa1787ab02cee1aa0359b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\launch.json": "6fe1c803528206d1ece8d90ca1e1c155e6d3aad0f4072f15e795bc0d3a2b9974",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\Player.log": "5349f9a1455ea95e396b8297c206cd46474f15155cdf8c73382401f92787ce24",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview-after-blend.json": "96c748bdaa969169490da97e7ebb44d0627e32d678ccfc99581fc1742a7274c4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview-before-blend.json": "d2842befd38f52ea0503a0e50ce4dcaf432c48b7eb09fefbe37c5fe7ce70ff54",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview-command.json": "59d595a409b9e03784292ebcd166fa2515553091044eae4bef6f092334772e87",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview-native-terrain.json": "0f3fe82e9e34c5e5f28314e8f782900aff33ca905f2472d6fdf8bc23f92ee170",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview-phase-end-terrain.json": "0cba1f303e369c864ba89f04cd5d78193caf357852ceb87bba61d15cd0869b4d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\preview.png": "8f35b6ca8ae438893852f3e729c069b3743fea464d7ac0e17232e1f87c535180",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\result.json": "0e54b8f991803fe17a4398afbda0774fecc72eea6cc24eedeebe2f852c8cb41a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-protected-new-01\\state.json": "2bd517c86e927664385133434f0fc6cd32db1c3ec9dac3a31fd22111d71e5055",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\fixture.json": "b463471066fbd6b1f47abefcd2cdd2092ef9ffe9f0da83de7e05fbc1c5c8ccf1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-after-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-before-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-complete-terrain.json": "02bac897061d1b2c4d0d48ab6ed857349f4c2d2aa533bcb227378b6f6de73113",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-native-terrain.json": "45f2887eda2baee69d836c67ec7696c7d58001e0bce00e0ae85960c3d3ef72be",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\full-phase-end-terrain.json": "53ea5c81aa83fa0f8baffa09877dd59d4e201d188ae0f887d3f5438b81c910d6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\launch.json": "bb8506fb9178aac2366feed20ff35a0371baa600875e35f5a59629beb558119b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\Player.log": "a9e9a74bf719984e978f282bbb82be2fb8947c18c6afca9a770474c71517dfb3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview-after-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview-before-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview-command.json": "6e5495c1347ea297ae562fda0530e8781642c824044902e23eaeeb390abfb130",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview-native-terrain.json": "aa0cc94d75a7e2064be5badd19de24b1af188966b97f41e558448b4a9f0cbaa8",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview-phase-end-terrain.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\preview.png": "37f757b70c0315403c5d0afc5585429f5a9f8e681028b5e9f8a3f07e1cbc4616",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\result.json": "dd4133297a637a829f53f3dbe7603d4e1d63f5956637a7b64d9a221b703caafc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-old-01\\state.json": "3d7a53452aa4072951324022efccdaf7f251a08d9d7120e1a043ff8fe9a68e76",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\fixture.json": "b463471066fbd6b1f47abefcd2cdd2092ef9ffe9f0da83de7e05fbc1c5c8ccf1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-after-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-before-blend.json": "2b33b328d01661d4793e33d2ec8a988dca969e2965f01b0fcbfacac32f8a1b56",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-complete-terrain.json": "607208eb7c6c2e9dc08a66142ea3f99ba1914f1fc7651e2037a7a3031397b4d8",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-native-terrain.json": "45f2887eda2baee69d836c67ec7696c7d58001e0bce00e0ae85960c3d3ef72be",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\full-phase-end-terrain.json": "f2a297d5ae5f9f34166127cc630ca21fff275c4207f6196301324b782ed38d83",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\launch.json": "55c256c4314ee89170736db36622d947a09ee47a0d052d6eea06977a273c0d31",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\Player.log": "0e16ed557b8c4087ae71900a4bb4ca319fe97a36f554492e3f34c306910ddab7",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview-after-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview-before-blend.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview-command.json": "6e5495c1347ea297ae562fda0530e8781642c824044902e23eaeeb390abfb130",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview-native-terrain.json": "aa0cc94d75a7e2064be5badd19de24b1af188966b97f41e558448b4a9f0cbaa8",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview-phase-end-terrain.json": "94e82292f750e4e80402cdb0f367ff01cfe15b641ff62844666e648eeec7e09a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\preview.png": "37f757b70c0315403c5d0afc5585429f5a9f8e681028b5e9f8a3f07e1cbc4616",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\result.json": "9a4d494d7f8e0c2b61582d493a98aeb818a534504a8c27d5e332fdc49e18dc98",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-hotspring-new-01\\state.json": "72fc903d30d9e624bf80400b4657a1c0ca95110573cb9e86d6ad0e2ec68df098",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\fixture.json": "c60aa23ccd1fd2de49c2d264b57b4f201bee3970741f9582c09326c8c565d3ac",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-actual-features.json": "c4525b578d2d840dfbec081ff2fe89b5df80c494154d36b075749b4d2cae6017",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-after-blend.json": "8a8ae32ab231fa62fc057c3ff3d7f3c704f96d0dfc9c1fa4fdd5765d4a29af28",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-before-blend.json": "153060e5bcf302a5769afa131089acf0ff88d5aad3933ddab2abba8cc3a8e533",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-complete-river-preservation.json": "84900d8e1caeaf6469695e68f5507b322d9df51c8b414b3e3c29b566fcda29ea",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-complete-terrain.json": "966d52df1eb61e4a0c3617c054b33ed40700dfe21fb3373ddab996dafe13db1e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-native-river.json": "9a7808dd0634bfcb5fc10dcc23aae9eff995fcee654a0dadde25279718ddf36e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-native-terrain.json": "d5eff298999c581f4725aece68c6c6159ef1c8018bf44d1de2484f9ea84e80b4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-phase-end-river-preservation.json": "84900d8e1caeaf6469695e68f5507b322d9df51c8b414b3e3c29b566fcda29ea",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\full-phase-end-terrain.json": "28fe9a41e49366d2d23062b9b47021cbbf6f31993cd520129623d82c771f8589",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\launch.json": "103e9e53744f5a7804a4c587a2506d5516dcf0c4541c3cdbf6d009570c1acb85",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\Player.log": "74ab554d06cb60c596ccbeb881364de064effd5099668bb9cf1c50269a3b86ed",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-after-blend.json": "0e9afc7089abca47594b813e0f61b0432fd6fb23e11fad5db37dbea18d265423",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-before-blend.json": "9b5e2b5e92bae4d5f8a4b56b3aee744a569af20fa01e77378ff58b67f984ec5b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-command.json": "9d69a3d9108611f951f6694708416b4e973299cf82686b44321a47b28c4aff4e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-native-river.json": "9a7808dd0634bfcb5fc10dcc23aae9eff995fcee654a0dadde25279718ddf36e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-native-terrain.json": "611b8bab6dd38fd597f05e203f675c981f29519eb2627d7b2f92adb34e78c144",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-phase-end-river-preservation.json": "e04feed87e5d9d74ba98520697f001778a970831edb7e5c6bb726fbb8772bd76",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview-phase-end-terrain.json": "0e9afc7089abca47594b813e0f61b0432fd6fb23e11fad5db37dbea18d265423",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\preview.png": "187d5fbb437b728cf7039172624aaa893eb0d01750a9444a59681a872c87dec1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\result.json": "8af991b7d043eb499d021a2b36a75f2f81ea313f32905203ae99f6e394105138",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-old-01\\state.json": "569f393eddf86608fbb6ff75e78902f1354caafc327ddc03e95f69311648b539",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\fixture.json": "cca353462e0055b35d846dd1c01eb40986aa0a8f21cd3b26162974a43c046b86",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-actual-features.json": "c4525b578d2d840dfbec081ff2fe89b5df80c494154d36b075749b4d2cae6017",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-after-blend.json": "d1071713dc2e9b7a2a475610631c9fe694f3be87cb70f625a63dffab0a94463e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-before-blend.json": "ea0d6a56baf692ed63293805424c6ff27e0e04b8c594e579a6d6b90c5d18b5da",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-complete-river-preservation.json": "e350892c9ff736e76061e60305fc98a474217cf33f8a936f93af11453beae769",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-complete-terrain.json": "19c7b1280ec02da7c63e47b598777217439acb22ef9678f6623a940f444fd31d",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-native-river.json": "164e09e27b5e6d9d9ddecb1e3b86e27b7a8cea8f551e4c27458c89c7db616921",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-native-terrain.json": "5a33fb5cf6380205afd9909ecef4fad0630a426c59d4cbaf1d446e93048cea47",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-phase-end-river-preservation.json": "e350892c9ff736e76061e60305fc98a474217cf33f8a936f93af11453beae769",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\full-phase-end-terrain.json": "c69f9828a31d0474887e0de2a0727a609955b742d3bef664f8bc248acfbe6b07",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\launch.json": "5432fbae93efa85640241e86e24c700e6b3d603e0d86c1be8fe87534132b6db0",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\Player.log": "0b98ed316ade710e0aa99a4dfa6a0d5ddf970f7abc212341302661578e59cc37",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-after-blend.json": "323e12ffd9d64233ec254894ab450f74dae6a4234bf4920ff23f1e5c8aa0d8d6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-before-blend.json": "7d72b5b87c8bab1d8884206dd8ad3cfebdfca8ce8f5737dfd49a533d18d616f1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-command.json": "4d2ca00c2c40524faa0006e6372e06ce67962e05b8e9dcb58848accd129c0caa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-native-river.json": "164e09e27b5e6d9d9ddecb1e3b86e27b7a8cea8f551e4c27458c89c7db616921",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-native-terrain.json": "3cb586121aa72a76628a53819940d886e440000e33e308bd9f76b678dffaa84e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-phase-end-river-preservation.json": "6cb3abb2718ac4b47a820ee805bbcf611962cce59fce2cc878c8b06c54cc7312",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview-phase-end-terrain.json": "323e12ffd9d64233ec254894ab450f74dae6a4234bf4920ff23f1e5c8aa0d8d6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\preview.png": "c56903441ca1abb2c006767ff518c78b91279eaa26179b7e460d9d895de425e3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\result.json": "a5dfaa81d5b07a556a631be5bbd7cdee626ec625e9f55cef10948822c0117fe0",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-river-new-01\\state.json": "91d9a5f2cd4e1ccf692bdbb97bc8d170900da02ea8187fc7985202125806ec80",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\fixture.json": "3a6670f45d8ba9fea0a1bf0e6789b58c38f8c023c05e2a870507e85f55876c1b",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-after-blend.json": "b69f0f9a0cd1c0d61c7d24e17cf2a153153e5951d22c6e13ad84094c4f4c04c2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-before-blend.json": "8fa930c956806ecf0fcda0acc2ae05d80ceb60fd1f627a28cff8abae37c6eb6c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-complete-terrain.json": "db1cea91360460cce14baffcbd69939169e661b732301e9974085c0511a25069",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-native-terrain.json": "8fa930c956806ecf0fcda0acc2ae05d80ceb60fd1f627a28cff8abae37c6eb6c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\full-phase-end-terrain.json": "572f2b829d78458f0588cbf824bca288b07002afa799e87373c94da157e78ed9",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\launch.json": "24c1595ceb424b7281102fa49ad97dcf21a070be3981065c9275e7800ab21fbb",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\Player.log": "44ca7d5a55370143b96db91512ff8d19aebc4fc4a4d7fde960a7e8692111f591",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview-after-blend.json": "1b1bbd7546ef25036cb8c65b3905807ab839a0589a3ccdb024fc082a7682aa04",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview-before-blend.json": "89fb8d332fb7b34c2283ef536a2cb8d16d579767133899598f6566c32ba10aca",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview-command.json": "86d49cb118d9f51f1c8045af8864731e8357535712c9966e642c6ccb138a56c4",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview-native-terrain.json": "89fb8d332fb7b34c2283ef536a2cb8d16d579767133899598f6566c32ba10aca",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview-phase-end-terrain.json": "1b1bbd7546ef25036cb8c65b3905807ab839a0589a3ccdb024fc082a7682aa04",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\preview.png": "944101fe3d699ae548f4956cae0a4871cdf563a1c3880d6e3851143bcb7bdcb2",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\result.json": "3492de124e5a09b8098158ed82a6a52828cb9972ead353d4751807764dd043f6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-final-ring-new-01\\state.json": "13dcb252093beb7ba5965d56484a584e9a889e750d868d3db72dea7dac0a6e66",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\fixture.json": "afcff10574c801629dbf0cbba1846974689a2ca606193c84b3c4216f692a8e31",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-actual-features.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-after-blend.json": "aa3dfd5a6af7d02a19cc3ba9ecc963a5943111527ef2bb7af68c0cf6fc23ff82",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-before-blend.json": "004832993871b779b36a1457111c563522afd690cce4f446fb2b1a9315cffe0e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-complete-terrain.json": "44b6b5748a5ed3ff20bd9f75ab66e1bd1b8a99e5fd90d8002c0ecd08508bc72a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-native-palette.json": "3c81f7877ace79aee9709717ad4fbb0f80dc6d86ff191626fdb22f32670606dc",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-native-terrain.json": "004832993871b779b36a1457111c563522afd690cce4f446fb2b1a9315cffe0e",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\full-phase-end-terrain.json": "8ee64b7205e9195322bebc19ef57e152190a23f435940d45cacf4384a91eb8c6",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\harmony-patches.json": "e883013f96e7db4ab85abf8f0b40dd0cb85c782e27a30b29b9420a28314afe06",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\integration-explicit-legacy.xml": "e18cbda789106b0dbaec41638a183ced699edb81e599fd5ddb6cd63a5dc8c67a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\integration-missing-profile.xml": "69cfa040cbd6137761da31194c34cc5a6fb1d5121bbfededbc3040a0aeddb578",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\integration-native-natural.xml": "05dda53164ae4a78a0e2801ed8355a53c52853aec99bb101164a69b63a9494f0",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\integration-native-none.xml": "4cf4eef2ded6ec87c525688b15d995d13eca6c3dacfb096079868695b02a8470",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\launch.json": "40c5a2d95472766e57e46d398e09c820619b6ebd4684bf766cf739ca1c8b2c27",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\native-integration-checks.json": "80c55374a6a405fc27a60d1bfd343808a5ef553a7e3572a0277350a9babe1d5a",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\native-water-checks.json": "e7681a2c98ebaf10ccf2a0c9718cb0c1b4925116d08f85d3cc06e274e630ffac",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\Player.log": "cdaca043ea31288f2ed051c6529442ecf32c5ca734ef76379a983da9dc4bb0a3",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview-after-blend.json": "fef76f1a4c0a31af8c9e870e3d5ba7ca4ce139fe3d220071aa5c7c35fac1e456",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview-before-blend.json": "5089b8a33ce9ae9f7298159f55c491fd5f96a171f9fd46fb3670a1ee3dbff3f1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview-command.json": "4d2ca00c2c40524faa0006e6372e06ce67962e05b8e9dcb58848accd129c0caa",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview-native-terrain.json": "5089b8a33ce9ae9f7298159f55c491fd5f96a171f9fd46fb3670a1ee3dbff3f1",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview-phase-end-terrain.json": "fef76f1a4c0a31af8c9e870e3d5ba7ca4ce139fe3d220071aa5c7c35fac1e456",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\preview.png": "59aaf8a199b8024a3aad2e1be52fa7a4b28fdb5cb4b91e38c0905d59dbf5447c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\result.json": "d95ca7c3919c4923e2bda2a5d1f7311945dc48f66727dc906d6ae88bc610b53c",
+    "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\outputs\\mapgenai-native-generation\\runs\\native-temperate-water-new06-graphics-01\\state.json": "56353c7604c6e4017b7592e7d7a63aa49113b7856fd11e70113a4bd31730eddb"
+  },
+  "limits": [
+    "Raw river runs remain failed because native seasonal ThinIce changes surface/temp; separate permanent-layer and exact overlay audit is reported without rewriting those results.",
+    "Native map checks validate this fixed set of inputs and seeds, not all possible recommendations or aesthetic quality.",
+    "The 600 field cases are synthetic field/raster properties, not 600 generated full maps.",
+    "Helper palette sentinels are not full rendered custom biome tests.",
+    "StateFile input is authoritative; fixture CLI details field may say natural for the explicit off state."
+  ]
+}
