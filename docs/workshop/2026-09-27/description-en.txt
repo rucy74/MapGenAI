@@ -49,7 +49,7 @@ Type what you want in plain words, like "a ring of mountains with a lake inside"
 [h2]Good to know[/h2]
 [list]
 [*][b]It shapes the map you are about to start.[/b] It does not edit a colony map you are already playing.
-[*][b]World rivers and coasts stay connected.[/b] You can straighten a river, shift where it crosses the map, or turn a coast, but you cannot delete them or add a coast inland.
+[*][b]World rivers and coasts stay connected.[/b] You can straighten a river or turn a coast, but you cannot delete them or add a coast inland.
 [*][b]Map Preview shows terrain and layout.[/b] Plants, building interiors, and loot appear when the real map is generated.
 [*][b]Results depend on the model.[/b] Check the preview, and use Undo or Reset when a request goes wrong.
 [*][b]DLC and landmark mods:[/b] you can add hot springs, fjords, oasis, and other tile features when the DLC or mod is active and the tile allows them.
