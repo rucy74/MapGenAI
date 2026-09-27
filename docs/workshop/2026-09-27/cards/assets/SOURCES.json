@@ -1,0 +1,203 @@
+{
+ "cards/assets/c1-ui-open.png": {
+  "source": "captures/showcase-01/01-open.png",
+  "sourceSha256_16": "7692ac0fe02c8b6c",
+  "crop": [
+   60,
+   30,
+   1860,
+   1030
+  ],
+  "size": [
+   1800,
+   1000
+  ]
+ },
+ "cards/assets/c1-chat.png": {
+  "source": "captures/showcase-01/03-ring.png",
+  "sourceSha256_16": "da436cf41c1b52be",
+  "crop": [
+   115,
+   448,
+   1380,
+   712
+  ],
+  "size": [
+   1265,
+   264
+  ]
+ },
+ "cards/assets/c1-before.png": {
+  "source": "captures/showcase-01/01-open-preview.png",
+  "sourceSha256_16": "b2bcf955ac24cec9",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c1-after.png": {
+  "source": "captures/showcase-01/03-ring-preview.png",
+  "sourceSha256_16": "de94173abd59b201",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c2-step1.png": {
+  "source": "captures/showcase-01/03-ring-preview.png",
+  "sourceSha256_16": "de94173abd59b201",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c2-step2.png": {
+  "source": "captures/showcase-01/04-island-preview.png",
+  "sourceSha256_16": "350c073682b92b18",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c2-step3.png": {
+  "source": "captures/showcase-01/05-island-move-preview.png",
+  "sourceSha256_16": "dc8c84b2fae699a1",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c2-coast-before.png": {
+  "source": "captures/showcase-01/13-coast-before-preview.png",
+  "sourceSha256_16": "c46e54792b536a05",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c2-coast-after.png": {
+  "source": "captures/showcase-01/13-coast-preview.png",
+  "sourceSha256_16": "0418d7aba97ae416",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c3-candidates.png": {
+  "source": "captures/showcase-01/11-recommend.png",
+  "sourceSha256_16": "1a7a5c9e90116dfa",
+  "crop": [
+   105,
+   535,
+   1410,
+   900
+  ],
+  "size": [
+   1305,
+   365
+  ]
+ },
+ "cards/assets/c3-opt2-before.png": {
+  "source": "captures/showcase-01/11-recommend-option-2.png",
+  "sourceSha256_16": "d55d70ed894789c9",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c3-opt2-after.png": {
+  "source": "captures/showcase-01/12-refine-option-2.png",
+  "sourceSha256_16": "bcd2787a45fef242",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cards/assets/c3-guide.png": {
+  "source": "captures/showcase-01/02-guide.png",
+  "sourceSha256_16": "273db49b6eda01ad",
+  "crop": [
+   262,
+   55,
+   1250,
+   665
+  ],
+  "size": [
+   988,
+   610
+  ]
+ },
+ "cards/assets/c4-map.png": {
+  "source": "captures/showcase-01/14-map-1.png",
+  "sourceSha256_16": "3bc4bc7a147326a8",
+  "crop": [
+   0,
+   50,
+   1690,
+   1015
+  ],
+  "size": [
+   1690,
+   965
+  ]
+ },
+ "cover/assets/a-map.png": {
+  "source": "captures/showcase-01/03-ring-preview.png",
+  "sourceSha256_16": "de94173abd59b201",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cover/assets/b-1.png": {
+  "source": "captures/showcase-01/01-open-preview.png",
+  "sourceSha256_16": "b2bcf955ac24cec9",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cover/assets/b-2.png": {
+  "source": "captures/showcase-01/03-ring-preview.png",
+  "sourceSha256_16": "de94173abd59b201",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cover/assets/b-3.png": {
+  "source": "captures/showcase-01/05-island-move-preview.png",
+  "sourceSha256_16": "dc8c84b2fae699a1",
+  "scale": "nearest x2",
+  "size": [
+   500,
+   500
+  ]
+ },
+ "cover/assets/c-bg.png": {
+  "source": "captures/showcase-01/14-map-1.png",
+  "sourceSha256_16": "3bc4bc7a147326a8",
+  "crop": [
+   180,
+   65,
+   1620,
+   875
+  ],
+  "size": [
+   1440,
+   810
+  ]
+ }
+}

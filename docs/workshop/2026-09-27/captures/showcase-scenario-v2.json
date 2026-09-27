@@ -1,0 +1,44 @@
+{
+  "schema": "mapgenai-showcase/1",
+  "purpose": "Re-capture for the Steam Workshop page after the release fixes (English-only messages in the English UI, rivers staying put when tile features are added), and re-run of the pre-release basic checks. Same world seed and tile rules as showcase-01.",
+  "notes": "Changes from showcase-01: road-with-bridge is tried first on the untouched tile and undone; the river-position request now matches a west-east river; a partial fill step is added; generate-map uses the fill state. Paid calls use a new ledger (cap 16).",
+  "worldSeed": "mapgenai-showcase-20260927",
+  "uiScale": 1.5,
+  "previewMapSize": 250,
+  "captureDelayFrames": 30,
+  "runMinutes": 110,
+  "callLedger": "model-call-ledger-v2.json",
+  "tiles": {
+    "A": {
+      "rule": "Temperate inland river tile: TemperateForest biome, a world river on the tile, no Ocean or Lake neighbour (not coastal), hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then a river with widthOnMap 6-20, then the lowest tile id.",
+      "biomes": ["TemperateForest"],
+      "river": true,
+      "coastal": false,
+      "hilliness": ["Flat", "SmallHills"]
+    },
+    "B": {
+      "rule": "Temperate coastal tile: TemperateForest biome, at least one Ocean neighbour and no Lake neighbour, no world river, hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then the lowest tile id.",
+      "biomes": ["TemperateForest"],
+      "river": false,
+      "coastal": true,
+      "hilliness": ["Flat", "SmallHills"]
+    }
+  },
+  "steps": [
+    {"id": "01-open", "tile": "A", "action": "open"},
+    {"id": "02-guide", "tile": "A", "action": "guide"},
+    {"id": "03-road", "tile": "A", "action": "send", "priority": 4, "text": "Add a dirt road from the north edge to the south edge."},
+    {"id": "04-undo-road", "tile": "A", "action": "undo"},
+    {"id": "05-ring", "tile": "A", "action": "send", "priority": 1, "text": "Make a ring of mountains in the middle with a lake inside and one opening to the south."},
+    {"id": "06-island", "tile": "A", "action": "send", "priority": 2, "text": "Add a small island in the middle of the lake."},
+    {"id": "07-island-move", "tile": "A", "action": "send", "priority": 9, "text": "Move the island to the north side of the lake."},
+    {"id": "08-river-north", "tile": "A", "action": "send", "priority": 3, "text": "Move the river closer to the north edge of the map."},
+    {"id": "09-river-straight", "tile": "A", "action": "send", "priority": 5, "text": "Make the river straight."},
+    {"id": "10-hot-springs", "tile": "A", "action": "send", "priority": 6, "text": "Add hot springs."},
+    {"id": "11-fill", "tile": "A", "action": "send", "priority": 10, "text": "Fill 70% of the ring's interior with rich soil."},
+    {"id": "12-recommend", "tile": "A", "action": "reset-quick-suggestions", "priority": 7, "text": "Recommend a map."},
+    {"id": "13-refine", "tile": "A", "action": "refine", "priority": 11, "requires": "12-recommend", "text": "Make option 2 more natural."},
+    {"id": "14-coast", "tile": "B", "action": "send", "priority": 8, "text": "Put the coast on the north side."},
+    {"id": "15-map", "tile": "A", "action": "generate-map", "stateFrom": "11-fill", "maxMinutes": 45}
+  ]
+}

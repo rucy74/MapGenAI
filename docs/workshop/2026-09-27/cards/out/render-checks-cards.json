@@ -1,0 +1,148 @@
+{
+  "html": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\workshop\\2026-09-27\\cards\\cards.html",
+  "chrome": "C:/Users/choco/AppData/Local/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-win64/chrome-headless-shell.exe",
+  "cssWidth": 640,
+  "scale": 1.5,
+  "overflowSelfTest": true,
+  "images": [
+    {
+      "src": "assets/c1-ui-open.png",
+      "ok": true,
+      "w": 1800,
+      "h": 1000
+    },
+    {
+      "src": "assets/c1-chat.png",
+      "ok": true,
+      "w": 1265,
+      "h": 264
+    },
+    {
+      "src": "assets/c1-before.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c1-after.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c2-step1.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c2-step2.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c2-step3.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c2-coast-before.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c2-coast-after.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c3-candidates.png",
+      "ok": true,
+      "w": 1305,
+      "h": 365
+    },
+    {
+      "src": "assets/c3-opt2-before.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c3-opt2-after.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c3-guide.png",
+      "ok": true,
+      "w": 988,
+      "h": 610
+    },
+    {
+      "src": "assets/c4-map.png",
+      "ok": true,
+      "w": 1690,
+      "h": 965
+    }
+  ],
+  "results": [
+    {
+      "id": "describe",
+      "file": "cards\\out\\describe.png",
+      "cssBox": {
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 1408.796875
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 2113,
+      "overflow": []
+    },
+    {
+      "id": "editing",
+      "file": "cards\\out\\editing.png",
+      "cssBox": {
+        "x": 0,
+        "y": 1432.796875,
+        "w": 640,
+        "h": 953.375
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1430,
+      "overflow": []
+    },
+    {
+      "id": "ideas",
+      "file": "cards\\out\\ideas.png",
+      "cssBox": {
+        "x": 0,
+        "y": 2410.171875,
+        "w": 640,
+        "h": 1196.046875
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1794,
+      "overflow": []
+    },
+    {
+      "id": "realmap",
+      "file": "cards\\out\\realmap.png",
+      "cssBox": {
+        "x": 0,
+        "y": 3630.21875,
+        "w": 640,
+        "h": 598.78125
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 898,
+      "overflow": []
+    }
+  ],
+  "created": "2026-09-27T01:19:17.612Z"
+}

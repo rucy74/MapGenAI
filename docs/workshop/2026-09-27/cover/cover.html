@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>MapGen AI cover candidates</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#0d141c;font-family:Arial,sans-serif}
+.cover{width:640px;height:360px;position:relative;overflow:hidden;background:#172231;color:#f3f1ea;margin-bottom:20px}
+.brand{font:700 56px/1 Bahnschrift,Arial,sans-serif;letter-spacing:-1px}.brand span{color:#6cb6ff}
+.tagline{font:600 15px/1.2 Bahnschrift,Arial,sans-serif;letter-spacing:2.4px;color:#f4be63;text-transform:uppercase}
+.map{border:2px solid #6cb6ff;background:#0f1822;box-shadow:0 6px 22px rgba(0,0,0,.45)}.map img{display:block;width:100%;height:100%;object-fit:cover}
+/* A: one request -> its result */
+#coverA .left{position:absolute;left:30px;top:36px;width:252px}
+#coverA .bubble{margin-top:24px;background:#265a8c;border-radius:14px 14px 14px 3px;padding:15px 17px;font:600 20px/1.28 Arial,sans-serif;color:#fff}
+#coverA .tagline{margin-top:24px}
+#coverA .map{position:absolute;right:30px;top:30px;width:300px;height:300px}
+/* B: your tile -> first request -> follow-ups */
+#coverB .brand{position:absolute;left:0;right:0;top:20px;text-align:center}
+#coverB .row{position:absolute;left:24px;right:24px;top:94px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+#coverB .map{width:100%;aspect-ratio:1/1}
+#coverB .q{margin-top:8px;font:600 14px/1.25 Arial,sans-serif;text-align:center;color:#dce6ee}
+#coverB .tagline{position:absolute;left:0;right:0;bottom:14px;text-align:center}
+/* C: the real generated map */
+#coverC .bg{position:absolute;inset:0}#coverC .bg img{width:100%;height:100%;object-fit:cover;display:block}
+#coverC .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,20,28,.92) 0%,rgba(13,20,28,.78) 34%,rgba(13,20,28,.05) 62%)}
+#coverC .left{position:absolute;left:32px;top:0;bottom:0;width:250px;display:flex;flex-direction:column;justify-content:center}
+#coverC .tagline{margin-top:18px}
+#coverC .sub{margin-top:10px;font:600 15px/1.35 Arial,sans-serif;color:#dce6ee}
+</style>
+<div id="coverA" class="cover">
+  <div class="left"><div class="brand">MAPGEN <span>AI</span></div>
+  <div class="bubble">"A ring of mountains with a lake inside"</div>
+  <div class="tagline">Describe your map</div></div>
+  <div class="map"><img src="assets/a-map.png" alt="Map Preview after that request"></div>
+</div>
+<div id="coverB" class="cover">
+  <div class="brand">MAPGEN <span>AI</span></div>
+  <div class="row">
+    <div><div class="map"><img src="assets/b-1.png" alt=""></div><div class="q">Your tile</div></div>
+    <div><div class="map"><img src="assets/b-2.png" alt=""></div><div class="q">"Ring of mountains, lake"</div></div>
+    <div><div class="map"><img src="assets/b-3.png" alt=""></div><div class="q">"Add an island"</div></div>
+  </div>
+  <div class="tagline">Describe your map. Keep editing.</div>
+</div>
+<div id="coverC" class="cover">
+  <div class="bg"><img src="assets/c-bg.png" alt="A real generated map in game"></div>
+  <div class="shade"></div>
+  <div class="left"><div class="brand">MAPGEN <span>AI</span></div>
+  <div class="tagline">Describe your map</div>
+  <div class="sub">Chat with AI. Map Preview shows it. Then play it.</div></div>
+</div>
+</html>

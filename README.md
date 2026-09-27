@@ -1,69 +1,79 @@
 # MapGen AI
 
-> **Current test build:** `dist` and the separate **MapGen AI [DEV]** package now contain the same verified DLL and translations for RimWorld 1.6. [한국어 모드 소개·사용법](docs/description-ko.md) covers the current features; image input remains paused. Enable one package at a time. The previous release is preserved at tag `v1.6`. This local package synchronization does not publish a Steam update or a new GitHub Release.
+> **RimWorld 1.6.** Requires Harmony and Map Preview. Image input is paused in the current version. The previous release is preserved at tag `v1.6`. [한국어 모드 소개·사용법](docs/description-ko.md)
 
 ![Preview](docs/assets/preview_composite.png)
 
-**Describe your map in natural language — AI generates it for you.**
+**Describe your map in natural language, and MapGen AI builds it.**
 
-A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type anything like *"mountain fortress with hot springs"*, *"straight river on the left side"*, or *"just surprise me"* and watch the AI configure your map in real-time with Map Preview.
+A RimWorld mod that replaces manual map sliders with an AI chat. Type things like *"a ring of mountains with a lake inside"*, *"move the river to the west side"*, or *"recommend a map"*, and Map Preview shows the result.
 
 > The original version was built by [Claude Code](https://claude.ai/claude-code) (AI coding agent). The author has zero C# experience. Development continues with AI-assisted implementation and validation.
 
 ## Features
 
-- **Natural Language Map Generation** — Describe terrain in plain text, AI converts it to map parameters
-- **Live Map Preview** — See changes instantly through Map Preview integration
-- **Elevation Shapes** — Diagonal mountain ranges, central lakes, ring fortresses, canyons, ridges, passages, and more
-- **Explicit Dry Passages** — Connect ordered waypoints with a width in map cells. Existing shape behavior is preserved; generation reports remaining obstructions and protects world water.
-- **Free-form Shapes** — Star, heart, crescent, and custom shapes via CSG/SDF composite system
-- **Terrain Fill** — Paint areas with loaded permanent terrain materials, including Odyssey lava, cooled lava, soil, sand, gravel, mud, or ice
-- **Positioned Ruins** — Place small ruined walls/floors inside a named shape or bounded location; full footprints and available space are checked
-- **Terrain-relative Placement** — Place structures near river banks, water, mountain foothills or inner region edges, with minimum spacing; simple ruins support 90-degree rotations
-- **Native Ancient Dangers** — Position the game's native temples, including difficulty-aware contents; previews show an orange reservation outline, while interiors generate in the full map
-- **Images Paused** — Image entry and generation are disabled during text-first development; existing data is retained
-- **River Control** — Direction, position, and straight river mode
-- **MDP State** — Previous settings preserved across requests (add mountains, then lakes, then caves — nothing gets lost)
-- **Terrain Tuning** — Rich soil density, vegetation, animals, ore, ruins, rock types, caves, geysers
-- **Odyssey DLC Support** — 60+ tile mutators (hot springs, fjords, oasis, animal habitats, etc.)
-- **Preset System** — Save and load your favorite map configurations
-- **Iterative Refinement** — Keep chatting to tweak your map until it's perfect
-- **Undo & Reset** — Made a wrong turn? **Undo** reverts to before your last message. **Reset** restores the tile to its original state. Both are one click.
-- **Korean / English / Japanese / Chinese (Simplified)** — Full multilingual UI and AI responses
+- **Natural language map generation:** describe terrain in plain text, and the AI turns it into map settings
+- **Live Map Preview:** see each change through Map Preview
+- **Edits keep what you built:** add a lake, then move it, resize it, or change only its outline. Earlier changes stay
+- **Undo and Reset:** Undo steps back one request. Reset returns the tile to its original map
+- **Map ideas with previews:** Quick suggestions draws up to three candidates with Map Preview. Refine one before you pick. Nothing changes until you choose
+- **Preference questions:** answer a few multiple-choice questions before asking for ideas. They make no AI calls
+- **Exact or natural shapes:** perfect circles, stars, hearts, rings, or natural outlines through the CSG/SDF composite system
+- **Terrain fills:** paint areas with loaded permanent terrain, including Odyssey lava, or fill part of an area, like 70% rich soil
+- **Positioned ruins and ancient dangers:** place ruins, or the game's own ancient dangers, by area, direction, or landmark
+- **Local roads with bridges:** roads that cross a river or shallow water get wooden bridges automatically
+- **Natural water:** natural lakes follow the game's own lake style, with shallow edges and lakeshore ground that suits the biome
+- **Explicit dry passages:** connect ordered waypoints with a passage of a given width in cells
+- **River and coast control:** straighten rivers, shift where they cross the map, and turn coasts. World river and coast connections stay intact
+- **Odyssey and landmark mods:** hot springs, fjords, oasis, and other tile features when the DLC or mod is active and the tile allows them
+- **Terrain tuning:** rich soil, vegetation, animals, ore, ruins density, rock types, caves, geysers
+- **Presets:** save and load map settings
+- **Images paused:** image input is disabled during text-first development. Existing data is retained
+- **Languages:** menus in English, Korean, Japanese, and Simplified Chinese. Some newer messages are English or Korean only
 
 ## Quick Start
 
-1. Install this mod + [Map Preview](https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642) (required)
-2. Open **Mod Settings → MapGen AI**, select your LLM provider and enter your API key
-3. On the world map, select a tile — click the **✦ AI Map Gen** button next to Map Preview
-4. Describe your ideal map and hit Send!
+1. Install this mod, [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077), and [Map Preview](https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642)
+2. Open **Mod Settings > MapGen AI**, pick your provider, enter your API key, and choose a model
+3. On the world map, select a tile and click the **✦ AI Map Gen** button next to Map Preview
+4. Type a request, or press **Quick suggestions** or **Find my preferences**
+5. When the preview looks right, press **Generate with these settings**. The settings apply when you start or settle on that tile
 
 ## Supported LLM Providers
 
 | Provider | Notes |
 |----------|-------|
-| Google Gemini | Free tier available |
-| OpenRouter | Access to 100+ models (Gemini, Claude, etc.) |
-| OpenAI | GPT-4o, etc. |
-| Local LLMs | Ollama, LM Studio, or any OpenAI-compatible API |
+| Google Gemini | Default model `gemini-3.8-flash`. Used for most testing |
+| OpenAI | |
+| OpenRouter | Access to many models |
+| DeepSeek | |
+| Grok | |
+| GLM, GLM (Coding) | |
+| Alibaba (Intl), Alibaba (CN) | |
+| Local | Ollama, LM Studio, or another OpenAI-compatible local server |
+| Custom | Your own endpoint |
 
 ## Example Prompts
 
-- *"Diagonal canyon with a large central lake"*
-- *"Mountain fortress with hot springs and a southern exit"*
-- *"Fertile land between two mountain ranges"*
-- *"Star-shaped hill on top, crescent lake on the bottom"*
-- *"Straight river, horizontal, at the bottom. Mountains on top, huge lake in center. Hot springs, caves, more animals and plants, marble only"*
+- *"A ring of mountains with a lake inside and one opening to the south."*
+- *"Add a small island in the middle of the lake."*
+- *"Move the island to the north side of the lake."* / *"Make the river straight."*
+- *"Fill 70% of the ring's interior with rich soil."*
+- *"Put two small ruins on the island."*
+- *"Add a dirt road from the west edge to the east edge."*
+- *"Add hot springs."* (Odyssey)
+- *"Recommend a map."* / *"Make option 2 more natural."*
 
 ## Tips
 
 - **Not sure what features are available?** Just ask! Type things like *"what ancient ruins are there?"*, *"what special terrain features can I add here?"*, or *"what rock types are available?"* and the AI will list the options for your current tile.
-- **Undo and Reset are your safety net** — If the AI generates something you don't like, hit **Undo** to go back one step, or **Reset** to wipe everything and start fresh.
+- **Not sure where to start?** Press **Quick suggestions**, or **Find my preferences** to answer a few questions first.
+- **Undo and Reset are your safety net.** If the AI generates something you don't like, hit **Undo** to go back one step, or **Reset** to start fresh.
 
 ## Requirements
 
-- [Map Preview](https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642) (required dependency)
-- An API key from Gemini, OpenAI, or a local LLM server
+- [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077) and [Map Preview](https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642)
+- An API key for your chosen provider, or a local OpenAI-compatible server
 
 ## Install (non-Steam)
 
@@ -73,8 +83,9 @@ A RimWorld mod that replaces manual UI sliders with an AI chat interface. Type a
 
 ## Compatibility
 
-- Current `dev` and `dist`: RimWorld 1.6
-- Odyssey DLC — Supported (enables 60+ additional terrain mutators)
+- RimWorld 1.6
+- Odyssey DLC: supported (hot springs, lava, and other tile features)
+- Vanilla Landmarks Expanded: its tile features are read automatically when the mod is active
 
 ## Project Structure
 
@@ -111,3 +122,4 @@ Oasis-like terrain requests compose a small irregular pool with localized fertil
 ---
 ## 작성 이력
 - 2026-09-15 00:34 — 추천 실행 계획 검증·저장 선택, 오아시스 주변 토양, 이미지 버튼 숨김.
+- 2026-09-27 09:28 — 창작마당 새 소개글에 맞춰 기능·공급자(11종)·시작 방법·예시·호환 정보를 갱신하고, 일반판과 DEV가 같은 DLL이라는 시점 의존 문구를 뺐다.

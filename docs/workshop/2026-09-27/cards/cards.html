@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>MapGen AI - Workshop description cards</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#1b2838;--ink:#f3f1ea;--muted:#aebccb;--accent:#6cb6ff;--teal:#74d3c3;--gold:#f4be63;--line:#344656;--panel:#162230}
+body{margin:0;background:#101923;color:var(--ink);font-family:Arial,sans-serif;font-size:16px;line-height:1.46}
+main{width:640px;margin:auto} article{background:var(--bg);margin-bottom:24px;padding:28px}
+h1,h2,h3,p,figure{margin:0} h1,h2,h3,.eyebrow,.num,.stats b,.tag,.step-n{font-family:Bahnschrift,Arial,sans-serif}
+h1{font-size:56px;line-height:1.02;letter-spacing:-1.5px;font-weight:700} h1 span{color:var(--accent)}
+h2{font-size:23px;line-height:1.1;font-weight:700;letter-spacing:.3px} h3{font-size:20px;line-height:1.15;font-weight:700;margin-bottom:6px}
+.eyebrow{font-size:12px;letter-spacing:2px;font-weight:600;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.hero{padding:6px 0 20px;border-bottom:1px solid var(--line)} .hero p{font-size:18px;margin-top:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);padding:16px 0 20px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.stats div{padding-left:16px;border-left:1px solid var(--line)} .stats div:first-child{padding-left:0;border:0}
+.stats b{display:block;color:var(--accent);font-size:30px;font-weight:700;line-height:1.1}.stats span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.section-title{display:flex;align-items:center;gap:14px;margin:0 0 18px}.section-title:after{content:'';height:1px;background:var(--line);flex:1}
+.num{font-size:13px;color:var(--accent)}
+.shot{border:1px solid #405363;background:var(--panel);overflow:hidden}
+.shot img{display:block;width:100%;height:auto}
+.caption{font-size:12.5px;color:var(--muted);line-height:1.45;margin:8px 0 20px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.flow div{background:var(--panel);border-top:2px solid var(--accent);padding:12px 12px 14px}
+.flow b{display:block;font:700 15px Bahnschrift,Arial,sans-serif;letter-spacing:.6px;margin-bottom:5px}
+.flow p{font-size:13.5px;color:#cfdae3;line-height:1.42}
+.lead{color:var(--muted);margin:-4px 0 18px;font-size:15.5px}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-bottom:20px}
+.step img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid #405363;image-rendering:auto}
+.step figcaption{font-size:13.5px;color:#d6e0e8;margin-top:8px;line-height:1.4}
+.step-n{display:inline-block;color:var(--bg);background:var(--accent);font-weight:700;font-size:13px;padding:1px 7px;margin-right:6px}
+.notice{padding:12px 14px;background:var(--panel);border-left:3px solid var(--accent);font-size:14px;color:#cbd6df}
+.notice strong{color:var(--ink)}
+.details{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 0}.details span{border:1px solid #476071;padding:4px 8px;font-size:12px;color:var(--teal)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:4px}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.8px;font-weight:600;text-transform:uppercase;margin:0 0 10px;padding-bottom:5px;border-bottom:2px solid var(--accent);color:var(--accent)}
+.tag.teal{color:var(--teal);border-color:var(--teal)}
+.copy p{margin-bottom:10px;color:#d3dde4;font-size:14.5px}.copy p strong{color:var(--ink)}
+.mini{border:1px solid #405363;margin-top:4px}.mini img{display:block;width:100%;height:auto}
+.foot{display:flex;justify-content:space-between;gap:20px;color:#8ea3b4;font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:20px}
+.ba{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px;margin-bottom:6px}
+.ba figure img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid #405363}
+.ba figcaption{font:600 13px Bahnschrift,Arial,sans-serif;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:6px;text-align:center}
+.ba .to{color:var(--accent);font:700 26px Arial,sans-serif;text-align:center;margin-bottom:22px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.grid3 .step img{aspect-ratio:1/1}
+.sub{font:700 17px Bahnschrift,Arial,sans-serif;letter-spacing:.6px;color:var(--ink);margin:4px 0 12px;text-transform:uppercase}
+.quote{font-size:14.5px;color:#d6e0e8;margin:2px 0 18px}.quote b{color:var(--ink)}
+</style>
+<main>
+
+<article id="describe">
+  <header class="hero"><div class="eyebrow">A RimWorld 1.6 mod</div><h1>MAPGEN <span>AI</span></h1><p>Describe your map. MapGen AI builds it.</p></header>
+  <div class="stats"><div><b>11</b><span>AI provider options</span></div><div><b>4</b><span>menu languages</span></div><div><b>0</b><span>AI calls for preference questions</span></div></div>
+  <div class="section-title"><span class="num">01</span><h2>DESCRIBE IT</h2></div>
+  <figure class="shot"><img src="assets/c1-ui-open.png" alt="The MapGen AI chat window open next to Map Preview on the world map"></figure>
+  <p class="caption">Select a tile on the world map and open <strong>✦ AI Map Gen</strong>. The chat opens next to Map Preview.</p>
+  <figure class="shot"><img src="assets/c1-chat.png" alt="A typed request and the list of changes the AI applied"></figure>
+  <p class="caption">Type what you want. The reply lists exactly what changed.</p>
+  <div class="ba">
+    <figure><img src="assets/c1-before.png" alt="Map Preview before the request"><figcaption>Before</figcaption></figure>
+    <div class="to">▶</div>
+    <figure><img src="assets/c1-after.png" alt="Map Preview after the request"><figcaption>After</figcaption></figure>
+  </div>
+  <p class="caption">Map Preview of the same tile, before and after that one request.</p>
+  <div class="flow">
+    <div><b>1 · TYPE</b><p>Describe the map in plain words, or press <strong>Quick suggestions</strong>.</p></div>
+    <div><b>2 · PREVIEW</b><p>The AI turns your words into map settings. Map Preview redraws the tile.</p></div>
+    <div><b>3 · GENERATE</b><p>Press <strong>Generate with these settings</strong>, then start or settle there.</p></div>
+  </div>
+  <div class="foot"><span>MapGen AI · Describe it</span><span>Actual in-game captures</span></div>
+</article>
+
+<article id="editing">
+  <div class="section-title"><span class="num">02</span><h2>KEEP EDITING</h2></div>
+  <p class="lead">Each request builds on the last one. Earlier changes stay.</p>
+  <div class="grid3">
+    <figure class="step"><img src="assets/c2-step1.png" alt="Step 1"><figcaption><span class="step-n">1</span>"Make a ring of mountains in the middle with a lake inside and one opening to the south."</figcaption></figure>
+    <figure class="step"><img src="assets/c2-step2.png" alt="Step 2"><figcaption><span class="step-n">2</span>"Add a small island in the middle of the lake."</figcaption></figure>
+    <figure class="step"><img src="assets/c2-step3.png" alt="Step 3"><figcaption><span class="step-n">3</span>"Move the island to the north side of the lake."</figcaption></figure>
+  </div>
+  <div class="sub">Change the geography</div>
+  <div class="ba">
+    <figure><img src="assets/c2-coast-before.png" alt="Coastal tile with the sea to the west"><figcaption>Before</figcaption></figure>
+    <div class="to">▶</div>
+    <figure><img src="assets/c2-coast-after.png" alt="The same tile with the coast turned to the north"><figcaption>After</figcaption></figure>
+  </div>
+  <p class="quote"><b>"Put the coast on the north side."</b> World rivers and coasts stay connected. You can turn them, but not delete them.</p>
+  <div class="notice"><strong>Undo</strong> steps back one request. <strong>Reset</strong> returns the tile to its original map.</div>
+  <div class="details"><span>Exact or natural outlines</span><span>Partial fills</span><span>Ruins and ancient dangers</span><span>Roads with bridges</span><span>Presets</span></div>
+  <div class="foot"><span>MapGen AI · Keep editing</span><span>Map Preview from real sessions</span></div>
+</article>
+
+<article id="ideas">
+  <div class="section-title"><span class="num">03</span><h2>GET IDEAS</h2></div>
+  <figure class="shot"><img src="assets/c3-candidates.png" alt="Three suggested maps with Apply and Refine buttons"></figure>
+  <p class="caption"><strong>"Recommend a map."</strong> Up to three candidates, each drawn by Map Preview. Nothing changes on your map until you pick one.</p>
+  <div class="sub">Refine one before you pick</div>
+  <div class="ba">
+    <figure><img src="assets/c3-opt2-before.png" alt="Option 2 as suggested"><figcaption>Option 2</figcaption></figure>
+    <div class="to">▶</div>
+    <figure><img src="assets/c3-opt2-after.png" alt="Option 2 after refining"><figcaption>Refined</figcaption></figure>
+  </div>
+  <p class="quote"><b>"Make option 2 more natural."</b> Only option 2 is redrawn. The other candidates stay as they were.</p>
+  <div class="tag teal">Find my preferences · no AI calls</div>
+  <figure class="shot"><img src="assets/c3-guide.png" alt="The first preference question"></figure>
+  <p class="caption">Not sure what you want? Answer a few prepared questions about space, defense, scenery, mountains, and water, then ask for ideas that fit.</p>
+  <div class="foot"><span>MapGen AI · Get ideas</span><span>Actual in-game captures</span></div>
+</article>
+
+<article id="realmap">
+  <div class="section-title"><span class="num">04</span><h2>PLAY IT</h2></div>
+  <figure class="shot"><img src="assets/c4-map.png" alt="The real generated map in game"></figure>
+  <p class="caption">The real map generated from the same chat session, after a few more edits: a straightened river and hot springs.</p>
+  <div class="notice">Map Preview shows terrain and layout. Plants, buildings, and loot appear when the real map is generated.</div>
+  <div class="foot"><span>MapGen AI · Play it</span><span>Actual in-game capture</span></div>
+</article>
+
+</main></html>

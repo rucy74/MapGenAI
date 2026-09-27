@@ -44,12 +44,13 @@ def promote(dev_package: Path, output: Path):
     metadata.find('name').text = 'MapGen AI'
     metadata.find('packageId').text = 'Choco.MapGenAI'
     metadata.find('description').text = (
-        'Describe and refine RimWorld maps in natural language, with live Map Preview.\n'
-        'Includes cumulative edits, natural outlines, partial soil/material fills, positioned ruins, '
-        'hot springs, local roads with automatic wooden bridges, and selectable recommendation previews.\n'
-        'Recommendations can be dismissed, refreshed or collapsed to leave more room for chat.\n'
-        'Current build targets RimWorld 1.6. Image input is temporarily disabled.\n'
-        'Configure your provider and API key in Mod Settings. Enable MapGen AI without MapGen AI [DEV].'
+        'Describe your map in plain words and MapGen AI builds it, with live Map Preview.\n'
+        'Edits keep what you built: add, move, or resize parts of the map, and undo one request at a time.\n'
+        'Get up to three suggested maps drawn by Map Preview, or answer a few preference questions first (no AI calls).\n'
+        'Also: exact or natural shapes, partial fills, positioned ruins and ancient dangers, '
+        'local roads with automatic wooden bridges, and natural lakes.\n'
+        'RimWorld 1.6. Requires Harmony and Map Preview. Set your AI provider and API key in Mod Settings.\n'
+        'Image input is temporarily disabled.'
     )
     versions = metadata.find('supportedVersions')
     versions.clear(); ET.SubElement(versions, 'li').text = '1.6'

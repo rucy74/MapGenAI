@@ -1,0 +1,81 @@
+{
+  "html": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\workshop\\2026-09-27\\cover\\cover.html",
+  "chrome": "C:/Users/choco/AppData/Local/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-win64/chrome-headless-shell.exe",
+  "cssWidth": 640,
+  "scale": 1.5,
+  "overflowSelfTest": true,
+  "images": [
+    {
+      "src": "assets/a-map.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/b-1.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/b-2.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/b-3.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "assets/c-bg.png",
+      "ok": true,
+      "w": 1440,
+      "h": 810
+    }
+  ],
+  "results": [
+    {
+      "id": "coverA",
+      "file": "cover\\out\\coverA.png",
+      "cssBox": {
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 360
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 540,
+      "overflow": []
+    },
+    {
+      "id": "coverB",
+      "file": "cover\\out\\coverB.png",
+      "cssBox": {
+        "x": 0,
+        "y": 380,
+        "w": 640,
+        "h": 360
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 540,
+      "overflow": []
+    },
+    {
+      "id": "coverC",
+      "file": "cover\\out\\coverC.png",
+      "cssBox": {
+        "x": 0,
+        "y": 760,
+        "w": 640,
+        "h": 360
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 540,
+      "overflow": []
+    }
+  ],
+  "created": "2026-09-27T01:20:57.104Z"
+}
