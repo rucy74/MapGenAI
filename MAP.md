@@ -75,6 +75,8 @@
 
 ## 강·해안 온천
 
+프롬프트 비용 압축(2026-09-27, DEV): `TextRegionPrompt`/`RoadPrompt`/`RecommendationPlan.Rules`의 기술 설명만 압축. 카탈로그/history/현재 상태/생성 로직은 유지. 측정·초안 실패·한계는 [비용 검증 보고서](docs/analysis/2026-09-27-prompt-compaction/report.md) 참조.
+
 - `FeaturePolicy.PostTerrainOrder`, `Patches/HotSpringWaterPatch.cs`: 명시적으로 추가한 정확한 native HotSprings만 강/해안 자연발생 제한에서 제외한다. 해당 타일의 PostTerrain 실행 목록 복사본에서 온천을 마지막으로 이동하고, 호출 전 기존 물 지형을 finalizer에서 복원한다. native River가 기존 온천수를 건너뛰어 끊기는 것을 방지한다. 원본 목록/공유 genOrder/Init/고도 단계/다른 worker 순서는 보존한다.
 - `tools/runtime-probe/HotSpringAudit.cs`, `tools/evaluate_hot_springs_water.py`: 이전 거부 재현·실제 물 복원·연결·Preview와 기존 지형/도로 이미지 비교. [검증 및 한계](docs/analysis/2026-09-20-hot-springs-water/report.md).
 

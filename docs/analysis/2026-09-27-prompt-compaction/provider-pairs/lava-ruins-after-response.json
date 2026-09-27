@@ -1,0 +1,1 @@
+{"action":"generate","description":"해자의 물을 깊은 용암으로 변경하고, 섬 내부 폐허의 개수를 기존 크기(9x7) 그대로 3개로 늘렸습니다.","params":{"shape_ops":[{"op":"update","id":"moat","changes":{"fill":"LavaDeep"}}],"structure_ops":[{"op":"update","id":"ruins","changes":{"count":3}}]}}

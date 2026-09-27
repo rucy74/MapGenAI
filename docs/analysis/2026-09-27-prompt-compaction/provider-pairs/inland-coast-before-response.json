@@ -1,0 +1,1 @@
+{"action":"ask","message":"An ocean coast cannot be added to this tile because it is an inland location without an adjacent world ocean or lake shore. The game's world geography rules require the world map tile itself to be coastal to generate a true coast feature."}

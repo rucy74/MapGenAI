@@ -1,0 +1,463 @@
+{
+  "model": "gemini-3.8-flash",
+  "measured": "Provider usageMetadata, not local token estimates",
+  "rates": {
+    "inputUSDPerMillion": 0.75,
+    "outputAndThinkingUSDPerMillion": 3.75,
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
+    "checked": "2026-09-27",
+    "note": "Standard rates through 2026-12-31; excludes caching, taxes and FX"
+  },
+  "finalRuleBlocksMatchRuntime": true,
+  "paired": {
+    "ko": {
+      "cases": 9,
+      "before": {
+        "inputTokens": 157815,
+        "outputTokens": 1857,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.125325
+      },
+      "after": {
+        "inputTokens": 130896,
+        "outputTokens": 2473,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.10744575
+      },
+      "inputSavedPercent": 17.06,
+      "estimatedCostSavedPercent": 14.27
+    },
+    "en": {
+      "cases": 7,
+      "before": {
+        "inputTokens": 99566,
+        "outputTokens": 1214,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.079227
+      },
+      "after": {
+        "inputTokens": 85825,
+        "outputTokens": 1769,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.0710025
+      },
+      "inputSavedPercent": 13.8,
+      "estimatedCostSavedPercent": 10.38
+    },
+    "all": {
+      "cases": 16,
+      "before": {
+        "inputTokens": 257381,
+        "outputTokens": 3071,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.204552
+      },
+      "after": {
+        "inputTokens": 216721,
+        "outputTokens": 4242,
+        "thinkingTokens": 0,
+        "estimatedUSD": 0.17844825
+      },
+      "inputSavedPercent": 15.8,
+      "estimatedCostSavedPercent": 12.76
+    }
+  },
+  "finalChecks": {
+    "edits": "10/10",
+    "recommendations": "6/6"
+  },
+  "totalLiveCalls": 46,
+  "totalBenchmarkUsage": {
+    "inputTokens": 669015,
+    "outputTokens": 9507,
+    "thinkingTokens": 0,
+    "estimatedUSD": 0.5374125
+  },
+  "pairs": [
+    {
+      "case": "donut",
+      "language": "ko",
+      "before": {
+        "id": "donut-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17420,
+        "outputTokens": 150,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "donut-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14429,
+        "outputTokens": 146,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "coverage70",
+      "language": "ko",
+      "before": {
+        "id": "coverage70-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17698,
+        "outputTokens": 80,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "coverage70-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14707,
+        "outputTokens": 79,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "coverage50",
+      "language": "ko",
+      "before": {
+        "id": "coverage50-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17681,
+        "outputTokens": 54,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "coverage50-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14690,
+        "outputTokens": 51,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "lava-ruins",
+      "language": "ko",
+      "before": {
+        "id": "lava-ruins-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17689,
+        "outputTokens": 78,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "lava-ruins-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14698,
+        "outputTokens": 78,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "cross-ko",
+      "language": "ko",
+      "before": {
+        "id": "cross-ko-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17646,
+        "outputTokens": 91,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "cross-ko-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14655,
+        "outputTokens": 93,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "cross-en",
+      "language": "en",
+      "before": {
+        "id": "cross-en-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14235,
+        "outputTokens": 85,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "cross-en-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 12272,
+        "outputTokens": 85,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "spring",
+      "language": "ko",
+      "before": {
+        "id": "spring-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17424,
+        "outputTokens": 24,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "spring-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14433,
+        "outputTokens": 27,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "move-en",
+      "language": "en",
+      "before": {
+        "id": "move-en-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 13931,
+        "outputTokens": 52,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "move-en-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 11968,
+        "outputTokens": 51,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "inland-coast",
+      "language": "en",
+      "before": {
+        "id": "inland-coast-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14033,
+        "outputTokens": 55,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "inland-coast-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 12070,
+        "outputTokens": 39,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "candidate",
+      "language": "en",
+      "before": {
+        "id": "candidate-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 15304,
+        "outputTokens": 34,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "candidate-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 13341,
+        "outputTokens": 34,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-ko-1",
+      "language": "ko",
+      "before": {
+        "id": "recommend-ko-1-before",
+        "ok": false,
+        "language": true,
+        "error": "Expected actual landscape geometry",
+        "inputTokens": 17419,
+        "outputTokens": 280,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-ko-1-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14428,
+        "outputTokens": 717,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-en-1",
+      "language": "en",
+      "before": {
+        "id": "recommend-en-1-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14021,
+        "outputTokens": 465,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-en-1-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 12058,
+        "outputTokens": 535,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-ko-2",
+      "language": "ko",
+      "before": {
+        "id": "recommend-ko-2-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17419,
+        "outputTokens": 488,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-ko-2-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14428,
+        "outputTokens": 570,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-en-2",
+      "language": "en",
+      "before": {
+        "id": "recommend-en-2-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14021,
+        "outputTokens": 410,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-en-2-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 12058,
+        "outputTokens": 501,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-ko-3",
+      "language": "ko",
+      "before": {
+        "id": "recommend-ko-3-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 17419,
+        "outputTokens": 612,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-ko-3-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14428,
+        "outputTokens": 712,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    },
+    {
+      "case": "recommend-en-3",
+      "language": "en",
+      "before": {
+        "id": "recommend-en-3-before",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 14021,
+        "outputTokens": 113,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      },
+      "after": {
+        "id": "recommend-en-3-after",
+        "ok": true,
+        "language": true,
+        "error": null,
+        "inputTokens": 12058,
+        "outputTokens": 524,
+        "thinkingTokens": 0,
+        "model": "gemini-3.8-flash"
+      }
+    }
+  ],
+  "limitations": "Small controlled sample; same histories/states, no repair calls. Native world contexts differ between KO/EN captures but are identical within each pair. Does not prove visual quality, feature compatibility with all mods, or every conversation."
+}

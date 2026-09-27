@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 내부의 기름진 토양 비율을 50%로 변경합니다.","params":{"shape_ops":[{"op":"update","id":"inner_soil","changes":{"coverage":0.5}}]}}

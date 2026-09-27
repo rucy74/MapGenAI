@@ -1,0 +1,1 @@
+{"action":"generate","description":"Move the bottom-right lake to position [0.7, 0.3].","params":{"shape_ops":[{"op":"move","id":"lake","position":[0.7,0.3]}]}}

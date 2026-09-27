@@ -1,0 +1,1 @@
+{"action":"generate","description":"해자의 물을 깊은 용암으로 변경하고, 중앙 섬의 폐허 개수를 3개로 늘립니다.","params":{"shape_ops":[{"op":"update","id":"moat","changes":{"fill":"LavaDeep"}}],"structure_ops":[{"op":"update","id":"ruins","changes":{"count":3}}]}}

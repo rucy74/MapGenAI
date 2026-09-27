@@ -1,0 +1,1 @@
+{"action":"generate","description":"도넛 내부 기름진 토양 범위를 절반(50%)으로 수정합니다.","params":{"shape_ops":[{"op":"update","id":"inner_soil","changes":{"coverage":0.5}}]}}

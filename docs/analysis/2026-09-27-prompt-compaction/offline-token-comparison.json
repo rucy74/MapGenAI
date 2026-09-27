@@ -1,0 +1,39 @@
+{
+  "tokenizer": "o200k_base (proxy, not Gemini billing)",
+  "method": "Identical fresh captured tile/catalog/current-state context, three rule blocks replaced",
+  "detector_negative_control": true,
+  "rows": [
+    {
+      "language": "ko",
+      "kind": "system",
+      "before": 17124,
+      "after": 13956,
+      "saved": 3168,
+      "reduction_percent": 18.5
+    },
+    {
+      "language": "ko",
+      "kind": "edit",
+      "before": 17024,
+      "after": 13856,
+      "saved": 3168,
+      "reduction_percent": 18.61
+    },
+    {
+      "language": "en",
+      "kind": "system",
+      "before": 13075,
+      "after": 11158,
+      "saved": 1917,
+      "reduction_percent": 14.66
+    },
+    {
+      "language": "en",
+      "kind": "edit",
+      "before": 12899,
+      "after": 10982,
+      "saved": 1917,
+      "reduction_percent": 14.86
+    }
+  ]
+}
