@@ -1,0 +1,80 @@
+{
+  "installedAt": "2026-09-27T16:56:48.3597287+09:00",
+  "source": "F:/Projects/Rimworld/active/mapgen_ai/docs/workshop/2026-09-27/upload-v6/2-cover/Preview.png",
+  "sha256": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46",
+  "backup": "F:/Projects/Rimworld/work/mapgenai-packages/2026-09-27-cover-v5/backup-20260927-165648",
+  "targets": [
+    {
+      "name": "source-dev",
+      "path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\About\\Preview.png",
+      "beforeHash": "30FA0E18E8DDE9496E1515868A67F249A8528D58CE6C2B3107DE756C51462452",
+      "expectedHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46",
+      "afterHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46"
+    },
+    {
+      "name": "source-dist",
+      "path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dist\\About\\Preview.png",
+      "beforeHash": "17F53CC684716C8950CBC93B4A7B7FE2B61713E814AC4B5579E2C32DFEB36822",
+      "expectedHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46",
+      "afterHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46"
+    },
+    {
+      "name": "installed-release",
+      "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\About\\Preview.png",
+      "beforeHash": "17F53CC684716C8950CBC93B4A7B7FE2B61713E814AC4B5579E2C32DFEB36822",
+      "expectedHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46",
+      "afterHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46"
+    },
+    {
+      "name": "installed-dev",
+      "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\About\\Preview.png",
+      "beforeHash": null,
+      "expectedHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46",
+      "afterHash": "3ED88EF35150D59B0EAF1DE7F8612381538CEA0DB7CEC3F785F2FFB6F0D9AF46"
+    }
+  ],
+  "protectedFiles": [
+    {
+      "Path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll",
+      "Hash": "45646072C2E758AD909ECAF9679C5586D3977C900E41AEC97B24CD607E9ECE8C"
+    },
+    {
+      "Path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\About\\About.xml",
+      "Hash": "FD7D56B4FBA9765110040CDC93EA927132BE5C8563C367C57208CCB6DDFFF40D"
+    },
+    {
+      "Path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dist\\Assemblies\\MapGenAI.dll",
+      "Hash": "0B582DA94E1E2420E6AEAB4932A5C3BEC171E48A5E6BCBE56D3785374CFBBC69"
+    },
+    {
+      "Path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dist\\About\\About.xml",
+      "Hash": "9358F3A7C9EA1D7645FE62F20E849C0D93D63CB891D6245531F1631C85260D20"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\Assemblies\\MapGenAI.dll",
+      "Hash": "0B582DA94E1E2420E6AEAB4932A5C3BEC171E48A5E6BCBE56D3785374CFBBC69"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\About\\About.xml",
+      "Hash": "9358F3A7C9EA1D7645FE62F20E849C0D93D63CB891D6245531F1631C85260D20"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\Assemblies\\MapGenAI.dll",
+      "Hash": "45646072C2E758AD909ECAF9679C5586D3977C900E41AEC97B24CD607E9ECE8C"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\About\\About.xml",
+      "Hash": "A4588228CDCAD403A1E57B7000C619185E4B8EC831462B2F802FA4E4D4745460"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\About\\PublishedFileId.txt",
+      "Hash": "5D66709395C3BAC1BCE354A0D44AEEA3FA94BFB91D8104FC35D3B052F351A75B"
+    },
+    {
+      "Path": "G:\\SteamLibrary\\steamapps\\workshop\\content\\294100\\3685385453\\About\\Preview.png",
+      "Hash": "30FA0E18E8DDE9496E1515868A67F249A8528D58CE6C2B3107DE756C51462452"
+    }
+  ],
+  "scope": "Cover PNG only. No code, DLL, About.xml, config or Workshop publication changes.",
+  "validation": "All four cover hashes match the accepted source; protected file hashes unchanged. Running-game UI refresh not tested."
+}
