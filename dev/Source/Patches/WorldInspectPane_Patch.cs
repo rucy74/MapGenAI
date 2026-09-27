@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using LudeonTK;
@@ -210,10 +211,11 @@ namespace MapGenAI.Patches
                     if (toolbarRect != null)
                     {
                         var tr = toolbarRect.Value;
-                        var btnRect = new Rect(tr.xMax + Gap, tr.y + (tr.height - BtnH) / 2f, BtnW, BtnH);
-                        if (btnRect.xMax > Verse.UI.screenWidth - 5f)
-                            btnRect = new Rect(tr.x, tr.yMax + Gap, BtnW, BtnH);
-                        DrawAIButton(btnRect);
+                        // Drawn under every window: pick a spot no window covers (Map Preview's preview sits right below its toolbar).
+                        var open = Find.WindowStack.Windows.Select(w => new EntryButtonPlacement.Box(w.windowRect.x, w.windowRect.y, w.windowRect.width, w.windowRect.height));
+                        var spot = EntryButtonPlacement.Choose(new EntryButtonPlacement.Box(tr.x, tr.y, tr.width, tr.height),
+                            Verse.UI.screenWidth, Verse.UI.screenHeight, open, BtnW, BtnH, Gap);
+                        DrawAIButton(new Rect(spot.X, spot.Y, spot.W, spot.H));
                     }
                 }
             }

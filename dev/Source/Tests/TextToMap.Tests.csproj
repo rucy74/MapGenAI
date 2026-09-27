@@ -73,6 +73,8 @@
     <Compile Include="../MapGen/FeaturePolicy.cs" Link="FeaturePolicy.cs" />
     <Compile Include="../MapGen/WorldTileEditor.cs" Link="WorldTileEditor.cs" />
     <Compile Include="../MapGen/FeatureInitStream.cs" Link="FeatureInitStream.cs" />
+    <Compile Include="../Core/PatchPlan.cs" Link="PatchPlan.cs" />
+    <Compile Include="../Core/EntryButtonPlacement.cs" Link="EntryButtonPlacement.cs" />
     <Compile Include="../MapGen/MapStateCodec.cs" Link="MapStateCodec.cs" />
     <Compile Include="../LLM/ProviderResponse.cs" Link="ProviderResponse.cs" />
     <Compile Include="../LLM/RequestGate.cs" Link="RequestGate.cs" />
