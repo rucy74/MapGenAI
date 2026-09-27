@@ -46,7 +46,8 @@
     [string]$ModelConfig='',
     [string]$Language='',
     [string]$ImageInputs='',
-    [string]$ImageStates=''
+    [string]$ImageStates='',
+    [string]$RiverStability=''
 )
 $ErrorActionPreference='Stop'
 $probeStamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
@@ -140,6 +141,7 @@ if($DeltaDiagnostics){$arguments+='-mapgenAIDeltaDiagnostics=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}
+if($RiverStability){$arguments+=('-mapgenAIRiverStability="'+[IO.Path]::GetFullPath($RiverStability)+'"')}
 $process=Start-Process -FilePath $gameExe -ArgumentList $arguments -WindowStyle Hidden -PassThru
 $manifest=@{pid=$process.Id;profile=$probeProfile;mod=$probeModPath;output=$probeOutput;sourceDllSha256=(Get-FileHash -LiteralPath $mainDll -Algorithm SHA256).Hash;probeDllSha256=(Get-FileHash -LiteralPath $probeDll -Algorithm SHA256).Hash;created=(Get-Date).ToString('o')}
 $manifest|ConvertTo-Json | Set-Content -LiteralPath (Join-Path $probeOutput 'launch.json') -Encoding utf8

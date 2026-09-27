@@ -1,0 +1,330 @@
+{
+ "fixed": "fixed-r6",
+ "control": "control-r4",
+ "checks": [
+  "PASS fixed run loaded the current build 0b582da94e",
+  "PASS control run loaded the release candidate 4908863336",
+  "PASS fixed-r6: run completed on the showcase world",
+  "PASS fixed-r6: tile 281 is the showcase river tile (TemperateForest, River only)",
+  "PASS fixed-r6: tile 83 is the showcase coast tile",
+  "PASS fixed-r6: both native Init call sites and the post-terrain loop routed; isolated post-terrain steps 24",
+  "PASS fixed-r6: 07 vs 08 (hot springs added): same centre, course and river water cells in Map Preview and real map",
+  "PASS fixed-r6: the added hot springs were generated (preview and map)",
+  "PASS fixed-r6: the added feature took the isolated path in both generators",
+  "PASS fixed-r6: a state without added features takes the unchanged path",
+  "PASS fixed-r6: 07 + Caves (dry feature added): same centre and course (preview and map)",
+  "PASS fixed-r6: 07 + Lake: same centre and course (the added lake does not pull the river)",
+  "PASS fixed-r6: 05 (default river position) + hot springs: x and z of the centre, course and water kept",
+  "PASS fixed-r6: 7 more river tiles, 14 pure additions: no river moved",
+  "PASS fixed-r6: 3 ocean shore tiles, 3 pure additions: no ocean cell moved",
+  "PASS fixed-r6: river_position left still pins x = 50",
+  "PASS fixed-r6: straight_river still straight (rms 1.73 vs 6.49 without it)",
+  "PASS fixed-r6: river_direction north still turns the river (axis 90 deg)",
+  "PASS fixed-r6: no feature-init routing warning in Player.log",
+  "PASS fixed-r6: no exception or MapGen AI failure line in Player.log",
+  "PASS control-r4: run completed on the showcase world",
+  "PASS control-r4: tile 281 is the showcase river tile (TemperateForest, River only)",
+  "PASS control-r4: tile 83 is the showcase coast tile",
+  "PASS control-r4: release candidate has no routing (control)",
+  "PASS control-r4 (positive control): reproduces showcase-01 step 08 (centre 50,140; 1553 river and 843 hot spring cells)",
+  "PASS control-r4 (positive control): the same comparisons flag the moved river on 281, 13 river additions and 3 shore additions",
+  "PASS control-r4: river_position left still pins x = 50",
+  "PASS control-r4: straight_river still straight (rms 1.73 vs 6.49 without it)",
+  "PASS control-r4: river_direction north still turns the river (axis 90 deg)",
+  "PASS control-r4: no feature-init routing warning in Player.log",
+  "PASS control-r4: no exception or MapGen AI failure line in Player.log",
+  "PASS 07 + RiverIsland (replaces River): centre [50, 101] in both builds, as without the island",
+  "FAIL tiles without MapGen AI state: whole-map terrain identical across builds (2/3)",
+  "FAIL states without added features: centre, course, river and shore identical across builds (9/12 previews, 2/2 maps)"
+ ],
+ "facts": {
+  "fixed-r6": {
+   "A-07 / A-08 centre (preview, map)": [
+    [
+     50,
+     101
+    ],
+    [
+     50,
+     101
+    ],
+    [
+     50,
+     101
+    ],
+    [
+     50,
+     101
+    ]
+   ],
+   "A-07 / A-08 river water cells (preview, map)": [
+    1200,
+    1200,
+    1200,
+    1200
+   ],
+   "A-08 hot spring cells (preview, map)": [
+    480,
+    480
+   ],
+   "A-07 map cells covered by temporary terrain (ice)": 759,
+   "dry feature / centre / course kept (preview, map) / water cells": [
+    "Caves",
+    [
+     50,
+     101
+    ],
+    true,
+    true,
+    1200
+   ],
+   "lake feature / centre / course kept / water cells": [
+    "Lake",
+    [
+     50,
+     101
+    ],
+    true,
+    797
+   ],
+   "island: apply error / centre / course kept": [
+    null,
+    [
+     50,
+     101
+    ],
+    false
+   ],
+   "A-05 / with springs centre": [
+    [
+     174,
+     101
+    ],
+    [
+     174,
+     101
+    ]
+   ],
+   "river tiles, pure additions, moved": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4",
+     "R5",
+     "R6",
+     "R7"
+    ],
+    14,
+    []
+   ],
+   "river water cells changed with course kept": [
+    [
+     "R3-springs",
+     1946,
+     1992
+    ],
+    [
+     "R7-springs",
+     1682,
+     1944
+    ]
+   ],
+   "coast tiles, pure additions, moved": [
+    [
+     "B",
+     "C1",
+     "C2"
+    ],
+    3,
+    []
+   ],
+   "replacements (not pure additions)": [],
+   "isolated inits A-08 (preview, map)": [
+    1,
+    1
+   ],
+   "07 axis deg / rms": [
+    15.1,
+    1.73
+   ],
+   "05 axis deg / rms": [
+    10.8,
+    6.49
+   ],
+   "north axis deg / rms": [
+    90.2,
+    1.62
+   ],
+   "exception or MapGenAI failure lines": []
+  },
+  "control-r4": {
+   "A-07 / A-08 centre (preview, map)": [
+    [
+     50,
+     101
+    ],
+    [
+     50,
+     140
+    ],
+    [
+     50,
+     101
+    ],
+    [
+     50,
+     140
+    ]
+   ],
+   "A-07 / A-08 river water cells (preview, map)": [
+    1200,
+    1553,
+    1200,
+    1553
+   ],
+   "A-08 hot spring cells (preview, map)": [
+    843,
+    843
+   ],
+   "A-07 map cells covered by temporary terrain (ice)": 3118,
+   "dry feature / centre / course kept (preview, map) / water cells": [
+    "Caves",
+    [
+     50,
+     131
+    ],
+    false,
+    false,
+    1390
+   ],
+   "lake feature / centre / course kept / water cells": [
+    "Lake",
+    [
+     110,
+     97
+    ],
+    false,
+    876
+   ],
+   "island: apply error / centre / course kept": [
+    null,
+    [
+     50,
+     101
+    ],
+    false
+   ],
+   "A-05 / with springs centre": [
+    [
+     174,
+     101
+    ],
+    [
+     131,
+     140
+    ]
+   ],
+   "river tiles, pure additions, moved": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4",
+     "R5",
+     "R6",
+     "R7"
+    ],
+    13,
+    [
+     "R1-springs",
+     "R1-dry-Caves",
+     "R2-springs",
+     "R2-dry-Caves",
+     "R3-springs",
+     "R3-dry-Caves",
+     "R4-springs",
+     "R4-dry-Caves",
+     "R5-dry-Caves",
+     "R6-springs",
+     "R6-dry-Caves",
+     "R7-springs",
+     "R7-dry-Caves"
+    ]
+   ],
+   "river water cells changed with course kept": [],
+   "coast tiles, pure additions, moved": [
+    [
+     "B",
+     "C1",
+     "C2"
+    ],
+    3,
+    [
+     "B-springs",
+     "C1-springs",
+     "C2-springs"
+    ]
+   ],
+   "replacements (not pure additions)": [
+    {
+     "id": "R5-springs",
+     "features": [
+      [
+       "Headwater"
+      ],
+      [
+       "HotSprings",
+       "River"
+      ]
+     ],
+     "centre": [
+      [
+       125,
+       125
+      ],
+      [
+       124,
+       119
+      ]
+     ],
+     "sameCourse": false
+    }
+   ],
+   "isolated inits A-08 (preview, map)": [
+    0,
+    0
+   ],
+   "07 axis deg / rms": [
+    15.1,
+    1.73
+   ],
+   "05 axis deg / rms": [
+    10.8,
+    6.49
+   ],
+   "north axis deg / rms": [
+    90.2,
+    1.62
+   ],
+   "exception or MapGenAI failure lines": []
+  },
+  "cross-build": {
+   "stateless tiles": [
+    "N1",
+    "N2",
+    "N3"
+   ],
+   "identical": [
+    "N2",
+    "N3"
+   ],
+   "original states compared": 12,
+   "identical previews": 9,
+   "identical maps": [
+    "A-07",
+    "B-base"
+   ]
+  }
+ }
+}

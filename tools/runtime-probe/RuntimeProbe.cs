@@ -48,6 +48,7 @@ namespace MapGenAI.RuntimeProbe
                 {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 LandformSuiteProbe.Configure();
                 CandidatePreviewProbe.Configure();
+                RiverStabilityProbe.Configure();
                 ChatMemoryProbe.Configure();
                 SaveLoadProbe();
                 var catalog = DefDatabase<TileMutatorDef>.AllDefsListForReading.Select(d => new Dictionary<string,object> {
@@ -124,6 +125,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIRiverStability",out _))
+                {RiverStabilityProbe.Run(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIChatMemory",out _))
                 {ChatMemoryProbe.Run(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAICandidatePreviews",out var candidateFixtures))
@@ -339,6 +342,7 @@ namespace MapGenAI.RuntimeProbe
             ReadableChoicesProbe.Tick();
             CoverageProbe.Tick();
             LandformSuiteProbe.Tick();
+            RiverStabilityProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
             if(frames==20)ScreenCapture.CaptureScreenshot(Path.Combine(output,ImageFeatureGate.Enabled?"image-dialog.png":"text-dialog.png"));
