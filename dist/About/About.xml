@@ -3,11 +3,12 @@
     <packageId>Choco.MapGenAI</packageId>
     <name>MapGen AI</name>
     <author>Choco</author>
-    <supportedVersions><li>1.6</li></supportedVersions><description>Describe and refine RimWorld maps in natural language, with live Map Preview.
-Includes cumulative edits, natural outlines, partial soil/material fills, positioned ruins, hot springs, local roads with automatic wooden bridges, and selectable recommendation previews.
-Recommendations can be dismissed, refreshed or collapsed to leave more room for chat.
-Current build targets RimWorld 1.6. Image input is temporarily disabled.
-Configure your provider and API key in Mod Settings. Enable MapGen AI without MapGen AI [DEV].</description>
+    <supportedVersions><li>1.6</li></supportedVersions><description>Describe your map in plain words and MapGen AI builds it, with live Map Preview.
+Edits keep what you built: add, move, or resize parts of the map, and undo one request at a time.
+Get up to three suggested maps drawn by Map Preview, or answer a few preference questions first (no AI calls).
+Also: exact or natural shapes, partial fills, positioned ruins and ancient dangers, local roads with automatic wooden bridges, and natural lakes.
+RimWorld 1.6. Requires Harmony and Map Preview. Set your AI provider and API key in Mod Settings.
+Image input is temporarily disabled.</description>
     <modDependencies>
         <li>
             <packageId>brrainz.harmony</packageId>
