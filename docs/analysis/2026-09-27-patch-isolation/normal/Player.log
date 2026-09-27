@@ -1,0 +1,426 @@
+Mono path[0] = 'C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/Managed'
+Mono config path = 'C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/MonoBleedingEdge/etc'
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.35f1 (011206c7a712)
+[Subsystems] Discovering subsystems at path C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Ti SUPER (ID=0x2705)
+    Vendor:   NVIDIA
+    VRAM:     16061 MB
+    Driver:   32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.166 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.593700 ms
+Command line arguments: -screen-fullscreen 0 -screen-width 1920 -screen-height 1080 -savedatafolder=C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260927-235124-592 -mapgenAIProbe=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-27-patch-isolation\normal -logFile F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-27-patch-isolation\normal\Player.log -mapgenAIProbeRender=true -mapgenAIModelConfig=F:\Projects\Rimworld\active\mapgen_ai\docs\dev_config.json -mapgenAIShowcase=F:\Projects\Rimworld\active\mapgen_ai\docs\analysis\2026-09-27-patch-isolation\entry-audit-scenario.json
+RimWorld 1.6.4871 rev591
+Save data folder overridden to C:\Users\choco\AppData\Local\mapgen-ai-probe\profile-20260927-235124-592
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-natural-quiet-s4-r7) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-natural-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-natural-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-repeat-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s3-r1) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s3-r2) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-none-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-new-quiet-s4-r7) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-new-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-old-quiet-repeat-s4-r7) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-old-quiet-s4-r6) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-old-quiet-s4-r7) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-a-null-old-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-natural-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-none-s4-r3) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-b-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-c-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-c-natural-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-c-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-d-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-d-natural-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-d-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-protected-natural-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-protected-natural-s4-r5) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-protected-none-s4-r4) is not in valid format.
+Mod MapGenAI disposable landscape blend audit <packageId> (choco.mapgenai.landscapeblendprobe.blend-road-natural-s4-r5) is not in valid format.
+Mod Draconis Koelime Fix dependency (Draconis.Koelime) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Draconis Koelime Fix dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (vanillaexpanded.outposts) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (oskarpotocki.vanillafactionsexpanded.core) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod World Domination dependency (brrainz.harmony) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Paniel: The Hidden Protocol dependency (kalospacer.AhnDemi.PanieltheAutomata) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Yuran Furshaved Continue has a dependency (RooAndGloomy.YuranRaceMod) with empty display name.
+Mod Yuran Furshaved Continue dependency (RooAndGloomy.YuranRaceMod) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Roren Facial Animation dependency (Po210.RorenRaceModOfficial) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Ratkin Gene Expanded dependency (EoralMilk.PawnTextureOffsetAdjuster) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Mod Taste of Vanilla - The Alpha Mythology dependency (sarg.magicalmenagerie) needs to have <downloadUrl> and/or <steamWorkshopUrl> specified.
+Tried loading mod with the same packageId multiple times: Owlchemist.MidSaverSaver. Ignoring the duplicates.
+G:\SteamLibrary\steamapps\workshop\content\294100\2921585989
+G:\SteamLibrary\steamapps\workshop\content\294100\3261311100
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000001D3057E9A00.dll
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000001D30588E120.dll
+Fallback handler could not load library C:/Users/choco/Documents/Codex/2026-09-13/new-chat-2/work/mapgenai-headless-runtime/RimWorldWin64_Data/MonoBleedingEdge/data-000001D305F6B030.dll
+[MapGenAI] Game patches applied: 35/35 (entry button first).
+[TrueTerrainColors v1.12.26] Extracted true colors from 384 terrain defs in 0.13 seconds.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 5)
+[MapGenAI] Invalid saved image terrain was repaired; review before applying.
+[MapGenAI] Invalid saved image terrain was repaired; review before applying.
+Unloading 99 unused Assets to reduce memory usage. Loaded Objects now: 26487.
+Total: 198.695200 ms (FindLiveObjects: 1.580400 ms CreateObjectMapping: 0.424000 ms MarkObjects: 196.304300 ms  DeleteObjects: 0.386100 ms)
+
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Unloading 4 Unused Serialized files (Serialized files now loaded: 5)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.900400 ms
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 26698.
+Total: 235.213700 ms (FindLiveObjects: 1.829300 ms CreateObjectMapping: 0.829300 ms MarkObjects: 232.514100 ms  DeleteObjects: 0.040300 ms)
+
+Initializing new game with mods:
+  - brrainz.harmony
+  - Ludeon.RimWorld
+  - Ludeon.RimWorld.Royalty
+  - Ludeon.RimWorld.Ideology
+  - Ludeon.RimWorld.Biotech
+  - Ludeon.RimWorld.Anomaly
+  - Ludeon.RimWorld.Odyssey
+  - m00nl1ght.MapPreview
+  - choco.mapgenai.probe.20260927235124592
+Direct3D: detected that using refresh rate causes time drift. Will stop trusting refresh rate until the game window is moved.
+Direct3D: detected that vsync is broken (it does not limit frame rate properly). Delta time will now be calculated using cpu-side time stampling until the game window is moved.
+Unloading 0 Unused Serialized files (Serialized files now loaded: 5)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 27592.
+Total: 196.056300 ms (FindLiveObjects: 1.613800 ms CreateObjectMapping: 0.418500 ms MarkObjects: 193.975700 ms  DeleteObjects: 0.047900 ms)
+
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 97406 frames, [1.0 KB-2.0 KB]: 3 frames, [2.0 KB-4.0 KB]: 5980 frames, [4.0 KB-8.0 KB]: 3 frames, [8.0 KB-16.0 KB]: 2 frames, [32.0 KB-64.0 KB]: 1 frames, [128.0 KB-256.0 KB]: 1 frames, [1.0 MB-2.0 MB]: 1 frames, [2.0 MB-4.0 MB]: 4 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 3.9 MB
+      Overflow Count 1
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 120.0 KB
+      Peak Allocated Bytes 117.2 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 3.8 KB
+      Overflow Count 8
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 144 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 128 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 144 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 312 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 128 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_]
+      Initial Block Size 64.0 KB
+      Current Block Size 92.0 KB
+      Peak Allocated Bytes 91.6 KB
+      Overflow Count 9
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_UnityGfxDeviceWorker]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 10.3 KB
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 138 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 128 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 144 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 144 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 507 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 480 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 128 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 29889
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 46470
+        32B: 33 Subsections = 16896 buckets. Failed count: 49895
+        48B: 48 Subsections = 16384 buckets. Failed count: 90086
+        64B: 39 Subsections = 9984 buckets. Failed count: 35380
+        80B: 85 Subsections = 17408 buckets. Failed count: 30819
+        96B: 31 Subsections = 5290 buckets. Failed count: 44397
+        112B: 10 Subsections = 1462 buckets. Failed count: 11454
+        128B: 6 Subsections = 768 buckets. Failed count: 9827
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 93174 frames, [128.0 MB-256.0 MB]: 10227 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 13
+      Peak Allocated memory 209.3 MB
+      Peak Large allocation bytes 19.3 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [8.0 MB-16.0 MB]: 93454 frames, [16.0 MB-32.0 MB]: 60 frames, [32.0 MB-64.0 MB]: 9887 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 4
+      Peak Allocated memory 55.3 MB
+      Peak Large allocation bytes 10.0 MB
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 50
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 46470
+        32B: 33 Subsections = 16896 buckets. Failed count: 49895
+        48B: 48 Subsections = 16384 buckets. Failed count: 90086
+        64B: 39 Subsections = 9984 buckets. Failed count: 35380
+        80B: 85 Subsections = 17408 buckets. Failed count: 30819
+        96B: 31 Subsections = 5290 buckets. Failed count: 44397
+        112B: 10 Subsections = 1462 buckets. Failed count: 11454
+        128B: 6 Subsections = 768 buckets. Failed count: 9827
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [64.0 KB-128.0 KB]: 1 frames, [2.0 MB-4.0 MB]: 97416 frames, [8.0 MB-16.0 MB]: 8 frames, [16.0 MB-32.0 MB]: 5975 frames, [256.0 MB-0.50 GB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 3
+      Peak Allocated memory 500.5 MB
+      Peak Large allocation bytes 478.4 MB
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 93252 frames, [1.0 KB-2.0 KB]: 4166 frames, [8.0 KB-16.0 KB]: 1 frames, [16.0 KB-32.0 KB]: 5982 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 27.4 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 109
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 46470
+        32B: 33 Subsections = 16896 buckets. Failed count: 49895
+        48B: 48 Subsections = 16384 buckets. Failed count: 90086
+        64B: 39 Subsections = 9984 buckets. Failed count: 35380
+        80B: 85 Subsections = 17408 buckets. Failed count: 30819
+        96B: 31 Subsections = 5290 buckets. Failed count: 44397
+        112B: 10 Subsections = 1462 buckets. Failed count: 11454
+        128B: 6 Subsections = 768 buckets. Failed count: 9827
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 93174 frames, [8.0 MB-16.0 MB]: 1 frames, [16.0 MB-32.0 MB]: 10226 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 5
+      Peak Allocated memory 17.3 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 97015 frames, [32.0 KB-64.0 KB]: 1 frames, [64.0 KB-128.0 KB]: 6381 frames, [256.0 KB-0.5 MB]: 3 frames, [0.5 MB-1.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 0.6 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 4.0 MB
+      Failed Allocations. Bucket layout:
+        16B: 4 Subsections = 4096 buckets. Failed count: 46470
+        32B: 33 Subsections = 16896 buckets. Failed count: 49895
+        48B: 48 Subsections = 16384 buckets. Failed count: 90086
+        64B: 39 Subsections = 9984 buckets. Failed count: 35380
+        80B: 85 Subsections = 17408 buckets. Failed count: 30819
+        96B: 31 Subsections = 5290 buckets. Failed count: 44397
+        112B: 10 Subsections = 1462 buckets. Failed count: 11454
+        128B: 6 Subsections = 768 buckets. Failed count: 9827
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 1 frames, [8.0 KB-16.0 KB]: 93173 frames, [32.0 KB-64.0 KB]: 10227 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 55.8 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 103401 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B

@@ -1,0 +1,9 @@
+﻿{
+    "output":  "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-27-patch-isolation\\simulated-failure",
+    "profile":  "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260927-235206-273",
+    "mod":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\MapGenAI_Probe_20260927-235206-273",
+    "pid":  109424,
+    "created":  "2026-09-27T23:52:06.5256817+09:00",
+    "probeDllSha256":  "7E2D8E26C6492B0470C27941FFDD9D6729329936B5ADB0B82D04D535D763957B",
+    "sourceDllSha256":  "E836D63791B0D38CA4E097C49ECB28E7DE677ADBC207FBABF941C4C898B55FF0"
+}
