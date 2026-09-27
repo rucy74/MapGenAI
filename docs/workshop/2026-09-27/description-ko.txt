@@ -4,18 +4,18 @@
 [b]RimWorld 1.6[/b] · [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url]와 [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642]Map Preview[/url]가 필요합니다.
 [b]원하는 AI 사용:[/b] Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, Ollama·LM Studio 같은 로컬 서버 또는 사용자 지정 엔드포인트를 연결할 수 있습니다.
 
-[img]CARD_01_URL[/img]
+[img]https://i.imgur.com/X2SrIzn.png[/img]
 
 [h2]대화하면서 다듬기[/h2]
 산과 호수, 다양한 모양의 지형을 만들 수 있습니다. 정확한 도형도, 가장자리가 불규칙한 자연스러운 모양도 요청해 보세요. 이어서 섬을 추가하거나 옮기고, 특정 영역의 일부만 비옥한 토양으로 채울 수도 있습니다. 매번 미리보기로 확인하고, 잘못된 요청은 되돌리기로 한 단계씩 취소하세요.
 
-[img]CARD_02_URL[/img]
+[img]https://i.imgur.com/bbPyeVD.png[/img]
 
 [h2]무엇을 만들지 모르겠다면[/h2]
 선택한 타일에 맞는 추천을 바로 받거나, 먼저 간단한 취향 문답에 답할 수 있습니다. 최대 세 후보의 미리보기를 비교하고 하나를 고르세요. 선택 전에 후보를 수정하거나, 다시 추천받거나, 아무것도 선택하지 않을 수도 있습니다. 선택하기 전에는 현재 설정이 바뀌지 않습니다.
 문답은 준비된 질문을 앞선 답변에 맞춰 보여주며 로컬에서 실행됩니다. 최종 추천을 요청할 때는 선택한 AI를 사용하지만, 결과 그림을 그리는 데에는 추가 AI 호출이 필요하지 않습니다.
 
-[img]CARD_03_URL[/img]
+[img]https://i.imgur.com/ToLAi5c.png[/img]
 
 [h2]산과 호수 외에도[/h2]
 [list]
@@ -26,7 +26,7 @@
 [*]마음에 드는 맵 설정을 저장하고 다시 불러옵니다.
 [/list]
 
-[img]CARD_04_URL[/img]
+[img]https://i.imgur.com/F0mnMKx.png[/img]
 
 [h2]시작하기[/h2]
 [olist]

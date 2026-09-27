@@ -1,0 +1,70 @@
+{
+  "verifiedAt": "2026-09-27T17:10:03.349397+09:00",
+  "cards": [
+    {
+      "slot": "CARD_01_URL",
+      "albumUrl": "https://imgur.com/a/rimworld-mapgenai-describe-oLTKaVj",
+      "albumTitle": "Rimworld-MapgenAI-describe",
+      "directUrl": "https://i.imgur.com/X2SrIzn.png",
+      "file": "upload-v6/1-imgur/card-01-describe.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "localSha256": "4d31a8481d3b47553a6deaec75b504885c6dc668caaab892a4d463d4c2c7f937",
+      "remoteSha256": "6227b640b0a759d5156a8d55ce4b41dc79bc73d23157bb12629d877086b481b4",
+      "dimensions": [
+        960,
+        1076
+      ],
+      "decodedPixelsIdentical": true
+    },
+    {
+      "slot": "CARD_02_URL",
+      "albumUrl": "https://imgur.com/a/rimworld-mapgenai-editing-mZDIHL4",
+      "albumTitle": "Rimworld-MapgenAI-editing",
+      "directUrl": "https://i.imgur.com/bbPyeVD.png",
+      "file": "upload-v6/1-imgur/card-02-editing.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "localSha256": "6ffccca9fcf42c12c81f3027d0da3b4aca48bc60afef2c763424bde77cced7c8",
+      "remoteSha256": "30b46a76d54580ac1acc8d2158c08e55bdbd1a991afabfc9dbfae226ba5d2065",
+      "dimensions": [
+        960,
+        1199
+      ],
+      "decodedPixelsIdentical": true
+    },
+    {
+      "slot": "CARD_03_URL",
+      "albumUrl": "https://imgur.com/a/rimworld-mapgenai-ideas-3oVEhNh",
+      "albumTitle": "Rimworld-MapgenAI-ideas",
+      "directUrl": "https://i.imgur.com/ToLAi5c.png",
+      "file": "upload-v6/1-imgur/card-03-ideas.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "localSha256": "a20be86905be042ab190b9929736a5304cb8e8511ab6afd53904abdcaaeb8558",
+      "remoteSha256": "2d257227ecc69a19b1cf6e0fe25239617b448feba74b5e1677e25bb872e903e8",
+      "dimensions": [
+        960,
+        1043
+      ],
+      "decodedPixelsIdentical": true
+    },
+    {
+      "slot": "CARD_04_URL",
+      "albumUrl": "https://imgur.com/a/rimworld-mapgenai-roads-2GOpcUa",
+      "albumTitle": "Rimworld-MapgenAI-roads",
+      "directUrl": "https://i.imgur.com/F0mnMKx.png",
+      "file": "upload-v6/1-imgur/card-04-roads.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "localSha256": "c85c266ffcfd6d374c5199e34f06434f19449bdc4724efa6fcb07280381d8c7e",
+      "remoteSha256": "c274b702d5d2d2c7e5cad1e7d4095d5ccb9c863e77b45b3d112af3720b15824c",
+      "dimensions": [
+        960,
+        1106
+      ],
+      "decodedPixelsIdentical": true
+    }
+  ],
+  "validation": "Four HTTP 200 image/png responses with a Steam referrer; decoded RGBA pixels equal the approved local files. PNG byte hashes differ. Steam page publication/rendering not performed."
+}

@@ -1,0 +1,14 @@
+{
+  "source": "captures/showcase-04-road-replay/14-map-2.png",
+  "sourceBytes": 3714444,
+  "sourceSha256": "3bff626ea9259ea106625934457ef7b24e9f0e6738f94f51c1085d55d095aec6",
+  "output": "refresh-v6/gallery-04-road-bridge.jpg",
+  "outputBytes": 1070342,
+  "outputSha256": "71841bdfea650023d81fefa1f4dc555a20e5feb6daf2081f609af4e3429da077",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "conversion": "JPEG quality 94, 4:4:4, optimized encoding; no resizing, crop or retouch. Original PNG retained.",
+  "limitBytes": 2000000
+}

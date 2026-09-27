@@ -1,7 +1,8 @@
 {
   "workshopId": "3685385453",
   "published": false,
-  "imageHostingComplete": false,
+  "imageHostingComplete": true,
+  "imageHostingEvidence": "../image-hosting.json",
   "files": [
     {
       "file": "upload-v6/1-imgur/card-01-describe.png",
@@ -52,10 +53,10 @@
       "use": "선택 전 후보 수정 대화"
     },
     {
-      "file": "upload-v6/3-steam-gallery/gallery-04-road-bridge.png",
-      "source": "captures/showcase-04-road-replay/14-map-2.png",
-      "sha256": "3bff626ea9259ea106625934457ef7b24e9f0e6738f94f51c1085d55d095aec6",
-      "use": "실제 생성 맵의 흙길과 나무 다리"
+      "file": "upload-v6/3-steam-gallery/gallery-04-road-bridge.jpg",
+      "source": "refresh-v6/gallery-04-road-bridge.jpg",
+      "sha256": "71841bdfea650023d81fefa1f4dc555a20e5feb6daf2081f609af4e3429da077",
+      "use": "실제 생성 맵의 흙길과 나무 다리 · 2 MB 미만"
     }
   ]
 }

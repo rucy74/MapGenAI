@@ -8,10 +8,12 @@
 - 새 카드 4장: [../upload-v6/1-imgur](../upload-v6/1-imgur).
 - 채택 표지: [../upload-v6/2-cover/Preview.png](../upload-v6/2-cover/Preview.png).
 - 갤러리에 추가할 실제 화면 4장: [../upload-v6/3-steam-gallery](../upload-v6/3-steam-gallery).
-- 설명 템플릿: [영어](../description-en.txt), [한국어](../description-ko.txt).
+- 게시용 설명: [영어](../description-en.txt), [한국어](../description-ko.txt).
 - 출처 파일과 SHA256: [../upload-v6/manifest.json](../upload-v6/manifest.json).
 
-`upload/`와 `cards/out/`은 이전 자료다. 이번 작업에 사용할 새 묶음은 **upload-v6/**다. 이전 Imgur 주소는 옛 카드라 새 템플릿에서 제거했다. `CARD_01_URL`~`CARD_04_URL`을 새 카드의 직접 이미지 URL로 채우기 전에는 소개글을 게시하지 않는다. 공개 페이지·설치본·dist·모드 DLL은 이번 작업에서 변경하지 않았다.
+`upload/`와 `cards/out/`은 이전 자료다. 이번 작업에 사용할 새 묶음은 **upload-v6/**다. 사용자가 올린 새 카드 네 장의 Imgur 직접 주소를 한·영 설명에 반영했다. HTTP 200/image/png 및 디코딩한 RGBA 픽셀 일치4/4 확인; PNG 파일의 바이트 해시는 다르다. [호스팅 확인 기록](../image-hosting.json). 검토 HTML은 동일한 로컬 이미지로 표시한다. 공개 Steam 페이지는 아직 변경하지 않았다.
+
+도로·다리 갤러리는 **gallery-04-road-bridge.jpg**를 업로드한다. 원본 1920×1080 PNG 3,714,444 bytes를 동일 해상도의 JPEG(quality 94, 4:4:4) 1,070,342 bytes로 변환했다. 리사이즈·크롭·리터칭 없음. 원본 PNG는 `captures/showcase-04-road-replay/14-map-2.png`에 유지한다. [변환 기록](gallery-compression.json). 갤러리 생성 시 각 파일이 2,000,000 bytes 미만인지 검사한다.
 
 ## 구성과 출처
 

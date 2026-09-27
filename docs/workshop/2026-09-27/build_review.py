@@ -23,7 +23,7 @@ UPLOADS = [
     ("3-steam-gallery", "gallery-01-recommendations.png", "captures/showcase-02/12-recommend.png", "추천 후보와 선택·재추천 UI"),
     ("3-steam-gallery", "gallery-02-preferences.png", "cards/assets/c3-guide.png", "취향 문답: 공간·방어·경관 선택"),
     ("3-steam-gallery", "gallery-03-editing.png", "captures/showcase-02/13-refine.png", "선택 전 후보 수정 대화"),
-    ("3-steam-gallery", "gallery-04-road-bridge.png", "captures/showcase-04-road-replay/14-map-2.png", "실제 생성 맵의 흙길과 나무 다리"),
+    ("3-steam-gallery", "gallery-04-road-bridge.jpg", "refresh-v6/gallery-04-road-bridge.jpg", "실제 생성 맵의 흙길과 나무 다리 · 2 MB 미만"),
 ]
 VIDEO = "video/animatic-draft.mp4"
 ALLOWED_TAGS = {"h1", "h2", "h3", "b", "i", "u", "url", "img", "list", "olist", "*"}
@@ -47,6 +47,12 @@ def collect_uploads():
             raise SystemExit(f"copy differs from source: {target}")
         if what.startswith("CARD_"):
             card_paths[what] = target
+        if group == "3-steam-gallery" and os.path.getsize(kit(target)) >= 2_000_000:
+            raise SystemExit(f"gallery image exceeds upload limit: {target}")
+    for card in json.load(open(kit('image-hosting.json'), encoding='utf-8'))['cards']:
+        if card_paths[card['slot']] != card['file'] or sha(kit(card['file'])) != card['localSha256']:
+            raise SystemExit(f"hosted card no longer matches local source: {card['slot']}")
+        card_paths[card['directUrl']] = card['file']
     return card_paths
 
 
@@ -59,6 +65,8 @@ def inline(text, card_paths):
 
     def image(match):
         key = match.group(1).strip()
+        if key in card_paths:
+            return f'<img class="card" src="{card_paths[key]}" alt="card"><span class="slot">{key}</span>'
         if key.startswith("https://"):
             return f'<img class="card" src="{key}" alt="card"><span class="slot">{key}</span>'
         if key not in card_paths:
@@ -130,7 +138,8 @@ def main():
             raise SystemExit(f"template slot missing: {key}")
         page = page.replace(key, value)
     open(kit("review.html"), "w", encoding="utf-8", newline="\n").write(page)
-    manifest = {'workshopId': '3685385453', 'published': False, 'imageHostingComplete': False,
+    manifest = {'workshopId': '3685385453', 'published': False, 'imageHostingComplete': True,
+        'imageHostingEvidence': '../image-hosting.json',
         'files': [{'file': f'{UPLOAD_ROOT}/{g}/{n}', 'source': s, 'sha256': sha(kit(s)), 'use': w} for g,n,s,w in UPLOADS]}
     open(kit(UPLOAD_ROOT + '/manifest.json'), 'w', encoding='utf-8').write(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     print(f"review.html written; {len(UPLOADS)} verified files in {UPLOAD_ROOT}/; public upload pending")

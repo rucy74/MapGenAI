@@ -1,11 +1,12 @@
 # MapGen AI 창작마당 갱신 자료 (2026-09-27)
 
-> **최신: 표지 v5 채택, 본문 카드·설명 v6 정리 완료.** 현재 사용할 묶음은 **`upload-v6/`**다. [검토 페이지](review.html), [교체 안내](publish-plan-ko.md), [출처·검증](refresh-v6/README.md)을 먼저 읽는다. 새 카드 URL을 채워야 설명을 게시할 수 있으며 공개 반영은 아직 하지 않았다. 기존 Workshop 항목·좋은 지형 갤러리·영상은 유지한다.
+> **최신: 표지 v5 설치 및 본문 카드·설명 v6 준비 완료.** 현재 사용할 묶음은 **`upload-v6/`**다. [검토 페이지](review.html), [교체 안내](publish-plan-ko.md), [출처·검증](refresh-v6/README.md)을 먼저 읽는다. 사용자가 올린 Imgur 카드 네 장의 직접 주소를 한·영 설명에 반영했다. Steam 공개 반영은 아직 하지 않았다. 기존 Workshop 항목·좋은 지형 갤러리·영상은 유지한다.
 
 ## 이번 준비본 — v6
 
 - 본문 카드 4장: 텍스트 생성 / 연속 수정 / 추천 비교 / 도로와 다리. `refresh-v6/cards.html`, `refresh-v6/out/`.
-- 한·영 설명: `description-en.txt`, `description-ko.txt`. **새 직접 이미지 URL 4개를 채워야 하는 템플릿**이다.
+- 한·영 설명: `description-en.txt`, `description-ko.txt`. **새 직접 이미지 URL 4개를 반영한 게시용 텍스트**다. [주소·원본 비교 기록](image-hosting.json).
+- 도로·다리 갤러리는 `gallery-04-road-bridge.jpg`를 사용한다. 원래 3.71 MB PNG를 1920×1080 그대로 1.07 MB JPEG로 변환했다. 원본은 captures/에 보존했다.
 - 업로드용 표지 1장·본문 4장·갤러리 4장: `upload-v6/`. 이전 `upload/`는 보관본이다.
 - 재생성: `python -X utf8 build_review.py`. 현재 템플릿은 `refresh-v6/review-template.html`이다.
 - 브라우저 자동 열기는 로컬 URL 보안 정책으로 차단됐다. 카드 이미지는 직접 확인했으며 최종 HTML의 앱·모바일 실표시는 미검증이다.
