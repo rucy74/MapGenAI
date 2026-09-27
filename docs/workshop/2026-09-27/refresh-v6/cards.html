@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>MapGen AI — Workshop feature cards</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0a1517;color:#fff6e7;font:18px/1.45 'Segoe UI',Arial,sans-serif}
+.card{width:640px;padding:30px 32px;background:#122124;margin:0 0 28px;overflow:hidden}
+.eyebrow{color:#8bdbc8;font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:9px}.brand{float:right;letter-spacing:.6px;font-size:12px;color:#b1c5be}
+h1{font:750 36px/1.12 'Bahnschrift','Segoe UI',sans-serif;margin:0 0 12px;letter-spacing:-.6px}p{margin:0 0 20px;color:#c6d5ce}
+.prompt{background:#edf2e6;color:#122124;padding:15px 19px;border-radius:4px;font-size:21px;line-height:1.3;font-weight:600;margin:0 0 20px}
+.crop{position:relative;overflow:hidden;background:#0a1415}.crop img{position:absolute;max-width:none;display:block}.terrain img{image-rendering:pixelated}
+.hero{width:390px;height:390px;margin:0 auto 20px;outline:1px solid #647a68}
+.steps{display:flex;gap:14px;align-items:center;border-top:1px solid #3b504b;padding-top:17px;color:#edf2e6;font-weight:600}.steps i{color:#8bdbc8;font-style:normal}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}.pair img{display:block;width:100%;image-rendering:pixelated;border:1px solid #52624f}.label{font-size:14px;color:#9eb6ab;margin:0 0 7px}.caption{font-size:19px;line-height:1.3;margin:10px 0 0;color:#edf2e6}
+.edit-start{display:grid;grid-template-columns:164px 1fr;gap:22px;align-items:center;padding-bottom:22px;margin-bottom:20px;border-bottom:1px solid #3b504b}.edit-start img{width:164px;display:block;image-rendering:pixelated}.edit-start p{margin:0;font-size:20px}
+.note{font-size:15px;color:#aec3b7;margin:19px 0 0}.preview-ui{width:576px;height:auto;display:block;border:1px solid #52624f;margin:20px 0}.split{border-top:1px solid #3b504b;margin-top:22px;padding-top:21px;display:grid;grid-template-columns:1fr 1fr;gap:26px}.split h2{font-size:21px;margin:0 0 7px;color:#8bdbc8}.split p{font-size:17px;margin:0}.action{font-size:21px;font-weight:600;color:#edf2e6;margin:0}
+.road{width:576px;height:376px;margin-bottom:20px}.road img{image-rendering:auto}
+</style>
+<section class="card" id="describe">
+ <div class="eyebrow">01 / CREATE<span class="brand">MAPGEN AI</span></div>
+ <h1>Your words. Your starting map.</h1>
+ <p>Describe a place you want to settle.</p>
+ <div class="prompt">“A diagonal canyon with a large central lake.”</div>
+ <div class="crop hero terrain" data-allow-overflow><img src="../../../assets/new_example1.png" data-crop="637,20,239,239" alt="Actual canyon and lake Map Preview"></div>
+ <div class="steps">Describe <i>→</i> Check the preview <i>→</i> Start there</div>
+</section>
+<section class="card" id="editing">
+ <div class="eyebrow">02 / REFINE<span class="brand">MAPGEN AI</span></div>
+ <h1>Keep the conversation going.</h1>
+ <p>Make another request to adjust your map.</p>
+ <div class="edit-start"><img src="../cards/assets/c2-step1.png" alt="Original ring and lake"><p>Start with a mountain ring<br>and a lake inside.</p></div>
+ <div class="pair">
+  <div><div class="label">FIRST EDIT</div><img src="../cards/assets/c2-step2.png" alt="An island added inside the lake"><p class="caption">“Add a small island<br>in the lake.”</p></div>
+  <div><div class="label">NEXT EDIT</div><img src="../cards/assets/c2-step3.png" alt="The island moved north"><p class="caption">“Move the island<br>to the north.”</p></div>
+ </div>
+ <p class="note">Changed your mind? Undo steps back one request.</p>
+</section>
+<section class="card" id="ideas">
+ <div class="eyebrow">03 / EXPLORE<span class="brand">MAPGEN AI</span></div>
+ <h1>See ideas before you choose.</h1>
+ <p>Ask for suggestions for your selected tile.<br>Compare the previews, then pick a starting point.</p>
+ <div class="prompt">“Recommend a map.”</div>
+ <img class="preview-ui" src="../cards/assets/c3-candidates.png" alt="Actual recommendation UI with Apply, Refine, New suggestions and Select none">
+ <p class="action">Pick one. Refine it. Or ask again.</p>
+ <div class="split"><div><h2>Quick suggestions</h2><p>Let the selected tile guide the ideas.</p></div><div><h2>Find my preferences</h2><p>Answer a few questions about space, defense and scenery first.</p></div></div>
+ <p class="note">Nothing is applied until you choose. Preview rendering and the preference questions run locally.</p>
+</section>
+<section class="card" id="roads">
+ <div class="eyebrow">04 / CONNECT<span class="brand">MAPGEN AI</span></div>
+ <h1>Give your map a way through.</h1>
+ <p>Request local roads, then start on the generated map.</p>
+ <div class="crop road" data-allow-overflow><img src="../captures/showcase-04-road-replay/14-map-2.png" data-crop="500,70,1000,653" alt="Actual generated dirt road crossing a river on a wooden bridge"></div>
+ <p class="action">A dirt road. A river. A wooden bridge.</p>
+ <p class="note">Bridgeable river or shallow-water crossings can receive wooden bridges automatically. Deep water and obstacles can still block a route.</p>
+ <p class="note">Map Preview shows the terrain layout. Check plants and built details on the generated map.</p>
+</section>
+<script>
+for(const img of document.querySelectorAll('[data-crop]')){
+ const place=()=>{const[x,y,w,h]=img.dataset.crop.split(',').map(Number),p=img.parentElement,s=p.clientWidth/w;img.style.width=img.naturalWidth*s+'px';img.style.height=img.naturalHeight*s+'px';img.style.left=-x*s+'px';img.style.top=-y*s+'px';};
+ if(img.complete&&img.naturalWidth)place();else img.addEventListener('load',place,{once:true});
+}
+</script></html>

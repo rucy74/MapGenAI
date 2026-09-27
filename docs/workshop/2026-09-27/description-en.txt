@@ -1,65 +1,65 @@
-[h1]Describe your map. MapGen AI builds it.[/h1]
-Type what you want in plain words, like "a ring of mountains with a lake inside" or "add a small island in the middle of the lake". MapGen AI turns it into map settings, and Map Preview shows the result. Keep chatting to adjust it until the map feels right, then start there.
+[h1]Describe your map. Watch it take shape.[/h1]
+A canyon with a lake. A coastal fjord. A star-shaped hill. Describe the place you want to settle, check it in Map Preview, and keep chatting to adjust it before you start.
 
-[b]Built for RimWorld 1.6.[/b] Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642]Map Preview[/url].
-[b]Use your own AI:[/b] Google Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, a local server such as Ollama or LM Studio, or a custom endpoint.
+[b]RimWorld 1.6[/b] · Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642]Map Preview[/url].
+[b]Bring your own AI:[/b] Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, a local server such as Ollama or LM Studio, or a custom endpoint.
 
-[img]https://i.imgur.com/aB4pSxq.png[/img]
+[img]CARD_01_URL[/img]
 
-[img]https://i.imgur.com/OVg0Gi1.png[/img]
+[h2]Build on an idea[/h2]
+Create mountains, lakes and terrain shapes. Ask for clean geometric outlines or more natural edges. Then add an island, move it, or fill only part of an area with rich soil. Check each change in the preview; Undo takes you back one request.
 
-[img]https://i.imgur.com/6J5waj1.png[/img]
+[img]CARD_02_URL[/img]
 
-[h2]What's new in this update[/h2]
+[h2]Not sure what to make?[/h2]
+Get suggestions for the selected tile, or answer a short preference questionnaire first. Compare up to three previews. Pick one, refine a candidate, ask for new ideas, or select none. Your settings stay unchanged until you choose.
+The prepared questions adapt to earlier answers and run locally. Asking the AI for final suggestions uses your selected provider; drawing their previews needs no additional AI call.
+
+[img]CARD_03_URL[/img]
+
+[h2]More than mountains and lakes[/h2]
 [list]
-[*][b]Edits keep what you built.[/b] Add a lake, then move it, resize it, or change only its outline. Earlier changes stay, and Undo steps back one request at a time.
-[*][b]Map ideas with pictures.[/b] Ask for suggestions and get up to three candidates drawn by Map Preview. Refine one, like "make option 2 more natural", before you pick. Your map does not change until you choose.
-[*][b]Preference questions.[/b] Not sure what you want? Answer a few multiple-choice questions first. They run on your PC and make no AI calls.
-[*][b]Exact or natural shapes.[/b] Ask for a perfect circle, or for a natural lake with an uneven shore.
-[*][b]Fill part of an area.[/b] "Fill 70% of the ring's interior with rich soil." Lava fills are available with Odyssey.
-[*][b]Place ruins and ancient dangers[/b] by area, direction, or landmark, such as on an island or at the foot of a mountain. Ancient dangers use the game's own generator.
-[*][b]Local roads with bridges.[/b] Roads that cross a river or shallow water get wooden bridges automatically.
-[*][b]Natural water.[/b] Natural lakes you add now follow the game's own lake style, with shallow edges and lakeshore ground that suits the biome.
+[*]Add local roads, with wooden bridges at suitable river or shallow-water crossings.
+[*]Place ruins and ancient dangers by area, direction or landmark.
+[*]Add supported tile features, including hot springs with Odyssey, when the selected tile allows them.
+[*]Straighten an existing river or change the direction of an existing coast.
+[*]Save and load map settings you want to reuse.
 [/list]
 
-[img]https://i.imgur.com/fQrAxnM.png[/img]
+[img]CARD_04_URL[/img]
 
-[h2]How to start[/h2]
+[h2]Start here[/h2]
 [olist]
-[*]Subscribe to MapGen AI, Harmony, and Map Preview.
-[*]Open [b]Options > Mod settings > MapGen AI[/b]. Pick a provider, enter your API key, and choose a model.
-[*]On the world map, select a tile and click [b]✦ AI Map Gen[/b] next to Map Preview.
-[*]Type a request, or press [b]Quick suggestions[/b] or [b]Find my preferences[/b].
-[*]When the preview looks right, press [b]Generate with these settings[/b]. The settings apply when you start or settle on that tile.
+[*]Enable MapGen AI, Harmony and Map Preview.
+[*]In [b]Options > Mod settings > MapGen AI[/b], choose your provider and model. Enter an API key if your provider requires one.
+[*]Select a world tile and click [b]✦ AI Map Gen[/b] beside Map Preview.
+[*]Describe a map, choose [b]Quick suggestions[/b], or try [b]Find my preferences[/b].
+[*]When the preview looks right, click [b]Generate with these settings[/b]. The settings apply when you start or settle on that tile.
 [/olist]
 
-[h2]Example requests[/h2]
+[h2]Things to try[/h2]
 [list]
-[*]"A ring of mountains with a lake inside and one opening to the south."
-[*]"Add a small island in the middle of the lake."
-[*]"Move the island to the north side of the lake." / "Make the river straight."
+[*]"A diagonal canyon with a large central lake."
+[*]"A natural mountain ring with one opening to the south."
 [*]"Fill 70% of the ring's interior with rich soil."
-[*]"Put two small ruins on the island."
+[*]"Add a small island in the lake. Then put two small ruins on it."
 [*]"Add a dirt road from the west edge to the east edge."
-[*]"Add hot springs." (Odyssey)
-[*]"Put the coast on the north side."
-[*]"Recommend a map." / "Make option 2 more natural."
+[*]"Recommend a map." Then: "Make option 2 more natural."
 [/list]
 
-[h2]Good to know[/h2]
+[h2]Before you start[/h2]
 [list]
-[*][b]It shapes the map you are about to start.[/b] It does not edit a colony map you are already playing.
-[*][b]World rivers and coasts stay connected.[/b] You can straighten a river or turn a coast, but you cannot delete them or add a coast inland.
-[*][b]Map Preview shows terrain and layout.[/b] Plants, building interiors, and loot appear when the real map is generated.
-[*][b]Results depend on the model.[/b] Check the preview, and use Undo or Reset when a request goes wrong.
-[*][b]DLC and landmark mods:[/b] you can add hot springs, fjords, oasis, and other tile features when the DLC or mod is active and the tile allows them.
-[*][b]Cost and privacy:[/b] each message is a request to the provider you chose, paid with your own key. A few actions add a request, such as summarizing a long chat or re-asking when a reply comes back malformed. Your key is saved in your RimWorld mod settings on your PC.
-[*][b]Languages:[/b] menus in English, Korean, Japanese, and Simplified Chinese. Some newer messages appear in English for Japanese and Chinese.
-[*][b]Image input is paused[/b] in this version.
-[*][b]Presets:[/b] Save and Load keep map settings you want to reuse.
+[*]This prepares a new map. It does not edit a colony map you are already playing.
+[*]Results vary by model and request. Review the preview and use Undo or Reset when needed.
+[*]World rivers and coasts remain connected to the selected tile. You cannot add a coast inland. Tile features still have compatibility conditions.
+[*]Roads need a valid route. Deep water, mountains and other obstacles can prevent a crossing.
+[*]Map Preview shows terrain and layout. Plants, building interiors and loot appear on the generated map.
+[*]Paid providers use your own key and credits. Retries and long-chat summaries can add requests. Local questionnaire answers and preview rendering make no AI calls. Keys are stored in your local RimWorld mod settings.
+[*]Menus support English, Korean, Japanese and Simplified Chinese. Some newer Japanese and Chinese guidance appears in English.
+[*]Image input is paused in this version.
 [/list]
 
 [h2]Credits[/h2]
 Created by Choco with assistance from Claude and ChatGPT.
-The multi-provider settings UI was inspired by [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752]RimTalk[/url]. If you enjoy AI-powered mods, give it a try. It lets your colonists have AI-driven conversations.
+The provider settings UI was inspired by [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752]RimTalk[/url].
 [url=https://github.com/rucy74/MapGenAI]Source code on GitHub[/url]

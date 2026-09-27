@@ -1,0 +1,43 @@
+{
+  "html": "F:/Projects/Rimworld/active/mapgen_ai/docs/workshop/2026-09-27/cover/words-to-maps-v5/cover.html",
+  "chrome": "chrome.exe",
+  "cssWidth": 960,
+  "scale": 0.3333333333,
+  "overflowSelfTest": true,
+  "images": [
+    {
+      "src": "../../../../assets/new_example1.png",
+      "ok": true,
+      "w": 881,
+      "h": 529
+    },
+    {
+      "src": "../../../../assets/new_example4.png",
+      "ok": true,
+      "w": 876,
+      "h": 518
+    },
+    {
+      "src": "../../../../assets/new_example6.png",
+      "ok": true,
+      "w": 878,
+      "h": 514
+    }
+  ],
+  "results": [
+    {
+      "id": "cover",
+      "file": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\workshop\\2026-09-27\\cover\\words-to-maps-v5\\thumb\\cover.png",
+      "cssBox": {
+        "x": 0,
+        "y": 0,
+        "w": 960,
+        "h": 540
+      },
+      "pixelWidth": 320,
+      "pixelHeight": 180,
+      "overflow": []
+    }
+  ],
+  "created": "2026-09-27T06:21:41.102Z"
+}

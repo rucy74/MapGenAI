@@ -1,0 +1,100 @@
+{
+  "html": "refresh-v6/cards.html",
+  "chrome": "chrome.exe",
+  "cssWidth": 640,
+  "scale": 1.5,
+  "overflowSelfTest": true,
+  "images": [
+    {
+      "src": "../../../assets/new_example1.png",
+      "ok": true,
+      "w": 881,
+      "h": 529
+    },
+    {
+      "src": "../cards/assets/c2-step1.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "../cards/assets/c2-step2.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "../cards/assets/c2-step3.png",
+      "ok": true,
+      "w": 500,
+      "h": 500
+    },
+    {
+      "src": "../cards/assets/c3-candidates.png",
+      "ok": true,
+      "w": 1305,
+      "h": 365
+    },
+    {
+      "src": "../captures/showcase-04-road-replay/14-map-2.png",
+      "ok": true,
+      "w": 1920,
+      "h": 1080
+    }
+  ],
+  "results": [
+    {
+      "id": "describe",
+      "file": "refresh-v6\\out\\describe.png",
+      "cssBox": {
+        "x": 0,
+        "y": 0,
+        "w": 640,
+        "h": 717.640625
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1076,
+      "overflow": []
+    },
+    {
+      "id": "editing",
+      "file": "refresh-v6\\out\\editing.png",
+      "cssBox": {
+        "x": 0,
+        "y": 745.640625,
+        "w": 640,
+        "h": 799.671875
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1200,
+      "overflow": []
+    },
+    {
+      "id": "ideas",
+      "file": "refresh-v6\\out\\ideas.png",
+      "cssBox": {
+        "x": 0,
+        "y": 1573.3125,
+        "w": 640,
+        "h": 695.828125
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1044,
+      "overflow": []
+    },
+    {
+      "id": "roads",
+      "file": "refresh-v6\\out\\roads.png",
+      "cssBox": {
+        "x": 0,
+        "y": 2297.140625,
+        "w": 640,
+        "h": 737.6875
+      },
+      "pixelWidth": 960,
+      "pixelHeight": 1107,
+      "overflow": []
+    }
+  ],
+  "created": "2026-09-27T06:39:46.387Z"
+}

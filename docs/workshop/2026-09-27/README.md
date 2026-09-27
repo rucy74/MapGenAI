@@ -1,5 +1,19 @@
 # MapGen AI 창작마당 갱신 자료 (2026-09-27)
 
+> **최신: 표지 v5 채택, 본문 카드·설명 v6 정리 완료.** 현재 사용할 묶음은 **`upload-v6/`**다. [검토 페이지](review.html), [교체 안내](publish-plan-ko.md), [출처·검증](refresh-v6/README.md)을 먼저 읽는다. 새 카드 URL을 채워야 설명을 게시할 수 있으며 공개 반영은 아직 하지 않았다. 기존 Workshop 항목·좋은 지형 갤러리·영상은 유지한다.
+
+## 이번 준비본 — v6
+
+- 본문 카드 4장: 텍스트 생성 / 연속 수정 / 추천 비교 / 도로와 다리. `refresh-v6/cards.html`, `refresh-v6/out/`.
+- 한·영 설명: `description-en.txt`, `description-ko.txt`. **새 직접 이미지 URL 4개를 채워야 하는 템플릿**이다.
+- 업로드용 표지 1장·본문 4장·갤러리 4장: `upload-v6/`. 이전 `upload/`는 보관본이다.
+- 재생성: `python -X utf8 build_review.py`. 현재 템플릿은 `refresh-v6/review-template.html`이다.
+- 브라우저 자동 열기는 로컬 URL 보안 정책으로 차단됐다. 카드 이미지는 직접 확인했으며 최종 HTML의 앱·모바일 실표시는 미검증이다.
+
+## 아래는 이전 제작·검증 기록
+
+아래의 `upload/` 경로, 이전 카드·표지 후보, 전체 갤러리 교체와 영상 교체 절차는 역사 기록이다. **현재 게시 절차는 [publish-plan-ko.md](publish-plan-ko.md)를 따른다.**
+
 창작마당 [MapGen AI](https://steamcommunity.com/sharedfiles/filedetails/?id=3685385453) 페이지의 소개글·사진·영상을 새 빌드에 맞춰 바꾸기 위한 자료다. 구성은 Living Screens 게시 때 쓴 방식을 따른다. 글과 이미지를 섞은 본문, 실게임 캡처로만 만든 이미지 카드, 목록 크기에서 읽히는 표지를 쓴다.
 
 ## 먼저 알아 둘 점
@@ -36,7 +50,7 @@
 ## 올리는 순서
 
 1. `upload/1-imgur`의 카드 PNG 4장을 Imgur에 올린다. 직접 이미지 주소를 알려 주면 설명 두 파일의 `CARD_0N_URL` 자리에 넣는다.
-2. 고른 표지 A(`cover/out/coverA.png`)를 `dist/About/Preview.png`에 넣고 일반판 승격과 업로드를 한다. 승격 스크립트는 이 파일을 그대로 가져간다.
+2. 채택한 표지 v5(`cover/words-to-maps-v5/out/cover.png`, `upload/2-cover/Preview.png`)를 게시 준비 완료 후 `dist/About/Preview.png`에 넣고 일반판 승격과 기존 창작마당 항목 업데이트를 한다. 현재 설치본/dist 표지는 아직 교체하지 않았다.
 3. 스팀 페이지의 제목 및 설명 편집에서 영어 설명에 `description-en.txt`, 한국어 설명에 `description-ko.txt` 전체를 붙여 넣는다.
 4. 이미지·영상 추가 편집에서 옛 대화창 스크린샷을 내리고 `upload/3-steam-gallery`의 사진 4장을 올린다. 원본은 다음 네 장이다: `captures/showcase-03-replay/03-ring.png`(요청과 Map Preview), `captures/showcase-02/12-recommend.png`(추천 후보 3개), `captures/showcase-04-road-replay/14-map-2.png`(도로와 나무다리), `captures/showcase-03-replay/14-map-1.png`(실제 맵).
 5. 새 영상을 YouTube에 올린 뒤 같은 화면에서 링크를 넣고 옛 영상을 내린다.

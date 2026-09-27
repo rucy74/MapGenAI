@@ -1,0 +1,61 @@
+{
+  "workshopId": "3685385453",
+  "published": false,
+  "imageHostingComplete": false,
+  "files": [
+    {
+      "file": "upload-v6/1-imgur/card-01-describe.png",
+      "source": "refresh-v6/out/describe.png",
+      "sha256": "4d31a8481d3b47553a6deaec75b504885c6dc668caaab892a4d463d4c2c7f937",
+      "use": "CARD_01_URL"
+    },
+    {
+      "file": "upload-v6/1-imgur/card-02-editing.png",
+      "source": "refresh-v6/out/editing.png",
+      "sha256": "6ffccca9fcf42c12c81f3027d0da3b4aca48bc60afef2c763424bde77cced7c8",
+      "use": "CARD_02_URL"
+    },
+    {
+      "file": "upload-v6/1-imgur/card-03-ideas.png",
+      "source": "refresh-v6/out/ideas.png",
+      "sha256": "a20be86905be042ab190b9929736a5304cb8e8511ab6afd53904abdcaaeb8558",
+      "use": "CARD_03_URL"
+    },
+    {
+      "file": "upload-v6/1-imgur/card-04-roads.png",
+      "source": "refresh-v6/out/roads.png",
+      "sha256": "c85c266ffcfd6d374c5199e34f06434f19449bdc4724efa6fcb07280381d8c7e",
+      "use": "CARD_04_URL"
+    },
+    {
+      "file": "upload-v6/2-cover/Preview.png",
+      "source": "cover/words-to-maps-v5/out/cover.png",
+      "sha256": "3ed88ef35150d59b0eaf1de7f8612381538cea0db7cec3f785f2ffb6f0d9af46",
+      "use": "accepted cover v5"
+    },
+    {
+      "file": "upload-v6/3-steam-gallery/gallery-01-recommendations.png",
+      "source": "captures/showcase-02/12-recommend.png",
+      "sha256": "e4cd93cf2c9d6205b255a108f7ed0c021e75ab670bd2bc062f54a554dd5a83d6",
+      "use": "추천 후보와 선택·재추천 UI"
+    },
+    {
+      "file": "upload-v6/3-steam-gallery/gallery-02-preferences.png",
+      "source": "cards/assets/c3-guide.png",
+      "sha256": "c4974e6303b89ef1f18e3de130f1e84a48685e398468fa0e4fe276cb0786edd4",
+      "use": "취향 문답: 공간·방어·경관 선택"
+    },
+    {
+      "file": "upload-v6/3-steam-gallery/gallery-03-editing.png",
+      "source": "captures/showcase-02/13-refine.png",
+      "sha256": "4923ab238f23bfe6fb17985d7220318dee282c0d92976a04ccd1cdfbb28aa1c6",
+      "use": "선택 전 후보 수정 대화"
+    },
+    {
+      "file": "upload-v6/3-steam-gallery/gallery-04-road-bridge.png",
+      "source": "captures/showcase-04-road-replay/14-map-2.png",
+      "sha256": "3bff626ea9259ea106625934457ef7b24e9f0e6738f94f51c1085d55d095aec6",
+      "use": "실제 생성 맵의 흙길과 나무 다리"
+    }
+  ]
+}
