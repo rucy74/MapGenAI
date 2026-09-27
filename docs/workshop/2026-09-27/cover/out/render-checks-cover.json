@@ -1,6 +1,6 @@
 {
-  "html": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\workshop\\2026-09-27\\cover\\cover.html",
-  "chrome": "C:/Users/choco/AppData/Local/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-win64/chrome-headless-shell.exe",
+  "html": "cover/cover.html",
+  "chrome": "chrome-headless-shell.exe",
   "cssWidth": 640,
   "scale": 1.5,
   "overflowSelfTest": true,
@@ -77,5 +77,5 @@
       "overflow": []
     }
   ],
-  "created": "2026-09-27T01:20:57.104Z"
+  "created": "2026-09-27T03:46:26.640Z"
 }

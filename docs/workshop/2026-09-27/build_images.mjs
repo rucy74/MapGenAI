@@ -46,7 +46,7 @@ try {
     const out = path.join(outDir, id + '.png'); fs.writeFileSync(out, Buffer.from(shot.data, 'base64'));
     results.push({ id, file: out, cssBox: box, pixelWidth: Math.round(box.w * scale), pixelHeight: Math.round(box.h * scale), overflow });
   }
-  const report = { html: path.resolve(html), chrome, cssWidth, scale, overflowSelfTest: selfTest, images, results, created: new Date().toISOString() };
+  const report = { html: path.relative(process.cwd(), path.resolve(html)).split(path.sep).join('/'), chrome: path.basename(chrome), cssWidth, scale, overflowSelfTest: selfTest, images, results, created: new Date().toISOString() };
   fs.writeFileSync(path.join(outDir, 'render-checks-' + path.basename(html, '.html') + '.json'), JSON.stringify(report, null, 2));
   const badImages = images.filter(i => !i.ok), badOverflow = results.filter(r => r.overflow && r.overflow.length);
   console.log(`rendered ${results.filter(r => r.file).length}/${ids.length}; images ${images.length - badImages.length}/${images.length} ok; overflow in ${badOverflow.length} element(s); selfTest=${selfTest}`);

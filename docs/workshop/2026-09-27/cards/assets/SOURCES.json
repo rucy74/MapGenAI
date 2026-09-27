@@ -1,7 +1,7 @@
 {
  "cards/assets/c1-ui-open.png": {
-  "source": "captures/showcase-01/01-open.png",
-  "sourceSha256_16": "7692ac0fe02c8b6c",
+  "source": "captures/showcase-03-replay/01-open.png",
+  "sourceSha256_16": "f6b2a9a1eaeae95b",
   "crop": [
    60,
    30,
@@ -14,8 +14,8 @@
   ]
  },
  "cards/assets/c1-chat.png": {
-  "source": "captures/showcase-01/03-ring.png",
-  "sourceSha256_16": "da436cf41c1b52be",
+  "source": "captures/showcase-03-replay/03-ring.png",
+  "sourceSha256_16": "f40d485d96241177",
   "crop": [
    115,
    448,
@@ -28,7 +28,7 @@
   ]
  },
  "cards/assets/c1-before.png": {
-  "source": "captures/showcase-01/01-open-preview.png",
+  "source": "captures/showcase-03-replay/01-open-preview.png",
   "sourceSha256_16": "b2bcf955ac24cec9",
   "scale": "nearest x2",
   "size": [
@@ -37,7 +37,7 @@
   ]
  },
  "cards/assets/c1-after.png": {
-  "source": "captures/showcase-01/03-ring-preview.png",
+  "source": "captures/showcase-03-replay/03-ring-preview.png",
   "sourceSha256_16": "de94173abd59b201",
   "scale": "nearest x2",
   "size": [
@@ -46,7 +46,7 @@
   ]
  },
  "cards/assets/c2-step1.png": {
-  "source": "captures/showcase-01/03-ring-preview.png",
+  "source": "captures/showcase-03-replay/03-ring-preview.png",
   "sourceSha256_16": "de94173abd59b201",
   "scale": "nearest x2",
   "size": [
@@ -55,7 +55,7 @@
   ]
  },
  "cards/assets/c2-step2.png": {
-  "source": "captures/showcase-01/04-island-preview.png",
+  "source": "captures/showcase-03-replay/04-island-preview.png",
   "sourceSha256_16": "350c073682b92b18",
   "scale": "nearest x2",
   "size": [
@@ -64,7 +64,7 @@
   ]
  },
  "cards/assets/c2-step3.png": {
-  "source": "captures/showcase-01/05-island-move-preview.png",
+  "source": "captures/showcase-03-replay/05-island-move-preview.png",
   "sourceSha256_16": "dc8c84b2fae699a1",
   "scale": "nearest x2",
   "size": [
@@ -73,7 +73,7 @@
   ]
  },
  "cards/assets/c2-coast-before.png": {
-  "source": "captures/showcase-01/13-coast-before-preview.png",
+  "source": "captures/showcase-02/14-coast-before-preview.png",
   "sourceSha256_16": "c46e54792b536a05",
   "scale": "nearest x2",
   "size": [
@@ -82,7 +82,7 @@
   ]
  },
  "cards/assets/c2-coast-after.png": {
-  "source": "captures/showcase-01/13-coast-preview.png",
+  "source": "captures/showcase-02/14-coast-preview.png",
   "sourceSha256_16": "0418d7aba97ae416",
   "scale": "nearest x2",
   "size": [
@@ -91,8 +91,8 @@
   ]
  },
  "cards/assets/c3-candidates.png": {
-  "source": "captures/showcase-01/11-recommend.png",
-  "sourceSha256_16": "1a7a5c9e90116dfa",
+  "source": "captures/showcase-02/12-recommend.png",
+  "sourceSha256_16": "e4cd93cf2c9d6205",
   "crop": [
    105,
    535,
@@ -105,8 +105,8 @@
   ]
  },
  "cards/assets/c3-opt2-before.png": {
-  "source": "captures/showcase-01/11-recommend-option-2.png",
-  "sourceSha256_16": "d55d70ed894789c9",
+  "source": "captures/showcase-02/12-recommend-option-2.png",
+  "sourceSha256_16": "d81d75f79ccf9bbc",
   "scale": "nearest x2",
   "size": [
    500,
@@ -114,8 +114,8 @@
   ]
  },
  "cards/assets/c3-opt2-after.png": {
-  "source": "captures/showcase-01/12-refine-option-2.png",
-  "sourceSha256_16": "bcd2787a45fef242",
+  "source": "captures/showcase-02/13-refine-option-2.png",
+  "sourceSha256_16": "33e097eec9149d69",
   "scale": "nearest x2",
   "size": [
    500,
@@ -123,8 +123,8 @@
   ]
  },
  "cards/assets/c3-guide.png": {
-  "source": "captures/showcase-01/02-guide.png",
-  "sourceSha256_16": "273db49b6eda01ad",
+  "source": "captures/showcase-02/02-guide.png",
+  "sourceSha256_16": "846696d476bdf15b",
   "crop": [
    262,
    55,
@@ -137,8 +137,8 @@
   ]
  },
  "cards/assets/c4-map.png": {
-  "source": "captures/showcase-01/14-map-1.png",
-  "sourceSha256_16": "3bc4bc7a147326a8",
+  "source": "captures/showcase-03-replay/14-map-1.png",
+  "sourceSha256_16": "96b3d5f132c7fbc3",
   "crop": [
    0,
    50,
@@ -151,7 +151,7 @@
   ]
  },
  "cover/assets/a-map.png": {
-  "source": "captures/showcase-01/03-ring-preview.png",
+  "source": "captures/showcase-03-replay/03-ring-preview.png",
   "sourceSha256_16": "de94173abd59b201",
   "scale": "nearest x2",
   "size": [
@@ -160,7 +160,7 @@
   ]
  },
  "cover/assets/b-1.png": {
-  "source": "captures/showcase-01/01-open-preview.png",
+  "source": "captures/showcase-03-replay/01-open-preview.png",
   "sourceSha256_16": "b2bcf955ac24cec9",
   "scale": "nearest x2",
   "size": [
@@ -169,7 +169,7 @@
   ]
  },
  "cover/assets/b-2.png": {
-  "source": "captures/showcase-01/03-ring-preview.png",
+  "source": "captures/showcase-03-replay/03-ring-preview.png",
   "sourceSha256_16": "de94173abd59b201",
   "scale": "nearest x2",
   "size": [
@@ -178,7 +178,7 @@
   ]
  },
  "cover/assets/b-3.png": {
-  "source": "captures/showcase-01/05-island-move-preview.png",
+  "source": "captures/showcase-03-replay/05-island-move-preview.png",
   "sourceSha256_16": "dc8c84b2fae699a1",
   "scale": "nearest x2",
   "size": [
@@ -187,8 +187,8 @@
   ]
  },
  "cover/assets/c-bg.png": {
-  "source": "captures/showcase-01/14-map-1.png",
-  "sourceSha256_16": "3bc4bc7a147326a8",
+  "source": "captures/showcase-03-replay/14-map-1.png",
+  "sourceSha256_16": "96b3d5f132c7fbc3",
   "crop": [
    180,
    65,
