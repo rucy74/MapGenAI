@@ -47,11 +47,26 @@
     [string]$Language='',
     [string]$ImageInputs='',
     [string]$ImageStates='',
-    [string]$RiverStability=''
+    [string]$Showcase='',
+    [string]$RiverStability='',
+    [int]$ScreenWidth=0,
+    [int]$ScreenHeight=0
 )
 $ErrorActionPreference='Stop'
 $probeStamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 $probeRepo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+if($Showcase){
+    # Showcase captures: rendered English UI, 1920x1080 at UI scale 1.5, real model config, marked isolated runtime only.
+    if(-not (Test-Path -LiteralPath (Join-Path $GameRoot 'MAPGENAI_HEADLESS_OWNED'))){throw 'Showcase runs only in a marked isolated runtime (MAPGENAI_HEADLESS_OWNED)'}
+    if(-not $Render){throw 'Showcase captures require -Render'}
+    if($Language -and $Language -ne 'English'){throw 'Showcase captures use the English UI'}
+    if(-not (Test-Path -LiteralPath $Showcase)){throw "Missing showcase scenario: $Showcase"}
+    $Language='English'
+    if(-not $ModelConfig){$ModelConfig=Join-Path $probeRepo 'docs/dev_config.json'}
+    if(-not (Test-Path -LiteralPath $ModelConfig)){throw 'Showcase requires a model config file'}
+    if(-not $ScreenWidth){$ScreenWidth=1920}
+    if(-not $ScreenHeight){$ScreenHeight=1080}
+}
 if (-not $Output) { $Output=Join-Path $probeRepo "docs/analysis/2026-09-13-implementation/runtime-$probeStamp" }
 if (-not $Profile) { $Profile=Join-Path $env:LOCALAPPDATA "mapgen-ai-probe/profile-$probeStamp" }
 if (-not $ProbeMod) { $ProbeMod=Join-Path $GameRoot "Mods/MapGenAI_Probe_$probeStamp" }
@@ -95,11 +110,11 @@ $config='<?xml version="1.0" encoding="utf-8"?><ModsConfigData><version>'+$versi
 if($Language){
     if($Language -notin @('English','Korean','Japanese','ChineseSimplified')){throw 'Unsupported probe language'}
     $probeLanguageName=if($Language -eq 'Korean'){'Korean (한국어)'}else{$Language}
-    [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/Prefs.xml'),('<Prefs><langFolderName>'+$probeLanguageName+'</langFolderName><screenWidth>1280</screenWidth><screenHeight>800</screenHeight><fullscreen>false</fullscreen></Prefs>'),[Text.UTF8Encoding]::new($false))
+    [IO.File]::WriteAllText((Join-Path $probeProfile 'Config/Prefs.xml'),('<Prefs><langFolderName>'+$probeLanguageName+'</langFolderName><screenWidth>'+$(if($ScreenWidth){$ScreenWidth}else{1280})+'</screenWidth><screenHeight>'+$(if($ScreenHeight){$ScreenHeight}else{800})+'</screenHeight><fullscreen>false</fullscreen>'+$(if($Showcase){'<uiScale>1.5</uiScale><adaptiveTrainingEnabled>false</adaptiveTrainingEnabled>'}else{''})+'</Prefs>'),[Text.UTF8Encoding]::new($false))
 }
 [IO.File]::WriteAllText((Join-Path $probeProfile 'MAPGENAI_DISPOSABLE'),'new test world only; never load a user save')
 [IO.File]::WriteAllText((Join-Path $probeModPath 'MAPGENAI_PROBE_OWNED'),$probeProfile)
-$arguments=@('-screen-fullscreen','0','-screen-width','960','-screen-height','640',('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
+$arguments=@('-screen-fullscreen','0','-screen-width',$(if($ScreenWidth){[string]$ScreenWidth}else{'960'}),'-screen-height',$(if($ScreenHeight){[string]$ScreenHeight}else{'640'}),('-savedatafolder="'+$probeProfile+'"'),('-mapgenAIProbe="'+$probeOutput+'"'),'-logFile',('"'+(Join-Path $probeOutput 'Player.log')+'"'))
 if(-not $Render){$arguments=@('-batchmode')+$arguments}
 if($Render){$arguments+='-mapgenAIProbeRender=true'}
 if($LandformSuite){$arguments+='-mapgenAILandformSuite="'+[IO.Path]::GetFullPath($LandformSuite)+'"';$arguments+='-mapgenAILandformSample='+$LandformSample}
@@ -141,10 +156,12 @@ if($DeltaDiagnostics){$arguments+='-mapgenAIDeltaDiagnostics=true'}
 if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($ModelConfig)+'"')}
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}
+if($Showcase){$arguments+=('-mapgenAIShowcase="'+[IO.Path]::GetFullPath($Showcase)+'"')}
 if($RiverStability){$arguments+=('-mapgenAIRiverStability="'+[IO.Path]::GetFullPath($RiverStability)+'"')}
 $process=Start-Process -FilePath $gameExe -ArgumentList $arguments -WindowStyle Hidden -PassThru
 $manifest=@{pid=$process.Id;profile=$probeProfile;mod=$probeModPath;output=$probeOutput;sourceDllSha256=(Get-FileHash -LiteralPath $mainDll -Algorithm SHA256).Hash;probeDllSha256=(Get-FileHash -LiteralPath $probeDll -Algorithm SHA256).Hash;created=(Get-Date).ToString('o')}
 $manifest|ConvertTo-Json | Set-Content -LiteralPath (Join-Path $probeOutput 'launch.json') -Encoding utf8
 $cleanupArgs=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"'+(Join-Path $PSScriptRoot 'cleanup.ps1')+'"'),'-Manifest',('"'+(Join-Path $probeOutput 'launch.json')+'"'),'-GameRoot',('"'+$GameRoot+'"'),'-WaitForExit')
-Start-Process -FilePath 'powershell.exe' -ArgumentList $cleanupArgs -WindowStyle Hidden | Out-Null
+# Showcase probe folders are archived (moved), not deleted, after the run.
+if(-not $Showcase){Start-Process -FilePath 'powershell.exe' -ArgumentList $cleanupArgs -WindowStyle Hidden | Out-Null}
 $manifest|ConvertTo-Json

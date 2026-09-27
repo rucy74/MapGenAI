@@ -48,6 +48,7 @@ namespace MapGenAI.RuntimeProbe
                 {RealImageProbe.Prepare(inputs,output);Application.Quit();return;}
                 LandformSuiteProbe.Configure();
                 CandidatePreviewProbe.Configure();
+                ShowcaseProbe.Configure();
                 RiverStabilityProbe.Configure();
                 ChatMemoryProbe.Configure();
                 SaveLoadProbe();
@@ -125,6 +126,8 @@ namespace MapGenAI.RuntimeProbe
         {
             try
             {
+                if(GenCommandLine.TryGetCommandLineArg("mapgenAIShowcase",out var showcase))
+                {ShowcaseProbe.Run(output,showcase);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIRiverStability",out _))
                 {RiverStabilityProbe.Run(output);return;}
                 if(GenCommandLine.TryGetCommandLineArg("mapgenAIChatMemory",out _))
@@ -342,6 +345,7 @@ namespace MapGenAI.RuntimeProbe
             ReadableChoicesProbe.Tick();
             CoverageProbe.Tick();
             LandformSuiteProbe.Tick();
+            ShowcaseProbe.Tick();
             RiverStabilityProbe.Tick();
             if(captureFrame<0)return;
             int frames=Time.frameCount-captureFrame;
