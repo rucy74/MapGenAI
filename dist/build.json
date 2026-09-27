@@ -1,9 +1,13 @@
 {
-  "sourceCommit": "0b42e65ac3a98206933e3112c55382fdf9a52236",
-  "dllSha256": "17c35e94fe6c3a5277137a28ccfe3c6b12990dbc7679ca08ec4517e5736d8549",
   "packageId": "Choco.MapGenAI",
   "gameVersion": "1.6",
-  "promotedFrom": "Choco.MapGenAI.Dev",
-  "developmentArchiveSha256": "aabf2f8f699ddf914672dafeea140025221e54f4dc71fbdae920071edf4026d2",
-  "createdUtc": "2026-09-22T14:24:04.062498+00:00"
+  "dllSha256": "f3f82a069f3abc644c03a068a821102cdc042d5bfcc83a299e10032b69b3855d",
+  "hotfixOf": {
+    "dllSha256": "0b582da94e1e2420e6aeab4932a5c3bec171e48a5e6bcbe56d3785374cfbbc69",
+    "sourceCommit": "2a039cd66c6569c7aacafdbf5ce66c7371c2662e"
+  },
+  "sourceBase": "2a039cd66c6569c7aacafdbf5ce66c7371c2662e",
+  "sourceBranch": "hotfix/entry-button",
+  "change": "World-map AI Map Gen button placed where no window covers it (Map Preview's preview window hid it); game patches applied one class at a time, entry button first, so one failing patch cannot remove the button or the settings page.",
+  "createdUtc": "2026-09-27T15:01:01+00:00"
 }
