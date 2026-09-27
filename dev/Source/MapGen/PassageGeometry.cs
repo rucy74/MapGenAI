@@ -1,4 +1,5 @@
 using System;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -54,5 +55,10 @@ namespace MapGenAI.MapGen
             }
             return result;
         }
+
+        // Built without a map so the generation check's wording stays testable.
+        public static string BlockedMessage(int blocked) => L10n.Pick(
+            "요청한 폭의 마른 통로에 장애물이 "+blocked+"칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다.",
+            "The requested dry passage footprint has "+blocked+" obstructed cells; adjust its route/width. World water and buildings are preserved.");
     }
 }

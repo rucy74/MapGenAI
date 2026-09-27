@@ -4,6 +4,7 @@ using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -57,7 +58,7 @@ namespace MapGenAI.MapGen
             for (int i = 0; i < additions.Count; i++)
                 for (int j = i + 1; j < additions.Count; j++)
                     if (Conflict(additions[i], additions[j]))
-                        throw new FormatException("함께 사용할 수 없는 지형 특징입니다: " + FeatureName(additions[i]) + ", " + FeatureName(additions[j]) + ". 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요. / These features conflict; choose what to keep or replace.");
+                        throw new FormatException(L10n.Pick("함께 사용할 수 없는 지형 특징입니다: " + FeatureName(additions[i]) + ", " + FeatureName(additions[j]) + ". 기존 특징을 유지하거나, 없애고 교체할 특징을 선택해 주세요.", "These features conflict: " + FeatureName(additions[i]) + ", " + FeatureName(additions[j]) + "; choose what to keep or replace."));
             var removals = new HashSet<string>(state.removeMutators);
             if (state.cavesExplicitlySet && !state.hasCaves) removals.Add("Caves");
             var result = ResolveExisting(baseline.mutators).Where(d => !removals.Contains(d.defName) && !d.categories.Any(suppressed.Contains)).ToList();

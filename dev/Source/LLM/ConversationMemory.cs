@@ -156,7 +156,7 @@ namespace MapGenAI.LLM
             catch(Exception)
             {
                 // An unsuccessful summary never replaces the previous checkpoint or the raw transcript.
-                result.Warning="대화 요약에 실패해 원문을 유지했습니다. / Summary failed; original conversation retained.";
+                result.Warning=L10n.Pick("대화 요약에 실패해 원문을 유지했습니다.", "Summary failed; original conversation retained.");
                 if(enforceBudget)EnsureFits(result);return result;
             }
         }
@@ -164,7 +164,7 @@ namespace MapGenAI.LLM
         static void EnsureFits(Prepared result)
         {
             if(result.InputTokens>=result.Budget)
-                throw new InvalidOperationException("대화 원문을 보존했습니다. 현재 설정·최근 대화가 입력 예산을 초과해 요청을 보내지 않았습니다. 모델/대화 입력 예산을 확인하거나 초기화해 주세요. / Original conversation retained. Input budget exceeded; no edit was sent. Check the model/input budget or reset.");
+                throw new InvalidOperationException(L10n.Pick("대화 원문을 보존했습니다. 현재 설정·최근 대화가 입력 예산을 초과해 요청을 보내지 않았습니다. 모델/대화 입력 예산을 확인하거나 초기화해 주세요.", "Original conversation retained. Input budget exceeded; no edit was sent. Check the model/input budget or reset."));
         }
     }
 }

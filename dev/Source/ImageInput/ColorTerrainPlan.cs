@@ -91,8 +91,8 @@ For recognizable native Map Preview images, solid mountain interiors use RGB(54,
                 labels[id]=ImageMapData.Label(entry.GetString("label"));
             }
             var cells=Groups.Select(g=>labels[g]).ToArray();
-            if(cells.Distinct().Count()==1)notes+="\n단일 지형 해석입니다. 원본을 확인하세요. / Single terrain class; review the reference.";
-            notes+="\n색이 비슷한 지형은 같은 종류로 묶일 수 있습니다. / Similar terrain colors can share a label.";
+            if(cells.Distinct().Count()==1)notes+="\n"+L10n.Pick("단일 지형 해석입니다. 원본을 확인하세요.", "Single terrain class; review the reference.");
+            notes+="\n"+L10n.Pick("색이 비슷한 지형은 같은 종류로 묶일 수 있습니다.", "Similar terrain colors can share a label.");
             var map=new ImageMapData{width=Width,height=Height,cells=new string(cells),note=notes,replaceElevation=true};map.Validate();
             return new ImageCandidate{title=title,notes=notes,map=map};
         }

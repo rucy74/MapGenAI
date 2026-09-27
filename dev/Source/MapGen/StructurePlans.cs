@@ -113,7 +113,7 @@ namespace MapGenAI.MapGen
         {
             if (p == null) throw new FormatException("Null structure plan");
             Id(p.id);
-            if (p.kind != "ruin" && p.kind!="ancient_danger") throw new FormatException("현재 위치 지정 지원 구조물: ruin / ancient_danger. 임의 모드 건물은 별도 생성기가 필요합니다. / Supported kinds: ruin and ancient_danger; other structures require an adapter.");
+            if (p.kind != "ruin" && p.kind!="ancient_danger") throw new FormatException(L10n.Pick("현재 위치 지정 지원 구조물: ruin / ancient_danger. 임의 모드 건물은 별도 생성기가 필요합니다.", "Supported kinds: ruin and ancient_danger; other structures require an adapter."));
             if (p.region != null) Id(p.region);
             if(p.region_part!=null && p.region_part!="inside" && p.region_part!="enclosed")throw new FormatException("Structure region_part must be inside or enclosed");
             if(p.region_part!=null && p.region==null)throw new FormatException("Structure region_part requires a region ID; clear both when unbinding");
@@ -140,7 +140,7 @@ namespace MapGenAI.MapGen
             {
                 ShapeValidation.Range(p.width,15,20,"ancient danger width");ShapeValidation.Range(p.height,15,20,"ancient danger height");
                 ShapeValidation.Range(p.count,1,2,"ancient danger count per plan");
-                if(p.rotation!=0)throw new FormatException("고대 위협은 내부 배치를 게임 생성기가 결정하며 회전 지정은 아직 지원하지 않습니다. / Native ancient danger rotation is not supported.");
+                if(p.rotation!=0)throw new FormatException(L10n.Pick("고대 위협은 내부 배치를 게임 생성기가 결정하며 회전 지정은 아직 지원하지 않습니다.", "Native ancient danger rotation is not supported."));
             }
         }
         public static void Validate(TileMapState state)
@@ -154,7 +154,7 @@ namespace MapGenAI.MapGen
                 if (p.region != null)
                 {
                     var shape = state.elevationShapes.Find(s => s.id == p.region);
-                    if (shape == null) throw new FormatException("유적이 참조하는 영역이 없습니다. 함께 제거하거나 다시 지정하세요. / Missing structure region; remove or rebind the structure too: " + p.region);
+                    if (shape == null) throw new FormatException(L10n.Pick("유적이 참조하는 영역이 없습니다. 함께 제거하거나 다시 지정하세요: ", "Missing structure region; remove or rebind the structure too: ") + p.region);
                     if (shape.type != "composite" && shape.type != "bump" && shape.type != "ring" && shape.type != "region_fill" && shape.type != "landform") throw new FormatException("Structure region requires composite, bump, ring, landform or region_fill geometry");
                     if(shape.type=="landform" && p.region_part=="enclosed")throw new FormatException("Use inside for a landform's planned floor");
                     if(p.region_part=="enclosed" && shape.type=="region_fill")throw new FormatException("For an enclosed interior, reference the original ring, not its partial material fill");

@@ -53,6 +53,7 @@
     <Compile Include="../../../tools/fixtures/NaturalShapeFixtures.cs" Link="NaturalShapeFixtures.cs" />
     <Compile Include="../../../tools/fixtures/LandscapeCompositionFixtures.cs" Link="LandscapeCompositionFixtures.cs" />
     <Compile Include="../UI/SimpleJson.cs" Link="SimpleJson.cs" />
+    <Compile Include="../UI/L10n.cs" Link="L10n.cs" />
     <Compile Include="../MapGen/MapParameterParser.cs" Link="MapParameterParser.cs" />
     <Compile Include="../MapGen/MapStateEditor.cs" Link="MapStateEditor.cs" />
     <Compile Include="../MapGen/ShapeEdits.cs" Link="ShapeEdits.cs" />

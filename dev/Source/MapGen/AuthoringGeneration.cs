@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -190,7 +191,7 @@ namespace MapGenAI.MapGen
                 bool Constraint(PlannedRect r)=> (relation==null || relation(r)) && jobs.All(j=>Separated(r,j.Item2,Math.Max(p.spacing,j.Item1.spacing)));
                 int width=p.rotation%180==0?p.width:p.height,height=p.rotation%180==0?p.height:p.width;
                 var positions=PlacementPlanner.Find(cols,rows,allowed,occupied,width,height,p.count,targetX,targetZ,p.spacing,Constraint);
-                if(positions==null)throw new InvalidOperationException("구조물 배치 실패 / Structure placement failed ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요. / Expand the region, reduce size/count or flatten it. No positioned structures were spawned.");
+                if(positions==null)throw new InvalidOperationException(L10n.Pick("구조물 배치 실패 ["+p.id+"]: 지정 영역에 전체 크기 "+p.width+"×"+p.height+", "+p.count+"개를 놓을 안전한 공간이 없습니다. 영역 확대·크기/개수 축소·평탄화를 요청하세요.", "Structure placement failed ["+p.id+"] (size "+p.width+"×"+p.height+", count "+p.count+"): Expand the region, reduce size/count or flatten it. No positioned structures were spawned."));
                 jobs.AddRange(positions.Select(r=>Tuple.Create(p,r)));
             }
             // All plans are feasible before any positioned structure is spawned.

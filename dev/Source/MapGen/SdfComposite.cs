@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -372,7 +373,7 @@ namespace MapGenAI.MapGen
                 int dx=0,dz=0;
                 if(clipped || regions==null || !LandscapePlacement.TryPlace(cols,rows,source,footprint,placement,direction,out dx,out dz,blocked))
                 {
-                    const string failure="요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요. / The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.";
+                    string failure=L10n.Pick("요청한 지형을 기준 영역에 온전히 배치할 공간이 없습니다. 크기를 줄이거나 위치 관계를 바꿔 주세요.", "The complete terrain footprint does not fit its anchor area; reduce its size or change the relationship.");
                     if(GenerationContext.Report!=null)GenerationContext.Report.issues.Add(failure);
                     Log.Warning("[MapGenAI] "+failure);
                     return;

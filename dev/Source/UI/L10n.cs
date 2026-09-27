@@ -15,6 +15,9 @@ namespace MapGenAI.UI
             catch { return false; }
         }
 
+        /// <summary>Text for the game language only; user-facing messages never join both languages.</summary>
+        public static string Pick(string ko, string en) => IsKorean() ? ko : en;
+
         private static readonly Dictionary<string, (string ko, string en)> Strings = new Dictionary<string, (string ko, string en)>
         {
             // UI

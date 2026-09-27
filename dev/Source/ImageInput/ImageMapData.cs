@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.ImageInput
 {
@@ -37,7 +38,7 @@ namespace MapGenAI.ImageInput
             try {Validate();}
             catch(FormatException)
             {
-                const string warning="저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요. / Invalid saved image terrain was repaired; review before applying.";
+                string warning=L10n.Pick("저장된 이미지 지형이 손상되어 복구했습니다. 확인 후 다시 적용하세요.", "Invalid saved image terrain was repaired; review before applying.");
                 if(width<1 || height<1 || width>MaxSide || height>MaxSide || cells==null || cells.Length!=width*height)
                 {width=height=1;cells="N";}
                 else
@@ -111,6 +112,6 @@ namespace MapGenAI.ImageInput
             }
         }
         public string SamplingWarning(int targetWidth,int targetHeight) => width>targetWidth || height>targetHeight
-            ? "이미지 지형을 작은 맵으로 축소하므로 가는 통로나 작은 섬이 사라질 수 있습니다. / Downsampling image terrain may lose thin passages or small islands." : null;
+            ? L10n.Pick("이미지 지형을 작은 맵으로 축소하므로 가는 통로나 작은 섬이 사라질 수 있습니다.", "Downsampling image terrain may lose thin passages or small islands.") : null;
     }
 }

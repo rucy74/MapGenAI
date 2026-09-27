@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -48,8 +49,8 @@ namespace MapGenAI.MapGen
         public static TerrainDef Resolve(string fill, bool deep = true)
         {
             var def = DefDatabase<TerrainDef>.GetNamedSilentFail(DefName(fill, deep));
-            if (!Supported(def)) throw new FormatException("사용할 수 없는 채움 재료 / Unavailable fill material: " + fill +
-                ". 활성 재료 목록을 사용하세요. 임시 용암·바다·강·건축 바닥은 별도 기능입니다. / Use the active material catalog; temporary lava, ocean/river and constructed floors need separate generators.");
+            if (!Supported(def)) throw new FormatException(L10n.Pick("사용할 수 없는 채움 재료: " + fill +
+                ". 활성 재료 목록을 사용하세요. 임시 용암·바다·강·건축 바닥은 별도 기능입니다.", "Unavailable fill material: " + fill + ". Use the active material catalog; temporary lava, ocean/river and constructed floors need separate generators."));
             return def;
         }
         public static void Validate(TileMapState state)
@@ -59,7 +60,7 @@ namespace MapGenAI.MapGen
                 if (!string.IsNullOrEmpty(shape.fill))
                 {
                     var material=Resolve(shape.fill);
-                    if(shape.type=="passage" && (material.IsWater || material.dangerous))throw new FormatException("통로에는 마른 안전한 바닥 재료가 필요합니다. / Passage requires dry, safe ground.");
+                    if(shape.type=="passage" && (material.IsWater || material.dangerous))throw new FormatException(L10n.Pick("통로에는 마른 안전한 바닥 재료가 필요합니다.", "Passage requires dry, safe ground."));
                 }
                 if (shape.compositeOps != null)
                     foreach (var op in shape.compositeOps)

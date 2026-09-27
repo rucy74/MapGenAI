@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -37,7 +38,7 @@ namespace MapGenAI.MapGen
                 var mask=s.scope=="mountains"?GenerationContext.Regions(map).Mask(s.id):PassageGeometry.Mask(map.Size.x,map.Size.z,s.points,s.width,s.edge_roughness,s.id);int blocked=0;
                 if(s.scope=="mountains" && !mask.Any(b=>b))
                 {
-                    AuthoringGeneration.Fail(new InvalidOperationException("지정한 통로 경로에 깎을 산이 없습니다. 평지는 유지했습니다. / No mountain intersects the passage route. Open ground was preserved."));
+                    AuthoringGeneration.Fail(new InvalidOperationException(L10n.Pick("지정한 통로 경로에 깎을 산이 없습니다. 평지는 유지했습니다.", "No mountain intersects the passage route. Open ground was preserved.")));
                     continue;
                 }
                 foreach(var c in map.AllCells)if(mask[c.z*map.Size.x+c.x])
@@ -45,7 +46,7 @@ namespace MapGenAI.MapGen
                     var t=map.terrainGrid.TerrainAt(c);
                     if(t.IsWater || t.dangerous || !c.Walkable(map) || MapGenerator.Elevation[c]>=.7f)blocked++;
                 }
-                if(blocked>0)AuthoringGeneration.Fail(new InvalidOperationException("요청한 폭의 마른 통로에 장애물이 "+blocked+"칸 남았습니다. 위치/폭을 조정하세요. 기존 강·해안·건물을 강제로 지우지 않습니다. / The requested dry passage footprint has "+blocked+" obstructed cells; adjust its route/width. World water and buildings are preserved."));
+                if(blocked>0)AuthoringGeneration.Fail(new InvalidOperationException(PassageGeometry.BlockedMessage(blocked)));
             }
         }
         public static void Reserve(Map map)

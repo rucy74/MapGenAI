@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -17,12 +18,12 @@ namespace MapGenAI.MapGen
                 if(bridgeable==null || bridgeable.Length!=ground.Length)throw;
                 int Index(float[] p)=>(int)Math.Round(p[1]*(rows-1),MidpointRounding.AwayFromZero)*cols+(int)Math.Round(p[0]*(cols-1),MidpointRounding.AwayFromZero);
                 if(!ground[Index(points[0])] || !ground[Index(points[points.Length-1])])
-                    throw new InvalidOperationException("다리를 포함한 도로의 시작과 끝은 육지나 기존 다리에 두세요. / Road endpoints must be on land or an existing bridge.");
+                    throw new InvalidOperationException(L10n.Pick("다리를 포함한 도로의 시작과 끝은 육지나 기존 다리에 두세요.", "Road endpoints must be on land or an existing bridge."));
                 var supported=new bool[ground.Length];
                 for(int i=0;i<supported.Length;i++)supported[i]=ground[i] || bridgeable[i];
                 try{return Plan(cols,rows,supported,points,mode,radius);}
                 catch(InvalidOperationException error)
-                {throw new InvalidOperationException("도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요. / No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints.",error);}
+                {throw new InvalidOperationException(L10n.Pick("도로와 다리를 놓을 공간이 부족합니다. 다리로 건널 수 없는 물·용암·산·건물은 유지합니다. 경유점이나 경로를 조정하세요.", "No supported road and bridge route; unbridgeable water, lava, mountains and buildings are preserved. Adjust the route or waypoints."),error);}
             }
         }
         public static List<int> Plan(int cols,int rows,bool[] ground,float[][] points,string mode,float radius)
@@ -34,7 +35,7 @@ namespace MapGenAI.MapGen
             for(int n=1;n<points.Length;n++)
             {
                 int a=Index(points[n-1]),b=Index(points[n]);
-                if(a==b)throw new InvalidOperationException("도로 경유점이 같은 맵 칸에 있습니다. / Road waypoints resolve to the same map cell.");
+                if(a==b)throw new InvalidOperationException(L10n.Pick("도로 경유점이 같은 맵 칸에 있습니다.", "Road waypoints resolve to the same map cell."));
                 List<int> leg;
                 if(mode=="direct")
                 {
@@ -62,7 +63,7 @@ namespace MapGenAI.MapGen
             return result;
             int Index(float[] point)=>(int)Math.Round(point[1]*(rows-1),MidpointRounding.AwayFromZero)*cols+(int)Math.Round(point[0]*(cols-1),MidpointRounding.AwayFromZero);
         }
-        static Exception Blocked()=>new InvalidOperationException("도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다. / No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved.");
+        static Exception Blocked()=>new InvalidOperationException(L10n.Pick("도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다.", "No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved."));
         static void Append(List<int> target,List<int> source){foreach(int cell in source)if(target.Count==0 || target[target.Count-1]!=cell)target.Add(cell);}
         public static bool[] Clearance(int cols,int rows,bool[] ground,float radius)
         {

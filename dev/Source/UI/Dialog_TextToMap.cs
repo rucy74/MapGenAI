@@ -806,7 +806,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                         break;
                     }
                     catch (OperationCanceledException) when (ticket.Token.IsCancellationRequested) { return; }
-                    catch (OperationCanceledException) { error = "요청 시간이 초과되었습니다. 다시 시도해 주세요. / Request timed out."; }
+                    catch (OperationCanceledException) { error = L10n.Pick("요청 시간이 초과되었습니다. 다시 시도해 주세요.", "Request timed out."); }
                     catch (Exception e) { error=e.Message; }
                 }
                 _requests.Complete(ticket,result,error,prepared);

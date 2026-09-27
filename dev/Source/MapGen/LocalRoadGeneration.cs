@@ -4,6 +4,7 @@ using System.Linq;
 using RimWorld;
 using RimWorld.BaseGen;
 using Verse;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -51,7 +52,7 @@ namespace MapGenAI.MapGen
                 foreach(var cell in map.AllCells)bridgeable[cell.z*cols+cell.x]=MapGenerator.Elevation[cell]<.7f && RoadBridges.Supports(map,cell,bridge);
                 List<int> path;
                 try{path=RoadRouting.PlanWithBridges(cols,rows,ground,bridgeable,plan.points,plan.route,radius);}
-                catch(Exception e){throw new InvalidOperationException(RoadPlans.Label(plan.kind,true)+" / "+RoadPlans.Label(plan.kind,false)+": "+e.Message,e);}
+                catch(Exception e){throw new InvalidOperationException(RoadPlans.Label(plan.kind,L10n.IsKorean())+": "+e.Message,e);}
                 var distance=Distances(cols,rows,path,radius,bridgeable,out var bridgeOrigins);
                 var job=new Job{plan=plan,result=new RoadPlacement{id=plan.id,kind=plan.kind,length=path.Count},footprint=new bool[ground.Length]};
                 foreach(int i in path)job.result.path.Add(new[]{i%cols,i/cols});
@@ -69,7 +70,7 @@ namespace MapGenAI.MapGen
                     var cell=new IntVec3(i%cols,0,i/cols);
                     var before=map.terrainGrid.TerrainAt(cell);
                     if((!ground[i] && !bridgeable[i]) || cell.GetEdifice(map)!=null || map.terrainGrid.TempTerrainAt(cell)!=null || cell.GetThingList(map).Any(t=>t is Pawn || t is Blueprint || t is Frame))
-                        throw new InvalidOperationException("도로 공간에 기존 장애물이 있습니다. 위치를 조정하세요. / Existing obstacles occupy the road footprint; adjust its route. No local roads were painted.");
+                        throw new InvalidOperationException(L10n.Pick("도로 공간에 기존 장애물이 있습니다. 위치를 조정하세요.", "Existing obstacles occupy the road footprint; adjust its route. No local roads were painted."));
                     if(bridgeable[i])
                     {
                         // Wet shoulders remain water. Use the road's native solid
@@ -169,7 +170,7 @@ namespace MapGenAI.MapGen
                     var c=new IntVec3(p[0],0,p[1]);var t=map.terrainGrid.TerrainAt(c);
                     return t.IsWater || t.IsRiver || t.dangerous || MapGenerator.Elevation[c]>=.7f || c.GetEdifice(map)!=null;
                 });
-                if(road.blockedCells>0)AuthoringGeneration.RoadFailure(new InvalidOperationException(RoadPlans.Label(road.kind,true)+" / "+RoadPlans.Label(road.kind,false)+": 생성 후 경로에 장애물 "+road.blockedCells+"칸이 남았습니다. 기존 건물/지형을 유지했습니다. / Later generation obstructed the road; existing structures and terrain were preserved."));
+                if(road.blockedCells>0)AuthoringGeneration.RoadFailure(new InvalidOperationException(L10n.Pick(RoadPlans.Label(road.kind,true)+": 생성 후 경로에 장애물 "+road.blockedCells+"칸이 남았습니다. 기존 건물/지형을 유지했습니다.", RoadPlans.Label(road.kind,false)+": Later generation obstructed the road ("+road.blockedCells+" cells); existing structures and terrain were preserved.")));
             }
         }
     }

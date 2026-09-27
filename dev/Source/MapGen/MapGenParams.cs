@@ -416,14 +416,14 @@ namespace MapGenAI.MapGen
             if (missing.Count > 0)
             {
                 candidate.mutators.RemoveAll(missing.Contains);
-                if (!validateOnly) LastApplyWarning = "비활성 모드의 특징 생략 / Unavailable features omitted: " + string.Join(", ", missing);
+                if (!validateOnly) LastApplyWarning = MapGenAI.UI.L10n.Pick("비활성 모드의 특징 생략: ", "Unavailable features omitted: ") + string.Join(", ", missing);
             }
             // A concurrent removal of one of our features must not be silently undone.
             if (lastApplied != null && previous != null)
             {
                 var externallyRemoved = lastApplied.mutators.Except(beforeWorld.mutators).ToList();
                 if (candidate.mutators.Any(n => externallyRemoved.Contains(n) && previous.mutators.Contains(n)))
-                    throw new System.FormatException("다른 작업에서 제거한 특징과 충돌합니다. 해당 특징을 remove_mutators로 먼저 해제하세요. / A feature was removed externally; remove it from this plan before editing.");
+                    throw new System.FormatException(MapGenAI.UI.L10n.Pick("다른 작업에서 제거한 특징과 충돌합니다. 해당 특징을 remove_mutators로 먼저 해제하세요.", "A feature was removed externally; remove it from this plan before editing."));
             }
             var desired = WorldTileEditor.Plan(tile, baseline, candidate);
             if (validateOnly) return;
@@ -499,7 +499,7 @@ namespace MapGenAI.MapGen
             catch { WorldTileEditor.Restore(tile, before); throw; }
             wc.SetState(tileId, state);
             wc.SetLastApplied(tileId, TileWorldSnapshot.Capture(tile));
-            LastApplyWarning = "이전 개발판의 강·해안 제거 설정을 해제하고 월드 연결을 복원했습니다 / Restored world connections suppressed by an older dev build.";
+            LastApplyWarning = MapGenAI.UI.L10n.Pick("이전 개발판의 강·해안 제거 설정을 해제하고 월드 연결을 복원했습니다", "Restored world connections suppressed by an older dev build.");
             Log.Warning("[MapGenAI] " + LastApplyWarning);
         }
 

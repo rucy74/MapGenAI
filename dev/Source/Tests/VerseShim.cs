@@ -30,6 +30,17 @@ namespace Verse
         }
     }
 
+    /// <summary>Game language setting read by L10n. Tests switch it to check each language's text.</summary>
+    public static class Prefs
+    {
+        public static string LangFolderName { get; set; } = "English";
+    }
+
+    public static class Translator
+    {
+        public static string Translate(this string key) => key;
+    }
+
     /// <summary>WorldSelector 스텁. SelectedTile은 항상 -1 반환.</summary>
     public class WorldSelector
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using MapGenAI.UI;
 
 namespace MapGenAI.ImageInput
 {
@@ -157,7 +158,7 @@ namespace MapGenAI.ImageInput
                     if(pixels[i].a<128 || best>3600) {label='N';unknown++;}
                     cells[i]=label;
                 }
-                return new ImageMapData {width=small.width,height=small.height,cells=new string(cells),replaceElevation=true,note="팔레트 색상 매칭 / Palette color matching. 인식되지 않은 픽셀은 자연 지형으로 유지 / Unmatched pixels use natural terrain: "+unknown+" / "+cells.Length};
+                return new ImageMapData {width=small.width,height=small.height,cells=new string(cells),replaceElevation=true,note=L10n.Pick("팔레트 색상 매칭. 인식되지 않은 픽셀은 자연 지형으로 유지: ", "Palette color matching. Unmatched pixels use natural terrain: ")+unknown+" / "+cells.Length};
             }
             finally {UnityEngine.Object.Destroy(small);}
         }

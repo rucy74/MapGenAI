@@ -28,7 +28,7 @@ namespace MapGenAI.LLM
             try{ValidateEnvelope(repaired,requireRecommendations);var reason=reject?.Invoke(repaired);if(reason!=null)throw new FormatException(reason);return repaired;}
             catch(FormatException error)
             {
-                throw new FormatException("AI 응답 형식을 한 번 다시 요청했지만 올바른 JSON을 받지 못했습니다. 맵 설정은 변경하지 않았습니다. / The AI returned an invalid response after one format retry; no settings were changed.",error);
+                throw new FormatException(L10n.Pick("AI 응답 형식을 한 번 다시 요청했지만 올바른 JSON을 받지 못했습니다. 맵 설정은 변경하지 않았습니다.", "The AI returned an invalid response after one format retry; no settings were changed."),error);
             }
         }
         public static void ValidateEnvelope(string response,bool requireRecommendations=false)

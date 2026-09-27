@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MapGenAI.UI;
 
 namespace MapGenAI.MapGen
 {
@@ -64,7 +65,7 @@ namespace MapGenAI.MapGen
         }
         public Func<PlannedRect,bool> Constrain(bool[] allowed,SpatialRelation relation)
         {
-            if(!HasTarget)throw new InvalidOperationException("배치 기준 지형이 없습니다 / Placement target is absent: "+relation.target);
+            if(!HasTarget)throw new InvalidOperationException(L10n.Pick("배치 기준 지형이 없습니다: ", "Placement target is absent: ")+relation.target);
             var near=new int[(cols+1)*(rows+1)];int stride=cols+1;
             float min=relation.min_distance*relation.min_distance,max=relation.max_distance*relation.max_distance;
             for(int z=0;z<rows;z++)for(int x=0;x<cols;x++)

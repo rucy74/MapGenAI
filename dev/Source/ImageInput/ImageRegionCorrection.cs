@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MapGenAI.LLM;
+using MapGenAI.UI;
 
 namespace MapGenAI.ImageInput
 {
@@ -13,7 +14,7 @@ namespace MapGenAI.ImageInput
             if(root.GetString("action")=="ask") {message=root.GetString("message")??"No terrain label was changed.";return map.Clone();}
             if(root.GetString("action")!="relabel") throw new FormatException("Unsupported image region correction");
             char label=ImageMapData.Label(root.GetString("label"));
-            message="영역 지형 / Region terrain → "+root.GetString("label");
+            message=L10n.Pick("영역 지형 → ", "Region terrain → ")+root.GetString("label");
             return map.Relabel(selection,label);
         }
     }

@@ -62,8 +62,8 @@ Labels: natural (leave existing generated terrain), mountain, water, shallow_wat
                     if(count==0) throw new FormatException("Image region is smaller than a terrain cell: "+id);
                 }
                 for(int i=0;i<regionNames.Count;i++) if(!owners.Contains(i))
-                    notes+="\n겹침으로 사라진 영역 / Fully covered region: "+regionNames[i];
-                if(cells.Distinct().Count()==1) notes+="\n단일 지형으로 해석되었습니다. 원본과 비교한 뒤 적용하세요. / Only one terrain class; compare with the reference before applying.";
+                    notes+="\n"+L10n.Pick("겹침으로 사라진 영역: ", "Fully covered region: ")+regionNames[i];
+                if(cells.Distinct().Count()==1) notes+="\n"+L10n.Pick("단일 지형으로 해석되었습니다. 원본과 비교한 뒤 적용하세요.", "Only one terrain class; compare with the reference before applying.");
                 var map=new ImageMapData {width=width,height=height,cells=new string(cells),note=notes,replaceElevation=true}; map.Validate();
                 result.Add(new ImageCandidate {title=title,notes=notes,map=map});
             }
