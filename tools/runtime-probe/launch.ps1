@@ -49,6 +49,7 @@
     [string]$ImageStates='',
     [string]$Showcase='',
     [string]$RiverStability='',
+    [string]$SimulatePatchFailure='',
     [int]$ScreenWidth=0,
     [int]$ScreenHeight=0
 )
@@ -157,6 +158,7 @@ if($ModelConfig){$arguments+=('-mapgenAIModelConfig="'+[IO.Path]::GetFullPath($M
 if($ImageInputs){$arguments+=('-mapgenAIImageInputs="'+[IO.Path]::GetFullPath($ImageInputs)+'"')}
 if($ImageStates){$arguments+=('-mapgenAIImageStates="'+[IO.Path]::GetFullPath($ImageStates)+'"')}
 if($Showcase){$arguments+=('-mapgenAIShowcase="'+[IO.Path]::GetFullPath($Showcase)+'"')}
+if($SimulatePatchFailure){$arguments+=('-mapgenAISimulatePatchFailure='+$SimulatePatchFailure)}
 if($RiverStability){$arguments+=('-mapgenAIRiverStability="'+[IO.Path]::GetFullPath($RiverStability)+'"')}
 $process=Start-Process -FilePath $gameExe -ArgumentList $arguments -WindowStyle Hidden -PassThru
 $manifest=@{pid=$process.Id;profile=$probeProfile;mod=$probeModPath;output=$probeOutput;sourceDllSha256=(Get-FileHash -LiteralPath $mainDll -Algorithm SHA256).Hash;probeDllSha256=(Get-FileHash -LiteralPath $probeDll -Algorithm SHA256).Hash;created=(Get-Date).ToString('o')}

@@ -47,6 +47,7 @@ namespace MapGenAI.RuntimeProbe
         static volatile string stepId = "setup";
         static SimpleJsonObject scenario;
         static bool dryRun, active, finishing;
+        static int entryDraws; static Rect entryRect;
         static readonly object gate = new object();
         static readonly List<Step> steps = new List<Step>();
         static readonly List<Call> calls = new List<Call>();
@@ -129,6 +130,12 @@ namespace MapGenAI.RuntimeProbe
             h.Patch(AccessTools.Method(typeof(ProviderContextBudgets), "GeminiAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeBudget)));
             h.Patch(AccessTools.Method(typeof(ProviderContextBudgets), "CountGeminiAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeCount)));
             h.Patch(AccessTools.Method(typeof(Dialog_TextToMap), "HandleResponse"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(RecordResponse)));
+            if (scenario.GetBool("entryAudit"))
+            {
+                // Counts real draws of the world-map entry button through the production OnGUI path (not a direct dialog open).
+                var draw = AccessTools.Method("MapGenAI.Patches.WorldInterface_Patch:DrawAIButton");
+                if (draw != null) h.Patch(draw, postfix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(AfterEntryDraw)));
+            }
             windowAtStartup = ShowGameWindow();
         }
 
@@ -154,6 +161,24 @@ namespace MapGenAI.RuntimeProbe
         }
 
         static void FixedWorldSeed(ref string seedString) => seedString = worldSeed;
+        static void AfterEntryDraw(Rect btnRect) { entryDraws++; entryRect = btnRect; }
+        // Whether the entry button and the settings page survived startup: the Mod instance exists only if its constructor finished.
+        static Dictionary<string, object> EntryAudit()
+        {
+            const string owner = "Choco.MapGenAI";
+            var onGui = AccessTools.Method(typeof(WorldInterface), "WorldInterfaceOnGUI");
+            var info = onGui == null ? null : HarmonyLib.Harmony.GetPatchInfo(onGui);
+            int ours = HarmonyLib.Harmony.GetAllPatchedMethods().Count(m => HarmonyLib.Harmony.GetPatchInfo(m)?.Owners.Contains(owner) == true);
+            var mod = LoadedModManager.ModHandles.FirstOrDefault(m => m is MapGenAIMod);
+            return new Dictionary<string, object> {
+                { "buttonPatchApplied", info?.Owners.Contains(owner) == true },
+                { "methodsPatchedByMapGenAI", ours },
+                { "modSettingsRegistered", mod != null },
+                { "settingsCategory", mod?.SettingsCategory() },
+                { "buttonDrawCalls", entryDraws },
+                { "buttonRect", RectInfo(entryRect) },
+                { "tile", currentTile } };
+        }
         static bool HideAlerts() => false;
         static void ParkMouse() { if (Event.current != null) Event.current.mousePosition = new Vector2(-100000f, -100000f); }
         static bool BeforeChat(GeminiClient __instance, ref Task<string> __result, out object __state)
@@ -340,6 +365,15 @@ namespace MapGenAI.RuntimeProbe
             CameraJumper.TryShowWorld();
             foreach (var y in Frames(30)) yield return y; // Map Preview ignores selections in the first world frames.
             foreach (var y in ShowTile(tileA)) yield return y;
+            if (scenario.GetBool("entryAudit"))
+            {
+                foreach (var y in Frames(captureDelay)) yield return y;
+                var entry = EntryAudit();
+                foreach (var y in Capture("00-world-entry", entry)) yield return y;
+                entry["buttonDrawCallsAfterCapture"] = entryDraws;
+                result["entryAudit"] = entry;
+                if (steps.Count == 0) { stepId = "done"; yield break; }
+            }
             OpenDialog();
             foreach (var y in Frames(10)) yield return y;
             for (int i = 0; i < steps.Count; i++)
