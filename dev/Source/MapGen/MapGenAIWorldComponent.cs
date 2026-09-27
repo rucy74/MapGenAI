@@ -41,12 +41,13 @@ namespace MapGenAI.MapGen
             lock (stateLock) tileStates[tileId] = state.Clone();
         }
 
-        public TileWorldSnapshot GetBaseline(int tileId) => tileBaselines.TryGetValue(tileId, out var value) ? value : null;
-        public void SetBaseline(int tileId, TileWorldSnapshot baseline) => tileBaselines[tileId] = baseline;
-        public void RemoveBaseline(int tileId) => tileBaselines.Remove(tileId);
-        public TileWorldSnapshot GetLastApplied(int tileId) => lastAppliedTiles.TryGetValue(tileId, out var value) ? value : null;
-        public void SetLastApplied(int tileId, TileWorldSnapshot snapshot) => lastAppliedTiles[tileId] = snapshot;
-        public void RemoveLastApplied(int tileId) => lastAppliedTiles.Remove(tileId);
+        // Map Preview reads these from its worker thread while the dialog commits on the main thread.
+        public TileWorldSnapshot GetBaseline(int tileId) { lock (stateLock) return tileBaselines.TryGetValue(tileId, out var value) ? value : null; }
+        public void SetBaseline(int tileId, TileWorldSnapshot baseline) { lock (stateLock) tileBaselines[tileId] = baseline; }
+        public void RemoveBaseline(int tileId) { lock (stateLock) tileBaselines.Remove(tileId); }
+        public TileWorldSnapshot GetLastApplied(int tileId) { lock (stateLock) return lastAppliedTiles.TryGetValue(tileId, out var value) ? value : null; }
+        public void SetLastApplied(int tileId, TileWorldSnapshot snapshot) { lock (stateLock) lastAppliedTiles[tileId] = snapshot; }
+        public void RemoveLastApplied(int tileId) { lock (stateLock) lastAppliedTiles.Remove(tileId); }
 
         /// <summary>타일의 상태를 삭제 (리셋).</summary>
         public void RemoveState(int tileId)

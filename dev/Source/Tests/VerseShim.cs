@@ -64,12 +64,29 @@ namespace Verse
         public static RimWorld.Planet.World World { get; set; }
     }
 
+    /// <summary>Same stream as Verse.Rand 1.6 (MurmurHash of seed and draw count), so draw-order tests match the game.</summary>
     public static class Rand
     {
-        private static readonly Random _rng = new Random(42);
-        public static float Value => (float)_rng.NextDouble();
-        public static float Range(float min, float max) => min + (float)_rng.NextDouble() * (max - min);
-        public static int Range(int min, int max) => _rng.Next(min, max);
+        private static uint seed = 42, iterations;
+        private static readonly Stack<ulong> states = new Stack<ulong>();
+        public static int Seed { set { seed = (uint)value; iterations = 0; } }
+        public static int Int => Hash(seed, iterations++);
+        public static float Value => (float)(((double)Hash(seed, iterations++) - -2147483648.0) / 4294967295.0);
+        public static float Range(float min, float max) => max <= min ? min : Value * (max - min) + min;
+        public static int Range(int min, int max) => max <= min ? min : min + Math.Abs(Int % (max - min));
+        public static void PushState() => states.Push(seed | ((ulong)iterations << 32));
+        public static void PushState(int replacementSeed) { PushState(); Seed = replacementSeed; }
+        public static void PopState() { ulong state = states.Pop(); seed = (uint)state; iterations = (uint)(state >> 32); }
+        private static int Hash(uint seed, uint input)
+        {
+            unchecked
+            {
+                uint num = input * 3432918353u; num = (num << 15) | (num >> 17); num *= 461845907u;
+                uint h = seed ^ num; h = (h << 13) | (h >> 19); h = h * 5 + 3864292196u; h ^= 0xA8F3B65Au;
+                h ^= h >> 16; h *= 2246822507u; h ^= h >> 13; h *= 3266489909u;
+                return (int)(h ^ (h >> 16));
+            }
+        }
     }
 
     public static class DefDatabase<T> where T : class
