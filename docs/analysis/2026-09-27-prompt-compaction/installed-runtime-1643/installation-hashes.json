@@ -1,0 +1,22 @@
+[
+  {
+    "hash": "45646072C2E758AD909ECAF9679C5586D3977C900E41AEC97B24CD607E9ECE8C",
+    "path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dev\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "hash": "0B582DA94E1E2420E6AEAB4932A5C3BEC171E48A5E6BCBE56D3785374CFBBC69",
+    "path": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\dist\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "hash": "45646072C2E758AD909ECAF9679C5586D3977C900E41AEC97B24CD607E9ECE8C",
+    "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "hash": "0B582DA94E1E2420E6AEAB4932A5C3BEC171E48A5E6BCBE56D3785374CFBBC69",
+    "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI\\Assemblies\\MapGenAI.dll"
+  },
+  {
+    "hash": "EEC2CF45E9A2F1C41078E7970D02FD5CE71BCD6413987783744EC40A30D0B04B",
+    "path": "G:\\SteamLibrary\\steamapps\\workshop\\content\\294100\\3685385453\\Assemblies\\MapGenAI.dll"
+  }
+]

@@ -49,3 +49,9 @@ Gemini 3.8 Flash의 응답 `usageMetadata`를 사용했다. 각 쌍은 동일 �
 최종 DEV DLL SHA256: `45646072C2E758AD909ECAF9679C5586D3977C900E41AEC97B24CD607E9ECE8C`.
 배포판/기존 설치본 SHA256: `0B582DA94E1E2420E6AEAB4932A5C3BEC171E48A5E6BCBE56D3785374CFBBC69`.
 DEV 전용 설치 패키지는 워크스페이스 `work/mapgenai-packages/2026-09-27-prompt-compaction/`에 준비한다. 게임 실행 중에는 설치 DLL 교체를 보류한다. 일반판 승격/창작마당 게시 여부는 이후 별도 결정한다.
+
+### 16:46 설치 후속 완료
+
+다른 세션의 게임이 자연히 종료된 뒤 16:44 DEV만 설치했다. 기존 DLL을 백업하고 설치 해시를 확인했다. 실제 설치된 DLL을 SourceDll로 지정한 격리 게임 기본 검사 **34/34 PASS**, 검사 프로세스 종료·임시 모드 제거도 확인했다. [설치 영수증](installed-runtime-1643/installation-receipt.json), [검사 결과](installed-runtime-1643/result.json), [파일 해시](installed-runtime-1643/installation-hashes.json), [실행 기록](installed-runtime-1643/launch.json), [정리 기록](installed-runtime-1643/cleanup.json).
+
+자동 확인 `mapgen-ai-dev`는 완료 후 일시중지했고 도구 응답 및 설정 파일의 PAUSED 상태를 확인했다. dist/일반판/구독본·사용자 설정은 그대로이며 이번 설치 검증의 유료 모델 호출은0회다. 위 비용 실험을 다시 수행하거나 모든 자연어 요청의 지도 미관을 재검증한 결과는 아니다.
