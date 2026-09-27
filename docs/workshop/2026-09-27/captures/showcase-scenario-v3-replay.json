@@ -1,0 +1,356 @@
+{
+  "schema": "mapgenai-showcase/1",
+  "purpose": "Replay, on the fixed build, of real model replies recorded earlier today for the same request sentences. No model calls. Used for the Workshop ring/island sequence and the generated map, because the live showcase-02 reply drew the ring lake as a small pool.",
+  "notes": "Each dryRunReplies entry is the unmodified reply recorded in replySources. Step ids match showcase-01 so previews can be compared by hash.",
+  "dryRun": true,
+  "worldSeed": "mapgenai-showcase-20260927",
+  "uiScale": 1.5,
+  "previewMapSize": 250,
+  "captureDelayFrames": 30,
+  "runMinutes": 60,
+  "tiles": {
+    "A": {
+      "rule": "Temperate inland river tile: TemperateForest biome, a world river on the tile, no Ocean or Lake neighbour (not coastal), hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then a river with widthOnMap 6-20, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": true,
+      "coastal": false,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    },
+    "B": {
+      "rule": "Temperate coastal tile: TemperateForest biome, at least one Ocean neighbour and no Lake neighbour, no world river, hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": false,
+      "coastal": true,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "id": "01-open",
+      "tile": "A",
+      "action": "open"
+    },
+    {
+      "id": "03-ring",
+      "tile": "A",
+      "action": "send",
+      "text": "Make a ring of mountains in the middle with a lake inside and one opening to the south."
+    },
+    {
+      "id": "04-island",
+      "tile": "A",
+      "action": "send",
+      "text": "Add a small island in the middle of the lake."
+    },
+    {
+      "id": "05-island-move",
+      "tile": "A",
+      "action": "send",
+      "text": "Move the island to the north side of the lake."
+    },
+    {
+      "id": "07-river-straight",
+      "tile": "A",
+      "action": "send",
+      "text": "Make the river straight."
+    },
+    {
+      "id": "08-hot-springs",
+      "tile": "A",
+      "action": "send",
+      "text": "Add hot springs."
+    },
+    {
+      "id": "14-map",
+      "tile": "A",
+      "action": "generate-map",
+      "stateFrom": "08-hot-springs",
+      "maxMinutes": 45
+    }
+  ],
+  "dryRunReplies": {
+    "03-ring": {
+      "action": "generate",
+      "description": "mountain ring with central lake and southern opening",
+      "params": {
+        "shape_ops": [
+          {
+            "op": "add",
+            "shape": {
+              "id": "central_ring",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "outer",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.35
+                },
+                {
+                  "id": "inner",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.2
+                }
+              ],
+              "compose": [
+                {
+                  "op": "sub",
+                  "a": "inner",
+                  "from": "outer",
+                  "out": "ring"
+                },
+                {
+                  "op": "add",
+                  "s": "ring",
+                  "e": 0.95,
+                  "f": 0.03
+                }
+              ]
+            }
+          },
+          {
+            "op": "add",
+            "shape": {
+              "id": "inner_lake",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "lake",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.12
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "lake",
+                  "fill": "water",
+                  "e": 0,
+                  "f": 0.015
+                }
+              ]
+            }
+          },
+          {
+            "op": "add",
+            "shape": {
+              "id": "south_pass",
+              "type": "passage",
+              "points": [
+                [
+                  0.5,
+                  0.5
+                ],
+                [
+                  0.5,
+                  0
+                ]
+              ],
+              "width": 8,
+              "scope": "mountains",
+              "fill": "Soil"
+            }
+          }
+        ]
+      }
+    },
+    "04-island": {
+      "action": "generate",
+      "description": "Add a small island in the center of the lake",
+      "params": {
+        "shape_ops": [
+          {
+            "op": "update",
+            "id": "inner_lake",
+            "changes": {
+              "shapes": [
+                {
+                  "id": "lake",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.12
+                },
+                {
+                  "id": "island",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.04
+                }
+              ],
+              "compose": [
+                {
+                  "op": "sub",
+                  "a": "island",
+                  "from": "lake",
+                  "out": "lake_moat"
+                },
+                {
+                  "op": "add",
+                  "s": "lake_moat",
+                  "fill": "water",
+                  "e": 0,
+                  "f": 0.015
+                }
+              ]
+            }
+          },
+          {
+            "op": "add",
+            "shape": {
+              "id": "center_island",
+              "type": "composite",
+              "edge_roughness": "medium",
+              "shapes": [
+                {
+                  "id": "isle_ground",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.04
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "isle_ground",
+                  "fill": "soil",
+                  "e": 0.05,
+                  "f": 0.01
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "05-island-move": {
+      "action": "generate",
+      "description": "Move the island to the north side of the lake",
+      "params": {
+        "shape_ops": [
+          {
+            "op": "update",
+            "id": "inner_lake",
+            "changes": {
+              "shapes": [
+                {
+                  "id": "lake",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.5
+                  ],
+                  "r": 0.12
+                },
+                {
+                  "id": "island",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.56
+                  ],
+                  "r": 0.035
+                }
+              ],
+              "compose": [
+                {
+                  "op": "sub",
+                  "a": "island",
+                  "from": "lake",
+                  "out": "lake_moat"
+                },
+                {
+                  "op": "add",
+                  "s": "lake_moat",
+                  "fill": "water",
+                  "e": 0,
+                  "f": 0.015
+                }
+              ]
+            }
+          },
+          {
+            "op": "update",
+            "id": "center_island",
+            "changes": {
+              "shapes": [
+                {
+                  "id": "isle_ground",
+                  "prim": "circle",
+                  "center": [
+                    0.5,
+                    0.56
+                  ],
+                  "r": 0.035
+                }
+              ],
+              "compose": [
+                {
+                  "op": "add",
+                  "s": "isle_ground",
+                  "fill": "soil",
+                  "e": 0.05,
+                  "f": 0.01
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "07-river-straight": {
+      "action": "generate",
+      "description": "Make the river straight",
+      "params": {
+        "straight_river": true
+      }
+    },
+    "08-hot-springs": {
+      "action": "generate",
+      "description": "add hot springs mutator",
+      "params": {
+        "mutators": [
+          "HotSprings"
+        ]
+      }
+    }
+  },
+  "replySources": {
+    "03-ring": "showcase-01/03-ring.json",
+    "04-island": "showcase-01/04-island.json",
+    "05-island-move": "showcase-01/05-island-move.json",
+    "07-river-straight": "showcase-01/07-river-straight.json",
+    "08-hot-springs": "showcase-02/10-hot-springs.json"
+  }
+}

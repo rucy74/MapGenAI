@@ -1,0 +1,358 @@
+{
+ "01-open-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 44393,
+   "Gravel": 4784,
+   "Riverbank": 3075,
+   "SoilRich": 2324,
+   "Granite_Rough": 1854,
+   "WaterMovingShallow": 1695,
+   "solid rock (Map Preview stone colour)": 1569,
+   "Limestone_Rough": 1060,
+   "Marble_Rough": 766,
+   "Mud": 680,
+   "WaterShallow": 300
+  },
+  "riverCells": 1695,
+  "riverCentroid": [
+   0.516,
+   0.318
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 300,
+  "stillWaterCentroid": [
+   0.778,
+   0.409
+  ],
+  "hotSpringCells": 0,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     32,
+     56
+    ],
+    [
+     70,
+     70
+    ],
+    [
+     78,
+     102
+    ],
+    [
+     132,
+     140
+    ],
+    [
+     156,
+     288
+    ],
+    [
+     298,
+     356
+    ]
+   ],
+   "clearRays": 129,
+   "rockCells": 1569,
+   "centreStillWaterFraction": 0.0
+  },
+  "islands": [],
+  "riverLine": {
+   "perpendicularRms": 6.49,
+   "lengthSd": 74.6,
+   "axisAngleDeg": 10.8
+  }
+ },
+ "03-ring-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 26168,
+   "solid rock (Map Preview stone colour)": 20791,
+   "Gravel": 3127,
+   "WaterShallow": 2081,
+   "SoilRich": 1725,
+   "WaterMovingShallow": 1695,
+   "Riverbank": 1541,
+   "Granite_Rough": 1522,
+   "WaterDeep": 986,
+   "Limestone_Rough": 944,
+   "Marble_Rough": 717,
+   "Mud": 680,
+   "Sand": 523
+  },
+  "riverCells": 1695,
+  "riverCentroid": [
+   0.516,
+   0.318
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 3067,
+  "stillWaterCentroid": [
+   0.536,
+   0.49
+  ],
+  "hotSpringCells": 0,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     270,
+     272
+    ]
+   ],
+   "clearRays": 2,
+   "rockCells": 20791,
+   "centreStillWaterFraction": 0.987
+  },
+  "islands": [],
+  "riverLine": {
+   "perpendicularRms": 6.49,
+   "lengthSd": 74.6,
+   "axisAngleDeg": 10.8
+  }
+ },
+ "04-island-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 26977,
+   "solid rock (Map Preview stone colour)": 20823,
+   "Gravel": 3068,
+   "SoilRich": 1718,
+   "WaterMovingShallow": 1695,
+   "Granite_Rough": 1560,
+   "Riverbank": 1541,
+   "WaterDeep": 1513,
+   "WaterShallow": 1152,
+   "Limestone_Rough": 907,
+   "Marble_Rough": 717,
+   "Mud": 680,
+   "Sand": 149
+  },
+  "riverCells": 1695,
+  "riverCentroid": [
+   0.516,
+   0.318
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 2665,
+  "stillWaterCentroid": [
+   0.533,
+   0.49
+  ],
+  "hotSpringCells": 0,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     270,
+     272
+    ]
+   ],
+   "clearRays": 2,
+   "rockCells": 20823,
+   "centreStillWaterFraction": 0.632
+  },
+  "islands": [
+   {
+    "cells": 465,
+    "centroid": [
+     0.502,
+     0.503
+    ]
+   }
+  ],
+  "riverLine": {
+   "perpendicularRms": 6.49,
+   "lengthSd": 74.6,
+   "axisAngleDeg": 10.8
+  }
+ },
+ "05-island-move-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 26877,
+   "solid rock (Map Preview stone colour)": 20832,
+   "Gravel": 3063,
+   "SoilRich": 1718,
+   "WaterMovingShallow": 1695,
+   "WaterDeep": 1585,
+   "Granite_Rough": 1565,
+   "Riverbank": 1541,
+   "WaterShallow": 1181,
+   "Limestone_Rough": 907,
+   "Marble_Rough": 717,
+   "Mud": 680,
+   "Sand": 139
+  },
+  "riverCells": 1695,
+  "riverCentroid": [
+   0.516,
+   0.318
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 2766,
+  "stillWaterCentroid": [
+   0.531,
+   0.484
+  ],
+  "hotSpringCells": 0,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     270,
+     272
+    ]
+   ],
+   "clearRays": 2,
+   "rockCells": 20832,
+   "centreStillWaterFraction": 0.794
+  },
+  "islands": [
+   {
+    "cells": 372,
+    "centroid": [
+     0.502,
+     0.562
+    ]
+   }
+  ],
+  "riverLine": {
+   "perpendicularRms": 6.49,
+   "lengthSd": 74.6,
+   "axisAngleDeg": 10.8
+  }
+ },
+ "07-river-straight-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 26668,
+   "solid rock (Map Preview stone colour)": 21134,
+   "Gravel": 3061,
+   "SoilRich": 1718,
+   "Riverbank": 1619,
+   "WaterDeep": 1585,
+   "Granite_Rough": 1562,
+   "WaterMovingShallow": 1553,
+   "WaterShallow": 1181,
+   "Limestone_Rough": 907,
+   "Marble_Rough": 717,
+   "Mud": 680,
+   "Sand": 115
+  },
+  "riverCells": 1553,
+  "riverCentroid": [
+   0.5,
+   0.352
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 2766,
+  "stillWaterCentroid": [
+   0.531,
+   0.484
+  ],
+  "hotSpringCells": 0,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     270,
+     272
+    ]
+   ],
+   "clearRays": 2,
+   "rockCells": 21134,
+   "centreStillWaterFraction": 0.794
+  },
+  "islands": [
+   {
+    "cells": 372,
+    "centroid": [
+     0.502,
+     0.562
+    ]
+   }
+  ],
+  "riverLine": {
+   "perpendicularRms": 1.73,
+   "lengthSd": 74.8,
+   "axisAngleDeg": 15.1
+  }
+ },
+ "08-hot-springs-preview": {
+  "size": [
+   250,
+   250
+  ],
+  "counts": {
+   "Soil": 27518,
+   "solid rock (Map Preview stone colour)": 18377,
+   "Gravel": 3163,
+   "Granite_Rough": 3106,
+   "Marble_Rough": 1713,
+   "WaterDeep": 1585,
+   "Riverbank": 1556,
+   "WaterMovingShallow": 1553,
+   "Limestone_Rough": 1220,
+   "SoilRich": 1092,
+   "WaterShallow": 881,
+   "HotSpring": 639,
+   "Sand": 97
+  },
+  "riverCells": 1553,
+  "riverCentroid": [
+   0.5,
+   0.352
+  ],
+  "oceanCells": 0,
+  "oceanCentroid": null,
+  "stillWaterCells": 2466,
+  "stillWaterCentroid": [
+   0.501,
+   0.493
+  ],
+  "hotSpringCells": 639,
+  "ring": {
+   "clearRayRunsDeg": [
+    [
+     270,
+     272
+    ]
+   ],
+   "clearRays": 2,
+   "rockCells": 18377,
+   "centreStillWaterFraction": 0.794
+  },
+  "islands": [
+   {
+    "cells": 372,
+    "centroid": [
+     0.502,
+     0.562
+    ]
+   }
+  ],
+  "riverLine": {
+   "perpendicularRms": 1.73,
+   "lengthSd": 74.8,
+   "axisAngleDeg": 15.1
+  }
+ }
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "mapgenai-showcase/1",
+  "purpose": "Replay, on the fixed build, of the real road reply recorded in showcase-02, then generate the real map so the dirt road and its bridge can be seen in game. No model calls.",
+  "notes": "dryRunReplies holds the unmodified reply recorded in replySources.",
+  "dryRun": true,
+  "worldSeed": "mapgenai-showcase-20260927",
+  "uiScale": 1.5,
+  "previewMapSize": 250,
+  "captureDelayFrames": 30,
+  "runMinutes": 60,
+  "tiles": {
+    "A": {
+      "rule": "Temperate inland river tile: TemperateForest biome, a world river on the tile, no Ocean or Lake neighbour (not coastal), hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then a river with widthOnMap 6-20, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": true,
+      "coastal": false,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    },
+    "B": {
+      "rule": "Temperate coastal tile: TemperateForest biome, at least one Ocean neighbour and no Lake neighbour, no world river, hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": false,
+      "coastal": true,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "id": "01-open",
+      "tile": "A",
+      "action": "open"
+    },
+    {
+      "id": "03-road",
+      "tile": "A",
+      "action": "send",
+      "text": "Add a dirt road from the north edge to the south edge."
+    },
+    {
+      "id": "14-map",
+      "tile": "A",
+      "action": "generate-map",
+      "stateFrom": "03-road",
+      "maxMinutes": 45
+    }
+  ],
+  "dryRunReplies": {
+    "03-road": {
+      "action": "generate",
+      "description": "add north-to-south dirt road",
+      "params": {
+        "road_ops": [
+          {
+            "op": "add",
+            "road": {
+              "id": "road_ns",
+              "kind": "DirtRoad",
+              "route": "avoid",
+              "points": [
+                [
+                  0.5,
+                  1
+                ],
+                [
+                  0.5,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "replySources": {
+    "03-road": "showcase-02/03-road.json"
+  }
+}
