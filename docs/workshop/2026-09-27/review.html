@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MapGen AI 창작마당 검토</title>
+<style>
+:root{--bg:#0f1720;--panel:#16212d;--panel2:#1c2a38;--ink:#e8ecef;--muted:#9fb0bf;--accent:#6cb6ff;--line:#2a3a4a;--warn:#f0b35a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Segoe UI","Malgun Gothic",sans-serif}
+main{max-width:1060px;margin:0 auto;padding:24px 16px 64px}
+h1.page{font-size:26px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 24px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 18px 8px;margin:0 0 20px}
+section>h2{margin:0 0 4px;font-size:19px}
+.when{color:var(--muted);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:12px}
+.item{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px}
+.item img{width:100%;height:160px;object-fit:cover;object-position:top;border-radius:4px;display:block;background:#0b1118}
+.item .name{font-weight:600;margin-top:8px;word-break:break-all}
+.item .what{color:var(--muted);font-size:13px}
+.path{font:12px/1.4 Consolas,monospace;color:var(--muted);word-break:break-all;background:#0b1118;border-radius:4px;padding:6px 8px;margin:6px 0 12px}
+.cover-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:12px}
+.cover-row img.full{width:min(480px,100%);border-radius:6px;border:1px solid var(--line)}
+.cover-row .small{color:var(--muted);font-size:13px}
+.cover-row .small img{display:block;width:204px;height:115px;margin:0 0 6px;border:1px solid var(--line)}
+video{width:100%;border-radius:8px;border:1px solid var(--line);background:#000;margin-bottom:12px}
+.tabs{display:flex;gap:8px;margin:0 0 12px}
+.tabs button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:var(--accent);color:#08121c;border-color:var(--accent);font-weight:600}
+.desc{background:#1b2838;border-radius:6px;padding:18px 20px;margin-bottom:12px;color:#d6d7d8}
+.desc h1{font-size:22px;color:#fff;margin:4px 0 10px}
+.desc h2{font-size:18px;color:#fff;margin:14px 0 6px}
+.desc a{color:#66c0f4}
+.desc p{margin:0}
+.desc .gap{height:12px}
+.desc ul,.desc ol{margin:4px 0 4px 22px;padding:0}
+.desc .figure{margin:4px 0;position:relative}
+.desc img.card{display:block;max-width:100%;border-radius:4px}
+.desc .slot{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.7);color:var(--warn);font:12px Consolas,monospace;padding:2px 6px;border-radius:4px}
+.note{border-left:3px solid var(--warn);padding:6px 12px;color:var(--muted);margin:0 0 12px}
+.checks{margin:0 0 12px;padding-left:20px}
+</style>
+</head>
+<body>
+<main>
+<h1 class="page">MapGen AI 창작마당 검토</h1>
+<p class="sub">올릴 파일과 새 소개글을 한 화면에 모은 검토용 페이지입니다. 올릴 파일은 모두 <code>upload</code> 폴더에 있습니다. 아래 경로는 이 페이지가 있는 폴더 기준입니다.</p>
+
+<section>
+<h2>1. Imgur에 올린 카드 4장</h2>
+<p class="when">올리기 끝. 소개글 두 파일에 각 카드의 Imgur 직접 주소를 넣었습니다.</p>
+<div class="path">upload/1-imgur</div>
+<div class="grid"><div class="item"><a href="upload/1-imgur/card-01-describe.png" target="_blank"><img src="upload/1-imgur/card-01-describe.png" alt="card-01-describe.png"></a><div class="name">card-01-describe.png</div><div class="what">소개글의 CARD_01_URL 자리</div></div><div class="item"><a href="upload/1-imgur/card-02-editing.png" target="_blank"><img src="upload/1-imgur/card-02-editing.png" alt="card-02-editing.png"></a><div class="name">card-02-editing.png</div><div class="what">소개글의 CARD_02_URL 자리</div></div><div class="item"><a href="upload/1-imgur/card-03-ideas.png" target="_blank"><img src="upload/1-imgur/card-03-ideas.png" alt="card-03-ideas.png"></a><div class="name">card-03-ideas.png</div><div class="what">소개글의 CARD_03_URL 자리</div></div><div class="item"><a href="upload/1-imgur/card-04-play.png" target="_blank"><img src="upload/1-imgur/card-04-play.png" alt="card-04-play.png"></a><div class="name">card-04-play.png</div><div class="what">소개글의 CARD_04_URL 자리</div></div></div>
+</section>
+
+<section>
+<h2>2. 소개글 미리보기</h2>
+<p class="when">새 빌드를 올리는 날 스팀 웹 페이지의 설명 편집에 붙여 넣습니다. 카드는 소개글에 넣은 Imgur 주소에서 그대로 불러오고, 오른쪽 위에 그 주소를 표시했습니다.</p>
+<div class="path">description-en.txt  ·  description-ko.txt</div>
+<div class="tabs"><button class="on" data-tab="en">English</button><button data-tab="ko">한국어</button></div>
+<div class="desc" id="desc-en"><h1>Describe your map. MapGen AI builds it.</h1>
+<p>Type what you want in plain words, like "a ring of mountains with a lake inside" or "add a small island in the middle of the lake". MapGen AI turns it into map settings, and Map Preview shows the result. Keep chatting to adjust it until the map feels right, then start there.</p>
+<div class="gap"></div>
+<p><strong>Built for RimWorld 1.6.</strong> Requires <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077" target="_blank" rel="noopener">Harmony</a> and <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642" target="_blank" rel="noopener">Map Preview</a>.</p>
+<p><strong>Use your own AI:</strong> Google Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, a local server such as Ollama or LM Studio, or a custom endpoint.</p>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/aB4pSxq.png" alt="card"><span class="slot">https://i.imgur.com/aB4pSxq.png</span></div>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/OVg0Gi1.png" alt="card"><span class="slot">https://i.imgur.com/OVg0Gi1.png</span></div>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/6J5waj1.png" alt="card"><span class="slot">https://i.imgur.com/6J5waj1.png</span></div>
+<div class="gap"></div>
+<h2>What's new in this update</h2>
+<ul>
+<li><strong>Edits keep what you built.</strong> Add a lake, then move it, resize it, or change only its outline. Earlier changes stay, and Undo steps back one request at a time.</li>
+<li><strong>Map ideas with pictures.</strong> Ask for suggestions and get up to three candidates drawn by Map Preview. Refine one, like "make option 2 more natural", before you pick. Your map does not change until you choose.</li>
+<li><strong>Preference questions.</strong> Not sure what you want? Answer a few multiple-choice questions first. They run on your PC and make no AI calls.</li>
+<li><strong>Exact or natural shapes.</strong> Ask for a perfect circle, or for a natural lake with an uneven shore.</li>
+<li><strong>Fill part of an area.</strong> "Fill 70% of the ring's interior with rich soil." Lava fills are available with Odyssey.</li>
+<li><strong>Place ruins and ancient dangers</strong> by area, direction, or landmark, such as on an island or at the foot of a mountain. Ancient dangers use the game's own generator.</li>
+<li><strong>Local roads with bridges.</strong> Roads that cross a river or shallow water get wooden bridges automatically.</li>
+<li><strong>Natural water.</strong> Natural lakes you add now follow the game's own lake style, with shallow edges and lakeshore ground that suits the biome.</li>
+</ul>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/fQrAxnM.png" alt="card"><span class="slot">https://i.imgur.com/fQrAxnM.png</span></div>
+<div class="gap"></div>
+<h2>How to start</h2>
+<ol>
+<li>Subscribe to MapGen AI, Harmony, and Map Preview.</li>
+<li>Open <strong>Options &gt; Mod settings &gt; MapGen AI</strong>. Pick a provider, enter your API key, and choose a model.</li>
+<li>On the world map, select a tile and click <strong>✦ AI Map Gen</strong> next to Map Preview.</li>
+<li>Type a request, or press <strong>Quick suggestions</strong> or <strong>Find my preferences</strong>.</li>
+<li>When the preview looks right, press <strong>Generate with these settings</strong>. The settings apply when you start or settle on that tile.</li>
+</ol>
+<div class="gap"></div>
+<h2>Example requests</h2>
+<ul>
+<li>"A ring of mountains with a lake inside and one opening to the south."</li>
+<li>"Add a small island in the middle of the lake."</li>
+<li>"Move the island to the north side of the lake." / "Make the river straight."</li>
+<li>"Fill 70% of the ring's interior with rich soil."</li>
+<li>"Put two small ruins on the island."</li>
+<li>"Add a dirt road from the west edge to the east edge."</li>
+<li>"Add hot springs." (Odyssey)</li>
+<li>"Put the coast on the north side."</li>
+<li>"Recommend a map." / "Make option 2 more natural."</li>
+</ul>
+<div class="gap"></div>
+<h2>Good to know</h2>
+<ul>
+<li><strong>It shapes the map you are about to start.</strong> It does not edit a colony map you are already playing.</li>
+<li><strong>World rivers and coasts stay connected.</strong> You can straighten a river or turn a coast, but you cannot delete them or add a coast inland.</li>
+<li><strong>Map Preview shows terrain and layout.</strong> Plants, building interiors, and loot appear when the real map is generated.</li>
+<li><strong>Results depend on the model.</strong> Check the preview, and use Undo or Reset when a request goes wrong.</li>
+<li><strong>DLC and landmark mods:</strong> you can add hot springs, fjords, oasis, and other tile features when the DLC or mod is active and the tile allows them.</li>
+<li><strong>Cost and privacy:</strong> each message is a request to the provider you chose, paid with your own key. A few actions add a request, such as summarizing a long chat or re-asking when a reply comes back malformed. Your key is saved in your RimWorld mod settings on your PC.</li>
+<li><strong>Languages:</strong> menus in English, Korean, Japanese, and Simplified Chinese. Some newer messages appear in English for Japanese and Chinese.</li>
+<li><strong>Image input is paused</strong> in this version.</li>
+<li><strong>Presets:</strong> Save and Load keep map settings you want to reuse.</li>
+</ul>
+<div class="gap"></div>
+<h2>Credits</h2>
+<p>Created by Choco with assistance from Claude and ChatGPT.</p>
+<p>The multi-provider settings UI was inspired by <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752" target="_blank" rel="noopener">RimTalk</a>. If you enjoy AI-powered mods, give it a try. It lets your colonists have AI-driven conversations.</p>
+<p><a href="https://github.com/rucy74/MapGenAI" target="_blank" rel="noopener">Source code on GitHub</a></p></div>
+<div class="desc" id="desc-ko" hidden><h1>원하는 맵을 말하면, MapGen AI가 만들어 줍니다.</h1>
+<p>"가운데 호수를 품은 고리 모양 산", "호수 한가운데에 작은 섬을 넣어 줘"처럼 평소 말로 입력하세요. MapGen AI가 맵 설정으로 바꾸고, Map Preview가 결과를 바로 보여 줍니다. 마음에 들 때까지 대화로 다듬은 뒤 그 자리에서 시작하면 됩니다.</p>
+<div class="gap"></div>
+<p><strong>RimWorld 1.6용입니다.</strong> <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077" target="_blank" rel="noopener">Harmony</a>와 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642" target="_blank" rel="noopener">Map Preview</a>가 필요합니다.</p>
+<p><strong>AI는 직접 고릅니다:</strong> Google Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, Ollama·LM Studio 같은 로컬 서버, 직접 지정한 주소를 쓸 수 있습니다.</p>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/aB4pSxq.png" alt="card"><span class="slot">https://i.imgur.com/aB4pSxq.png</span></div>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/OVg0Gi1.png" alt="card"><span class="slot">https://i.imgur.com/OVg0Gi1.png</span></div>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/6J5waj1.png" alt="card"><span class="slot">https://i.imgur.com/6J5waj1.png</span></div>
+<div class="gap"></div>
+<h2>이번 업데이트에서 달라진 점</h2>
+<ul>
+<li><strong>앞서 만든 지형이 유지됩니다.</strong> 호수를 만든 뒤 옮기거나, 크기만 바꾸거나, 물가 모양만 바꿀 수 있습니다. 앞선 변경은 그대로 남고, 되돌리기는 요청 하나씩 뒤로 돌아갑니다.</li>
+<li><strong>그림으로 보는 추천.</strong> 추천을 요청하면 Map Preview로 그린 후보를 최대 3개까지 보여 줍니다. 고르기 전에 "2번을 더 자연스럽게"처럼 다듬을 수 있고, 직접 선택하기 전까지 맵은 바뀌지 않습니다.</li>
+<li><strong>취향 문답.</strong> 무엇을 원하는지 막막하면 객관식 질문 몇 개에 먼저 답해 보세요. 질문은 PC 안에서 진행되고 AI를 호출하지 않습니다.</li>
+<li><strong>정확한 도형과 자연스러운 모양.</strong> 완벽한 원형도, 물가가 울퉁불퉁한 자연스러운 호수도 요청할 수 있습니다.</li>
+<li><strong>영역의 일부만 채우기.</strong> "고리 안쪽의 70%만 비옥한 토양으로" 같은 요청이 됩니다. 용암 채우기는 Odyssey가 있을 때 쓸 수 있습니다.</li>
+<li><strong>폐허와 고대 위협 배치.</strong> 섬 안, 산기슭처럼 영역·방향·지형을 기준으로 놓을 수 있습니다. 고대 위협은 게임 기본 생성기로 만듭니다.</li>
+<li><strong>다리가 놓이는 지역 도로.</strong> 강이나 얕은 물을 건너는 구간에는 나무 다리가 자동으로 놓입니다.</li>
+<li><strong>자연스러운 물.</strong> 새로 추가하는 자연 호수는 게임 기본 호수처럼 얕은 가장자리와 바이옴에 맞는 호숫가 바닥을 갖습니다.</li>
+</ul>
+<div class="gap"></div>
+<div class="figure"><img class="card" src="https://i.imgur.com/fQrAxnM.png" alt="card"><span class="slot">https://i.imgur.com/fQrAxnM.png</span></div>
+<div class="gap"></div>
+<h2>시작하는 방법</h2>
+<ol>
+<li>MapGen AI, Harmony, Map Preview를 구독합니다.</li>
+<li><strong>모드 설정 &gt; MapGen AI</strong>에서 공급자를 고르고 API 키와 모델을 입력합니다.</li>
+<li>월드맵에서 타일을 고르고 Map Preview 옆의 <strong>✦ AI 맵 생성</strong> 버튼을 누릅니다.</li>
+<li>원하는 맵을 입력하거나 <strong>바로 추천받기</strong> 또는 <strong>취향에 맞춰 추천받기</strong>를 누릅니다.</li>
+<li>미리보기가 마음에 들면 <strong>이 설정으로 맵 생성</strong>을 누릅니다. 그 타일에서 시작하거나 정착할 때 이 설정이 적용됩니다.</li>
+</ol>
+<div class="gap"></div>
+<h2>요청 예시</h2>
+<ul>
+<li>"가운데에 호수를 품은 고리 모양 산을 만들고, 남쪽으로 출구 하나를 내 줘."</li>
+<li>"호수 한가운데에 작은 섬을 넣어 줘."</li>
+<li>"섬을 호수 북쪽으로 옮겨 줘." / "강을 곧게 펴 줘."</li>
+<li>"고리 안쪽의 70%만 비옥한 토양으로 채워 줘."</li>
+<li>"섬 안에 작은 폐허 두 개를 놓아 줘."</li>
+<li>"맵 서쪽 끝에서 동쪽 끝까지 흙길을 내 줘."</li>
+<li>"온천을 추가해 줘." (Odyssey)</li>
+<li>"해안을 북쪽으로 바꿔 줘."</li>
+<li>"그냥 추천해 줘." / "2번을 더 자연스럽게 해 줘."</li>
+</ul>
+<div class="gap"></div>
+<h2>알아 두면 좋은 점</h2>
+<ul>
+<li><strong>새로 시작할 맵을 만드는 모드입니다.</strong> 이미 플레이 중인 정착지 맵을 고치지는 않습니다.</li>
+<li><strong>월드의 강과 해안 연결은 유지됩니다.</strong> 강을 곧게 펴거나 해안 방향을 바꿀 수는 있지만, 강·해안을 없애거나 내륙에 해안을 만들 수는 없습니다.</li>
+<li><strong>Map Preview는 지형과 배치를 보여 줍니다.</strong> 식물, 건물 내부, 전리품은 실제 맵을 생성할 때 나타납니다.</li>
+<li><strong>결과는 모델에 따라 달라집니다.</strong> 미리보기로 확인하고, 잘못되면 되돌리기나 초기화를 쓰세요.</li>
+<li><strong>DLC와 랜드마크 모드:</strong> 해당 DLC나 모드가 켜져 있고 타일 조건이 맞으면 온천, 피오르드, 오아시스 같은 지형 특징을 추가할 수 있습니다.</li>
+<li><strong>비용과 개인정보:</strong> 메시지 하나가 내가 고른 공급자에 내 키로 보내는 요청 하나입니다. 긴 대화를 요약하거나 형식이 깨진 답을 다시 받을 때처럼 요청이 하나 더 드는 경우가 있습니다. API 키는 내 PC의 RimWorld 모드 설정에 저장됩니다.</li>
+<li><strong>언어:</strong> 메뉴는 영어, 한국어, 일본어, 중국어(간체)를 지원합니다. 일본어와 중국어에서는 새로 추가된 일부 안내가 영어로 나옵니다.</li>
+<li><strong>이미지 입력은 이번 버전에서 잠시 꺼 두었습니다.</strong></li>
+<li><strong>프리셋:</strong> 저장·불러오기로 자주 쓰는 맵 설정을 다시 쓸 수 있습니다.</li>
+</ul>
+<div class="gap"></div>
+<h2>만든 사람</h2>
+<p>Choco가 Claude와 ChatGPT의 도움을 받아 만들었습니다.</p>
+<p>여러 AI 공급자를 고르는 설정 화면은 <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752" target="_blank" rel="noopener">RimTalk</a>에서 영감을 받았습니다. AI 모드를 좋아한다면 정착민이 AI로 대화하는 RimTalk도 한번 써 보세요.</p>
+<p><a href="https://github.com/rucy74/MapGenAI" target="_blank" rel="noopener">GitHub 소스 코드</a></p></div>
+</section>
+
+<section>
+<h2>3. 스팀 갤러리 사진 4장</h2>
+<p class="when">새 빌드를 올리는 날 스팀 페이지의 이미지·영상 추가 편집에서 옛 스크린샷 대신 올립니다.</p>
+<div class="path">upload/3-steam-gallery</div>
+<div class="grid"><div class="item"><a href="upload/3-steam-gallery/gallery-1-chat.png" target="_blank"><img src="upload/3-steam-gallery/gallery-1-chat.png" alt="gallery-1-chat.png"></a><div class="name">gallery-1-chat.png</div><div class="what">The chat and Map Preview after the ring request</div></div><div class="item"><a href="upload/3-steam-gallery/gallery-2-ideas.png" target="_blank"><img src="upload/3-steam-gallery/gallery-2-ideas.png" alt="gallery-2-ideas.png"></a><div class="name">gallery-2-ideas.png</div><div class="what">Three suggested maps</div></div><div class="item"><a href="upload/3-steam-gallery/gallery-3-road-bridge.png" target="_blank"><img src="upload/3-steam-gallery/gallery-3-road-bridge.png" alt="gallery-3-road-bridge.png"></a><div class="name">gallery-3-road-bridge.png</div><div class="what">A dirt road crossing the river on a wooden bridge</div></div><div class="item"><a href="upload/3-steam-gallery/gallery-4-map.png" target="_blank"><img src="upload/3-steam-gallery/gallery-4-map.png" alt="gallery-4-map.png"></a><div class="name">gallery-4-map.png</div><div class="what">The real map from the same chat</div></div></div>
+</section>
+
+<section>
+<h2>4. 표지</h2>
+<p class="when">직접 올리지 않습니다. 일반판으로 승격할 때 모드의 About 폴더 Preview.png로 들어가고, 게임 업로더가 표지로 씁니다.</p>
+<div class="path">upload/2-cover/Preview.png</div>
+<div class="cover-row"><img class="full" src="upload/2-cover/Preview.png" alt="Cover A"><div class="small"><img src="upload/2-cover/Preview.png" alt="Cover A at list size">창작마당 목록에서 보이는 크기(204×115)</div></div>
+</section>
+
+<section>
+<h2>5. 영상 시안 76초</h2>
+<p class="when">순서와 자막을 확인하는 시안입니다. 실제 캡처 정지 화면으로 만들었고, 확정하면 움직이는 녹화로 바꿔 YouTube에 올립니다.</p>
+<div class="path">video/animatic-draft.mp4</div>
+<video src="video/animatic-draft.mp4" controls preload="metadata"></video>
+</section>
+
+<section>
+<h2>이번 확인 결과</h2>
+<ul class="checks">
+<li>온천을 더하기 전후로 강물 칸의 위치가 한 칸도 바뀌지 않았습니다.</li>
+<li>영어 화면의 대화 문구에 한국어가 나오지 않았습니다.</li>
+<li>강을 북쪽으로 옮기는 요청은 여전히 실패해서, 소개글에서 강 위치를 옮긴다는 문구를 뺐습니다.</li>
+</ul>
+<p class="note">판정 전체: <code>captures/showcase-02/basic-checks.md</code></p>
+</section>
+</main>
+<script>
+document.querySelectorAll('.tabs button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.toggle('on', x === b); });
+    document.getElementById('desc-en').hidden = b.dataset.tab !== 'en';
+    document.getElementById('desc-ko').hidden = b.dataset.tab !== 'ko';
+  });
+});
+</script>
+</body>
+</html>

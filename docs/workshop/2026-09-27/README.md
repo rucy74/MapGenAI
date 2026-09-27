@@ -12,6 +12,9 @@
 
 | 경로 | 내용 |
 |---|---|
+| `review.html` | 검토 페이지. 올릴 파일, 소개글 미리보기, 갤러리 사진, 표지, 영상 시안을 한 화면에 모은다. 파일을 브라우저로 열면 된다 |
+| `upload/` | 올릴 파일 묶음. `1-imgur`는 카드 4장, `2-cover`는 표지, `3-steam-gallery`는 갤러리 사진 4장 |
+| `build_review.py` | `upload/`를 모으고 `review.html`을 다시 만든다. 카드나 소개글을 고친 뒤 실행한다 |
 | `description-en.txt` | 스팀 설명 영어본. 스팀 서식 그대로 붙여 넣는다 |
 | `description-ko.txt` | 한국어 설명. 스팀의 언어별 설명에서 한국어를 골라 붙여 넣는다 |
 | `cards/cards.html`, `cards/assets/` | 본문 이미지 카드 원본 |
@@ -32,10 +35,10 @@
 
 ## 올리는 순서
 
-1. 카드 PNG를 Imgur에 올린다. 직접 이미지 주소를 알려 주면 설명 두 파일의 `CARD_0N_URL` 자리에 넣는다.
+1. `upload/1-imgur`의 카드 PNG 4장을 Imgur에 올린다. 직접 이미지 주소를 알려 주면 설명 두 파일의 `CARD_0N_URL` 자리에 넣는다.
 2. 고른 표지 A(`cover/out/coverA.png`)를 `dist/About/Preview.png`에 넣고 일반판 승격과 업로드를 한다. 승격 스크립트는 이 파일을 그대로 가져간다.
 3. 스팀 페이지의 제목 및 설명 편집에서 영어 설명에 `description-en.txt`, 한국어 설명에 `description-ko.txt` 전체를 붙여 넣는다.
-4. 이미지·영상 추가 편집에서 옛 대화창 스크린샷을 내리고 새 캡처를 올린다. 추천 네 장: `captures/showcase-03-replay/03-ring.png`(요청과 Map Preview), `captures/showcase-02/12-recommend.png`(추천 후보 3개), `captures/showcase-04-road-replay/14-map-2.png`(도로와 나무다리), `captures/showcase-03-replay/14-map-1.png`(실제 맵).
+4. 이미지·영상 추가 편집에서 옛 대화창 스크린샷을 내리고 `upload/3-steam-gallery`의 사진 4장을 올린다. 원본은 다음 네 장이다: `captures/showcase-03-replay/03-ring.png`(요청과 Map Preview), `captures/showcase-02/12-recommend.png`(추천 후보 3개), `captures/showcase-04-road-replay/14-map-2.png`(도로와 나무다리), `captures/showcase-03-replay/14-map-1.png`(실제 맵).
 5. 새 영상을 YouTube에 올린 뒤 같은 화면에서 링크를 넣고 옛 영상을 내린다.
 
 ## 기본값으로 둔 것
@@ -78,3 +81,5 @@
 - 2026-09-27 09:30 — 초안. 설명 두 파일, 카드·표지 틀, 영상 시안 구성, 올리는 순서.
 - 2026-09-27 10:25 — 실게임 캡처 결과, 기본 6종 판정, 제품 문제 3건, 표지 후보 비교, 새 파일 목록 추가.
 - 2026-09-27 12:51 — 출시 수정 빌드 캡처(showcase-02)와 재생 촬영 반영, 이미지 출처·갤러리 추천 파일·`make_assets.py` 추가, 강 위치 문구 삭제 기록.
+- 2026-09-27 13:12 — 검토 페이지 `review.html`, 올릴 파일 묶음 `upload/`, 생성 스크립트 `build_review.py` 추가.
+- 2026-09-27 14:02 — Imgur 카드 주소 4개를 설명 두 파일에 반영(i.imgur.com/aB4pSxq·OVg0Gi1·6J5waj1·fQrAxnM, 로컬 카드와 화소 동일 확인), 검토 페이지가 Imgur 주소로 카드를 불러오게 바꿈.
