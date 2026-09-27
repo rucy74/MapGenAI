@@ -7,7 +7,8 @@ A canyon with a lake. A coastal fjord. A star-shaped hill. Describe the place yo
 [img]https://i.imgur.com/X2SrIzn.png[/img]
 
 [h2]Build on an idea[/h2]
-Create mountains, lakes and terrain shapes. Ask for clean geometric outlines or more natural edges. Then add an island, move it, or fill only part of an area with rich soil. Check each change in the preview; Undo takes you back one request.
+Create mountains, lakes and terrain shapes. Ask for clean geometric outlines or more natural edges. Then add an island, move or resize it, or fill only part of an area with rich soil. Check each change in the preview; Undo takes you back one request.
+Fill areas with available terrain such as sand, rich soil, marsh, mud or ice. Odyssey also adds lava fills. New natural freshwater lakes and ponds follow the game's lake style, with shallow edges and lakeshore ground suited to the biome.
 
 [img]https://i.imgur.com/bbPyeVD.png[/img]
 
@@ -19,10 +20,11 @@ The prepared questions adapt to earlier answers and run locally. Asking the AI f
 
 [h2]More than mountains and lakes[/h2]
 [list]
+[*]Tune fertility, vegetation, animals, ore and ruin density, rock types, caves and geysers. You can also turn off scattered rock chunks.
 [*]Add local roads, with wooden bridges at suitable river or shallow-water crossings.
-[*]Place ruins and ancient dangers by area, direction or landmark.
-[*]Add supported tile features, including hot springs with Odyssey, when the selected tile allows them.
-[*]Straighten an existing river or change the direction of an existing coast.
+[*]Place ruins and ancient dangers by area, direction or landmark. Ancient dangers use the game's own generator for their interiors.
+[*]Add supported tile features such as Odyssey hot springs, fjords, oases and animal habitats, when the selected tile allows them. Features from active landmark mods are read automatically; their requirements and incompatibilities still apply.
+[*]Change an existing river's direction or straighten it, and change the direction of an existing coast.
 [*]Save and load map settings you want to reuse.
 [/list]
 
@@ -44,14 +46,22 @@ The prepared questions adapt to earlier answers and run locally. Asking the AI f
 [*]"Fill 70% of the ring's interior with rich soil."
 [*]"Add a small island in the lake. Then put two small ruins on it."
 [*]"Add a dirt road from the west edge to the east edge."
+[*]"Make flatland with more rich soil and plants, marble only, and no scattered rock chunks."
+[*]"Add hot springs." (Odyssey) / "Put the coast on the north side." (coastal tile)
 [*]"Recommend a map." Then: "Make option 2 more natural."
 [/list]
+
+[h2]Not sure what is available?[/h2]
+Ask "What special terrain features can I add on this tile?", "What rock types are available?" or "What ruins can you place?" The AI can explain the available options before you choose. Tile conditions and active DLC or mods determine which features are available.
+[b]Undo[/b] goes back one edit. [b]Reset[/b] clears your changes and returns to the tile's starting settings, without closing the chat window.
 
 [h2]Before you start[/h2]
 [list]
 [*]This prepares a new map. It does not edit a colony map you are already playing.
 [*]Results vary by model and request. Review the preview and use Undo or Reset when needed.
 [*]World rivers and coasts remain connected to the selected tile. You cannot add a coast inland. Tile features still have compatibility conditions.
+[*]Odyssey is optional for the base mod; its tile features and lava require the DLC. Other mod-provided features require those mods to be active.
+[*]Some river-position requests are still unreliable, including moving an east-west river north or south.
 [*]Roads need a valid route. Deep water, mountains and other obstacles can prevent a crossing.
 [*]Map Preview shows terrain and layout. Plants, building interiors and loot appear on the generated map.
 [*]Paid providers use your own key and credits. Retries and long-chat summaries can add requests. Local questionnaire answers and preview rendering make no AI calls. Keys are stored in your local RimWorld mod settings.
@@ -61,5 +71,5 @@ The prepared questions adapt to earlier answers and run locally. Asking the AI f
 
 [h2]Credits[/h2]
 Created by Choco with assistance from Claude and ChatGPT.
-The provider settings UI was inspired by [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752]RimTalk[/url].
+The provider settings UI was inspired by [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3551203752]RimTalk[/url]. If you enjoy AI-powered mods, it lets your colonists have AI-driven conversations.
 [url=https://github.com/rucy74/MapGenAI]Source code on GitHub[/url]
