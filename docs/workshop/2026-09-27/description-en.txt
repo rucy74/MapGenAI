@@ -4,11 +4,11 @@ Type what you want in plain words, like "a ring of mountains with a lake inside"
 [b]Built for RimWorld 1.6.[/b] Requires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2800857642]Map Preview[/url].
 [b]Use your own AI:[/b] Google Gemini, OpenAI, OpenRouter, DeepSeek, Grok, GLM, Alibaba, a local server such as Ollama or LM Studio, or a custom endpoint.
 
-[img]CARD_01_URL[/img]
+[img]https://i.imgur.com/aB4pSxq.png[/img]
 
-[img]CARD_02_URL[/img]
+[img]https://i.imgur.com/OVg0Gi1.png[/img]
 
-[img]CARD_03_URL[/img]
+[img]https://i.imgur.com/6J5waj1.png[/img]
 
 [h2]What's new in this update[/h2]
 [list]
@@ -22,7 +22,7 @@ Type what you want in plain words, like "a ring of mountains with a lake inside"
 [*][b]Natural water.[/b] Natural lakes you add now follow the game's own lake style, with shallow edges and lakeshore ground that suits the biome.
 [/list]
 
-[img]CARD_04_URL[/img]
+[img]https://i.imgur.com/fQrAxnM.png[/img]
 
 [h2]How to start[/h2]
 [olist]
