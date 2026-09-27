@@ -24,3 +24,4 @@ docs/dev_config.json
 ../release/
 ref_examples/*
 .claude/
+**/__pycache__/
