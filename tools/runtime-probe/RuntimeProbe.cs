@@ -56,6 +56,7 @@ namespace MapGenAI.RuntimeProbe
                     {"def",d.defName},{"categories",d.categories},{"overrideCategories",d.overrideCategories},{"priority",d.priority}
                 }).ToList();
                 File.WriteAllText(Path.Combine(output,"mutator-catalog.json"),SimpleJson.Serialize(catalog));
+                if(ShowcaseProbe.WantsStartingSite){ShowcaseProbe.BeginStartingSite(output,Fail);return;}
                 pending = true;
                 LongEventHandler.QueueLongEvent(() => {
                     try

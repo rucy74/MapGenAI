@@ -48,6 +48,11 @@ namespace MapGenAI.RuntimeProbe
         static SimpleJsonObject scenario;
         static bool dryRun, active, finishing;
         static int entryDraws; static Rect entryRect;
+        // Entry-button checks: the new-colony starting-site screen, Map Preview's toolbar setting, and a click on the drawn button.
+        static int clickPhase;
+        static Event heldEvent;
+        static readonly List<string> clickTrace = new List<string>();
+        public static bool WantsStartingSite => scenario != null && scenario.GetBool("startingSite");
         static readonly object gate = new object();
         static readonly List<Step> steps = new List<Step>();
         static readonly List<Call> calls = new List<Call>();
@@ -125,6 +130,8 @@ namespace MapGenAI.RuntimeProbe
             h.Patch(AccessTools.Method(typeof(ColonistBar), "ColonistBarOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(HideAlerts)));
             // Every action is scripted: park the GUI mouse so hover highlights, tooltips and stray clicks cannot reach the UI.
             h.Patch(AccessTools.Method(typeof(UIRoot_Play), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
+            // The new-colony starting-site screen is drawn by the main-menu UI root, not the play one.
+            h.Patch(AccessTools.Method(typeof(UIRoot_Entry), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
             h.Patch(AccessTools.Method(typeof(GeminiClient), "SendChatAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeChat)),
                 postfix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(AfterChat)));
             h.Patch(AccessTools.Method(typeof(ProviderContextBudgets), "GeminiAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeBudget)));
@@ -134,7 +141,8 @@ namespace MapGenAI.RuntimeProbe
             {
                 // Counts real draws of the world-map entry button through the production OnGUI path (not a direct dialog open).
                 var draw = AccessTools.Method("MapGenAI.Patches.WorldInterface_Patch:DrawAIButton");
-                if (draw != null) h.Patch(draw, postfix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(AfterEntryDraw)));
+                if (draw != null) h.Patch(draw, prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeEntryDraw)), postfix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(AfterEntryDraw)),
+                    finalizer: new HarmonyMethod(typeof(ShowcaseProbe), nameof(RestoreEntryEvent)));
             }
             windowAtStartup = ShowGameWindow();
         }
@@ -162,6 +170,25 @@ namespace MapGenAI.RuntimeProbe
 
         static void FixedWorldSeed(ref string seedString) => seedString = worldSeed;
         static void AfterEntryDraw(Rect btnRect) { entryDraws++; entryRect = btnRect; }
+        // A click is a mouse-down on one draw of the button and a mouse-up on a later draw, handed only to the button's own
+        // Widgets.ButtonInvisible (GUI.Button) call. The event of that GUI pass is put back right after the call.
+        static void BeforeEntryDraw(Rect btnRect)
+        {
+            if (clickPhase != 1 && clickPhase != 2) return;
+            // Both halves go into repaint passes: IMGUI gives the button a different control id in layout passes, and a
+            // mouse-up only counts for the control that took the mouse-down.
+            if (Event.current.type != EventType.Repaint) return;
+            heldEvent = Event.current;
+            var synthetic = new Event { type = clickPhase == 1 ? EventType.MouseDown : EventType.MouseUp, mousePosition = btnRect.center, button = 0, clickCount = 1 };
+            Event.current = synthetic;
+            clickTrace.Add(synthetic.type + " at " + (int)btnRect.center.x + "," + (int)btnRect.center.y + " in a " + heldEvent?.type + " pass, hotControl before " + GUIUtility.hotControl);
+        }
+        static void RestoreEntryEvent(Exception __exception)
+        {
+            if (heldEvent == null) return;
+            clickTrace[clickTrace.Count - 1] += ", after " + GUIUtility.hotControl + (__exception != null ? ", draw threw " + __exception.GetType().Name + ": " + __exception.Message : "");
+            Event.current = heldEvent; heldEvent = null; clickPhase++;
+        }
         // Whether the entry button and the settings page survived startup: the Mod instance exists only if its constructor finished.
         static Dictionary<string, object> EntryAudit()
         {
@@ -170,7 +197,17 @@ namespace MapGenAI.RuntimeProbe
             var info = onGui == null ? null : HarmonyLib.Harmony.GetPatchInfo(onGui);
             int ours = HarmonyLib.Harmony.GetAllPatchedMethods().Count(m => HarmonyLib.Harmony.GetPatchInfo(m)?.Owners.Contains(owner) == true);
             var mod = LoadedModManager.ModHandles.FirstOrDefault(m => m is MapGenAIMod);
+            var toolbar = Find.WindowStack.Windows.FirstOrDefault(w => w.GetType().FullName == "MapPreview.MapPreviewToolbar");
+            var preview = PreviewWindow();
+            // A window over the button's centre takes the click, so the button is usable only when none is there.
+            var over = entryDraws > 0 ? Find.WindowStack.GetWindowAt(entryRect.center) : null;
             return new Dictionary<string, object> {
+                { "programState", Current.ProgramState.ToString() },
+                { "startingSiteScreen", Find.WindowStack.IsOpen<Page_SelectStartingSite>() },
+                { "toolbarRect", toolbar != null ? RectInfo(toolbar.windowRect) : null },
+                { "previewRect", preview != null ? RectInfo(preview.windowRect) : null },
+                { "windowAtButtonCentre", over?.GetType().FullName },
+                { "windowsOverlappingButton", Find.WindowStack.Windows.Where(w => entryDraws > 0 && w.windowRect.Overlaps(entryRect)).Select(w => (object)w.GetType().FullName).ToList() },
                 { "buttonPatchApplied", info?.Owners.Contains(owner) == true },
                 { "methodsPatchedByMapGenAI", ours },
                 { "modSettingsRegistered", mod != null },
@@ -178,6 +215,64 @@ namespace MapGenAI.RuntimeProbe
                 { "buttonDrawCalls", entryDraws },
                 { "buttonRect", RectInfo(entryRect) },
                 { "tile", currentTile } };
+        }
+        // New-colony starting-site screen: the same entry-state game the quick test builds (scenario, storyteller, world from the
+        // fixed seed), opened on Page_SelectStartingSite instead of generating a map. Map Preview has separate settings for this screen.
+        public static void BeginStartingSite(string output, Action<Exception> fail)
+        {
+            GenCommandLine.TryGetCommandLineArg("mapgenAIShowcase", out var path);
+            LongEventHandler.QueueLongEvent(() =>
+            {
+                try { Root_Play.SetupForQuickTestPlay(); }
+                catch (Exception error) { fail(error); return; }
+                LongEventHandler.ExecuteWhenFinished(() =>
+                {
+                    try
+                    {
+                        Find.World.renderer.RegenerateAllLayersNow();
+                        Find.WindowStack.Add(new Page_SelectStartingSite());
+                        Run(output, path);
+                    }
+                    catch (Exception error) { fail(error); }
+                });
+            }, "GeneratingWorld", false, null);
+        }
+        // Map Preview's own switches for its toolbar on the starting-site screen and during play (both on by default).
+        static Dictionary<string, object> SetMapPreviewToolbar(bool enabled)
+        {
+            var settings = AccessTools.Field(AccessTools.TypeByName("MapPreview.MapPreviewMod"), "Settings").GetValue(null);
+            var record = new Dictionary<string, object>();
+            foreach (var name in new[] { "EnableToolbar", "EnableToolbarInPlay" })
+            {
+                var entry = AccessTools.Field(settings.GetType(), name).GetValue(settings);
+                var value = AccessTools.Field(entry.GetType(), "Value");
+                value.SetValue(entry, enabled);
+                record[name] = value.GetValue(entry);
+            }
+            AccessTools.Method("MapPreview.WorldInterfaceManager:RefreshInterface").Invoke(null, null);
+            record["toolbarOpenAfterRefresh"] = Find.WindowStack.Windows.Any(w => w.GetType().FullName == "MapPreview.MapPreviewToolbar");
+            return record;
+        }
+        static IEnumerable<object> ClickEntry(Dictionary<string, object> entry)
+        {
+            bool openBefore = Find.WindowStack.IsOpen<Dialog_TextToMap>();
+            clickTrace.Clear();
+            clickPhase = 1;
+            var ok = new bool[1];
+            foreach (var y in WaitFor(() => clickPhase >= 3, 10f, ok)) yield return y;
+            if (!ok[0]) { clickPhase = 0; GUIUtility.hotControl = 0; }
+            int hotAfterClick = GUIUtility.hotControl;
+            foreach (var y in Frames(10)) yield return y;
+            var opened = Find.WindowStack.Windows.OfType<Dialog_TextToMap>().FirstOrDefault();
+            var click = new Dictionary<string, object> {
+                { "delivered", ok[0] }, { "trace", clickTrace.Cast<object>().ToList() },
+                { "dialogOpenBefore", openBefore }, { "dialogOpenedByClick", !openBefore && opened != null }, { "hotControlAfterClick", hotAfterClick } };
+            if (opened == null) GUIUtility.hotControl = 0;
+            entry["click"] = click;
+            if (opened == null) yield break;
+            foreach (var y in Capture("01-after-click", click)) yield return y;
+            opened.Close(false);
+            foreach (var y in Frames(10)) yield return y;
         }
         static bool HideAlerts() => false;
         static void ParkMouse() { if (Event.current != null) Event.current.mousePosition = new Vector2(-100000f, -100000f); }
@@ -362,6 +457,7 @@ namespace MapGenAI.RuntimeProbe
             tileA = SelectTile("A", rules.GetObject("A"), -1);
             tileB = SelectTile("B", rules.GetObject("B"), tileA);
             File.WriteAllText(Path.Combine(folder, "tiles.json"), SimpleJson.Serialize(tileFacts));
+            if (scenario.GetBool("mapPreviewToolbarOff")) result["mapPreviewToolbarOff"] = SetMapPreviewToolbar(false);
             CameraJumper.TryShowWorld();
             foreach (var y in Frames(30)) yield return y; // Map Preview ignores selections in the first world frames.
             foreach (var y in ShowTile(tileA)) yield return y;
@@ -371,6 +467,7 @@ namespace MapGenAI.RuntimeProbe
                 var entry = EntryAudit();
                 foreach (var y in Capture("00-world-entry", entry)) yield return y;
                 entry["buttonDrawCallsAfterCapture"] = entryDraws;
+                if (scenario.GetBool("clickEntry")) foreach (var y in ClickEntry(entry)) yield return y;
                 result["entryAudit"] = entry;
                 if (steps.Count == 0) { stepId = "done"; yield break; }
             }
