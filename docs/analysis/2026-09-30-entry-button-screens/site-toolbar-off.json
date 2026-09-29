@@ -1,0 +1,41 @@
+{
+  "schema": "mapgenai-showcase/1",
+  "purpose": "New-colony starting-site screen with Map Preview's toolbar turned off in its settings: is the entry button still drawn and clickable. No model calls.",
+  "dryRun": true,
+  "entryAudit": true,
+  "worldSeed": "mapgenai-showcase-20260927",
+  "uiScale": 1.5,
+  "previewMapSize": 250,
+  "captureDelayFrames": 30,
+  "runMinutes": 20,
+  "tiles": {
+    "A": {
+      "rule": "Temperate inland river tile: TemperateForest biome, a world river on the tile, no Ocean or Lake neighbour (not coastal), hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then a river with widthOnMap 6-20, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": true,
+      "coastal": false,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    },
+    "B": {
+      "rule": "Temperate coastal tile: TemperateForest biome, at least one Ocean neighbour and no Lake neighbour, no world river, hilliness Flat preferred over SmallHills, no world object on the tile, not impassable. Ties: fewest features other than river/coast variants, then the lowest tile id.",
+      "biomes": [
+        "TemperateForest"
+      ],
+      "river": false,
+      "coastal": true,
+      "hilliness": [
+        "Flat",
+        "SmallHills"
+      ]
+    }
+  },
+  "steps": [],
+  "startingSite": true,
+  "clickEntry": true,
+  "mapPreviewToolbarOff": true
+}

@@ -1,0 +1,9 @@
+{
+    "output":  "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-30-entry-button-screens\\v171-site-off",
+    "profile":  "F:\\Projects\\Rimworld\\work\\mapgenai-probe-profiles\\v171-site-off",
+    "mod":  "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\MapGenAI_Probe_20260930-003346-710",
+    "pid":  61200,
+    "created":  "2026-09-30T00:33:46.9477318+09:00",
+    "probeDllSha256":  "B435008936B4239389CAA6923E691EBE45438710706674D5366E66F3B5A8EC66",
+    "sourceDllSha256":  "F3F82A069F3ABC644C03A068A821102CDC042D5BFCC83A299E10032B69B3855D"
+}
