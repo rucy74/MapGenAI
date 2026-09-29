@@ -20,6 +20,18 @@ namespace MapGenAI
         }
 
         /// <summary>
+        /// What the button is placed beside: Map Preview's toolbar when it is open. Players can turn the toolbar off in Map
+        /// Preview's settings (separately for the starting-site screen and for play); then the top edge of the preview window,
+        /// and with neither open the top-right corner of the screen.
+        /// </summary>
+        public static Box Anchor(Box? toolbar, Box? preview, float screenWidth, float height, float margin = 5f)
+        {
+            if (toolbar.HasValue) return toolbar.Value;
+            if (preview.HasValue) return new Box(preview.Value.X, preview.Value.Y, preview.Value.W, height);
+            return new Box(screenWidth - margin, margin, 0f, height);
+        }
+
+        /// <summary>
         /// Right of the toolbar, then left of it, then below it: the first spot that is on screen and clear of every
         /// window. If every on-screen spot is covered, the first on-screen one; if none is on screen, below the toolbar.
         /// </summary>

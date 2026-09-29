@@ -49,5 +49,28 @@ static class EntryButtonPlacementTests
             var chat = new Box(300, 40, 670, 600);
             Equal("865,60,110,30", Text(EntryButtonPlacement.Choose(Toolbar, 1280, 720, new[] { Toolbar, PreviewWindow, chat }, 110, 30, 5)));
         });
+
+        Check("Toolbar open: the button is placed beside the toolbar, as before", () =>
+        {
+            Equal(Text(Toolbar), Text(EntryButtonPlacement.Anchor(Toolbar, PreviewWindow, 1280, 30)));
+        });
+
+        Check("Toolbar turned off in Map Preview: the button goes left of the preview window, level with its top", () =>
+        {
+            var spot = EntryButtonPlacement.Choose(EntryButtonPlacement.Anchor(null, PreviewWindow, 1280, 30), 1280, 720, new[] { PreviewWindow, InspectPane }, 110, 30, 5);
+            Equal("865,105,110,30", Text(spot));
+            Equal(false, spot.Overlaps(PreviewWindow));
+        });
+
+        Check("Toolbar off and the preview window dragged to the left edge: the button goes right of it", () =>
+        {
+            var preview = new Box(10, 200, 250, 250);
+            Equal("265,200,110,30", Text(EntryButtonPlacement.Choose(EntryButtonPlacement.Anchor(null, preview, 1280, 30), 1280, 720, new[] { preview }, 110, 30, 5)));
+        });
+
+        Check("Toolbar off and no preview window (an impassable tile): the button goes to the top-right corner", () =>
+        {
+            Equal("1160,5,110,30", Text(EntryButtonPlacement.Choose(EntryButtonPlacement.Anchor(null, null, 1280, 30), 1280, 720, new[] { InspectPane }, 110, 30, 5)));
+        });
     }
 }
