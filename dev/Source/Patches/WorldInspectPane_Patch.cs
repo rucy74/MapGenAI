@@ -143,6 +143,17 @@ namespace MapGenAI.Patches
             return toolbar != null ? (Rect?)toolbar.windowRect : null;
         }
 
+        // Map Preview 미리보기 창 위치 (NoInlining: TypeLoadException 방지)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static Rect? GetPreviewRect()
+        {
+            var preview = MapPreview.MapPreviewWindow.Instance;
+            return preview != null ? (Rect?)preview.windowRect : null;
+        }
+
+        private static EntryButtonPlacement.Box? ToBox(Rect? r) =>
+            r.HasValue ? new EntryButtonPlacement.Box(r.Value.x, r.Value.y, r.Value.width, r.Value.height) : (EntryButtonPlacement.Box?)null;
+
         private static void DrawAIButton(Rect btnRect)
         {
             var oldColor = GUI.color;
@@ -207,16 +218,12 @@ namespace MapGenAI.Patches
                 // (툴바 등록 실패 시 fallback)
                 if (!MapPreviewToolbarButton.IsRegistered && IsMapPreviewLoaded())
                 {
-                    var toolbarRect = GetToolbarRect();
-                    if (toolbarRect != null)
-                    {
-                        var tr = toolbarRect.Value;
-                        // Drawn under every window: pick a spot no window covers (Map Preview's preview sits right below its toolbar).
-                        var open = Find.WindowStack.Windows.Select(w => new EntryButtonPlacement.Box(w.windowRect.x, w.windowRect.y, w.windowRect.width, w.windowRect.height));
-                        var spot = EntryButtonPlacement.Choose(new EntryButtonPlacement.Box(tr.x, tr.y, tr.width, tr.height),
-                            Verse.UI.screenWidth, Verse.UI.screenHeight, open, BtnW, BtnH, Gap);
-                        DrawAIButton(new Rect(spot.X, spot.Y, spot.W, spot.H));
-                    }
+                    // Drawn under every window: pick a spot no window covers (Map Preview's preview sits right below its toolbar).
+                    // With the toolbar turned off in Map Preview's settings the button goes beside the preview window instead.
+                    var open = Find.WindowStack.Windows.Select(w => new EntryButtonPlacement.Box(w.windowRect.x, w.windowRect.y, w.windowRect.width, w.windowRect.height));
+                    var anchor = EntryButtonPlacement.Anchor(ToBox(GetToolbarRect()), ToBox(GetPreviewRect()), Verse.UI.screenWidth, BtnH);
+                    var spot = EntryButtonPlacement.Choose(anchor, Verse.UI.screenWidth, Verse.UI.screenHeight, open, BtnW, BtnH, Gap);
+                    DrawAIButton(new Rect(spot.X, spot.Y, spot.W, spot.H));
                 }
             }
             catch (System.Exception e)
