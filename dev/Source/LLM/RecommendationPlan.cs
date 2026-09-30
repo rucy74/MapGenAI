@@ -99,7 +99,9 @@ Recommendations:
                 throw new FormatException("recommend requires 1..3 options, each with params");
             return options;
         }
-        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null,float nativeRiverDirection=-1f)
+        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null)
+            => Validate(command,before,validate,korean,lookup,-1f);
+        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup,float nativeRiverDirection)
         {
             var plans=new List<RecommendationPlan>();
             var outcomes=new HashSet<string>(StringComparer.Ordinal);
