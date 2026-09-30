@@ -41,7 +41,7 @@ static class FeatureInitStreamTests
         try
         {
             for (int i = 0; i < DrawsBeforeLoop; i++) _ = Rand.Int;
-            var plan = routed ? FeatureInitStream.Plan(generated, Snap(original), Snap(generated), Snap(generated), Connection) : null;
+            var plan = routed ? FeatureInitStream.Plan(generated, Snap(original), Snap(generated), Snap(generated), Connection, n => GenOrder[n], (n, p) => Draw(n)) : null;
             foreach (var name in generated)
             {
                 if (plan == null) draws[name] = Draw(name);
@@ -54,6 +54,42 @@ static class FeatureInitStreamTests
 
     public static void RunAll()
     {
+        Check("Removed native Caves reserve their draws before retained or replacement world water", () =>
+        {
+            for (int i = 1; i <= 200; i++)
+            {
+                var original = new[] { "Caves", "HotSprings", "River", "Coast" };
+                var reference = Generate(i, original, original, false);
+                foreach (var generated in new[] { new[] { "River", "Coast" }, new[] { "HotSprings", "River", "Coast" }, new[] { "RiverIsland", "Coast" } })
+                {
+                    var actual = Generate(i, original, generated, true);
+                    string river = generated.Contains("River") ? "River" : "RiverIsland";
+                    Equal(Text(reference["River"]), Text(actual[river].Take(6).ToArray()));
+                    if (river == "River") Equal(Text(reference["Coast"]), Text(actual["Coast"]));
+                }
+            }
+        });
+        Check("Removed feature reservations preserve the post-terrain bend and do not skip same-order features", () =>
+        {
+            var calls = new List<string>();
+            var original = new[] { "Caves", "HotSprings", "River" };
+            var generated = new[] { "Added", "RiverIsland" };
+            var order = new Func<string, int>(n => n == "Added" ? 0 : GenOrder[n]);
+            Rand.PushState(1);
+            try
+            {
+                var plan = FeatureInitStream.Plan(generated, Snap(original), Snap(generated), Snap(generated), Connection, order,
+                    (n, phase) => { calls.Add(n + "/" + phase); _ = Rand.Int; });
+                plan.Run("Added", () => calls.Add("Added"));
+                plan.Run("RiverIsland", () => calls.Add("RiverIsland"));
+                Equal("Caves/,Added,HotSprings/,RiverIsland", string.Join(",", calls));
+                calls.Clear();
+                plan.Run("Added", () => calls.Add("Added"), "PostTerrain");
+                plan.Run("RiverIsland", () => calls.Add("RiverIsland"), "PostTerrain");
+                Equal("Caves/PostTerrain,Added,HotSprings/PostTerrain,RiverIsland", string.Join(",", calls));
+            }
+            finally { Rand.PopState(); }
+        });
         Check("Showcase river draws: z 101 alone, z 140 when hot springs draw first from the shared stream", () =>
         {
             Equal(101, Generate(ShowcaseMapSeed, new[] { "River" }, new[] { "River" }, false)["River"][1]);

@@ -202,7 +202,7 @@ namespace MapGenAI.UI
 추천: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}}]}
 
 params 스키마:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite|landform|passage|region_fill"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|right|up|down|center|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite|landform|passage|region_fill"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|숫자"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes 가이드:
 - ridge: 한 방향에 산맥. direction으로 산이 높은 방향. fade로 산 범위(small=가장자리만, medium=절반, large=맵 대부분). noise_amount로 자연스러움 조절(none=깨끗한 경계, high=매우 불규칙). fade와 noise_amount는 생략 가능(기본값=medium).
@@ -239,7 +239,7 @@ elevation_shapes 가이드:
 - hill_smoothness: 산 표면 거칠기 (rough=울퉁불퉁, normal=기본, smooth=매끄러움). 또는 숫자(0.5~6.0, 기본 2.0).
 - hill_amount: 전체 고도 오프셋 (0.1~1.3, 기본 1.0). 0.1=완전 평지(강제), 0.5=완만한 평지, 1.2=산이 많아짐. 1.3 이상은 맵 대부분이 산으로 뒤덮이므로 주의. ""완전 평지"" 요청 시 0.1, ""산 많이"" 요청 시 1.2 사용. 1.0은 기본값(변화 없음).
 - river_direction: 강 방향. left/right/up/down 또는 0-360도 각도. 0=위(북), 90=오른쪽(동), 180=아래(남), 270=왼쪽(서). 미지정시 자동.
-- river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 좌우 이동은 x축, 상하 이동은 z축으로 자동 처리. 미지정시 중앙.
+- river_position: 강 위치. left/right/up/down/center 또는 0.0~1.0 숫자. 명시적 동서 이동은 river.x_position, 남북 이동은 river.z_position을 사용. 숫자 단축키는 현재/변경할 강 방향의 수직 축에 적용(가로 강은 z, 세로 강은 x). 미지정 좌표는 유지.
 - straight_river: 일자 강 (true/false). true면 강이 구불거리지 않고 직선으로 흐름. '일자 강', '운하', '직선 강' 요청 시 사용.
 - fertility_offset: 비옥도 오프셋 (-1.0~1.0, 기본 0). 양수=기름진 토양 증가(0.5 권장), 음수=감소. '기름진 토양 많이', '비옥한 맵' 등 요청 시 사용."
                 : @"Output exactly one of these three JSON formats.
@@ -249,7 +249,7 @@ Map generation: {""action"":""generate"",""description"":""map description"",""p
 Recommendations: {""action"":""recommend"",""options"":[{""params"":{...}},{""params"":{...}}]}
 
 params schema:
-{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|center|right|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite|landform|passage|region_fill"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
+{""hills"":""left|right|center|edges|top|bottom|none"",""hill_amount"":0.5~1.6,""vegetation_density"":0.0~2.0,""animal_density"":0.0~2.0,""fertility_offset"":-1.0~1.0,""caves"":true|false,""coast_direction"":""auto|north|east|south|west"",""rock_count"":1~15,""rock_types"":[""Granite|Limestone|Marble|Sandstone|Slate""],""ore_density"":0.0~2.5,""ruin_density"":0.0~2.5,""danger_density"":0.0~2.5,""rock_chunks"":true|false,""hill_size"":""small|medium|large"",""hill_smoothness"":""rough|normal|smooth"",""river_direction"":""left|right|up|down|0-360"",""river_position"":""left|right|up|down|center|0.0-1.0"",""mutators"":[""defName""],""remove_mutators"":[""defName""],""remove_categories"":[""category""],""restore_categories"":[""category""],""river"":{""present"":true|false},""elevation_shapes"":[{""type"":""ridge|split|radial|bump|noise|ring|composite|landform|passage|region_fill"",""direction"":""left|right|top|bottom|top_left|top_right|bottom_left|bottom_right|0-360"",""strength"":""weak|medium|strong|negative_weak|negative_medium|negative_strong|number"",""fade"":""small|medium|large|0.0-1.0"",""noise_amount"":""none|low|medium|high|0.0-1.5"",""edge_roughness"":""none|low|medium|high|0.0-1.0 (composite only)"",""position"":""center|top_left|top|top_right|left|right|bottom_left|bottom|bottom_right|[x,z]"",""size"":""small|medium|large|0-1"",""gap"":""tiny|small|medium|large"",""fill"":""water""}]}
 
 elevation_shapes guide:
 - ridge: Mountains on one side. Use direction to set which side is high. fade controls range (small=edge only, medium=half, large=most of map). noise_amount controls naturalness (none=clean, high=very rough). fade and noise_amount are optional (default=medium).
@@ -286,7 +286,7 @@ Additional parameters:
 - hill_smoothness: Mountain surface roughness (rough=jagged, normal=default, smooth=smooth). Or a number (0.5~6.0, default 2.0).
 - hill_amount: Global elevation offset (0.1~1.3, default 1.0). 0.1=completely flat (forced), 0.5=gently flattened, 1.2=more mountains. Values above 1.3 will cover most of the map with mountains — use with caution. Use 0.1 for ""completely flat"", 1.2 for ""lots of mountains"". 1.0 is default (no change).
 - river_direction: River direction. left/right/up/down or 0-360 degree angle. 0=up(north), 90=right(east), 180=down(south), 270=left(west). Auto if unspecified.
-- river_position: River position. left/right/up/down/center or 0.0~1.0 number. Left/right moves on x-axis, up/down on z-axis. Center if unspecified.
+- river_position: River position. left/right/up/down/center or 0.0~1.0 number. For explicit east/west use river.x_position; north/south use river.z_position. A numeric shortcut moves across the resulting/current river direction (horizontal river: z, vertical: x). Preserve unspecified coordinates.
 - straight_river: Straight river (true/false). If true, the river flows in a straight line without meandering. Use for 'straight river', 'canal' requests.
 - fertility_offset: Fertility offset (-1.0~1.0, default 0). Positive=more rich soil (0.5 recommended), negative=less. Use for 'lots of rich soil', 'fertile map' requests.";
 
@@ -840,7 +840,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
                     try
                     {
                         var plans=RecommendationPlan.Validate(parsed,MapGenParams.CaptureState(_openedTileId),
-                            data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean(),DefinitionText);
+                            data=>MapGenParams.ValidatePatch(data,_openedTileId),IsKorean(),DefinitionText,NativeRiverDirection.Angle(_openedTileId));
                         _recommendations=plans;_recommendationState=RecommendationState();
                         _recommendationPreviews?.Dispose();
                         _recommendationPreviews=null; _previewError=null;
@@ -939,7 +939,7 @@ For recommendations follow the rules below and this tile's terrain and shore con
             var previous = MapGenAIWorldComponent.Get()?.GetState(_openedTileId)?.Clone();
             var before = previous ?? new TileMapState();
             var proposed = before;
-            foreach(var edit in edits)proposed=MapStateEditor.Merge(proposed,edit);
+            foreach(var edit in edits)proposed=MapStateEditor.Merge(proposed,edit,NativeRiverDirection.Angle(_openedTileId));
             var changes = MapStateCodec.ChangedFields(before,proposed);
             // Backend rejects the whole response before any state or undo history changes.
             var oldFeatures=Find.WorldGrid[_openedTileId].Mutators.Select(m=>m.defName).ToList();

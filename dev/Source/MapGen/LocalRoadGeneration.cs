@@ -168,7 +168,8 @@ namespace MapGenAI.MapGen
             {
                 road.blockedCells=road.path.Count(p=>{
                     var c=new IntVec3(p[0],0,p[1]);var t=map.terrainGrid.TerrainAt(c);
-                    return t.IsWater || t.IsRiver || t.dangerous || MapGenerator.Elevation[c]>=.7f || c.GetEdifice(map)!=null;
+                    // Native road decorations such as AncientHydrant are PassThroughOnly, not blocked roads.
+                    return t.IsWater || t.IsRiver || t.dangerous || MapGenerator.Elevation[c]>=.7f || c.GetEdifice(map)?.def.passability==Traversability.Impassable;
                 });
                 if(road.blockedCells>0)AuthoringGeneration.RoadFailure(new InvalidOperationException(L10n.Pick(RoadPlans.Label(road.kind,true)+": 생성 후 경로에 장애물 "+road.blockedCells+"칸이 남았습니다. 기존 건물/지형을 유지했습니다.", RoadPlans.Label(road.kind,false)+": Later generation obstructed the road ("+road.blockedCells+" cells); existing structures and terrain were preserved.")));
             }

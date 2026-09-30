@@ -27,10 +27,16 @@ try {
     foreach($game in @(Get-CimInstance Win32_Process -Filter "Name='RimWorldWin64.exe'")) {
         if($game.CommandLine -and $game.CommandLine.IndexOf($probeProfilePath,[StringComparison]::OrdinalIgnoreCase) -ge 0){throw 'Owned profile is still running'}
     }
-    Remove-Item -LiteralPath $target -Recurse -Force
+    $archiveRoot=[IO.Path]::GetFullPath((Join-Path $GameRoot 'ArchivedProbes')).TrimEnd('\')
+    $archiveTarget=[IO.Path]::GetFullPath((Join-Path $archiveRoot (Split-Path -Leaf $target)))
+    if((Split-Path -Parent $archiveRoot) -ne [IO.Path]::GetFullPath($GameRoot).TrimEnd('\') -or (Split-Path -Parent $archiveTarget) -ne $archiveRoot){throw 'Archive outside the owned runtime'}
+    if(Test-Path -LiteralPath $archiveTarget){throw 'Archive destination already exists'}
+    New-Item -ItemType Directory -Path $archiveRoot -Force | Out-Null
+    if((Get-Item -LiteralPath $archiveRoot).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Refusing a linked archive directory'}
+    Move-Item -LiteralPath $target -Destination $archiveTarget
     if(Test-Path -LiteralPath $target){throw 'Temporary mod directory remains'}
-    @{removed=$true;mod=$target;profileRetained=$probeProfilePath;utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8
-    Write-Output "Removed owned probe: $(Split-Path -Leaf $target)"
+    @{removed=$true;archived=$true;mod=$target;archive=$archiveTarget;profileRetained=$probeProfilePath;utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8
+    Write-Output "Archived owned probe: $(Split-Path -Leaf $target)"
 } catch {
     @{removed=$false;error=$_.Exception.Message;utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath $receiptPath -Encoding utf8
     throw

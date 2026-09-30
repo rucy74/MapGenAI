@@ -52,6 +52,43 @@ static class MdpApplyTests
             var z=Edit(x,"{\"river_position\":\"down\"}");
             Equal(.3f,z.riverXPosition); Equal(.2f,z.riverZPosition);
         });
+        Check("Numeric river position follows the resulting direction and retains the other coordinate", () =>
+        {
+            foreach (float angle in new[] { 0f, 90f, 180f, 270f, 80f, 350f, -1f })
+            {
+                var state = new TileMapState { hasRiver=true, riverDirectionAngle=angle, riverXPosition=.3f, riverZPosition=.4f };
+                var moved = Edit(state,"{\"river_position\":0.85}");
+                bool horizontal = angle == 90 || angle == 270 || angle == 80;
+                Equal(horizontal ? .3f : .85f, moved.riverXPosition);
+                Equal(horizontal ? .85f : .4f, moved.riverZPosition);
+                Equal(angle, moved.riverDirectionAngle);
+            }
+            var both = Edit(new TileMapState {riverXPosition=.3f,riverZPosition=.4f},"{\"river_direction\":\"right\",\"river_position\":0.85}");
+            Equal(.3f,both.riverXPosition); Equal(.85f,both.riverZPosition); Equal(90f,both.riverDirectionAngle);
+        });
+        Check("Named river positions choose an explicit map axis independent of river direction", () =>
+        {
+            foreach (string name in new[] { "north", "south", "east", "west", "up", "down", "left", "right" })
+            {
+                var state = new TileMapState {riverDirectionAngle=90f,riverXPosition=.3f,riverZPosition=.4f};
+                var moved=Edit(state,"{\"river_position\":\""+name+"\"}");
+                bool z=name=="north" || name=="south" || name=="up" || name=="down";
+                float position=name=="north" || name=="east" || name=="up" || name=="right" ? .8f : .2f;
+                Equal(z ? .3f : position,moved.riverXPosition); Equal(z ? position : .4f,moved.riverZPosition);
+            }
+            Throws(()=>Edit(new TileMapState(),"{\"river_position\":0.85,\"river\":{\"z_position\":0.8}}"));
+        });
+        Check("Automatic native river direction resolves numeric positions without making that direction explicit", () =>
+        {
+            var before=new TileMapState {riverXPosition=.3f,riverZPosition=.4f,riverDirectionAngle=-1f};
+            var data=Patch("{\"river_position\":0.85}");
+            var north=MapStateEditor.Merge(before,data,90f);
+            Equal(.3f,north.riverXPosition);Equal(.85f,north.riverZPosition);Equal(-1f,north.riverDirectionAngle);
+            var east=MapStateEditor.Merge(before,data,0f);
+            Equal(.85f,east.riverXPosition);Equal(.4f,east.riverZPosition);Equal(-1f,east.riverDirectionAngle);
+            var explicitDirection=MapStateEditor.Merge(before,Patch("{\"river_direction\":\"up\",\"river_position\":0.85}"),90f);
+            Equal(.85f,explicitDirection.riverXPosition);Equal(.4f,explicitDirection.riverZPosition);
+        });
         Check("Removed features persist and can be re-added", () =>
         {
             var state=Edit(null,"{\"mutators\":[\"A\",\"B\"]}");

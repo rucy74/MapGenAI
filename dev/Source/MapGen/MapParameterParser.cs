@@ -16,7 +16,7 @@ namespace MapGenAI.MapGen
             ValidateChoice(obj,"hill_size","small,medium,large",true);
             ValidateChoice(obj,"hill_smoothness","rough,normal,smooth",true);
             ValidateChoice(obj,"river_direction","horizontal,vertical,left,right,up,down",true);
-            ValidateChoice(obj,"river_position","left,right,up,down,top,bottom,center",true);
+            ValidateChoice(obj,"river_position","left,right,up,down,top,bottom,north,south,east,west,center",true);
             if(obj.GetObject("river")!=null)ValidateChoice(obj.GetObject("river"),"direction","horizontal,vertical,left,right,up,down",true);
             var data = new MapParamsData();
 
@@ -80,13 +80,23 @@ namespace MapGenAI.MapGen
                     if (data.river == null) data.river = new RiverData();
                     data.river.present = true;
                     string rp = rpStr.Trim().ToLower();
-                    if (rp == "up" || rp == "top")
-                        data.river.z_position = 0.8f;
-                    else if (rp == "down" || rp == "bottom")
-                        data.river.z_position = 0.2f;
+                    if (rp == "up" || rp == "top" || rp == "north" || rp == "down" || rp == "bottom" || rp == "south")
+                    {
+                        data.river.z_position = rp == "down" || rp == "bottom" || rp == "south" ? .2f : .8f;
+                        Track("river_z");
+                    }
+                    else if (rp == "left" || rp == "west" || rp == "right" || rp == "east")
+                    {
+                        data.river.x_position = rp == "left" || rp == "west" ? .2f : .8f;
+                        Track("river_x");
+                    }
                     else
-                        data.river.x_position = ParseRiverPosition(rpStr);
-                    Track(rp == "up" || rp == "top" || rp == "down" || rp == "bottom" ? "river_z" : "river_x");
+                    {
+                        if (data.explicitKeys.Contains("river_x") || data.explicitKeys.Contains("river_z"))
+                            throw new FormatException("Use river.x_position/z_position or a numeric river_position, not both.");
+                        data.river.position = ParseRiverPosition(rpStr);
+                        Track("river_position");
+                    }
                     Track("river_present");
                 }
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace MapGenAI.MapGen
@@ -12,13 +13,19 @@ namespace MapGenAI.MapGen
         // world: the committed world tile, never a candidate substitute. No baseline means the tile was never edited.
         // worldConnection: river and shore features. A new one only replaces the tile's own connection at the same genOrder
         // (River -> RiverIsland, Coast -> Bay) and first draws what that connection drew, so it stays on the shared stream.
-        // Returns null when the generated tile has no added feature, so natural generation stays untouched.
+        // Unedited tiles take the unchanged native path.
         public static FeatureInitPlan Plan(IEnumerable<string> generated, TileWorldSnapshot baseline, TileWorldSnapshot lastApplied, TileWorldSnapshot world,
-            Func<string, bool> worldConnection = null)
+            Func<string, bool> worldConnection = null, Func<string, int> generationOrder = null, Action<string, string> reserveRemoved = null)
         {
-            var original = new HashSet<string>(baseline == null ? world.mutators : WorldTileEditor.Rebase(baseline, lastApplied, world).mutators);
+            var originals = baseline == null ? world.mutators : WorldTileEditor.Rebase(baseline, lastApplied, world).mutators;
+            var original = new HashSet<string>(originals);
+            var names = generated.ToList();
             var added = new HashSet<string>();
-            foreach (var name in generated) if (!original.Contains(name) && worldConnection?.Invoke(name) != true) added.Add(name);
+            foreach (var name in names) if (!original.Contains(name) && worldConnection?.Invoke(name) != true) added.Add(name);
+            // Water-category replacements are intentional changes to that connection. Reserve only removed non-water features.
+            var removed = new HashSet<string>(original.Where(n => !names.Contains(n) && worldConnection?.Invoke(n) != true));
+            if (removed.Count > 0 && reserveRemoved != null && generationOrder != null)
+                return new FeatureInitPlan(added, Peek(), originals.OrderBy(generationOrder).ToList(), names, removed, reserveRemoved, generationOrder);
             return added.Count == 0 ? null : new FeatureInitPlan(added, Peek());
         }
 
@@ -47,17 +54,45 @@ namespace MapGenAI.MapGen
     {
         readonly HashSet<string> added;
         readonly int streamSeed;
+        readonly List<string> original, generated;
+        readonly HashSet<string> removed;
+        readonly Action<string, string> reserve;
+        readonly Func<string, int> generationOrder;
+        readonly Dictionary<string, int> cursors = new Dictionary<string, int>();
         public FeatureInitPlan(HashSet<string> added, int streamSeed) { this.added = added; this.streamSeed = streamSeed; }
+        public FeatureInitPlan(HashSet<string> added, int streamSeed, List<string> original, List<string> generated,
+            HashSet<string> removed, Action<string, string> reserve, Func<string, int> generationOrder) : this(added, streamSeed)
+        { this.original = original; this.generated = generated; this.removed = removed; this.reserve = reserve; this.generationOrder = generationOrder; }
         public bool Isolates(string defName) => added.Contains(defName);
 
         // An added feature runs from its own stream; the shared stream resumes exactly where it was.
         // phase names a later generation step of the feature, whose native stream is shared per GenStep.
         public void Run(string defName, Action action, string phase = null)
         {
-            if (!Isolates(defName)) { action(); return; }
-            Rand.PushState(FeatureInitStream.SeedFor(streamSeed, phase == null ? defName : defName + "/" + phase));
-            try { action(); }
-            finally { Rand.PopState(); }
+            string key = phase ?? "Init";
+            if (original != null)
+            {
+                int index = original.IndexOf(defName);
+                // A replacement connection (RiverIsland for River) has a different name but the same native order.
+                int boundary = index >= 0 ? index : original.FindIndex(n => generationOrder(n) >= generationOrder(defName));
+                if (boundary < 0) boundary = original.Count;
+                Advance(boundary, key, phase);
+                if (index >= 0) cursors[key] = Math.Max(cursors[key], index + 1);
+            }
+            if (!Isolates(defName)) action();
+            else
+            {
+                Rand.PushState(FeatureInitStream.SeedFor(streamSeed, phase == null ? defName : defName + "/" + phase));
+                try { action(); }
+                finally { Rand.PopState(); }
+            }
+            if (original != null && defName == generated[generated.Count - 1]) Advance(original.Count, key, phase);
+        }
+        void Advance(int end, string key, string phase)
+        {
+            cursors.TryGetValue(key, out int cursor);
+            for (int i = cursor; i < end; i++) if (removed.Contains(original[i])) reserve(original[i], phase);
+            cursors[key] = Math.Max(cursor, end);
         }
     }
 }

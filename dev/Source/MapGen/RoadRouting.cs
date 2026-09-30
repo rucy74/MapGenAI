@@ -31,10 +31,13 @@ namespace MapGenAI.MapGen
             if(cols<2 || rows<2 || ground==null || ground.Length!=cols*rows)throw new ArgumentException("Invalid road grid");
             // Diagonal centerline segments pass between cell centers; reserve that extra half diagonal.
             var safe=Clearance(cols,rows,ground,radius+.708f);
+            var anchors=points.Select(Index).ToArray();
+            if(mode=="avoid" && anchors.Skip(1).Take(anchors.Length-2).Any(i=>!safe[i]))
+                AdjustBlockedWaypoints(cols,rows,safe,anchors,radius);
             var result=new List<int>();
             for(int n=1;n<points.Length;n++)
             {
-                int a=Index(points[n-1]),b=Index(points[n]);
+                int a=anchors[n-1],b=anchors[n];
                 if(a==b)throw new InvalidOperationException(L10n.Pick("도로 경유점이 같은 맵 칸에 있습니다.", "Road waypoints resolve to the same map cell."));
                 List<int> leg;
                 if(mode=="direct")
@@ -62,6 +65,36 @@ namespace MapGenAI.MapGen
             }
             return result;
             int Index(float[] point)=>(int)Math.Round(point[1]*(rows-1),MidpointRounding.AwayFromZero)*cols+(int)Math.Round(point[0]*(cols-1),MidpointRounding.AwayFromZero);
+        }
+        // Avoiding roads treat interior waypoints as approximate when they land inside an obstacle.
+        // Endpoints and every already-usable waypoint remain exact. Search only nearby connected clear ground.
+        static void AdjustBlockedWaypoints(int cols,int rows,bool[] safe,int[] anchors,float radius)
+        {
+            int start=anchors[0],end=anchors[anchors.Length-1];
+            if(!safe[start] || !safe[end])throw Blocked();
+            var reachable=new bool[safe.Length];var queue=new Queue<int>();reachable[start]=true;queue.Enqueue(start);
+            while(queue.Count>0)
+            {
+                int i=queue.Dequeue(),x=i%cols,z=i/cols;
+                foreach(int next in new[]{x>0 ? i-1 : -1,x+1<cols ? i+1 : -1,z>0 ? i-cols : -1,z+1<rows ? i+cols : -1})
+                    if(next>=0 && safe[next] && !reachable[next]){reachable[next]=true;queue.Enqueue(next);}
+            }
+            if(!reachable[end])throw Blocked();
+            float limit=Math.Max(radius+2f,Math.Max(4f,Math.Min(cols,rows)*.12f));
+            for(int n=1;n<anchors.Length-1;n++)
+            {
+                if(safe[anchors[n]])continue;
+                int target=anchors[n],best=-1;double distance=double.MaxValue;
+                for(int i=0;i<safe.Length;i++)
+                {
+                    if(!reachable[i] || i==anchors[n-1] || i==anchors[n+1])continue;
+                    int dx=i%cols-target%cols,dz=i/cols-target/cols;double sq=dx*dx+dz*dz;
+                    if(sq>limit*limit || sq>=distance)continue;
+                    distance=sq;best=i;
+                }
+                if(best<0)throw Blocked();
+                anchors[n]=best;
+            }
         }
         static Exception Blocked()=>new InvalidOperationException(L10n.Pick("도로를 연결할 마른 공간이 부족합니다. 경유점을 옮기거나 우회 경로를 요청하세요. 강·바다·산·건물은 유지합니다.", "No dry route with sufficient clearance. Move the waypoints or request an avoiding route; water, mountains and buildings are preserved."));
         static void Append(List<int> target,List<int> source){foreach(int cell in source)if(target.Count==0 || target[target.Count-1]!=cell)target.Add(cell);}

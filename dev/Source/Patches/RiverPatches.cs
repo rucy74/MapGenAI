@@ -22,7 +22,7 @@ namespace MapGenAI.Patches
     {
         static bool Prefix(Vector3 a, Vector3 b, ref float angle)
         {
-            if (!MapGenParams.HasParams) return true;
+            if (!GenerationContext.Active || !MapGenParams.HasParams) return true;
             if (MapGenParams.RiverDirectionAngle < 0f) return true; // -1 = 자동
 
             angle = MapGenParams.RiverDirectionAngle;
@@ -35,7 +35,7 @@ namespace MapGenAI.Patches
     {
         static bool Prefix(Map map, ref float angle)
         {
-            if (!MapGenParams.HasParams) return true;
+            if (!MapGenParams.HasParams || (int)map.Tile != MapGenParams.CurrentTileId) return true;
             if (MapGenParams.RiverDirectionAngle < 0f) return true; // -1 = 자동
 
             angle = MapGenParams.RiverDirectionAngle;
@@ -57,7 +57,7 @@ namespace MapGenAI.Patches
     {
         static void Postfix(Map map, ref IntVec3 __result)
         {
-            if (!MapGenParams.HasParams) return;
+            if (!MapGenParams.HasParams || (int)map.Tile != MapGenParams.CurrentTileId) return;
 
             float xPos = MapGenParams.RiverXPosition;
             float zPos = MapGenParams.RiverZPosition;
@@ -91,7 +91,7 @@ namespace MapGenAI.Patches
     {
         static void Postfix(ref float __result)
         {
-            if (!MapGenParams.HasParams) return;
+            if (!GenerationContext.Active || !MapGenParams.HasParams) return;
             if (!MapGenParams.StraightRiver) return;
 
             __result = 0f;
@@ -105,9 +105,9 @@ namespace MapGenAI.Patches
     [HarmonyPatch(typeof(TileMutatorWorker_River), "Init")]
     static class Patch_StraightRiver_Width
     {
-        static void Postfix(TileMutatorWorker_River __instance)
+        static void Postfix(TileMutatorWorker_River __instance, Map map)
         {
-            if (!MapGenParams.HasParams) return;
+            if (!MapGenParams.HasParams || (int)map.Tile != MapGenParams.CurrentTileId) return;
             if (!MapGenParams.StraightRiver) return;
 
             try

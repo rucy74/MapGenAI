@@ -103,15 +103,34 @@ static class RoadRoutingTests
             Need(before.SequenceEqual(ground),"Failed later leg mutated ground");
             SamePoints(pointCopy,points);
         });
-        test("Road blocked start end and intermediate waypoint are not silently relocated", () =>
+        test("Road endpoints remain exact; direct routes never relocate blocked intermediate waypoints", () =>
         {
             const int cols=25,rows=21;
             var points=Points(cols,rows,3,4,12,10,21,16);
             foreach(int blocked in new[]{3+4*cols,12+10*cols,21+16*cols})
             {
                 var ground=Open(cols,rows);ground[blocked]=false;
-                foreach(var mode in new[]{"direct","avoid"}) Reject(()=>RoadRouting.Plan(cols,rows,ground,points,mode,0));
+                Reject(()=>RoadRouting.Plan(cols,rows,ground,points,"direct",0));
+                if(blocked!=12+10*cols)Reject(()=>RoadRouting.Plan(cols,rows,ground,points,"avoid",0));
             }
+        });
+        test("Avoid roads move a mountain waypoint to nearby connected ground without carving or mutating the request", () =>
+        {
+            const int cols=61,rows=51;var ground=Open(cols,rows);Block(ground,cols,28,15,32,35);
+            var points=Points(cols,rows,5,25,30,25,55,25);var copy=Copy(points);var before=(bool[])ground.Clone();
+            var path=RoadRouting.Plan(cols,rows,ground,points,"avoid",1f);
+            AssertRoute(cols,rows,ground,path,1f);AssertWaypoints(path,5+25*cols,55+25*cols);
+            Need(path.Any(i=>Math.Abs(i%cols-30)<=7 && Math.Abs(i/cols-25)<=7),"Adjusted route abandoned the approximate waypoint");
+            Need(path.SequenceEqual(RoadRouting.Plan(cols,rows,ground,points,"avoid",1f)),"Adjusted routing must be deterministic");
+            Need(before.SequenceEqual(ground),"Planning carved obstacles");SamePoints(copy,points);
+            Reject(()=>RoadRouting.Plan(cols,rows,ground,points,"direct",1f));
+        });
+        test("Avoid roads do not move a waypoint arbitrarily far or into a disconnected pocket", () =>
+        {
+            const int cols=61,rows=51;var ground=Open(cols,rows);Block(ground,cols,20,10,40,40);
+            ground[25*cols+30]=true; // closest clear cell is an isolated pocket, too small for this road.
+            var points=Points(cols,rows,5,25,30,25,55,25);
+            Reject(()=>RoadRouting.Plan(cols,rows,ground,points,"avoid",1f));
         });
         test("Road avoid cannot cross diagonally touching obstacle corners", () =>
         {

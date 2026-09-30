@@ -43,7 +43,7 @@ namespace MapGenAI.Patches
     {
         internal static bool MapSiteRouted, PreviewSiteRouted, PostTerrainRouted;
         internal static int IsolatedInits, IsolatedPostTerrain;
-        sealed class Holder { public FeatureInitPlan Plan; }
+        sealed class Holder { public FeatureInitPlan Plan; public Map ReferenceMap; }
         static readonly ConditionalWeakTable<Map, Holder> plans = new ConditionalWeakTable<Map, Holder>();
 
         internal static IEnumerable<CodeInstruction> Route(IEnumerable<CodeInstruction> instructions, string site, string workerMethod, string hook, Action<bool> routed)
@@ -66,16 +66,25 @@ namespace MapGenAI.Patches
         // Replaces worker.Init(map) at the native call sites. Unedited tiles take the unchanged path.
         public static void Init(TileMutatorWorker worker, Map map)
         {
-            var plan = plans.GetValue(map, m => new Holder { Plan = Compute(m) }).Plan;
-            if (plan == null || !plan.Isolates(worker.def.defName)) { worker.Init(map); return; }
+            var plan = plans.GetValue(map, m => { var h = new Holder(); h.Plan = Compute(m, h); return h; }).Plan;
+            if (plan == null) { worker.Init(map); return; }
             var water = map.waterInfo;
             var lake = water?.lakeCenter ?? IntVec3.Invalid;
-            try { plan.Run(worker.def.defName, () => worker.Init(map)); }
+            try
+            {
+                plan.Run(worker.def.defName, () =>
+                {
+                    var reference = plans.GetValue(map, _ => throw new InvalidOperationException()).ReferenceMap;
+                    if (reference?.waterInfo.lakeCenter.IsValid == true && worker.def.categories.Contains("River"))
+                        water.lakeCenter = reference.waterInfo.lakeCenter;
+                    worker.Init(map);
+                });
+            }
             finally
             {
                 // Natural generation routes the river through a lake's centre; an added lake must not move the world river.
-                if (water != null) water.lakeCenter = lake;
-                Interlocked.Increment(ref IsolatedInits);
+                if (water != null && (plan.Isolates(worker.def.defName) || worker.def.categories.Contains("River"))) water.lakeCenter = lake;
+                if (plan.Isolates(worker.def.defName)) Interlocked.Increment(ref IsolatedInits);
             }
         }
 
@@ -90,13 +99,13 @@ namespace MapGenAI.Patches
         public static void PostTerrain(TileMutatorWorker worker, Map map)
         {
             var plan = plans.TryGetValue(map, out var holder) ? holder.Plan : null;
-            if (plan == null || !plan.Isolates(worker.def.defName)) { worker.GeneratePostTerrain(map); return; }
+            if (plan == null) { worker.GeneratePostTerrain(map); return; }
             try { plan.Run(worker.def.defName, () => worker.GeneratePostTerrain(map), "PostTerrain"); }
-            finally { Interlocked.Increment(ref IsolatedPostTerrain); }
+            finally { if (plan.Isolates(worker.def.defName)) Interlocked.Increment(ref IsolatedPostTerrain); }
         }
 
         // Called at the first feature of the loop, before any feature has drawn from the shared stream.
-        static FeatureInitPlan Compute(Map map)
+        static FeatureInitPlan Compute(Map map, Holder holder)
         {
             try
             {
@@ -108,13 +117,63 @@ namespace MapGenAI.Patches
                 var candidate = CandidatePreviewContext.Current;
                 var world = candidate != null && ReferenceEquals(generated, candidate.Tile) ? candidate.Original : generated;
                 int id = map.Tile.tileId;
-                return FeatureInitStream.Plan(generated.Mutators.Select(d => d.defName), wc.GetBaseline(id), wc.GetLastApplied(id), TileWorldSnapshot.Capture(world), WorldConnection);
+                var baseline = wc.GetBaseline(id); var applied = wc.GetLastApplied(id); var snapshot = TileWorldSnapshot.Capture(world);
+                var originals = baseline == null ? snapshot.mutators : WorldTileEditor.Rebase(baseline, applied, snapshot).mutators;
+                var removed = originals.Where(n => !generated.Mutators.Any(d => d.defName == n) && !WorldConnection(n)).ToList();
+                // Keep previous generation available for unsupported third-party or geometry-dependent workers.
+                // They need a dedicated reservation contract; do not run them against a shallow reference map.
+                bool supported = removed.All(SupportsReservation);
+                if (!supported && generated.Mutators.Any(d => WorldConnection(d.defName)))
+                    Log.Warning("[MapGenAI] Water preservation after removing these features is not supported: " + string.Join(", ", removed.Where(n => !SupportsReservation(n))));
+                return FeatureInitStream.Plan(generated.Mutators.Select(d => d.defName), wc.GetBaseline(id), wc.GetLastApplied(id), TileWorldSnapshot.Capture(world), WorldConnection,
+                    name => DefDatabase<TileMutatorDef>.GetNamedSilentFail(name)?.genOrder ?? 0,
+                    supported && generated.Mutators.Any(d => WorldConnection(d.defName)) ? (Action<string, string>)((name, phase) => ReserveRemoved(map, holder, name, phase)) : null);
             }
             catch (Exception e)
             {
                 Log.Warning("[MapGenAI] Feature initialization plan failed: " + e.Message);
                 return null;
             }
+        }
+
+        static readonly MethodInfo clone = AccessTools.Method(typeof(object), "MemberwiseClone");
+        static bool SupportsReservation(string name)
+        {
+            var type = DefDatabase<TileMutatorDef>.GetNamedSilentFail(name)?.Worker.GetType();
+            if (type == null) return true;
+            if (type.Assembly != typeof(TileMutatorWorker).Assembly) return false;
+            string owner = AccessTools.Method(type, nameof(TileMutatorWorker.GeneratePostTerrain)).DeclaringType.Name;
+            return owner == "TileMutatorWorker_Caves" || owner == "TileMutatorWorker" || owner == "TileMutatorWorker_Lake"
+                || owner == "TileMutatorWorker_HotSprings" || owner == "TileMutatorWorker_Coast" || owner == "TileMutatorWorker_Wetland";
+        }
+        // Removed features never paint terrain or spawn things. Native Init builds noise only, except for
+        // the lake centre and MixedBiome component; both are held on an unregistered reference map/worker.
+        static void ReserveRemoved(Map map, Holder holder, string name, string phase)
+        {
+            var def = DefDatabase<TileMutatorDef>.GetNamedSilentFail(name);
+            if (def == null) return; // a disabled mod's missing baseline definition
+            var workerType = def.Worker.GetType();
+            if (workerType.Assembly != typeof(TileMutatorWorker).Assembly)
+                throw new InvalidOperationException("Cannot preserve water while removing this external feature: " + name);
+            if (phase == null)
+            {
+                if (holder.ReferenceMap == null)
+                {
+                    holder.ReferenceMap = (Map)clone.Invoke(map, null);
+                    holder.ReferenceMap.waterInfo = (WaterInfo)clone.Invoke(map.waterInfo, null);
+                    holder.ReferenceMap.components = map.components.Select(c => (MapComponent)clone.Invoke(c, null)).ToList();
+                }
+                var worker = (TileMutatorWorker)Activator.CreateInstance(workerType, def);
+                worker.Init(holder.ReferenceMap);
+                return;
+            }
+            var method = AccessTools.Method(workerType, nameof(TileMutatorWorker.GeneratePostTerrain));
+            string owner = method.DeclaringType.Name;
+            if (owner == "TileMutatorWorker_Caves") { _ = Rand.Int; _ = Rand.Int; return; }
+            // These native methods do not draw from the shared stream (RW 1.6.4871).
+            if (owner == "TileMutatorWorker" || owner == "TileMutatorWorker_Lake" || owner == "TileMutatorWorker_HotSprings"
+                || owner == "TileMutatorWorker_Coast" || owner == "TileMutatorWorker_Wetland") return;
+            throw new InvalidOperationException("Cannot reserve terrain-dependent native random draws for removed feature: " + name);
         }
     }
 }

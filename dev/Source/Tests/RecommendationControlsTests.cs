@@ -1,11 +1,25 @@
 using MapGenAI.LLM;
 using MapGenAI.UI;
+using MapGenAI.MapGen;
 using static CoreRegressionTests;
 
 static class RecommendationControlsTests
 {
     public static void RunAll()
     {
+        Check("Numeric native river edits agree between recommendation preview, revision and final command replay", () =>
+        {
+            var before=new TileMapState {riverXPosition=.3f,riverZPosition=.4f,riverDirectionAngle=-1f};
+            var command=SimpleJson.Parse("{\"action\":\"recommend\",\"options\":[{\"params\":{\"river_position\":0.85}}]}");
+            var plans=RecommendationPlan.Validate(command,before,_=>{},false,nativeRiverDirection:90f);
+            var preview=plans[0].Resolve(before);
+            Equal(.3f,preview.riverXPosition);Equal(.85f,preview.riverZPosition);Equal(-1f,preview.riverDirectionAngle);
+            var revised=RecommendationPlan.Refine(plans,1,SimpleJson.Parse("{\"river_position\":0.7}"),before,_=>{},false);
+            var applied=before;
+            foreach(var edit in revised.Edits())applied=MapStateEditor.Merge(applied,edit,90f);
+            Equal(MapStateCodec.Serialize(applied),MapStateCodec.Serialize(revised.Resolve(before)));
+            Equal(.3f,applied.riverXPosition);Equal(.7f,applied.riverZPosition);
+        });
         Check("Discard phrases are local and do not swallow map edits", () =>
         {
             foreach (var text in new[] { "추천 취소", "추천 모두 취소해 줘", "선택 안 함", "아무것도 선택 안 할래", "None of these.", "Select none", "cancel the suggestions" })

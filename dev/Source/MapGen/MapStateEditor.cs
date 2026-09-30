@@ -33,8 +33,9 @@ namespace MapGenAI.MapGen
 
 
         public static TileMapState Merge(TileMapState existing, MapParamsData data) => MergeCore(existing, data, false);
+        public static TileMapState Merge(TileMapState existing, MapParamsData data, float nativeRiverDirection) => MergeCore(existing, data, false, nativeRiverDirection);
         public static TileMapState FromLegacySnapshot(MapParamsData data) => MergeCore(new TileMapState(), data, true);
-        private static TileMapState MergeCore(TileMapState existing, MapParamsData data, bool fullApply)
+        private static TileMapState MergeCore(TileMapState existing, MapParamsData data, bool fullApply, float nativeRiverDirection = -1f)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
             var keys = data.explicitKeys ?? new HashSet<string>();
@@ -108,10 +109,19 @@ namespace MapGenAI.MapGen
                     angle = Mathf.Repeat(angle, 360f);
                 state.riverDirectionAngle = angle;
             }
-            if (fullApply || keys.Contains("river_x") || keys.Contains("river_position"))
+            if (fullApply || keys.Contains("river_x"))
                 state.riverXPosition = Mathf.Clamp(data.river?.x_position ?? 0.5f, 0f, 1f);
-            if (fullApply || keys.Contains("river_z") || keys.Contains("river_position"))
+            if (fullApply || keys.Contains("river_z"))
                 state.riverZPosition = Mathf.Clamp(data.river?.z_position ?? 0.5f, 0f, 1f);
+            if (keys.Contains("river_position") && data.river != null && data.river.position >= 0f)
+            {
+                float angle = state.riverDirectionAngle >= 0f ? state.riverDirectionAngle : nativeRiverDirection;
+                double radians = angle * Math.PI / 180d;
+                // Horizontal rivers move north/south, vertical ones east/west; no known world direction keeps legacy X behavior.
+                if (angle >= 0f && Math.Abs(Math.Sin(radians)) > Math.Abs(Math.Cos(radians)) + 1e-6)
+                    state.riverZPosition = Mathf.Clamp(data.river.position, 0f, 1f);
+                else state.riverXPosition = Mathf.Clamp(data.river.position, 0f, 1f);
+            }
 
             // 석재 종류
             if (fullApply || keys.Contains("rock_types"))

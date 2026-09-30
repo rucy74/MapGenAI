@@ -33,6 +33,7 @@ namespace MapGenAI.Patches
             var wc = MapGenAIWorldComponent.Get();
             var baseline = WorldTileEditor.Rebase(wc.GetBaseline(tileId), wc.GetLastApplied(tileId), TileWorldSnapshot.Capture(Original));
             var desired = WorldTileEditor.Plan(Original, baseline, State);
+            desired.SortBy(d => d.genOrder); // Tile.AddMutator uses this same native generation order.
             Tile = (Tile)AccessTools.Method(typeof(object), "MemberwiseClone").Invoke(Original, null);
             Tile.mutatorsNullable = desired;
             // These caches depend on the native feature list, which differs between candidates.
@@ -73,7 +74,14 @@ namespace MapGenAI.Patches
 
         internal static IDisposable Enter(object request)
         {
-            if (!Requests.TryGetValue(request, out var snapshot)) return null;
+            if (!Requests.TryGetValue(request, out var snapshot))
+            {
+                // Ordinary previews initialize feature workers before GenerateContentsIntoMap.
+                // Freeze their own tile here so the editor's selected tile cannot leak into Init.
+                int tile = (int)((MapPreview.MapPreviewRequest)request).MapTile;
+                MapGenParams.UpgradeStoredFeaturePolicy(tile);
+                return GenerationContext.Enter(tile, MapGenAIWorldComponent.Get()?.GetState(tile));
+            }
             return new Scope(snapshot);
         }
 

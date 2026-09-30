@@ -13,13 +13,14 @@ namespace MapGenAI.LLM
         public readonly string Command;
         public readonly string Summary;
         public readonly IReadOnlyList<string> Commands;
-        private RecommendationPlan(string command,string summary):this(new[]{command},summary){}
-        private RecommendationPlan(IReadOnlyList<string> commands,string summary){Commands=commands;Command=commands[0];Summary=summary;}
+        readonly float nativeRiverDirection;
+        private RecommendationPlan(string command,string summary,float nativeRiverDirection=-1f):this(new[]{command},summary,nativeRiverDirection){}
+        private RecommendationPlan(IReadOnlyList<string> commands,string summary,float nativeRiverDirection=-1f){Commands=commands;Command=commands[0];Summary=summary;this.nativeRiverDirection=nativeRiverDirection;}
         public List<MapParamsData> Edits()=>Commands.Select(c=>MapParameterParser.Parse(ProviderResponse.Command(c).GetObject("params"))).ToList();
         public TileMapState Resolve(TileMapState before)
         {
             var state=before;
-            foreach(var data in Edits())state=MapStateEditor.Merge(state,data);
+            foreach(var data in Edits())state=MapStateEditor.Merge(state,data,nativeRiverDirection);
             return state;
         }
 
@@ -31,13 +32,13 @@ namespace MapGenAI.LLM
             if(old.Commands.Count>=33)throw new FormatException("Candidate revision limit reached; select it or request new options");
             var envelope=new SimpleJsonObject();envelope.SetString("action","generate");envelope.SetObject("params",parameters);
             var commands=old.Commands.Concat(new[]{SimpleJson.Serialize(envelope)}).ToArray();
-            var pending=new RecommendationPlan(commands,"");
+            var pending=new RecommendationPlan(commands,"",old.nativeRiverDirection);
             validate(pending.Edits());
             var after=pending.Resolve(before);
             if(MapStateCodec.ChangedFields(old.Resolve(before),after).Count==0)throw new FormatException("Candidate revision has no changes");
             for(int i=0;i<plans.Count;i++)if(i!=number-1 && MapStateCodec.Serialize(plans[i].Resolve(before))==MapStateCodec.Serialize(after))
                 throw new FormatException("Revised candidate duplicates another option");
-            return new RecommendationPlan(commands,new MapPlanDescription(korean,lookup).Describe(before,after));
+            return new RecommendationPlan(commands,new MapPlanDescription(korean,lookup).Describe(before,after),old.nativeRiverDirection);
         }
 
         public static string PendingInstruction(IReadOnlyList<RecommendationPlan> plans,TileMapState before)
@@ -98,7 +99,7 @@ Recommendations:
                 throw new FormatException("recommend requires 1..3 options, each with params");
             return options;
         }
-        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null)
+        public static List<RecommendationPlan> Validate(SimpleJsonObject command,TileMapState before,Action<MapParamsData> validate,bool korean,Func<string,string,PlanDefinition> lookup=null,float nativeRiverDirection=-1f)
         {
             var plans=new List<RecommendationPlan>();
             var outcomes=new HashSet<string>(StringComparer.Ordinal);
@@ -107,12 +108,12 @@ Recommendations:
                 var parameters=option.GetObject("params");
                 var data=MapParameterParser.Parse(parameters);
                 validate(data);
-                var after=MapStateEditor.Merge(before,data);
+                var after=MapStateEditor.Merge(before,data,nativeRiverDirection);
                 if(MapStateCodec.ChangedFields(before,after).Count==0)throw new FormatException("Recommendation has no changes");
                 if(!outcomes.Add(MapStateCodec.Serialize(after)))throw new FormatException("Recommendations produce the same settings. Provide distinct alternatives against the current state.");
                 var envelope=new SimpleJsonObject();envelope.SetString("action","generate");envelope.SetObject("params",parameters);
                 string summary=new MapPlanDescription(korean,lookup).Describe(before,after);
-                plans.Add(new RecommendationPlan(SimpleJson.Serialize(envelope),summary));
+                plans.Add(new RecommendationPlan(SimpleJson.Serialize(envelope),summary,nativeRiverDirection));
             }
             return plans; // Nothing is published when any option failed.
         }

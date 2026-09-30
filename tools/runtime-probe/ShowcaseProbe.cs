@@ -129,9 +129,11 @@ namespace MapGenAI.RuntimeProbe
             // The quick-test colonists are not part of the showcase; the bar would show them behind the dialog and over the map.
             h.Patch(AccessTools.Method(typeof(ColonistBar), "ColonistBarOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(HideAlerts)));
             // Every action is scripted: park the GUI mouse so hover highlights, tooltips and stray clicks cannot reach the UI.
-            h.Patch(AccessTools.Method(typeof(UIRoot_Play), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
+            if (!scenario.GetBool("manualEntryClick"))
+                h.Patch(AccessTools.Method(typeof(UIRoot_Play), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
             // The new-colony starting-site screen is drawn by the main-menu UI root, not the play one.
-            h.Patch(AccessTools.Method(typeof(UIRoot_Entry), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
+            if (!scenario.GetBool("manualEntryClick"))
+                h.Patch(AccessTools.Method(typeof(UIRoot_Entry), "UIRootOnGUI"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(ParkMouse)));
             h.Patch(AccessTools.Method(typeof(GeminiClient), "SendChatAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeChat)),
                 postfix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(AfterChat)));
             h.Patch(AccessTools.Method(typeof(ProviderContextBudgets), "GeminiAsync"), prefix: new HarmonyMethod(typeof(ShowcaseProbe), nameof(BeforeBudget)));
@@ -433,7 +435,7 @@ namespace MapGenAI.RuntimeProbe
                         { "ended", c.Ended }, { "modelVersion", c.ModelVersion }, { "inputTokens", c.InputTokens }, { "outputTokens", c.OutputTokens },
                         { "thinkingTokens", c.ThinkingTokens }, { "error", c.Error } }).ToList();
                     result["providerMetadataCalls"] = metadataCalls; result["providerTokenCountCalls"] = countCalls;
-                    result["suppression"] = new Dictionary<string, object> { { "alertsReadoutPatched", true }, { "lettersRemoved", lettersRemoved }, { "debugLogWindowsClosed", logWindowsClosed }, { "mouseoverReadoutPatched", true }, { "colonistBarPatched", true }, { "guiMouseParked", true },
+                    result["suppression"] = new Dictionary<string, object> { { "alertsReadoutPatched", true }, { "lettersRemoved", lettersRemoved }, { "debugLogWindowsClosed", logWindowsClosed }, { "mouseoverReadoutPatched", true }, { "colonistBarPatched", true }, { "guiMouseParked", !scenario.GetBool("manualEntryClick") },
                         { "adaptiveTraining", Prefs.AdaptiveTrainingEnabled }, { "gamePausedForCaptures", true } };
                     File.WriteAllText(Path.Combine(folder, "result.json"), SimpleJson.Serialize(result));
                 }
@@ -467,6 +469,17 @@ namespace MapGenAI.RuntimeProbe
                 var entry = EntryAudit();
                 foreach (var y in Capture("00-world-entry", entry)) yield return y;
                 entry["buttonDrawCallsAfterCapture"] = entryDraws;
+                if (scenario.GetBool("manualEntryClick"))
+                {
+                    if (scenario.GetBool("clickEntry")) throw new InvalidOperationException("Manual entry checks must not inject a synthetic button click");
+                    File.WriteAllText(Path.Combine(folder, "manual-entry-ready.json"), SimpleJson.Serialize(entry));
+                    var opened = new bool[1];
+                    foreach (var y in WaitFor(() => Find.WindowStack.IsOpen<Dialog_TextToMap>(), 240f, opened)) yield return y;
+                    entry["dialogOpenedByOsInput"] = opened[0];
+                    entry["syntheticClickCount"] = clickTrace.Count;
+                    if (!opened[0]) throw new TimeoutException("No OS input opened the entry dialog");
+                    foreach (var y in Capture("01-os-input-dialog", entry)) yield return y;
+                }
                 if (scenario.GetBool("clickEntry")) foreach (var y in ClickEntry(entry)) yield return y;
                 result["entryAudit"] = entry;
                 if (steps.Count == 0) { stepId = "done"; yield break; }

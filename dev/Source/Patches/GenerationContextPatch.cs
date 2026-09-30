@@ -27,8 +27,8 @@ namespace MapGenAI.Patches
         static void Prefix(Map map, out IDisposable __state)
         {
             int tile = map == null ? -1 : (int)map.Tile;
-            // Candidate requests already entered a frozen scope before feature workers initialized.
-            if (CandidatePreviewContext.Current != null && tile == GenerationContext.TileId)
+            // Map and preview requests already froze the tile before feature workers initialized.
+            if (GenerationContext.Active && tile == GenerationContext.TileId)
             { __state = null; return; }
             MapGenParams.UpgradeStoredFeaturePolicy(tile);
             __state = GenerationContext.Enter(tile, MapGenAIWorldComponent.Get()?.GetState(tile));

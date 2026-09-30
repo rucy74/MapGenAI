@@ -364,7 +364,7 @@ namespace MapGenAI.MapGen
         {
             ValidateSequenceRequests(edits,tileId);
             var candidate=previous;
-            foreach(var data in edits)candidate=BuildPatchCandidate(candidate,data);
+            foreach(var data in edits)candidate=BuildPatchCandidate(candidate,data,tileId);
             return candidate;
         }
 
@@ -378,9 +378,9 @@ namespace MapGenAI.MapGen
             }
         }
 
-        private static TileMapState BuildPatchCandidate(TileMapState previous, MapParamsData data)
+        private static TileMapState BuildPatchCandidate(TileMapState previous, MapParamsData data, int tileId)
         {
-            var candidate = MapStateEditor.Merge(previous, data);
+            var candidate = MapStateEditor.Merge(previous, data, data.explicitKeys.Contains("river_position") ? NativeRiverDirection.Angle(tileId) : -1f);
             if (data.mutators != null)
                 foreach (var name in data.mutators)
                 {
@@ -700,5 +700,7 @@ namespace MapGenAI.MapGen
         public float direction_angle = -1f;     // 0-360도, -1=자동
         public float x_position = 0.5f;
         public float z_position = 0.5f;
+        // Request-only numeric shortcut, resolved against the resulting river direction during merge.
+        public float position = -1f;
     }
 }

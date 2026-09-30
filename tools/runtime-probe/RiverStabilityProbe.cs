@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using HarmonyLib;
+using MapGenAI.LLM;
 using MapGenAI.MapGen;
 using MapGenAI.UI;
 using RimWorld;
@@ -35,6 +36,8 @@ namespace MapGenAI.RuntimeProbe
         static readonly object gate = new object();
         static Dictionary<string, object> latest;
         static readonly ConditionalWeakTable<Map, StrongBox<IntVec3>> centres = new ConditionalWeakTable<Map, StrongBox<IntVec3>>();
+        static readonly ConditionalWeakTable<Map, StrongBox<string>> coastFields = new ConditionalWeakTable<Map, StrongBox<string>>();
+        static readonly ConditionalWeakTable<Map, Dictionary<int,float>> roadHeights = new ConditionalWeakTable<Map, Dictionary<int,float>>();
         static readonly ConditionalWeakTable<Map, List<int>> courses = new ConditionalWeakTable<Map, List<int>>();
         static System.Reflection.FieldInfo depthMaps;
         static AccessTools.FieldRef<TileMutatorWorker_River, IntVec3> riverCenter;
@@ -47,6 +50,7 @@ namespace MapGenAI.RuntimeProbe
             var h = new Harmony("choco.mapgenai.probe.riverstability");
             h.Patch(AccessTools.Method(typeof(WorldGenerator), "GenerateWorld"), prefix: new HarmonyMethod(typeof(RiverStabilityProbe), nameof(FixedWorldSeed)));
             h.Patch(AccessTools.Method(typeof(TileMutatorWorker_River), "Init"), postfix: new HarmonyMethod(typeof(RiverStabilityProbe), nameof(AfterRiverInit)) { priority = Priority.Last });
+            h.Patch(AccessTools.Method(typeof(TileMutatorWorker_Coast), "Init"), postfix: new HarmonyMethod(typeof(RiverStabilityProbe), nameof(AfterCoastInit)) { priority = Priority.Last });
             depthMaps = AccessTools.Field(typeof(TileMutatorWorker_River), "nodeDepthMaps");
             h.Patch(AccessTools.Method(typeof(TileMutatorWorker_River), "GeneratePostTerrain"), postfix: new HarmonyMethod(typeof(RiverStabilityProbe), nameof(AfterRiverTerrain)) { priority = Priority.Last });
             h.Patch(AccessTools.Method(typeof(MapGenerator), nameof(MapGenerator.GenerateContentsIntoMap)), postfix: new HarmonyMethod(typeof(RiverStabilityProbe), nameof(AfterContents)) { priority = Priority.Last });
@@ -58,6 +62,19 @@ namespace MapGenAI.RuntimeProbe
         {
             centres.Remove(map);
             centres.Add(map, new StrongBox<IntVec3>(riverCenter(__instance)));
+        }
+
+        static void AfterCoastInit(TileMutatorWorker_Coast __instance, Map map)
+        {
+            var noise = (Verse.Noise.ModuleBase)AccessTools.Field(typeof(TileMutatorWorker_Coast), "coastNoise").GetValue(__instance);
+            using (var bytes = new MemoryStream())
+            using (var writer = new BinaryWriter(bytes))
+            using (var sha = SHA256.Create())
+            {
+                foreach (var cell in map.AllCells) writer.Write(noise.GetValue(cell.x, 0, cell.z));
+                coastFields.Remove(map);
+                coastFields.Add(map, new StrongBox<string>(BitConverter.ToString(sha.ComputeHash(bytes.ToArray())).Replace("-", "").ToLowerInvariant()));
+            }
         }
 
         // The river's own course: cells the river worker gives positive depth, whatever other water covers them.
@@ -102,7 +119,18 @@ namespace MapGenAI.RuntimeProbe
                     { "preview", !UnityData.IsInMainThread }, { "river", river }, { "ocean", ocean },
                     { "hotSpringCells", springs }, { "coveredCells", frozen }, { "terrainSha256", Hash(names.ToString()) } };
                 if (centres.TryGetValue(map, out var centre)) capture["riverCentre"] = new List<object> { centre.Value.x, centre.Value.z };
+                if (coastFields.TryGetValue(map, out var coast)) capture["coastFieldSha256"] = coast.Value;
                 if (courses.TryGetValue(map, out var course)) capture["course"] = course;
+                var state = GenerationContext.State;
+                var authored = state == null ? null : AuthoringGeneration.Latest(map.Tile.tileId, state);
+                if (authored != null) capture["authoring"] = new Dictionary<string, object> {
+                    { "issues", authored.issues.ToArray() }, { "roads", authored.roads.ToArray() } };
+                if (authored?.roads.Count > 0)
+                {
+                    roadHeights.Remove(map);
+                    roadHeights.Add(map, authored.roads.SelectMany(r => r.path).Select(p => p[1]*map.Size.x+p[0]).Distinct()
+                        .ToDictionary(i => i, i => MapGenerator.Elevation[new IntVec3(i%map.Size.x,0,i/map.Size.x)]));
+                }
                 lock (gate) latest = capture;
             }
             catch (Exception error) { lock (gate) latest = new Dictionary<string, object> { { "captureError", error.ToString() } }; }
@@ -114,7 +142,7 @@ namespace MapGenAI.RuntimeProbe
             Application.runInBackground = true;
             deadline = DateTime.UtcNow.AddMinutes(40);
             active = true;
-            routine = Script().GetEnumerator();
+            routine = (Path.GetFileName(showcase) == "edit-stability" ? EditStabilityScript() : Path.GetFileName(showcase) == "road-diagnostic" ? RoadDiagnosticScript() : Script()).GetEnumerator();
         }
 
         public static void Tick()
@@ -254,7 +282,105 @@ namespace MapGenAI.RuntimeProbe
             }
         }
 
+        static IEnumerable<object> EditStabilityScript()
+        {
+            foreach (var y in Frames(30)) yield return y;
+            Directory.CreateDirectory(Path.Combine(folder, "captures"));
+            var wc = MapGenAIWorldComponent.Get();
+            result["worldSeed"] = Find.World.info.seedString;
+            // Controlled natural features on existing river/shore tiles, not a user profile.
+            foreach (int id in new[] { ShowcaseRiverTile, ShowcaseCoastTile })
+            {
+                string prefix = id == ShowcaseRiverTile ? "river" : "coast";
+                var tile = Find.WorldGrid[id];
+                var natural = TileWorldSnapshot.Capture(tile);
+                var surface = (SurfaceTile)tile; var hilliness = surface.hilliness;
+                MapGenParams.ClearTile(id);
+                surface.hilliness = Hilliness.Mountainous; // Cavern's native requirement; restored below.
+                tile.AddMutator(DefDatabase<TileMutatorDef>.GetNamed("Caves"));
+                foreach (var y in Variant(prefix + "-caves", id, new TileMapState(), true)) yield return y;
+                var removed = new TileMapState(); removed.removeMutators.Add("Caves");
+                foreach (var y in Variant(prefix + "-removed", id, removed, true)) yield return y;
+                var replaced = new TileMapState(); replaced.mutators.Add("Cavern");
+                foreach (var y in Variant(prefix + "-replaced", id, replaced, true)) yield return y;
+                if (id == ShowcaseRiverTile)
+                {
+                    var island = removed.Clone(); island.mutators.Add("RiverIsland");
+                    foreach (var y in Variant(prefix + "-removed-island", id, island, false)) yield return y;
+                }
+                MapGenParams.ClearTile(id); WorldTileEditor.Restore(tile, natural); surface.hilliness = hilliness;
+            }
+            // Pure additions and unedited cells must retain the previous build's output.
+            foreach (int id in new[] { ShowcaseRiverTile, ShowcaseCoastTile })
+            {
+                string prefix = id == ShowcaseRiverTile ? "river" : "coast";
+                MapGenParams.ClearTile(id);
+                foreach (var y in Variant(prefix + "-plain", id, null, true)) yield return y;
+                var springs = new TileMapState(); springs.mutators.Add("HotSprings");
+                foreach (var y in Variant(prefix + "-added-springs", id, springs, true)) yield return y;
+                MapGenParams.ClearTile(id);
+            }
+            // The editor holds explicit settings for A while an ordinary preview generates B.
+            var other = Candidates(t => FeaturePolicy.HasRiver(t) && FeaturePolicy.WaterNeighbors(t).Count == 0,
+                new HashSet<int> { ShowcaseRiverTile, ShowcaseCoastTile }).First(t => t.Mutators.All(d => d.defName == "River"));
+            int otherId = other.tile;
+            MapGenParams.ClearTile(otherId); MapGenParams.ClearTile(ShowcaseRiverTile);
+            foreach (var y in Variant("other-before", otherId, null, false)) yield return y;
+            MapGenParams.RestoreSnapshot(new TileMapState { riverDirectionAngle = 0f, riverXPosition = .85f, straightRiver = true }, ShowcaseRiverTile);
+            foreach (var y in Variant("other-editor-active", otherId, null, false)) yield return y;
+            MapGenParams.ClearTile(ShowcaseRiverTile);
+            // A snapshot must use native genOrder before Init, just like applying its state.
+            var candidateType = AccessTools.TypeByName("MapGenAI.Patches.CandidatePreviewSnapshot");
+            var state = new TileMapState(); state.mutators.Add("HotSprings"); state.mutators.Add("Caves");
+            var candidate = Activator.CreateInstance(candidateType, new object[] { ShowcaseRiverTile, state, null });
+            var candidateTile = (Tile)AccessTools.Field(candidateType, "Tile").GetValue(candidate);
+            result["candidateOrder"] = candidateTile.Mutators.Select(d => d.defName).ToArray();
+            bool candidateDone = false; string candidateError = null;
+            lock (gate) latest = null;
+            QueuePreview(ShowcaseRiverTile, "candidate-unapplied", message => { candidateError = message; candidateDone = true; }, candidate);
+            float candidateDeadline = Time.realtimeSinceStartup + 180f;
+            while (!candidateDone && Time.realtimeSinceStartup < candidateDeadline) yield return null;
+            if (!candidateDone || candidateError != null) throw new InvalidOperationException("Candidate request failed: " + candidateError);
+            records.Add(new Dictionary<string, object> { { "id", "candidate-unapplied" }, { "preview", Save("candidate-unapplied-preview") } });
+            MapGenParams.RestoreSnapshot(state, ShowcaseRiverTile);
+            result["appliedOrder"] = Find.WorldGrid[ShowcaseRiverTile].Mutators.Select(d => d.defName).ToArray();
+            foreach (var y in Variant("candidate-applied", ShowcaseRiverTile, state, false)) yield return y;
+            MapGenParams.ClearTile(ShowcaseRiverTile);
+            var inputs = Path.GetDirectoryName(showcase);
+            if (File.Exists(Path.Combine(inputs, "north-before.json")))
+            {
+                foreach (string name in new[] { "north", "road" })
+                {
+                    var before = MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(inputs, name + "-before.json")));
+                    var response = ProviderResponse.Command(File.ReadAllText(Path.Combine(inputs, name + "-response.json")));
+                    MapGenParams.ClearTile(ShowcaseRiverTile);
+                    MapGenParams.RestoreSnapshot(before, ShowcaseRiverTile);
+                    MapGenParams.ApplyPatch(MapParameterParser.Parse(response.GetObject("params")), ShowcaseRiverTile);
+                    var after = MapGenParams.CaptureState(ShowcaseRiverTile);
+                    result[name + "-stateBefore"] = SimpleJson.Parse(MapStateCodec.Serialize(before));
+                    result[name + "-stateAfter"] = SimpleJson.Parse(MapStateCodec.Serialize(after));
+                    MapGenParams.ClearTile(ShowcaseRiverTile);
+                    foreach (var y in Variant(name + "-before", ShowcaseRiverTile, before, true)) yield return y;
+                    foreach (var y in Variant(name + "-after", ShowcaseRiverTile, after, true)) yield return y;
+                    MapGenParams.ClearTile(ShowcaseRiverTile);
+                }
+            }
+            result["apiCalls"] = 0;
+        }
+
         // Commits the state as the dialog does (null = no state), then generates a Map Preview and optionally a real map.
+        static IEnumerable<object> RoadDiagnosticScript()
+        {
+            foreach (var y in Frames(30)) yield return y;
+            Directory.CreateDirectory(Path.Combine(folder, "captures"));
+            var inputs = Path.GetDirectoryName(showcase);
+            var before = MapStateCodec.Deserialize(File.ReadAllText(Path.Combine(inputs, "road-before.json")));
+            MapGenParams.RestoreSnapshot(before, ShowcaseRiverTile);
+            var response = ProviderResponse.Command(File.ReadAllText(Path.Combine(inputs, "road-response.json")));
+            MapGenParams.ApplyPatch(MapParameterParser.Parse(response.GetObject("params")), ShowcaseRiverTile);
+            foreach (var y in Variant("road-after", ShowcaseRiverTile, MapGenParams.CaptureState(ShowcaseRiverTile), true)) yield return y;
+        }
+
         static IEnumerable<object> Variant(string id, int tile, TileMapState state, bool realMap)
         {
             var record = new Dictionary<string, object> { { "id", id }, { "tile", tile } };
@@ -266,7 +392,7 @@ namespace MapGenAI.RuntimeProbe
             int isolatedBefore = Isolated();
             lock (gate) latest = null;
             bool done = false; string failure = null;
-            QueuePreview(tile, message => { failure = message; done = true; });
+            QueuePreview(tile, id, message => { failure = message; done = true; });
             float until = Time.realtimeSinceStartup + 180f;
             while (!done && Time.realtimeSinceStartup < until) yield return null;
             if (!done) throw new TimeoutException("Map Preview did not finish " + id);
@@ -281,6 +407,14 @@ namespace MapGenAI.RuntimeProbe
                 parent.Tile = tile; parent.SetFaction(Faction.OfPlayer); Find.WorldObjects.Add(parent);
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 var map = MapGenerator.GenerateMap(new IntVec3(Size, 1, Size), parent, parent.MapGeneratorDef);
+                var report = state == null ? null : AuthoringGeneration.Latest(tile, state);
+                if (report != null && report.roads.Count > 0)
+                {
+                    record["roadObstacles"] = report.roads.SelectMany(r => r.path).Distinct().Select(p => new IntVec3(p[0],0,p[1])).Select(c => new Dictionary<string, object> {
+                        { "x", c.x }, { "z", c.z }, { "terrain", c.GetTerrain(map).defName }, { "elevation", roadHeights.TryGetValue(map,out var heights) ? heights[c.z*map.Size.x+c.x] : -1f },
+                        { "edifice", c.GetEdifice(map)?.def.defName }, { "edificePassability", c.GetEdifice(map)?.def.passability.ToString() }, { "water", c.GetTerrain(map).IsWater }, { "river", c.GetTerrain(map).IsRiver } })
+                        .Where(c => (string)c["edifice"] != null || (bool)c["water"] || (bool)c["river"] || (float)c["elevation"] >= .7f).ToArray();
+                }
                 record["mapSeconds"] = watch.Elapsed.TotalSeconds;
                 record["map"] = Save(id + "-map");
                 record["isolatedMap"] = Isolated() - isolatedBefore;
@@ -293,10 +427,21 @@ namespace MapGenAI.RuntimeProbe
         // Map Preview types stay inside this non-inlined method: that assembly is not resolvable while the starting map generates,
         // and a Map Preview type in an iterator or capture field breaks loading the whole probe type.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void QueuePreview(int tile, Action<string> completed)
+        static void QueuePreview(int tile, string id, Action<string> completed, object candidate = null)
         {
             var request = new MapPreview.MapPreviewRequest(Find.World.info.seedString, tile, new IntVec2(Size, Size)) { UseMinimalMapComponents = true, UseTrueTerrainColors = true };
-            MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(r => completed(null)).Catch(e => completed(e.Message));
+            if (candidate != null)
+            {
+                var requests = AccessTools.Field(AccessTools.TypeByName("MapGenAI.Patches.CandidatePreviewContext"), "Requests").GetValue(null);
+                AccessTools.Method(requests.GetType(), "Add").Invoke(requests, new object[] { request, candidate });
+            }
+            MapPreview.MapPreviewGenerator.Init().QueuePreviewRequest(request).Then(r =>
+            {
+                var texture = new Texture2D(Size, Size);
+                try { r.CopyToTexture(texture); texture.Apply(); File.WriteAllBytes(Path.Combine(folder, "captures", id + "-preview.png"), ImageConversion.EncodeToPNG(texture)); }
+                finally { UnityEngine.Object.Destroy(texture); }
+                completed(null);
+            }).Catch(e => completed(e.Message));
         }
 
         static Dictionary<string, object> Save(string name)
