@@ -1,0 +1,148 @@
+{
+  "ok": true,
+  "passed": 35,
+  "failed": 0,
+  "candidateChangedPixels": 0,
+  "checks": [
+    {
+      "name": "Both isolated runs completed",
+      "ok": true
+    },
+    {
+      "name": "No model calls in the replay scripts",
+      "ok": true
+    },
+    {
+      "name": "preview: baseline detects river shift after native removal",
+      "ok": true
+    },
+    {
+      "name": "preview: removed preserves native river centre and whole course",
+      "ok": true
+    },
+    {
+      "name": "preview: replaced preserves native river centre and whole course",
+      "ok": true
+    },
+    {
+      "name": "preview: baseline detects coast field shift after native removal",
+      "ok": true
+    },
+    {
+      "name": "preview: removed preserves all 62500 coast field values",
+      "ok": true
+    },
+    {
+      "name": "preview: replaced preserves all 62500 coast field values",
+      "ok": true
+    },
+    {
+      "name": "preview: river-plain keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "preview: coast-plain keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "preview: river-added-springs keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "preview: coast-added-springs keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "preview: original north reply moves Z to 212 and keeps X",
+      "ok": true
+    },
+    {
+      "name": "preview: original road reply produces one usable road",
+      "ok": true
+    },
+    {
+      "name": "preview: baseline detects the same road reply failure",
+      "ok": true
+    },
+    {
+      "name": "map: baseline detects river shift after native removal",
+      "ok": true
+    },
+    {
+      "name": "map: removed preserves native river centre and whole course",
+      "ok": true
+    },
+    {
+      "name": "map: replaced preserves native river centre and whole course",
+      "ok": true
+    },
+    {
+      "name": "map: baseline detects coast field shift after native removal",
+      "ok": true
+    },
+    {
+      "name": "map: removed preserves all 62500 coast field values",
+      "ok": true
+    },
+    {
+      "name": "map: replaced preserves all 62500 coast field values",
+      "ok": true
+    },
+    {
+      "name": "map: river-plain keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "map: coast-plain keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "map: river-added-springs keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "map: coast-added-springs keeps previous whole terrain output",
+      "ok": true
+    },
+    {
+      "name": "map: original north reply moves Z to 212 and keeps X",
+      "ok": true
+    },
+    {
+      "name": "map: original road reply produces one usable road",
+      "ok": true
+    },
+    {
+      "name": "map: baseline detects the same road reply failure",
+      "ok": true
+    },
+    {
+      "name": "Original north reply control changes X instead of Z",
+      "ok": true
+    },
+    {
+      "name": "Other-tile control detects editor state leak",
+      "ok": true
+    },
+    {
+      "name": "Other tile keeps all terrain while editor A is active",
+      "ok": true
+    },
+    {
+      "name": "Baseline candidate uses different native order",
+      "ok": true
+    },
+    {
+      "name": "Candidate and applied native order match",
+      "ok": true
+    },
+    {
+      "name": "Candidate and applied whole terrain match",
+      "ok": true
+    },
+    {
+      "name": "Candidate and applied 62500 preview pixels match",
+      "ok": true
+    }
+  ]
+}

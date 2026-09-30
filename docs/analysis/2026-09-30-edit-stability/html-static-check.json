@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "nativePngImages": 19,
+  "selfContained": true,
+  "encoding": "UTF-8",
+  "browserRenderVerified": false,
+  "reason": "file protocol security rejection"
+}

@@ -1,0 +1,1 @@
+{"action":"generate","description":"Build a dirt road from the east edge to the ring's opening","params":{"road_ops":[{"op":"add","road":{"id":"east_to_south_opening","kind":"DirtRoad","route":"avoid","points":[[1,0.5],[0.75,0.3],[0.5,0.25]]}}]}}

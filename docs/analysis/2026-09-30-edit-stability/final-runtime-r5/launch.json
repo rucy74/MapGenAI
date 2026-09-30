@@ -1,0 +1,9 @@
+{
+  "pid": 86608,
+  "created": "2026-09-30T23:19:36.0021844+09:00",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260930-231935-617",
+  "mod": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\MapGenAI_Probe_20260930-231935-617",
+  "sourceDllSha256": "D05522F40C3292FC367D24D11F1E030CCAAA1FAAD06C9B5B62924956A59BB3EB",
+  "probeDllSha256": "B643EB57DBA03D1843628368C924DF6141F8381EEA807CA611534BA39C77885F",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-30-edit-stability\\final-runtime-r5"
+}

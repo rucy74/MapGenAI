@@ -1,0 +1,5 @@
+# Preserve original mixed-newline runtime logs byte for byte in Player.log.zip.
+**/Player.log
+# Exact production prompts include intentional trailing spaces; archive originals.
+**/production-edit-prompt-template.txt
+**/production-system-prompt.txt

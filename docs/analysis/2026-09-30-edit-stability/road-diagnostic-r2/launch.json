@@ -1,0 +1,9 @@
+{
+  "pid": 74204,
+  "created": "2026-09-30T23:34:44.6895268+09:00",
+  "sourceDllSha256": "1F6FD087CEBE5088C45FB3D4FBD3C90668AE409412CE5B240B7AFA76A9CBE1D2",
+  "probeDllSha256": "6D6C02C2B594A2AE98688CF5696390EC64BF5D92165CB20F6B6EBFAB17C6E2DB",
+  "profile": "C:\\Users\\choco\\AppData\\Local\\mapgen-ai-probe\\profile-20260930-233444-141",
+  "output": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-09-30-edit-stability\\road-diagnostic-r2",
+  "mod": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\Mods\\MapGenAI_Probe_20260930-233444-141"
+}
