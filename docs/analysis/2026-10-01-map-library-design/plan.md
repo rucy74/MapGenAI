@@ -207,7 +207,7 @@ dev/MapLibrary/<catalog-version>/
 
 설정은 “저장소 비교 끄기 / 로컬 조건 검색 / API 의미 검색” 세 모드를 제안한다. 비교 끄기는 기존 경로만 사용하며, 로컬 모드는 저장소 비교를 하되 API를 부르지 않는다. 의미 검색은 query embedding 호출을 허용하는 선택이다. UI에 실제 검색 종류를 과하게 노출할 필요는 없지만 설정 설명에서 비용과 동작을 구분한다.
 
-현재 코드의 ILLMClient는 chat/image만 제공하므로 embedding을 chat 호출로 흉내 내지 않는다. V1은 Gemini text embedding 한 종류를 파일 지문과 함께 별도 클라이언트로 검증하는 안을 제안한다. 현재 Gemini 키가 없거나 embedding 사용이 OFF면 새 키 입력을 강요하지 않고 로컬 조건 검색을 쓰거나 기존 신규 후보만 제공한다. 다른 공급자의 chat 모델을 선택했다고 Gemini 키를 몰래 사용하지 않는다.
+현재 클라이언트 체계는 ILLMClient(chat)와 IVisionClient(image)를 구분하며 embedding 메서드는 없다. embedding을 chat 호출로 흉내 내지 않는다. V1은 Gemini text embedding 한 종류를 파일 지문과 함께 별도 클라이언트로 검증하는 안을 제안한다. 현재 Gemini 키가 없거나 embedding 사용이 OFF면 새 키 입력을 강요하지 않고 로컬 조건 검색을 쓰거나 기존 신규 후보만 제공한다. 다른 공급자의 chat 모델을 선택했다고 Gemini 키를 몰래 사용하지 않는다.
 
 초기 평가 모델 제안은 `gemini-embedding-001`, 768차원, 등록 설명 RETRIEVAL_DOCUMENT / 요청 RETRIEVAL_QUERY이며 두 벡터를 L2 정규화한다. 실제 선정은 한국어/영어 요청 평가와 비용 측정 후 확정한다. 최신 multimodal 모델이나 영상/이미지 임베딩은 V1에 필요하지 않다. 이 지원 방식과 모델/차원 안내는 [Google 공식 embeddings 문서](https://ai.google.dev/gemini-api/docs/embeddings)를 확인했다. 아직 임베딩을 만들어본 결과는 아니다.
 
