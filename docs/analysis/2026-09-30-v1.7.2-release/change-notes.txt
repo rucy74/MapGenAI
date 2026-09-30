@@ -1,0 +1,6 @@
+v1.7.2 — World-map button fix
+
+- The AI Map Gen button now appears even when Map Preview's toolbar is turned off.
+- Checked on both the new-colony starting-site screen and the world map during play.
+
+This update changes the button placement only; map generation behavior is unchanged.

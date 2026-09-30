@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MapGen AI v1.7.2 — 버튼 수정·배포 확인</title>
+<style>
+body{margin:0;background:#10151b;color:#e2e9f0;font:16px/1.65 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:28px 20px 60px}h1{font-size:clamp(25px,4vw,40px);line-height:1.2}h2{margin-top:32px;color:#99caff}p{max-width:850px}.status{background:#19362d;border:1px solid #367b5c;padding:16px;border-radius:12px}figure{margin:20px 0;background:#18212a;border:1px solid #364859;border-radius:12px;overflow:hidden}img{display:block;width:100%;height:auto}figcaption{padding:12px 16px}a{color:#9acfff}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #364859}code{overflow-wrap:anywhere;font-size:14px}.note{color:#bec9d5}@media(max-width:600px){th,td{padding:8px;font-size:14px}}
+</style>
+<main>
+<p>2026년 9월 30일 · MapGen AI</p>
+<h1>툴바를 꺼도<br>맵 만들기 버튼이 보입니다</h1>
+<p class="status"><strong>v1.7.2 창작마당 반영 완료.</strong> 일반 설치본·구독본·배포 파일을 새 패키지와 대조했습니다. 창작마당 항목 ID는 3685385453입니다.</p>
+<h2>이번 설치본에서 확인한 화면</h2>
+<p>새 식민지의 시작 지점을 고르는 화면입니다. Map Preview 툴바를 끈 상태에서도 파란 <strong>AI Map Gen</strong> 버튼이 미리보기 왼쪽에 표시됩니다. 그림을 누르면 원본 크기로 볼 수 있습니다.</p>
+<figure><a href="installed-site-off/00-world-entry.png"><img src="installed-site-off/00-world-entry.png" alt="툴바를 끈 시작 지점 화면에서 미리보기 왼쪽에 보이는 AI Map Gen 버튼"></a><figcaption>이번에 설치한 v1.7.2 DLL로 실제 게임에서 촬영했습니다.</figcaption></figure>
+<figure><a href="installed-site-off/01-after-click.png"><img src="installed-site-off/01-after-click.png" alt="버튼에 자동 클릭 이벤트를 전달한 뒤 열린 MapGen AI 대화창"></a><figcaption>버튼에 자동 클릭 이벤트를 전달한 뒤 대화창이 열렸습니다. 물리 마우스·다른 모드의 입력 처리는 이 검사에 포함하지 않았습니다.</figcaption></figure>
+<h2>확인 결과</h2>
+<table><tr><th>항목</th><th>결과</th></tr><tr><td>일반 설치본·구독본·저장소 배포 파일</td><td>패키지 9개 파일과 일치</td></tr><tr><td>창작마당 업로드</td><td>Steam 성공 응답 + 공개 API + 구독 파일 확인</td></tr><tr><td>변경 기록</td><td>v1.7.2 버튼 수정 내용 등록</td></tr><tr><td>시작 화면·툴바 끔</td><td>버튼 표시·대화창 열기 확인</td></tr><tr><td>유료 AI 호출</td><td>이번 작업 0회</td></tr></table>
+<p class="note">이전 Claude 검사는 자동 테스트 337개와 시작 화면/플레이 화면의 툴바 켬·끔을 확인했습니다. 이번에는 동일한 설치 DLL을 사용해 시작 화면·툴바 끔을 새로 확인했습니다. 실제 마우스, 다른 해상도·UI 배율, 미리보기 창을 옮긴 상황은 추가 확인이 필요합니다.</p>
+<p class="note">이번 공개판에는 DEV의 프롬프트 비용 압축이 들어가지 않습니다. 강 위치 변경·특징 교체 관련 남은 문제도 별도 작업입니다.</p>
+<p><a href="https://steamcommunity.com/sharedfiles/filedetails/changelog/3685385453">창작마당 수정 기록</a> · <a href="report.md">상세 검증 기록</a> · <a href="release-verification.json">파일 대조 영수증</a></p>
+</main>
+</html>

@@ -1,0 +1,25 @@
+{
+  "at": "2026-09-30T20:58:38+09:00",
+  "zip": "F:\\Projects\\Rimworld\\work\\mapgenai-packages\\2026-09-30-entry-button-v1.7.2\\release\\MapGenAI.zip",
+  "zipSha256": "5209bfe38bb29ceaf8baf6cefff4f33a52b7e05e3184b9303dcb9b5f1aff345d",
+  "matchesPackagePlusWorkshopId": true,
+  "publishedFileId": "3685385453",
+  "publishedFileIdUnchanged": true,
+  "devUnchanged": true,
+  "configUnchanged": true,
+  "previousDll": "f3f82a069f3abc644c03a068a821102cdc042d5bfcc83a299e10032b69b3855d",
+  "installedDll": "9a792fad321743582ee767548082b0ae72d23643d4f8e26358a42bee5b1052b5",
+  "backup": "F:\\Projects\\Rimworld\\work\\mapgenai-packages\\2026-09-30-entry-button-v1.7.2\\release-installed-before",
+  "installed": {
+    "build.json": "b5b1d2ee2b3c3389903129d8491f60cfb8329a3fbd0a6d96a0c66582dc5ea6b3",
+    "README.txt": "e59b573e91e057cb2112e3a648a1798c478ad86a4159dfc784dad51ae094eca1",
+    "About/About.xml": "9358f3a7c9ea1d7645fe62f20e849c0d93d63cb891d6245531f1631c85260d20",
+    "About/Preview.png": "3ed88ef35150d59b0eaf1de7f8612381538cea0db7cec3f785f2ffb6f0d9af46",
+    "About/PublishedFileId.txt": "5d66709395c3bac1bce354a0d44aeea3fa94bfb91d8104fc35d3b052f351a75b",
+    "Assemblies/MapGenAI.dll": "9a792fad321743582ee767548082b0ae72d23643d4f8e26358a42bee5b1052b5",
+    "Languages/ChineseSimplified/Keyed/MapGenAI.xml": "4b83883efb0dcf6fbe38872497876a7adbad6f5c1d69b38117341009df4aa9a3",
+    "Languages/English/Keyed/MapGenAI.xml": "eb59633f4ae91818f139979d33d702c0717ec07d4f1e8dbb17ebbe0652c2a769",
+    "Languages/Japanese/Keyed/MapGenAI.xml": "f248ca30b932644774ec2a92f682bf50ed8add6bfc4aa1fed6aadebd8214842f",
+    "Languages/Korean/Keyed/MapGenAI.xml": "f1ee27512ac25729798708185b65dee8c8e64c2c4698d33d57689f72e30fb543"
+  }
+}

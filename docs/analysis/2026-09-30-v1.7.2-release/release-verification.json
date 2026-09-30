@@ -1,0 +1,53 @@
+{
+  "verifiedAt": "2026-09-30T21:21:04+09:00",
+  "item": "3685385453",
+  "version": "1.7.2",
+  "copies": {
+    "repository_dist": {
+      "payloadFiles": 9,
+      "matchesPackage": true,
+      "dllSha256": "9a792fad321743582ee767548082b0ae72d23643d4f8e26358a42bee5b1052b5"
+    },
+    "installed": {
+      "payloadFiles": 9,
+      "matchesPackage": true,
+      "dllSha256": "9a792fad321743582ee767548082b0ae72d23643d4f8e26358a42bee5b1052b5"
+    },
+    "subscribed": {
+      "payloadFiles": 9,
+      "matchesPackage": true,
+      "dllSha256": "9a792fad321743582ee767548082b0ae72d23643d4f8e26358a42bee5b1052b5"
+    }
+  },
+  "server": {
+    "manifest": "4012711468297338724",
+    "timeUpdated": 1790769943,
+    "fileSize": 911208,
+    "uploadResult": "k_EResultOK"
+  },
+  "preservedMetadata": [
+    "title",
+    "descriptionSha256",
+    "tags",
+    "visibility",
+    "previewSize"
+  ],
+  "changedDllNegativeControlRejected": true,
+  "runtime": {
+    "startingSite": true,
+    "toolbarOff": true,
+    "buttonVisible": true,
+    "syntheticClickOpensDialog": true,
+    "paidCalls": 0,
+    "probeArchived": true
+  },
+  "secretScan": {
+    "positiveControlsDetected": 2,
+    "inspectedFiles": 22,
+    "hits": []
+  },
+  "limits": [
+    "Real mouse input was not tested.",
+    "Non-default preview-window positions and sizes were not tested."
+  ]
+}
