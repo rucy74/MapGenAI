@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "scope": "Design document static integrity and current-turn full-content review only",
+  "contentReviewMechanism": "LLM judgment after verbatim reread; no product behavior verified",
+  "checks": {
+    "sections": 16,
+    "navigationTargetsValid": true,
+    "selfContainedAssets": true,
+    "detectorsExercisedOnBrokenSamples": true,
+    "jsonExampleParses": true,
+    "existingCodePaths": 9,
+    "sourceQuotesVerified": 4,
+    "utf8Readable": true
+  },
+  "requirementsReview": [
+    {
+      "request": "Pre-generate and select attractive actual maps",
+      "section": "4, 12",
+      "finding": "Original replay metadata, admission steps and transplant checks defined"
+    },
+    {
+      "request": "Store embeddings and generation settings",
+      "section": "5, 11",
+      "finding": "Local catalog, command data, independent vector space and query client proposed"
+    },
+    {
+      "request": "Find maps close to the user request",
+      "section": "6, 7",
+      "finding": "Required constraints before semantic ranking and bounded reranking"
+    },
+    {
+      "request": "Offer retrieved results alongside new generation",
+      "section": "2, 3, 10",
+      "finding": "New 1 plus library up to 2, all regenerated on current tile before selection"
+    },
+    {
+      "request": "Design first",
+      "section": "1, 14, 16",
+      "finding": "Proposal only, implementation order and unresolved choices explicit"
+    },
+    {
+      "request": "Protect existing features and follow-up edits",
+      "section": "8, 9, 10, 13, 15",
+      "finding": "Opt-in DEV branch, existing transaction/Undo paths, edited requests skip retrieval"
+    },
+    {
+      "request": "Explain cost and quality limits",
+      "section": "11, 12, 15, 16",
+      "finding": "API/local cost distinction, no automatic beauty guarantee or claimed reduction"
+    }
+  ],
+  "unexecuted": [
+    "Runtime implementation",
+    "Actual catalog maps",
+    "Embedding/API calls",
+    "Search accuracy evaluation",
+    "Transfer/beauty/playability tests",
+    "Browser rendering"
+  ],
+  "artifacts": {
+    "plan.md": "36b8670ad8ab5ebcd3614d629a66b09f078e9a05388a4905f3dcbf0bb752ee74",
+    "review.html": "48ff62f74ab4fafc257a2ac4c70cc4078e4d8c893c0a40654db17ad64d1d5af0"
+  }
+}

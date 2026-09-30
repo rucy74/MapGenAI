@@ -1,0 +1,416 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MapGen AI — 맵 저장소 설계</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#111820;color:#e6edf3;font:16px/1.8 system-ui,sans-serif}a{color:#9cd2ff}aside{position:fixed;top:0;bottom:0;width:260px;overflow:auto;background:#18232e;padding:24px 18px;border-right:1px solid #334353}aside strong{display:block;font-size:20px;margin-bottom:16px}aside a{display:block;padding:6px 0;font-size:14px;text-decoration:none}main{margin-left:260px;max-width:1160px;padding:28px 42px 70px}h1{font-size:32px;line-height:1.45}h2{font-size:24px;line-height:1.5;margin-top:48px;border-top:1px solid #334353;padding-top:24px;scroll-margin-top:16px}p{color:#d1dce5}code{color:#aad4f5;font-size:.9em;overflow-wrap:anywhere}pre{overflow:auto;background:#0a1119;border:1px solid #334353;padding:18px;border-radius:8px;line-height:1.6}pre code{white-space:pre;overflow-wrap:normal}blockquote{border-left:4px solid #598bae;margin-left:0;padding:3px 18px;background:#1b2a37}table{border-collapse:collapse;width:100%;display:block;overflow:auto;font-size:14px}th,td{border:1px solid #3b4b5b;padding:10px 12px;text-align:left;vertical-align:top;min-width:150px}th{background:#253646;color:#e7f1f9}tr:nth-child(even){background:#17222c}li{margin:6px 0}.overview{border:1px solid #466a87;border-radius:12px;padding:22px;background:#1b2935}.badge{display:inline-block;background:#304b60;color:#cae7ff;border-radius:99px;padding:4px 14px;font-size:14px}.flow{display:flex;flex-direction:column;align-items:center;gap:7px;padding:8px 0}.flow>div{border:1px solid #557b99;border-radius:8px;background:#20374a;text-align:center;padding:14px 18px;width:100%;max-width:650px}.flow small{color:#b4c7d7}.flow>span{color:#8fc7ed}.flow .branches{display:flex;gap:14px;border:0;background:transparent;padding:0}.branches>div{flex:1;background:#20374a;border:1px solid #557b99;border-radius:8px;padding:14px 8px}footer{margin-top:40px;color:#9eb0bf;font-size:14px}@media(max-width:950px){aside{position:static;width:100%;max-height:none;border-right:0;border-bottom:1px solid #334353}aside a{display:inline-block;margin-right:14px}main{margin:0;padding:20px 16px 50px}h1{font-size:27px}h2{font-size:21px}.overview{padding:16px}.flow .branches{gap:8px}}
+</style></head><body><aside><strong>MapGen AI<br>맵 저장소 설계</strong><a href="#section-0">1. 목표와 사용자 요청</a><a href="#section-1">2. 핵심 결정</a><a href="#section-2">3. 전체 흐름</a><a href="#section-3">4. 원본 사례와 옮겨 쓰는 구성의 분리</a><a href="#section-4">5. 데이터 구조</a><a href="#section-5">6. 검색 목적과 필수 조건</a><a href="#section-6">7. 검색 순위와 반복 방지</a><a href="#section-7">8. 현재 타일에 적용하는 방법</a><a href="#section-8">9. 후보 검사와 선택</a><a href="#section-9">10. 사용자 흐름과 문답</a><a href="#section-10">11. 임베딩과 비용</a><a href="#section-11">12. 좋은 사례를 모으는 방법</a><a href="#section-12">13. 기존 코드와 연결할 위치</a><a href="#section-13">14. 구현 순서와 중단 기준</a><a href="#section-14">15. 검증 항목과 평가 결과 양식</a><a href="#section-15">16. 이번 설계의 남은 결정</a></aside><main><section class="overview" aria-label="전체 흐름">
+<p class="badge">구현 전 설계 초안 · 새 유료 호출 없음</p>
+<div class="flow"><div>좋은 실제 맵 선정<br><small>설정 · 설명 · 적용 조건 · 임베딩 저장</small></div><span>↓</span><div>사용자 요청 + 현재 타일 + 취향</div><span>↓</span><div class="branches"><div>요청으로 새로 설계<br><small>기존 LLM 경로</small></div><div>저장소에서 검색<br><small>조건 필터 + 임베딩</small></div></div><span>↓</span><div>현재 타일에서 실제 미리보기 생성<br><small>같은 시드 · 선택 전 실제 맵 유지</small></div><span>↓</span><div>비교 → 선택 → 기존 후속 편집</div></div>
+<p>저장된 예쁜 사진을 현재 결과 대신 보여주지 않습니다. 현재 타일에서 다시 생성한 후보를 비교합니다.</p></section><h1 id="title">MapGen AI — 검증된 맵 저장소와 검색 추천 설계</h1>
+<p>작성: 2026-10-01 / 기준: dev <code>d5c39b853fe8679b2089c97285c4fee172d92b4e</code> / 상태: 구현 전 설계 초안.</p>
+<h2 id="section-0">1. 목표와 사용자 요청</h2>
+<p>좋은 실제 생성 결과를 등록하고, 사용자 요청과 가까운 구성을 검색해 현재 타일에서 새로 생성한다. 요청에 따라 새로 설계한 후보와 검색한 후보를 그림으로 비교하고, 선택한 뒤에는 기존 자연어 수정·Undo 흐름을 이어간다.</p>
+<p>사용자 요청 출처: 프로젝트 트랙 로그 <code>../../../../../agents/main/log/2026-10-01-0039-mapgenai.md</code> §사용자 요청 원문.</p>
+<blockquote>
+<p>이쁜 맵에 대해서 미리 생성해둠 -&gt; 임베딩과 생성 설정 저장해둠
+사용자 요청 시 요청에 따른 맵 생성 외에, &quot;저장소&quot;에서 가져온 결과로 임베딩 기준 가장 가까운 맵을 생성해줌
+먼저 이 구성에 대해 설계 먼저 해봐</p>
+</blockquote>
+<p>이하의 후보 개수·임베딩 공급자·시험 목표는 설계 제안이다. 사용자에게 구현·게시 승인을 받은 것으로 취급하지 않는다. 이번 작업은 문서만 작성하며 유료 호출·런타임 변경·새 맵 수집을 실행하지 않는다.</p>
+<p>성공 기준은 검색 기능의 존재가 아니라, 사용자가 현재 타일에서 기존 추천보다 마음에 드는 맵을 고를 수 있는지다. 임베딩 유사도는 의미의 가까움이며, 아름다움 점수나 생성 성공의 증거가 아니다.</p>
+<h2 id="section-1">2. 핵심 결정</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>제안</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장 단위</td>
+<td>원본 생성 사례 + 옮겨 쓸 수 있는 구성 설정</td>
+<td>사진의 재현성과 다른 타일 적용을 분리한다</td>
+</tr>
+<tr>
+<td>저장 위치</td>
+<td>모드에 동봉하는 로컬 데이터</td>
+<td>서버 운영·항상 연결·사용자 업로드가 필요 없다</td>
+</tr>
+<tr>
+<td>검색</td>
+<td>적용 조건 필터 → 임베딩 유사도 → 다양성 → 실제 미리보기 검사</td>
+<td>비슷한 문장이라도 부적합하거나 똑같은 후보는 줄인다</td>
+</tr>
+<tr>
+<td>기본 비교</td>
+<td>추천에서는 신규 후보 1개 + 저장소 후보 최대 2개</td>
+<td>기존 최대3칸 UI를 재사용하며 두 생성 경로를 비교한다</td>
+</tr>
+<tr>
+<td>직접 묘사</td>
+<td>기능 ON에서 첫 전체 풍경 구성만 비교 대상으로 확장</td>
+<td>일반 추가·부분 수정의 빠른 흐름을 보존한다</td>
+</tr>
+<tr>
+<td>현재 타일</td>
+<td>바이옴·시드·native 강/해안·기존 상태를 기준으로 재생성</td>
+<td>저장 원본의 다른 타일을 몰래 적용하지 않는다</td>
+</tr>
+<tr>
+<td>후보 선택</td>
+<td>private snapshot으로 검사하고 선택 때 한 번 적용</td>
+<td>미선택 후보가 맵이나 Undo를 바꾸지 않게 한다</td>
+</tr>
+<tr>
+<td>검색 실패</td>
+<td>유효한 신규 후보만 제공, 추가 모델 호출로 자동 보충하지 않음</td>
+<td>검색 장애가 기존 생성 장애·예상 밖 비용이 되지 않게 한다</td>
+</tr>
+<tr>
+<td>임베딩 초기 경로</td>
+<td>텍스트 API 임베딩, DEV에서는 설정으로 활성화</td>
+<td>대형 로컬 추론 의존성을 먼저 넣지 않는다</td>
+</tr>
+<tr>
+<td>이미지 처리</td>
+<td>실제 미리보기 PNG를 사람에게 표시, 임베딩 입력은 설명 텍스트</td>
+<td>현재 이미지 입력 OFF 결정과 분리한다</td>
+</tr>
+</tbody>
+</table>
+<p>첫 구현은 DEV에서 비교 기능 기본 OFF로 시작한다. 사용자가 설정에서 활성화하면 전체 구도 비교가 새 동작이라는 점을 안내한다. OFF일 때는 기존 생성·추천·저장·편집 경로를 그대로 사용한다. ON에서도 설명/단순 특징 추가/부분 수정/선택한 후보 다듬기는 기존 흐름을 사용한다. 최종 일반판 기본값은 비교 결과를 보고 별도로 결정한다.</p>
+<h2 id="section-2">3. 전체 흐름</h2>
+<pre><code class="language-text">개발 단계: 실제 맵 생성 → 생성 설정·원본 맥락 보관 → 미관/생활 공간 확인
+          → 다른 타일 재생성 확인 → 설명 작성 → 임베딩 생성 → 로컬 카탈로그
+
+사용자 요청 + 취향 문답 + 현재 타일/현재 상태
+                         ↓
+              검색 목적과 변경 범위 정리
+                 ↙                  ↘
+        기존 LLM 신규 구성         로컬 저장소 조건 필터
+                 ↓                  ↓
+           신규 후보 1개       요청 임베딩 + 근접 검색
+                 ↓                  ↓
+                 │          현재 타일용 명령으로 변환
+                 └───────────┬──────┘
+                             ↓
+             같은 타일·시드에서 격리된 실제 미리보기
+                             ↓
+                 검증 통과한 후보만 비교·선택
+                             ↓
+                기존 ApplyPatches 한 번 + Undo 한 번
+                             ↓
+                       기존 후속 편집
+</code></pre>
+<p>LLM 신규 생성과 저장소 후보는 독립적이다. V1은 저장소 사례 전체를 매번 LLM에 넣지 않고, 추가 LLM 재순위 호출도 하지 않는다. 나중에 선택한 사례를 참고해 새 구도를 설계하는 기능은 이 비교 기능과 별도 확장으로 둔다.</p>
+<h2 id="section-3">4. 원본 사례와 옮겨 쓰는 구성의 분리</h2>
+<p><strong>원본 사례</strong>는 실제로 예뻤던 한 맵의 기록이다. 세계 시드, Map Preview의 실제 요청 시드, 타일 식별자·연결·기후·산악도·native 특징, 맵 크기, MapGen AI 코드 버전, RimWorld/Map Preview 버전, 활성 모드와 관련 설정 지문, 전체 TileMapState, 실제 PNG, 실제 생성 검사 결과를 보관한다. 같은 환경에서 재현하기 위한 개발 자료이지 다른 세계에 그대로 이식할 데이터가 아니다.</p>
+<p>타일 번호와 세계 시드만으로 모든 주변 연결과 모드 환경이 재현된다고 가정하지 않는다. 세계 생성 설정과 개발용 source fixture를 기록하고, 필요한 사례는 개발자가 소유한 원본 world save도 로컬 재현 자료로 보관한다. 사용자 게임에 원본 world save를 불러오는 방식은 사용하지 않는다.</p>
+<p><strong>이식용 구성</strong>은 원본에서 검증한 MapGen AI 명령과 적용 조건이다. 0..1 좌표 기반 도형/landform/구조물/도로와 명시적인 변경만 담는다. 현재 parser가 받는 generate params·shape_ops·structure_ops·road_ops를 사용하고, 원본 snapshot의 모든 기본값을 패치에 복사하지 않는다. 필드가 없다는 것은 현재 상태를 보존한다는 의미다.</p>
+<p>원본의 토양·강 위치·바이옴·seed·native 특징 제거 목록·전역 밀도 수치를 자동 복사하지 않는다. 명시한 소재나 전체 교체가 핵심인 사례는 이를 적용 조건과 변경 설명에 드러내며 일반 추천에서 몰래 쓰지 않는다. 기존 PresetManager의 전체 상태 불러오기를 검색 후보 적용 경로로 사용하지 않는다.</p>
+<p>등록 도구는 원본 before/after와 실제 명령열을 함께 읽고 해당 구성에 필요한 필드를 추린다. 일반 변환으로 옮길 수 없는 필드나 누락된 실행 명령은 등록 거부 사유다. 불분명한 명령을 LLM이 매번 다시 써서 복원하지 않는다. 변환한 구성은 실제 다른 타일에서 검증해 출처와 이식 가능성을 구분한다.</p>
+<p>정확한 원본 사진을 가져오는 모드는 V1에 포함하지 않는다. 현재 타일이 원본과 다르면 원본 사진은 참고 자료이고, 선택 버튼 옆에는 현재 타일에서 다시 만든 사진만 표시한다.</p>
+<h2 id="section-4">5. 데이터 구조</h2>
+<p>별도 벡터 DB는 처음부터 필요하지 않다. 수십~수백 사례는 로컬 JSON과 float32 벡터의 전수 내적으로 시작하고, 개수가 커져 측정 결과가 필요성을 보일 때 인덱스를 바꾼다.</p>
+<p>아래 파일과 필드 이름은 새 기능의 제안이며 아직 존재하지 않는다.</p>
+<pre><code class="language-text">dev/MapLibrary/&lt;catalog-version&gt;/
+  catalog.json                 # entry ID, 데이터/벡터 해시, 생성기 지원 범위
+  entries/&lt;entry-id&gt;.json       # 설명, 조건, 이식용 실행 명령, 등록 검사
+  vectors/&lt;embedding-space&gt;.f32 # 등록된 설명의 정규화 벡터
+  references/&lt;entry-id&gt;.png     # 원본 참고 미리보기, 현재 타일 결과로 쓰지 않음
+
+개발 자료 폴더/
+  sources/&lt;case-id&gt;/            # 원본 상태·seed·환경 지문·전체 생성 검사
+  query-set/                   # 실제 요청 + 명시한 합성 평가 사례
+</code></pre>
+<pre><code class="language-json">{
+  &quot;library_schema&quot;: 1,
+  &quot;id&quot;: &quot;lakeside-clearing-01&quot;,
+  &quot;revision&quot;: 1,
+  &quot;family&quot;: &quot;lakeside-clearing&quot;,
+  &quot;titles&quot;: { &quot;ko&quot;: &quot;작은 호숫가의 넓은 빈터&quot;, &quot;en&quot;: &quot;Broad clearing by a small lake&quot; },
+  &quot;search_text_ref&quot;: &quot;approved-description-v1&quot;,
+  &quot;requires&quot;: { &quot;dlc&quot;: [], &quot;defs&quot;: [], &quot;profile&quot;: &quot;temperate-land&quot; },
+  &quot;policy&quot;: { &quot;preserve_native_water&quot;: true, &quot;preserve_unspecified_state&quot;: true },
+  &quot;recipe_ref&quot;: &quot;validated-command-sequence&quot;,
+  &quot;embedding&quot;: { &quot;space_id&quot;: &quot;text-retrieval-v1&quot;, &quot;row&quot;: 0 },
+  &quot;reference_case&quot;: &quot;source-case-01&quot;,
+  &quot;admission&quot;: { &quot;status&quot;: &quot;draft&quot;, &quot;evidence_refs&quot;: [] }
+}
+</code></pre>
+<p>이 JSON은 형식 설명용이고 실제 등록 맵이 아니다. <code>requires.profile</code> 등은 라이브러리 전용 분류이며 MapGenAI params에 그대로 전달하지 않는다. 실제 entry에는 참조된 실행 명령을 함께 넣거나 catalog hash로 연결된 파일로 보관한다. 전체 설정 저장은 MapStateCodec의 현행 schema_version2를 쓰고 라이브러리 wrapper 버전과 구분한다.</p>
+<p>임베딩 공간에는 공급자·모델 식별자·차원·query/document 입력 형식·정규화 방법·설명 버전·빌드 식별자를 기록한다. entry의 <code>row</code>는 catalog entry ID 매핑과 함께 검증한다. 벡터 공간이 다른 모델 결과를 섞거나, 한 모델의 query를 다른 모델 index와 비교하지 않는다. remote 별칭의 내부 모델 변경은 이름/차원만으로 완전히 감지할 수 없어 정기 재평가 대상으로 남는다.</p>
+<p>배포 데이터는 설명·조건·명령 JSON, 임베딩 벡터, 참고 이미지로 한정한다. 실행 스크립트·사용자 API key·대화 원문·원본 world save를 포함하지 않는다. catalog 로드에서 중복 ID·참조 누락·해시/벡터 크기 불일치·지원하지 않는 wrapper 버전은 해당 팩을 제외하며 기존 모드 사용을 막지 않는다.</p>
+<h2 id="section-5">6. 검색 목적과 필수 조건</h2>
+<p>검색 입력은 사용자 문장만으로 끝내지 않는다. 현재 문답 답변, 요청의 변경 범위, 보존할 기존 지형, 확인된 타일 특징을 함께 반영한다. 원래 대화 전체나 거대한 현재 상태 JSON을 embedding API로 보내지 않는다.</p>
+<p>현재 추천 LLM 응답에 기능 ON일 때만 짧은 optional <code>library_intent</code> 메타데이터를 붙이는 확장을 제안한다. 검색 전용 LLM 호출은 추가하지 않는다. 신규 생성 params와 분리하고 기존 응답만 반환하는 모델도 그대로 지원한다. 임베딩 요청은 이 요약을 받은 뒤 한 번만 보낸다.</p>
+<p>메타데이터의 제안 필드: 목적/분위기, 물·산·생활 공간 선호, <code>new_layout / preserve_layout / edit_only</code>, 추가 금지 항목, 명시 크기·위치·비율·ID, 기존/native 물 사용 여부. 모델이 써준 금지·보존 해석을 절대적인 사실로 취급하지 않는다. 문답의 구조화된 답, 현재 상태, 명시 숫자/대상과 모순이면 후보를 제외하거나 기존 clarification 흐름으로 확인한다. V1에서 확실히 판정할 수 없는 명시 조건이 있으면 자동 저장소 후보를 건너뛰고 기존 신규 생성 경로를 유지한다.</p>
+<table>
+<thead>
+<tr>
+<th>조건 종류</th>
+<th>처리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>필요한 DLC/Def/생성기 기능·버전</td>
+<td>검색 전 필수 조건 필터</td>
+</tr>
+<tr>
+<td>사막/한랭/습지의 적용 가능성</td>
+<td>등록된 지원 profile로 필터, 현재 타일에서 다시 검사</td>
+</tr>
+<tr>
+<td>native 강·해안 및 기존 맵 유지</td>
+<td>native 제거/이동 명령 제외, 변경된 필드와 실제 지형 검사</td>
+</tr>
+<tr>
+<td>“새 물 없음”, “산 추가 없음”, “폭10”, “안쪽70%”</td>
+<td>명시 조건으로 검사, 유사도로 완화하지 않음</td>
+</tr>
+<tr>
+<td>“아늑하게”, “자연스럽게”, “넓은 마을”</td>
+<td>임베딩·설명·정착 공간 지표로 순위 결정</td>
+</tr>
+<tr>
+<td>애매한 금지/충돌하는 문답</td>
+<td>새 확인 질문 또는 저장소 분기 생략</td>
+</tr>
+</tbody>
+</table>
+<p>기능별 금지 여부는 그림 색이나 entry의 제목에서 추정하지 않고 실행 명령과 실제 지형 결과를 기준으로 본다. 명시 조건을 검증할 수 없는 entry는 자동 적용 후보로 쓰지 않는다.</p>
+<h2 id="section-6">7. 검색 순위와 반복 방지</h2>
+<ol>
+<li>현재 타일/요청 조건으로 적용 불가능한 entry를 제거한다.</li>
+<li>같은 임베딩 공간에서 요청 벡터와 entry 벡터의 cosine similarity로 가까운 구성을 찾는다.</li>
+<li>등록 검사를 통과한 후보만 대상으로 삼고, 필수 조건에 합격한 후보 중 요청과 가장 가까운 후보를 우선한다.</li>
+<li>두 번째 저장소 후보는 지형 family·물/암석 비율·생활 공간 배치가 첫 후보와 충분히 다른 것으로 고른다. 같은 도넛의 seed만 다른 사례를 다양성으로 세지 않는다.</li>
+<li>최근 보였던 entry 및 같은 resolved state를 제외하고, 실제 미리보기에서 실패한 후보는 제한된 다음 후보로 교체한다.</li>
+</ol>
+<p>첫 검색 폭은 최대8개, 실제 추가 미리보기 시도는 저장소 후보 합계 최대4개를 초기 설계값으로 둔다. 화면에 최대2개만 공개한다. 이 수치는 프로파일링 전 가정이며 성능 측정 뒤 조정한다. 유사도 한 개의 고정 임계값을 임의로 “정답 확률”처럼 표시하지 않는다. 조회 평가 세트로 약한 관련성의 제외 기준을 정한다.</p>
+<p>“그냥 추천해 줘”는 수계·산악도·문답 답을 기준으로 서로 다른 family를 섞는다. 재추천은 같은 타일에서 아직 안 보여준 적합한 entry를 우선하며 world seed를 바꾸지 않는다. 가까운 후보를 다 소진하면 숨기지 않고 “저장소의 다른 적합한 구성이 없음”으로 알린다. 새 타일에서는 적합성부터 다시 계산한다.</p>
+<p>요청 embedding은 같은 텍스트/문답 의미/space ID에 캐시할 수 있다. 순위·실제 생성 후보 캐시는 별도로 현재 타일 fingerprint에 묶는다. 요청 문장이 같다는 이유만으로 다른 타일의 결과를 재사용하지 않는다. 검증된 신규 생성 후보와 같은 resolved state면 저장소 후보를 중복 표시하지 않는다.</p>
+<h2 id="section-7">8. 현재 타일에 적용하는 방법</h2>
+<p>이 단계가 검색기보다 중요하다. 저장소 원본의 전체 TileMapState를 불러오지 않고, 현재 before를 기준으로 이식용 명령열을 적용해 private after를 만든다.</p>
+<ul>
+<li>실행 전에 entry에서 정의한 shape/structure/road ID와 내부 참조를 후보 전용 ID로 바꿔 현재 맵의 ID와 충돌하지 않게 한다. 참조 하나라도 바꿀 수 없으면 해당 후보를 제외한다.</li>
+<li>기본은 0..1 배치 좌표와 현행 생성기 규칙을 사용한다. 정확한 width·coverage·재료는 그대로 보존한다. 등록된 맵 크기 범위 밖이거나 충분한 땅이 없으면 실패로 돌린다.</li>
+<li>V1에는 임의의 이동/회전/강 위치 변경으로 모양을 억지로 맞추는 자동 최적화를 넣지 않는다. 이미 지원하는 명령으로 등록한 적합한 구성을 선택하고 실제 생성으로 확인한다.</li>
+<li>기존 native 강을 전제로 한 사례는 강 방향·강가의 땅 등 필요한 조건을 기록한다. 현재 타일이 다르면 제외한다. 현재 코드에 없는 <code>native_river</code> anchor 같은 문법을 가정하지 않는다. 더 정교한 수계에 따른 재배치는 후속 생성기 기능으로 다룬다.</li>
+<li>현재 맵을 유지하라는 요청에서 기존 shapes/roads/structures를 지우는 전체 배열 교체는 금지한다. 전체 새 구도가 명시된 경우만 기존 authored 구성 교체를 후보 변경 설명에 표시한다. native 물/바이옴 변경 권한까지 함께 얻은 것으로 해석하지 않는다.</li>
+</ul>
+<p>현재 미리보기의 native/기존 authored 지형을 읽을 필요가 있으면 RecommendationPreviews/CandidatePreviewSnapshot의 실제 map 검사 단계에서 물·암석·건물·통행 가능 표본을 캡처하도록 최소 확장한다. Texture 색만 읽어 강/바다/빈 땅을 구분하지 않는다. 새 map summary 수집과 보존 비교는 아직 구현되지 않았다.</p>
+<p>생성 context fingerprint: 세계/선택 타일, Map Preview 실제 seed, 맵 크기, 현재 TileMapState, rebased native 특징/기후/연결, 생성기 및 catalog revision, 확인 가능한 관련 모드/설정 지문. 후보 생성 중 타일·seed·상태가 바뀌면 해당 batch를 버린다. 임의 외부 모드 설정을 모두 알아낼 수 있다고 가정하지 않는다. 설정 지문은 생성에 관련된 항목만 쓰고 API key나 사용자 프로필 전체를 포함하지 않는다.</p>
+<h2 id="section-8">9. 후보 검사와 선택</h2>
+<p>기존 MapGenParams.ValidatePatches/ApplyPatches, MapStateEditor.Merge, RecommendationPlan.Resolve, CandidatePreviewSnapshot, RecommendationQuality를 재사용한다. 기존 RecommendationQuality의 현재 검사는 placement failure와 의도된 물이 아예 안 생긴 경우 정도이므로, 미관 전체가 이미 검증된다고 부르지 않는다.</p>
+<p>새로 필요한 것은 현재 타일의 실제 지형 요약과 entry가 요구한 관찰 조건이다. 예: native 물 보존, 필수 통로 연결, 일정 크기의 연결된 마른 정착지, 의도한 수역 위치/면적, 주요 지형 component 수, 구조물 배치 오류. 바이옴 특수 지형은 “일반 토양만 통과”로 오판하지 않도록 현행 walkability/buildability와 등록 profile 기준을 쓴다.</p>
+<p>보존 조건은 native 물 경로만 격리해 검사할지 전체 물 마스크를 검사할지 명시한다. 기존 MG42 해안/동굴의 최종 마스크 한계가 있는 사례는 엄격한 물 보존 후보에서 제외한다. 결과 검사가 구현되기 전에는 기술 통과나 제목만으로 보존됐다고 주장하지 않는다.</p>
+<p>실패한 저장소 후보는 표시/선택하지 않고 시도 한도 내에서만 다음 후보를 만든다. 예쁜 원본 썸네일로 실패한 현재 결과를 대체하지 않는다. 원본에서의 미관 합격은 현재 재생성의 미관 합격으로 자동 승계되지 않는다. 실제 환경에서 재생성한 맵이 못생겨지는 문제는 평가와 등록 조건 개선으로 되돌린다.</p>
+<p>저장소 후보는 현재 타일의 실제 미리보기 생성 성공이 필요하다. Map Preview를 사용할 수 없거나 생성이 실패하면 저장소 후보를 제외한다. 기존 신규 후보가 그림 없이도 선택 가능한 정책은 이번 기능 때문에 바꾸지 않는다.</p>
+<p>선택 때 기존 ApplyPatches로 후보 명령열을 한 번 적용하고 Undo 하나만 추가한다. 저장소 entry ID를 이후 생성의 필수 의존성으로 두지 않는다. 실제 적용된 TileMapState와 명령은 기존 저장 형식으로 남아 catalog를 빼도 이미 만든 맵·세이브·프리셋이 유지되도록 한다. 후보 출처는 부가 정보다.</p>
+<h2 id="section-9">10. 사용자 흐름과 문답</h2>
+<p><strong>추천:</strong> “그냥 추천해 줘” → 요청에 맞춰 새로 설계한 후보1 + 저장소에서 찾은 서로 다른 후보 최대2. 그림 위에는 “새 구성 / 저장소 구성”처럼 출처를 짧게 표시한다. 유사도 숫자·Def 이름·embedding 공급자는 플레이어 후보 설명에 노출하지 않는다. 어울린 이유와 바뀔 부분을 자연어로 설명한다.</p>
+<p>명시한 후보 개수는 존중한다. 한 개만 요청하면 자동 비교를 생략하고, 두 개면 신규1+저장소1로 구성한다. 현행 최대3개 후보 제한을 확대하는 작업은 별도 범위다. 적합한 저장소 후보가 부족하면 실제로 제공할 수 있는 개수와 이유를 알린다.</p>
+<p>신규 후보를 먼저 준비할 수 있으면 먼저 표시하고, 저장소 후보가 검색되는 동안 선택을 막지 않는다. 신규 후보 번호는1번으로 고정하고 늦게 온 결과로 번호를 바꾸지 않는다. 사용자가 선택·취소·후속 요청을 하면 해당 batch의 검색을 취소한다. 이미 시작된 Map Preview 작업은 현행 큐 정책대로 끝날 수 있지만 폐기된 batch의 결과가 다시 나타나면 안 된다.</p>
+<p><strong>첫 직접 묘사:</strong> 비교 기능 ON이며 확실한 <code>new_layout</code> 요청인 경우, 기존 generate 응답을 즉시 commit하지 않고 신규 후보로 구성한다. 저장소의 가까운 후보와 함께 private 미리보기로 보여준다. <code>edit_only</code>나 범위가 애매한 요청은 기존 적용 경로를 사용한다. 이것은 새 동작이므로 OFF/ON 전환과 직접 요청의 회귀 검사가 필요하다.</p>
+<p><strong>후속 편집:</strong> “2번 연못 줄여 줘”는 기존 Refine으로 그 후보만 수정한다. 선택 이후 “온천 추가”, “강을 북쪽으로”, “흙길 설치”는 기존 채팅/Apply 경로로 처리하며 자동 검색·임베딩 호출을 하지 않는다. 수정된 저장소 후보는 “저장소에서 가져와 수정한 구성”으로 출처를 표시한다.</p>
+<p><strong>선택 안 함/재추천/접기:</strong> 현행 DismissRecommendations와 RequestNewRecommendations를 유지한다. 선택을 강요하지 않는다. 같은 조건의 저장소 재검색은 cached embedding과 최근 후보 제외로 진행할 수 있다. 신규 LLM 후보까지 다시 만들 때는 일반 신규 생성 비용이 발생한다. 반복 그림만 강제로 돌려 보여주지 않는다.</p>
+<p><strong>취향 문답:</strong> 초기 선택 “그냥 추천 / 취향에 맞춰 추천”을 유지한다. 문답은 library family 이름을 외워 고르는 메뉴로 만들지 않는다. 사용자는 생활 공간과 분위기를 말한다. 우선순위는 ① 기존 맵 유지/새 구도 ② 넓은 한 정착지/여러 연결 공간 ③ 물 사용/새 물 금지 ④ 산으로 둘러싸임/부분 산/열린 공간 ⑤ 자연 풍경/특별한 지형/상관없음 ⑥ 생활 편의/균형/도전이다. 현재 조건에 무관한 질문은 건너뛰고 이전 답과 충돌하는 선택지는 제거하거나 확인한다.</p>
+<p>특별한 지형을 고르면 나중에 실제 후보 그림으로 협곡·섬·호수·열린 골짜기 등을 보여준다. “기존 물만”을 고른 뒤 새 연못을 권하거나 “산 없음” 뒤 산성 분지를 권하는 식의 모순은 필수 조건 검사로 막는다. Geological Landforms에서 영감을 받은 구성 분류를 쓸 수 있지만 GL 원본 생성기와 같은 맵이라고 표시하지 않는다.</p>
+<h2 id="section-10">11. 임베딩과 비용</h2>
+<p>로컬에 저장된 벡터의 검색·정렬·중복 제거·Map Preview 생성은 LLM 토큰을 쓰지 않는다. 새 사용자 요청의 API embedding과 기존 LLM 신규 후보 생성은 각각 비용이 있을 수 있다. 그림이 추가될수록 로컬 미리보기 생성 시간과 CPU/메모리 사용량은 늘어난다.</p>
+<table>
+<thead>
+<tr>
+<th>선택</th>
+<th>초기 제안</th>
+<th>비용·제약</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>텍스트 API 임베딩</td>
+<td>V1 후보</td>
+<td>요청 때 작은 embedding 호출이 필요, 같은 모델로 만든 동봉 index가 필요</td>
+</tr>
+<tr>
+<td>로컬 다국어 임베딩</td>
+<td>후속 비교 대상</td>
+<td>API 비용은 없지만 모델/토크나이저/native 추론 라이브러리·Unity 호환·메모리 검증 필요</td>
+</tr>
+<tr>
+<td>키워드/구조 조건 검색</td>
+<td>embedding OFF/미지원/실패 fallback</td>
+<td>API 없이 일부 사례를 찾지만 임베딩 검색으로 표시하지 않음</td>
+</tr>
+</tbody>
+</table>
+<p>설정은 “저장소 비교 끄기 / 로컬 조건 검색 / API 의미 검색” 세 모드를 제안한다. 비교 끄기는 기존 경로만 사용하며, 로컬 모드는 저장소 비교를 하되 API를 부르지 않는다. 의미 검색은 query embedding 호출을 허용하는 선택이다. UI에 실제 검색 종류를 과하게 노출할 필요는 없지만 설정 설명에서 비용과 동작을 구분한다.</p>
+<p>현재 코드의 ILLMClient는 chat/image만 제공하므로 embedding을 chat 호출로 흉내 내지 않는다. V1은 Gemini text embedding 한 종류를 파일 지문과 함께 별도 클라이언트로 검증하는 안을 제안한다. 현재 Gemini 키가 없거나 embedding 사용이 OFF면 새 키 입력을 강요하지 않고 로컬 조건 검색을 쓰거나 기존 신규 후보만 제공한다. 다른 공급자의 chat 모델을 선택했다고 Gemini 키를 몰래 사용하지 않는다.</p>
+<p>초기 평가 모델 제안은 <code>gemini-embedding-001</code>, 768차원, 등록 설명 RETRIEVAL_DOCUMENT / 요청 RETRIEVAL_QUERY이며 두 벡터를 L2 정규화한다. 실제 선정은 한국어/영어 요청 평가와 비용 측정 후 확정한다. 최신 multimodal 모델이나 영상/이미지 임베딩은 V1에 필요하지 않다. 이 지원 방식과 모델/차원 안내는 <a href="https://ai.google.dev/gemini-api/docs/embeddings">Google 공식 embeddings 문서</a>를 확인했다. 아직 임베딩을 만들어본 결과는 아니다.</p>
+<p>요청 embedding 캐시 miss에서 라이브러리 분기가 추가하는 네트워크 호출은 최대1회로 시작하고 자동 재시도하지 않는다. 카탈로그 임베딩 생성은 개발/배포 준비 때 한 번 수행하며 사용자 게임에서 전체 카탈로그를 재임베딩하지 않는다. timeout/HTTP오류/model공간불일치는 library 분기만 종료하고 기존 신규 후보는 남긴다. 지연/요청 취소는 기존 RequestGate의 취소 토큰과 batch 지문을 사용한다.</p>
+<p>초기 DEV 측정용 한도 제안은 embedding timeout5초, library 분기 전체 대기20초다. 이는 측정된 속도가 아니라 반복 재생성을 끝내기 위한 시작값이며 실제 환경에서 조정한다. 전체 시간 예산과 최대4회 미리보기 시도 중 먼저 도달한 한도로 중단한다. Unity 객체 접근과 실제 생성은 기존 UI/Map Preview 큐에서 처리하고, 네트워크/벡터 검색으로 UI 스레드를 막지 않는다. 기존 전역 Preview timeout을 이 기능 때문에 임의 변경하지 않는다.</p>
+<p>예상 호출 구조(정상 1차, 기존 요약/형식 수정/공급자 fallback의 재시도는 별도): 기존 추천은 chat 1회, 혼합 추천은 chat 1회 + embedding 최대1회. 그러므로 V1 비교 기능만으로 총 토큰이나 비용이 줄어든다고 주장하지 않는다. 신규 후보 수 축소가 출력 토큰을 줄일 여지는 있지만 실제 측정해야 한다. 별도의 “저장소만 다시 보기”는 query embedding 캐시가 있으면 추가 chat/embedding 없이 동작하도록 설계할 수 있다.</p>
+<p>검색 query에 API key·개인 정보·대화 원문을 보관하지 않는다. 외부로 전송되는 검색 문구 범위와 공급자는 설정에서 설명하고, 캐시는 기본 세션 메모리에서 유지한다. 검색 내적 결과를 정답 확률로 광고하지 않는다.</p>
+<h2 id="section-11">12. 좋은 사례를 모으는 방법</h2>
+<p>처음부터 대량 생성하지 않고, 서로 다른 구성 20~30개를 목표로 작은 카탈로그를 만든다. 숫자보다 검증된 다양성이 우선이다. 열린 평야, 산기슭의 넓은 빈터, 굽은 강가, 작은 호숫가, 완만한 골짜기, 해안 정착지 등을 먼저 다루고, 분지/섬/협곡 같은 특별 지형은 일부로 둔다. 자연 구도와 의도적인 기하 구도를 분리해 후자가 일반 추천을 차지하지 않게 한다.</p>
+<p>등록 단계: <code>draft → 기술 검사 통과 → 미관 선정 → 이식 검사 통과 → 공개 카탈로그 편입</code>. 단순히 probe PASS가 났다고 미관 선정 상태를 올리지 않는다. 개발자가 실제 맵으로 1차 선별하고 사용자에게 모아둔 그림을 보여줘 취향에 맞는 기준을 조정한다. 매 사례마다 사용자가 반복 플레이하도록 요구하지 않는다.</p>
+<p>원본 기술 검사는 저장/불러오기 재현, 필요 Def, 의도된 지형/도로/구조물 배치, 실제 맵 생성, 생활 공간 연결, native 물 보존 범위를 포함한다. Map Preview가 보이지 않는 식물·동물·자원 등은 원본 실제 생성 기록으로 구분한다.</p>
+<p>이식 검사는 지원 profile마다 최소3개의 다른 타일/seed context에서 진행하고 그중 하나는 다른 지원 맵 크기를 사용한다. 실제 그림과 관찰 조건을 모두 기록한다. 적용했을 때 원본보다 크게 나빠지는 entry는 profile을 좁히거나 제외한다. 모든 바이옴/크기/모드 조합에 이식된다고 선언하지 않는다. 실패 표본도 등록 평가에서 숨기지 않는다.</p>
+<p>설명은 처음 요청했던 문장보다 실제 결과에 맞게 쓴다. 주요 지형의 크기/위치/연결, 물가, 빈터, 개방 방향, 생활 공간을 기술하고 KO/EN 제목을 함께 둔다. 등록 당시 실제 미관 평가와 기계 지표를 분리한다. 텍스트 임베딩에 일반적인 “아름다운 맵” 표현만 반복하지 않는다.</p>
+<p>사용자의 마음에 든 맵을 “내 구성으로 저장”하는 확장은 추후 가능하다. 개인 preset 저장과 공개 라이브러리 편입은 별개이고 자동 업로드/공개 수집은 V1에 없다.</p>
+<h2 id="section-12">13. 기존 코드와 연결할 위치</h2>
+<p>아래 기존 파일은 이번 턴에 읽은 구조를 기준으로 하며 새로운 컴포넌트는 아직 구현되지 않았다.</p>
+<p>재사용 판단의 코드 근거:</p>
+<ul>
+<li><code>dev/Source/LLM/RecommendationPlan.cs</code> §PendingInstruction: “the displayed candidates are NOT applied to the current map.” 현재 후보가 미선택 상태임을 구분하는 계약이다.</li>
+<li><code>dev/Source/UI/RecommendationPreviews.cs</code> §RecommendationPreviews 생성자: <code>snapshots.Add(new CandidatePreviewSnapshot(tileId, plan.Resolve(before), before));</code> 후보별 private 생성 상태를 만든다.</li>
+<li><code>dev/Source/MapGen/MapStateCodec.cs</code> §Serialize: <code>&quot;schema_version&quot;, 2</code> 현재 상태 export 버전이며 라이브러리 wrapper의 제안 버전1과 다르다.</li>
+<li><code>dev/Source/LLM/RecommendationQuality.cs</code> §Rejection: “A successfully drawn image is not proof that its requested placements succeeded.” 지금 구현은 placement와 의도 물 검사이므로 미관/이식 전체 검사는 새로 설계해야 한다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>기존 위치</th>
+<th>재사용 또는 최소 확장</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev/Source/UI/Dialog_TextToMap.cs</code></td>
+<td>추천 결과 조합, 출처 표시, 명확한 첫 전체 구성의 비교 분기, 취소/실패 시 신규 후보 보존</td>
+</tr>
+<tr>
+<td><code>dev/Source/LLM/RecommendationPlan.cs</code></td>
+<td>library 명령열을 Validate/Resolve/Refine 가능한 plan으로 만드는 factory, 기존 public overload 보존</td>
+</tr>
+<tr>
+<td><code>dev/Source/UI/RecommendationPreviews.cs</code></td>
+<td>현재 타일·같은 seed·private snapshot, 큐/timeout/늦은 결과 무효화 재사용</td>
+</tr>
+<tr>
+<td><code>dev/Source/Patches/CandidatePreviewContext.cs</code></td>
+<td>실제 map 관찰 조건을 캡처하는 제한된 확장, native genOrder/타일 격리 유지</td>
+</tr>
+<tr>
+<td><code>dev/Source/LLM/RecommendationQuality.cs</code></td>
+<td>library-specific 관찰 조건 판정 연결, 기존 신규 후보의 선택 규칙은 불필요하게 강화하지 않음</td>
+</tr>
+<tr>
+<td><code>dev/Source/LLM/RecommendationGuide.cs</code></td>
+<td>기존 답을 구조화 검색 조건으로 전달, 앞뒤 충돌과 특별 지형 선호 보완</td>
+</tr>
+<tr>
+<td><code>dev/Source/MapGen/MapStateCodec.cs</code></td>
+<td>원본 상태 export에 schema2 재사용, save format을 catalog에 종속시키지 않음</td>
+</tr>
+<tr>
+<td><code>dev/Source/MapGen/MapGenParams.cs</code></td>
+<td>ValidatePatches/ApplyPatches로 실제 실행, 선택/Undo 경로 재사용</td>
+</tr>
+<tr>
+<td><code>dev/Source/LLM/RequestGate.cs</code></td>
+<td>검색 취소·오래된 batch 격리 재사용</td>
+</tr>
+</tbody>
+</table>
+<p>새 기능은 <code>dev/Source/MapLibrary/</code> 아래 catalog 로더·검색·명령 변환/검사와 텍스트 embedding 클라이언트를 작게 묶는 안을 제안한다. UI 출처 메타데이터는 plan 옆의 부가 정보로 두며 기존 parser/schema와 엔진에 library ID가 필요하게 만들지 않는다. 기존 save/game schema·harness·feature generation을 이번 기능 때문에 전면 개편하지 않는다.</p>
+<h2 id="section-13">14. 구현 순서와 중단 기준</h2>
+<ol>
+<li><strong>비교 기준 마련:</strong> 좋은 구성 소수와 나쁜/부적합 사례, 사용자 실제 요청 및 synthetic 요청을 구분한 평가 세트를 만든다. 원본/이식용 자료를 수작업 검증할 수 있는 형태로 내보낸다.</li>
+<li><strong>로컬 데이터 재생:</strong> 검증한 이식 명령을 선택 전 private 후보로 재생한다. 검색 없이 현재 타일에서 선택/Undo/세이브가 기존 흐름을 유지하는지 확인한다. 여기서 실패하면 embedding 작업 전에 멈춘다.</li>
+<li><strong>검색 분리 평가:</strong> 구조 필터와 한 embedding 공간으로 질의/순위 평가를 한다. 비용/한국어·영어/금지 조건을 확인한다. 임베딩보다 단순 검색이 더 낫다면 모델/설명을 재검토하고 임베딩의 효과를 입증하기 전 우월하다고 주장하지 않는다.</li>
+<li><strong>기존 추천에 연결:</strong> 신규1+저장소최대2를 기존3칸에 조합한다. 실패/취소/재추천/후보 수정/출처 표시를 확인한다.</li>
+<li><strong>첫 직접 묘사 비교:</strong> 명확한 새 구도 요청에 한정해 기능 ON의 동작을 확장하고, 일반 부분 수정이 비교로 바뀌지 않는지 검증한다.</li>
+<li><strong>카탈로그 확대·사용자 검토:</strong> 20~30개의 서로 다른 구성 목표, 자동 캡처 HTML로 미관을 검토한다. DEV 시험 후 공개 반영 여부를 결정한다.</li>
+</ol>
+<p>추천 품질이 좋아지지 않으면 데이터/검색/이식 중 어느 단계에서 실패했는지 나눠 판정한다. 더 많은 entry나 프롬프트 길이 증가로 무조건 해결하려 하지 않는다. 원본만 예쁘고 이식이 불안정하면 지원 조건을 좁힌다. 실제 지형 표현의 문제는 생성기 쪽 개선으로 남긴다.</p>
+<h2 id="section-14">15. 검증 항목과 평가 결과 양식</h2>
+<p>아래는 앞으로 실행할 계획이며 이번 설계 작업의 테스트 결과가 아니다.</p>
+<table>
+<thead>
+<tr>
+<th>검사</th>
+<th>실패를 드러낼 변경/사례</th>
+<th>합격 기준 또는 기록</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기능 OFF 회귀</td>
+<td>신규 library 코드가 기존 처리에 끼어듦</td>
+<td>기존 응답 재생의 상태/Preview/Undo가 기준과 동일</td>
+</tr>
+<tr>
+<td>기존 모델 응답 호환</td>
+<td>library_intent 누락을 오류로 처리</td>
+<td>기존 응답도 정상 적용, 불확실한 검색만 생략</td>
+</tr>
+<tr>
+<td>보존과 부분 편집</td>
+<td>후속 “온천 추가”에 full snapshot을 적용</td>
+<td>기존 산/물/도로/ID 유지, library 네트워크 호출 없음</td>
+</tr>
+<tr>
+<td>후보 선택 격리</td>
+<td>임베딩 완료 전에 실제맵을 변경</td>
+<td>미선택 상태/Undo 불변, 선택1회 Undo1개</td>
+</tr>
+<tr>
+<td>후보 수정</td>
+<td>2번 수정이 1번/3번을 변경</td>
+<td>대상만 변경, 선택 후 기존 편집과 저장/복원 가능</td>
+</tr>
+<tr>
+<td>native 수계 보존</td>
+<td>entry가 river/coast/native feature를 제거</td>
+<td>엄격 보존 후보 제외/실패, 물 위치 오류를 원본썸네일로 숨기지 않음</td>
+</tr>
+<tr>
+<td>타일/seed 교체</td>
+<td>오래된 검색·Preview가 새 타일에 게시</td>
+<td>늦은 결과 폐기, 다른 타일 상태 불변</td>
+</tr>
+<tr>
+<td>요청의 금지/비율</td>
+<td>“새 물 없이”, “산 없이”, “70%만”</td>
+<td>지원 가능한 조건은 전부 검사, 검증 못 하는 조건은 자동 후보 제외</td>
+</tr>
+<tr>
+<td>벡터 공간 불일치</td>
+<td>dimension/model/task mapping 바꾼 index</td>
+<td>검색 중단·fallback, 기존 생성 정상</td>
+</tr>
+<tr>
+<td>API/카탈로그 실패</td>
+<td>embedding timeout/없는키/깨진팩</td>
+<td>추가 유료 자동 재시도 없이 신규 후보 사용 가능</td>
+</tr>
+<tr>
+<td>중복/재추천</td>
+<td>같은 family·resolved state만 계속 반환</td>
+<td>같은 batch 중복 제외, 재추천 소진 안내</td>
+</tr>
+<tr>
+<td>이식 품질</td>
+<td>source와 다른 타일/크기에서 무너짐</td>
+<td>지원 profile/지형 조건을 좁히거나 등록 제외</td>
+</tr>
+<tr>
+<td>새 기능 비용</td>
+<td>전체 카탈로그를 매 턴 LLM에 넣음</td>
+<td>실제 chat/embedding/repair 호출과 input/output tokens를 각각 기록</td>
+</tr>
+</tbody>
+</table>
+<p>검색 평가는 실제 요청과 합성 요청을 구분하고, 한국어/영어·부정·위치·다중 조건·기존 맵 보존·단순 추천을 포함한다. 선정자가 각 요청에 허용할 entry를 먼저 표시하고 top3 적합 후보 포함률, 필수 조건 위반, 동의어/번역 일관성, 부적합 요청의 거부, 반복 family 비율을 측정한다. 원본 entry 설명을 그대로 질의로 써 얻은 점수만 제시하지 않는다.</p>
+<p>초기 목표 제안: 명시 필수 조건 위반은 허용하지 않고, 별도 평가 요청의 top3 적합 후보 포함률80% 이상을 탐색 목표로 둔다. 데이터 규모/난이도와 함께 공개하며 달성 전 결과처럼 쓰지 않는다. 신규/검색 후보의 미관은 섞어서 출처를 숨긴 비교도 실시하고 선택률·“둘 다 별로” 비율을 기록한다. 숫자 목표 달성만으로 사용자 취향을 보장하지 않는다.</p>
+<p>비용/성능 보고는 등록1회 비용, 새로운 질의1회 비용, 재추천 캐시 비용, 로컬 검색 시간, 실제 Preview 시간, 추가 메모리/배포 크기를 구분한다. provider 사용량이 없으면 token 값은 추정으로 표시한다. 측정 전 “몇 배 절감/즉시 응답/모든 타일 자연스러움”을 주장하지 않는다.</p>
+<h2 id="section-15">16. 이번 설계의 남은 결정</h2>
+<ul>
+<li>API embedding 모델/차원은 평가 후 확정한다. 로컬 임베딩은 모델카드·라이선스·토크나이저·Unity native 의존성을 별도로 확인해야 하며 아직 채택하지 않았다. <a href="https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime">Microsoft ONNX Runtime 패키지</a>는 의존성 후보를 확인한 자료일 뿐 게임 호환 검증이 아니다.</li>
+<li>초기 지원 profile/맵 크기와 후보 검사 임계값은 실제 등록 사례로 정한다. 모든 모드·바이옴·GL 지형을 한 번에 지원하는 계획이 아니다.</li>
+<li>기본 추천의 새 동작, 첫 직접 묘사의 비교 적용, 일반판 활성화 기본값은 DEV 실제 그림/회귀/비용 결과를 보고 결정한다.</li>
+<li>이번 문서에는 실제 등록 맵·임베딩·검색 성능·완료된 런타임 기능이 없다. 설계 문서의 확인과 제품 검증을 구분한다.</li>
+</ul>
+<footer>2026-10-01 · 현재 코드 확인을 바탕으로 작성한 설계 제안입니다. 생성된 맵·실행된 embedding·검색 성능 결과는 포함하지 않습니다.</footer></main></body></html>
