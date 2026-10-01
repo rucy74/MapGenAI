@@ -1,0 +1,236 @@
+{
+  "action": "generate",
+  "params": {},
+  "water_layer": {
+    "schema_version": 1,
+    "mode": "source-composition",
+    "width": 100,
+    "height": 100,
+    "row_order": "south-first",
+    "source_biome": "TemperateForest",
+    "source_kind": "observed-permanent-terrain",
+    "runs": [
+      {
+        "start": 0,
+        "length": 404,
+        "kind": 1
+      },
+      {
+        "start": 407,
+        "length": 97,
+        "kind": 1
+      },
+      {
+        "start": 507,
+        "length": 97,
+        "kind": 1
+      },
+      {
+        "start": 607,
+        "length": 3938,
+        "kind": 1
+      },
+      {
+        "start": 4545,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 4561,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 4645,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 4661,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 4745,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 4761,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 4845,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 4861,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 4945,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 4961,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5045,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5061,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5145,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5161,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5245,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5261,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5345,
+        "length": 8,
+        "kind": 2
+      },
+      {
+        "start": 5353,
+        "length": 4,
+        "kind": 3
+      },
+      {
+        "start": 5357,
+        "length": 4,
+        "kind": 2
+      },
+      {
+        "start": 5361,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5445,
+        "length": 8,
+        "kind": 2
+      },
+      {
+        "start": 5453,
+        "length": 4,
+        "kind": 3
+      },
+      {
+        "start": 5457,
+        "length": 4,
+        "kind": 2
+      },
+      {
+        "start": 5461,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5545,
+        "length": 8,
+        "kind": 2
+      },
+      {
+        "start": 5553,
+        "length": 4,
+        "kind": 3
+      },
+      {
+        "start": 5557,
+        "length": 4,
+        "kind": 2
+      },
+      {
+        "start": 5561,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5645,
+        "length": 8,
+        "kind": 2
+      },
+      {
+        "start": 5653,
+        "length": 4,
+        "kind": 3
+      },
+      {
+        "start": 5657,
+        "length": 4,
+        "kind": 2
+      },
+      {
+        "start": 5661,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5745,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5761,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5845,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5861,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 5945,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 5961,
+        "length": 84,
+        "kind": 1
+      },
+      {
+        "start": 6045,
+        "length": 16,
+        "kind": 2
+      },
+      {
+        "start": 6061,
+        "length": 3939,
+        "kind": 1
+      }
+    ],
+    "policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched"
+  }
+}

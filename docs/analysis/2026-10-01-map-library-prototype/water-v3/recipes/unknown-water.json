@@ -1,0 +1,15 @@
+{
+  "action": "generate",
+  "params": {},
+  "water_layer": {
+    "schema_version": 1,
+    "mode": "source-composition",
+    "width": 100,
+    "height": 100,
+    "row_order": "south-first",
+    "source_biome": "TemperateForest",
+    "source_kind": "observed-permanent-terrain",
+    "runs": [],
+    "policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched"
+  }
+}

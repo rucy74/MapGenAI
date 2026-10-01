@@ -1,0 +1,57 @@
+test_default_mode_uses_its_own_colors_and_leaves_missing_unknown (test_ground.GroundTests.test_default_mode_uses_its_own_colors_and_leaves_missing_unknown) ... ok
+test_direct_ground_can_use_named_def_even_without_preview_color (test_ground.GroundTests.test_direct_ground_can_use_named_def_even_without_preview_color) ... ok
+test_ground_failure_rejects_even_when_geometry_passes (test_ground.GroundTests.test_ground_failure_rejects_even_when_geometry_passes) ... ok
+test_ground_names_survive_and_water_rock_and_unknown_stay_zero (test_ground.GroundTests.test_ground_names_survive_and_water_rock_and_unknown_stay_zero) ... ok
+test_ground_recipe_not_promoted_without_ground_evidence (test_ground.GroundTests.test_ground_recipe_not_promoted_without_ground_evidence) ... ok
+test_ground_small_fragments_omitted_without_filling_unknown_holes (test_ground.GroundTests.test_ground_small_fragments_omitted_without_filling_unknown_holes) ... ok
+test_hazardous_material_not_imported_as_dry_ground (test_ground.GroundTests.test_hazardous_material_not_imported_as_dry_ground) ... ok
+test_histogram_only_capture_cannot_claim_ground_reconstruction (test_ground.GroundTests.test_histogram_only_capture_cannot_claim_ground_reconstruction) ... ok
+test_image_keeps_south_first_orientation_and_actual_ground_name (test_ground.GroundTests.test_image_keeps_south_first_orientation_and_actual_ground_name) ... ok
+test_out_of_palette_color_is_not_forced_to_ground (test_ground.GroundTests.test_out_of_palette_color_is_not_forced_to_ground) ... ok
+test_palette_reads_all_loaded_named_materials_and_records_missing_colors (test_ground.GroundTests.test_palette_reads_all_loaded_named_materials_and_records_missing_colors) ... ok
+test_per_cell_capture_overrides_same_histogram_different_layout (test_ground.GroundTests.test_per_cell_capture_overrides_same_histogram_different_layout) ... ok
+test_same_rgb_different_ground_is_unknown_not_nearest_guess (test_ground.GroundTests.test_same_rgb_different_ground_is_unknown_not_nearest_guess) ... ok
+test_same_semantic_water_alias_does_not_create_false_ambiguity (test_ground.GroundTests.test_same_semantic_water_alias_does_not_create_false_ambiguity) ... ok
+test_supported_and_constructed_same_color_is_rejected (test_ground.GroundTests.test_supported_and_constructed_same_color_is_rejected) ... ok
+test_caches_detect_corruption_in_real_entrypoint (test_prototype.PrototypeTests.test_caches_detect_corruption_in_real_entrypoint) ... ok
+test_challenge_is_opt_in (test_prototype.PrototypeTests.test_challenge_is_opt_in) ... ok
+test_contour_export_has_hole_and_separate_depth (test_prototype.PrototypeTests.test_contour_export_has_hole_and_separate_depth) ... ok
+test_diversity_one_per_family (test_prototype.PrototypeTests.test_diversity_one_per_family) ... ok
+test_empty_or_ambiguous_image_not_claimed_as_map (test_prototype.PrototypeTests.test_empty_or_ambiguous_image_not_claimed_as_map) ... ok
+test_exact_coverage_skips_unverified (test_prototype.PrototypeTests.test_exact_coverage_skips_unverified) ... ok
+test_exact_position_skips_unverified (test_prototype.PrototypeTests.test_exact_position_skips_unverified) ... ok
+test_existing_map_not_silently_replaced (test_prototype.PrototypeTests.test_existing_map_not_silently_replaced) ... ok
+test_existing_world_road_profile_remains_with_existing_generator (test_prototype.PrototypeTests.test_existing_world_road_profile_remains_with_existing_generator) ... ok
+test_failed_native_recipe_is_quarantined (test_prototype.PrototypeTests.test_failed_native_recipe_is_quarantined) ... ok
+test_native_water_excludes_disconnected_new_water (test_prototype.PrototypeTests.test_native_water_excludes_disconnected_new_water) ... ok
+test_no_ground_or_bonus_import (test_prototype.PrototypeTests.test_no_ground_or_bonus_import) ... ok
+test_no_mount_en (test_prototype.PrototypeTests.test_no_mount_en) ... ok
+test_no_passing_profile_means_no_candidate (test_prototype.PrototypeTests.test_no_passing_profile_means_no_candidate) ... ok
+test_partial_edit_skips_library (test_prototype.PrototypeTests.test_partial_edit_skips_library) ... ok
+test_recent_exclusion (test_prototype.PrototypeTests.test_recent_exclusion) ... ok
+test_semantic_order_uses_vector_not_file_order (test_prototype.PrototypeTests.test_semantic_order_uses_vector_not_file_order) ... ok
+test_unsupported_biome (test_prototype.PrototypeTests.test_unsupported_biome) ... ok
+test_unsupported_mountains_tile (test_prototype.PrototypeTests.test_unsupported_mountains_tile) ... ok
+test_unsupported_size (test_prototype.PrototypeTests.test_unsupported_size) ... ok
+test_verified_profile_is_exact_not_cartesian_product (test_prototype.PrototypeTests.test_verified_profile_is_exact_not_cartesian_product) ... ok
+test_water_forbidden_overrules_best_vector (test_prototype.PrototypeTests.test_water_forbidden_overrules_best_vector) ... ok
+test_actual_source_pond_position_mismatch_cannot_be_hidden_by_native_pond_union (test_water.WaterTests.test_actual_source_pond_position_mismatch_cannot_be_hidden_by_native_pond_union) ... ok
+test_image_unknown_is_preserved_and_confident_dry_does_not_fill_holes (test_water.WaterTests.test_image_unknown_is_preserved_and_confident_dry_does_not_fill_holes) ... ok
+test_invalid_mode_overlap_bounds_and_material_rejected (test_water.WaterTests.test_invalid_mode_overlap_bounds_and_material_rejected) ... ok
+test_old_histogram_does_not_claim_water_coordinates (test_water.WaterTests.test_old_histogram_does_not_claim_water_coordinates) ... ok
+test_river_sea_and_unknown_do_not_clear_but_observed_dry_floor_proves_dry_space (test_water.WaterTests.test_river_sea_and_unknown_do_not_clear_but_observed_dry_floor_proves_dry_space) ... ok
+test_small_pool_and_depth_are_not_discarded_by_polygon_fragment_budget (test_water.WaterTests.test_small_pool_and_depth_are_not_discarded_by_polygon_fragment_budget) ... ok
+test_source_layout_admission_does_not_require_intentionally_removed_native_ponds (test_water.WaterTests.test_source_layout_admission_does_not_require_intentionally_removed_native_ponds) ... ok
+test_water_recipe_requires_actual_water_evidence_and_rejects_conflicts (test_water.WaterTests.test_water_recipe_requires_actual_water_evidence_and_rejects_conflicts) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 0.835s
+
+OK
+{"available": [], "quarantined": ["dry"]}
+{"available": ["dry"], "quarantined": []}
+{"available": [], "quarantined": ["dry"]}
+{"passed": 1, "failed": 0, "rows": [{"run": "native", "id": "valley", "pass": true, "reasons": []}]}
+{"available": [], "quarantined": ["valley"]}
+{"available": [], "quarantined": ["valley"]}
+{"available": ["valley"], "quarantined": []}

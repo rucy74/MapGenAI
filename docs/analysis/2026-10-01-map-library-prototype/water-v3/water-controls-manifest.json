@@ -1,0 +1,17 @@
+{
+  "world_seed": "map-library-water-controls-20261001",
+  "cases": [
+    {
+      "id": "water-guard",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/water-guard.json"
+    },
+    {
+      "id": "unknown-water",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/unknown-water.json"
+    }
+  ]
+}

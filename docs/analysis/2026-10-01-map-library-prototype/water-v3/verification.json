@@ -1,0 +1,159 @@
+{
+  "utc": "2026-10-01T10:19:46.859208+00:00",
+  "unit_tests": 45,
+  "native_checks": 308,
+  "fresh_generated_maps_including_baselines": 58,
+  "reused_original_gl_maps": 6,
+  "source_reuse_files": 20,
+  "water_layouts": 21,
+  "passing_water_layouts": 21,
+  "local_index_shape": [
+    9,
+    384
+  ],
+  "local_index_matches_catalog": true,
+  "positive_controls": [
+    {
+      "id": "water-guard",
+      "run": "water-controls-native-r1",
+      "pass": true,
+      "added_water_cells": 252,
+      "cleared_ordinary_pond_cells": 560,
+      "depth_changed_cells": 1,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 9,
+      "protected_changes": 0,
+      "unknown_cells": 9,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 6,
+      "protection_kinds": {
+        "river": 1,
+        "sea": 1,
+        "special_water": 1,
+        "connected_water": 3,
+        "road": 1,
+        "floor": 2,
+        "building": 1
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection",
+      "unknown_fixture_preserved": true
+    },
+    {
+      "id": "unknown-water",
+      "run": "water-controls-native-r1",
+      "pass": true,
+      "added_water_cells": 0,
+      "cleared_ordinary_pond_cells": 0,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 10000,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection",
+      "native_terrain_identical": true,
+      "native_png_identical": true
+    }
+  ],
+  "small_pool_examples": [
+    {
+      "id": "gl-valley",
+      "previously_omitted_small_pool_cells": 19,
+      "all_source_pool_cells_in_water_layer": true
+    },
+    {
+      "id": "gl-cliff",
+      "previously_omitted_small_pool_cells": 123,
+      "all_source_pool_cells_in_water_layer": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "previously_omitted_small_pool_cells": 54,
+      "all_source_pool_cells_in_water_layer": true
+    }
+  ],
+  "ground_applications": 21,
+  "geometry_passed": 27,
+  "geometry_cases": 27,
+  "available_catalog_entries": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "gl-oasis",
+    "image-lake",
+    "core-foothills",
+    "core-dry-clearing"
+  ],
+  "quarantined_entries": [],
+  "passing_water_iou_range": [
+    0.9883495145631068,
+    1.0
+  ],
+  "legacy_controls": [
+    {
+      "run": "transfer-a-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    }
+  ],
+  "product_dll_hashes": {
+    "sourceDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "installedDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "dist": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5",
+    "installedGeneral": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5"
+  },
+  "product_sources_unchanged": true,
+  "paid_api_calls": 0,
+  "html_images": 23,
+  "html_rendered_in_browser": false,
+  "archived_runs": [
+    "transfer-a-native-r2",
+    "transfer-b-native-r2",
+    "transfer-c-native-r2",
+    "water-controls-native-r1"
+  ],
+  "scope": "Developer complete inland composition; native protected conflicts cause quarantine. Not procedural GL conversion, UI integration, release or aesthetic approval."
+}

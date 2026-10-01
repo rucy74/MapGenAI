@@ -1,0 +1,1426 @@
+{
+  "records": [
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 0,
+      "counts": {
+        "mountain": 4970,
+        "water": 2479,
+        "shallow": 5642,
+        "ground": 49409
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 748,
+          "actual_cells": 4970,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.1505030181086519,
+          "iou": 0.1505030181086519
+        },
+        "wet_footprint": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 9608,
+          "actual_cells": 8121,
+          "recall": 0.845233139050791,
+          "recall_within_2_cells": 0.8512697751873439,
+          "precision": 1.0,
+          "iou": 0.845233139050791
+        },
+        "deep_core": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 54379,
+          "actual_cells": 54379,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 20,
+      "counts": {
+        "mountain": 31741,
+        "water": 0,
+        "shallow": 635,
+        "ground": 30124
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 28628,
+          "actual_cells": 31741,
+          "recall": 0.9893810255693727,
+          "recall_within_2_cells": 0.9946905127846863,
+          "precision": 0.8923474370687754,
+          "iou": 0.8838820408800124
+        },
+        "wet_footprint": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 1483,
+          "actual_cells": 635,
+          "recall": 0.428186109238031,
+          "recall_within_2_cells": 0.428186109238031,
+          "precision": 1.0,
+          "iou": 0.428186109238031
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 61865,
+          "actual_cells": 61865,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 22,
+      "counts": {
+        "mountain": 10773,
+        "water": 0,
+        "shallow": 1239,
+        "ground": 50488
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 9186,
+          "actual_cells": 10773,
+          "recall": 0.9565643370346179,
+          "recall_within_2_cells": 0.9712606139777923,
+          "precision": 0.8156502367028683,
+          "iou": 0.7865198711063373
+        },
+        "wet_footprint": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 2683,
+          "actual_cells": 1239,
+          "recall": 0.46179649645918747,
+          "recall_within_2_cells": 0.46179649645918747,
+          "precision": 1.0,
+          "iou": 0.46179649645918747
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 61261,
+          "actual_cells": 61261,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 23,
+      "counts": {
+        "mountain": 18978,
+        "water": 0,
+        "shallow": 123,
+        "ground": 43399
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 15852,
+          "actual_cells": 18978,
+          "recall": 0.9962780721675498,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.8321740963220571,
+          "iou": 0.8295949992120607
+        },
+        "wet_footprint": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 1553,
+          "actual_cells": 123,
+          "recall": 0.07920154539600772,
+          "recall_within_2_cells": 0.07920154539600772,
+          "precision": 1.0,
+          "iou": 0.07920154539600772
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 62377,
+          "actual_cells": 62377,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 24,
+      "counts": {
+        "mountain": 511,
+        "water": 13525,
+        "shallow": 40121,
+        "ground": 8343
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 53646,
+          "actual_cells": 53646,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 53647,
+          "actual_cells": 53646,
+          "recall": 0.9999813596286838,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 0.9999813596286838
+        },
+        "deep_core": {
+          "expected_cells": 13525,
+          "actual_cells": 13525,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 8854,
+          "actual_cells": 8854,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 40121,
+          "actual_cells": 40121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "tile": 40,
+      "counts": {
+        "mountain": 5098,
+        "water": 0,
+        "shallow": 319,
+        "ground": 57083
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 1625,
+          "actual_cells": 5098,
+          "recall": 0.9975384615384615,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.31796783052177324,
+          "iou": 0.31771854174833397
+        },
+        "wet_footprint": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 62181,
+          "actual_cells": 62181,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "image-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 43,
+      "counts": {
+        "mountain": 2364,
+        "water": 2479,
+        "shallow": 5642,
+        "ground": 52015
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 9031,
+          "actual_cells": 8121,
+          "recall": 0.899235965009412,
+          "recall_within_2_cells": 0.899235965009412,
+          "precision": 1.0,
+          "iou": 0.899235965009412
+        },
+        "deep_core": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 54379,
+          "actual_cells": 54379,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "core-foothills",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 55,
+      "counts": {
+        "mountain": 15742,
+        "water": 0,
+        "shallow": 1619,
+        "ground": 45139
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-a-native-r2",
+      "id": "core-dry-clearing",
+      "biome": "TemperateForest",
+      "size": 250,
+      "tile": 57,
+      "counts": {
+        "mountain": 2849,
+        "water": 0,
+        "shallow": 1167,
+        "ground": 58484
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 0,
+      "counts": {
+        "mountain": 5649,
+        "water": 3579,
+        "shallow": 8128,
+        "ground": 72644
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 1090,
+          "actual_cells": 5649,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.1929545052221632,
+          "iou": 0.1929545052221632
+        },
+        "wet_footprint": {
+          "expected_cells": 11707,
+          "actual_cells": 11707,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 12625,
+          "actual_cells": 11707,
+          "recall": 0.9272871287128713,
+          "recall_within_2_cells": 0.9272871287128713,
+          "precision": 1.0,
+          "iou": 0.9272871287128713
+        },
+        "deep_core": {
+          "expected_cells": 3579,
+          "actual_cells": 3579,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 78293,
+          "actual_cells": 78293,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 8128,
+          "actual_cells": 8128,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 4,
+      "counts": {
+        "mountain": 46891,
+        "water": 0,
+        "shallow": 914,
+        "ground": 42195
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 41202,
+          "actual_cells": 46891,
+          "recall": 0.998203970681035,
+          "recall_within_2_cells": 0.9999757293335275,
+          "precision": 0.8770979505662068,
+          "iou": 0.8757159586926434
+        },
+        "wet_footprint": {
+          "expected_cells": 914,
+          "actual_cells": 914,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 2401,
+          "actual_cells": 914,
+          "recall": 0.3806747188671387,
+          "recall_within_2_cells": 0.3806747188671387,
+          "precision": 1.0,
+          "iou": 0.3806747188671387
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 89086,
+          "actual_cells": 89086,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 914,
+          "actual_cells": 914,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 13,
+      "counts": {
+        "mountain": 17986,
+        "water": 0,
+        "shallow": 1768,
+        "ground": 70246
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 13243,
+          "actual_cells": 17986,
+          "recall": 0.9869364947519444,
+          "recall_within_2_cells": 0.9891263308917919,
+          "precision": 0.7266763037918381,
+          "iou": 0.7197532903794261
+        },
+        "wet_footprint": {
+          "expected_cells": 1768,
+          "actual_cells": 1768,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 3670,
+          "actual_cells": 1768,
+          "recall": 0.4817438692098093,
+          "recall_within_2_cells": 0.4817438692098093,
+          "precision": 1.0,
+          "iou": 0.4817438692098093
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 88232,
+          "actual_cells": 88232,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 1768,
+          "actual_cells": 1768,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 20,
+      "counts": {
+        "mountain": 26383,
+        "water": 0,
+        "shallow": 174,
+        "ground": 63443
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 22915,
+          "actual_cells": 26383,
+          "recall": 0.9726816495745145,
+          "recall_within_2_cells": 0.9879991272092515,
+          "precision": 0.8448243186900656,
+          "iou": 0.8252434373727277
+        },
+        "wet_footprint": {
+          "expected_cells": 174,
+          "actual_cells": 174,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 960,
+          "actual_cells": 174,
+          "recall": 0.18125,
+          "recall_within_2_cells": 0.18125,
+          "precision": 1.0,
+          "iou": 0.18125
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 89826,
+          "actual_cells": 89826,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 174,
+          "actual_cells": 174,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 21,
+      "counts": {
+        "mountain": 770,
+        "water": 19602,
+        "shallow": 57677,
+        "ground": 11951
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 77279,
+          "actual_cells": 77279,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 77296,
+          "actual_cells": 77279,
+          "recall": 0.9997800662388739,
+          "recall_within_2_cells": 0.9999094390395363,
+          "precision": 1.0,
+          "iou": 0.9997800662388739
+        },
+        "deep_core": {
+          "expected_cells": 19602,
+          "actual_cells": 19602,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 12721,
+          "actual_cells": 12721,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 57677,
+          "actual_cells": 57677,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 300,
+      "tile": 2,
+      "counts": {
+        "mountain": 6049,
+        "water": 0,
+        "shallow": 461,
+        "ground": 83490
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 2358,
+          "actual_cells": 6049,
+          "recall": 0.9995759117896522,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.389651182013556,
+          "iou": 0.38958677685950416
+        },
+        "wet_footprint": {
+          "expected_cells": 461,
+          "actual_cells": 461,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 461,
+          "actual_cells": 461,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 89539,
+          "actual_cells": 89539,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 461,
+          "actual_cells": 461,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "image-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 22,
+      "counts": {
+        "mountain": 3056,
+        "water": 3579,
+        "shallow": 8266,
+        "ground": 75099
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 11707,
+          "actual_cells": 11845,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.9883495145631068,
+          "iou": 0.9883495145631068
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 13128,
+          "actual_cells": 11845,
+          "recall": 0.9022699573430835,
+          "recall_within_2_cells": 0.9162096282754418,
+          "precision": 1.0,
+          "iou": 0.9022699573430835
+        },
+        "deep_core": {
+          "expected_cells": 3579,
+          "actual_cells": 3579,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 78293,
+          "actual_cells": 78155,
+          "recall": 0.9982373903158648,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 0.9982373903158648
+        },
+        "shallow_layout": {
+          "expected_cells": 8128,
+          "actual_cells": 8266,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.9833051052504235,
+          "iou": 0.9833051052504235
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "core-foothills",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 24,
+      "counts": {
+        "mountain": 23372,
+        "water": 0,
+        "shallow": 585,
+        "ground": 66043
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-b-native-r2",
+      "id": "core-dry-clearing",
+      "biome": "TemperateForest",
+      "size": 300,
+      "tile": 36,
+      "counts": {
+        "mountain": 3404,
+        "water": 0,
+        "shallow": 1170,
+        "ground": 85426
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 49,
+      "counts": {
+        "mountain": 2605,
+        "water": 2479,
+        "shallow": 5642,
+        "ground": 51774
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 748,
+          "actual_cells": 2605,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.2871401151631478,
+          "iou": 0.2871401151631478
+        },
+        "wet_footprint": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 54379,
+          "actual_cells": 54379,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 143,
+      "counts": {
+        "mountain": 31817,
+        "water": 0,
+        "shallow": 635,
+        "ground": 30048
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 28628,
+          "actual_cells": 31817,
+          "recall": 0.998323319826743,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.8982619354433165,
+          "iou": 0.8969088341440452
+        },
+        "wet_footprint": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 61865,
+          "actual_cells": 61865,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-lone-mountain",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 230,
+      "counts": {
+        "mountain": 13185,
+        "water": 0,
+        "shallow": 1239,
+        "ground": 48076
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 9186,
+          "actual_cells": 13185,
+          "recall": 0.9671238841715655,
+          "recall_within_2_cells": 0.9846505551926845,
+          "precision": 0.6737959802806219,
+          "iou": 0.6587083858530437
+        },
+        "wet_footprint": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 61261,
+          "actual_cells": 61261,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-cliff",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 231,
+      "counts": {
+        "mountain": 20469,
+        "water": 0,
+        "shallow": 123,
+        "ground": 41908
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 15852,
+          "actual_cells": 20469,
+          "recall": 0.9959626545546303,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.7713127167912452,
+          "iou": 0.768908586178347
+        },
+        "wet_footprint": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 62377,
+          "actual_cells": 62377,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-archipelago",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 232,
+      "counts": {
+        "mountain": 87,
+        "water": 13525,
+        "shallow": 40121,
+        "ground": 8767
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 53646,
+          "actual_cells": 53646,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 53646,
+          "actual_cells": 53646,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": {
+          "expected_cells": 13525,
+          "actual_cells": 13525,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 8854,
+          "actual_cells": 8854,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 40121,
+          "actual_cells": 40121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "tile": 0,
+      "counts": {
+        "mountain": 3472,
+        "water": 0,
+        "shallow": 319,
+        "ground": 58709
+      },
+      "metrics": {
+        "mountains": {
+          "expected_cells": 1625,
+          "actual_cells": 3472,
+          "recall": 0.9981538461538462,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.4671658986175115,
+          "iou": 0.4667625899280576
+        },
+        "wet_footprint": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": null,
+        "dry_land": {
+          "expected_cells": 62181,
+          "actual_cells": 62181,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "image-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 234,
+      "counts": {
+        "mountain": 2982,
+        "water": 2479,
+        "shallow": 5642,
+        "ground": 51397
+      },
+      "metrics": {
+        "wet_footprint": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet_with_native_baseline": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep_core": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "dry_land": {
+          "expected_cells": 54379,
+          "actual_cells": 54379,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "shallow_layout": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": true,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "core-foothills",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 238,
+      "counts": {
+        "mountain": 17426,
+        "water": 0,
+        "shallow": 0,
+        "ground": 45074
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    },
+    {
+      "run": "transfer-c-native-r2",
+      "id": "core-dry-clearing",
+      "biome": "AridShrubland",
+      "size": 250,
+      "tile": 386,
+      "counts": {
+        "mountain": 2677,
+        "water": 0,
+        "shallow": 0,
+        "ground": 59823
+      },
+      "metrics": {},
+      "geometry_pass": true,
+      "reasons": [],
+      "source_comparison": false,
+      "native_authoring_report_present": false,
+      "scope": "Sampled silhouette/depth transfer; unrelated native ground preserved. Not aesthetic approval."
+    }
+  ],
+  "checks": 27,
+  "passed": 27,
+  "failed": 0,
+  "source_comparison_cases": 21,
+  "source_comparison_passed": 21,
+  "execution_only_controls": 6,
+  "protocol": "Source water sidecar: all observed pools/depths, direct source IoU >=0.98 and no protected conflicts; native pond union is diagnostic only. Legacy polygons: two-cell recall >=0.85; water union paired baseline IoU >=0.80. Permanent terrain below seasonal ice. No beauty claim.",
+  "no_source_reference": [
+    "core-foothills",
+    "core-dry-clearing"
+  ],
+  "paid_api_calls": 0
+}

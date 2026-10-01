@@ -1,0 +1,87 @@
+{
+  "original": "../ground-v2/source-native-final",
+  "source_commit": "5cada7f",
+  "policy": "Previously generated actual GL references, byte-for-byte reused; not new source generation",
+  "files": [
+    {
+      "name": "gl-archipelago-map-default.png",
+      "sha256": "c194ab0b4271e189bc8686d13d90c42f3ebf789e1e242e4705d662023780e606"
+    },
+    {
+      "name": "gl-archipelago-map.png",
+      "sha256": "f32bb4aa8f79926543cd0d6aaf04961601e3de0707c6d45e570d2e78894a3f28"
+    },
+    {
+      "name": "gl-archipelago-terrain.json",
+      "sha256": "d7d594c03c5204ddfb7caa4a8068e476f09fc4c78e3cfb75aad529960cd7f2a5"
+    },
+    {
+      "name": "gl-cliff-map-default.png",
+      "sha256": "fec80af0a54771b37bf9c551c914b732c72e999ac290b9e42763635f11f2c3fb"
+    },
+    {
+      "name": "gl-cliff-map.png",
+      "sha256": "24fa5f45e7ba703a15097289bd3e117ba76d52fa4a5a57def67aab857a628bcb"
+    },
+    {
+      "name": "gl-cliff-terrain.json",
+      "sha256": "a1543631dc32a8894f2212acd4392076f1a711977a2a5e962ae24754992b1ba8"
+    },
+    {
+      "name": "gl-lake-map-default.png",
+      "sha256": "a30e5a6993e9b89ae1a47b813c83b2372e580148c56ebdfb6ec9a57bfe7b0217"
+    },
+    {
+      "name": "gl-lake-map.png",
+      "sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5"
+    },
+    {
+      "name": "gl-lake-terrain.json",
+      "sha256": "d2fadc5556a4ed72e379dc06e3df6338bd4896f04dcabed02915f9e407092c43"
+    },
+    {
+      "name": "gl-lone-mountain-map-default.png",
+      "sha256": "4106d1c7e1521c0bc7e50b68b66ab5da614dcb0a82a9add8df09a30645af975a"
+    },
+    {
+      "name": "gl-lone-mountain-map.png",
+      "sha256": "18e5e557e34451a6203c2bd6ff35951219a3f485f71e6ac1be5e06062adb8921"
+    },
+    {
+      "name": "gl-lone-mountain-terrain.json",
+      "sha256": "9184cf1f13768f82aff040bf0833250a67532a389e3da0fdcea651aefbcf5d75"
+    },
+    {
+      "name": "gl-oasis-map-default.png",
+      "sha256": "89a29274a852c4870810d56cb3316eeff2d036ecaba085a8539158e70fa69ce2"
+    },
+    {
+      "name": "gl-oasis-map.png",
+      "sha256": "8ef5a549ddc655f4e0775b394075cdf4692b11ceeee80ecfd274a0b29bec1397"
+    },
+    {
+      "name": "gl-oasis-terrain.json",
+      "sha256": "d56c29e326635831fde45b2de82ff1f1b6815aadb8b55a6a8f8048e022e4a47d"
+    },
+    {
+      "name": "gl-valley-map-default.png",
+      "sha256": "1dd65c3cdb5694ffe3eb3d14a1457dd009a2cc9e1ccdefe92c6e2e13c46c45a3"
+    },
+    {
+      "name": "gl-valley-map.png",
+      "sha256": "ebb98e8bc2b7dfed1e784c3ca14d58529a50d6878e15d6effeeb686a418b15bf"
+    },
+    {
+      "name": "gl-valley-terrain.json",
+      "sha256": "c3833e910cbe0d01dc60af7ae52bf4dc1ebdaa8999047b9a1513f46bba424d94"
+    },
+    {
+      "name": "native-terrain-palette.json",
+      "sha256": "d541bcb8c15b2d1a4422ccf82084d3542bce79778456d3caad70bf866da4e026"
+    },
+    {
+      "name": "result.json",
+      "sha256": "fa5c1bc70a401f9bfdbc7f528103e90968f0a781318280143801ea6408becaf9"
+    }
+  ]
+}

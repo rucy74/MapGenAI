@@ -1,0 +1,36 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "library_clearing",
+          "type": "composite",
+          "details": "natural",
+          "edge_roughness": "medium",
+          "shapes": [
+            {
+              "id": "plain",
+              "prim": "ellipse",
+              "center": [
+                0.52,
+                0.48
+              ],
+              "w": 0.3,
+              "h": 0.26
+            }
+          ],
+          "compose": [
+            {
+              "op": "add",
+              "s": "plain",
+              "e": 0.05,
+              "f": 0.008
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

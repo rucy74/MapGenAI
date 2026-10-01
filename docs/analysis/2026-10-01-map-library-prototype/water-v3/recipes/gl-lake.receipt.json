@@ -1,0 +1,131 @@
+{
+  "method": "observed-terrain",
+  "source_sha256": "d2fadc5556a4ed72e379dc06e3df6338bd4896f04dcabed02915f9e407092c43",
+  "row_order": "south-first",
+  "loss": {
+    "M": {
+      "input_cells": 1191,
+      "omitted_small_cells": 443,
+      "components": 3
+    },
+    "S": {
+      "input_cells": 8140,
+      "omitted_small_cells": 101,
+      "components": 3
+    },
+    "W": {
+      "input_cells": 2479,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 7,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 51630,
+  "ground_materials": [
+    {
+      "def": "Gravel",
+      "role": "gravel"
+    },
+    {
+      "def": "Mud",
+      "role": "mud"
+    },
+    {
+      "def": "Sand",
+      "role": "sand"
+    },
+    {
+      "def": "Sandstone_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Slate_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 4302,
+  "omitted_ground": {
+    "AncientConcrete": {
+      "cells": 167,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneGranite": {
+      "cells": 7,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneLimestone": {
+      "cells": 137,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSandstone": {
+      "cells": 174,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSlate": {
+      "cells": 202,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "Gravel": {
+      "cells": 197,
+      "reason": "Tiny components"
+    },
+    "Mud": {
+      "cells": 28,
+      "reason": "Tiny components"
+    },
+    "Sand": {
+      "cells": 14,
+      "reason": "Tiny components"
+    },
+    "Sandstone_Rough": {
+      "cells": 78,
+      "reason": "Tiny components"
+    },
+    "Slate_Rough": {
+      "cells": 15,
+      "reason": "Tiny components"
+    },
+    "Soil": {
+      "cells": 118,
+      "reason": "Tiny components"
+    },
+    "SoilRich": {
+      "cells": 187,
+      "reason": "Tiny components"
+    },
+    "TileGranite": {
+      "cells": 41,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "TileMarble": {
+      "cells": 17,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "TileSandstone": {
+      "cells": 75,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "TileSlate": {
+      "cells": 149,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    }
+  },
+  "runtime_contract": "Developer ground sidecar; not yet serialized by product TileMapState",
+  "source_water_cells": 8121,
+  "known_dry_cells": 54379,
+  "unclassified_water_scope_cells": 0,
+  "water_runs": 567,
+  "water_fragment_omissions": 0,
+  "water_policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched"
+}
