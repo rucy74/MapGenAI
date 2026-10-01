@@ -38,6 +38,7 @@ $ProductDll=(Resolve-Path -LiteralPath $ProductDll).Path
 if((Get-FileHash -LiteralPath $ProductDll -Algorithm SHA256).Hash -ne '6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6'){throw 'Unexpected DEV baseline DLL; review before running'}
 $probeDll=Join-Path $PSScriptRoot 'bin/Debug/net472/MapGenAI.MapLibraryProbe.dll'
 if(-not(Test-Path -LiteralPath $probeDll)){throw 'Build PrototypeProbe.csproj first'}
+if((Get-Item -LiteralPath (Join-Path $PSScriptRoot 'Probe.cs')).LastWriteTimeUtc -gt (Get-Item -LiteralPath $probeDll).LastWriteTimeUtc){throw 'Probe source is newer than DLL; complete a successful build before launching'}
 $stamp=Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 $profile=Join-Path $profileRoot $stamp
 $mod=Join-Path $runtimeRoot ('Mods/MapGenAI_Probe_library_'+$stamp)

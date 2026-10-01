@@ -7,6 +7,7 @@ import argparse, hashlib, json, pathlib
 import numpy as np
 from PIL import Image
 from skimage import measure, morphology
+from ground import read_image_materials
 
 def read_terrain(path):
     data=json.loads(path.read_text(encoding='utf-8'))
@@ -14,15 +15,8 @@ def read_terrain(path):
     return cells, {'method':'observed-terrain','source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'row_order':'south-first'}
 
 def read_image(path,palette_path):
-    image=np.asarray(Image.open(path).convert('RGB'))[::-1].astype(float)
-    palette=json.loads(palette_path.read_text(encoding='utf-8'))
-    rgb=np.array([x['rgb'] for x in palette['colors']]); labels=np.array([x['label'] for x in palette['colors']])
-    distances=np.sum((image[:,:,None,:]-rgb[None,None,:,:])**2,axis=-1)
-    nearest=np.argmin(distances,axis=-1)
-    cells=labels[nearest]; distance=np.sqrt(np.min(distances,axis=-1))
-    uncertain=distance>palette.get('max_distance',38)
-    cells[uncertain]='N'
-    return cells,{'method':'image-palette-contours','source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'palette_sha256':hashlib.sha256(palette_path.read_bytes()).hexdigest(),'unknown_fraction':float(np.mean(uncertain)),'note':'Known minimap palette only; screenshots with labels/UI, photos and arbitrary palettes require manual interpretation or a future vision adapter.'}
+    cells,_,receipt=read_image_materials(path,palette_path)
+    return cells,receipt
 
 def polygon(contour,height,width):
     # Border sampling uses half cells outside the map. Clamp and then remove

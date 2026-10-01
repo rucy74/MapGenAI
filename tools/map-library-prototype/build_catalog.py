@@ -3,6 +3,7 @@ import argparse, collections, hashlib, json, pathlib
 import numpy as np
 from PIL import Image
 from contours import read_terrain, read_image, export
+from ground import observed_ground, ground_layer, image_palette, read_image_materials
 
 NAMES={
  'gl-lake':('불규칙한 호숫가','Irregular lakeside','lake','구불구불한 호숫가와 넓게 이어지는 정착 공간.','An irregular lake shoreline with broad connected settlement ground.'),
@@ -21,13 +22,18 @@ def build(folder,source):
     if not result['ok'] or len(result['results'])!=6: raise ValueError('Complete six-scene GL capture required')
     inventory=json.loads((folder/'gl-inventory.json').read_text(encoding='utf-8'))['items']; original={e['id']:e for e in inventory}
     entries=[];excluded=[];receipt=[]
+    native_path=source/'native-terrain-palette.json'
+    native=json.loads(native_path.read_text(encoding='utf-8')) if native_path.exists() else None
     for scene in result['results']:
         ident=scene['id']; title,en_title,family,ko,en=NAMES[ident]
         cells,origin=read_terrain(source/(ident+'-terrain.json'))
         data=json.loads((source/(ident+'-terrain.json')).read_text(encoding='utf-8'))
-        fertile=np.array(list(data['fertile_cells'])).reshape(cells.shape) if ident=='gl-oasis' else None
+        fertile=np.array(list(data['fertile_cells'])).reshape(cells.shape) if ident=='gl-oasis' and native is None else None
         try:
             command,loss=export(cells,ident.replace('-','_'),water=ident in ('gl-lake','gl-oasis','gl-archipelago'),fertile_cells=fertile)
+            if native is not None:
+                layer,ground_loss=observed_ground(source/(ident+'-terrain.json'),cells,native)
+                command['ground_layer']=layer;loss.update(ground_loss)
         except ValueError as error:
             excluded.append({'id':ident,'reason':str(error),'source_retained':True});continue
         path=folder/'recipes'/(ident+'.json');write(path,command);write(path.with_suffix('.receipt.json'),{**origin,**loss})
@@ -42,7 +48,8 @@ def build(folder,source):
                          'reference_run':source.relative_to(folder).as_posix(),'reference_id':ident,'source_settings':{'gl_id':scene['gl_id'],'map_size':scene['size'],'world_seed':scene['world_seed'],'tile':scene['tile'],'biome':scene['biome'],'mutators':scene['mutators']}},
                'limitations':['Sampled geometry, not a procedural GL graph conversion','Caves, roofs, incidents, resources and spawn logic are not transplanted','Visual approval pending; technical execution alone is not beauty']}
         entries.append(entry);receipt.append({'id':ident,**loss})
-    # Palette calibration uses other scenes, never the held-out lake's labels.
+    # Legacy captures use other scenes for calibration. V2 captures read the
+    # renderer's loaded color dictionary without using the held-out labels.
     palette=[]
     for ident in ('gl-valley','gl-archipelago'):
         cells,_=read_terrain(source/(ident+'-terrain.json'))
@@ -52,23 +59,30 @@ def build(folder,source):
             for color,count in colors.most_common(3):
                 if count>=50:palette.append({'label':label,'rgb':list(color),'calibration_scene':ident})
     palette_path=folder/'minimap-palette.json';write(palette_path,{'colors':palette,'max_distance':38,'protocol':'Native Map Preview colors, calibrated on valley/archipelago; lake held out'})
-    cells,image_origin=read_image(source/'gl-lake-map.png',palette_path)
+    if native is not None:write(palette_path,image_palette(native))
+    cells,ground_names,image_origin=read_image_materials(source/'gl-lake-map.png',palette_path)
     # Brown ground, rough rock and shadows are ambiguous in a palette alone.
     # Keep this fallback to water silhouette/depth; never invent mountains from
     # uncertain brown pixels. Original game rocks remain on the target tile.
     image_command,image_loss=export(cells,'image_lake',mountains=False)
+    if native is not None:
+        layer,ground_loss=ground_layer(ground_names,cells,native,'TemperateForest')
+        image_command['ground_layer']=layer;image_loss.update(ground_loss)
     write(folder/'recipes/image-lake.json',image_command);write(folder/'recipes/image-lake.receipt.json',{**image_origin,**image_loss})
     truth,_=read_terrain(source/'gl-lake-terrain.json')
     per_label={label:{'predicted_cells':int((cells==label).sum()),'actual_cells':int((truth==label).sum()),
         'precision':float(((cells==label)&(truth==label)).sum()/max(1,(cells==label).sum())),
         'recall':float(((cells==label)&(truth==label)).sum()/max(1,(truth==label).sum()))} for label in ('M','S','W','G')}
     write(folder/'image-evaluation.json',{'input':'source-final/gl-lake-map.png','calibration':['gl-valley','gl-archipelago'],'held_out':'gl-lake','pixel_label_accuracy':float(np.mean(cells==truth)),
-         'per_label':per_label,'exported_features':['shallow footprint','deep cores'],'rocks_exported':False,**image_origin,**image_loss,'scope':'Known native minimap palette water contours only; not general vision, no API model used'})
+         'per_label':per_label,'exported_features':['shallow footprint','deep cores']+(['confident named ground'] if native else []),'rocks_exported':False,**image_origin,**image_loss,'scope':'Known native minimap palette; ambiguous pixels omitted, no general vision or API model used'})
     base=next(e for e in entries if e['id']=='gl-lake')
     image_entry=json.loads(json.dumps(base));image_entry.update({'id':'image-lake','title_ko':'이미지에서 읽은 호숫가','title_en':'Lakeside from an image','command':'recipes/image-lake.json'})
     image_entry['source']['kind']='Image palette and contour fallback';image_entry['limitations'].append('Known minimap palette only, unknown colors preserved as unclassified')
     image_entry['features']['new_mountains']=False
     image_entry['limitations'].append('Water contours only; ambiguous rock/ground/shadow colors are not transplanted')
+    if native is not None:
+        image_entry['limitations'][-1]='Water and confident named ground only; ambiguous pixels preserved'
+        for e in entries+[image_entry]:e['limitations'].append('Ground sidecar runs only in developer probe; product state/UI does not apply it yet')
     entries.append(image_entry)
     own=[('core-foothills','완만한 산기슭의 넓은 평지','Gentle foothill plain','foothills','큰 산기슭 옆에 이어진 넓은 평지. 새 물을 넣지 않는다.','Broad connected ground beside gentle foothills, with no new water.',
           {'shape_ops':[{'op':'add','shape':{'id':'library_foothills','type':'landform','landform':'foothills','layout':'organic','details':'natural','variant':'257','position':'top','size':'0.62','direction':'0'}}]}),
@@ -80,8 +94,13 @@ def build(folder,source):
                         'profiles':{'biomes':['TemperateForest','AridShrubland','Desert'],'map_sizes':[250,300],'hilliness':['Flat']},
                         'features':{'new_water':False,'new_mountains':ident=='core-foothills','global_density_edits':False},
                         'source':{'kind':'MapGenAI existing native generator','author':'MapGenAI','license':'Project original authoring','reference_id':ident},'limitations':['Visual approval pending','Modest local clearing can be a small change on an already flat tile']})
-    write(folder/'catalog.json',{'schema_version':1,'purpose':'Developer prototype, not a distributed preset pack','entries':entries,'excluded':excluded,'reference_source_graphs':44,'paid_api_calls':0})
-    write(folder/'conversion-receipt.json',{'entries':receipt,'excluded':excluded,'ground_policy':'Native biome ground preserved except explicitly requested oasis fertile areas','water_depth':'Shallow footprint first, sampled deep cores last; no automatic all-deep water'} )
+    if native is not None:
+        for e in entries:e['requires_ground_sidecar']='ground_layer' in json.loads((folder/e['command']).read_text(encoding='utf-8'))
+    write(folder/'catalog.json',{'schema_version':1,'purpose':'Developer prototype, not a distributed preset pack','entries':entries,'excluded':excluded,'reference_source_graphs':44,'paid_api_calls':0,
+        'runtime_contract':'MapLibraryProbe ground sidecar v1; product ApplyPatches alone omits ground' if native else 'Product polygon commands only'})
+    write(folder/'conversion-receipt.json',{'entries':receipt,'excluded':excluded,
+        'ground_policy':'Named source ground sidecar with native protection and biome adaptation' if native else 'Native biome ground preserved except explicitly requested oasis fertile areas',
+        'water_depth':'Shallow footprint first, sampled deep cores last; no automatic all-deep water'} )
     for name,seed,size in [('transfer-a','map-library-target-a-20261001',250),('transfer-b','map-library-target-b-20261001',300),('transfer-c','map-library-target-c-20261001',250)]:
         cases=[]
         for e in entries:

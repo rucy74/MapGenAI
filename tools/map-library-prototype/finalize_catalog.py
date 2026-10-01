@@ -4,12 +4,20 @@ import argparse, hashlib, json, pathlib
 def finalize(folder):
     path=folder/'catalog.json';catalog=json.loads(path.read_text(encoding='utf-8'))
     evidence_path=folder/'transfer-evaluation.json';evidence=json.loads(evidence_path.read_text(encoding='utf-8'))
+    ground_path=folder/'ground-evaluation.json'
+    ground=json.loads(ground_path.read_text(encoding='utf-8')) if ground_path.exists() else None
     for entry in catalog['entries']:
         profiles={};failed=[]
         for row in evidence['records']:
             if row['id']!=entry['id']:continue
             key=(row['biome'],row['size'],'Flat')
-            profiles[key]=profiles.get(key,True) and row['geometry_pass']
+            ground_ok=True
+            if entry.get('requires_ground_sidecar'):
+                matches=[] if ground is None else [r for r in ground['records'] if r['run']==row['run'] and r['id']==entry['id']]
+                guards=[] if ground is None else [r for r in ground['application_checks'] if r['run']==row['run'] and r['id']==entry['id']]
+                ground_ok=bool(matches and guards) and all(r['fidelity_pass'] is not False for r in matches) and all(r['pass'] for r in guards)
+                if not ground_ok:failed.append({'run':row['run'],'reasons':['Ground evidence absent or failed']})
+            profiles[key]=profiles.get(key,True) and row['geometry_pass'] and ground_ok
             if not row['geometry_pass']:failed.append({'run':row['run'],'reasons':row['reasons']})
         entry['verified_profiles']=[{'biome':biome,'map_size':size,'hilliness':hill} for (biome,size,hill),ok in sorted(profiles.items()) if ok]
         entry['status']='prototype-tested' if entry['verified_profiles'] else 'prototype-quarantined'

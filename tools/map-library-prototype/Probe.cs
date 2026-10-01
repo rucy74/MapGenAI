@@ -56,6 +56,7 @@ namespace MapGenAI.MapLibraryProbe
         }
         static void Run()
         {
+            SavePalette();
             var root=SimpleJson.Parse(File.ReadAllText(manifest));
             foreach (var item in root.GetObjectArray("cases")) {
                 string id=item.GetString("id"), biome=item.GetString("biome"), gl=item.GetString("gl_id");
@@ -87,8 +88,16 @@ namespace MapGenAI.MapLibraryProbe
                 }
                 var before=new TileMapState(); MapGenParams.RestoreSnapshot(before,target);
                 string commandFile=item.GetString("command"); TileMapState state=before;
+                GroundPass ground=null;
                 if (!string.IsNullOrEmpty(commandFile)) {
                     var command=SimpleJson.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(manifest),commandFile))));
+                    if(command.GetObject("ground_layer")!=null)ground=new GroundPass(command.GetObject("ground_layer"),id);
+                    if(ground!=null && command.GetObject("params")?.Keys.Any()==false) {
+                        // Ground-only developer controls have no product edit. The
+                        // product correctly refuses an empty recommendation.
+                        Check(MapStateCodec.Serialize(MapGenParams.CaptureState(target))==MapStateCodec.Serialize(before),"Ground-only control keeps product state unchanged: "+id);
+                    }
+                    else {
                     var options=SimpleJson.Parse("{\"action\":\"recommend\",\"options\":[{\"params\":"+SimpleJson.Serialize(command.GetObject("params"))+"}]}");
                     string untouched=MapStateCodec.Serialize(MapGenParams.CaptureState(target));
                     var plans=RecommendationPlan.Validate(options,before,data=>MapGenParams.ValidatePatch(data,target),false);
@@ -102,6 +111,7 @@ namespace MapGenAI.MapLibraryProbe
                     MapGenParams.RestoreSnapshot(before,target);
                     Check(MapStateCodec.Serialize(MapGenParams.CaptureState(target))==untouched,"Existing snapshot restore returns to base: "+id);
                     MapGenParams.RestoreSnapshot(state,target);
+                    }
                 }
                 File.WriteAllText(Path.Combine(output,id+"-state.json"),MapStateCodec.Serialize(state));
                 var parent=(MapParent)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement); parent.Tile=target; parent.SetFaction(Faction.OfPlayer); Find.WorldObjects.Add(parent);
@@ -127,6 +137,8 @@ namespace MapGenAI.MapLibraryProbe
                 }
                 var generator=(MapGeneratorDef)typeof(object).GetMethod("MemberwiseClone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(original,null);
                 generator.genSteps=new List<GenStepDef>(original.genSteps);
+                if(id=="ground-guard")generator.genSteps.Add(new GenStepDef{defName="MapLibraryGroundGuard",order=404,genStep=new GuardFixture()});
+                if(ground!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryGround_"+id,order=405,genStep=ground});
                 var capture=new Capture{Id=id,Size=size,Target=target,State=state,IsSource=!string.IsNullOrEmpty(gl)};
                 generator.genSteps.Add(new GenStepDef{defName="MapLibraryCapture_"+id,order=99999,genStep=capture});
                 var clock=System.Diagnostics.Stopwatch.StartNew();
@@ -134,6 +146,134 @@ namespace MapGenAI.MapLibraryProbe
                 clock.Stop(); Check(capture.Captured,"Actual full map capture completed: "+id);
                 results.Add(new Dictionary<string,object>{{"id",id},{"tile",target},{"biome",map.Biome.defName},{"size",size},{"gl_id",gl},{"world_seed",worldSeed},{"seconds",clock.Elapsed.TotalSeconds},{"mutators",tile.Mutators.Select(m=>m.defName).ToArray()},{"rainfall",tile.rainfall},{"temperature",tile.temperature},{"counts",capture.Counts},{"authoring_report_present",capture.AuthoringReportPresent},{"provider_calls",0}});
                 Save("progress.json",new Dictionary<string,object>{{"results",results},{"checks",checks}});
+            }
+        }
+        sealed class GuardFixture : GenStep
+        {
+            public override int SeedPart=>2739473;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                var road=DefDatabase<TerrainDef>.AllDefsListForReading.First(d=>d.HasTag("Road"));
+                var floor=DefDatabase<TerrainDef>.AllDefsListForReading.First(d=>d.designationCategory!=null && !d.IsWater && !d.dangerous);
+                var fixtures=new[]{TerrainDefOf.WaterShallow,road,floor,TerrainDefOf.Soil};
+                for(int i=0;i<fixtures.Length;i++) {
+                    var c=new IntVec3(12+i,0,12);c.GetEdifice(map)?.Destroy();MapGenerator.Elevation[c]=.2f;map.terrainGrid.SetTerrain(c,fixtures[i]);
+                    if(i==3)GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.Wall,ThingDef.Named("BlocksGranite")),c,map);
+                }
+            }
+        }
+        static int[] Rgb(Color color) {Color32 c=color;return new[]{(int)c.r,(int)c.g,(int)c.b};}
+        static void SavePalette()
+        {
+            var rows=new List<object>();
+            foreach(var def in DefDatabase<TerrainDef>.AllDefsListForReading.OrderBy(d=>d.defName)) {
+                bool found=MapPreview.TrueTerrainColors.TrueColors.TryGetValue(def.defName,out var color);
+                bool defaultFound=MapPreview.TrueTerrainColors.DefaultColors.TryGetValue(def.defName,out var defaultColor);
+                rows.Add(new Dictionary<string,object>{{"def",def.defName},{"label",def.label},{"rgb",found?Rgb(color):null},
+                    {"default_rgb",defaultFound?Rgb(defaultColor):null},{"default_has_preview_color",defaultFound},
+                    {"has_preview_color",found},{"supported",TerrainMaterials.Supported(def)},{"water",def.IsWater},{"river",def.IsRiver},
+                    {"temporary",def.temporary},{"dangerous",def.dangerous},{"fertility",def.fertility}});
+            }
+            var overlays=new List<object>();
+            foreach(string name in new[]{"SolidStoneColor","SolidStoneHighlightColor","SolidStoneShadowColor","CaveColor","MissingTerrainColor"}) {
+                var field=typeof(MapPreview.MapPreviewGenerator).GetField(name,BindingFlags.Static|BindingFlags.NonPublic);
+                if(field!=null)overlays.Add(new Dictionary<string,object>{{"name",name},{"rgb",Rgb((Color)field.GetValue(null))}});
+            }
+            Save("native-terrain-palette.json",new Dictionary<string,object>{{"schema_version",2},{"renderer","MapPreview.TrueTerrainColors.TrueColors"},{"terrains",rows},{"overlays",overlays},
+                {"policy","Read-only renderer catalog. Missing colors remain missing; same colors do not imply same terrain."}});
+            Check(rows.Count>0,"Loaded terrain palette captured");
+        }
+        // Developer sidecar only: late ground paint, without flattening or replacing
+        // native water/rock/roads/structures. Not yet connected to product state/UI.
+        sealed class GroundPass : GenStep
+        {
+            readonly SimpleJsonObject layer;readonly string id;
+            public GroundPass(SimpleJsonObject layer,string id){this.layer=layer;this.id=id;}
+            public override int SeedPart=>2739472;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                int width=(int)layer.GetFloat("width"),height=(int)layer.GetFloat("height");
+                Check(width>0 && height>0 && layer.GetString("row_order")=="south-first","Ground coordinate system valid: "+id);
+                var classes=layer.GetObjectArray("materials");var plane=new int[width*height];
+                int end=0;
+                foreach(var run in layer.GetObjectArray("runs")) {
+                    int start=(int)run.GetFloat("start"),length=(int)run.GetFloat("length"),material=(int)run.GetFloat("material");
+                    if(start<end || length<=0 || start+length>plane.Length || material<=0 || material>classes.Count)throw new Exception("Invalid ground RLE: "+id);
+                    for(int n=start;n<start+length;n++)plane[n]=material;
+                    end=start+length;
+                }
+                Check(true,"Ground runs and material indices validated: "+id);
+                bool same=layer.GetString("source_biome")==map.Biome.defName;
+                bool dry=map.Biome.defName=="Desert" || map.Biome.defName=="ExtremeDesert";
+                var before=map.AllCells.Select(c=>map.terrainGrid.TerrainAt(c)).ToArray();
+                var elevation=map.AllCells.Select(c=>MapGenerator.Elevation[c]).ToArray();
+                var blocked=new bool[map.cellIndices.NumGridCells];
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c);var t=before[n];
+                    blocked[n]=t.IsWater || t.IsRiver || t.dangerous || t.HasTag("Road") || !TerrainMaterials.Supported(t)
+                        || c.GetEdifice(map)!=null || MapGenerator.Elevation[c]>=.7f;
+                }
+                int eligible=0,changed=0,protectedCells=0,missing=0,adapted=0;
+                var protectionKinds=new Dictionary<string,int>{{"water",0},{"road",0},{"constructed_floor",0},{"edifice",0},{"high_elevation",0}};
+                var counts=new Dictionary<string,int>();var resolutions=new List<object>();
+                var resolved=new TerrainDef[classes.Count];
+                for(int i=0;i<classes.Count;i++) {
+                    string name=classes[i].GetString("def"),role=classes[i].GetString("role"),target=name,reason="same-biome exact material";
+                    if(!same) {
+                        reason="compatible natural material";
+                        if(role=="base" || role=="rock-ground") {target=null;reason="preserve target native base ground";}
+                        if(role=="ice") {target=null;reason="preserve target climate; no imported ice sheet";}
+                        if(dry && role=="fertile") {target=null;reason="preserve dry target; no implicit oasis";}
+                        if(dry && (role=="mud" || role=="marsh")) {target="Sand";reason="dry biome shore uses sand";}
+                    }
+                    var def=target==null?null:DefDatabase<TerrainDef>.GetNamedSilentFail(target);
+                    if(def!=null && (!TerrainMaterials.Supported(def) || def.IsWater || def.IsRiver || def.dangerous))def=null;
+                    resolved[i]=def;
+                    resolutions.Add(new Dictionary<string,object>{{"source",name},{"role",role},{"target",def?.defName},{"reason",target!=null && def==null?"missing or unsupported loaded TerrainDef; preserved":reason}});
+                }
+                foreach(var c in map.AllCells) {
+                    int sx=Math.Min(width-1,c.x*width/map.Size.x),sz=Math.Min(height-1,c.z*height/map.Size.z);
+                    int m=plane[sz*width+sx];if(m==0)continue;
+                    int n=map.cellIndices.CellToIndex(c);if(blocked[n]){
+                        protectedCells++;var t=before[n];
+                        if(t.IsWater || t.IsRiver)protectionKinds["water"]++;
+                        if(t.HasTag("Road"))protectionKinds["road"]++;
+                        if(t.designationCategory!=null)protectionKinds["constructed_floor"]++;
+                        if(c.GetEdifice(map)!=null)protectionKinds["edifice"]++;
+                        if(elevation[n]>=.7f)protectionKinds["high_elevation"]++;
+                        continue;
+                    }
+                    eligible++;var def=resolved[m-1];if(def==null){missing++;continue;}
+                    string role=classes[m-1].GetString("role");
+                    // Wet ground is kept near actual water, including on arid tiles.
+                    // Distant wet patches from another biome stay native.
+                    if(!same && (role=="mud" || role=="marsh") && !NearWater(map,c)){missing++;continue;}
+                    if(def.defName!=classes[m-1].GetString("def"))adapted++;
+                    if(before[n]!=def){map.terrainGrid.SetTerrain(c,def);changed++;}
+                    if(!counts.ContainsKey(def.defName))counts[def.defName]=0;counts[def.defName]++;
+                }
+                int protectedChanged=0,elevationChanged=0,unmapped=0,unmappedChanged=0;
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c);
+                    if(blocked[n] && map.terrainGrid.TerrainAt(c)!=before[n])protectedChanged++;
+                    if(MapGenerator.Elevation[c]!=elevation[n])elevationChanged++;
+                    int m=plane[Math.Min(height-1,c.z*height/map.Size.z)*width+Math.Min(width-1,c.x*width/map.Size.x)];
+                    if(m==0){unmapped++;if(map.terrainGrid.TerrainAt(c)!=before[n])unmappedChanged++;}
+                }
+                Check(protectedChanged==0 && elevationChanged==0 && unmappedChanged==0,"Ground pass preserves protected/unmapped terrain and elevations: "+id);
+                if(id=="ground-guard")Check(protectionKinds.Values.All(n=>n>0),"Real water, road, floor, edifice and rock fixtures protected");
+                Save(id+"-ground-application.json",new Dictionary<string,object>{{"source_biome",layer.GetString("source_biome")},{"target_biome",map.Biome.defName},{"same_biome",same},
+                    {"eligible_cells",eligible},{"changed_cells",changed},{"protected_cells",protectedCells},{"preserved_unresolved_cells",missing},{"adapted_cells",adapted},
+                    {"protected_changes",protectedChanged},{"elevation_changes",elevationChanged},{"applied_counts",counts},{"resolutions",resolutions},
+                    {"protection_kinds",protectionKinds},{"unmapped_cells",unmapped},{"unmapped_changes",unmappedChanged},
+                    {"stage",405},{"scope","Developer sidecar; ground only, no world/tile settings or RNG calls"}});
+            }
+            static bool NearWater(Map map,IntVec3 c)
+            {
+                for(int z=-4;z<=4;z++)for(int x=-4;x<=4;x++) {
+                    var at=c+new IntVec3(x,0,z);if(at.InBounds(map) && map.terrainGrid.TerrainAtIgnoreTemp(map.cellIndices.CellToIndex(at)).IsWater)return true;
+                }
+                return false;
             }
         }
         sealed class Capture : GenStep
@@ -153,12 +293,17 @@ namespace MapGenAI.MapLibraryProbe
                     labels[c.z*Size+c.x]=v; Counts[v=='M'?"mountain":v=='W'?"water":v=='S'?"shallow":"ground"]++;
                 }
                 var fertility=new char[Size*Size];var terrainCounts=new Dictionary<string,int>();
+                var names=new List<string>();var indices=new int[Size*Size];var surfaces=new int[Size*Size];
                 foreach(var c in map.AllCells) {
                     var terrain=map.terrainGrid.TerrainAt(c);string name=terrain.defName;
                     fertility[c.z*Size+c.x]=name=="SoilRich"?'R':name=="Soil"?'F':'N';
                     if(!terrainCounts.ContainsKey(name))terrainCounts[name]=0;terrainCounts[name]++;
+                    string permanent=map.terrainGrid.TerrainAtIgnoreTemp(map.cellIndices.CellToIndex(c)).defName;
+                    if(!names.Contains(permanent))names.Add(permanent);indices[c.z*Size+c.x]=names.IndexOf(permanent);
+                    if(!names.Contains(name))names.Add(name);surfaces[c.z*Size+c.x]=names.IndexOf(name);
                 }
-                Save(Id+"-terrain.json",new Dictionary<string,object>{{"width",Size},{"height",Size},{"cells",new string(labels)},{"fertile_cells",new string(fertility)},{"terrain_defs",terrainCounts},{"row_order","south-first"},{"note","Final named ordinary Water terrain/passability beneath temporary seasonal ice; actual surface names in terrain_defs and PNG. Soil/SoilRich and natural-rock edifices. Marsh/hot springs are not silently imported as ordinary ponds."}});
+                Save(Id+"-terrain.json",new Dictionary<string,object>{{"schema_version",2},{"biome",map.Biome.defName},{"width",Size},{"height",Size},{"cells",new string(labels)},{"fertile_cells",new string(fertility)},{"terrain_defs",terrainCounts},
+                    {"terrain_table",names},{"terrain_indices",indices},{"surface_indices",surfaces},{"row_order","south-first"},{"note","Per-cell permanent TerrainDef and visible surface are separate; temporary ice is never imported as water from a color alone."}});
                 var request=new MapPreview.MapPreviewRequest(Find.World.info.seedString,Target,new IntVec2(Size,Size));
                 var result=new MapPreview.MapPreviewResult(request);
                 var gt=typeof(MapPreview.MapPreviewGenerator);
@@ -167,6 +312,12 @@ namespace MapGenAI.MapLibraryProbe
                 var texture=new Texture2D(Size,Size,TextureFormat.RGBA32,false);
                 try {texture.SetPixels(result.Pixels);texture.Apply();File.WriteAllBytes(Path.Combine(output,Id+"-map.png"),ImageConversion.EncodeToPNG(texture));}
                 finally {UnityEngine.Object.Destroy(texture);}
+                var defaultResult=new MapPreview.MapPreviewResult(request);
+                var defaultStep=(GenStep)Activator.CreateInstance(gt.GetNestedType("PreviewTextureGenStep",BindingFlags.NonPublic),new object[]{defaultResult,false});
+                defaultStep.Generate(map,parms);gt.GetMethod("AddBevelToSolidStone",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{defaultResult});
+                var defaultTexture=new Texture2D(Size,Size,TextureFormat.RGBA32,false);
+                try {defaultTexture.SetPixels(defaultResult.Pixels);defaultTexture.Apply();File.WriteAllBytes(Path.Combine(output,Id+"-map-default.png"),ImageConversion.EncodeToPNG(defaultTexture));}
+                finally {UnityEngine.Object.Destroy(defaultTexture);}
                 if(!IsSource) {
                     var report=AuthoringGeneration.Latest(Target,State);
                     // Shape-only recipes need no structure/passage authoring pass.

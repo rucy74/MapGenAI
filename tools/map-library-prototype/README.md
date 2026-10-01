@@ -12,6 +12,26 @@ GL 원본 생성 → 관측된 산/물 윤곽을 기존 MapGenAI 명령으로 �
 - 원본과 다른 월드의 250/300 크기·온대림/건조관목림/사막을 실제로 생성해 비교한다. 지원조건 밖·기존 월드 강/해안/도로가 있는 타일·부분 편집·정확한 방향/비율 요청은 저장소 후보를 반환하지 않는다.
 - 실제 신규 지도와 동일 타일/seed의 빈 설정 baseline을 비교한다. PNG는 native Map Preview 색으로 그린 실제 전체 맵이다. 얼음 표면은 PNG에 남기고 지형 측정은 임시 얼음 아래 영구 Water를 읽는다.
 
+## 바닥 이식 추가 (2026-10-01 후속)
+
+[바닥 전후 비교 HTML](../../docs/analysis/2026-10-01-map-library-prototype/ground-v2/review.html)의 새 실험은 칸별 영구 TerrainDef/표면 이름을 캡처한다. 원래 prototype 결과와 파일을 분리하여 보존했다.
+
+- `ground.py`: 흙/비옥한 토양/모래/부드러운 모래/자갈/진흙/습지/바위 바닥의 이름과 마스크를 별도 `ground_layer` RLE로 저장. 바닥 12칸 미만 조각·사용 불가/역할 미확인 지형을 생략하고 기록한다.
+- `Probe.cs`: 단계405에서 기존 물·바위·길·건물·건축 바닥·높이와 미지정 칸을 보호하며 실제 바닥을 적용한다. 같은 바이옴은 정확한 재료, 다른 바이옴은 기본 토양/바위 바닥 유지·젖은 땅의 물가 제한·사막의 모래 해안 조정을 사용한다. 없는/위험한 바닥은 칠하지 않는다.
+- `native-terrain-palette.json`: Map Preview의 실제 토양 색과 일반 색을 읽기만 한다. 이번 GL 격리 프로필의 실제 색347종/일반 색14종. 일반 색은 Soil/Gravel/MossyTerrain가 동일하여 이미지로 구분할 수 없다. 모호한 픽셀을 nearest-color로 강제 지정하지 않는다. Map Preview DLL/전역 색상표는 수정하지 않는다.
+- `ground_report.py`: 원본의 실제 칸별 이름과 생성 결과를 대조한다. 실제 토양 색 입력과 일반 색 입력을 별도 검사한다. 원본/기존 이식/새 이식 HTML과 실제 그림을 만든다.
+- `finalize_catalog.py`: 바닥 sidecar가 있는 후보는 바닥 검사까지 있어야 검색 가능 profile로 등록한다. geometry PASS만으로 바닥 성공을 주장하지 않는다.
+
+**이 바닥 sidecar는 개발자 프로브만 해석한다.** 제품 `TileMapState`/추천 UI/저장/Undo에 아직 연결하지 않았다. 일반 제품 `ApplyPatches`만 호출하면 `params`의 윤곽만 적용되고 바닥은 누락된다. 바닥-only 개발자 대조군은 제품 추천을 우회해 제품 상태를 그대로 둔다. 제품의 빈 추천 거절 동작은 유지한다. 이미지 입력 OFF 정책도 유지한다.
+
+```powershell
+python -X utf8 -m unittest discover -s tools/map-library-prototype -p 'test_*.py' -v
+dotnet build tools/map-library-prototype/PrototypeProbe.csproj --nologo
+python -X utf8 tools/map-library-prototype/build_catalog.py --folder docs/analysis/2026-10-01-map-library-prototype/ground-v2 --source docs/analysis/2026-10-01-map-library-prototype/ground-v2/source-native-final
+```
+
+원본 v2 캡처가 없다면 기존 `source-manifest.json`을 `run.ps1 -WithGL`로 새 출력 폴더에서 다시 생성해야 한다. `run.ps1`은 소스가 DLL보다 새로우면 실행을 거절한다. 실제 replay와 바닥/윤곽 검사 전에 카탈로그를 확정하지 않는다. 전체 재현 순서·최종 명령·실제 결과는 새 보고서를 따른다.
+
 ## 실행
 
 저장소 루트 `active/mapgen_ai`에서 실행한다. Python 패키지는 `requirements.txt`가 이 PC의 검증 버전이다. 모델 가중치는 저장소 밖 `F:/Projects/Rimworld/work/mapgenai-library-model-cache`에 내려받는다. 첫 모델 다운로드는 인터넷이 필요하며 게임의 의존성이 아니다.

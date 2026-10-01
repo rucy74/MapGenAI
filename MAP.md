@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 맵 저장소 바닥 이식 후속(2026-10-01): `tools/map-library-prototype/ground.py`는 칸별 TerrainDef/RLE 바닥과 native 실제/일반 색 팔레트를 읽는다. 프로브는 단계405에서 물·바위·길·건물·높이/미지정 칸을 보호하고 바이옴에 맞게 적용한다. `ground_report.py`/`verify_ground.py`는 독립 원본 바닥 대조·양성 대조군·기존6지도 동일성을 검사한다. 제품 UI/TileMapState/이미지 OFF/설치 DLL에는 연결하지 않은 sidecar다. [바닥 전후 비교·검증·한계](docs/analysis/2026-10-01-map-library-prototype/ground-v2/report.md).
+
 - 맵 저장소 개발자 프로토타입(2026-10-01): `tools/map-library-prototype`는 GL 원본6종/편집 가능한 sampled polygon/알려진 minimap 물 윤곽/로컬 E5 검색/격리된 실제 생성 도구다. 실험 레시피9 중8은 실제 통과 profile만 검색하고, 작은 오아시스와 미검증 강·해안·도로 타일은 제외한다. 제품 UI/DEV DLL·배포판은 미변경이다. [실제 그림·검증·한계](docs/analysis/2026-10-01-map-library-prototype/report.md), [실행법](tools/map-library-prototype/README.md). 원본 GL의 절차적 다양성·동굴·이벤트를 이식한 기능은 아니다.
 
 - 기본 생성 참조 담수(DEV): 새 rough 담수 composite만 저장되는 `water_profile:native`로 기본 추가한다. `NativeWaterField`는 실제 엔진 displacement를 영역 크기에 맞춰 적용하고, `NativeWaterRaster`는 최종 수역에서 실제 육지 거리로 얕은 가장자리를 만든다. `AuthoringGeneration`/`LandscapeBlendGeneration`은 native 물·호숫가 재료 선택기를 사용한다. 저장 null/legacy와 정확 도형/특수 물은 기존 경로, `details:none`은 선택된 수심/윤곽 유지. [범위·검증](docs/analysis/2026-09-27-native-water/report.md).
