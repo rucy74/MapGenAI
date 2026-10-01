@@ -89,10 +89,12 @@ namespace MapGenAI.MapLibraryProbe
                 var before=new TileMapState(); MapGenParams.RestoreSnapshot(before,target);
                 string commandFile=item.GetString("command"); TileMapState state=before;
                 GroundPass ground=null;
+                WaterPass water=null;
                 if (!string.IsNullOrEmpty(commandFile)) {
                     var command=SimpleJson.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(manifest),commandFile))));
                     if(command.GetObject("ground_layer")!=null)ground=new GroundPass(command.GetObject("ground_layer"),id);
-                    if(ground!=null && command.GetObject("params")?.Keys.Any()==false) {
+                    if(command.GetObject("water_layer")!=null)water=new WaterPass(command.GetObject("water_layer"),id);
+                    if((ground!=null || water!=null) && command.GetObject("params")?.Keys.Any()==false) {
                         // Ground-only developer controls have no product edit. The
                         // product correctly refuses an empty recommendation.
                         Check(MapStateCodec.Serialize(MapGenParams.CaptureState(target))==MapStateCodec.Serialize(before),"Ground-only control keeps product state unchanged: "+id);
@@ -137,6 +139,8 @@ namespace MapGenAI.MapLibraryProbe
                 }
                 var generator=(MapGeneratorDef)typeof(object).GetMethod("MemberwiseClone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(original,null);
                 generator.genSteps=new List<GenStepDef>(original.genSteps);
+                if(id=="water-guard")generator.genSteps.Add(new GenStepDef{defName="MapLibraryWaterGuard",order=402,genStep=new WaterGuardFixture()});
+                if(water!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryWater",order=403,genStep=water});
                 if(id=="ground-guard")generator.genSteps.Add(new GenStepDef{defName="MapLibraryGroundGuard",order=404,genStep=new GuardFixture()});
                 if(ground!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryGround_"+id,order=405,genStep=ground});
                 var capture=new Capture{Id=id,Size=size,Target=target,State=state,IsSource=!string.IsNullOrEmpty(gl)};
@@ -160,6 +164,120 @@ namespace MapGenAI.MapLibraryProbe
                     var c=new IntVec3(12+i,0,12);c.GetEdifice(map)?.Destroy();MapGenerator.Elevation[c]=.2f;map.terrainGrid.SetTerrain(c,fixtures[i]);
                     if(i==3)GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.Wall,ThingDef.Named("BlocksGranite")),c,map);
                 }
+            }
+        }
+        sealed class WaterGuardFixture : GenStep
+        {
+            public override int SeedPart=>2739475;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                var river=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.IsRiver);
+                var sea=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.defName=="WaterOceanShallow");
+                var special=DefDatabase<TerrainDef>.GetNamed("HotSpring");
+                var road=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.HasTag("Road"));
+                var floor=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.designationCategory!=null && !t.IsWater && !t.dangerous);
+                var points=new[]{new IntVec3(12,0,12),new IntVec3(13,0,12),new IntVec3(20,0,20),new IntVec3(21,0,20),
+                    new IntVec3(30,0,30),new IntVec3(31,0,30),new IntVec3(40,0,40),new IntVec3(41,0,40),
+                    new IntVec3(48,0,50),new IntVec3(49,0,50),new IntVec3(50,0,50),new IntVec3(51,0,50)};
+                var defs=new[]{TerrainDefOf.WaterShallow,TerrainDefOf.WaterDeep,river,TerrainDefOf.WaterShallow,
+                    sea,TerrainDefOf.WaterShallow,special,TerrainDefOf.WaterShallow,road,floor,TerrainDefOf.Soil,TerrainDefOf.Soil};
+                for(int i=0;i<points.Length;i++) {
+                    var c=points[i];c.GetEdifice(map)?.Destroy();MapGenerator.Elevation[c]=.2f;map.terrainGrid.SetTerrain(c,defs[i]);
+                    if(i==10)GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.Wall,ThingDef.Named("BlocksGranite")),c,map);
+                    if(i==11)map.terrainGrid.SetTerrain(c,TerrainDefOf.WaterDeep);
+                }
+                var unknown=new IntVec3(5,0,5);unknown.GetEdifice(map)?.Destroy();map.terrainGrid.SetTerrain(unknown,TerrainDefOf.WaterShallow);
+            }
+        }
+        // Exact observed water layout for a complete library composition only.
+        // Product editing and candidates without this sidecar remain unchanged.
+        sealed class WaterPass : GenStep
+        {
+            readonly SimpleJsonObject layer;readonly string id;
+            public WaterPass(SimpleJsonObject layer,string id){this.layer=layer;this.id=id;}
+            public override int SeedPart=>2739474;
+            static bool Ordinary(TerrainDef t)=>t.defName=="WaterShallow" || t.defName=="WaterDeep";
+            static bool Special(TerrainDef t)=>t.IsRiver || (t.IsWater && !Ordinary(t) && t.defName!="Marsh");
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                int width=(int)layer.GetFloat("width"),height=(int)layer.GetFloat("height");
+                if(layer.GetFloat("schema_version")!=1 || layer.GetString("mode")!="source-composition" || width<=0 || height<=0
+                    || layer.GetString("row_order")!="south-first")throw new Exception("Invalid source water contract: "+id);
+                var plane=new int[width*height];int end=0;
+                foreach(var run in layer.GetObjectArray("runs")) {
+                    int start=(int)run.GetFloat("start"),length=(int)run.GetFloat("length"),kind=(int)run.GetFloat("kind");
+                    if(start<end || length<=0 || start+length>plane.Length || kind<1 || kind>3)throw new Exception("Invalid water RLE: "+id);
+                    for(int n=start;n<start+length;n++)plane[n]=kind;end=start+length;
+                }
+                Check(true,"Observed water contract and RLE validated: "+id);
+                int count=map.cellIndices.NumGridCells;
+                var before=new TerrainDef[count];var elevations=new float[count];var blocked=new bool[count];var connected=new bool[count];
+                var queue=new Queue<IntVec3>();
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c);var t=map.terrainGrid.TerrainAtIgnoreTemp(n);before[n]=t;elevations[n]=MapGenerator.Elevation[c];
+                    var building=c.GetEdifice(map);
+                    blocked[n]=Special(t) || t.dangerous || t.HasTag("Road") || t.bridge
+                        || t.designationCategory!=null || (building!=null && building.def.building?.isNaturalRock!=true);
+                    if(Special(t)) {connected[n]=true;queue.Enqueue(c);}
+                }
+                // A fresh-water-looking cell attached to a river/sea/special pool
+                // is part of that protected water body, not an incidental pond.
+                while(queue.Count>0) {
+                    var c=queue.Dequeue();
+                    foreach(var d in GenAdj.CardinalDirections) {
+                        var at=c+d;if(!at.InBounds(map))continue;int n=map.cellIndices.CellToIndex(at);
+                        if(!connected[n] && before[n].IsWater) {connected[n]=true;queue.Enqueue(at);}
+                    }
+                }
+                for(int n=0;n<count;n++)blocked[n]|=connected[n];
+                var dry=map.Biome.defName=="Desert" || map.Biome.defName=="ExtremeDesert"?TerrainDefOf.Sand:TerrainDefOf.Soil;
+                int added=0,cleared=0,depthChanged=0,conflicts=0,unknown=0,protectedCells=0,rocksRemoved=0;
+                var protections=new Dictionary<string,int>{{"river",0},{"sea",0},{"special_water",0},{"connected_water",0},{"road",0},{"floor",0},{"building",0}};
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c),kind=plane[Math.Min(height-1,c.z*height/map.Size.z)*width+Math.Min(width-1,c.x*width/map.Size.x)];
+                    if(kind==0){unknown++;continue;}
+                    var t=before[n];
+                    if(blocked[n]) {
+                        protectedCells++;if((kind==2 && t!=TerrainDefOf.WaterShallow) || (kind==3 && t!=TerrainDefOf.WaterDeep) || (kind==1 && Ordinary(t)))conflicts++;
+                        if(t.IsRiver)protections["river"]++;
+                        if(t.defName.StartsWith("WaterOcean",StringComparison.Ordinal))protections["sea"]++;
+                        if(t.IsWater && !t.IsRiver && !Ordinary(t) && !t.defName.StartsWith("WaterOcean",StringComparison.Ordinal))protections["special_water"]++;
+                        if(connected[n] && Ordinary(t))protections["connected_water"]++;
+                        if(t.HasTag("Road"))protections["road"]++;
+                        if(t.designationCategory!=null)protections["floor"]++;
+                        if(c.GetEdifice(map)!=null)protections["building"]++;
+                        continue;
+                    }
+                    if(kind==1) {
+                        if(Ordinary(t)){map.terrainGrid.SetTerrain(c,dry);cleared++;}
+                        continue;
+                    }
+                    var desired=kind==2?TerrainDefOf.WaterShallow:TerrainDefOf.WaterDeep;
+                    if(!Ordinary(t))added++;else if(t!=desired)depthChanged++;
+                    var rock=c.GetEdifice(map);
+                    if(rock?.def.building?.isNaturalRock==true){rock.Destroy();rocksRemoved++;}
+                    map.terrainGrid.SetTerrain(c,desired);MapGenerator.Elevation[c]=Math.Min(elevations[n],.3f);
+                }
+                int protectedChanged=0,unknownChanged=0,outsideWaterHeightChanged=0,knownMismatches=0;
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c),kind=plane[Math.Min(height-1,c.z*height/map.Size.z)*width+Math.Min(width-1,c.x*width/map.Size.x)];
+                    var t=map.terrainGrid.TerrainAtIgnoreTemp(n);
+                    if(blocked[n] && (t!=before[n] || MapGenerator.Elevation[c]!=elevations[n]))protectedChanged++;
+                    if(kind==0 && t!=before[n])unknownChanged++;
+                    if(kind<2 && MapGenerator.Elevation[c]!=elevations[n])outsideWaterHeightChanged++;
+                    if(!blocked[n] && ((kind==1 && Ordinary(t)) || (kind==2 && t!=TerrainDefOf.WaterShallow) || (kind==3 && t!=TerrainDefOf.WaterDeep)))knownMismatches++;
+                }
+                Check(protectedChanged==0 && unknownChanged==0 && outsideWaterHeightChanged==0,"Water layout preserves special/connected water, structures and unknown cells: "+id);
+                Check(knownMismatches==0,"Known source water depth and dry cells reproduced: "+id);
+                if(id=="water-guard") {
+                    Check(cleared>0 && added>0 && depthChanged>0,"Real pond removal, water addition and depth changes exercised");
+                    Check(protections.Values.All(n=>n>0),"Real river, sea, special/connected water, road, floor and wall protected");
+                }
+                Save(id+"-water-application.json",new Dictionary<string,object>{{"added_water_cells",added},{"cleared_ordinary_pond_cells",cleared},
+                    {"depth_changed_cells",depthChanged},{"natural_rocks_removed_inside_requested_water",rocksRemoved},{"protected_cells",protectedCells},
+                    {"protected_changes",protectedChanged},{"unknown_cells",unknown},{"unknown_changes",unknownChanged},{"outside_water_height_changes",outsideWaterHeightChanged},
+                    {"known_source_mismatches",knownMismatches},{"protected_conflicts",conflicts},{"protection_kinds",protections},{"stage",403},
+                    {"scope","Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"}});
             }
         }
         static int[] Rgb(Color color) {Color32 c=color;return new[]{(int)c.r,(int)c.g,(int)c.b};}

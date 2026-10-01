@@ -1,7 +1,8 @@
 """Compare actual native terrain to sampled source topology, separately from beauty.
 
-Extra native rocks/ponds outside an authored footprint are deliberately retained,
-so mountain precision is reported, not used as a blanket clearing instruction.
+Legacy commands retain extra native rocks/ponds. Complete source water sidecars
+compare directly with the original pools, while mountain precision remains
+diagnostic rather than a blanket clearing instruction.
 """
 import argparse, json, pathlib
 import numpy as np
@@ -43,14 +44,23 @@ def measure(folder, runs):
                 if entry['features']['new_mountains']:
                     metrics['mountains']=compare(scaled(retained(truth=='M'),scene['size']),actual=='M')
                 if entry['features']['new_water']:
-                    wet=scaled(retained(np.isin(truth,['S','W'])),scene['size'])
+                    exact=entry.get('requires_water_sidecar',False)
+                    wet=scaled(np.isin(truth,['S','W']) if exact else retained(np.isin(truth,['S','W'])),scene['size'])
                     metrics['wet_footprint']=compare(wet,np.isin(actual,['S','W']))
                     metrics['wet_with_native_baseline']=compare(wet | np.isin(baseline,['S','W']),np.isin(actual,['S','W']))
                     metrics['deep_core']=compare(scaled(truth=='W',scene['size']),actual=='W')
                     metrics['dry_land']=compare(~wet,~np.isin(actual,['S','W']))
+                    if exact:
+                        metrics['shallow_layout']=compare(scaled(truth=='S',scene['size']),actual=='S')
+                        for key in ('wet_footprint','deep_core','shallow_layout'):
+                            value=metrics.get(key)
+                            if value and value['iou']<.98:reasons.append(key+' exact source IoU below 0.98')
+                        application=json.loads((run/(entry['id']+'-water-application.json')).read_text(encoding='utf-8'))
+                        if application['protected_conflicts']:reasons.append('Source composition conflicts with protected native features')
                 for feature,value in metrics.items():
+                    if entry.get('requires_water_sidecar') and feature=='wet_with_native_baseline':continue
                     if value and value['recall_within_2_cells']<.85:reasons.append(feature+' source recall below 0.85')
-                if metrics.get('wet_with_native_baseline') and metrics['wet_with_native_baseline']['iou']<.80:reasons.append('Water plus paired native baseline IoU below 0.80')
+                if not entry.get('requires_water_sidecar') and metrics.get('wet_with_native_baseline') and metrics['wet_with_native_baseline']['iou']<.80:reasons.append('Water plus paired native baseline IoU below 0.80')
             # Original native features need not be cleared to improve precision.
             records.append({'run':run.name,'id':entry['id'],'biome':scene['biome'],'size':scene['size'],'tile':scene['tile'],
                             'counts':scene['counts'],'metrics':metrics,'geometry_pass':not reasons,'reasons':reasons,
@@ -61,7 +71,7 @@ def measure(folder, runs):
             'source_comparison_cases':sum(r['source_comparison'] for r in records),
             'source_comparison_passed':sum(r['source_comparison'] and r['geometry_pass'] for r in records),
             'execution_only_controls':sum(not r['source_comparison'] for r in records),
-            'protocol':'Compared to source components above the declared fragment threshold, not recipe self-consistency. Two-cell recall >=0.85; water union paired native baseline IoU >=0.80. Permanent terrain below seasonal ice. No beauty claim.',
+            'protocol':'Source water sidecar: all observed pools/depths, direct source IoU >=0.98 and no protected conflicts; native pond union is diagnostic only. Legacy polygons: two-cell recall >=0.85; water union paired baseline IoU >=0.80. Permanent terrain below seasonal ice. No beauty claim.',
             'no_source_reference':['core-foothills','core-dry-clearing'],'paid_api_calls':0}
     (folder/'transfer-evaluation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'passed':report['passed'],'failed':report['failed'],'rows':[{'run':r['run'],'id':r['id'],'pass':r['geometry_pass'],'reasons':r['reasons']} for r in records]},ensure_ascii=False))

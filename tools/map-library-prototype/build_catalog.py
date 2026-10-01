@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from contours import read_terrain, read_image, export
 from ground import observed_ground, ground_layer, image_palette, read_image_materials
+from water import observed_water, water_layer
 
 NAMES={
  'gl-lake':('불규칙한 호숫가','Irregular lakeside','lake','구불구불한 호숫가와 넓게 이어지는 정착 공간.','An irregular lake shoreline with broad connected settlement ground.'),
@@ -30,10 +31,12 @@ def build(folder,source):
         data=json.loads((source/(ident+'-terrain.json')).read_text(encoding='utf-8'))
         fertile=np.array(list(data['fertile_cells'])).reshape(cells.shape) if ident=='gl-oasis' and native is None else None
         try:
-            command,loss=export(cells,ident.replace('-','_'),water=ident in ('gl-lake','gl-oasis','gl-archipelago'),fertile_cells=fertile)
+            command,loss=export(cells,ident.replace('-','_'),water=True,fertile_cells=fertile)
             if native is not None:
                 layer,ground_loss=observed_ground(source/(ident+'-terrain.json'),cells,native)
                 command['ground_layer']=layer;loss.update(ground_loss)
+                water,water_loss=observed_water(source/(ident+'-terrain.json'),cells,native)
+                command['water_layer']=water;loss.update(water_loss)
         except ValueError as error:
             excluded.append({'id':ident,'reason':str(error),'source_retained':True});continue
         path=folder/'recipes'/(ident+'.json');write(path,command);write(path.with_suffix('.receipt.json'),{**origin,**loss})
@@ -68,6 +71,8 @@ def build(folder,source):
     if native is not None:
         layer,ground_loss=ground_layer(ground_names,cells,native,'TemperateForest')
         image_command['ground_layer']=layer;image_loss.update(ground_loss)
+        water,water_loss=water_layer(cells,ground_names,native,'TemperateForest',image=True)
+        image_command['water_layer']=water;image_loss.update(water_loss)
     write(folder/'recipes/image-lake.json',image_command);write(folder/'recipes/image-lake.receipt.json',{**image_origin,**image_loss})
     truth,_=read_terrain(source/'gl-lake-terrain.json')
     per_label={label:{'predicted_cells':int((cells==label).sum()),'actual_cells':int((truth==label).sum()),
@@ -95,9 +100,15 @@ def build(folder,source):
                         'features':{'new_water':False,'new_mountains':ident=='core-foothills','global_density_edits':False},
                         'source':{'kind':'MapGenAI existing native generator','author':'MapGenAI','license':'Project original authoring','reference_id':ident},'limitations':['Visual approval pending','Modest local clearing can be a small change on an already flat tile']})
     if native is not None:
-        for e in entries:e['requires_ground_sidecar']='ground_layer' in json.loads((folder/e['command']).read_text(encoding='utf-8'))
+        for e in entries:
+            command=json.loads((folder/e['command']).read_text(encoding='utf-8'))
+            e['requires_ground_sidecar']='ground_layer' in command
+            e['requires_water_sidecar']='water_layer' in command
+            if e['requires_water_sidecar']:
+                e['features']['new_water']=True
+                e['limitations'].append('Complete observed inland water layout sidecar; product state/UI does not apply it yet')
     write(folder/'catalog.json',{'schema_version':1,'purpose':'Developer prototype, not a distributed preset pack','entries':entries,'excluded':excluded,'reference_source_graphs':44,'paid_api_calls':0,
-        'runtime_contract':'MapLibraryProbe ground sidecar v1; product ApplyPatches alone omits ground' if native else 'Product polygon commands only'})
+        'runtime_contract':'MapLibraryProbe ground/water sidecars v1; product ApplyPatches alone omits sidecars' if native else 'Product polygon commands only'})
     write(folder/'conversion-receipt.json',{'entries':receipt,'excluded':excluded,
         'ground_policy':'Named source ground sidecar with native protection and biome adaptation' if native else 'Native biome ground preserved except explicitly requested oasis fertile areas',
         'water_depth':'Shallow footprint first, sampled deep cores last; no automatic all-deep water'} )

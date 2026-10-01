@@ -1,5 +1,7 @@
 # MapGenAI 개발 지도
 
+- 저장소 물 배치 후속(개발자 도구): 실제 원본의 작은 연못/수심/확인된 dry mask를 물 sidecar로 이식하고 일반 연못만 정리한다. 강·바다·온천/연결된 물·길·건물·불명 칸 보호, 보호 충돌은 후보 제외. 제품 UI/설치 DLL 미연결. [실제 전후 비교](docs/analysis/2026-10-01-map-library-prototype/water-v3/review.html).
+
 - 맵 저장소 바닥 이식 후속(2026-10-01): `tools/map-library-prototype/ground.py`는 칸별 TerrainDef/RLE 바닥과 native 실제/일반 색 팔레트를 읽는다. 프로브는 단계405에서 물·바위·길·건물·높이/미지정 칸을 보호하고 바이옴에 맞게 적용한다. `ground_report.py`/`verify_ground.py`는 독립 원본 바닥 대조·양성 대조군·기존6지도 동일성을 검사한다. 제품 UI/TileMapState/이미지 OFF/설치 DLL에는 연결하지 않은 sidecar다. [바닥 전후 비교·검증·한계](docs/analysis/2026-10-01-map-library-prototype/ground-v2/report.md).
 
 - 맵 저장소 개발자 프로토타입(2026-10-01): `tools/map-library-prototype`는 GL 원본6종/편집 가능한 sampled polygon/알려진 minimap 물 윤곽/로컬 E5 검색/격리된 실제 생성 도구다. 실험 레시피9 중8은 실제 통과 profile만 검색하고, 작은 오아시스와 미검증 강·해안·도로 타일은 제외한다. 제품 UI/DEV DLL·배포판은 미변경이다. [실제 그림·검증·한계](docs/analysis/2026-10-01-map-library-prototype/report.md), [실행법](tools/map-library-prototype/README.md). 원본 GL의 절차적 다양성·동굴·이벤트를 이식한 기능은 아니다.

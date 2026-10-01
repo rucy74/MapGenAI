@@ -1,5 +1,13 @@
 # Map library developer prototype
 
+## 물 위치까지 함께 가져오는 후속
+
+`water.py`는 실제 원본 칸의 얕은 물/깊은 물/확인된 마른 땅을 별도 `water_layer`에 저장한다. 작은 연못도 생략하지 않는다. 개발자 `WaterPass`는 바닥 적용 전에 원본 수심/위치를 적용하고, 원본의 확인된 마른 곳에 있는 일반 연못만 정리한다. 원본의 건축 바닥은 마른 곳이라는 근거로만 사용하며 재료/건물을 복사하지 않는다. 대상의 강·바다·온천 및 연결된 물, 길·건축 바닥·건물과 불명 입력은 보호하고 충돌을 기록한다. 보통 습지 Marsh는 강/온천으로 오인하지 않는다.
+
+물 검사에서는 원본 전체 water mask(작은 조각 포함)와 직접 IoU≥98%를 요구한다. 현재 타일의 연못을 원본 mask에 합친 수치는 참고만 하며 후보 승인 근거로 쓰지 않는다. 보호 대상 충돌이나 water 근거 부재는 후보를 제외한다. `water_layer` 역시 제품 `TileMapState`/Preview/Undo/UI에는 미연결이고 완전한 저장소 구도에만 적용한다. 기존 부분 편집·강/해안/도로 타일 제외와 sidecar 없는 기존 생성 흐름은 유지한다.
+
+실행: `water_report.py --folder docs/analysis/2026-10-01-map-library-prototype/water-v3 --prepare` → 새 transfer-a/b/c 및 water-controls manifest로 `run.ps1` 실제 생성/Archive → `water_report.py --folder .../water-v3 --runs <A> <B> <C> <controls>` → `finalize_catalog.py --folder .../water-v3` → `verify_water.py --folder .../water-v3 --runs <A> <B> <C> <controls>`. 보고서의 실제 폴더/실패 영수증을 확인하고, 재현 출력은 항상 새 폴더로 만든다. 원본 GL6개는 기존 실제 캡처를 해시로 대조해 재사용한다.
+
 GL 원본 생성 → 관측된 산/물 윤곽을 기존 MapGenAI 명령으로 변환 → 로컬 의미 검색 → 격리된 실제 RimWorld 맵 생성의 실험이다. **제품 채팅 UI·이미지 입력·설치 DLL은 변경하지 않는다.**
 
 ## 실제로 구현한 범위
