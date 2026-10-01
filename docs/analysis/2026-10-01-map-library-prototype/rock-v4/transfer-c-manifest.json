@@ -1,0 +1,59 @@
+{
+  "world_seed": "map-library-target-c-20261001",
+  "cases": [
+    {
+      "id": "gl-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/gl-lake.json"
+    },
+    {
+      "id": "gl-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/gl-valley.json"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/gl-lone-mountain.json"
+    },
+    {
+      "id": "gl-cliff",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/gl-cliff.json"
+    },
+    {
+      "id": "gl-archipelago",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/gl-archipelago.json"
+    },
+    {
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "command": "recipes/gl-oasis.json"
+    },
+    {
+      "id": "image-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/image-lake.json"
+    },
+    {
+      "id": "core-foothills",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/core-foothills.json"
+    },
+    {
+      "id": "core-dry-clearing",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "recipes/core-dry-clearing.json"
+    }
+  ]
+}

@@ -1,0 +1,1142 @@
+{
+  "records": [
+    {
+      "id": "gl-lake",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 86,
+      "cleared_ordinary_pond_cells": 2268,
+      "depth_changed_cells": 200,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-valley",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 19,
+      "cleared_ordinary_pond_cells": 561,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 53,
+      "cleared_ordinary_pond_cells": 1840,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-cliff",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 123,
+      "cleared_ordinary_pond_cells": 791,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-archipelago",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 40121,
+          "actual_cells": 40121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 13525,
+          "actual_cells": 13525,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 53646,
+          "actual_cells": 53646,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 42,
+      "cleared_ordinary_pond_cells": 1421,
+      "depth_changed_cells": 290,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-oasis",
+      "run": "detail-a-native-r2",
+      "biome": "Desert",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 0,
+      "cleared_ordinary_pond_cells": 96,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "image-lake",
+      "run": "detail-a-native-r2",
+      "biome": "TemperateForest",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 94,
+      "cleared_ordinary_pond_cells": 1730,
+      "depth_changed_cells": 200,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 5525,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-lake",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 8128,
+          "actual_cells": 8128,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 3579,
+          "actual_cells": 3579,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 11707,
+          "actual_cells": 11707,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 142,
+      "cleared_ordinary_pond_cells": 2032,
+      "depth_changed_cells": 300,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-valley",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 914,
+          "actual_cells": 914,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 914,
+          "actual_cells": 914,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 22,
+      "cleared_ordinary_pond_cells": 1701,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 1768,
+          "actual_cells": 1768,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 1768,
+          "actual_cells": 1768,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 79,
+      "cleared_ordinary_pond_cells": 2460,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-cliff",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 174,
+          "actual_cells": 174,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 174,
+          "actual_cells": 174,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 174,
+      "cleared_ordinary_pond_cells": 786,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-archipelago",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 57677,
+          "actual_cells": 57677,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 19602,
+          "actual_cells": 19602,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 77279,
+          "actual_cells": 77279,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 54,
+      "cleared_ordinary_pond_cells": 2001,
+      "depth_changed_cells": 262,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-oasis",
+      "run": "detail-b-native-r2",
+      "biome": "Desert",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 461,
+          "actual_cells": 461,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 461,
+          "actual_cells": 461,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 0,
+      "cleared_ordinary_pond_cells": 124,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "image-lake",
+      "run": "detail-b-native-r2",
+      "biome": "TemperateForest",
+      "size": 300,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 8128,
+          "actual_cells": 8266,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.9833051052504235,
+          "iou": 0.9833051052504235
+        },
+        "deep": {
+          "expected_cells": 3579,
+          "actual_cells": 3579,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 11707,
+          "actual_cells": 11845,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 0.9883495145631068,
+          "iou": 0.9883495145631068
+        }
+      },
+      "water_centroid_error_cells": 1.6574256221722674,
+      "unexpected_water_cells": 138,
+      "missing_water_cells": 0,
+      "added_water_cells": 133,
+      "cleared_ordinary_pond_cells": 2453,
+      "depth_changed_cells": 300,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 7985,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-lake",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 94,
+      "cleared_ordinary_pond_cells": 820,
+      "depth_changed_cells": 200,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-valley",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 635,
+          "actual_cells": 635,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 19,
+      "cleared_ordinary_pond_cells": 234,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 1239,
+          "actual_cells": 1239,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 53,
+      "cleared_ordinary_pond_cells": 308,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-cliff",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 123,
+          "actual_cells": 123,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 123,
+      "cleared_ordinary_pond_cells": 0,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-archipelago",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 40121,
+          "actual_cells": 40121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 13525,
+          "actual_cells": 13525,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 53646,
+          "actual_cells": 53646,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 42,
+      "cleared_ordinary_pond_cells": 1421,
+      "depth_changed_cells": 290,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "gl-oasis",
+      "run": "detail-c-native-r2",
+      "biome": "Desert",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": null,
+        "wet": {
+          "expected_cells": 319,
+          "actual_cells": 319,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 0,
+      "cleared_ordinary_pond_cells": 96,
+      "depth_changed_cells": 0,
+      "natural_rocks_removed_inside_requested_water": 0,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 0,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    },
+    {
+      "id": "image-lake",
+      "run": "detail-c-native-r2",
+      "biome": "AridShrubland",
+      "size": 250,
+      "pass": true,
+      "metrics": {
+        "shallow": {
+          "expected_cells": 5642,
+          "actual_cells": 5642,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "deep": {
+          "expected_cells": 2479,
+          "actual_cells": 2479,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        },
+        "wet": {
+          "expected_cells": 8121,
+          "actual_cells": 8121,
+          "recall": 1.0,
+          "recall_within_2_cells": 1.0,
+          "precision": 1.0,
+          "iou": 1.0
+        }
+      },
+      "water_centroid_error_cells": 0.0,
+      "unexpected_water_cells": 0,
+      "missing_water_cells": 0,
+      "added_water_cells": 94,
+      "cleared_ordinary_pond_cells": 820,
+      "depth_changed_cells": 200,
+      "natural_rocks_removed_inside_requested_water": 16,
+      "protected_cells": 0,
+      "protected_changes": 0,
+      "unknown_cells": 5525,
+      "unknown_changes": 0,
+      "outside_water_height_changes": 0,
+      "known_source_mismatches": 0,
+      "protected_conflicts": 0,
+      "protection_kinds": {
+        "river": 0,
+        "sea": 0,
+        "special_water": 0,
+        "connected_water": 0,
+        "road": 0,
+        "floor": 0,
+        "building": 0
+      },
+      "stage": 403,
+      "scope": "Complete observed inland composition only; conflicting protected cells remain intact and need candidate rejection"
+    }
+  ],
+  "controls": [],
+  "passing_layouts": 21,
+  "layouts": 21,
+  "protocol": "Independent original per-cell water and depth, including tiny pools. IoU >=0.98; protected conflicts reject; no paired-native-pond union for admission."
+}

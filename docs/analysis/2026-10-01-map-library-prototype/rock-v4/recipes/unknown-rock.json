@@ -1,0 +1,14 @@
+{
+  "action": "generate",
+  "params": {},
+  "rock_layer": {
+    "schema_version": 1,
+    "mode": "source-composition",
+    "width": 100,
+    "height": 100,
+    "row_order": "south-first",
+    "source_biome": "TemperateForest",
+    "runs": [],
+    "policy": "Known complete inland occupancy only; native geology/resources, protected water/roads/buildings and unknown cells preserved"
+  }
+}

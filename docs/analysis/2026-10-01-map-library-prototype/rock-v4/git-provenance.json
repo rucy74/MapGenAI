@@ -1,0 +1,22 @@
+{
+  "implementation_commit": "308c95e0d9ed4b499c8cb4ce61ff9545f5ce5b38",
+  "base_commit": "21a218f19859b9f453ea03493267bd92cf639a76",
+  "branch": "dev",
+  "implementation_files": [
+    "MAP.md",
+    "tools/map-library-prototype/Probe.cs",
+    "tools/map-library-prototype/README.md",
+    "tools/map-library-prototype/build_catalog.py",
+    "tools/map-library-prototype/detail_prepare.py",
+    "tools/map-library-prototype/finalize_catalog.py",
+    "tools/map-library-prototype/ground.py",
+    "tools/map-library-prototype/measure_transfer.py",
+    "tools/map-library-prototype/rock.py",
+    "tools/map-library-prototype/rock_report.py",
+    "tools/map-library-prototype/test_rock.py",
+    "tools/map-library-prototype/verify_details.py"
+  ],
+  "verification_utc": "2026-10-01T13:18:33.077042+00:00",
+  "probe_dll_sha256": "E34AAB357FFAD2BFD091A0A2093A6B490B732B8C4FAFBB253A8CECFFB5219028",
+  "paid_api_calls": 0
+}

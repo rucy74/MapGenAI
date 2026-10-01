@@ -1,0 +1,17 @@
+{
+  "world_seed": "map-library-rock-controls-20261001",
+  "cases": [
+    {
+      "id": "rock-guard",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/rock-guard.json"
+    },
+    {
+      "id": "unknown-rock",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/unknown-rock.json"
+    }
+  ]
+}

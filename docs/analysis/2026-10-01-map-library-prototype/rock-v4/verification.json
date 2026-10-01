@@ -1,0 +1,727 @@
+{
+  "utc": "2026-10-01T13:18:33.077042+00:00",
+  "unit_tests": 79,
+  "native_checks": 383,
+  "fresh_generated_maps_including_baselines": 58,
+  "reused_original_gl_maps": 6,
+  "source_reuse_files": 20,
+  "raw_rock_source_masks": [
+    {
+      "id": "gl-lake",
+      "raw_source_rock_cells": 1143,
+      "all_source_rocks_retained": true
+    },
+    {
+      "id": "gl-valley",
+      "raw_source_rock_cells": 28789,
+      "all_source_rocks_retained": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "raw_source_rock_cells": 9296,
+      "all_source_rocks_retained": true
+    },
+    {
+      "id": "gl-cliff",
+      "raw_source_rock_cells": 15831,
+      "all_source_rocks_retained": true
+    },
+    {
+      "id": "gl-archipelago",
+      "raw_source_rock_cells": 0,
+      "all_source_rocks_retained": true
+    },
+    {
+      "id": "gl-oasis",
+      "raw_source_rock_cells": 1946,
+      "all_source_rocks_retained": true
+    }
+  ],
+  "rock_evidence": "rock-evaluation.json",
+  "rock_controls": [
+    {
+      "id": "rock-guard",
+      "run": "rock-controls-native-r2",
+      "biome": "TemperateForest",
+      "size": 100,
+      "early": {
+        "present": true,
+        "pass": true,
+        "reasons": [],
+        "protected_changes": 0,
+        "unknown_changes": 0,
+        "known_source_mismatches": 0,
+        "known_grid_mismatches": 0,
+        "protected_conflicts": 0,
+        "added_rock_cells": 0,
+        "removed_rock_cells": 0,
+        "removed_resource_cells": 0,
+        "protection_kinds": {
+          "river": 0,
+          "sea": 0,
+          "special_water": 0,
+          "water": 0,
+          "road": 0,
+          "constructed_floor": 0,
+          "building": 0,
+          "special_rock": 0,
+          "preexisting_rock": 0,
+          "preexisting_resource": 0,
+          "other_thing": 0,
+          "unsupported_terrain": 0
+        },
+        "stage": 199,
+        "protected_elevation_changes": 0,
+        "protected_cave_changes": 0,
+        "unknown_elevation_changes": 0,
+        "unknown_cave_changes": 0,
+        "known_cells": 9999,
+        "unknown_cells": 1,
+        "protected_cells": 0,
+        "scope": "Developer complete inland occupancy grid; target native geology/resources and protected/unknown cells remain authoritative"
+      },
+      "final": {
+        "present": true,
+        "pass": true,
+        "reasons": [],
+        "protected_changes": 0,
+        "unknown_changes": 0,
+        "known_source_mismatches": 0,
+        "protected_conflicts": 12,
+        "added_rock_cells": 1,
+        "removed_rock_cells": 1,
+        "removed_resource_cells": 1,
+        "removed_total_rock_cells": 2,
+        "protection_kinds": {
+          "river": 1,
+          "sea": 1,
+          "special_water": 1,
+          "water": 92,
+          "road": 1,
+          "constructed_floor": 3,
+          "building": 1,
+          "special_rock": 1,
+          "preexisting_rock": 1,
+          "preexisting_resource": 1,
+          "other_thing": 1,
+          "unsupported_terrain": 1
+        },
+        "stage": 404,
+        "protected_cells": 101,
+        "unknown_cells": 1,
+        "resource_policy": "Current target native ore generation is retained inside occupancy; clipping can change ore amount. Source ore types/quantities are not copied.",
+        "scope": "Complete inland composition only. Protected conflicts require candidate rejection; no source roof/cave/resource recreation claim."
+      },
+      "final_audit": {
+        "schema_version": 1,
+        "stage": 99999,
+        "row_order": "south-first",
+        "source_width": 100,
+        "source_height": 100,
+        "target_width": 100,
+        "target_height": 100,
+        "known_source_mismatches": 12,
+        "missing_source_rock_cells": 10,
+        "extra_rock_cells_on_known_nonrock": 2,
+        "protected_conflicts": 12,
+        "unprotected_mismatches": 0,
+        "known_rock_cells": 1600,
+        "known_nonrock_cells": 8399,
+        "unknown_cells": 1,
+        "protection_kinds": {
+          "river": 1,
+          "sea": 1,
+          "special_water": 1,
+          "water": 92,
+          "road": 121,
+          "constructed_floor": 289,
+          "building": 92,
+          "special_rock": 1,
+          "preexisting_rock": 1,
+          "preexisting_resource": 1,
+          "other_thing": 4602,
+          "unsupported_terrain": 1
+        },
+        "mismatch_protection_kinds": {
+          "river": 1,
+          "sea": 1,
+          "special_water": 1,
+          "water": 4,
+          "road": 1,
+          "constructed_floor": 3,
+          "building": 1,
+          "special_rock": 0,
+          "preexisting_rock": 1,
+          "preexisting_resource": 1,
+          "other_thing": 1,
+          "unsupported_terrain": 1
+        },
+        "mismatch_terrain_defs": {
+          "Soil": 4,
+          "WaterMovingChestDeep": 1,
+          "WaterOceanShallow": 1,
+          "HotSpring": 1,
+          "WaterShallow": 1,
+          "FlagstoneSandstone": 1,
+          "StrawMatting": 1,
+          "LavaDeep": 1,
+          "AncientConcrete": 1
+        },
+        "mismatch_building_defs": {
+          "MineableSteel": 1,
+          "Slate": 1,
+          "Wall": 1
+        },
+        "mismatch_other_thing_defs": {
+          "ChunkGranite": 1
+        },
+        "mismatches": [
+          {
+            "x": 12,
+            "z": 12,
+            "source_kind": 1,
+            "actual_rock": true,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "preexisting_resource"
+            ],
+            "terrain": "Soil",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": "MineableSteel",
+            "other_thing_defs": [],
+            "elevation": 0.308496922,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 15,
+            "z": 12,
+            "source_kind": 1,
+            "actual_rock": true,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "preexisting_rock"
+            ],
+            "terrain": "Soil",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": "Slate",
+            "other_thing_defs": [],
+            "elevation": 0.34900105,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 20,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "river",
+              "water"
+            ],
+            "terrain": "WaterMovingChestDeep",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 21,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "sea",
+              "water"
+            ],
+            "terrain": "WaterOceanShallow",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 22,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "special_water",
+              "water"
+            ],
+            "terrain": "HotSpring",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 23,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "water"
+            ],
+            "terrain": "WaterShallow",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 24,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "road",
+              "constructed_floor"
+            ],
+            "terrain": "FlagstoneSandstone",
+            "terrain_natural": false,
+            "terrain_layerable": true,
+            "terrain_designation_category": "Floors",
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 25,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "constructed_floor"
+            ],
+            "terrain": "StrawMatting",
+            "terrain_natural": false,
+            "terrain_layerable": true,
+            "terrain_designation_category": "Floors",
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 26,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "building"
+            ],
+            "terrain": "Soil",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": "Wall",
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 28,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "other_thing"
+            ],
+            "terrain": "Soil",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [
+              "ChunkGranite"
+            ],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 29,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "unsupported_terrain"
+            ],
+            "terrain": "LavaDeep",
+            "terrain_natural": true,
+            "terrain_layerable": false,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          },
+          {
+            "x": 31,
+            "z": 20,
+            "source_kind": 2,
+            "actual_rock": false,
+            "current_guard_blocked": true,
+            "early_snapshot_protected": false,
+            "protection_kinds": [
+              "constructed_floor"
+            ],
+            "terrain": "AncientConcrete",
+            "terrain_natural": false,
+            "terrain_layerable": true,
+            "terrain_designation_category": null,
+            "building_def": null,
+            "other_thing_defs": [],
+            "elevation": 0.71,
+            "caves": 0,
+            "roof": null
+          }
+        ],
+        "roof_defs": {},
+        "natural_roof_cells": 0,
+        "roofed_known_rock_cells": 0,
+        "natural_roofed_known_rock_cells": 0,
+        "scope": "Read-only final source occupancy audit after native generation. Protected conflicts require quarantine; unknown/protected native changes are not compared with intermediate snapshots. No replay or roof/cave/resource transplant.",
+        "present": true,
+        "structure_pass": true,
+        "pass": false,
+        "reasons": [
+          "Final capture source occupancy conflicts with protected target features; reject candidate"
+        ]
+      },
+      "fixtures": {
+        "schema_version": 1,
+        "stage": 403.5,
+        "special_constructed_floor": {
+          "x": 31,
+          "z": 20,
+          "terrain": "AncientConcrete",
+          "designation_category": null,
+          "natural": false,
+          "layerable": true
+        },
+        "unsupported_terrain": {
+          "x": 29,
+          "z": 20,
+          "terrain": "LavaDeep",
+          "dangerous": true,
+          "supports_rock": false
+        }
+      },
+      "checks": {
+        "early_invariants": true,
+        "final_invariants": true,
+        "final_audit_structure": true,
+        "positive_protection_river": true,
+        "positive_protection_sea": true,
+        "positive_protection_special_water": true,
+        "positive_protection_water": true,
+        "positive_protection_road": true,
+        "positive_protection_constructed_floor": true,
+        "positive_protection_building": true,
+        "positive_protection_special_rock": true,
+        "positive_protection_preexisting_rock": true,
+        "positive_protection_preexisting_resource": true,
+        "positive_protection_other_thing": true,
+        "positive_protection_unsupported_terrain": true,
+        "positive_protected_conflicts": true,
+        "positive_added_rock_cells": true,
+        "positive_removed_rock_cells": true,
+        "positive_removed_resource_cells": true,
+        "positive_unknown_cells": true,
+        "unknown_rock_fixture_preserved": true,
+        "new_rock_fixture_added": true,
+        "preexisting_resource_fixture_preserved": true,
+        "ordinary_rock_fixture_removed": true,
+        "ordinary_resource_fixture_removed": true,
+        "preexisting_rock_fixture_preserved": true,
+        "special_cost_floor_fixture_preserved": true,
+        "special_cost_floor_fixture_metadata_present": true,
+        "special_cost_floor_fixture_properties": true,
+        "final_audit_positive_protected_conflicts": true
+      },
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "id": "unknown-rock",
+      "run": "rock-controls-native-r2",
+      "biome": "TemperateForest",
+      "size": 100,
+      "early": {
+        "present": true,
+        "pass": true,
+        "reasons": [],
+        "protected_changes": 0,
+        "unknown_changes": 0,
+        "known_source_mismatches": 0,
+        "known_grid_mismatches": 0,
+        "protected_conflicts": 0,
+        "added_rock_cells": 0,
+        "removed_rock_cells": 0,
+        "removed_resource_cells": 0,
+        "protection_kinds": {
+          "river": 0,
+          "sea": 0,
+          "special_water": 0,
+          "water": 0,
+          "road": 0,
+          "constructed_floor": 0,
+          "building": 0,
+          "special_rock": 0,
+          "preexisting_rock": 0,
+          "preexisting_resource": 0,
+          "other_thing": 0,
+          "unsupported_terrain": 0
+        },
+        "stage": 199,
+        "protected_elevation_changes": 0,
+        "protected_cave_changes": 0,
+        "unknown_elevation_changes": 0,
+        "unknown_cave_changes": 0,
+        "known_cells": 0,
+        "unknown_cells": 10000,
+        "protected_cells": 0,
+        "scope": "Developer complete inland occupancy grid; target native geology/resources and protected/unknown cells remain authoritative"
+      },
+      "final": {
+        "present": true,
+        "pass": true,
+        "reasons": [],
+        "protected_changes": 0,
+        "unknown_changes": 0,
+        "known_source_mismatches": 0,
+        "protected_conflicts": 0,
+        "added_rock_cells": 0,
+        "removed_rock_cells": 0,
+        "removed_resource_cells": 0,
+        "removed_total_rock_cells": 0,
+        "protection_kinds": {
+          "river": 0,
+          "sea": 0,
+          "special_water": 0,
+          "water": 8,
+          "road": 0,
+          "constructed_floor": 0,
+          "building": 0,
+          "special_rock": 0,
+          "preexisting_rock": 0,
+          "preexisting_resource": 0,
+          "other_thing": 0,
+          "unsupported_terrain": 0
+        },
+        "stage": 404,
+        "protected_cells": 8,
+        "unknown_cells": 10000,
+        "resource_policy": "Current target native ore generation is retained inside occupancy; clipping can change ore amount. Source ore types/quantities are not copied.",
+        "scope": "Complete inland composition only. Protected conflicts require candidate rejection; no source roof/cave/resource recreation claim."
+      },
+      "final_audit": {
+        "schema_version": 1,
+        "stage": 99999,
+        "row_order": "south-first",
+        "source_width": 100,
+        "source_height": 100,
+        "target_width": 100,
+        "target_height": 100,
+        "known_source_mismatches": 0,
+        "missing_source_rock_cells": 0,
+        "extra_rock_cells_on_known_nonrock": 0,
+        "protected_conflicts": 0,
+        "unprotected_mismatches": 0,
+        "known_rock_cells": 0,
+        "known_nonrock_cells": 0,
+        "unknown_cells": 10000,
+        "protection_kinds": {
+          "river": 0,
+          "sea": 0,
+          "special_water": 0,
+          "water": 8,
+          "road": 41,
+          "constructed_floor": 310,
+          "building": 118,
+          "special_rock": 0,
+          "preexisting_rock": 0,
+          "preexisting_resource": 0,
+          "other_thing": 4882,
+          "unsupported_terrain": 0
+        },
+        "mismatch_protection_kinds": {
+          "river": 0,
+          "sea": 0,
+          "special_water": 0,
+          "water": 0,
+          "road": 0,
+          "constructed_floor": 0,
+          "building": 0,
+          "special_rock": 0,
+          "preexisting_rock": 0,
+          "preexisting_resource": 0,
+          "other_thing": 0,
+          "unsupported_terrain": 0
+        },
+        "mismatch_terrain_defs": {},
+        "mismatch_building_defs": {},
+        "mismatch_other_thing_defs": {},
+        "mismatches": [],
+        "roof_defs": {
+          "RoofRockThin": 169,
+          "RoofRockThick": 10
+        },
+        "natural_roof_cells": 179,
+        "roofed_known_rock_cells": 0,
+        "natural_roofed_known_rock_cells": 0,
+        "scope": "Read-only final source occupancy audit after native generation. Protected conflicts require quarantine; unknown/protected native changes are not compared with intermediate snapshots. No replay or roof/cave/resource transplant.",
+        "present": true,
+        "structure_pass": true,
+        "pass": true,
+        "reasons": []
+      },
+      "checks": {
+        "early_invariants": true,
+        "final_invariants": true,
+        "final_audit_structure": true,
+        "cells_identical": true,
+        "dimensions_identical": true,
+        "biome_identical": true,
+        "terrain_defs_identical": true,
+        "permanent_terrain_identical": true,
+        "surface_terrain_identical": true,
+        "native_png_identical": true,
+        "default_png_identical": true,
+        "positive_unknown_cells": true,
+        "no_rock_additions": true,
+        "no_rock_removals": true,
+        "no_resource_removals": true,
+        "final_audit_no_known_mismatches": true,
+        "final_audit_no_protected_conflicts": true
+      },
+      "pass": true,
+      "reasons": []
+    }
+  ],
+  "strict_detail_passed": 12,
+  "strict_detail_cases": 18,
+  "strict_detail_failed": 6,
+  "full_source_ground_passed": 11,
+  "full_source_ground_cases": 13,
+  "final_capture_audits_present": 18,
+  "final_capture_protected_conflicts": 1306,
+  "water_layouts": 21,
+  "passing_water_layouts": 21,
+  "ground_applications": 21,
+  "geometry_passed": 25,
+  "geometry_cases": 27,
+  "legacy_controls": [
+    {
+      "run": "detail-a-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "detail-a-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "detail-b-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "detail-b-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "detail-c-native-r2",
+      "id": "core-foothills",
+      "whole_png_and_terrain_identical": true
+    },
+    {
+      "run": "detail-c-native-r2",
+      "id": "core-dry-clearing",
+      "whole_png_and_terrain_identical": true
+    }
+  ],
+  "available_catalog_entries": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "gl-oasis",
+    "image-lake",
+    "core-foothills",
+    "core-dry-clearing"
+  ],
+  "quarantined_entries": [],
+  "local_index_shape": [
+    9,
+    384
+  ],
+  "local_index_matches_catalog": true,
+  "product_dll_hashes": {
+    "sourceDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "installedDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "dist": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5",
+    "installedGeneral": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5"
+  },
+  "product_sources_unchanged": true,
+  "paid_api_calls": 0,
+  "html_images": 36,
+  "html_rendered_in_browser": false,
+  "archived_runs": [
+    "detail-a-native-r2",
+    "detail-b-native-r2",
+    "detail-c-native-r2",
+    "rock-controls-native-r2"
+  ],
+  "scope": "Observed complete inland topology only. Native stone/resources retained inside occupancy; roofs, caves, source ore layout, UI, installation and release are not copied."
+}

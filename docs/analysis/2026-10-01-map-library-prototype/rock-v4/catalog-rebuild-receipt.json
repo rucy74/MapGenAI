@@ -1,0 +1,26 @@
+{
+  "recipe_inputs_unchanged": true,
+  "files": {
+    "core-dry-clearing.json": "707d4966ace77ecf850afc3ad089c92d75e2b3eb3ad238a51bc4af56d9bf55b7",
+    "core-foothills.json": "9e8f94821a5df11dea2c94af2b07c7a58271cf9e8e634693c7d282f88230e7d0",
+    "gl-archipelago.json": "2606fe82c31636865ddac843a9932faf748aca6db75a4ceda6d4d9453f558cc2",
+    "gl-archipelago.receipt.json": "685f12cafd8788b5ae8d4fd29cf429f684f300c997dbe92ad3c8a82d4c6a6e08",
+    "gl-cliff.json": "bdebc467c5ec61ecefb6ef4becc783692fed2da13ed377f80586bcbf43408e6d",
+    "gl-cliff.receipt.json": "2feaa74d7d1facfb917eb5dd98358ee8a04a4cb274517eae7994c4678e60cfd0",
+    "gl-lake.json": "b9b0802eae4006e71aea1449c16dd284e5ca3130a0c5c2a13fd6b94c33c3122e",
+    "gl-lake.receipt.json": "d4f1a1765148949100a40060c8dd49c6210b48a7eaa5f5925d50c86cb9be3b12",
+    "gl-lone-mountain.json": "ac9c2534251684651227ca5700387ab65c7888f089f8a7a736b9592ac4edff10",
+    "gl-lone-mountain.receipt.json": "52d880e20c4f73e81e1c806903932e593700d9a34e2a9d174b817ae0d4055fbf",
+    "gl-oasis.json": "efc48cc860ca668135bc37593ef42245ada766b72f460ce94da5c0cd5316ca2e",
+    "gl-oasis.receipt.json": "499c8c0f57d7f1262d64af1554dd3ce1f4ee416fa2fbda853e0e3d6828fc1c78",
+    "gl-valley.json": "27ce40f3114cc8a7ef64c1aecb0c7ad56b6d76435ea7584eead69008f39e2f86",
+    "gl-valley.receipt.json": "8c177ce95a30812b7a3b3f781e2399e9b7cb8bd56f62a066fcf3a74cecd7a6b6",
+    "image-lake.json": "bfd034bdb106e35bb48facb9f584d582f52cc7440bf590d36ce66e4077d87988",
+    "image-lake.receipt.json": "1726bdab1cc214a3cab466cb4d600d9d5186799cc15f39e68a618aa3912609e7",
+    "rock-guard.json": "8dea2f7e514dfa1362b4c48c5e2a00b136d5f370c22a42dc0e89ece3d2930a59",
+    "unknown-rock.json": "c7887241b7641547632b551f5699aaca54cb46b7a7e1b2ea4c7b868a75c5cf89",
+    "unknown-water.json": "1e5eb93c0768c4b15a191c06fbc04cc2251a08ba4eaee80ff566fce8616eff83",
+    "water-guard.json": "7cb215f6404c4ad8f29dd19edd927d422b2a5f4482952b48ff230c1bed0c0d27"
+  },
+  "reason": "Fail-closed palette prerequisite and accurate per-recipe limitations"
+}

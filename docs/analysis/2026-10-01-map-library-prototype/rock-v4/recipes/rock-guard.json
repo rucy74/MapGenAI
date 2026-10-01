@@ -1,0 +1,425 @@
+{
+  "action": "generate",
+  "params": {},
+  "rock_layer": {
+    "schema_version": 1,
+    "mode": "source-composition",
+    "width": 100,
+    "height": 100,
+    "row_order": "south-first",
+    "source_biome": "TemperateForest",
+    "runs": [
+      {
+        "start": 0,
+        "length": 505,
+        "kind": 1
+      },
+      {
+        "start": 506,
+        "length": 1514,
+        "kind": 1
+      },
+      {
+        "start": 2020,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2060,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2120,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2160,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2220,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2260,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2320,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2360,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2420,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2460,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2520,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2560,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2620,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2660,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2720,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2760,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2820,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2860,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 2920,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 2960,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3020,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3060,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3120,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3160,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3220,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3260,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3320,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3360,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3420,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3460,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3520,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3560,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3620,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3660,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3720,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3760,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3820,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3860,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 3920,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 3960,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4020,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4060,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4120,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4160,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4220,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4260,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4320,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4360,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4420,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4460,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4520,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4560,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4620,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4660,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4720,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4760,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4820,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4860,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 4920,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 4960,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5020,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5060,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5120,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5160,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5220,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5260,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5320,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5360,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5420,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5460,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5520,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5560,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5620,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5660,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5720,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5760,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5820,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5860,
+        "length": 60,
+        "kind": 1
+      },
+      {
+        "start": 5920,
+        "length": 40,
+        "kind": 2
+      },
+      {
+        "start": 5960,
+        "length": 4040,
+        "kind": 1
+      }
+    ],
+    "policy": "Known complete inland occupancy only; native geology/resources, protected water/roads/buildings and unknown cells preserved"
+  }
+}
