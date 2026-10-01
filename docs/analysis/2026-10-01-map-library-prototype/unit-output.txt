@@ -1,0 +1,27 @@
+test_caches_detect_corruption_in_real_entrypoint (test_prototype.PrototypeTests.test_caches_detect_corruption_in_real_entrypoint) ... ok
+test_challenge_is_opt_in (test_prototype.PrototypeTests.test_challenge_is_opt_in) ... ok
+test_contour_export_has_hole_and_separate_depth (test_prototype.PrototypeTests.test_contour_export_has_hole_and_separate_depth) ... ok
+test_diversity_one_per_family (test_prototype.PrototypeTests.test_diversity_one_per_family) ... ok
+test_empty_or_ambiguous_image_not_claimed_as_map (test_prototype.PrototypeTests.test_empty_or_ambiguous_image_not_claimed_as_map) ... ok
+test_exact_coverage_skips_unverified (test_prototype.PrototypeTests.test_exact_coverage_skips_unverified) ... ok
+test_exact_position_skips_unverified (test_prototype.PrototypeTests.test_exact_position_skips_unverified) ... ok
+test_existing_map_not_silently_replaced (test_prototype.PrototypeTests.test_existing_map_not_silently_replaced) ... ok
+test_existing_world_road_profile_remains_with_existing_generator (test_prototype.PrototypeTests.test_existing_world_road_profile_remains_with_existing_generator) ... ok
+test_failed_native_recipe_is_quarantined (test_prototype.PrototypeTests.test_failed_native_recipe_is_quarantined) ... ok
+test_native_water_excludes_disconnected_new_water (test_prototype.PrototypeTests.test_native_water_excludes_disconnected_new_water) ... ok
+test_no_ground_or_bonus_import (test_prototype.PrototypeTests.test_no_ground_or_bonus_import) ... ok
+test_no_mount_en (test_prototype.PrototypeTests.test_no_mount_en) ... ok
+test_no_passing_profile_means_no_candidate (test_prototype.PrototypeTests.test_no_passing_profile_means_no_candidate) ... ok
+test_partial_edit_skips_library (test_prototype.PrototypeTests.test_partial_edit_skips_library) ... ok
+test_recent_exclusion (test_prototype.PrototypeTests.test_recent_exclusion) ... ok
+test_semantic_order_uses_vector_not_file_order (test_prototype.PrototypeTests.test_semantic_order_uses_vector_not_file_order) ... ok
+test_unsupported_biome (test_prototype.PrototypeTests.test_unsupported_biome) ... ok
+test_unsupported_mountains_tile (test_prototype.PrototypeTests.test_unsupported_mountains_tile) ... ok
+test_unsupported_size (test_prototype.PrototypeTests.test_unsupported_size) ... ok
+test_verified_profile_is_exact_not_cartesian_product (test_prototype.PrototypeTests.test_verified_profile_is_exact_not_cartesian_product) ... ok
+test_water_forbidden_overrules_best_vector (test_prototype.PrototypeTests.test_water_forbidden_overrules_best_vector) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.471s
+
+OK

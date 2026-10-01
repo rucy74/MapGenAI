@@ -1,0 +1,23 @@
+{
+  "method": "image-palette-contours",
+  "source_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+  "palette_sha256": "4f178ebfd1ff05e4507d05a549e5826fe4158d567eee32382ec3e0da8fe347c0",
+  "unknown_fraction": 0.0,
+  "note": "Known minimap palette only; screenshots with labels/UI, photos and arbitrary palettes require manual interpretation or a future vision adapter.",
+  "loss": {
+    "S": {
+      "input_cells": 8140,
+      "omitted_small_cells": 101,
+      "components": 3
+    },
+    "W": {
+      "input_cells": 2479,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 4,
+  "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false
+}

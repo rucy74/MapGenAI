@@ -1,0 +1,62 @@
+{
+  "input": "source-final/gl-lake-map.png",
+  "calibration": [
+    "gl-valley",
+    "gl-archipelago"
+  ],
+  "held_out": "gl-lake",
+  "pixel_label_accuracy": 0.938896,
+  "per_label": {
+    "M": {
+      "predicted_cells": 4924,
+      "actual_cells": 1143,
+      "precision": 0.2282696994313566,
+      "recall": 0.9833770778652668
+    },
+    "S": {
+      "predicted_cells": 5642,
+      "actual_cells": 5642,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "W": {
+      "predicted_cells": 2479,
+      "actual_cells": 2479,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "G": {
+      "predicted_cells": 49455,
+      "actual_cells": 53236,
+      "precision": 0.9996158123546659,
+      "recall": 0.9286197310090916
+    }
+  },
+  "exported_features": [
+    "shallow footprint",
+    "deep cores"
+  ],
+  "rocks_exported": false,
+  "method": "image-palette-contours",
+  "source_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+  "palette_sha256": "4f178ebfd1ff05e4507d05a549e5826fe4158d567eee32382ec3e0da8fe347c0",
+  "unknown_fraction": 0.0,
+  "note": "Known minimap palette only; screenshots with labels/UI, photos and arbitrary palettes require manual interpretation or a future vision adapter.",
+  "loss": {
+    "S": {
+      "input_cells": 8140,
+      "omitted_small_cells": 101,
+      "components": 3
+    },
+    "W": {
+      "input_cells": 2479,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 4,
+  "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "scope": "Known native minimap palette water contours only; not general vision, no API model used"
+}

@@ -1,0 +1,21 @@
+{
+  "action": "generate",
+  "params": {
+    "shape_ops": [
+      {
+        "op": "add",
+        "shape": {
+          "id": "library_foothills",
+          "type": "landform",
+          "landform": "foothills",
+          "layout": "organic",
+          "details": "natural",
+          "variant": "257",
+          "position": "top",
+          "size": "0.62",
+          "direction": "0"
+        }
+      }
+    ]
+  }
+}

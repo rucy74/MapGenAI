@@ -1,0 +1,67 @@
+{
+  "utc": "2026-10-01T02:22:41.459669+00:00",
+  "unit_tests": 22,
+  "unit_pass": true,
+  "build_pass": true,
+  "native_execution_checks": 216,
+  "native_maps_with_baselines": 66,
+  "html_image_elements_decoded": 48,
+  "html_anchor_count": 12,
+  "local_markdown_links": 20,
+  "browser_render_verified": false,
+  "source_geometry": {
+    "passed": 18,
+    "cases": 21
+  },
+  "retrieval_smoke": {
+    "passed": 13,
+    "cases": 15,
+    "top1": 8,
+    "top1_cases": 11
+  },
+  "available": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "image-lake",
+    "core-foothills",
+    "core-dry-clearing"
+  ],
+  "quarantined": [
+    "gl-oasis"
+  ],
+  "archived_owned_runs": [
+    "request-example-native",
+    "source-final",
+    "source-r1",
+    "source-r2",
+    "source-r3",
+    "source-r4",
+    "source-r5",
+    "transfer-a-final",
+    "transfer-a-native",
+    "transfer-a-paired",
+    "transfer-a-paired-r2",
+    "transfer-a-r1",
+    "transfer-a-r3",
+    "transfer-a-verified",
+    "transfer-b-native",
+    "transfer-c-native"
+  ],
+  "product_dll_hashes": {
+    "installedDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "sourceDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "installedGeneral": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5",
+    "dist": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5"
+  },
+  "product_sources_unchanged": true,
+  "paid_api_calls": 0,
+  "limits": [
+    "Oasis area accuracy failure retained and excluded",
+    "Native world-water/road profiles untested and excluded",
+    "Beauty not approved",
+    "No UI integration or product installation"
+  ]
+}

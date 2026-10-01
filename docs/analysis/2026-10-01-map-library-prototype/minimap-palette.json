@@ -1,0 +1,114 @@
+{
+  "colors": [
+    {
+      "label": "M",
+      "rgb": [
+        54,
+        39,
+        28
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "M",
+      "rgb": [
+        76,
+        52,
+        38
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "M",
+      "rgb": [
+        28,
+        19,
+        14
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "S",
+      "rgb": [
+        88,
+        97,
+        99
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        96,
+        78,
+        63
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        30,
+        25,
+        26
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        93,
+        76,
+        60
+      ],
+      "calibration_scene": "gl-valley"
+    },
+    {
+      "label": "W",
+      "rgb": [
+        68,
+        78,
+        88
+      ],
+      "calibration_scene": "gl-archipelago"
+    },
+    {
+      "label": "S",
+      "rgb": [
+        88,
+        97,
+        99
+      ],
+      "calibration_scene": "gl-archipelago"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        126,
+        112,
+        93
+      ],
+      "calibration_scene": "gl-archipelago"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        96,
+        78,
+        63
+      ],
+      "calibration_scene": "gl-archipelago"
+    },
+    {
+      "label": "G",
+      "rgb": [
+        28,
+        29,
+        28
+      ],
+      "calibration_scene": "gl-archipelago"
+    }
+  ],
+  "max_distance": 38,
+  "protocol": "Native Map Preview colors, calibrated on valley/archipelago; lake held out"
+}

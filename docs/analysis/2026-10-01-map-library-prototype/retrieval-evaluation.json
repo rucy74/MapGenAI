@@ -1,0 +1,832 @@
+{
+  "checks": 15,
+  "passed": 13,
+  "failed": 2,
+  "top1_matches": 8,
+  "top1_cases": 11,
+  "paid_api_calls": 0,
+  "repeat_query_cache_hit": true,
+  "results": [
+    {
+      "id": "Q01",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-lake",
+        "image-lake"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "구불구불한 호숫가에 집을 짓고 싶어",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "gl-lake",
+          "similarity": 0.8608501553535461,
+          "family": "lake",
+          "command": "recipes/gl-lake.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-foothills",
+          "similarity": 0.83573979139328,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8325521945953369,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0022891999687999487,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q02",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-valley"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "산 사이로 길게 열린 넓은 골짜기를 원해",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "gl-valley",
+          "similarity": 0.896207332611084,
+          "family": "valley",
+          "command": "recipes/gl-valley.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-foothills",
+          "similarity": 0.8596872091293335,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8388307690620422,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0012877000262960792,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q03",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-lone-mountain"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "평야에 외딴 바위산 하나 있는 곳",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "gl-lone-mountain",
+          "similarity": 0.9036511182785034,
+          "family": "lone-mountain",
+          "command": "recipes/gl-lone-mountain.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-foothills",
+          "similarity": 0.8403578400611877,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "gl-cliff",
+          "similarity": 0.8249279260635376,
+          "family": "cliff",
+          "command": "recipes/gl-cliff.json",
+          "source": "GL graph sampled to editable polygons"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0008923999266698956,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q04",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-cliff"
+      ],
+      "pass": true,
+      "top1_match": false,
+      "query": {
+        "text": "절벽 옆에 넓은 빈터가 있는 곳",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8794958591461182,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "gl-cliff",
+          "similarity": 0.8560787439346313,
+          "family": "cliff",
+          "command": "recipes/gl-cliff.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-foothills",
+          "similarity": 0.8416321277618408,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0009200000204145908,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q05",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-archipelago"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "여러 섬이 얕은 물로 이어진 군도",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": true
+      },
+      "candidates": [
+        {
+          "id": "gl-archipelago",
+          "similarity": 0.8832787275314331,
+          "family": "archipelago",
+          "command": "recipes/gl-archipelago.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-foothills",
+          "similarity": 0.853028416633606,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "gl-lake",
+          "similarity": 0.8331842422485352,
+          "family": "lake",
+          "command": "recipes/gl-lake.json",
+          "source": "GL graph sampled to editable polygons"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0008692999836057425,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q06",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-oasis"
+      ],
+      "pass": false,
+      "top1_match": false,
+      "query": {
+        "text": "사막에서 농사 지을 수 있는 작은 오아시스",
+        "biome": "Desert"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "id": "gl-lake",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-valley",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-cliff",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-archipelago",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        },
+        {
+          "id": "image-lake",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "core-foothills",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "core-dry-clearing",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.000637299963273108,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    },
+    {
+      "id": "Q07",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-lake",
+        "image-lake"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "A winding lakeshore with space for a village",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "gl-lake",
+          "similarity": 0.828208863735199,
+          "family": "lake",
+          "command": "recipes/gl-lake.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8136894702911377,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "similarity": 0.799349308013916,
+          "family": "lone-mountain",
+          "command": "recipes/gl-lone-mountain.json",
+          "source": "GL graph sampled to editable polygons"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0008694999851286411,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q08",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "gl-valley"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "A broad valley between rocky mountain sides",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "gl-valley",
+          "similarity": 0.8872623443603516,
+          "family": "valley",
+          "command": "recipes/gl-valley.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "similarity": 0.8560733795166016,
+          "family": "lone-mountain",
+          "command": "recipes/gl-lone-mountain.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "gl-cliff",
+          "similarity": 0.8451523184776306,
+          "family": "cliff",
+          "command": "recipes/gl-cliff.json",
+          "source": "GL graph sampled to editable polygons"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0010685999877750874,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q09",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "core-dry-clearing"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "No mountains and no water, keep an open settlement clearing",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": true,
+        "no_mountains": true,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8778278827667236,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-lake",
+          "reason": "New water forbidden"
+        },
+        {
+          "id": "gl-valley",
+          "reason": "New mountains forbidden"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "reason": "New mountains forbidden"
+        },
+        {
+          "id": "gl-cliff",
+          "reason": "New mountains forbidden"
+        },
+        {
+          "id": "gl-archipelago",
+          "reason": "New water forbidden"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        },
+        {
+          "id": "image-lake",
+          "reason": "New water forbidden"
+        },
+        {
+          "id": "core-foothills",
+          "reason": "New mountains forbidden"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0008265998912975192,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q10",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "core-foothills",
+        "gl-cliff"
+      ],
+      "pass": true,
+      "top1_match": true,
+      "query": {
+        "text": "완만한 산기슭 옆에 넓은 평지, 물은 없이",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [
+        {
+          "id": "core-foothills",
+          "similarity": 0.9276823997497559,
+          "family": "foothills",
+          "command": "recipes/core-foothills.json",
+          "source": "MapGenAI existing native generator"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "similarity": 0.8771854639053345,
+          "family": "lone-mountain",
+          "command": "recipes/gl-lone-mountain.json",
+          "source": "GL graph sampled to editable polygons"
+        },
+        {
+          "id": "core-dry-clearing",
+          "similarity": 0.8747564554214478,
+          "family": "clearing",
+          "command": "recipes/core-dry-clearing.json",
+          "source": "MapGenAI existing native generator"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "gl-archipelago",
+          "reason": "Challenge layout requires explicit preference"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        }
+      ],
+      "query_cache_hit": true,
+      "seconds": 0.0009771999903023243,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+    },
+    {
+      "id": "Q11",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [
+        "core-dry-clearing",
+        "core-foothills"
+      ],
+      "pass": false,
+      "top1_match": false,
+      "query": {
+        "text": "기존 강가에 정착 공간을 넓혀 줘",
+        "biome": "TemperateForest",
+        "has_native_water": true
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "id": "gl-lake",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "gl-valley",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "gl-cliff",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "gl-archipelago",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "image-lake",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "core-foothills",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        },
+        {
+          "id": "core-dry-clearing",
+          "reason": "Existing world river/coast profile has not been replay-tested; keep the existing generator"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.0005318999756127596,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    },
+    {
+      "id": "Q12",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [],
+      "pass": true,
+      "top1_match": null,
+      "query": {
+        "text": "온천만 추가해 줘",
+        "biome": "TemperateForest",
+        "scope": "edit"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "id": "gl-lake",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "gl-valley",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "gl-cliff",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "gl-archipelago",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "image-lake",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "core-foothills",
+          "reason": "Partial edits do not trigger library replacement"
+        },
+        {
+          "id": "core-dry-clearing",
+          "reason": "Partial edits do not trigger library replacement"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.0004813000559806824,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    },
+    {
+      "id": "Q13",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [],
+      "pass": true,
+      "top1_match": null,
+      "query": {
+        "text": "도넛 내부의 70%만 비옥한 토양으로",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "reason": "Exact coverage/width/direction requests remain with existing generator; library verification not implemented"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.00046719994861632586,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    },
+    {
+      "id": "Q14",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [],
+      "pass": true,
+      "top1_match": null,
+      "query": {
+        "text": "왼쪽에 호수를 놓아 줘",
+        "biome": "TemperateForest"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "reason": "Exact coverage/width/direction requests remain with existing generator; library verification not implemented"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.00047930004075169563,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    },
+    {
+      "id": "Q15",
+      "kind": "synthetic, labelled before retrieval",
+      "acceptable_ids": [],
+      "pass": true,
+      "top1_match": null,
+      "query": {
+        "text": "얼음 벌판에 아름다운 정착지",
+        "biome": "IceSheet"
+      },
+      "constraints": {
+        "no_water": false,
+        "no_mountains": false,
+        "allow_challenge": false
+      },
+      "candidates": [],
+      "excluded": [
+        {
+          "id": "gl-lake",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-valley",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-lone-mountain",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-cliff",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-archipelago",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "gl-oasis",
+          "reason": "Entry failed actual replay and is quarantined"
+        },
+        {
+          "id": "image-lake",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "core-foothills",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        },
+        {
+          "id": "core-dry-clearing",
+          "reason": "Exact biome/size/hilliness combination has no passing replay"
+        }
+      ],
+      "query_cache_hit": false,
+      "seconds": 0.0004664999432861805,
+      "paid_api_calls": 0,
+      "reranker": "rules/diversity only",
+      "embedding_skipped": true,
+      "warning": "No compatible verified recipe; existing generator remains responsible."
+    }
+  ],
+  "scope": "Small smoke set against nine authored entries, not user beauty preference or universal retrieval accuracy"
+}

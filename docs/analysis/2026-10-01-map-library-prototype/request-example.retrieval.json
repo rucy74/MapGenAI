@@ -1,0 +1,54 @@
+{
+  "query": {
+    "text": "산 사이로 길게 열린 넓은 골짜기",
+    "biome": "TemperateForest",
+    "map_size": 250,
+    "scope": "new",
+    "has_native_water": false,
+    "allow_challenge": false,
+    "count": 3
+  },
+  "constraints": {
+    "no_water": false,
+    "no_mountains": false,
+    "allow_challenge": false
+  },
+  "candidates": [
+    {
+      "id": "gl-valley",
+      "similarity": 0.9035274386405945,
+      "family": "valley",
+      "command": "recipes/gl-valley.json",
+      "source": "GL graph sampled to editable polygons"
+    },
+    {
+      "id": "core-foothills",
+      "similarity": 0.8661396503448486,
+      "family": "foothills",
+      "command": "recipes/core-foothills.json",
+      "source": "MapGenAI existing native generator"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "similarity": 0.8426157236099243,
+      "family": "lone-mountain",
+      "command": "recipes/gl-lone-mountain.json",
+      "source": "GL graph sampled to editable polygons"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "gl-archipelago",
+      "reason": "Challenge layout requires explicit preference"
+    },
+    {
+      "id": "gl-oasis",
+      "reason": "Entry failed actual replay and is quarantined"
+    }
+  ],
+  "query_cache_hit": false,
+  "seconds": 8.4289671999868,
+  "paid_api_calls": 0,
+  "reranker": "rules/diversity only",
+  "warning": "Experimental candidates need actual current-tile generation; similarity is not probability or beauty."
+}

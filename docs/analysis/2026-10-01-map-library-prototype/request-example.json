@@ -1,0 +1,32 @@
+{
+  "world_seed": "map-library-request-20261001",
+  "request": {
+    "text": "산 사이로 길게 열린 넓은 골짜기",
+    "biome": "TemperateForest",
+    "map_size": 250,
+    "scope": "new",
+    "has_native_water": false,
+    "allow_challenge": false,
+    "count": 3
+  },
+  "cases": [
+    {
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 250,
+      "command": "recipes/gl-valley.json"
+    },
+    {
+      "id": "core-foothills",
+      "biome": "TemperateForest",
+      "size": 250,
+      "command": "recipes/core-foothills.json"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 250,
+      "command": "recipes/gl-lone-mountain.json"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "method": "observed-terrain",
+  "source_sha256": "523bbd02753abdcfd4b9a57bdc0abfe516a00def6a16b7a058bff80d226af204",
+  "row_order": "south-first",
+  "loss": {
+    "M": {
+      "input_cells": 0,
+      "omitted_small_cells": 0,
+      "components": 0
+    },
+    "S": {
+      "input_cells": 53652,
+      "omitted_small_cells": 148,
+      "components": 1
+    },
+    "W": {
+      "input_cells": 13527,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 2,
+  "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false
+}

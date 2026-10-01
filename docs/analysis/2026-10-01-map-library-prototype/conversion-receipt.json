@@ -1,0 +1,131 @@
+{
+  "entries": [
+    {
+      "id": "gl-lake",
+      "loss": {
+        "M": {
+          "input_cells": 1191,
+          "omitted_small_cells": 443,
+          "components": 3
+        },
+        "S": {
+          "input_cells": 8140,
+          "omitted_small_cells": 101,
+          "components": 3
+        },
+        "W": {
+          "input_cells": 2479,
+          "omitted_small_cells": 0,
+          "components": 1
+        }
+      },
+      "shape_count": 7,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    },
+    {
+      "id": "gl-valley",
+      "loss": {
+        "M": {
+          "input_cells": 28985,
+          "omitted_small_cells": 394,
+          "components": 12
+        }
+      },
+      "shape_count": 12,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    },
+    {
+      "id": "gl-lone-mountain",
+      "loss": {
+        "M": {
+          "input_cells": 9382,
+          "omitted_small_cells": 288,
+          "components": 6
+        }
+      },
+      "shape_count": 6,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    },
+    {
+      "id": "gl-cliff",
+      "loss": {
+        "M": {
+          "input_cells": 16085,
+          "omitted_small_cells": 195,
+          "components": 2
+        }
+      },
+      "shape_count": 2,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    },
+    {
+      "id": "gl-archipelago",
+      "loss": {
+        "M": {
+          "input_cells": 0,
+          "omitted_small_cells": 0,
+          "components": 0
+        },
+        "S": {
+          "input_cells": 53652,
+          "omitted_small_cells": 148,
+          "components": 1
+        },
+        "W": {
+          "input_cells": 13527,
+          "omitted_small_cells": 0,
+          "components": 1
+        }
+      },
+      "shape_count": 2,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    },
+    {
+      "id": "gl-oasis",
+      "loss": {
+        "F": {
+          "input_cells": 1175,
+          "omitted_small_cells": 0,
+          "components": 1
+        },
+        "R": {
+          "input_cells": 255,
+          "omitted_small_cells": 0,
+          "components": 1
+        },
+        "M": {
+          "input_cells": 1994,
+          "omitted_small_cells": 369,
+          "components": 6
+        },
+        "S": {
+          "input_cells": 319,
+          "omitted_small_cells": 0,
+          "components": 1
+        },
+        "W": {
+          "input_cells": 0,
+          "omitted_small_cells": 0,
+          "components": 0
+        }
+      },
+      "shape_count": 9,
+      "ground_policy": "Preserve native biome terrain; only occupied rock/water outlines are authored",
+      "seed_policy": "Current tile seed; sampled source composition retained",
+      "procedural_reproduction": false
+    }
+  ],
+  "excluded": [],
+  "ground_policy": "Native biome ground preserved except explicitly requested oasis fertile areas",
+  "water_depth": "Shallow footprint first, sampled deep cores last; no automatic all-deep water"
+}
