@@ -305,9 +305,10 @@ def guard_check(run, scene, early, final, audit):
     return check
 
 
-def evaluate(folder, runs):
+def evaluate(folder, runs, source=None):
     entries = {e['id']: e for e in read(folder / 'catalog.json')['entries']}
-    palette = read(folder / 'source-native-final/native-terrain-palette.json')
+    source_root = source if source is not None else folder / 'source-native-final'
+    palette = read(source_root / 'native-terrain-palette.json')
     records, guards, legacy = [], [], []
     for run in runs:
         result = read(run / 'result.json')
@@ -315,6 +316,8 @@ def evaluate(folder, runs):
             raise ValueError('Incomplete native generation: ' + str(run))
         for scene in result['results']:
             ident = scene['id']
+            if ident in ('cave-guard', 'unknown-cave', 'cave-unsafe'):
+                continue  # Dedicated cave evaluator must prove these controls.
             path = run / (ident + '-rock-application.json')
             if (not path.exists() and ident not in GUARDS
                     and not entries[ident].get('requires_rock_sidecar', False)):
@@ -330,7 +333,7 @@ def evaluate(folder, runs):
                 continue
             entry = entries[ident]
             source_id = entry['source']['reference_id']
-            source_path = folder / 'source-native-final' / (source_id + '-terrain.json')
+            source_path = source_root / (source_id + '-terrain.json')
             source, source_cells, source_names = observation(source_path)
             actual, actual_cells, actual_names = observation(run / (ident + '-terrain.json'))
             size = scene['size']
@@ -340,14 +343,29 @@ def evaluate(folder, runs):
             reasons += audit['reasons']
             if audit['structure_pass']:
                 known_nonrock = scaled(np.isin(source_cells, ['G', 'S', 'W']), size)
+                known_rock = scaled(source_cells == 'M', size)
+                if entry.get('requires_cave_sidecar'):
+                    # This is an independent physical source classification,
+                    # not the recipe's declared known mask. Keep full original
+                    # M and ground denominators above unchanged.
+                    geology = read(source_root / (source_id + '-geology.json'))
+                    original_shape = source_cells.shape
+                    roof_names = np.asarray(geology['roof_table'])[np.asarray(geology['roof_indices']).reshape(original_shape)]
+                    portable = np.isin(roof_names, ['None', 'RoofRockThin', 'RoofRockThick'])
+                    portable &= np.asarray(list(geology['known_mask'])).reshape(original_shape) == '1'
+                    for field in ('constructed_floor', 'nonrock_edifice'):
+                        portable &= np.asarray(list(geology[field])).reshape(original_shape) == '0'
+                    portable = scaled(portable, size)
+                    known_nonrock &= portable; known_rock &= portable
                 actual_known_extra = int((known_nonrock & (actual_cells == 'M')).sum())
                 if (audit['source_width'], audit['source_height']) != (source['width'], source['height']):
                     reasons.append('Final audit source dimensions disagree with independent observation')
                 if (audit['target_width'], audit['target_height']) != (actual['width'], actual['height']):
                     reasons.append('Final audit target dimensions disagree with independent observation')
-                if audit['known_rock_cells'] != rock['expected_cells'] or audit['known_nonrock_cells'] != int(known_nonrock.sum()):
+                if audit['known_rock_cells'] != int(known_rock.sum()) or audit['known_nonrock_cells'] != int(known_nonrock.sum()):
                     reasons.append('Final audit source occupancy counts disagree with independent original-source observation')
-                if audit['missing_source_rock_cells'] != rock['missing_cells']:
+                known_missing = int((known_rock & (actual_cells != 'M')).sum())
+                if audit['missing_source_rock_cells'] != known_missing:
                     reasons.append('Final audit missing rock count disagrees with independent original-source observation')
                 if audit['extra_rock_cells_on_known_nonrock'] != actual_known_extra:
                     reasons.append('Final audit known-nonrock extra count disagrees with independent original-source observation')

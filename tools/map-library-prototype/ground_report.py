@@ -37,8 +37,9 @@ def prepare_extra(folder):
     write(folder/'extra-manifest.json',{'world_seed':'map-library-ground-positive-controls-20261001','cases':cases})
     print(json.dumps({'extra_cases':len(cases),'default_ground_precision':ground_match,'default_unknown':receipt['unknown_fraction']}))
 
-def evaluate(folder,runs):
-    native=read(folder/'source-native-final/native-terrain-palette.json');defs={d['def']:d for d in native['terrains']}
+def evaluate(folder,runs,source=None,strict=True):
+    source_root=source if source is not None else folder/'source-native-final'
+    native=read(source_root/'native-terrain-palette.json');defs={d['def']:d for d in native['terrains']}
     records=[];checks=[]
     for run in runs:
         result=read(run/'result.json')
@@ -59,7 +60,7 @@ def evaluate(folder,runs):
                 check.update({'positive_unresolved_cells':receipt['preserved_unresolved_cells'],'final_cells_changed_from_native':unchanged})
                 continue
             source_id='gl-lake' if ident in ('image-lake','image-default-lake','desert-lakeside') else ident
-            source_file=folder/'source-native-final'/(source_id+'-terrain.json')
+            source_file=source_root/(source_id+'-terrain.json')
             if not source_file.exists():continue
             source,source_names=names(source_file);actual,actual_names=names(run/(ident+'-terrain.json'))
             truth=scale(source_names,scene['size']);source_ground=scale(np.asarray(list(source['cells'])).reshape(source_names.shape)=='G',scene['size'])
@@ -76,11 +77,11 @@ def evaluate(folder,runs):
                  'source_reference_cells':int(eligible.sum()),'source_named_ground_agreement':fidelity,
                  'fidelity_pass':fidelity>=.95 if same and fidelity is not None else None,
                  'scope':'Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity.'}
-            if same and not row['fidelity_pass']:raise ValueError('Ground fidelity below 95%: '+str(row))
+            if strict and same and not row['fidelity_pass']:raise ValueError('Ground fidelity below 95%: '+str(row))
             records.append(row)
     image=read(folder/'image-evaluation.json')
-    cells,materials,_=read_image_materials(folder/'source-native-final/gl-lake-map.png',folder/'minimap-palette.json')
-    _,truth=names(folder/'source-native-final/gl-lake-terrain.json');known=materials!=''
+    cells,materials,_=read_image_materials(source_root/'gl-lake-map.png',folder/'minimap-palette.json')
+    _,truth=names(source_root/'gl-lake-terrain.json');known=materials!=''
     image['named_ground_precision']=float((materials[known]==truth[known]).mean());write(folder/'image-evaluation.json',image)
     report={'records':records,'application_checks':checks,'passing_applications':sum(c['pass'] for c in checks),'applications':len(checks),
             'same_biome_fidelity_passes':sum(r['fidelity_pass'] is True for r in records),

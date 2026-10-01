@@ -6,6 +6,7 @@ from contours import read_terrain, read_image, export
 from ground import observed_ground, ground_layer, image_palette, read_image_materials
 from water import observed_water, water_layer
 from rock import observed_rock
+from cave import observed_cave
 
 NAMES={
  'gl-lake':('불규칙한 호숫가','Irregular lakeside','lake','구불구불한 호숫가와 넓게 이어지는 정착 공간.','An irregular lake shoreline with broad connected settlement ground.'),
@@ -14,14 +15,19 @@ NAMES={
  'gl-cliff':('절벽 옆 넓은 빈터','Open ground beside a cliff','cliff','한쪽 가장자리에 길게 이어진 바위 절벽과 반대쪽의 넓은 정착 공간.','A continuous rocky cliff on one side and broad settlement space on the other.'),
  'gl-archipelago':('얕은 물로 이어진 군도','Shallow-water archipelago','archipelago','넓은 물 사이에 여러 섬. 얕은 물로 이동할 수 있는 특별한 지형.','Several islands amid broad water, linked by walkable shallows. A special island challenge.'),
  'gl-oasis':('사막의 작은 오아시스','Small desert oasis','oasis','사막 한가운데 작은 얕은 물과 주변의 국소적인 경작 가능한 토양.','A small shallow desert pool surrounded by localized farmable soil.'),
+ 'gl-cave-entrance':('산자락의 동굴 입구','Mountain cave entrance','cave','넓은 바깥 평야와 자연 지붕 아래로 이어지는 산속 통로.','Open exterior ground leading into roofed natural mountain passages.'),
+ 'gl-secluded-valley':('동굴로 이어진 외딴 골짜기','Secluded valley and tunnels','secluded-valley','산으로 둘러싸인 골짜기와 바깥으로 이어지는 자연 동굴 통로.','A secluded mountain valley connected to the outside by natural tunnels.'),
 }
 
 def write(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
-def build(folder,source,details=False):
+def build(folder,source,details=False,caves=False):
     result=json.loads((source/'result.json').read_text(encoding='utf-8'))
-    if not result['ok'] or len(result['results'])!=6: raise ValueError('Complete six-scene GL capture required')
+    expected=set(list(NAMES) if caves else list(NAMES)[:6])
+    if not result['ok'] or len(result['results'])!=len(expected) or {s['id'] for s in result['results']}!=expected:
+        raise ValueError('Complete requested GL capture required')
+    if caves and not details:raise ValueError('Cave transfer requires explicit rock/ground/water details')
     inventory=json.loads((folder/'gl-inventory.json').read_text(encoding='utf-8'))['items']; original={e['id']:e for e in inventory}
     entries=[];excluded=[];receipt=[]
     native_path=source/'native-terrain-palette.json'
@@ -34,7 +40,17 @@ def build(folder,source,details=False):
         data=json.loads((source/(ident+'-terrain.json')).read_text(encoding='utf-8'))
         fertile=np.array(list(data['fertile_cells'])).reshape(cells.shape) if ident=='gl-oasis' and native is None else None
         try:
-            command,loss=export(cells,ident.replace('-','_'),water=True,fertile_cells=fertile)
+            try:
+                command,loss=export(cells,ident.replace('-','_'),water=True,fertile_cells=fertile)
+            except ValueError as error:
+                if not caves or not str(error).startswith('Too many fragments'):
+                    raise
+                # Full observed grids/occupancy are the explicit developer
+                # contract here. A lossy polygon count limit cannot recreate a
+                # tunnel network. This is not a product empty recommendation.
+                command={'action':'generate','params':{}}
+                loss={'polygon_conversion_omitted':str(error),
+                      'runtime_contract':'Complete developer sidecars only; product polygon state alone cannot replay this entry'}
             if native is not None:
                 layer,ground_loss=observed_ground(source/(ident+'-terrain.json'),cells,native,minimum=1 if details else 12)
                 command['ground_layer']=layer;loss.update(ground_loss)
@@ -43,19 +59,34 @@ def build(folder,source,details=False):
                 if details:
                     rock,rock_loss=observed_rock(source/(ident+'-terrain.json'))
                     command['rock_layer']=rock;loss.update(rock_loss)
+                    if caves:
+                        cave,cave_loss=observed_cave(source/(ident+'-terrain.json'),source/(ident+'-geology.json'),native)
+                        command['cave_layer']=cave;loss.update(cave_loss)
+                        # These four complete observed sidecars are authoritative.
+                        # Replaying approximate water polygons as well would run
+                        # authored terrain at 400 and flatten exact source E/C.
+                        # Polygon conversion stays diagnostic; legacy detail and
+                        # image commands still use their existing product params.
+                        loss['diagnostic_polygon_params_sha256']=hashlib.sha256(
+                            json.dumps(command['params'],sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()
+                        loss['product_polygon_params_omitted']=True
+                        loss['runtime_contract']='Complete observed developer geology, rock, ground and water; no duplicate product polygon edits'
+                        command['params']={}
         except ValueError as error:
             excluded.append({'id':ident,'reason':str(error),'source_retained':True});continue
         path=folder/'recipes'/(ident+'.json');write(path,command);write(path.with_suffix('.receipt.json'),{**origin,**loss})
         source_info=original[scene['gl_id']]
-        kinds={op['shape']['compose'][-1].get('fill') for op in command['params']['shape_ops']}
+        kinds={op['shape']['compose'][-1].get('fill') for op in command['params'].get('shape_ops',[])}
         entry={'id':ident,'title_ko':title,'title_en':en_title,'description_ko':ko,'description_en':en,'family':family,
                'command':path.relative_to(folder).as_posix(),'status':'prototype-draft','challenge':ident=='gl-archipelago',
                'profiles':{'biomes':['Desert','AridShrubland'] if ident=='gl-oasis' else ['TemperateForest','AridShrubland'],'map_sizes':[250,300],'hilliness':['Flat'],'native_water':'Not supported for added water; explicit exclusion'},
                'features':{'new_water':bool(kinds & {'water','WaterShallow'}),'new_mountains':bool(np.any(cells=='M')),'global_density_edits':False},
-               'source':{'kind':'GL graph sampled to editable polygons','author':'m00nl1ght','license':'CC-BY-NC-SA-4.0','url':source_info['source'],
+               'source':{'kind':'Actual GL native geology, occupancy, ground and water' if caves else 'GL graph sampled to editable polygons','author':'m00nl1ght','license':'CC-BY-NC-SA-4.0','url':source_info['source'],
                          'graph':source_info['file'],'graph_sha256':source_info['sha256'],'graph_revision':source_info['revision'],
                          'reference_run':source.relative_to(folder).as_posix(),'reference_id':ident,'source_settings':{'gl_id':scene['gl_id'],'map_size':scene['size'],'world_seed':scene['world_seed'],'tile':scene['tile'],'biome':scene['biome'],'mutators':scene['mutators']}},
-               'limitations':['Sampled geometry, not a procedural GL graph conversion','Caves, roofs, incidents, resources and spawn logic are not transplanted','Visual approval pending; technical execution alone is not beauty']}
+               'limitations':['Sampled geometry, not a procedural GL graph conversion',
+                              'Incidents, source resources and spawn logic are not transplanted' if caves else 'Caves, roofs, incidents, resources and spawn logic are not transplanted',
+                              'Visual approval pending; technical execution alone is not beauty']}
         entries.append(entry);receipt.append({'id':ident,**loss})
     # Legacy captures use other scenes for calibration. V2 captures read the
     # renderer's loaded color dictionary without using the held-out labels.
@@ -90,6 +121,7 @@ def build(folder,source,details=False):
     image_entry=json.loads(json.dumps(base));image_entry.update({'id':'image-lake','title_ko':'이미지에서 읽은 호숫가','title_en':'Lakeside from an image','command':'recipes/image-lake.json'})
     image_entry['source']['kind']='Image palette and contour fallback';image_entry['limitations'].append('Known minimap palette only, unknown colors preserved as unclassified')
     image_entry['features']['new_mountains']=False
+    if caves:image_entry['limitations'].append('Image input supplies no cave/elevation/roof observations')
     image_entry['limitations'].append('Water contours only; ambiguous rock/ground/shadow colors are not transplanted')
     if native is not None:
         image_entry['limitations'][-1]='Water and confident named ground only; ambiguous pixels preserved'
@@ -111,13 +143,20 @@ def build(folder,source,details=False):
             e['requires_ground_sidecar']='ground_layer' in command
             e['requires_water_sidecar']='water_layer' in command
             e['requires_rock_sidecar']='rock_layer' in command
+            if caves:e['requires_cave_sidecar']='cave_layer' in command
             if e['requires_rock_sidecar']:
-                e['limitations'].append('Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original roofs/caves/resource layout transplant')
+                e['limitations'].append('Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant' if caves else 'Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original roofs/caves/resource layout transplant')
+            if e.get('requires_cave_sidecar'):
+                e['limitations'].append('Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only')
             if e['requires_water_sidecar']:
                 e['features']['new_water']=True
                 e['limitations'].append('Complete observed inland water layout sidecar; product state/UI does not apply it yet')
+    if caves:
+        # Keep all nine previous case positions/seeds unchanged for the legacy
+        # paired regression; new native cave families follow the existing cases.
+        entries.sort(key=lambda e:e['id'] in ('gl-cave-entrance','gl-secluded-valley'))
     write(folder/'catalog.json',{'schema_version':1,'purpose':'Developer prototype, not a distributed preset pack','entries':entries,'excluded':excluded,'reference_source_graphs':44,'paid_api_calls':0,
-        'runtime_contract':('MapLibraryProbe rock/ground/water sidecars v1; product ApplyPatches alone omits sidecars' if details else 'MapLibraryProbe ground/water sidecars v1; product ApplyPatches alone omits sidecars') if native else 'Product polygon commands only'})
+        'runtime_contract':('MapLibraryProbe cave/rock/ground/water sidecars v1; product ApplyPatches alone omits sidecars' if caves else 'MapLibraryProbe rock/ground/water sidecars v1; product ApplyPatches alone omits sidecars' if details else 'MapLibraryProbe ground/water sidecars v1; product ApplyPatches alone omits sidecars') if native else 'Product polygon commands only'})
     write(folder/'conversion-receipt.json',{'entries':receipt,'excluded':excluded,
         'ground_policy':'Named source ground sidecar with native protection and biome adaptation' if native else 'Native biome ground preserved except explicitly requested oasis fertile areas',
         'water_depth':'Shallow footprint first, sampled deep cores last; no automatic all-deep water'} )
@@ -130,4 +169,4 @@ def build(folder,source,details=False):
     print(json.dumps({'entries':len(entries),'excluded':excluded,'recipes':[e['id'] for e in entries]},ensure_ascii=False))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--folder',type=pathlib.Path,required=True);p.add_argument('--source',type=pathlib.Path,required=True);p.add_argument('--details',action='store_true');args=p.parse_args();build(args.folder,args.source,details=args.details)
+    p=argparse.ArgumentParser();p.add_argument('--folder',type=pathlib.Path,required=True);p.add_argument('--source',type=pathlib.Path,required=True);p.add_argument('--details',action='store_true');p.add_argument('--caves',action='store_true');args=p.parse_args();build(args.folder,args.source,details=args.details,caves=args.caves)

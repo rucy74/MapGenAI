@@ -1,5 +1,26 @@
 # Map library developer prototype
 
+## 동굴·자연 지붕·높이 이식 실험
+
+`--details --caves`는 새 원본 `*-geology.json`을 요구한다. terrain-v2와 별개로 native working grid가 폐기되기 전99999에서 실제 높이·Caves·지붕 이름·통행 가능 여부·인공 바닥/건물을 캡처한다. 기존6종에 CaveEntrance와 SecludedValley를 더한8종을 새로 생성한다. 이미지나 지붕 개수 합계에서 동굴을 추측하지 않는다.
+
+`cave.py`는 유한 높이/Caves와 None/얇은 자연 지붕/두꺼운 자연 지붕을 `cave_layer`로 저장한다. 불명 칸·원본 인공 지붕/바닥/건물은 이식 범위에서 제외한다. source199에서 실제 높이/동굴을 유지하고, 자연 지붕은 후반 native 생성 이후1601에서 보호/지지 조건을 확인한 뒤 적용한다. 현재 타일의 인공 지붕·건물·길·특수 물·기존 보호 대상은 그대로 둔다. 지붕 일괄 붕괴 처리나 원본을 맞추기 위한 건물 삭제는 하지 않는다.
+
+`cave_report.py`는 원본 실제 배열을 직접 읽고 높이/Caves 오차, 동굴 마스크, 실제 자연 지붕·지붕 없는 칸, 걸어갈 수 있는 통로,4방향 연결/입구를 따로 대조한다. PNG 색이나 exporter 배열을 정답으로 쓰지 않는다. 이 검사와 기존 바위98%·전체 지원 자연 바닥95%·물/최종 보호 충돌을 모두 통과한 profile만 등록한다. 크기 변경은 최근접 원본 칸 대응이며 Caves 값 자체를 확대하지 않는다. 데이터/최종 audit이 없으면 명시적 동굴 이식은 거절하고 기존 일반 경로는 유지한다.
+
+이 명시적인 전체 동굴 관측 실험은 네 종류의 칸별 sidecar를 정본으로 삼고 product params를 비운다. 근사 물 polygon을 중복 적용하면 제품 Authoring400이 원본 높이를 .3 이하로 낮추기 때문이다. polygon 변환은 손실·진단 SHA만 남기며 조각 수 제한도 기록한다. 제품의 빈 추천 허용으로 바꾸는 동작이 아니다. 제품 TileMapState·추천창·저장·Undo·설치 DLL에 아직 연결하지 않았고 source 자원 종류·spawn/사건/월드설정도 복제하지 않는다. 일반 rock-v4/이미지/기본 명령과 물의 기존 flatten 정책은 유지한다.8MiB 개발자 reader도 프로브에만 있으며 제품/모델 응답1MiB 제한을 변경하지 않는다.
+
+```powershell
+# source-manifest.json을 run.ps1 -WithGL로 새 소유 폴더에서 생성/Archive한 뒤:
+python -X utf8 tools/map-library-prototype/cave_prepare.py --folder docs/analysis/2026-10-01-map-library-prototype/cave-v5 --source docs/analysis/2026-10-01-map-library-prototype/cave-v5/source-native-r2
+# cave-a/b/c와 cave-controls manifest를 새 폴더에서 실제 생성/Archive한다.
+python -X utf8 tools/map-library-prototype/cave_report.py --help
+# 판정 실패 profile을 그대로 제외해 finalize하고 offline index를 만든 뒤:
+# verify_caves.py --folder <folder> --runs <A> <B> <C> <controls>
+```
+
+실제 재현 폴더는 [동굴 비교 HTML](../../docs/analysis/2026-10-01-map-library-prototype/cave-v5/cave-review.html), [검증 영수증](../../docs/analysis/2026-10-01-map-library-prototype/cave-v5/verification.json), [결과·한계](../../docs/analysis/2026-10-01-map-library-prototype/cave-v5/report.md)에서 확인한다. 기술적 보존 검사는 미관·플레이 승인과 구분한다. 고도/Caves 일치만으로 통로·안전 지붕까지 승인하지 않으며, native 후반 고대 벽이나 무지지 지붕과 충돌한 조건은 제외한다.
+
 ## 물 위치까지 함께 가져오는 후속
 
 `water.py`는 실제 원본 칸의 얕은 물/깊은 물/확인된 마른 땅을 별도 `water_layer`에 저장한다. 작은 연못도 생략하지 않는다. 개발자 `WaterPass`는 바닥 적용 전에 원본 수심/위치를 적용하고, 원본의 확인된 마른 곳에 있는 일반 연못만 정리한다. 원본의 건축 바닥은 마른 곳이라는 근거로만 사용하며 재료/건물을 복사하지 않는다. 대상의 강·바다·온천 및 연결된 물, 길·건축 바닥·건물과 불명 입력은 보호하고 충돌을 기록한다. 보통 습지 Marsh는 강/온천으로 오인하지 않는다.
