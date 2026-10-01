@@ -1,6 +1,6 @@
 # 실제 동굴·자연 지붕·고도 재현 실험
 
-원본 동굴을 실제 칸별 데이터로 가져오도록 개발자 프로토타입을 확장했다. 원본 높이와 Caves 수치는 8종×3조건 모두 차이0이지만, **실제 동굴이 있는 15조건 중 통로·지붕·연결·안전 검사까지 통과한 것은2조건**, 물·바위·바닥까지 합쳐 등록할 수 있는 동굴 조건은1개다. 전체 GL 지형의 완전 복제가 끝났다는 결과가 아니다. 제품 추천창/codec/저장/Undo/설치 DLL에는 아직 연결하지 않았다.
+원본 동굴을 실제 칸별 데이터로 가져오도록 개발자 프로토타입을 확장했다. 지원되는 known 원본 영역의 높이와 Caves 수치는 8종×3조건 모두 차이0이지만, **실제 동굴이 있는 15조건 중 통로·지붕·연결·안전 검사까지 통과한 것은2조건**, 물·바위·바닥까지 합쳐 등록할 수 있는 동굴 조건은1개다. 보호·unknown 영역은 이식하지 않으므로 전체 raw 배열의 복제와는 다르다. 전체 GL 지형의 완전 복제가 끝났다는 결과가 아니다. 제품 추천창/codec/저장/Undo/설치 DLL에는 아직 연결하지 않았다.
 
 [실제 그림·진단 HTML](cave-review.html) · [검증 영수증](verification.json) · [지질/통로 검사](cave-evaluation.json) · [카탈로그](catalog.json) · [전후 그림](comparison.png)
 
@@ -36,7 +36,7 @@
 
 - Python124/124, 프로브 빌드 경고0/오류0. 실제 CLR constructor의 잘못된 수치/타입/배열/K-N 거부12/12도 최종 DLL에서 확인했다.
 - 최종 source49 + target173×3 + controls77 = 실제 실행645/645. 정본 source8 + target/baseline/rock-only72 + controls10 = 새90지도. 지붕 지지 알고리즘의 별도 source-r3 진단8지도/49검사는 따로 센다. 실행 검사 통과는 지도 재현/등록 통과가 아니다.
-- target GL24개의 E/C 오차0, 직접 protected/unknown 변경0. native 실제 roof-support와 projected 판정 차이0. 전 단계 보호 대조군3/3은 **기대 동작 검사**이며 의도적으로 충돌/unsafe 후보를 탈락시키는 검사다.
+- target GL24개에서 지원되는 known 원본 영역의 E/C 오차0, 직접 protected/unknown 변경0. 전체 raw 진단에는 이식 제외 영역을 포함해 elevation24/24조건 총24213칸·Caves15/24조건 총1416칸 차이가 남는다. native 실제 roof-support와 projected 판정 차이0. 전 단계 보호 대조군3/3은 **기대 동작 검사**이며 의도적으로 충돌/unsafe 후보를 탈락시키는 검사다.
 - source 지붕 support의4방향 flood/6.9칸/인접 지지대 규칙과 얇고 두꺼운 자연 지붕의 collapse 정의를 실제 게임 코드와 비교했다. 별도 source-r3의 CaveEntrance742·SecludedValley15 무지지 지붕은 **Flat·GL stable override=false인 이 별도 표본의 진단값**이다. 모든 GL 원래 사용 조건의 안전성에 대한 판정이 아니다.
 - r2/r3 원본은 E/C/roof/PNG가 같지만 건물·보행·바닥 등의 물리 관측이 다르다. r3 수치를 r2 전체 물리/안전성 정본으로 합치지 않는다. 이전 rock-v4 원본과도 Cliff 바닥193칸 차이/PNG동일이 관측됐다. 과거 source 전체 동일 주장 대신 새 raw source를 정답으로 썼다.
 - 기존 sidecar 없는 core6결과는 이전 전체 terrain JSON과 true/default PNG 모두 동일하다. 강화 all-unknown은 별도 물900칸/비옥한 바닥10000칸 요청에도 전체 실제 terrain/geology/edifice와 두 PNG가 baseline과 동일했다. unsafe400 fixture는 적용/승격을 거부했다.
