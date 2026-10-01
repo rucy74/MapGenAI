@@ -1,0 +1,93 @@
+{
+  "probe_sha256": "55F196AACF7D73673F9B0570E8DB14A96EF6F6C825C9C233C15D950613E8AC32",
+  "product_sha256": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+  "method": "actual CLR CaveComposition constructor via reflection; no game launch/map generation",
+  "checks": [
+    {
+      "name": "known-zero",
+      "expected_accept": true,
+      "actual_accept": true,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "name": "unknown-zero",
+      "expected_accept": true,
+      "actual_accept": true,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "name": "fractional-width",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Expected exact JSON integer: width"
+    },
+    {
+      "name": "fractional-roof",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Expected exact JSON integer: roof_codes"
+    },
+    {
+      "name": "boolean-roof",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Expected JSON number: roof_codes"
+    },
+    {
+      "name": "string-cave",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Expected JSON number: caves"
+    },
+    {
+      "name": "negative-cave",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Invalid finite native cave value: caves"
+    },
+    {
+      "name": "negative-underflow-cave",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Invalid finite native cave value: caves"
+    },
+    {
+      "name": "overflow-elevation",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Invalid finite native cave value: elevation"
+    },
+    {
+      "name": "non-finite-elevation",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "FormatException: Non-finite number (JSON offset 154)"
+    },
+    {
+      "name": "array-length",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "Exception: Invalid source cave contract: native-parser-check"
+    },
+    {
+      "name": "invalid-known",
+      "expected_accept": false,
+      "actual_accept": false,
+      "pass": true,
+      "reason": "Exception: Invalid source cave contract: native-parser-check"
+    }
+  ],
+  "passed": 12,
+  "total": 12
+}

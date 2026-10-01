@@ -1,0 +1,145 @@
+{
+  "scope": "Inputs preserved before removing duplicate authored polygons from cave recipes. A-r2 and strengthened controls-r2 used these inputs. Older controls-r1 had different unknown fixture; not claimed identical.",
+  "files": [
+    {
+      "path": "recipes/cave-guard.json",
+      "sha256": "4c572966ab6e044fe855cd0524d2801fe6af973601ab74b1363a06ed5ce7e13f"
+    },
+    {
+      "path": "recipes/cave-unsafe.json",
+      "sha256": "ade3b8bffc63651b37a0ce68c365eb9bbb929df5f2101147cb5da3dec84801d9"
+    },
+    {
+      "path": "recipes/core-dry-clearing.json",
+      "sha256": "707d4966ace77ecf850afc3ad089c92d75e2b3eb3ad238a51bc4af56d9bf55b7"
+    },
+    {
+      "path": "recipes/core-foothills.json",
+      "sha256": "9e8f94821a5df11dea2c94af2b07c7a58271cf9e8e634693c7d282f88230e7d0"
+    },
+    {
+      "path": "recipes/gl-archipelago.json",
+      "sha256": "4b4da1c56c4a586427def7c374cff167f774af5c579f854dcc98d915b2ce1f63"
+    },
+    {
+      "path": "recipes/gl-archipelago.receipt.json",
+      "sha256": "0c9da137e54d9c8170a79ce10cb60e409325c8f98e527e067bdf866dbd87f804"
+    },
+    {
+      "path": "recipes/gl-cave-entrance.json",
+      "sha256": "96b5c0355a2b303145c5dc273146617533c54588977a0e38c5e1c42879588c9a"
+    },
+    {
+      "path": "recipes/gl-cave-entrance.receipt.json",
+      "sha256": "fcfeceebf31c0988b166329df28aad0a674e5e0a9f398f0e171665f5e0843978"
+    },
+    {
+      "path": "recipes/gl-cliff.json",
+      "sha256": "2fc6d64732ff9263ff313f76687c5f21c122d406c717a2ad0b177f0d6c6b3659"
+    },
+    {
+      "path": "recipes/gl-cliff.receipt.json",
+      "sha256": "0340e41250141042967b05eeca569bd83279970b097e07b18ef7fd98f0c8d5bb"
+    },
+    {
+      "path": "recipes/gl-lake.json",
+      "sha256": "5f13e991c104dd3cbfb60460bb2e9b9ed253b499c33de6a61c5a235a20ee83da"
+    },
+    {
+      "path": "recipes/gl-lake.receipt.json",
+      "sha256": "8cf8be746297732194e2ed60490d331a90bb0ced2be23911a0d14251b7806033"
+    },
+    {
+      "path": "recipes/gl-lone-mountain.json",
+      "sha256": "f487e58c523855dba84ab68c2e13cf7d1a96d2b19f3608eb065a7902104be8cf"
+    },
+    {
+      "path": "recipes/gl-lone-mountain.receipt.json",
+      "sha256": "ffe487890eeba708d352804edd594ac2389bf77d7b175ac0ca5738d903b48c53"
+    },
+    {
+      "path": "recipes/gl-oasis.json",
+      "sha256": "7a7eeab6827f192ad6802de2874cf77f0750973cfc96b68e4befae687f54a31c"
+    },
+    {
+      "path": "recipes/gl-oasis.receipt.json",
+      "sha256": "b5b8d6163256094535e5e52ee9670172085581b89a6129c1945334427d89e1d7"
+    },
+    {
+      "path": "recipes/gl-secluded-valley.json",
+      "sha256": "ed2f9708e125526ccaa4ab99d7de2bbe07c21cd0fcdd338b19d9374601f1a3c3"
+    },
+    {
+      "path": "recipes/gl-secluded-valley.receipt.json",
+      "sha256": "1005fe17e7945e201a5102631a96bca86643932338ea48fa7527a7ef5c3ece70"
+    },
+    {
+      "path": "recipes/gl-valley.json",
+      "sha256": "1044b3f5cfaf6c231ba7cab39b4bd8052a98ff6e855a2ea5e231b83ac6fbf0b4"
+    },
+    {
+      "path": "recipes/gl-valley.receipt.json",
+      "sha256": "87bf75bfcfd62523b2f121371d84b732fd903db5467dba6c8e1ce21ae9c8d96b"
+    },
+    {
+      "path": "recipes/image-lake.json",
+      "sha256": "bfd034bdb106e35bb48facb9f584d582f52cc7440bf590d36ce66e4077d87988"
+    },
+    {
+      "path": "recipes/image-lake.receipt.json",
+      "sha256": "1726bdab1cc214a3cab466cb4d600d9d5186799cc15f39e68a618aa3912609e7"
+    },
+    {
+      "path": "recipes/rock-guard.json",
+      "sha256": "8dea2f7e514dfa1362b4c48c5e2a00b136d5f370c22a42dc0e89ece3d2930a59"
+    },
+    {
+      "path": "recipes/unknown-cave.json",
+      "sha256": "6adf6be1855c56de89fb6c2a9d24330cefd29d18dc34c75e734715d3dbd4d380"
+    },
+    {
+      "path": "recipes/unknown-rock.json",
+      "sha256": "c7887241b7641547632b551f5699aaca54cb46b7a7e1b2ea4c7b868a75c5cf89"
+    },
+    {
+      "path": "cave-a-manifest.json",
+      "sha256": "ee7b388b3d02de79e45c15cd8fb86d64907450412ece8c1d48007a7526d3366f"
+    },
+    {
+      "path": "cave-b-manifest.json",
+      "sha256": "b351ec84a9d337556631a6277d3460745e2e343bd19def3cd26423b971c011e3"
+    },
+    {
+      "path": "cave-c-manifest.json",
+      "sha256": "eddc1ce00b60b5eced6760c353244428d6ed0df86fa35b089b7749cd930de8ec"
+    },
+    {
+      "path": "cave-controls-manifest.json",
+      "sha256": "7f24fa937331e3ea51994c9121c35cf7cb01f2cf3d495f2e7057d16d14c63a22"
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "e7ce4315311808c0491909902528063008075b69fee7b93db82b06f18a693485"
+    },
+    {
+      "path": "transfer-a-manifest.json",
+      "sha256": "39e0c6bf8248d6f91a831862fe9c68725d390ee33b58c1ae9ea57efc66d42d48"
+    },
+    {
+      "path": "transfer-b-manifest.json",
+      "sha256": "15c0b70bdcd5664c0c5746793dd58037c829e55b40892814f9372dd283147a8a"
+    },
+    {
+      "path": "transfer-c-manifest.json",
+      "sha256": "bcebf22e7a701b1cda22f5b392d9996b757bee19ac035d4546d90c4a067d3cb4"
+    },
+    {
+      "path": "catalog.json",
+      "sha256": "4f30cbbd92851b81a02aed4f20ae332a29203802f14a46a249622393f5c7ec0c"
+    },
+    {
+      "path": "conversion-receipt.json",
+      "sha256": "42dde8fb507a91c02cd6e0779973ebb42f1a38842e8f3d007d2f2f375f3d46f9"
+    }
+  ]
+}

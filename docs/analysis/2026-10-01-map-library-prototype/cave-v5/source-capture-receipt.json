@@ -1,0 +1,188 @@
+{
+  "reference_run": "source-native-r2",
+  "fresh_gl_maps": 8,
+  "paid_api_calls": 0,
+  "files": [
+    {
+      "name": "cleanup.json",
+      "sha256": "541bd307341fe434a01090ebb13a61ff2db75ae8951c95b136d2609b901abeeb"
+    },
+    {
+      "name": "gl-archipelago-geology.json",
+      "sha256": "f38fd2f80f6bfb6b463e0053f5b1de2371ba9959297163b6ab148791f58d2a23"
+    },
+    {
+      "name": "gl-archipelago-map-default.png",
+      "sha256": "c194ab0b4271e189bc8686d13d90c42f3ebf789e1e242e4705d662023780e606"
+    },
+    {
+      "name": "gl-archipelago-map.png",
+      "sha256": "f32bb4aa8f79926543cd0d6aaf04961601e3de0707c6d45e570d2e78894a3f28"
+    },
+    {
+      "name": "gl-archipelago-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-archipelago-terrain.json",
+      "sha256": "42d70385fe372f6e83e56d21913eb1f5a1be3f9172458bfcd06dcadea584d1b4"
+    },
+    {
+      "name": "gl-cave-entrance-geology.json",
+      "sha256": "024506be47943f294ac8c9122ba1eae7efafcc6b77eb13f6377a86a76f051db5"
+    },
+    {
+      "name": "gl-cave-entrance-map-default.png",
+      "sha256": "f5649016ac1a2e4ec201022e157be722d488ece46ebf988da34b055edf2873c7"
+    },
+    {
+      "name": "gl-cave-entrance-map.png",
+      "sha256": "dc24a4c226c67a724de316516f5367e54cc956254102917178c8b63d30ca4197"
+    },
+    {
+      "name": "gl-cave-entrance-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-cave-entrance-terrain.json",
+      "sha256": "f142ea41d116f09daccc9632106c38a37bfc8e07073b4882e1eaf5c99764580e"
+    },
+    {
+      "name": "gl-cliff-geology.json",
+      "sha256": "2460d8d67357a6e0cad24899b45719ff01483938c44e379b7bba9d8bd2c7f89f"
+    },
+    {
+      "name": "gl-cliff-map-default.png",
+      "sha256": "fec80af0a54771b37bf9c551c914b732c72e999ac290b9e42763635f11f2c3fb"
+    },
+    {
+      "name": "gl-cliff-map.png",
+      "sha256": "24fa5f45e7ba703a15097289bd3e117ba76d52fa4a5a57def67aab857a628bcb"
+    },
+    {
+      "name": "gl-cliff-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-cliff-terrain.json",
+      "sha256": "fe251e120c687d22d41d6c3fbecc322269bf1212fd1f42321a338e8faec22d36"
+    },
+    {
+      "name": "gl-lake-geology.json",
+      "sha256": "34fcb2746d5dbef46d722e49fc45736677b62c17db61ea524a22e8de55403179"
+    },
+    {
+      "name": "gl-lake-map-default.png",
+      "sha256": "a30e5a6993e9b89ae1a47b813c83b2372e580148c56ebdfb6ec9a57bfe7b0217"
+    },
+    {
+      "name": "gl-lake-map.png",
+      "sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5"
+    },
+    {
+      "name": "gl-lake-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-lake-terrain.json",
+      "sha256": "6287cefdde3b8d9102c75dfee5e47f92dc0c485d69e5ec8f7adc9edd57bcd4b5"
+    },
+    {
+      "name": "gl-lone-mountain-geology.json",
+      "sha256": "51137cf8a6238d69cf5eccdb519234f8e8970a39285032717c71f79ffebdf028"
+    },
+    {
+      "name": "gl-lone-mountain-map-default.png",
+      "sha256": "4106d1c7e1521c0bc7e50b68b66ab5da614dcb0a82a9add8df09a30645af975a"
+    },
+    {
+      "name": "gl-lone-mountain-map.png",
+      "sha256": "18e5e557e34451a6203c2bd6ff35951219a3f485f71e6ac1be5e06062adb8921"
+    },
+    {
+      "name": "gl-lone-mountain-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-lone-mountain-terrain.json",
+      "sha256": "440fcefae49a96fb3b08c2ca94350eae03997e94f9bfde92212598f3b552d41c"
+    },
+    {
+      "name": "gl-oasis-geology.json",
+      "sha256": "8e29d3affcd5528e6d1df21d26ed08ff3a6bf8192d6838f413ec67cc17c5d39c"
+    },
+    {
+      "name": "gl-oasis-map-default.png",
+      "sha256": "89a29274a852c4870810d56cb3316eeff2d036ecaba085a8539158e70fa69ce2"
+    },
+    {
+      "name": "gl-oasis-map.png",
+      "sha256": "8ef5a549ddc655f4e0775b394075cdf4692b11ceeee80ecfd274a0b29bec1397"
+    },
+    {
+      "name": "gl-oasis-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-oasis-terrain.json",
+      "sha256": "b4fd98acfe6f6191265b965d5127bb3c2b7d72b19480715bf8c7a4044c348b8b"
+    },
+    {
+      "name": "gl-secluded-valley-geology.json",
+      "sha256": "d0c070c95ea1438589be80087b75fa885389883e152365e216bc8afae3b512cf"
+    },
+    {
+      "name": "gl-secluded-valley-map-default.png",
+      "sha256": "f57a4d9c7079c57f6c93b9cc9200e701060fa5d6f188478606d1b1c58b542f31"
+    },
+    {
+      "name": "gl-secluded-valley-map.png",
+      "sha256": "7d7bb3d12288bac9ae798b4576901a15e5bf6e3fb43328970ea9682add7c8f59"
+    },
+    {
+      "name": "gl-secluded-valley-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-secluded-valley-terrain.json",
+      "sha256": "52f77289e9896c00c98caa812d12b533d7feee79b01f18b52168cc1ef081e111"
+    },
+    {
+      "name": "gl-valley-geology.json",
+      "sha256": "6f08fde96faf1091b236793e3385297006b69a7cd7c93430f144b76a6e503d18"
+    },
+    {
+      "name": "gl-valley-map-default.png",
+      "sha256": "1dd65c3cdb5694ffe3eb3d14a1457dd009a2cc9e1ccdefe92c6e2e13c46c45a3"
+    },
+    {
+      "name": "gl-valley-map.png",
+      "sha256": "ebb98e8bc2b7dfed1e784c3ca14d58529a50d6878e15d6effeeb686a418b15bf"
+    },
+    {
+      "name": "gl-valley-state.json",
+      "sha256": "b39bce007cd000e4b138e972781a8654541b230dedabadb2b20aef63073b68d9"
+    },
+    {
+      "name": "gl-valley-terrain.json",
+      "sha256": "5a4a093866b14a3517531142c10d5706fd144aecccdb081b5e876ddc010bce3e"
+    },
+    {
+      "name": "launch.json",
+      "sha256": "38f70aefffe522a50976eaef94fef7d782e75ae0ecf73037468ec20de283e589"
+    },
+    {
+      "name": "native-terrain-palette.json",
+      "sha256": "d541bcb8c15b2d1a4422ccf82084d3542bce79778456d3caad70bf866da4e026"
+    },
+    {
+      "name": "progress.json",
+      "sha256": "eaa5f9d8260871a6af3335da5135a910e4d0a4226130076aa84ed97f4892370c"
+    },
+    {
+      "name": "result.json",
+      "sha256": "8e5ee75a952cb8fd5036f5b1c52f35083418a892cc7df80983825f4149957088"
+    }
+  ],
+  "policy": "Fresh actual GL native grids/roofs captured in genstep99999; old terrain-v2 references remain unchanged"
+}

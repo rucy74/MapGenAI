@@ -1,0 +1,677 @@
+{
+  "schema_version": 1,
+  "purpose": "Developer prototype, not a distributed preset pack",
+  "entries": [
+    {
+      "id": "gl-lake",
+      "title_ko": "불규칙한 호숫가",
+      "title_en": "Irregular lakeside",
+      "description_ko": "구불구불한 호숫가와 넓게 이어지는 정착 공간.",
+      "description_en": "An irregular lake shoreline with broad connected settlement ground.",
+      "family": "lake",
+      "command": "recipes/gl-lake.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformLake.xml",
+        "graph_sha256": "abbb0a2436b71b6c181532cc43b36fd841ef0c62c168ed003c220081ad2f80c7",
+        "graph_revision": "2",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-lake",
+        "source_settings": {
+          "gl_id": "Lake",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 9,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_Lake"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-valley",
+      "title_ko": "두 산 사이 열린 골짜기",
+      "title_en": "Open mountain valley",
+      "description_ko": "양쪽 산자락 사이로 길게 이어지는 넓은 골짜기.",
+      "description_en": "A broad connected valley between two rocky mountain sides.",
+      "family": "valley",
+      "command": "recipes/gl-valley.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformValley.xml",
+        "graph_sha256": "4b7b4aa1a497458f269dd8145b5758cd5ac4a8aabc8a7691b581f43a2cf3b751",
+        "graph_revision": "3",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-valley",
+        "source_settings": {
+          "gl_id": "Valley",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 13,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_Valley",
+            "Caves"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "title_ko": "외딴 산과 열린 평야",
+      "title_en": "Lone mountain and open plain",
+      "description_ko": "한쪽에 자리한 큰 바위산과 주위의 넓게 열린 평야.",
+      "description_en": "One isolated rocky mountain beside a wide open plain.",
+      "family": "lone-mountain",
+      "command": "recipes/gl-lone-mountain.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformLoneMountain.xml",
+        "graph_sha256": "4898e2657f8d3ce1029ae63282381d77e29e25a1e5abe4393c7d573d39b7b83b",
+        "graph_revision": "1",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-lone-mountain",
+        "source_settings": {
+          "gl_id": "LoneMountain",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 20,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_LoneMountain",
+            "Caves"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-cliff",
+      "title_ko": "절벽 옆 넓은 빈터",
+      "title_en": "Open ground beside a cliff",
+      "description_ko": "한쪽 가장자리에 길게 이어진 바위 절벽과 반대쪽의 넓은 정착 공간.",
+      "description_en": "A continuous rocky cliff on one side and broad settlement space on the other.",
+      "family": "cliff",
+      "command": "recipes/gl-cliff.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformCliff.xml",
+        "graph_sha256": "6e0336c07d33f4d9d344fd6302e380d7203ffddcb5c8c43bbe6a7e6c79e0f930",
+        "graph_revision": "2",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-cliff",
+        "source_settings": {
+          "gl_id": "Cliff",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 22,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_Cliff",
+            "Caves"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-archipelago",
+      "title_ko": "얕은 물로 이어진 군도",
+      "title_en": "Shallow-water archipelago",
+      "description_ko": "넓은 물 사이에 여러 섬. 얕은 물로 이동할 수 있는 특별한 지형.",
+      "description_en": "Several islands amid broad water, linked by walkable shallows. A special island challenge.",
+      "family": "archipelago",
+      "command": "recipes/gl-archipelago.json",
+      "status": "prototype-draft",
+      "challenge": true,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": false,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformArchipelago.xml",
+        "graph_sha256": "147fbce9230f9b57a3e9629fce8bc777022157ac8c5668d717520e331267cdc3",
+        "graph_revision": "3",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-archipelago",
+        "source_settings": {
+          "gl_id": "Archipelago",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 34,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_Archipelago"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-oasis",
+      "title_ko": "사막의 작은 오아시스",
+      "title_en": "Small desert oasis",
+      "description_ko": "사막 한가운데 작은 얕은 물과 주변의 국소적인 경작 가능한 토양.",
+      "description_en": "A small shallow desert pool surrounded by localized farmable soil.",
+      "family": "oasis",
+      "command": "recipes/gl-oasis.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "Desert",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformOasis.xml",
+        "graph_sha256": "2e29135a02e0b5d5282b0d40342246300716725a981e0f6d35b0bf6200188ca8",
+        "graph_revision": "5",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-oasis",
+        "source_settings": {
+          "gl_id": "Oasis",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 2,
+          "biome": "Desert",
+          "mutators": [
+            "GL_Oasis"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "image-lake",
+      "title_ko": "이미지에서 읽은 호숫가",
+      "title_en": "Lakeside from an image",
+      "description_ko": "구불구불한 호숫가와 넓게 이어지는 정착 공간.",
+      "description_en": "An irregular lake shoreline with broad connected settlement ground.",
+      "family": "lake",
+      "command": "recipes/image-lake.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": false,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "Image palette and contour fallback",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformLake.xml",
+        "graph_sha256": "abbb0a2436b71b6c181532cc43b36fd841ef0c62c168ed003c220081ad2f80c7",
+        "graph_revision": "2",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-lake",
+        "source_settings": {
+          "gl_id": "Lake",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 9,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_Lake"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Known minimap palette only, unknown colors preserved as unclassified",
+        "Water and confident named ground only; ambiguous pixels preserved",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": false,
+      "requires_cave_sidecar": false
+    },
+    {
+      "id": "core-foothills",
+      "title_ko": "완만한 산기슭의 넓은 평지",
+      "title_en": "Gentle foothill plain",
+      "family": "foothills",
+      "description_ko": "큰 산기슭 옆에 이어진 넓은 평지. 새 물을 넣지 않는다.",
+      "description_en": "Broad connected ground beside gentle foothills, with no new water.",
+      "command": "recipes/core-foothills.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland",
+          "Desert"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ]
+      },
+      "features": {
+        "new_water": false,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "MapGenAI existing native generator",
+        "author": "MapGenAI",
+        "license": "Project original authoring",
+        "reference_id": "core-foothills"
+      },
+      "limitations": [
+        "Visual approval pending",
+        "Modest local clearing can be a small change on an already flat tile"
+      ],
+      "requires_ground_sidecar": false,
+      "requires_water_sidecar": false,
+      "requires_rock_sidecar": false,
+      "requires_cave_sidecar": false
+    },
+    {
+      "id": "core-dry-clearing",
+      "title_ko": "물과 산을 더하지 않는 작은 빈터",
+      "title_en": "Small dry clearing",
+      "family": "clearing",
+      "description_ko": "원래 풍경을 유지하면서 산과 물을 추가하지 않는 작은 정착 빈터.",
+      "description_en": "Keep the original landscape, opening a modest settlement clearing without adding mountains or water.",
+      "command": "recipes/core-dry-clearing.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland",
+          "Desert"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ]
+      },
+      "features": {
+        "new_water": false,
+        "new_mountains": false,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "MapGenAI existing native generator",
+        "author": "MapGenAI",
+        "license": "Project original authoring",
+        "reference_id": "core-dry-clearing"
+      },
+      "limitations": [
+        "Visual approval pending",
+        "Modest local clearing can be a small change on an already flat tile"
+      ],
+      "requires_ground_sidecar": false,
+      "requires_water_sidecar": false,
+      "requires_rock_sidecar": false,
+      "requires_cave_sidecar": false
+    },
+    {
+      "id": "gl-cave-entrance",
+      "title_ko": "산자락의 동굴 입구",
+      "title_en": "Mountain cave entrance",
+      "description_ko": "넓은 바깥 평야와 자연 지붕 아래로 이어지는 산속 통로.",
+      "description_en": "Open exterior ground leading into roofed natural mountain passages.",
+      "family": "cave",
+      "command": "recipes/gl-cave-entrance.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformCaveEntrance.xml",
+        "graph_sha256": "7d1855dab556ffe3cfe3dd55e34319e67782f77f0f08423fed94aa5b98499b44",
+        "graph_revision": "1",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-cave-entrance",
+        "source_settings": {
+          "gl_id": "CaveEntrance",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 45,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_CaveEntrance"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    },
+    {
+      "id": "gl-secluded-valley",
+      "title_ko": "동굴로 이어진 외딴 골짜기",
+      "title_en": "Secluded valley and tunnels",
+      "description_ko": "산으로 둘러싸인 골짜기와 바깥으로 이어지는 자연 동굴 통로.",
+      "description_en": "A secluded mountain valley connected to the outside by natural tunnels.",
+      "family": "secluded-valley",
+      "command": "recipes/gl-secluded-valley.json",
+      "status": "prototype-draft",
+      "challenge": false,
+      "profiles": {
+        "biomes": [
+          "TemperateForest",
+          "AridShrubland"
+        ],
+        "map_sizes": [
+          250,
+          300
+        ],
+        "hilliness": [
+          "Flat"
+        ],
+        "native_water": "Not supported for added water; explicit exclusion"
+      },
+      "features": {
+        "new_water": true,
+        "new_mountains": true,
+        "global_density_edits": false
+      },
+      "source": {
+        "kind": "GL graph sampled to editable polygons",
+        "author": "m00nl1ght",
+        "license": "CC-BY-NC-SA-4.0",
+        "url": "https://github.com/m00nl1ght-dev/GeologicalLandforms",
+        "graph": "LandformSecludedValley.xml",
+        "graph_sha256": "3cf0837ffd1ada27a41b2989eea6c05dacdb8080c21f8af6ae5d9f6ad3c9d7f6",
+        "graph_revision": "2",
+        "reference_run": "source-native-r2",
+        "reference_id": "gl-secluded-valley",
+        "source_settings": {
+          "gl_id": "SecludedValley",
+          "map_size": 250,
+          "world_seed": "map-library-gl-20261001-a",
+          "tile": 58,
+          "biome": "TemperateForest",
+          "mutators": [
+            "GL_SecludedValley"
+          ]
+        }
+      },
+      "limitations": [
+        "Sampled geometry, not a procedural GL graph conversion",
+        "Incidents, source resources and spawn logic are not transplanted",
+        "Visual approval pending; technical execution alone is not beauty",
+        "Ground sidecar runs only in developer probe; product state/UI does not apply it yet",
+        "Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original resource layout transplant",
+        "Observed elevation, cave grids and supported natural roofs; actual passage connectivity, roof support and final protected conflicts must pass separately; developer only",
+        "Complete observed inland water layout sidecar; product state/UI does not apply it yet"
+      ],
+      "requires_ground_sidecar": true,
+      "requires_water_sidecar": true,
+      "requires_rock_sidecar": true,
+      "requires_cave_sidecar": true
+    }
+  ],
+  "excluded": [],
+  "reference_source_graphs": 44,
+  "paid_api_calls": 0,
+  "runtime_contract": "MapLibraryProbe cave/rock/ground/water sidecars v1; product ApplyPatches alone omits sidecars"
+}

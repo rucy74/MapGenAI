@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "source_primary": "source-native-r2",
+  "independent_support_capture": "source-native-r3",
+  "rows": [
+    {
+      "id": "gl-archipelago",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-cave-entrance",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": false,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 742,
+      "unanchored_cave_roofs": 742,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-cliff",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": false,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-lake",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-lone-mountain",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-oasis",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-secluded-valley",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 15,
+      "unanchored_cave_roofs": 15,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    },
+    {
+      "id": "gl-valley",
+      "raw_equal": false,
+      "files_equal": {
+        "terrain.json": true,
+        "map.png": true,
+        "map-default.png": true
+      },
+      "native_unanchored_natural_roofs": 0,
+      "unanchored_cave_roofs": 0,
+      "native_projected_support_mismatches": 0,
+      "context": {
+        "hilliness": "Flat",
+        "gl_patch_active": true,
+        "gl_biome_has_stable_cave_roofs": false,
+        "gl_stable_cave_roof_override": false
+      }
+    }
+  ]
+}

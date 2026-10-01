@@ -1,11 +1,12 @@
 # MapGenAI 개발 지도
 
+- 저장소 실제 동굴 후속(개발자 도구, 2026-10-02): `cave.py`/`Probe.cs`는 원본 elevation·Caves·자연 지붕을 칸별로 관측/이식하고, `cave_report.py`가 최종 보행 통로·4방향 연결·입구·native 지붕 지지를 독립 대조한다. 전체 관측 모드는 4개 sidecar와 빈 params로 중복 polygon 고도 변경을 피한다. 보호 건물·인공 지붕·unknown은 보존하고 충돌/unsafe profile을 제외한다. Python124·실제 실행645/90지도, 실제 동굴15조건 중2개 지질 통과/1개 전체 통과. 큰 동굴2종의 완전 복제는 미완료다. 기존 core6지형/PNG·제품 source/설치 DLL 불변, 추천 UI·codec·Preview·Undo·저장 미연결. cave-v5 실험 카탈로그는 rock-v4를 대체하지 않는다. [실제 비교 HTML](docs/analysis/2026-10-01-map-library-prototype/cave-v5/cave-review.html), [결과·실패·재현](docs/analysis/2026-10-01-map-library-prototype/cave-v5/report.md).
 - 저장소 바위·바닥 디테일 후속(개발자 도구): `rock.py`의 칸별 실제 암석 점유, native 생성 그리드/바위 보정, 1칸짜리 지원 바닥을 보존한다. `rock_report.py`는 원본 전체 M/지원 자연 바닥을 독립 분모로 대조하며 후반 고대 건물과의 충돌을 검사한다. 보호된 구조물은 지우지 않고 부적합 후보를 제외한다. 제품 UI·설치 DLL 미연결. [전후 그림·검사와 한계](docs/analysis/2026-10-01-map-library-prototype/rock-v4/review.html).
 - 저장소 물 배치 후속(개발자 도구): 실제 원본의 작은 연못/수심/확인된 dry mask를 물 sidecar로 이식하고 일반 연못만 정리한다. 강·바다·온천/연결된 물·길·건물·불명 칸 보호, 보호 충돌은 후보 제외. 제품 UI/설치 DLL 미연결. [실제 전후 비교](docs/analysis/2026-10-01-map-library-prototype/water-v3/review.html).
 
 - 맵 저장소 바닥 이식 후속(2026-10-01): `tools/map-library-prototype/ground.py`는 칸별 TerrainDef/RLE 바닥과 native 실제/일반 색 팔레트를 읽는다. 프로브는 단계405에서 물·바위·길·건물·높이/미지정 칸을 보호하고 바이옴에 맞게 적용한다. `ground_report.py`/`verify_ground.py`는 독립 원본 바닥 대조·양성 대조군·기존6지도 동일성을 검사한다. 제품 UI/TileMapState/이미지 OFF/설치 DLL에는 연결하지 않은 sidecar다. [바닥 전후 비교·검증·한계](docs/analysis/2026-10-01-map-library-prototype/ground-v2/report.md).
 
-- 맵 저장소 개발자 프로토타입(2026-10-01): `tools/map-library-prototype`는 GL 원본6종/편집 가능한 sampled polygon/알려진 minimap 물 윤곽/로컬 E5 검색/격리된 실제 생성 도구다. 실험 레시피9 중8은 실제 통과 profile만 검색하고, 작은 오아시스와 미검증 강·해안·도로 타일은 제외한다. 제품 UI/DEV DLL·배포판은 미변경이다. [실제 그림·검증·한계](docs/analysis/2026-10-01-map-library-prototype/report.md), [실행법](tools/map-library-prototype/README.md). 원본 GL의 절차적 다양성·동굴·이벤트를 이식한 기능은 아니다.
+- 최초 맵 저장소 프로토타입(2026-10-01): `tools/map-library-prototype`는 당시 GL 원본6종/편집 가능한 sampled polygon/알려진 minimap 물 윤곽/로컬 E5 검색/격리된 실제 생성 도구를 연결했다. 최초 실험 레시피9 중8은 실제 통과 profile만 검색하고 작은 오아시스와 미검증 강·해안·도로 타일을 제외했다. 작은 오아시스는 후속 water-v3의 측정 profile에서 해소했고, 실제 동굴 관측은 위 cave-v5에서 별도로 확장했다. 제품 UI/DEV DLL·배포판은 미변경이다. [당시 그림·검증·한계](docs/analysis/2026-10-01-map-library-prototype/report.md), [현재 실행법](tools/map-library-prototype/README.md). GL 절차적 다양성·이벤트 및 전체 동굴 복제는 여전히 미완료다.
 
 - 기본 생성 참조 담수(DEV): 새 rough 담수 composite만 저장되는 `water_profile:native`로 기본 추가한다. `NativeWaterField`는 실제 엔진 displacement를 영역 크기에 맞춰 적용하고, `NativeWaterRaster`는 최종 수역에서 실제 육지 거리로 얕은 가장자리를 만든다. `AuthoringGeneration`/`LandscapeBlendGeneration`은 native 물·호숫가 재료 선택기를 사용한다. 저장 null/legacy와 정확 도형/특수 물은 기존 경로, `details:none`은 선택된 수심/윤곽 유지. [범위·검증](docs/analysis/2026-09-27-native-water/report.md).
 

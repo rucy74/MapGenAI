@@ -1,0 +1,108 @@
+{
+  "method": "observed-terrain",
+  "source_sha256": "5a4a093866b14a3517531142c10d5706fd144aecccdb081b5e876ddc010bce3e",
+  "row_order": "south-first",
+  "loss": {
+    "M": {
+      "input_cells": 28985,
+      "omitted_small_cells": 394,
+      "components": 12
+    },
+    "S": {
+      "input_cells": 653,
+      "omitted_small_cells": 44,
+      "components": 1
+    },
+    "W": {
+      "input_cells": 0,
+      "omitted_small_cells": 0,
+      "components": 0
+    }
+  },
+  "shape_count": 13,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 32765,
+  "ground_materials": [
+    {
+      "def": "Granite_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Gravel",
+      "role": "gravel"
+    },
+    {
+      "def": "Limestone_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Mud",
+      "role": "mud"
+    },
+    {
+      "def": "Slate_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 4915,
+  "omitted_ground": {
+    "AncientConcrete": {
+      "cells": 140,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneGranite": {
+      "cells": 9,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneMarble": {
+      "cells": 72,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSandstone": {
+      "cells": 53,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSlate": {
+      "cells": 35,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "TileSandstone": {
+      "cells": 2,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    }
+  },
+  "runtime_contract": "Complete observed developer geology, rock, ground and water; no duplicate product polygon edits",
+  "source_water_cells": 635,
+  "known_dry_cells": 61865,
+  "unclassified_water_scope_cells": 0,
+  "water_runs": 143,
+  "water_fragment_omissions": 0,
+  "water_policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched",
+  "rock_cells": 28789,
+  "observed_nonrock_cells": 33711,
+  "unknown_rock_cells": 0,
+  "rock_runs": 2113,
+  "omitted_small_rock_cells": 0,
+  "rock_type_policy": "Target native stone and ore generation, not a source resource transplant",
+  "known_geology_cells": 61968,
+  "unknown_geology_cells": 532,
+  "raw_cave_cells": 2285,
+  "portable_cave_cells": 2245,
+  "raw_natural_roof_cells": 29737,
+  "unsupported_source_roof_cells": 0,
+  "source_terrain_sha256": "5a4a093866b14a3517531142c10d5706fd144aecccdb081b5e876ddc010bce3e",
+  "source_geology_sha256": "6f08fde96faf1091b236793e3385297006b69a7cd7c93430f144b76a6e503d18",
+  "scaling": "Nearest source cell; observed grid intensities retained, coordinate width scales with map size",
+  "diagnostic_polygon_params_sha256": "66c83d1edccc3ee16a643054bba63231e92730746b4f6571ecbf36d8b45e3cd9",
+  "product_polygon_params_omitted": true
+}

@@ -1,0 +1,122 @@
+{
+  "input": "source-final/gl-lake-map.png",
+  "calibration": [
+    "gl-valley",
+    "gl-archipelago"
+  ],
+  "held_out": "gl-lake",
+  "pixel_label_accuracy": 0.929392,
+  "per_label": {
+    "M": {
+      "predicted_cells": 1112,
+      "actual_cells": 1143,
+      "precision": 1.0,
+      "recall": 0.9728783902012248
+    },
+    "S": {
+      "predicted_cells": 5642,
+      "actual_cells": 5642,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "W": {
+      "predicted_cells": 2479,
+      "actual_cells": 2479,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "G": {
+      "predicted_cells": 48854,
+      "actual_cells": 53236,
+      "precision": 1.0,
+      "recall": 0.9176872792846945
+    }
+  },
+  "exported_features": [
+    "shallow footprint",
+    "deep cores",
+    "confident named ground"
+  ],
+  "rocks_exported": false,
+  "method": "native-palette-with-ambiguity-rejection",
+  "source_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+  "palette_sha256": "51daf8b1e45f6d40d956de7160ceda0f0d1f5ca812e614a58c7ded772c4f51c7",
+  "unknown_fraction": 0.070608,
+  "distant_pixels": 0,
+  "ambiguous_pixels": 3444,
+  "recognized_unusable_pixels": 969,
+  "palette_colors": 352,
+  "semantic_classes": 24,
+  "note": "Known native renderer only; unknown/conflicting ground preserved. A color cannot prove river, hot spring, seasonal underlying water or constructed-floor identity.",
+  "loss": {
+    "S": {
+      "input_cells": 8140,
+      "omitted_small_cells": 101,
+      "components": 3
+    },
+    "W": {
+      "input_cells": 2479,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 4,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 48310,
+  "ground_materials": [
+    {
+      "def": "Gravel",
+      "role": "gravel"
+    },
+    {
+      "def": "Mud",
+      "role": "mud"
+    },
+    {
+      "def": "Sand",
+      "role": "sand"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 3653,
+  "omitted_ground": {
+    "Gravel": {
+      "cells": 197,
+      "reason": "Tiny components"
+    },
+    "Mud": {
+      "cells": 28,
+      "reason": "Tiny components"
+    },
+    "Sand": {
+      "cells": 14,
+      "reason": "Tiny components"
+    },
+    "Soil": {
+      "cells": 118,
+      "reason": "Tiny components"
+    },
+    "SoilRich": {
+      "cells": 187,
+      "reason": "Tiny components"
+    }
+  },
+  "runtime_contract": "Developer ground sidecar; not yet serialized by product TileMapState",
+  "source_water_cells": 8121,
+  "known_dry_cells": 48854,
+  "unclassified_water_scope_cells": 5525,
+  "water_runs": 1444,
+  "water_fragment_omissions": 0,
+  "water_policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched",
+  "scope": "Known native minimap palette; ambiguous pixels omitted, no general vision or API model used",
+  "named_ground_precision": 1.0
+}
