@@ -90,11 +90,13 @@ namespace MapGenAI.MapLibraryProbe
                 string commandFile=item.GetString("command"); TileMapState state=before;
                 GroundPass ground=null;
                 WaterPass water=null;
+                RockComposition rock=null;
                 if (!string.IsNullOrEmpty(commandFile)) {
                     var command=SimpleJson.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(manifest),commandFile))));
                     if(command.GetObject("ground_layer")!=null)ground=new GroundPass(command.GetObject("ground_layer"),id);
                     if(command.GetObject("water_layer")!=null)water=new WaterPass(command.GetObject("water_layer"),id);
-                    if((ground!=null || water!=null) && command.GetObject("params")?.Keys.Any()==false) {
+                    if(command.GetObject("rock_layer")!=null)rock=new RockComposition(command.GetObject("rock_layer"),id);
+                    if((ground!=null || water!=null || rock!=null) && command.GetObject("params")?.Keys.Any()==false) {
                         // Ground-only developer controls have no product edit. The
                         // product correctly refuses an empty recommendation.
                         Check(MapStateCodec.Serialize(MapGenParams.CaptureState(target))==MapStateCodec.Serialize(before),"Ground-only control keeps product state unchanged: "+id);
@@ -125,6 +127,7 @@ namespace MapGenAI.MapLibraryProbe
                     var nativeGenerator=(MapGeneratorDef)typeof(object).GetMethod("MemberwiseClone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(original,null);
                     nativeGenerator.genSteps=new List<GenStepDef>(original.genSteps);
                     var nativeCapture=new Capture{Id=id+"-baseline",Size=size,Target=target,State=before,IsSource=true};
+                    if(rock!=null && id=="unknown-rock")nativeGenerator.genSteps.Add(new GenStepDef{defName="MapLibraryUnknownRockBaselineFixture",order=403.5f,genStep=new RockGuardFixture(rock)});
                     nativeGenerator.genSteps.Add(new GenStepDef{defName="MapLibraryBaseline_"+id,order=99999,genStep=nativeCapture});
                     var baselineMap=MapGenerator.GenerateMap(new IntVec3(size,1,size),parent,nativeGenerator);
                     Check(nativeCapture.Captured,"Paired native baseline captured on same tile: "+id);
@@ -139,11 +142,14 @@ namespace MapGenAI.MapLibraryProbe
                 }
                 var generator=(MapGeneratorDef)typeof(object).GetMethod("MemberwiseClone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(original,null);
                 generator.genSteps=new List<GenStepDef>(original.genSteps);
+                if(rock!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryRockGrid_"+id,order=199,genStep=new RockGridPass(rock)});
                 if(id=="water-guard")generator.genSteps.Add(new GenStepDef{defName="MapLibraryWaterGuard",order=402,genStep=new WaterGuardFixture()});
                 if(water!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryWater",order=403,genStep=water});
+                if(rock!=null && (id=="rock-guard" || id=="unknown-rock"))generator.genSteps.Add(new GenStepDef{defName="MapLibraryRockGuard_"+id,order=403.5f,genStep=new RockGuardFixture(rock)});
+                if(rock!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryRockFinal_"+id,order=404,genStep=new RockFinalPass(rock)});
                 if(id=="ground-guard")generator.genSteps.Add(new GenStepDef{defName="MapLibraryGroundGuard",order=404,genStep=new GuardFixture()});
                 if(ground!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryGround_"+id,order=405,genStep=ground});
-                var capture=new Capture{Id=id,Size=size,Target=target,State=state,IsSource=!string.IsNullOrEmpty(gl)};
+                var capture=new Capture{Id=id,Size=size,Target=target,State=state,IsSource=!string.IsNullOrEmpty(gl),Rock=rock};
                 generator.genSteps.Add(new GenStepDef{defName="MapLibraryCapture_"+id,order=99999,genStep=capture});
                 var clock=System.Diagnostics.Stopwatch.StartNew();
                 var map=MapGenerator.GenerateMap(new IntVec3(size,1,size),parent,generator);
@@ -187,6 +193,298 @@ namespace MapGenAI.MapLibraryProbe
                     if(i==11)map.terrainGrid.SetTerrain(c,TerrainDefOf.WaterDeep);
                 }
                 var unknown=new IntVec3(5,0,5);unknown.GetEdifice(map)?.Destroy();map.terrainGrid.SetTerrain(unknown,TerrainDefOf.WaterShallow);
+            }
+        }
+        // Only this disposable developer probe accepts occupancy sidecars. They
+        // do not import source rock/resource definitions or source roof/cave data.
+        sealed class RockComposition
+        {
+            public readonly string Id;
+            readonly int width,height;
+            readonly int[] plane;
+            readonly HashSet<Building> preexistingRocks=new HashSet<Building>();
+            bool[] earlyProtected;
+            public RockComposition(SimpleJsonObject layer,string id)
+            {
+                Id=id;
+                if(Integer(layer,"schema_version")!=1 || layer.GetString("mode")!="source-composition"
+                    || layer.GetString("row_order")!="south-first")throw new Exception("Invalid source rock contract: "+id);
+                width=Integer(layer,"width");height=Integer(layer,"height");
+                if(width<=0 || height<=0 || (long)width*height>int.MaxValue)throw new Exception("Invalid rock dimensions: "+id);
+                plane=new int[width*height];var occupied=new bool[plane.Length];
+                if(layer.GetObjectArray("runs")==null)throw new Exception("Missing rock runs: "+id);
+                foreach(var run in layer.GetObjectArray("runs")) {
+                    int start=Integer(run,"start"),length=Integer(run,"length"),kind=Integer(run,"kind");
+                    if(start<0 || length<=0 || (long)start+length>plane.Length || (kind!=1 && kind!=2))throw new Exception("Invalid rock RLE: "+id);
+                    for(int n=start;n<start+length;n++) {
+                        if(occupied[n])throw new Exception("Overlapping rock RLE: "+id);
+                        occupied[n]=true;plane[n]=kind;
+                    }
+                }
+                Check(true,"Observed rock contract, integral bounds and nonoverlapping runs validated: "+id);
+            }
+            static int Integer(SimpleJsonObject value,string key)
+            {
+                float number=value.GetFloat(key,float.NaN);
+                if(float.IsNaN(number) || float.IsInfinity(number) || number<0 || number>=2147483648d || number!=Math.Floor(number))
+                    throw new Exception("Invalid integral rock field: "+key);
+                return (int)number;
+            }
+            public int Kind(Map map,IntVec3 cell)=>plane[Math.Min(height-1,cell.z*height/map.Size.z)*width+Math.Min(width-1,cell.x*width/map.Size.x)];
+            public static bool Natural(Building building)=>building?.def.building?.isNaturalRock==true;
+            public static bool Resource(Building building)=>Natural(building) && building.def.building.isResourceRock;
+            public static bool ConstructedFloor(TerrainDef terrain)=>terrain.designationCategory!=null || terrain.isFoundation
+                || (terrain.costList!=null && terrain.costList.Count>0) || terrain.costStuffCount>0 || (terrain.layerable && !terrain.natural);
+            public static bool SupportedStone(ThingDef def)=>def?.building?.isNaturalRock==true && !def.building.isResourceRock
+                && def.building.naturalTerrain!=null && def.building.naturalTerrain.supportsRock
+                && RockNoises.rockNoises.Any(r=>r.rockDef==def);
+            public static ThingDef NativeStone(IntVec3 cell)
+            {
+                var def=GenStep_RocksFromGrid.RockDefAt(cell);
+                if(SupportedStone(def))return def;
+                return RockNoises.rockNoises.Select(r=>r.rockDef).FirstOrDefault(SupportedStone);
+            }
+            public void MarkPreexisting(Building building){if(Natural(building))preexistingRocks.Add(building);}
+            public bool[] Protections(Map map,bool early,Dictionary<string,int> kinds)
+            {
+                int count=map.cellIndices.NumGridCells;
+                if(early)earlyProtected=new bool[count];
+                var blocked=new bool[count];
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell);var terrain=map.terrainGrid.TerrainAtIgnoreTemp(n);var building=cell.GetEdifice(map);
+                    if(early)MarkPreexisting(building);
+                    bool water=terrain.IsWater || terrain.IsRiver,road=terrain.HasTag("Road") || terrain.bridge;
+                    bool floor=ConstructedFloor(terrain);
+                    bool structure=building!=null && !Natural(building);
+                    bool specialRock=Natural(building) && !Resource(building) && !SupportedStone(building.def);
+                    bool existing=building!=null && preexistingRocks.Contains(building);
+                    // Spawn(Vanish) can wipe chunks, plants and non-edifice
+                    // buildings. Occupancy never authorizes deleting such things.
+                    bool otherThing=cell.GetThingList(map).Any(thing=>thing!=building);
+                    bool unsupported=!terrain.supportsRock || terrain.dangerous;
+                    blocked[n]=water || road || floor || structure || specialRock || existing || otherThing || unsupported || (!early && earlyProtected[n]);
+                    if(early)earlyProtected[n]=blocked[n];
+                    if(!blocked[n])continue;
+                    if(terrain.IsRiver)kinds["river"]++;
+                    if(terrain.defName.StartsWith("WaterOcean",StringComparison.Ordinal))kinds["sea"]++;
+                    if(water && !terrain.IsRiver && !terrain.defName.StartsWith("WaterOcean",StringComparison.Ordinal)
+                        && terrain.defName!="WaterShallow" && terrain.defName!="WaterDeep" && terrain.defName!="Marsh")kinds["special_water"]++;
+                    if(water)kinds["water"]++;
+                    if(road)kinds["road"]++;
+                    if(floor)kinds["constructed_floor"]++;
+                    if(structure)kinds["building"]++;
+                    if(specialRock)kinds["special_rock"]++;
+                    if(existing)kinds[Resource(building)?"preexisting_resource":"preexisting_rock"]++;
+                    if(otherThing)kinds["other_thing"]++;
+                    if(unsupported)kinds["unsupported_terrain"]++;
+                }
+                return blocked;
+            }
+            public static Dictionary<string,int> ProtectionKinds()=>new Dictionary<string,int>{{"river",0},{"sea",0},{"special_water",0},
+                {"water",0},{"road",0},{"constructed_floor",0},{"building",0},{"special_rock",0},{"preexisting_rock",0},{"preexisting_resource",0},{"other_thing",0},{"unsupported_terrain",0}};
+            public void AuditFinal(Map map)
+            {
+                // This is a source-occupancy comparison at final capture, not a
+                // before/after mutation guard. Native steps may change the map
+                // after 404; unknown cells have no imported expectation.
+                var protections=ProtectionKinds();var blocked=Protections(map,false,protections);
+                var mismatchKinds=ProtectionKinds();var terrains=new Dictionary<string,int>();var buildings=new Dictionary<string,int>();
+                var things=new Dictionary<string,int>();var roofCounts=new Dictionary<string,int>();var rows=new List<object>();
+                int missing=0,extra=0,conflicts=0,unprotected=0,unknown=0,knownRock=0,knownNonrock=0,naturalRoofs=0,roofedKnownRock=0,naturalRoofedKnownRock=0;
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell),kind=Kind(map,cell);var roof=cell.GetRoof(map);
+                    if(roof!=null){AddCount(roofCounts,roof.defName);if(roof.isNatural)naturalRoofs++;}
+                    if(kind==0){unknown++;continue;}
+                    if(kind==2){knownRock++;if(roof!=null){roofedKnownRock++;if(roof.isNatural)naturalRoofedKnownRock++;}}
+                    else knownNonrock++;
+                    var building=cell.GetEdifice(map);bool actual=Natural(building);
+                    if((kind==2)==actual)continue;
+                    if(kind==2)missing++;else extra++;
+                    if(blocked[n])conflicts++;else unprotected++;
+                    var terrain=map.terrainGrid.TerrainAtIgnoreTemp(n);var reasons=new List<string>();
+                    bool water=terrain.IsWater || terrain.IsRiver;
+                    if(terrain.IsRiver)reasons.Add("river");
+                    if(terrain.defName.StartsWith("WaterOcean",StringComparison.Ordinal))reasons.Add("sea");
+                    if(water && !terrain.IsRiver && !terrain.defName.StartsWith("WaterOcean",StringComparison.Ordinal)
+                        && terrain.defName!="WaterShallow" && terrain.defName!="WaterDeep" && terrain.defName!="Marsh")reasons.Add("special_water");
+                    if(water)reasons.Add("water");
+                    if(terrain.HasTag("Road") || terrain.bridge)reasons.Add("road");
+                    if(ConstructedFloor(terrain))reasons.Add("constructed_floor");
+                    if(building!=null && !actual)reasons.Add("building");
+                    if(actual && !Resource(building) && !SupportedStone(building.def))reasons.Add("special_rock");
+                    if(building!=null && preexistingRocks.Contains(building))reasons.Add(Resource(building)?"preexisting_resource":"preexisting_rock");
+                    var others=cell.GetThingList(map).Where(thing=>thing!=building).Select(thing=>thing.def.defName).ToArray();
+                    if(others.Length>0)reasons.Add("other_thing");
+                    if(!terrain.supportsRock || terrain.dangerous)reasons.Add("unsupported_terrain");
+                    foreach(string reason in reasons)mismatchKinds[reason]++;
+                    AddCount(terrains,terrain.defName);if(building!=null)AddCount(buildings,building.def.defName);
+                    foreach(string name in others)AddCount(things,name);
+                    rows.Add(new Dictionary<string,object>{{"x",cell.x},{"z",cell.z},{"source_kind",kind},{"actual_rock",actual},
+                        {"current_guard_blocked",blocked[n]},{"early_snapshot_protected",earlyProtected[n]},{"protection_kinds",reasons},
+                        {"terrain",terrain.defName},{"terrain_natural",terrain.natural},{"terrain_layerable",terrain.layerable},
+                        {"terrain_designation_category",terrain.designationCategory?.defName},{"building_def",building?.def.defName},{"other_thing_defs",others},
+                        {"elevation",MapGenerator.Elevation[cell]},{"caves",MapGenerator.Caves[cell]},{"roof",roof?.defName}});
+                }
+                Save(Id+"-rock-final-audit.json",new Dictionary<string,object>{{"schema_version",1},{"stage",99999},{"row_order","south-first"},
+                    {"source_width",width},{"source_height",height},{"target_width",map.Size.x},{"target_height",map.Size.z},
+                    {"known_source_mismatches",missing+extra},{"missing_source_rock_cells",missing},{"extra_rock_cells_on_known_nonrock",extra},
+                    {"protected_conflicts",conflicts},{"unprotected_mismatches",unprotected},{"known_rock_cells",knownRock},{"known_nonrock_cells",knownNonrock},{"unknown_cells",unknown},
+                    {"protection_kinds",protections},{"mismatch_protection_kinds",mismatchKinds},{"mismatch_terrain_defs",terrains},
+                    {"mismatch_building_defs",buildings},{"mismatch_other_thing_defs",things},{"mismatches",rows},{"roof_defs",roofCounts},
+                    {"natural_roof_cells",naturalRoofs},{"roofed_known_rock_cells",roofedKnownRock},{"natural_roofed_known_rock_cells",naturalRoofedKnownRock},
+                    {"scope","Read-only final source occupancy audit after native generation. Protected conflicts require quarantine; unknown/protected native changes are not compared with intermediate snapshots. No replay or roof/cave/resource transplant."}});
+            }
+            static void AddCount(Dictionary<string,int> counts,string name){if(!counts.ContainsKey(name))counts[name]=0;counts[name]++;}
+        }
+        sealed class RockSnapshot
+        {
+            readonly TerrainDef[] terrain;
+            readonly Building[] buildings;
+            readonly RoofDef[] roofs;
+            public readonly float[] Elevation,Caves;
+            public RockSnapshot(Map map)
+            {
+                int count=map.cellIndices.NumGridCells;terrain=new TerrainDef[count];buildings=new Building[count];roofs=new RoofDef[count];
+                Elevation=new float[count];Caves=new float[count];
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell);terrain[n]=map.terrainGrid.TerrainAtIgnoreTemp(n);buildings[n]=cell.GetEdifice(map);
+                    roofs[n]=cell.GetRoof(map);Elevation[n]=MapGenerator.Elevation[cell];Caves[n]=MapGenerator.Caves[cell];
+                }
+            }
+            public bool Changed(Map map,IntVec3 cell)
+            {
+                int n=map.cellIndices.CellToIndex(cell);
+                return terrain[n]!=map.terrainGrid.TerrainAtIgnoreTemp(n) || buildings[n]!=cell.GetEdifice(map) || roofs[n]!=cell.GetRoof(map)
+                    || Elevation[n]!=MapGenerator.Elevation[cell] || Caves[n]!=MapGenerator.Caves[cell];
+            }
+        }
+        sealed class RockGridPass : GenStep
+        {
+            readonly RockComposition rock;
+            public RockGridPass(RockComposition rock){this.rock=rock;}
+            public override int SeedPart=>2739476;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                var kinds=RockComposition.ProtectionKinds();var blocked=rock.Protections(map,true,kinds);var before=new RockSnapshot(map);
+                int conflicts=0,known=0,unknown=0;
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell),kind=rock.Kind(map,cell);
+                    if(kind==0){unknown++;continue;}known++;
+                    if(blocked[n]){if((kind==2 && (MapGenerator.Elevation[cell]<=.7f || MapGenerator.Caves[cell]>0)) || (kind==1 && MapGenerator.Elevation[cell]>.7f))conflicts++;continue;}
+                    if(kind==2){MapGenerator.Elevation[cell]=.71f;MapGenerator.Caves[cell]=0f;}
+                    else MapGenerator.Elevation[cell]=Math.Min(before.Elevation[n],.5f);
+                }
+                int protectedChanges=0,unknownChanges=0,protectedElevation=0,protectedCaves=0,unknownElevation=0,unknownCaves=0,mismatches=0;
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell),kind=rock.Kind(map,cell);
+                    if(blocked[n]){if(before.Changed(map,cell))protectedChanges++;if(MapGenerator.Elevation[cell]!=before.Elevation[n])protectedElevation++;if(MapGenerator.Caves[cell]!=before.Caves[n])protectedCaves++;}
+                    if(kind==0){if(before.Changed(map,cell))unknownChanges++;if(MapGenerator.Elevation[cell]!=before.Elevation[n])unknownElevation++;if(MapGenerator.Caves[cell]!=before.Caves[n])unknownCaves++;}
+                    if(!blocked[n] && ((kind==2 && (MapGenerator.Elevation[cell]!=.71f || MapGenerator.Caves[cell]!=0f))
+                        || (kind==1 && (MapGenerator.Elevation[cell]>.5f || MapGenerator.Caves[cell]!=before.Caves[n]))))mismatches++;
+                }
+                Save(rock.Id+"-rock-grid-application.json",new Dictionary<string,object>{{"protected_changes",protectedChanges},{"unknown_changes",unknownChanges},
+                    {"known_source_mismatches",mismatches},{"known_grid_mismatches",mismatches},{"protected_conflicts",conflicts},
+                    {"added_rock_cells",0},{"removed_rock_cells",0},{"removed_resource_cells",0},{"protection_kinds",kinds},{"stage",199},
+                    {"protected_elevation_changes",protectedElevation},{"protected_cave_changes",protectedCaves},{"unknown_elevation_changes",unknownElevation},
+                    {"unknown_cave_changes",unknownCaves},{"known_cells",known},{"unknown_cells",unknown},{"protected_cells",blocked.Count(b=>b)},
+                    {"scope","Developer complete inland occupancy grid; target native geology/resources and protected/unknown cells remain authoritative"}});
+                Check(protectedChanges==0 && unknownChanges==0 && mismatches==0,"Rock grid preserves protected/unknown elevation and cave grids: "+rock.Id);
+            }
+        }
+        sealed class RockFinalPass : GenStep
+        {
+            readonly RockComposition rock;
+            public RockFinalPass(RockComposition rock){this.rock=rock;}
+            public override int SeedPart=>2739477;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                var kinds=RockComposition.ProtectionKinds();var blocked=rock.Protections(map,false,kinds);var before=new RockSnapshot(map);
+                int added=0,removed=0,resources=0,conflicts=0;
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell),kind=rock.Kind(map,cell);if(kind==0)continue;
+                    var building=cell.GetEdifice(map);bool actual=RockComposition.Natural(building);
+                    if(blocked[n]){if((kind==2)!=actual)conflicts++;continue;}
+                    if(kind==1 && actual) {
+                        if(RockComposition.Resource(building))resources++;else removed++;
+                        building.Destroy();
+                    }
+                    else if(kind==2 && !actual) {
+                        var def=RockComposition.NativeStone(cell);
+                        if(def==null){conflicts++;blocked[n]=true;continue;}
+                        GenSpawn.Spawn(def,cell,map);added++;
+                    }
+                }
+                int protectedChanges=0,unknownChanges=0,mismatches=0;
+                foreach(var cell in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(cell),kind=rock.Kind(map,cell);bool actual=RockComposition.Natural(cell.GetEdifice(map));
+                    if(blocked[n] && before.Changed(map,cell))protectedChanges++;
+                    if(kind==0 && before.Changed(map,cell))unknownChanges++;
+                    if(!blocked[n] && kind!=0 && (kind==2)!=actual)mismatches++;
+                }
+                Save(rock.Id+"-rock-application.json",new Dictionary<string,object>{{"protected_changes",protectedChanges},{"unknown_changes",unknownChanges},
+                    {"known_source_mismatches",mismatches},{"protected_conflicts",conflicts},{"added_rock_cells",added},{"removed_rock_cells",removed},
+                    {"removed_resource_cells",resources},{"removed_total_rock_cells",removed+resources},{"protection_kinds",kinds},{"stage",404},
+                    {"protected_cells",blocked.Count(b=>b)},{"unknown_cells",map.AllCells.Count(c=>rock.Kind(map,c)==0)},
+                    {"resource_policy","Current target native ore generation is retained inside occupancy; clipping can change ore amount. Source ore types/quantities are not copied."},
+                    {"scope","Complete inland composition only. Protected conflicts require candidate rejection; no source roof/cave/resource recreation claim."}});
+                Check(protectedChanges==0 && unknownChanges==0 && mismatches==0,"Final rock occupancy preserves protected/unknown cells: "+rock.Id);
+                if(rock.Id=="rock-guard") {
+                    Check(added>0 && removed>0 && resources>0,"Real missing rock addition, regular removal and native resource spill removal exercised");
+                    Check(new[]{"river","sea","special_water","water","road","constructed_floor","building","special_rock","preexisting_resource","other_thing"}.All(k=>kinds[k]>0),
+                        "Real protected water, road, floor, building, special rock and preexisting resource fixtures exercised");
+                }
+            }
+        }
+        sealed class RockGuardFixture : GenStep
+        {
+            readonly RockComposition rock;
+            public RockGuardFixture(RockComposition rock){this.rock=rock;}
+            public override int SeedPart=>2739478;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                if(rock.Id=="rock-guard") {
+                    var river=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.IsRiver);
+                    var sea=DefDatabase<TerrainDef>.GetNamed("WaterOceanShallow");var special=DefDatabase<TerrainDef>.GetNamed("HotSpring");
+                    var road=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.HasTag("Road"));
+                    var floor=DefDatabase<TerrainDef>.AllDefsListForReading.First(t=>t.designationCategory!=null && !t.IsWater && !t.dangerous);
+                    var defs=new[]{river,sea,special,TerrainDefOf.WaterShallow,road,floor,TerrainDefOf.Soil,TerrainDefOf.Soil};
+                    for(int i=0;i<defs.Length;i++) {
+                        var cell=new IntVec3(20+i,0,20);ClearGeneratedRock(map,cell);map.terrainGrid.SetTerrain(cell,defs[i]);
+                        if(i==6)GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.Wall,ThingDef.Named("BlocksGranite")),cell,map);
+                        if(i==7)GenSpawn.Spawn(DefDatabase<ThingDef>.AllDefsListForReading.First(d=>d.building?.isNaturalRock==true
+                            && !d.building.isResourceRock && d.building.naturalTerrain!=null && !RockComposition.SupportedStone(d)),cell,map);
+                    }
+                    SeedStone(map,new IntVec3(12,0,12),ThingDef.Named("MineableSteel"),true);
+                    SeedStone(map,new IntVec3(13,0,12),RockComposition.NativeStone(new IntVec3(13,0,12)),false);
+                    SeedStone(map,new IntVec3(14,0,12),ThingDef.Named("MineableSteel"),false);
+                    SeedStone(map,new IntVec3(15,0,12),RockComposition.NativeStone(new IntVec3(15,0,12)),true);
+                    var chunk=new IntVec3(28,0,20);ClearGeneratedRock(map,chunk);map.terrainGrid.SetTerrain(chunk,TerrainDefOf.Soil);
+                    GenSpawn.Spawn(ThingDef.Named("ChunkGranite"),chunk,map);
+                    var unsafeTerrain=new IntVec3(29,0,20);var lava=DefDatabase<TerrainDef>.GetNamed("LavaDeep");
+                    Check(rock.Kind(map,unsafeTerrain)==2 && lava.dangerous && !lava.supportsRock,"Real unsupported dangerous terrain conflicts with requested M fixture");
+                    ClearGeneratedRock(map,unsafeTerrain);map.terrainGrid.SetTerrain(unsafeTerrain,lava);
+                    var specialFloor=new IntVec3(31,0,20);var ancient=DefDatabase<TerrainDef>.GetNamed("AncientConcrete");
+                    Check(rock.Kind(map,specialFloor)==2 && ancient.designationCategory==null && RockComposition.ConstructedFloor(ancient),
+                        "Real designation-category-null constructed floor conflicts with requested M fixture");
+                    ClearGeneratedRock(map,specialFloor);map.terrainGrid.SetTerrain(specialFloor,ancient);
+                    Save(rock.Id+"-rock-fixtures.json",new Dictionary<string,object>{{"schema_version",1},{"stage",403.5f},
+                        {"special_constructed_floor",new Dictionary<string,object>{{"x",31},{"z",20},{"terrain",ancient.defName},
+                            {"designation_category",ancient.designationCategory?.defName},{"natural",ancient.natural},{"layerable",ancient.layerable}}},
+                        {"unsupported_terrain",new Dictionary<string,object>{{"x",29},{"z",20},{"terrain",lava.defName},{"dangerous",lava.dangerous},{"supports_rock",lava.supportsRock}}}});
+                    var missing=new IntVec3(30,0,30);ClearGeneratedRock(map,missing);map.terrainGrid.SetTerrain(missing,TerrainDefOf.Soil);
+                }
+                SeedStone(map,new IntVec3(5,0,5),RockComposition.NativeStone(new IntVec3(5,0,5)),false);
+            }
+            void SeedStone(Map map,IntVec3 cell,ThingDef def,bool protect)
+            {
+                ClearGeneratedRock(map,cell);map.terrainGrid.SetTerrain(cell,TerrainDefOf.Soil);
+                var building=(Building)GenSpawn.Spawn(def,cell,map);if(protect)rock.MarkPreexisting(building);
+            }
+            static void ClearGeneratedRock(Map map,IntVec3 cell)
+            {
+                var building=cell.GetEdifice(map);
+                Check(building==null || RockComposition.Natural(building),"Disposable rock fixture never clears an actual building: "+cell);
+                if(building!=null)building.Destroy();
             }
         }
         // Exact observed water layout for a complete library composition only.
@@ -397,6 +695,7 @@ namespace MapGenAI.MapLibraryProbe
         sealed class Capture : GenStep
         {
             public string Id; public int Size,Target; public bool IsSource,Captured,AuthoringReportPresent; public TileMapState State;
+            public RockComposition Rock;
             public Dictionary<string,int> Counts;
             public override int SeedPart=>2739471;
             public override void Generate(Map map,GenStepParams parms)
@@ -411,6 +710,7 @@ namespace MapGenAI.MapLibraryProbe
                     labels[c.z*Size+c.x]=v; Counts[v=='M'?"mountain":v=='W'?"water":v=='S'?"shallow":"ground"]++;
                 }
                 var fertility=new char[Size*Size];var terrainCounts=new Dictionary<string,int>();
+                var rockMask=new int[Size*Size];var rockDefs=new Dictionary<string,int>();int regularRocks=0,resourceRocks=0;
                 var names=new List<string>();var indices=new int[Size*Size];var surfaces=new int[Size*Size];
                 foreach(var c in map.AllCells) {
                     var terrain=map.terrainGrid.TerrainAt(c);string name=terrain.defName;
@@ -419,9 +719,20 @@ namespace MapGenAI.MapLibraryProbe
                     string permanent=map.terrainGrid.TerrainAtIgnoreTemp(map.cellIndices.CellToIndex(c)).defName;
                     if(!names.Contains(permanent))names.Add(permanent);indices[c.z*Size+c.x]=names.IndexOf(permanent);
                     if(!names.Contains(name))names.Add(name);surfaces[c.z*Size+c.x]=names.IndexOf(name);
+                    var building=c.GetEdifice(map);
+                    if(RockComposition.Natural(building)) {
+                        bool resource=RockComposition.Resource(building);rockMask[c.z*Size+c.x]=resource?2:1;
+                        if(resource)resourceRocks++;else regularRocks++;
+                        if(!rockDefs.ContainsKey(building.def.defName))rockDefs[building.def.defName]=0;rockDefs[building.def.defName]++;
+                    }
                 }
+                Counts["regular_rock_cells"]=regularRocks;Counts["resource_rock_cells"]=resourceRocks;Counts["rock_cells"]=regularRocks+resourceRocks;
                 Save(Id+"-terrain.json",new Dictionary<string,object>{{"schema_version",2},{"biome",map.Biome.defName},{"width",Size},{"height",Size},{"cells",new string(labels)},{"fertile_cells",new string(fertility)},{"terrain_defs",terrainCounts},
-                    {"terrain_table",names},{"terrain_indices",indices},{"surface_indices",surfaces},{"row_order","south-first"},{"note","Per-cell permanent TerrainDef and visible surface are separate; temporary ice is never imported as water from a color alone."}});
+                    {"terrain_table",names},{"terrain_indices",indices},{"surface_indices",surfaces},{"row_order","south-first"},
+                    {"rock_mask",rockMask},{"rock_mask_policy","0 absent, 1 natural stone, 2 natural resource; observed target result, never a source resource transplant"},
+                    {"rock_defs",rockDefs},{"regular_rock_cells",regularRocks},{"resource_rock_cells",resourceRocks},{"rock_cells",regularRocks+resourceRocks},
+                    {"note","Per-cell permanent TerrainDef and visible surface are separate; temporary ice is never imported as water from a color alone."}});
+                Rock?.AuditFinal(map);
                 var request=new MapPreview.MapPreviewRequest(Find.World.info.seedString,Target,new IntVec2(Size,Size));
                 var result=new MapPreview.MapPreviewResult(request);
                 var gt=typeof(MapPreview.MapPreviewGenerator);

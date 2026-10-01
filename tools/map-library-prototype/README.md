@@ -4,6 +4,22 @@
 
 `water.py`는 실제 원본 칸의 얕은 물/깊은 물/확인된 마른 땅을 별도 `water_layer`에 저장한다. 작은 연못도 생략하지 않는다. 개발자 `WaterPass`는 바닥 적용 전에 원본 수심/위치를 적용하고, 원본의 확인된 마른 곳에 있는 일반 연못만 정리한다. 원본의 건축 바닥은 마른 곳이라는 근거로만 사용하며 재료/건물을 복사하지 않는다. 대상의 강·바다·온천 및 연결된 물, 길·건축 바닥·건물과 불명 입력은 보호하고 충돌을 기록한다. 보통 습지 Marsh는 강/온천으로 오인하지 않는다.
 
+## 칸별 바위·바닥 디테일 실험
+
+`detail_prepare.py --folder <새 폴더>`는 기존 실제 GL 원자료를 해시와 함께 재사용하고 `build_catalog.py --details`로 명시적인 전체 구도 실험을 만든다. `rock.py`는 원본의 실제 자연 암석 점유와 비암석/불명 칸을 RLE `rock_layer`에 기록하며 작은 조각과 구멍도 생략하지 않는다. 원본 돌/광석 종류·자원량은 복제하지 않고 현재 타일의 기본 생성에 맡긴다. 전체 구도 경계 밖에 새로 생성된 광석은 정리될 수 있으므로 자원량 동일 보장은 아니다. 기존 바닥 정책은 유지하고, 이 명시적인 원본 데이터 이식만 지원하는 자연 바닥 조각을 1칸까지 저장한다. 이미지 입력은 추측하지 않으며 이전 12칸 기준을 유지한다.
+
+[최종 보고서](../../docs/analysis/2026-10-01-map-library-prototype/rock-v4/report.md): Python79·실제 실행383·새58지도, 엄격한 원본 대조12/18. 실패한6조건은 그대로 제외하고 통과한 profile만 등록한다. `--details`의 native palette가 없으면 sidecar 없는 fallback으로 우회하지 않는다.
+
+원본 M 마스크를 단순화한 윤곽과 비교하지 않고 원자료 전체와 직접 비교한다. 바위의 추가/누락·precision/recall/IoU≥98%와 원본의 지원 자연 바닥 전체를 분모로 한 같은 바이옴 재료 일치≥95%를 승인 기준으로 삼고 물·바닥 보호 검사도 함께 유지한다. 불명 영역과 보호 대상은 남기며 충돌 후보는 제외한다. 기존 부분 편집/sidecar 없는 생성 경로, 제품 DLL/추천창/저장/Undo는 변경하지 않는다. 동굴·지붕·원본 자원 배치·절차적 다양성은 별도 후속이다.
+
+native `RocksFromGrid` 직전 단계199에서 점유 그리드를 맞추고 물403 뒤404에서 바위를 보정한다. 이후750의 `ScatterShrines`는 고대 건물 자리의 바위를 치우고 바닥을 덮을 수 있으므로 중간 적용 성공을 최종 원본 일치로 취급하지 않는다. 마지막 캡처에서도 실제 추가/누락과 보호 충돌을 따로 검사한다. 생긴 건물을 지우거나 주변 바닥을 덮어 원본 일치 수치를 높이지 않는다.
+
+```powershell
+python -X utf8 tools/map-library-prototype/detail_prepare.py --folder docs/analysis/2026-10-01-map-library-prototype/rock-v4
+# 새 manifest로 run.ps1을 실행·Archive한 뒤 실제 원자료와 직접 비교한다.
+python -X utf8 tools/map-library-prototype/rock_report.py --folder docs/analysis/2026-10-01-map-library-prototype/rock-v4 --runs detail-a-native-r2 detail-b-native-r2 detail-c-native-r2 rock-controls-native-r2
+```
+
 물 검사에서는 원본 전체 water mask(작은 조각 포함)와 직접 IoU≥98%를 요구한다. 현재 타일의 연못을 원본 mask에 합친 수치는 참고만 하며 후보 승인 근거로 쓰지 않는다. 보호 대상 충돌이나 water 근거 부재는 후보를 제외한다. `water_layer` 역시 제품 `TileMapState`/Preview/Undo/UI에는 미연결이고 완전한 저장소 구도에만 적용한다. 기존 부분 편집·강/해안/도로 타일 제외와 sidecar 없는 기존 생성 흐름은 유지한다.
 
 실행: `water_report.py --folder docs/analysis/2026-10-01-map-library-prototype/water-v3 --prepare` → 새 transfer-a/b/c 및 water-controls manifest로 `run.ps1` 실제 생성/Archive → `water_report.py --folder .../water-v3 --runs <A> <B> <C> <controls>` → `finalize_catalog.py --folder .../water-v3` → `verify_water.py --folder .../water-v3 --runs <A> <B> <C> <controls>`. 보고서의 실제 폴더/실패 영수증을 확인하고, 재현 출력은 항상 새 폴더로 만든다. 원본 GL6개는 기존 실제 캡처를 해시로 대조해 재사용한다.

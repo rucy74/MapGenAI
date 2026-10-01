@@ -42,13 +42,13 @@ def ground_layer(names, cells, palette, source_biome, minimum=12):
                   'omitted_ground':omitted,'ground_policy':layer['policy'],
                   'runtime_contract':'Developer ground sidecar; not yet serialized by product TileMapState'}
 
-def observed_ground(path,cells,palette):
+def observed_ground(path,cells,palette,minimum=12):
     data=json.loads(path.read_text(encoding='utf-8'))
     if data.get('schema_version')!=2 or data.get('row_order')!='south-first':
         raise ValueError('Per-cell TerrainDef v2 capture required; a histogram cannot recreate ground')
     table=np.asarray(data['terrain_table']);indices=np.asarray(data['terrain_indices']).reshape(cells.shape)
     if indices.min()<0 or indices.max()>=len(table):raise ValueError('Invalid terrain table indices')
-    return ground_layer(table[indices],cells,palette,data['biome'])
+    return ground_layer(table[indices],cells,palette,data['biome'],minimum=minimum)
 
 def image_palette(native,mode='true'):
     if mode not in ('true','default'):raise ValueError('Unknown native preview mode')

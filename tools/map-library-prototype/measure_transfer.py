@@ -41,8 +41,14 @@ def measure(folder, runs):
                 source=folder/entry['source']['reference_run'];ident=entry['source']['reference_id']
                 truth,_=read_terrain(source/(ident+'-terrain.json'))
                 baseline,_=read_terrain(run/(entry['id']+'-baseline-terrain.json'))
-                if entry['features']['new_mountains']:
-                    metrics['mountains']=compare(scaled(retained(truth=='M'),scene['size']),actual=='M')
+                if entry['features']['new_mountains'] or entry.get('requires_rock_sidecar'):
+                    exact_rock=entry.get('requires_rock_sidecar',False)
+                    rocks=scaled(truth=='M' if exact_rock else retained(truth=='M'),scene['size'])
+                    metrics['mountains']=compare(rocks,actual=='M')
+                    if exact_rock:
+                        value=metrics['mountains']
+                        if value is None and (actual=='M').any():reasons.append('Unexpected rocks in observed rock-free source')
+                        elif value and any(value[k]<.98 for k in ('precision','recall','iou')):reasons.append('Raw source rock precision/recall/IoU below 0.98')
                 if entry['features']['new_water']:
                     exact=entry.get('requires_water_sidecar',False)
                     wet=scaled(np.isin(truth,['S','W']) if exact else retained(np.isin(truth,['S','W'])),scene['size'])

@@ -8,6 +8,8 @@ def finalize(folder):
     ground=json.loads(ground_path.read_text(encoding='utf-8')) if ground_path.exists() else None
     water_path=folder/'water-evaluation.json'
     water=json.loads(water_path.read_text(encoding='utf-8')) if water_path.exists() else None
+    rock_path=folder/'rock-evaluation.json'
+    rock=json.loads(rock_path.read_text(encoding='utf-8')) if rock_path.exists() else None
     for entry in catalog['entries']:
         profiles={};failed=[]
         for row in evidence['records']:
@@ -24,7 +26,12 @@ def finalize(folder):
                 matches=[] if water is None else [r for r in water['records'] if r['run']==row['run'] and r['id']==entry['id']]
                 water_ok=bool(matches) and all(r['pass'] for r in matches)
                 if not water_ok:failed.append({'run':row['run'],'reasons':['Water layout evidence absent or failed']})
-            profiles[key]=profiles.get(key,True) and row['geometry_pass'] and ground_ok and water_ok
+            rock_ok=True
+            if entry.get('requires_rock_sidecar'):
+                matches=[] if rock is None else [r for r in rock['records'] if r['run']==row['run'] and r['id']==entry['id']]
+                rock_ok=bool(matches) and all(r['pass'] for r in matches)
+                if not rock_ok:failed.append({'run':row['run'],'reasons':['Rock detail evidence absent or failed']})
+            profiles[key]=profiles.get(key,True) and row['geometry_pass'] and ground_ok and water_ok and rock_ok
             if not row['geometry_pass']:failed.append({'run':row['run'],'reasons':row['reasons']})
         entry['verified_profiles']=[{'biome':biome,'map_size':size,'hilliness':hill} for (biome,size,hill),ok in sorted(profiles.items()) if ok]
         entry['status']='prototype-tested' if entry['verified_profiles'] else 'prototype-quarantined'

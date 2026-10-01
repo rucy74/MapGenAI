@@ -5,6 +5,7 @@ from PIL import Image
 from contours import read_terrain, read_image, export
 from ground import observed_ground, ground_layer, image_palette, read_image_materials
 from water import observed_water, water_layer
+from rock import observed_rock
 
 NAMES={
  'gl-lake':('불규칙한 호숫가','Irregular lakeside','lake','구불구불한 호숫가와 넓게 이어지는 정착 공간.','An irregular lake shoreline with broad connected settlement ground.'),
@@ -18,13 +19,15 @@ NAMES={
 def write(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
-def build(folder,source):
+def build(folder,source,details=False):
     result=json.loads((source/'result.json').read_text(encoding='utf-8'))
     if not result['ok'] or len(result['results'])!=6: raise ValueError('Complete six-scene GL capture required')
     inventory=json.loads((folder/'gl-inventory.json').read_text(encoding='utf-8'))['items']; original={e['id']:e for e in inventory}
     entries=[];excluded=[];receipt=[]
     native_path=source/'native-terrain-palette.json'
     native=json.loads(native_path.read_text(encoding='utf-8')) if native_path.exists() else None
+    if details and native is None:
+        raise ValueError('Native terrain palette required for explicit rock/ground detail transfer')
     for scene in result['results']:
         ident=scene['id']; title,en_title,family,ko,en=NAMES[ident]
         cells,origin=read_terrain(source/(ident+'-terrain.json'))
@@ -33,10 +36,13 @@ def build(folder,source):
         try:
             command,loss=export(cells,ident.replace('-','_'),water=True,fertile_cells=fertile)
             if native is not None:
-                layer,ground_loss=observed_ground(source/(ident+'-terrain.json'),cells,native)
+                layer,ground_loss=observed_ground(source/(ident+'-terrain.json'),cells,native,minimum=1 if details else 12)
                 command['ground_layer']=layer;loss.update(ground_loss)
                 water,water_loss=observed_water(source/(ident+'-terrain.json'),cells,native)
                 command['water_layer']=water;loss.update(water_loss)
+                if details:
+                    rock,rock_loss=observed_rock(source/(ident+'-terrain.json'))
+                    command['rock_layer']=rock;loss.update(rock_loss)
         except ValueError as error:
             excluded.append({'id':ident,'reason':str(error),'source_retained':True});continue
         path=folder/'recipes'/(ident+'.json');write(path,command);write(path.with_suffix('.receipt.json'),{**origin,**loss})
@@ -104,11 +110,14 @@ def build(folder,source):
             command=json.loads((folder/e['command']).read_text(encoding='utf-8'))
             e['requires_ground_sidecar']='ground_layer' in command
             e['requires_water_sidecar']='water_layer' in command
+            e['requires_rock_sidecar']='rock_layer' in command
+            if e['requires_rock_sidecar']:
+                e['limitations'].append('Exact observed solid-rock occupancy and tiny supported ground; current tile native stone/ore selection, no original roofs/caves/resource layout transplant')
             if e['requires_water_sidecar']:
                 e['features']['new_water']=True
                 e['limitations'].append('Complete observed inland water layout sidecar; product state/UI does not apply it yet')
     write(folder/'catalog.json',{'schema_version':1,'purpose':'Developer prototype, not a distributed preset pack','entries':entries,'excluded':excluded,'reference_source_graphs':44,'paid_api_calls':0,
-        'runtime_contract':'MapLibraryProbe ground/water sidecars v1; product ApplyPatches alone omits sidecars' if native else 'Product polygon commands only'})
+        'runtime_contract':('MapLibraryProbe rock/ground/water sidecars v1; product ApplyPatches alone omits sidecars' if details else 'MapLibraryProbe ground/water sidecars v1; product ApplyPatches alone omits sidecars') if native else 'Product polygon commands only'})
     write(folder/'conversion-receipt.json',{'entries':receipt,'excluded':excluded,
         'ground_policy':'Named source ground sidecar with native protection and biome adaptation' if native else 'Native biome ground preserved except explicitly requested oasis fertile areas',
         'water_depth':'Shallow footprint first, sampled deep cores last; no automatic all-deep water'} )
@@ -121,4 +130,4 @@ def build(folder,source):
     print(json.dumps({'entries':len(entries),'excluded':excluded,'recipes':[e['id'] for e in entries]},ensure_ascii=False))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--folder',type=pathlib.Path,required=True);p.add_argument('--source',type=pathlib.Path,required=True);args=p.parse_args();build(args.folder,args.source)
+    p=argparse.ArgumentParser();p.add_argument('--folder',type=pathlib.Path,required=True);p.add_argument('--source',type=pathlib.Path,required=True);p.add_argument('--details',action='store_true');args=p.parse_args();build(args.folder,args.source,details=args.details)
