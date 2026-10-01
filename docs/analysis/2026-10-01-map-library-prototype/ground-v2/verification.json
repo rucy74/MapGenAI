@@ -1,0 +1,87 @@
+{
+  "utc": "2026-10-01T05:26:02.886568+00:00",
+  "unit_tests": 37,
+  "native_checks": 306,
+  "captured_native_maps_including_baselines": 70,
+  "passing_ground_applications": 26,
+  "same_biome_fidelity_checks": 16,
+  "same_biome_fidelity_range": [
+    0.986180210060807,
+    1.0
+  ],
+  "exercised_source_ground_materials": [
+    "Granite_Rough",
+    "Gravel",
+    "Limestone_Rough",
+    "Marble_Rough",
+    "Mud",
+    "Sand",
+    "Sandstone_Rough",
+    "Slate_Rough",
+    "SoftSand",
+    "Soil",
+    "SoilRich"
+  ],
+  "html_embedded_images": 24,
+  "html_rendered_in_browser": false,
+  "unchanged_legacy_controls": [
+    {
+      "run": "transfer-a",
+      "id": "core-foothills",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    },
+    {
+      "run": "transfer-a",
+      "id": "core-dry-clearing",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    },
+    {
+      "run": "transfer-b",
+      "id": "core-foothills",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    },
+    {
+      "run": "transfer-b",
+      "id": "core-dry-clearing",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    },
+    {
+      "run": "transfer-c",
+      "id": "core-foothills",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    },
+    {
+      "run": "transfer-c",
+      "id": "core-dry-clearing",
+      "all_topology_cells_identical": true,
+      "all_named_terrain_counts_identical": true,
+      "complete_preview_png_identical": true
+    }
+  ],
+  "product_dll_hashes": {
+    "sourceDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "installedDev": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "dist": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5",
+    "installedGeneral": "9A792FAD321743582EE767548082B0AE72D23643D4F8E26358A42BEE5B1052B5"
+  },
+  "product_sources_unchanged": true,
+  "paid_api_calls": 0,
+  "archived_final_runs": [
+    "source-native-final",
+    "transfer-a-native-final",
+    "transfer-b-native-final",
+    "transfer-c-native-final",
+    "extra-native-r3"
+  ],
+  "scope": "Ground prototype only. Existing headless Plant.Print cleanup warnings and oasis geometry failures are not claimed fixed."
+}

@@ -1,0 +1,103 @@
+{
+  "method": "observed-terrain",
+  "source_sha256": "c3833e910cbe0d01dc60af7ae52bf4dc1ebdaa8999047b9a1513f46bba424d94",
+  "row_order": "south-first",
+  "loss": {
+    "M": {
+      "input_cells": 28985,
+      "omitted_small_cells": 394,
+      "components": 12
+    }
+  },
+  "shape_count": 12,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 31671,
+  "ground_materials": [
+    {
+      "def": "Granite_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Gravel",
+      "role": "gravel"
+    },
+    {
+      "def": "Limestone_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Mud",
+      "role": "mud"
+    },
+    {
+      "def": "Slate_Rough",
+      "role": "rock-ground"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 4161,
+  "omitted_ground": {
+    "AncientConcrete": {
+      "cells": 140,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneGranite": {
+      "cells": 9,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneMarble": {
+      "cells": 72,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSandstone": {
+      "cells": 53,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneSlate": {
+      "cells": 35,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "Granite_Rough": {
+      "cells": 100,
+      "reason": "Tiny components"
+    },
+    "Gravel": {
+      "cells": 682,
+      "reason": "Tiny components"
+    },
+    "Limestone_Rough": {
+      "cells": 28,
+      "reason": "Tiny components"
+    },
+    "Mud": {
+      "cells": 25,
+      "reason": "Tiny components"
+    },
+    "Slate_Rough": {
+      "cells": 39,
+      "reason": "Tiny components"
+    },
+    "Soil": {
+      "cells": 95,
+      "reason": "Tiny components"
+    },
+    "SoilRich": {
+      "cells": 125,
+      "reason": "Tiny components"
+    },
+    "TileSandstone": {
+      "cells": 2,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    }
+  },
+  "runtime_contract": "Developer ground sidecar; not yet serialized by product TileMapState"
+}

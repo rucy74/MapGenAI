@@ -1,0 +1,24 @@
+{
+  "action": "generate",
+  "params": {},
+  "ground_layer": {
+    "schema_version": 1,
+    "source_biome": "TemperateForest",
+    "width": 100,
+    "height": 100,
+    "row_order": "south-first",
+    "materials": [
+      {
+        "def": "MapLibrary_NotInstalled",
+        "role": "fertile"
+      }
+    ],
+    "runs": [
+      {
+        "start": 0,
+        "length": 10000,
+        "material": 1
+      }
+    ]
+  }
+}

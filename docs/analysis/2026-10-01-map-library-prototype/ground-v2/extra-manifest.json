@@ -1,0 +1,35 @@
+{
+  "world_seed": "map-library-ground-positive-controls-20261001",
+  "cases": [
+    {
+      "id": "image-default-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "command": "recipes/image-default-lake.json"
+    },
+    {
+      "id": "desert-lakeside",
+      "biome": "Desert",
+      "size": 250,
+      "command": "recipes/gl-lake.json"
+    },
+    {
+      "id": "missing-ground",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/missing-ground.json"
+    },
+    {
+      "id": "unsafe-ground",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/unsafe-ground.json"
+    },
+    {
+      "id": "ground-guard",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "recipes/ground-guard.json"
+    }
+  ]
+}

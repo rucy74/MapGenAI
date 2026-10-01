@@ -1,0 +1,75 @@
+{
+  "method": "native-palette-with-ambiguity-rejection",
+  "source_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+  "palette_sha256": "51daf8b1e45f6d40d956de7160ceda0f0d1f5ca812e614a58c7ded772c4f51c7",
+  "unknown_fraction": 0.070608,
+  "distant_pixels": 0,
+  "ambiguous_pixels": 3444,
+  "recognized_unusable_pixels": 969,
+  "palette_colors": 352,
+  "semantic_classes": 24,
+  "note": "Known native renderer only; unknown/conflicting ground preserved. A color cannot prove river, hot spring, seasonal underlying water or constructed-floor identity.",
+  "loss": {
+    "S": {
+      "input_cells": 8140,
+      "omitted_small_cells": 101,
+      "components": 3
+    },
+    "W": {
+      "input_cells": 2479,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 4,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 48310,
+  "ground_materials": [
+    {
+      "def": "Gravel",
+      "role": "gravel"
+    },
+    {
+      "def": "Mud",
+      "role": "mud"
+    },
+    {
+      "def": "Sand",
+      "role": "sand"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 3653,
+  "omitted_ground": {
+    "Gravel": {
+      "cells": 197,
+      "reason": "Tiny components"
+    },
+    "Mud": {
+      "cells": 28,
+      "reason": "Tiny components"
+    },
+    "Sand": {
+      "cells": 14,
+      "reason": "Tiny components"
+    },
+    "Soil": {
+      "cells": 118,
+      "reason": "Tiny components"
+    },
+    "SoilRich": {
+      "cells": 187,
+      "reason": "Tiny components"
+    }
+  },
+  "runtime_contract": "Developer ground sidecar; not yet serialized by product TileMapState"
+}

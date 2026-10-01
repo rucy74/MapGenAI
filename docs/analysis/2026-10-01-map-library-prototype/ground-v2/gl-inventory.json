@@ -1,0 +1,3668 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "id": "Archipelago",
+      "file": "LandformArchipelago.xml",
+      "sha256": "147fbce9230f9b57a3e9629fce8bc777022157ac8c5668d717520e331267cdc3",
+      "revision": "3",
+      "internal": false,
+      "nodes": 25,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridPreview": 5,
+        "gridPerlin": 1,
+        "gridOperator": 3,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridRotateToMapSides": 2,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 2,
+        "outputScatterers": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastAllSides",
+        "Commonness": "0.446927369",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "2.54802251"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Atoll",
+      "file": "LandformAtoll.xml",
+      "sha256": "20e04d0ec834d488d61714961be9f2ead271fbe02e4b8308e657cc6a8aae1e61",
+      "revision": "3",
+      "internal": false,
+      "nodes": 33,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 3,
+        "gridPreview": 8,
+        "gridPerlin": 2,
+        "gridOperator": 5,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "gridRotateToMapSides": 1,
+        "valueRandom": 3,
+        "outputScatterers": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastAllSides",
+        "Commonness": "0.396648049",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "1.45197737"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Badlands",
+      "file": "LandformBadlands.xml",
+      "sha256": "9ecc75414ef7572066662bb7d7325776ee9de2dc58564b24e3736dcaa0af9dfb",
+      "revision": "1",
+      "internal": false,
+      "nodes": 20,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "terrainGridPreview": 2,
+        "gridPerlin": 2,
+        "gridPreview": 3,
+        "outputTerrain": 1,
+        "gridOperator": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "terrainGridNaturalRock": 2,
+        "gridSelectTerrainGrid": 2,
+        "outputScatterers": 1,
+        "valueRandom": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.100558668",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.50169516"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "745.7627",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "2.259887",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "1214.68921"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Caldera",
+      "file": "LandformCaldera.xml",
+      "sha256": "cb40be76bb44982d4929d0ad686e57cd71e11ebaeb43f7b2cb9defa410790355",
+      "revision": "2",
+      "internal": false,
+      "nodes": 31,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 3,
+        "gridPreview": 10,
+        "gridOperator": 3,
+        "gridPerlin": 2,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 2,
+        "outputScatterers": 1,
+        "gridSelectValue": 1,
+        "gridCache": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.01675981",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "2.2429378"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.6965714"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Canyon",
+      "file": "LandformCanyon.xml",
+      "sha256": "fc9329cc862721cb4f7a70308c5b8feded34188ccaa96e22b3a83294032a61cc",
+      "revision": "1",
+      "internal": false,
+      "nodes": 16,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 1,
+        "gridPreview": 4,
+        "outputElevation": 1,
+        "gridOperator": 2,
+        "gridRotateToMapSides": 1,
+        "gridLinear": 1,
+        "gridRotate": 1,
+        "valueRandom": 2,
+        "outputScatterers": 1
+      },
+      "requirements": {
+        "Topology": "CliffValley",
+        "Commonness": "1",
+        "CaveChance": "0.7011173",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CaveEntrance",
+      "file": "LandformCaveEntrance.xml",
+      "sha256": "7d1855dab556ffe3cfe3dd55e34319e67782f77f0f08423fed94aa5b98499b44",
+      "revision": "1",
+      "internal": false,
+      "nodes": 48,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 5,
+        "outputElevation": 1,
+        "gridOperator": 6,
+        "gridRotateToMapSides": 2,
+        "gridLinear": 2,
+        "valueRandom": 5,
+        "outputScatterers": 1,
+        "outputCaves": 1,
+        "gridPreview": 10,
+        "gridTunnels": 1,
+        "worldTileGraphic": 1,
+        "gridRotate": 1,
+        "gridSelectValue": 5,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "valueWorldTile": 1,
+        "terrainFromBiome": 1
+      },
+      "requirements": {
+        "Topology": "CaveEntrance",
+        "Commonness": "1",
+        "CaveChance": "1",
+        "HillinessRequirement": {
+          "min": "6",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Cirque",
+      "file": "LandformCirque.xml",
+      "sha256": "9d2e24e89481f7289b8f4b8023f90f07be38d6d3fd75480e0ae618777cc36665",
+      "revision": "3",
+      "internal": false,
+      "nodes": 34,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridPreview": 9,
+        "gridOperator": 3,
+        "gridPerlin": 2,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 5,
+        "gridRotateToMapSides": 2,
+        "outputScatterers": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CliffThreeSides",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "4.67231655"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.697142839"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Cliff",
+      "file": "LandformCliff.xml",
+      "sha256": "6e0336c07d33f4d9d344fd6302e380d7203ffddcb5c8c43bbe6a7e6c79e0f930",
+      "revision": "2",
+      "internal": false,
+      "nodes": 18,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 1,
+        "gridPreview": 4,
+        "outputElevation": 1,
+        "gridOperator": 2,
+        "gridRotateToMapSides": 1,
+        "gridLinear": 1,
+        "valueRandom": 2,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "outputScatterers": 1,
+        "valueOperator": 1
+      },
+      "requirements": {
+        "Topology": "CliffOneSide",
+        "Commonness": "1",
+        "CaveChance": "0.49999997",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CliffAndCoast",
+      "file": "LandformCliffAndCoast.xml",
+      "sha256": "040f599cca133d79661473ac169353f9dcd9d48f8c234fea8b10b63fb6cdaecb",
+      "revision": "2",
+      "internal": false,
+      "nodes": 36,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 2,
+        "gridPreview": 8,
+        "outputElevation": 1,
+        "gridOperator": 3,
+        "gridRotateToMapSides": 2,
+        "gridLinear": 2,
+        "valueRandom": 4,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridRotate": 1,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputScatterers": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 2,
+        "valueConst": 1
+      },
+      "requirements": {
+        "Topology": "CliffAndCoast",
+        "Commonness": "1",
+        "CaveChance": "0.245810062",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CliffCorner",
+      "file": "LandformCliffCorner.xml",
+      "sha256": "9fba475264222e1bf77a73d6f6ec4a4a956c7f2c250cafbc1e818031cf456c27",
+      "revision": "2",
+      "internal": false,
+      "nodes": 22,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 1,
+        "gridPreview": 5,
+        "outputElevation": 1,
+        "gridOperator": 3,
+        "gridRotateToMapSides": 1,
+        "gridLinear": 2,
+        "valueRandom": 2,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridRotate": 1,
+        "outputScatterers": 1,
+        "valueOperator": 1
+      },
+      "requirements": {
+        "Topology": "CliffTwoSides",
+        "Commonness": "1",
+        "CaveChance": "0.49999997",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Coast",
+      "file": "LandformCoast.xml",
+      "sha256": "cadcbf152739d4528db79eeb8b76ea63c62422d68d69a6eedce0746aa6b65e60",
+      "revision": "3",
+      "internal": false,
+      "nodes": 21,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 1,
+        "gridRotateToMapSides": 1,
+        "valueRandom": 2,
+        "gridRotate": 1,
+        "gridPreview": 4,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 1,
+        "gridPerlin": 1,
+        "outputTerrain": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 2,
+        "valueConst": 1
+      },
+      "requirements": {
+        "Topology": "CoastOneSide",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CoastalIsland",
+      "file": "LandformCoastalIsland.xml",
+      "sha256": "2a76d40ef8e0417dc5f6ef30c6c4b492fcb2b5b6a39a50a9ab682a943b12bb29",
+      "revision": "6",
+      "internal": false,
+      "nodes": 43,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 4,
+        "gridPreview": 10,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridRotateToMapSides": 3,
+        "outputTerrain": 1,
+        "valueRandom": 4,
+        "outputElevation": 1,
+        "valueSelectGridValue": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 2,
+        "valueConst": 1
+      },
+      "requirements": {
+        "Topology": "CoastThreeSides",
+        "Commonness": "0.50000006",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.39548016"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.6959999"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CoastCorner",
+      "file": "LandformCoastCorner.xml",
+      "sha256": "e47a98e01b35e4598e4e7303e09d8d71d6a9dcf5283217cdc4c15268ee19300f",
+      "revision": "3",
+      "internal": false,
+      "nodes": 25,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridRotateToMapSides": 1,
+        "valueRandom": 3,
+        "gridPreview": 4,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 2,
+        "gridPerlin": 1,
+        "outputTerrain": 1,
+        "gridRotate": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 2,
+        "gridCache": 1,
+        "valueConst": 1
+      },
+      "requirements": {
+        "Topology": "CoastTwoSides",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Cove",
+      "file": "LandformCove.xml",
+      "sha256": "dda3a0f09d6af947ed22a6edd81390ade6901e28d58ed495760a7ce8f212b7ac",
+      "revision": "2",
+      "internal": false,
+      "nodes": 25,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 3,
+        "gridRotateToMapSides": 2,
+        "valueRandom": 2,
+        "gridPreview": 5,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 3,
+        "gridPerlin": 1,
+        "outputTerrain": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastOneSide",
+        "Commonness": "0.2988827",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "1.59887"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.502285838"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "92.93785",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "CoveWithIsland",
+      "file": "LandformCoveWithIsland.xml",
+      "sha256": "36c818ea94df5ca47f9b46058517d5717a79ddab56510a1c9c08d9fd6a3e78e1",
+      "revision": "3",
+      "internal": false,
+      "nodes": 32,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 4,
+        "gridRotateToMapSides": 3,
+        "valueRandom": 4,
+        "gridPreview": 7,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 4,
+        "gridPerlin": 1,
+        "outputTerrain": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastOneSide",
+        "Commonness": "0.120111741",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "1.59887"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.502857"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "119.77401",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Crater",
+      "file": "LandformCrater.xml",
+      "sha256": "eaf8ba95a06a78c01088909027de2f8f13b9471dfaf9f37975be9e16397697ca",
+      "revision": "3",
+      "internal": false,
+      "nodes": 39,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 3,
+        "gridPreview": 11,
+        "gridOperator": 4,
+        "gridPerlin": 2,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 6,
+        "gridRotateToMapSides": 1,
+        "gridRotate": 1,
+        "outputScatterers": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.05027937",
+        "CaveChance": "0.8519553",
+        "HillinessRequirement": {
+          "min": "3.39548016",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.697142839"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "DesertPlateau",
+      "file": "LandformDesertPlateau.xml",
+      "sha256": "ba32a752bcf79273a39b46492f85cd6c8b9e3e77f9c55cbfcc2b44a57a872608",
+      "revision": "2",
+      "internal": false,
+      "nodes": 36,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 10,
+        "terrainGridPreview": 2,
+        "gridOperator": 4,
+        "gridPerlin": 3,
+        "gridLinear": 3,
+        "valueRandom": 2,
+        "gridRotate": 1,
+        "outputFertility": 1,
+        "outputTerrain": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "terrainGridNaturalRock": 2,
+        "gridSelectTerrainGrid": 2
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.03351957",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "2.50282478"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "2.259887",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "508.474579"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "DryLake",
+      "file": "LandformDryLake.xml",
+      "sha256": "1649cc8610ab50c73adbacfc7f4cf1f90fb51f3ac483f0f6cde40d94172c4c18",
+      "revision": "1",
+      "internal": false,
+      "nodes": 15,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 3,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 1,
+        "gridPerlin": 1,
+        "outputTerrain": 1,
+        "gridLinear": 1,
+        "valueRandom": 3,
+        "gridRotate": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.0335195623",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.49717522"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-19.7740116",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "437.853119"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Fjord",
+      "file": "LandformFjord.xml",
+      "sha256": "26a2846ad1e6e4b49c022b07b8da45e8c028891c637fdb4e7365191a4eac4e00",
+      "revision": "4",
+      "internal": false,
+      "nodes": 32,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridRotateToMapSides": 2,
+        "gridPreview": 6,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridLinear": 4,
+        "valueRandom": 4,
+        "outputElevation": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastOneSide",
+        "Commonness": "0.2960894",
+        "CaveChance": "0.248603359",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "2.50282478",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.498857081"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "119.77401",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Glacier",
+      "file": "LandformGlacier.xml",
+      "sha256": "aaaaf5f4fcf536bc5caf16575bb7b368972d60b8f04de818afedfdc9e0e29941",
+      "revision": "1",
+      "internal": false,
+      "nodes": 45,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 10,
+        "gridOperator": 6,
+        "gridPerlin": 3,
+        "gridLinear": 5,
+        "valueRandom": 8,
+        "outputElevation": 1,
+        "gridRotate": 2,
+        "valueRiverLinks": 1,
+        "valueOperator": 1,
+        "gridSelectValue": 1,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridSelectTerrainGrid": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0.199999928",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "2.82857132",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-34.5143",
+          "max": "14.8571253"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "119.77401",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Gorge",
+      "file": "LandformGorge.xml",
+      "sha256": "e1c9e327617385e8c5e7aaacc321f5ca90f9e38ca09c659749a69d014c348c43",
+      "revision": "1",
+      "internal": false,
+      "nodes": 8,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "outputScatterers": 1,
+        "valueRandom": 1,
+        "mapIncidents": 1,
+        "gridPerlin": 1,
+        "gridPreview": 1,
+        "outputElevation": 1
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0.497206718",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "5.4",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "IceOasis",
+      "file": "LandformIceOasis.xml",
+      "sha256": "5ade53df4d9fb660a52dab33a4242c77ff42d5502da20e07d4e06a068113fd34",
+      "revision": "3",
+      "internal": false,
+      "nodes": 39,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 10,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 4,
+        "gridPerlin": 3,
+        "gridLinear": 3,
+        "valueRandom": 3,
+        "gridRotate": 1,
+        "gridFromValue": 2,
+        "outputElevation": 1,
+        "outputFertility": 1,
+        "outputTerrain": 1,
+        "valueWorldTile": 2,
+        "gridSelectBiomeGrid": 2,
+        "outputBiomeGrid": 1,
+        "biomeGridPreview": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.0474860445",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.49717522"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-60.4519768",
+          "max": "-20.3389835"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Island",
+      "file": "LandformIsland.xml",
+      "sha256": "d2bcb1a572952ab965b8d5eb51f03cb2875d9826ee4e88780489579b77f0324a",
+      "revision": "4",
+      "internal": false,
+      "nodes": 31,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridPreview": 8,
+        "gridPerlin": 2,
+        "gridOperator": 5,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "gridRotateToMapSides": 1,
+        "valueRandom": 1,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastAllSides",
+        "Commonness": "0.7039106",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Lake",
+      "file": "LandformLake.xml",
+      "sha256": "abbb0a2436b71b6c181532cc43b36fd841ef0c62c168ed003c220081ad2f80c7",
+      "revision": "2",
+      "internal": false,
+      "nodes": 30,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 7,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 4,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridLinear": 1,
+        "valueRandom": 3,
+        "gridRotate": 1,
+        "terrainNaturalWater": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.02793297",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.697142839"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-19.7740116",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "522.5989",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "LakeWithIsland",
+      "file": "LandformLakeWithIsland.xml",
+      "sha256": "fa71b75674191c980e440ad058c4b27624d31bc4673d206e1a99d938088e47c6",
+      "revision": "3",
+      "internal": false,
+      "nodes": 43,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 10,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 6,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridLinear": 2,
+        "valueRandom": 5,
+        "gridRotate": 2,
+        "terrainNaturalWater": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "gridCache": 3,
+        "gridSelectValue": 2,
+        "outputNamed": 2
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.008379889",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.702857137"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-19.7740116",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "706.214661",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "98.3050842",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Landbridge",
+      "file": "LandformLandbridge.xml",
+      "sha256": "b23de464289fbb5233bacbe6db7af53aa5a7da9dcf1a104d7ab74600e570fd19",
+      "revision": "4",
+      "internal": false,
+      "nodes": 33,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridRotateToMapSides": 2,
+        "valueRandom": 1,
+        "gridPreview": 7,
+        "gridSelectTerrain": 2,
+        "terrainNaturalWater": 2,
+        "terrainGridPreview": 1,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "gridSelectTerrainGrid": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastLandbridge",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "LoneMountain",
+      "file": "LandformLoneMountain.xml",
+      "sha256": "4898e2657f8d3ce1029ae63282381d77e29e25a1e5abe4393c7d573d39b7b83b",
+      "revision": "1",
+      "internal": false,
+      "nodes": 14,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 1,
+        "gridPerlin": 1,
+        "gridPreview": 4,
+        "outputElevation": 1,
+        "gridOperator": 1,
+        "valueRandom": 3,
+        "outputScatterers": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.0195531081",
+        "CaveChance": "0.497206718",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "1.4971751"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Oasis",
+      "file": "LandformOasis.xml",
+      "sha256": "2e29135a02e0b5d5282b0d40342246300716725a981e0f6d35b0bf6200188ca8",
+      "revision": "5",
+      "internal": false,
+      "nodes": 42,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 8,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 2,
+        "gridOperator": 3,
+        "gridPerlin": 3,
+        "gridLinear": 2,
+        "valueRandom": 4,
+        "gridRotate": 1,
+        "outputFertility": 1,
+        "outputTerrain": 1,
+        "gridFromValue": 2,
+        "valueWorldTile": 2,
+        "outputElevation": 1,
+        "terrainGridNaturalRock": 1,
+        "gridSelectTerrainGrid": 1,
+        "biomeGridPreview": 1,
+        "outputBiomeGrid": 1,
+        "gridSelectBiomeGrid": 2,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.0251396745",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.49717522"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "0",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "508.474579"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Peninsula",
+      "file": "LandformPeninsula.xml",
+      "sha256": "abfdf646c5e9f96f96d5c9f139f71ce3db39e576ed1bfaf79224505726ac2dfc",
+      "revision": "4",
+      "internal": false,
+      "nodes": 31,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridRotateToMapSides": 1,
+        "valueRandom": 2,
+        "gridPreview": 6,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "valueSelectGridValue": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastThreeSides",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Rift",
+      "file": "LandformRift.xml",
+      "sha256": "370db1b340f279866e4b56e81dcc82456876dedef32e7b68f77a72f49078af86",
+      "revision": "1",
+      "internal": false,
+      "nodes": 16,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 1,
+        "gridPreview": 4,
+        "outputElevation": 1,
+        "gridOperator": 2,
+        "gridRotateToMapSides": 1,
+        "gridLinear": 1,
+        "gridRotate": 1,
+        "valueRandom": 2,
+        "outputScatterers": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.08100559",
+        "CaveChance": "0.849162",
+        "HillinessRequirement": {
+          "min": "3.49717522",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "River",
+      "file": "LandformRiver.xml",
+      "sha256": "2722b9f6682df7f4b4172f129197d8d404e4f45a0ddadf67767d9cd395894dc6",
+      "revision": "2",
+      "internal": false,
+      "nodes": 115,
+      "node_types": {
+        "landformManifest": 1,
+        "pathTrace": 1,
+        "gridPreview": 13,
+        "worldTileReq": 1,
+        "valueRiverLinks": 5,
+        "layerConfig": 1,
+        "pathExtend": 1,
+        "mapSize": 3,
+        "valueOperator": 8,
+        "pathExtendTowards": 2,
+        "gridSelectValue": 5,
+        "pathOrigin": 1,
+        "valuePolarRectPosition": 2,
+        "gridPerlin": 3,
+        "valueRandom": 4,
+        "valueSelectPath": 1,
+        "valueSelectValue": 4,
+        "valueValidatePosition": 1,
+        "inputElevation": 1,
+        "gridCache": 5,
+        "outputNamed": 6,
+        "gridSlice": 2,
+        "curvePreview": 5,
+        "curveLinear": 6,
+        "curveOperator": 2,
+        "curveSelectValue": 6,
+        "pathWidth": 1,
+        "pathDensity": 1,
+        "pathCost": 1,
+        "applyLayer": 1,
+        "pathSwerve": 1,
+        "pathTenacity": 1,
+        "pathLoss": 1,
+        "valueSelectGridValue": 1,
+        "valueWorldTile": 2,
+        "gridOperator": 6,
+        "gridFromValue": 3,
+        "pathEndCondition": 1,
+        "inputNamed": 4,
+        "pathSpeed": 1
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "2118777191"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "RiverConfluence",
+      "file": "LandformRiverConfluence.xml",
+      "sha256": "3bc443d4bea5685206e11ca0757cacf277c13c43a38c29a413270066a33f9ae8",
+      "revision": "1",
+      "internal": false,
+      "nodes": 131,
+      "node_types": {
+        "landformManifest": 1,
+        "pathTrace": 1,
+        "gridPreview": 8,
+        "worldTileReq": 1,
+        "valueRiverLinks": 8,
+        "layerConfig": 1,
+        "pathExtend": 1,
+        "mapSize": 3,
+        "valueOperator": 23,
+        "valueRandom": 3,
+        "pathExtendTowards": 5,
+        "gridSelectValue": 1,
+        "pathOrigin": 1,
+        "valuePolarRectPosition": 6,
+        "gridPerlin": 3,
+        "inputElevation": 1,
+        "gridCache": 5,
+        "outputNamed": 5,
+        "applyLayer": 1,
+        "curveLinear": 6,
+        "curvePreview": 5,
+        "curveOperator": 2,
+        "curveSelectValue": 6,
+        "gridSlice": 2,
+        "pathWidth": 1,
+        "pathDensity": 1,
+        "pathSplit": 2,
+        "pathCombine": 2,
+        "pathCost": 1,
+        "pathCollision": 1,
+        "valueSelectPath": 3,
+        "valueAngleDelta": 3,
+        "valueSelectValue": 8,
+        "pathSwerve": 1,
+        "pathTenacity": 1,
+        "pathLoss": 2,
+        "gridOperator": 2,
+        "valueSelectGridValue": 1,
+        "valueWorldTile": 2,
+        "pathSpeed": 1
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "2118777191"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "RiverDelta",
+      "file": "LandformRiverDelta.xml",
+      "sha256": "7d08867420d8de48f56658ede1560e7209a3cd0d757d57d8ba19781eab206ce1",
+      "revision": "1",
+      "internal": false,
+      "nodes": 127,
+      "node_types": {
+        "landformManifest": 1,
+        "pathTrace": 1,
+        "gridPreview": 14,
+        "worldTileReq": 1,
+        "valueRiverLinks": 4,
+        "layerConfig": 1,
+        "pathExtend": 5,
+        "mapSize": 2,
+        "valueOperator": 7,
+        "pathOrigin": 1,
+        "valuePolarRectPosition": 1,
+        "gridPerlin": 2,
+        "gridCache": 5,
+        "outputNamed": 5,
+        "gridSlice": 2,
+        "curvePreview": 5,
+        "curveLinear": 4,
+        "curveOperator": 2,
+        "curveSelectValue": 4,
+        "pathWidth": 1,
+        "pathDensity": 1,
+        "pathCost": 7,
+        "applyLayer": 1,
+        "pathSwerve": 1,
+        "pathTenacity": 1,
+        "gridLinear": 1,
+        "pathCollision": 3,
+        "pathSplit": 3,
+        "pathCombine": 3,
+        "gridRotate": 7,
+        "valueRandom": 18,
+        "valueWorldTile": 1,
+        "valueAngleDelta": 1,
+        "valueSelectPath": 1,
+        "pathEndCondition": 1,
+        "inputNamed": 3,
+        "gridSelectValue": 2,
+        "gridFromValue": 1,
+        "valueSelectValue": 3
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "2118777191"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "RiverIsland",
+      "file": "LandformRiverIsland.xml",
+      "sha256": "6702c7eec39961ca4eeb45f287d950d819f712ee65dfe5b3ea58f1e05446d082",
+      "revision": "1",
+      "internal": false,
+      "nodes": 132,
+      "node_types": {
+        "landformManifest": 1,
+        "pathTrace": 1,
+        "gridPreview": 16,
+        "worldTileReq": 1,
+        "valueRiverLinks": 5,
+        "layerConfig": 1,
+        "pathExtend": 4,
+        "mapSize": 3,
+        "valueOperator": 12,
+        "pathExtendTowards": 2,
+        "gridSelectValue": 3,
+        "pathOrigin": 1,
+        "valuePolarRectPosition": 3,
+        "gridPerlin": 3,
+        "inputElevation": 1,
+        "gridCache": 5,
+        "outputNamed": 5,
+        "gridSlice": 2,
+        "curvePreview": 5,
+        "curveLinear": 6,
+        "curveOperator": 2,
+        "curveSelectValue": 6,
+        "pathWidth": 1,
+        "pathDensity": 1,
+        "pathCost": 6,
+        "applyLayer": 1,
+        "pathSwerve": 1,
+        "pathTenacity": 1,
+        "pathLoss": 1,
+        "valueSelectGridValue": 1,
+        "valueWorldTile": 2,
+        "gridOperator": 2,
+        "pathEndCondition": 1,
+        "inputNamed": 3,
+        "gridFromValue": 1,
+        "valueRandom": 10,
+        "pathSplit": 1,
+        "pathCombine": 1,
+        "gridLinear": 1,
+        "gridRotate": 4,
+        "pathCollision": 2,
+        "pathSpeed": 1,
+        "valueSelectValue": 2
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "0.0335195549",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0.502285659",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "2118777191"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "RiverSource",
+      "file": "LandformRiverSource.xml",
+      "sha256": "a287dabe95ada8646537d66ac95a8a7aefb725ae9572cd2248603e16f4f2781d",
+      "revision": "2",
+      "internal": false,
+      "nodes": 142,
+      "node_types": {
+        "landformManifest": 1,
+        "pathTrace": 1,
+        "gridPreview": 11,
+        "worldTileReq": 1,
+        "valueRiverLinks": 2,
+        "layerConfig": 1,
+        "pathExtend": 1,
+        "mapSize": 2,
+        "valueOperator": 8,
+        "valueRandom": 13,
+        "pathExtendTowards": 4,
+        "gridSelectValue": 2,
+        "pathOrigin": 1,
+        "valuePolarRectPosition": 5,
+        "gridPerlin": 5,
+        "gridCache": 5,
+        "outputNamed": 5,
+        "applyLayer": 1,
+        "curveLinear": 5,
+        "curvePreview": 5,
+        "curveOperator": 2,
+        "curveSelectValue": 5,
+        "gridSlice": 2,
+        "pathWidth": 1,
+        "pathDensity": 1,
+        "pathSplit": 1,
+        "pathCombine": 1,
+        "pathCost": 1,
+        "pathCollision": 1,
+        "pathSwerve": 1,
+        "pathTenacity": 1,
+        "gridOperator": 4,
+        "valueSelectGridValue": 2,
+        "valueWorldTile": 2,
+        "inputElevation": 1,
+        "pathLoss": 3,
+        "valueSelectPath": 1,
+        "gridLinear": 3,
+        "gridSelectTerrainGrid": 2,
+        "terrainGridPreview": 3,
+        "outputTerrain": 1,
+        "valueSelectValue": 7,
+        "inputBiomeGrid": 1,
+        "outputBiomeGrid": 1,
+        "gridSelectBiomeGrid": 3,
+        "biomeGridPreview": 1,
+        "gridFromValue": 1,
+        "inputTerrain": 1,
+        "terrainNaturalPriority": 1,
+        "terrainFromBiome": 1,
+        "terrainGridFromValue": 3,
+        "pathEndCondition": 1,
+        "inputNamed": 1,
+        "pathSpeed": 1,
+        "terrainNaturalWater": 1
+      },
+      "requirements": {
+        "Topology": "Any",
+        "Commonness": "1",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "2118777191"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "RiverTerrain",
+      "file": "LandformRiverTerrain.xml",
+      "sha256": "0f46aba5f77b38d6516d3ebf93c84a09c5e2bc12e43396473512143fecdb31f1",
+      "revision": "3",
+      "internal": true,
+      "nodes": 129,
+      "node_types": {
+        "landformManifest": 1,
+        "outputWaterFlow": 1,
+        "gridSelectTerrainGrid": 3,
+        "terrainGridPreview": 4,
+        "gridPreview": 28,
+        "layerConfig": 1,
+        "gridTurbulence": 1,
+        "gridOperator": 14,
+        "gridSelectTerrain": 1,
+        "gridSelectValue": 16,
+        "gridPerlin": 5,
+        "gridKernel": 1,
+        "inputNamed": 12,
+        "inputElevation": 1,
+        "outputElevation": 1,
+        "biomeSelectValue": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 4,
+        "valueSelectValue": 8,
+        "gridMorphGroupFilter": 1,
+        "valueRiverLinks": 4,
+        "valueSelectGridValue": 1,
+        "outputCaves": 1,
+        "inputCaves": 1,
+        "valueRandom": 1,
+        "gridSelectBiomeGrid": 1,
+        "inputBiomeGrid": 1,
+        "biomeGridPreview": 1,
+        "outputBiomeGrid": 1,
+        "outputTerrain": 1,
+        "biomeGridFromValue": 1,
+        "valueSelectBiome": 3,
+        "terrainNaturalPriority": 1,
+        "inputTerrain": 1,
+        "outputTerrainPatches": 1,
+        "gridCache": 1,
+        "terrainNaturalWater": 2,
+        "terrainGridFromValue": 1
+      },
+      "requirements": {},
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "SecludedCove",
+      "file": "LandformSecludedCove.xml",
+      "sha256": "fb091f8cab7cde9d4b054199f06009aba3069bee8bfa962c31874208c55e718a",
+      "revision": "2",
+      "internal": false,
+      "nodes": 47,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridRotateToMapSides": 3,
+        "gridPreview": 8,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 6,
+        "gridPerlin": 2,
+        "outputTerrain": 1,
+        "gridLinear": 7,
+        "outputElevation": 1,
+        "valueRandom": 9,
+        "valueSelectValue": 1,
+        "valueWorldTile": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastOneSide",
+        "Commonness": "0.301675975",
+        "CaveChance": "0.248603359",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "2.50282478",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.497142851"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "119.77401",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "SecludedValley",
+      "file": "LandformSecludedValley.xml",
+      "sha256": "3cf0837ffd1ada27a41b2989eea6c05dacdb8080c21f8af6ae5d9f6ad3c9d7f6",
+      "revision": "2",
+      "internal": false,
+      "nodes": 70,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridPreview": 11,
+        "gridOperator": 7,
+        "gridPerlin": 6,
+        "gridSelectTerrain": 2,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 3,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 8,
+        "gridRotate": 2,
+        "outputScatterers": 1,
+        "gridTunnels": 1,
+        "gridCache": 3,
+        "outputCaves": 1,
+        "valueWorldTile": 3,
+        "terrainFromBiome": 2,
+        "valueSelectValue": 1,
+        "terrainGridNaturalRock": 1,
+        "gridSelectTerrainGrid": 1,
+        "gridSelectValue": 4,
+        "valueOperator": 2,
+        "worldTileGraphic": 1,
+        "mapIncidents": 1,
+        "outputTerrainPatches": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CliffAllSides",
+        "Commonness": "0.1",
+        "CaveChance": "1",
+        "HillinessRequirement": {
+          "min": "6",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "MapSizeRequirement": {
+          "min": "111.723167",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Sinkhole",
+      "file": "LandformSinkhole.xml",
+      "sha256": "9840bf21990a5f96e17384d366f7dd30d8d3788fb53d8f1c9a64a93ad6aec5b0",
+      "revision": "2",
+      "internal": false,
+      "nodes": 75,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 2,
+        "gridPreview": 14,
+        "gridOperator": 9,
+        "gridPerlin": 6,
+        "gridSelectTerrain": 2,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 3,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "valueRandom": 8,
+        "gridRotateToMapSides": 1,
+        "gridRotate": 1,
+        "outputScatterers": 1,
+        "gridSelectValue": 5,
+        "gridTunnels": 1,
+        "gridCache": 3,
+        "outputCaves": 1,
+        "valueWorldTile": 3,
+        "terrainFromBiome": 2,
+        "valueSelectValue": 1,
+        "terrainGridNaturalRock": 1,
+        "gridSelectTerrainGrid": 1,
+        "valueOperator": 1,
+        "worldTileGraphic": 1,
+        "mapIncidents": 1,
+        "outputTerrainPatches": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CliffAllSides",
+        "Commonness": "0.1",
+        "CaveChance": "1",
+        "HillinessRequirement": {
+          "min": "6",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "MapSizeRequirement": {
+          "min": "111.723167",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Skerry",
+      "file": "LandformSkerry.xml",
+      "sha256": "6f1b48a1e97cef6536420c41e542358db9161ecaff733bf352a5c2a520c9aedf",
+      "revision": "3",
+      "internal": false,
+      "nodes": 39,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "terrainGridPreview": 2,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "gridPreview": 8,
+        "gridLinear": 2,
+        "valueRandom": 2,
+        "gridRotate": 1,
+        "outputTerrain": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1,
+        "outputElevation": 1,
+        "terrainGridNaturalRock": 2,
+        "gridSelectTerrainGrid": 2,
+        "terrainNaturalWater": 1,
+        "terrainGridFromValue": 2,
+        "gridRotateToMapSides": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastAllSides",
+        "Commonness": "0.2960894",
+        "CaveChance": "0.198324025",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "5"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "SurfaceCave",
+      "file": "LandformSurfaceCave.xml",
+      "sha256": "49cf863700a19af6c0bd7404c608b9b8251d048c01c53bdab9a1031c08ac86bf",
+      "revision": "2",
+      "internal": false,
+      "nodes": 78,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 6,
+        "outputElevation": 1,
+        "outputScatterers": 1,
+        "valueRandom": 19,
+        "outputCaves": 1,
+        "gridPreview": 13,
+        "gridTunnels": 1,
+        "gridLinear": 4,
+        "gridRotate": 2,
+        "gridOperator": 11,
+        "worldTileGraphic": 1,
+        "gridSelectValue": 4,
+        "gridCache": 2,
+        "valueWorldTile": 3,
+        "valueOperator": 1,
+        "outputTerrain": 1,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "terrainFromBiome": 1,
+        "mapIncidents": 1,
+        "valueSelectGridValue": 1
+      },
+      "requirements": {
+        "Topology": "CaveTunnel",
+        "Commonness": "1",
+        "CaveChance": "1",
+        "HillinessRequirement": {
+          "min": "6",
+          "max": "6"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "MapSizeRequirement": {
+          "min": "250",
+          "max": "1000"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "SwampHill",
+      "file": "LandformSwampHill.xml",
+      "sha256": "8b5da21358ea7ae16bf202752815b077a4696eacf579976b54965402408e44b7",
+      "revision": "4",
+      "internal": false,
+      "nodes": 26,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPreview": 7,
+        "gridSelectTerrain": 1,
+        "terrainGridPreview": 1,
+        "gridOperator": 3,
+        "gridPerlin": 2,
+        "gridLinear": 2,
+        "valueRandom": 3,
+        "gridRotate": 1,
+        "outputTerrain": 1,
+        "outputElevation": 1,
+        "gridFromValue": 1,
+        "valueWorldTile": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "0.100558668",
+        "CaveChance": "0",
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.48587561"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.5"
+        },
+        "ElevationRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-9.60452",
+          "max": "24.858757"
+        },
+        "RainfallRequirement": {
+          "min": "282.48587",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0.5480226",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "50",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Tombolo",
+      "file": "LandformTombolo.xml",
+      "sha256": "a3e2d23817bbb2e6e52ecf5e6905e4b1c546c66bb0e1e070971fe6e9beef0041",
+      "revision": "5",
+      "internal": false,
+      "nodes": 43,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridLinear": 5,
+        "gridPreview": 11,
+        "gridOperator": 5,
+        "gridPerlin": 2,
+        "gridSelectTerrain": 1,
+        "terrainNaturalWater": 1,
+        "terrainGridPreview": 1,
+        "valueWorldTile": 1,
+        "gridFromValue": 1,
+        "gridRotateToMapSides": 3,
+        "outputTerrain": 1,
+        "valueRandom": 4,
+        "outputElevation": 1,
+        "valueSelectGridValue": 1,
+        "gridCache": 1,
+        "gridSelectValue": 1,
+        "outputNamed": 1
+      },
+      "requirements": {
+        "Topology": "CoastThreeSides",
+        "Commonness": "0.5502794",
+        "CaveChance": "0",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "1",
+          "max": "3.39548016"
+        },
+        "RoadRequirement": {
+          "min": "0",
+          "max": "0"
+        },
+        "RiverRequirement": {
+          "min": "0",
+          "max": "0.497142851"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "5000"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "117.090393",
+          "max": "1000"
+        },
+        "AllowSettlements": "false",
+        "AllowSites": "false",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    },
+    {
+      "id": "Valley",
+      "file": "LandformValley.xml",
+      "sha256": "4b7b4aa1a497458f269dd8145b5758cd5ac4a8aabc8a7691b581f43a2cf3b751",
+      "revision": "3",
+      "internal": false,
+      "nodes": 19,
+      "node_types": {
+        "landformManifest": 1,
+        "worldTileReq": 1,
+        "gridPerlin": 1,
+        "gridPreview": 4,
+        "outputElevation": 1,
+        "gridOperator": 2,
+        "gridLinear": 1,
+        "gridRotate": 3,
+        "valueRandom": 3,
+        "valueRiversAndRoads": 1,
+        "outputScatterers": 1
+      },
+      "requirements": {
+        "Topology": "Inland",
+        "Commonness": "1",
+        "CaveChance": "0.502793252",
+        "AllowedRiverTypes": null,
+        "HillinessRequirement": {
+          "min": "3.68571424",
+          "max": "4.8"
+        },
+        "RoadRequirement": {
+          "min": "0.05142857",
+          "max": "1"
+        },
+        "RiverRequirement": {
+          "min": "0.251428574",
+          "max": "1"
+        },
+        "ElevationRequirement": {
+          "min": "-1000",
+          "max": "388.571442"
+        },
+        "AvgTemperatureRequirement": {
+          "min": "-100",
+          "max": "100"
+        },
+        "RainfallRequirement": {
+          "min": "0",
+          "max": "5000"
+        },
+        "SwampinessRequirement": {
+          "min": "0",
+          "max": "1"
+        },
+        "BiomeTransitionsRequirement": {
+          "min": "0",
+          "max": "6"
+        },
+        "TopologyValueRequirement": {
+          "min": "-1",
+          "max": "1"
+        },
+        "DepthInCaveSystemRequirement": {
+          "min": "0",
+          "max": "10"
+        },
+        "MapSizeRequirement": {
+          "min": "98.3050842",
+          "max": "1000"
+        },
+        "AllowSettlements": "true",
+        "AllowSites": "true",
+        "RandSeed": "351232153"
+      },
+      "license": "CC-BY-NC-SA-4.0",
+      "author": "m00nl1ght",
+      "source": "https://github.com/m00nl1ght-dev/GeologicalLandforms"
+    }
+  ]
+}

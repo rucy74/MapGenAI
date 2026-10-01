@@ -1,0 +1,789 @@
+{
+  "records": [
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 44917,
+      "source_named_ground_agreement": 0.9988645724335997,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 27438,
+      "source_named_ground_agreement": 0.9998542167796487,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 46942,
+      "source_named_ground_agreement": 1.0,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 41360,
+      "source_named_ground_agreement": 1.0,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 6269,
+      "source_named_ground_agreement": 0.9910671558462275,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 55139,
+      "source_named_ground_agreement": 0.9994921924590581,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "image-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 44043,
+      "source_named_ground_agreement": 0.9995458983266353,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 67153,
+      "source_named_ground_agreement": 0.9993894539335547,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 37898,
+      "source_named_ground_agreement": 1.0,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 65855,
+      "source_named_ground_agreement": 1.0,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 59448,
+      "source_named_ground_agreement": 1.0,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 9045,
+      "source_named_ground_agreement": 0.986180210060807,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 79594,
+      "source_named_ground_agreement": 0.9999874362389125,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "image-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "same_biome": true,
+      "source_reference_cells": 64168,
+      "source_named_ground_agreement": 0.9995948136142626,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 48226,
+      "source_named_ground_agreement": 0.5639074358230001,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 28022,
+      "source_named_ground_agreement": 0.526086646206552,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-lone-mountain",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 45831,
+      "source_named_ground_agreement": 0.505771202897602,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-cliff",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 40617,
+      "source_named_ground_agreement": 0.4841076396582712,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-archipelago",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 6737,
+      "source_named_ground_agreement": 0.898619563603978,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 56627,
+      "source_named_ground_agreement": 0.999505536228301,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "image-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 44091,
+      "source_named_ground_agreement": 0.6074028713342859,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "image-default-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "same_biome": true,
+      "source_reference_cells": 5945,
+      "source_named_ground_agreement": 0.9932716568544996,
+      "fidelity_pass": true,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "desert-lakeside",
+      "biome": "Desert",
+      "size": 250,
+      "same_biome": false,
+      "source_reference_cells": 48888,
+      "source_named_ground_agreement": 0.21189248895434462,
+      "fidelity_pass": null,
+      "scope": "Independent per-cell source ground within imported dry masks; actual protected water/rock/constructed floors excluded. Cross-biome adaptation is not exact-copy fidelity."
+    }
+  ],
+  "application_checks": [
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-lake",
+      "changed": 20631,
+      "protected": 6209,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 10870,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 2164,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4048,
+        "high_elevation": 4033
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-valley",
+      "changed": 12986,
+      "protected": 3692,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 30829,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 279,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 3413,
+        "high_elevation": 3385
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-lone-mountain",
+      "changed": 19195,
+      "protected": 3405,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 11844,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1412,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 1993,
+        "high_elevation": 1991
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-cliff",
+      "changed": 16540,
+      "protected": 3788,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 16984,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 610,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 3178,
+        "high_elevation": 3172
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-archipelago",
+      "changed": 5670,
+      "protected": 1899,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 53972,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1421,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 493,
+        "high_elevation": 455
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "gl-oasis",
+      "changed": 20718,
+      "protected": 3577,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 3117,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 96,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 3481,
+        "high_elevation": 3461
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-a-native-final",
+      "id": "image-lake",
+      "changed": 20550,
+      "protected": 4056,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 14190,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1722,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 2336,
+        "high_elevation": 2305
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-lake",
+      "changed": 30799,
+      "protected": 6487,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 15652,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 2037,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4456,
+        "high_elevation": 4425
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-valley",
+      "changed": 18579,
+      "protected": 6775,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 44420,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1080,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 5695,
+        "high_elevation": 5688
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-lone-mountain",
+      "changed": 27308,
+      "protected": 6542,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 17021,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1672,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4870,
+        "high_elevation": 4848
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-cliff",
+      "changed": 21270,
+      "protected": 4924,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 24557,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 786,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4138,
+        "high_elevation": 4134
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-archipelago",
+      "changed": 7864,
+      "protected": 2919,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 77759,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 2173,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 765,
+        "high_elevation": 711
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "gl-oasis",
+      "changed": 31359,
+      "protected": 3768,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 4484,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 124,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 3644,
+        "high_elevation": 3573
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-b-native-final",
+      "id": "image-lake",
+      "changed": 24769,
+      "protected": 5040,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 20435,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 2414,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 2629,
+        "high_elevation": 2546
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-lake",
+      "changed": 8251,
+      "protected": 2634,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 10870,
+      "adapted": 0,
+      "preserved_unresolved": 38523,
+      "protection_kinds": {
+        "water": 812,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 1823,
+        "high_elevation": 1707
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-valley",
+      "changed": 4438,
+      "protected": 3195,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 30829,
+      "adapted": 0,
+      "preserved_unresolved": 23674,
+      "protection_kinds": {
+        "water": 0,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 3195,
+        "high_elevation": 3187
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-lone-mountain",
+      "changed": 5187,
+      "protected": 4384,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 11844,
+      "adapted": 0,
+      "preserved_unresolved": 40693,
+      "protection_kinds": {
+        "water": 0,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4384,
+        "high_elevation": 4364
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-cliff",
+      "changed": 5294,
+      "protected": 4692,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 16984,
+      "adapted": 0,
+      "preserved_unresolved": 35109,
+      "protection_kinds": {
+        "water": 0,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 4692,
+        "high_elevation": 4692
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-archipelago",
+      "changed": 3710,
+      "protected": 1508,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 53972,
+      "adapted": 0,
+      "preserved_unresolved": 1342,
+      "protection_kinds": {
+        "water": 1421,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 87,
+        "high_elevation": 87
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "gl-oasis",
+      "changed": 22072,
+      "protected": 1949,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 3117,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 96,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 1853,
+        "high_elevation": 1804
+      },
+      "pass": true
+    },
+    {
+      "run": "transfer-c-native-final",
+      "id": "image-lake",
+      "changed": 8464,
+      "protected": 3768,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 14190,
+      "adapted": 0,
+      "preserved_unresolved": 34342,
+      "protection_kinds": {
+        "water": 812,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 2956,
+        "high_elevation": 2916
+      },
+      "pass": true
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "image-default-lake",
+      "changed": 5920,
+      "protected": 1520,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 54982,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 842,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 679,
+        "high_elevation": 669
+      },
+      "pass": true
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "desert-lakeside",
+      "changed": 4523,
+      "protected": 2479,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 10870,
+      "adapted": 296,
+      "preserved_unresolved": 40612,
+      "protection_kinds": {
+        "water": 812,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 1667,
+        "high_elevation": 1592
+      },
+      "pass": true
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "missing-ground",
+      "changed": 0,
+      "protected": 314,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 0,
+      "adapted": 0,
+      "preserved_unresolved": 9686,
+      "protection_kinds": {
+        "water": 13,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 301,
+        "high_elevation": 301
+      },
+      "pass": true,
+      "positive_unresolved_cells": 9686,
+      "final_cells_changed_from_native": 0
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "unsafe-ground",
+      "changed": 0,
+      "protected": 357,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 0,
+      "adapted": 0,
+      "preserved_unresolved": 9643,
+      "protection_kinds": {
+        "water": 0,
+        "road": 0,
+        "constructed_floor": 0,
+        "edifice": 357,
+        "high_elevation": 357
+      },
+      "pass": true,
+      "positive_unresolved_cells": 9643,
+      "final_cells_changed_from_native": 0
+    },
+    {
+      "run": "extra-native-r3",
+      "id": "ground-guard",
+      "changed": 9587,
+      "protected": 110,
+      "protected_changes": 0,
+      "unmapped_changes": 0,
+      "elevation_changes": 0,
+      "unmapped": 0,
+      "adapted": 0,
+      "preserved_unresolved": 0,
+      "protection_kinds": {
+        "water": 1,
+        "road": 1,
+        "constructed_floor": 2,
+        "edifice": 107,
+        "high_elevation": 99
+      },
+      "pass": true
+    }
+  ],
+  "passing_applications": 26,
+  "applications": 26,
+  "same_biome_fidelity_passes": 16,
+  "same_biome_fidelity_checks": 16,
+  "image_named_ground_precision": 1.0,
+  "scope": "Developer ground sidecar, independently compared to source TerrainDefs. Neither general vision nor product integration nor aesthetic approval."
+}

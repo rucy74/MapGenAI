@@ -1,0 +1,27 @@
+{
+  "space": {
+    "model": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "dimension": 384,
+    "pooling": "attention-masked-mean",
+    "normalization": "L2",
+    "document_prefix": "passage: ",
+    "query_prefix": "query: ",
+    "max_tokens": 256
+  },
+  "entry_ids": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "gl-oasis",
+    "image-lake",
+    "core-foothills",
+    "core-dry-clearing"
+  ],
+  "catalog_sha256": "eda098d20b7b046e71e27408091433282f414f8c9bde3e5e31c25f82c6b0429c",
+  "seconds": 8.820284600020386,
+  "paid_api_calls": 0,
+  "runtime": "developer Python CPU; not a game dependency"
+}
