@@ -1,0 +1,61 @@
+{
+  "world_seed": "map-library-gl-20261001-a",
+  "cases": [
+    {
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "Lake",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "Valley",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "LoneMountain",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "Cliff",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "Archipelago",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "gl_id": "Oasis",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-cave-entrance",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "CaveEntrance",
+      "capture_replica": true
+    },
+    {
+      "id": "gl-secluded-valley",
+      "biome": "TemperateForest",
+      "size": 250,
+      "gl_id": "SecludedValley",
+      "capture_replica": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "same_biome_verified_static": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "gl-oasis"
+  ],
+  "quarantined_sources": [
+    {
+      "id": "gl-cave-entrance",
+      "reason": "Unsafe original loaded roof; reject replica",
+      "source_retained": true,
+      "exact_replay_selected": false
+    },
+    {
+      "id": "gl-secluded-valley",
+      "reason": "Unsafe original loaded roof; reject replica",
+      "source_retained": true,
+      "exact_replay_selected": false
+    }
+  ],
+  "adaptive_fields_unchanged": true,
+  "strict_regression_bundle_pass": false,
+  "catalog_index_rebuilt": false,
+  "product_ui_connected": false,
+  "evaluation_sha256": "2b8594388891d1312f8ae12c7b4a29d1895e4b386ff459c150619dee8f6aee03"
+}

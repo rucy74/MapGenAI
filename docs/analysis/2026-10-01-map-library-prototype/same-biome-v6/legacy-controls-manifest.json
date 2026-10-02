@@ -1,0 +1,35 @@
+{
+  "world_seed": "map-library-rock-controls-20261001",
+  "cases": [
+    {
+      "id": "rock-guard",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "../cave-v5/recipes/rock-guard.json"
+    },
+    {
+      "id": "unknown-rock",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "../cave-v5/recipes/unknown-rock.json"
+    },
+    {
+      "id": "cave-guard",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "../cave-v5/recipes/cave-guard.json"
+    },
+    {
+      "id": "unknown-cave",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "../cave-v5/recipes/unknown-cave.json"
+    },
+    {
+      "id": "cave-unsafe",
+      "biome": "TemperateForest",
+      "size": 100,
+      "command": "../cave-v5/recipes/cave-unsafe.json"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "world_seed": "map-library-target-a-20261001",
+  "cases": [
+    {
+      "id": "replica-existing-guard",
+      "biome": "TemperateForest",
+      "size": 250,
+      "command": "recipes/gl-cliff.replica.json",
+      "replica_guard_existing": true
+    }
+  ]
+}

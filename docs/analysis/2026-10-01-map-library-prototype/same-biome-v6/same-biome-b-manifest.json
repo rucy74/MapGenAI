@@ -1,0 +1,73 @@
+{
+  "world_seed": "map-library-target-b-20261001",
+  "cases": [
+    {
+      "id": "gl-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-lake.json"
+    },
+    {
+      "id": "gl-valley",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-valley.json"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-lone-mountain.json"
+    },
+    {
+      "id": "gl-cliff",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-cliff.json"
+    },
+    {
+      "id": "gl-archipelago",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-archipelago.json"
+    },
+    {
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 300,
+      "command": "recipes/gl-oasis.json"
+    },
+    {
+      "id": "image-lake",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/image-lake.json"
+    },
+    {
+      "id": "core-foothills",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/core-foothills.json"
+    },
+    {
+      "id": "core-dry-clearing",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/core-dry-clearing.json"
+    },
+    {
+      "id": "gl-cave-entrance",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-cave-entrance.json"
+    },
+    {
+      "id": "gl-secluded-valley",
+      "biome": "TemperateForest",
+      "size": 300,
+      "command": "recipes/gl-secluded-valley.json"
+    }
+  ],
+  "exact_selected": [],
+  "exact_unavailable": []
+}

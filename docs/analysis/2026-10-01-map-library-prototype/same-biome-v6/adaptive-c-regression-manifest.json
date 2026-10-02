@@ -1,0 +1,73 @@
+{
+  "world_seed": "map-library-target-c-20261001",
+  "cases": [
+    {
+      "id": "gl-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-lake.json"
+    },
+    {
+      "id": "gl-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-valley.json"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-lone-mountain.json"
+    },
+    {
+      "id": "gl-cliff",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "regression-recipes/gl-cliff-c.json"
+    },
+    {
+      "id": "gl-archipelago",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-archipelago.json"
+    },
+    {
+      "id": "gl-oasis",
+      "biome": "Desert",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-oasis.json"
+    },
+    {
+      "id": "image-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/image-lake.json"
+    },
+    {
+      "id": "core-foothills",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/core-foothills.json"
+    },
+    {
+      "id": "core-dry-clearing",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/core-dry-clearing.json"
+    },
+    {
+      "id": "gl-cave-entrance",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-cave-entrance.json",
+      "compare_without_cave": true
+    },
+    {
+      "id": "gl-secluded-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-secluded-valley.json",
+      "compare_without_cave": true
+    }
+  ]
+}

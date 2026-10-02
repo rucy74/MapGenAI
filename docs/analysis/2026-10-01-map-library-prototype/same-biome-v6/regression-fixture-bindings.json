@@ -1,0 +1,146 @@
+{
+  "bindings": [
+    {
+      "profile": "b",
+      "source_recipe": "cave-v5/recipes/gl-cliff.json",
+      "unchanged_fields": {
+        "params": true,
+        "ground_layer": true,
+        "water_layer": true,
+        "rock_layer": true,
+        "cave_layer": true
+      },
+      "off_condition": "different dimensions",
+      "replica_path_exists": false
+    },
+    {
+      "profile": "c",
+      "source_recipe": "cave-v5/recipes/gl-cliff.json",
+      "unchanged_fields": {
+        "params": true,
+        "ground_layer": true,
+        "water_layer": true,
+        "rock_layer": true,
+        "cave_layer": true
+      },
+      "off_condition": "different biome",
+      "replica_path_exists": false
+    }
+  ],
+  "source_legacy_pngs": [
+    {
+      "id": "gl-lake",
+      "name": "gl-lake-map.png",
+      "old_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+      "new_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-lake",
+      "name": "gl-lake-map-default.png",
+      "old_sha256": "a30e5a6993e9b89ae1a47b813c83b2372e580148c56ebdfb6ec9a57bfe7b0217",
+      "new_sha256": "a30e5a6993e9b89ae1a47b813c83b2372e580148c56ebdfb6ec9a57bfe7b0217",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-valley",
+      "name": "gl-valley-map.png",
+      "old_sha256": "ebb98e8bc2b7dfed1e784c3ca14d58529a50d6878e15d6effeeb686a418b15bf",
+      "new_sha256": "ebb98e8bc2b7dfed1e784c3ca14d58529a50d6878e15d6effeeb686a418b15bf",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-valley",
+      "name": "gl-valley-map-default.png",
+      "old_sha256": "1dd65c3cdb5694ffe3eb3d14a1457dd009a2cc9e1ccdefe92c6e2e13c46c45a3",
+      "new_sha256": "1dd65c3cdb5694ffe3eb3d14a1457dd009a2cc9e1ccdefe92c6e2e13c46c45a3",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "name": "gl-lone-mountain-map.png",
+      "old_sha256": "18e5e557e34451a6203c2bd6ff35951219a3f485f71e6ac1be5e06062adb8921",
+      "new_sha256": "18e5e557e34451a6203c2bd6ff35951219a3f485f71e6ac1be5e06062adb8921",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-lone-mountain",
+      "name": "gl-lone-mountain-map-default.png",
+      "old_sha256": "4106d1c7e1521c0bc7e50b68b66ab5da614dcb0a82a9add8df09a30645af975a",
+      "new_sha256": "4106d1c7e1521c0bc7e50b68b66ab5da614dcb0a82a9add8df09a30645af975a",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-cliff",
+      "name": "gl-cliff-map.png",
+      "old_sha256": "24fa5f45e7ba703a15097289bd3e117ba76d52fa4a5a57def67aab857a628bcb",
+      "new_sha256": "24fa5f45e7ba703a15097289bd3e117ba76d52fa4a5a57def67aab857a628bcb",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-cliff",
+      "name": "gl-cliff-map-default.png",
+      "old_sha256": "fec80af0a54771b37bf9c551c914b732c72e999ac290b9e42763635f11f2c3fb",
+      "new_sha256": "fec80af0a54771b37bf9c551c914b732c72e999ac290b9e42763635f11f2c3fb",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-archipelago",
+      "name": "gl-archipelago-map.png",
+      "old_sha256": "f32bb4aa8f79926543cd0d6aaf04961601e3de0707c6d45e570d2e78894a3f28",
+      "new_sha256": "f32bb4aa8f79926543cd0d6aaf04961601e3de0707c6d45e570d2e78894a3f28",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-archipelago",
+      "name": "gl-archipelago-map-default.png",
+      "old_sha256": "c194ab0b4271e189bc8686d13d90c42f3ebf789e1e242e4705d662023780e606",
+      "new_sha256": "c194ab0b4271e189bc8686d13d90c42f3ebf789e1e242e4705d662023780e606",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-oasis",
+      "name": "gl-oasis-map.png",
+      "old_sha256": "8ef5a549ddc655f4e0775b394075cdf4692b11ceeee80ecfd274a0b29bec1397",
+      "new_sha256": "8ef5a549ddc655f4e0775b394075cdf4692b11ceeee80ecfd274a0b29bec1397",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-oasis",
+      "name": "gl-oasis-map-default.png",
+      "old_sha256": "89a29274a852c4870810d56cb3316eeff2d036ecaba085a8539158e70fa69ce2",
+      "new_sha256": "89a29274a852c4870810d56cb3316eeff2d036ecaba085a8539158e70fa69ce2",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-cave-entrance",
+      "name": "gl-cave-entrance-map.png",
+      "old_sha256": "dc24a4c226c67a724de316516f5367e54cc956254102917178c8b63d30ca4197",
+      "new_sha256": "dc24a4c226c67a724de316516f5367e54cc956254102917178c8b63d30ca4197",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-cave-entrance",
+      "name": "gl-cave-entrance-map-default.png",
+      "old_sha256": "f5649016ac1a2e4ec201022e157be722d488ece46ebf988da34b055edf2873c7",
+      "new_sha256": "f5649016ac1a2e4ec201022e157be722d488ece46ebf988da34b055edf2873c7",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-secluded-valley",
+      "name": "gl-secluded-valley-map.png",
+      "old_sha256": "7d7bb3d12288bac9ae798b4576901a15e5bf6e3fb43328970ea9682add7c8f59",
+      "new_sha256": "7d7bb3d12288bac9ae798b4576901a15e5bf6e3fb43328970ea9682add7c8f59",
+      "byte_equal": true
+    },
+    {
+      "id": "gl-secluded-valley",
+      "name": "gl-secluded-valley-map-default.png",
+      "old_sha256": "f57a4d9c7079c57f6c93b9cc9200e701060fa5d6f188478606d1b1c58b542f31",
+      "new_sha256": "f57a4d9c7079c57f6c93b9cc9200e701060fa5d6f188478606d1b1c58b542f31",
+      "byte_equal": true
+    }
+  ],
+  "paid_api_calls": 0,
+  "policy": "Identical legacy recipes and fixed world/case order; exact metadata is intentionally unusable only on off-condition profiles"
+}

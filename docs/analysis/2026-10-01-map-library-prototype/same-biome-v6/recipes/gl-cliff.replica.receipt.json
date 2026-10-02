@@ -1,0 +1,8 @@
+{
+  "source_replica_sha256": "1e5a57120b38404b0c129c37ce332d0510a784459285b96ade9707394c2aa236",
+  "capture_phase": "post-map-initialized",
+  "exact_observed_cells": 62500,
+  "scope": "Final static terrain grids, edifices, roofs, E/C/fertility/walkability and PNG pixels; not pawns/plants/quests or a source save",
+  "replica_selected": true,
+  "mode": "exact-static-replica"
+}

@@ -1,0 +1,3530 @@
+{
+  "schema_version": 2,
+  "renderer_mode": "true",
+  "colors": [
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        15,
+        7
+      ],
+      "native_def": "AncientBridge"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        29,
+        28
+      ],
+      "native_def": "AncientConcrete"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        85,
+        85,
+        82
+      ],
+      "native_def": "AncientTile"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        15,
+        7
+      ],
+      "native_def": "AncientWoodPlankFloor"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        34,
+        22,
+        22
+      ],
+      "native_def": "BioferritePlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        63,
+        34,
+        16
+      ],
+      "native_def": "Boards_Totemic"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        41,
+        22,
+        11
+      ],
+      "native_def": "Bridge"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        79,
+        77,
+        74
+      ],
+      "native_def": "BrokenAsphalt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        32,
+        21,
+        21
+      ],
+      "native_def": "BurnedBioferritePlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        44,
+        42,
+        44
+      ],
+      "native_def": "BurnedCarpet"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        52,
+        49,
+        46
+      ],
+      "native_def": "BurnedStrawMatting"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        70,
+        63,
+        53
+      ],
+      "native_def": "BurnedWoodPlankFloor"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        173,
+        172,
+        156
+      ],
+      "native_def": "Carpet_MindbendA"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        148,
+        127,
+        134
+      ],
+      "native_def": "Carpet_MindbendB"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        137,
+        147,
+        126
+      ],
+      "native_def": "Carpet_MindbendC"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        126,
+        135,
+        148
+      ],
+      "native_def": "Carpet_MindbendD"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        148,
+        140,
+        123
+      ],
+      "native_def": "Carpet_MindbendE"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        66,
+        9,
+        4
+      ],
+      "native_def": "Carpet_MorbidAuburn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        12,
+        12,
+        12
+      ],
+      "native_def": "Carpet_MorbidBlack"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        2,
+        15,
+        51
+      ],
+      "native_def": "Carpet_MorbidBlue"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        68,
+        75,
+        105
+      ],
+      "native_def": "Carpet_MorbidBlueIce"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        55,
+        93,
+        144
+      ],
+      "native_def": "Carpet_MorbidBluePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        61,
+        126
+      ],
+      "native_def": "Carpet_MorbidBlueSky"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        23,
+        35
+      ],
+      "native_def": "Carpet_MorbidBlueSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        16,
+        5
+      ],
+      "native_def": "Carpet_MorbidBrownDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        49,
+        29,
+        9
+      ],
+      "native_def": "Carpet_MorbidBrownDirt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        26,
+        20,
+        11
+      ],
+      "native_def": "Carpet_MorbidBrownFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        42,
+        21
+      ],
+      "native_def": "Carpet_MorbidBrownLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        27,
+        16
+      ],
+      "native_def": "Carpet_MorbidBrownSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        40,
+        21,
+        10
+      ],
+      "native_def": "Carpet_MorbidBrownWood"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        29,
+        6,
+        7
+      ],
+      "native_def": "Carpet_MorbidBurgundy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        132,
+        127,
+        107
+      ],
+      "native_def": "Carpet_MorbidCream"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        21,
+        35
+      ],
+      "native_def": "Carpet_MorbidDarkMauve"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        34,
+        59
+      ],
+      "native_def": "Carpet_MorbidDusk"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        31,
+        33
+      ],
+      "native_def": "Carpet_MorbidGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        40,
+        9,
+        33
+      ],
+      "native_def": "Carpet_MorbidGrape"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        95,
+        95,
+        95
+      ],
+      "native_def": "Carpet_MorbidGrayLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        38,
+        13
+      ],
+      "native_def": "Carpet_MorbidGreen"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        26,
+        30,
+        20
+      ],
+      "native_def": "Carpet_MorbidGreenFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        59,
+        38
+      ],
+      "native_def": "Carpet_MorbidGreenForest"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        58,
+        59,
+        21
+      ],
+      "native_def": "Carpet_MorbidGreenMarsh"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        32,
+        32,
+        18
+      ],
+      "native_def": "Carpet_MorbidGreenMuddy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        90,
+        156,
+        112
+      ],
+      "native_def": "Carpet_MorbidGreenPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        28,
+        14
+      ],
+      "native_def": "Carpet_MorbidGreenPine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        43,
+        59,
+        21
+      ],
+      "native_def": "Carpet_MorbidGreenSwamp"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        23,
+        23,
+        23
+      ],
+      "native_def": "Carpet_MorbidGreyDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        18,
+        54
+      ],
+      "native_def": "Carpet_MorbidIndigo"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        72,
+        25,
+        67
+      ],
+      "native_def": "Carpet_MorbidIndigoLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        95,
+        95,
+        28
+      ],
+      "native_def": "Carpet_MorbidLimePale"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        86,
+        81,
+        63
+      ],
+      "native_def": "Carpet_MorbidLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        49,
+        9,
+        22
+      ],
+      "native_def": "Carpet_MorbidMagenta"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        15,
+        23
+      ],
+      "native_def": "Carpet_MorbidMagentaSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        60,
+        63,
+        60
+      ],
+      "native_def": "Carpet_MorbidMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        12,
+        28
+      ],
+      "native_def": "Carpet_MorbidMarine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        27,
+        28
+      ],
+      "native_def": "Carpet_MorbidMoss"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        58,
+        59
+      ],
+      "native_def": "Carpet_MorbidMossBright"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        92,
+        59,
+        8
+      ],
+      "native_def": "Carpet_MorbidMustard"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        49,
+        9
+      ],
+      "native_def": "Carpet_MorbidOlive"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        27,
+        4
+      ],
+      "native_def": "Carpet_MorbidOliveDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        97,
+        32,
+        5
+      ],
+      "native_def": "Carpet_MorbidOrange"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        126,
+        65,
+        4
+      ],
+      "native_def": "Carpet_MorbidOrangePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        201,
+        127,
+        164
+      ],
+      "native_def": "Carpet_MorbidPink"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        5,
+        12
+      ],
+      "native_def": "Carpet_MorbidPlum"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        34,
+        9,
+        49
+      ],
+      "native_def": "Carpet_MorbidPurple"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        5,
+        28
+      ],
+      "native_def": "Carpet_MorbidPurpleDeep"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        47,
+        21,
+        59
+      ],
+      "native_def": "Carpet_MorbidPurpleMuted"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        18,
+        33
+      ],
+      "native_def": "Carpet_MorbidPurpleSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        8,
+        11
+      ],
+      "native_def": "Carpet_MorbidRed"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        140,
+        43,
+        43
+      ],
+      "native_def": "Carpet_MorbidRedPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        60,
+        24,
+        18
+      ],
+      "native_def": "Carpet_MorbidRedSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        42,
+        22
+      ],
+      "native_def": "Carpet_MorbidSage"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        55,
+        37,
+        31
+      ],
+      "native_def": "Carpet_MorbidSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        92,
+        6,
+        6
+      ],
+      "native_def": "Carpet_MorbidScarlet"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        17,
+        17,
+        17
+      ],
+      "native_def": "Carpet_MorbidSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        48,
+        49
+      ],
+      "native_def": "Carpet_MorbidTeal"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        12,
+        4
+      ],
+      "native_def": "Carpet_MorbidUmberBurnt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        49,
+        24
+      ],
+      "native_def": "Carpet_MorbidViridian"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        30,
+        24
+      ],
+      "native_def": "Carpet_MorbidViridianSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        117,
+        117,
+        117
+      ],
+      "native_def": "Carpet_MorbidWhite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        144,
+        143,
+        35
+      ],
+      "native_def": "Carpet_MorbidYellowPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        64,
+        9,
+        4
+      ],
+      "native_def": "Carpet_TranshumanistAuburn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        12,
+        12,
+        12
+      ],
+      "native_def": "Carpet_TranshumanistBlack"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        2,
+        14,
+        50
+      ],
+      "native_def": "Carpet_TranshumanistBlue"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        66,
+        74,
+        102
+      ],
+      "native_def": "Carpet_TranshumanistBlueIce"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        91,
+        141
+      ],
+      "native_def": "Carpet_TranshumanistBluePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        60,
+        123
+      ],
+      "native_def": "Carpet_TranshumanistBlueSky"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        15,
+        22,
+        35
+      ],
+      "native_def": "Carpet_TranshumanistBlueSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        16,
+        5
+      ],
+      "native_def": "Carpet_TranshumanistBrownDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        28,
+        8
+      ],
+      "native_def": "Carpet_TranshumanistBrownDirt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        25,
+        20,
+        11
+      ],
+      "native_def": "Carpet_TranshumanistBrownFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        58,
+        41,
+        21
+      ],
+      "native_def": "Carpet_TranshumanistBrownLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        26,
+        15
+      ],
+      "native_def": "Carpet_TranshumanistBrownSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        39,
+        21,
+        10
+      ],
+      "native_def": "Carpet_TranshumanistBrownWood"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        6,
+        7
+      ],
+      "native_def": "Carpet_TranshumanistBurgundy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        129,
+        125,
+        105
+      ],
+      "native_def": "Carpet_TranshumanistCream"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        58,
+        21,
+        35
+      ],
+      "native_def": "Carpet_TranshumanistDarkMauve"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        34,
+        58
+      ],
+      "native_def": "Carpet_TranshumanistDusk"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        37,
+        31,
+        32
+      ],
+      "native_def": "Carpet_TranshumanistGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        39,
+        9,
+        32
+      ],
+      "native_def": "Carpet_TranshumanistGrape"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        93,
+        93,
+        93
+      ],
+      "native_def": "Carpet_TranshumanistGrayLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        37,
+        13
+      ],
+      "native_def": "Carpet_TranshumanistGreen"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        25,
+        29,
+        20
+      ],
+      "native_def": "Carpet_TranshumanistGreenFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        58,
+        37
+      ],
+      "native_def": "Carpet_TranshumanistGreenForest"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        57,
+        58,
+        21
+      ],
+      "native_def": "Carpet_TranshumanistGreenMarsh"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        32,
+        18
+      ],
+      "native_def": "Carpet_TranshumanistGreenMuddy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        88,
+        153,
+        110
+      ],
+      "native_def": "Carpet_TranshumanistGreenPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        27,
+        14
+      ],
+      "native_def": "Carpet_TranshumanistGreenPine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        42,
+        58,
+        21
+      ],
+      "native_def": "Carpet_TranshumanistGreenSwamp"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        22,
+        22,
+        22
+      ],
+      "native_def": "Carpet_TranshumanistGreyDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        53,
+        18,
+        53
+      ],
+      "native_def": "Carpet_TranshumanistIndigo"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        70,
+        25,
+        65
+      ],
+      "native_def": "Carpet_TranshumanistIndigoLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        93,
+        93,
+        27
+      ],
+      "native_def": "Carpet_TranshumanistLimePale"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        84,
+        79,
+        62
+      ],
+      "native_def": "Carpet_TranshumanistLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        8,
+        22
+      ],
+      "native_def": "Carpet_TranshumanistMagenta"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        15,
+        23
+      ],
+      "native_def": "Carpet_TranshumanistMagentaSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        62,
+        59
+      ],
+      "native_def": "Carpet_TranshumanistMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        12,
+        27
+      ],
+      "native_def": "Carpet_TranshumanistMarine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        27,
+        27
+      ],
+      "native_def": "Carpet_TranshumanistMoss"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        57,
+        58
+      ],
+      "native_def": "Carpet_TranshumanistMossBright"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        90,
+        58,
+        8
+      ],
+      "native_def": "Carpet_TranshumanistMustard"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        47,
+        48,
+        8
+      ],
+      "native_def": "Carpet_TranshumanistOlive"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        26,
+        4
+      ],
+      "native_def": "Carpet_TranshumanistOliveDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        94,
+        31,
+        5
+      ],
+      "native_def": "Carpet_TranshumanistOrange"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        123,
+        64,
+        4
+      ],
+      "native_def": "Carpet_TranshumanistOrangePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        197,
+        125,
+        161
+      ],
+      "native_def": "Carpet_TranshumanistPink"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        5,
+        12
+      ],
+      "native_def": "Carpet_TranshumanistPlum"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        33,
+        8,
+        48
+      ],
+      "native_def": "Carpet_TranshumanistPurple"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        5,
+        27
+      ],
+      "native_def": "Carpet_TranshumanistPurpleDeep"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        46,
+        21,
+        58
+      ],
+      "native_def": "Carpet_TranshumanistPurpleMuted"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        18,
+        32
+      ],
+      "native_def": "Carpet_TranshumanistPurpleSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        47,
+        8,
+        11
+      ],
+      "native_def": "Carpet_TranshumanistRed"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        137,
+        42,
+        42
+      ],
+      "native_def": "Carpet_TranshumanistRedPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        24,
+        18
+      ],
+      "native_def": "Carpet_TranshumanistRedSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        41,
+        22
+      ],
+      "native_def": "Carpet_TranshumanistSage"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        37,
+        30
+      ],
+      "native_def": "Carpet_TranshumanistSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        90,
+        6,
+        6
+      ],
+      "native_def": "Carpet_TranshumanistScarlet"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        17,
+        17,
+        17
+      ],
+      "native_def": "Carpet_TranshumanistSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        8,
+        47,
+        48
+      ],
+      "native_def": "Carpet_TranshumanistTeal"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        11,
+        3
+      ],
+      "native_def": "Carpet_TranshumanistUmberBurnt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        8,
+        48,
+        24
+      ],
+      "native_def": "Carpet_TranshumanistViridian"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        30,
+        24
+      ],
+      "native_def": "Carpet_TranshumanistViridianSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        115,
+        115,
+        115
+      ],
+      "native_def": "Carpet_TranshumanistWhite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        141,
+        141,
+        34
+      ],
+      "native_def": "Carpet_TranshumanistYellowPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        65,
+        9,
+        4
+      ],
+      "native_def": "CarpetAuburn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        12,
+        12,
+        12
+      ],
+      "native_def": "CarpetBlack"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        2,
+        14,
+        50
+      ],
+      "native_def": "CarpetBlue"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        67,
+        75,
+        103
+      ],
+      "native_def": "CarpetBlueIce"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        92,
+        142
+      ],
+      "native_def": "CarpetBluePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        61,
+        125
+      ],
+      "native_def": "CarpetBlueSky"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        15,
+        23,
+        35
+      ],
+      "native_def": "CarpetBlueSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        16,
+        5
+      ],
+      "native_def": "CarpetBrownDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        28,
+        9
+      ],
+      "native_def": "CarpetBrownDirt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        25,
+        20,
+        11
+      ],
+      "native_def": "CarpetBrownFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        41,
+        21
+      ],
+      "native_def": "CarpetBrownLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        27,
+        15
+      ],
+      "native_def": "CarpetBrownSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        40,
+        21,
+        10
+      ],
+      "native_def": "CarpetBrownWood"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        6,
+        7
+      ],
+      "native_def": "CarpetBurgundy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        130,
+        126,
+        106
+      ],
+      "native_def": "CarpetCream"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        21,
+        35
+      ],
+      "native_def": "CarpetDarkMauve"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        34,
+        59
+      ],
+      "native_def": "CarpetDusk"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        71,
+        10,
+        5
+      ],
+      "native_def": "CarpetFineAuburn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        13,
+        13,
+        13
+      ],
+      "native_def": "CarpetFineBlack"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        2,
+        16,
+        55
+      ],
+      "native_def": "CarpetFineBlue"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        73,
+        82,
+        113
+      ],
+      "native_def": "CarpetFineBlueIce"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        101,
+        156
+      ],
+      "native_def": "CarpetFineBluePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        34,
+        66,
+        136
+      ],
+      "native_def": "CarpetFineBlueSky"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        17,
+        25,
+        38
+      ],
+      "native_def": "CarpetFineBlueSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        18,
+        5
+      ],
+      "native_def": "CarpetFineBrownDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        53,
+        31,
+        9
+      ],
+      "native_def": "CarpetFineBrownDirt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        22,
+        12
+      ],
+      "native_def": "CarpetFineBrownFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        64,
+        45,
+        23
+      ],
+      "native_def": "CarpetFineBrownLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        29,
+        17
+      ],
+      "native_def": "CarpetFineBrownSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        44,
+        23,
+        11
+      ],
+      "native_def": "CarpetFineBrownWood"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        6,
+        8
+      ],
+      "native_def": "CarpetFineBurgundy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        142,
+        138,
+        116
+      ],
+      "native_def": "CarpetFineCream"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        64,
+        23,
+        38
+      ],
+      "native_def": "CarpetFineDarkMauve"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        23,
+        37,
+        64
+      ],
+      "native_def": "CarpetFineDusk"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        41,
+        34,
+        35
+      ],
+      "native_def": "CarpetFineGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        44,
+        10,
+        35
+      ],
+      "native_def": "CarpetFineGrape"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        103,
+        103,
+        103
+      ],
+      "native_def": "CarpetFineGrayLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        41,
+        14
+      ],
+      "native_def": "CarpetFineGreen"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        32,
+        22
+      ],
+      "native_def": "CarpetFineGreenFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        23,
+        64,
+        41
+      ],
+      "native_def": "CarpetFineGreenForest"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        63,
+        64,
+        23
+      ],
+      "native_def": "CarpetFineGreenMarsh"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        34,
+        35,
+        19
+      ],
+      "native_def": "CarpetFineGreenMuddy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        97,
+        170,
+        121
+      ],
+      "native_def": "CarpetFineGreenPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        30,
+        15
+      ],
+      "native_def": "CarpetFineGreenPine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        47,
+        64,
+        23
+      ],
+      "native_def": "CarpetFineGreenSwamp"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        25,
+        25,
+        25
+      ],
+      "native_def": "CarpetFineGreyDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        58,
+        20,
+        58
+      ],
+      "native_def": "CarpetFineIndigo"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        77,
+        28,
+        72
+      ],
+      "native_def": "CarpetFineIndigoLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        103,
+        103,
+        30
+      ],
+      "native_def": "CarpetFineLimePale"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        93,
+        87,
+        68
+      ],
+      "native_def": "CarpetFineLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        53,
+        9,
+        24
+      ],
+      "native_def": "CarpetFineMagenta"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        17,
+        25
+      ],
+      "native_def": "CarpetFineMagentaSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        65,
+        68,
+        65
+      ],
+      "native_def": "CarpetFineMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        13,
+        30
+      ],
+      "native_def": "CarpetFineMarine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        30,
+        30
+      ],
+      "native_def": "CarpetFineMoss"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        23,
+        63,
+        64
+      ],
+      "native_def": "CarpetFineMossBright"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        99,
+        64,
+        9
+      ],
+      "native_def": "CarpetFineMustard"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        52,
+        53,
+        9
+      ],
+      "native_def": "CarpetFineOlive"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        18,
+        29,
+        5
+      ],
+      "native_def": "CarpetFineOliveDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        104,
+        34,
+        6
+      ],
+      "native_def": "CarpetFineOrange"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        136,
+        70,
+        4
+      ],
+      "native_def": "CarpetFineOrangePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        217,
+        138,
+        178
+      ],
+      "native_def": "CarpetFinePink"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        5,
+        13
+      ],
+      "native_def": "CarpetFinePlum"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        37,
+        9,
+        53
+      ],
+      "native_def": "CarpetFinePurple"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        5,
+        30
+      ],
+      "native_def": "CarpetFinePurpleDeep"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        50,
+        23,
+        64
+      ],
+      "native_def": "CarpetFinePurpleMuted"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        19,
+        35
+      ],
+      "native_def": "CarpetFinePurpleSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        52,
+        9,
+        12
+      ],
+      "native_def": "CarpetFineRed"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        151,
+        47,
+        47
+      ],
+      "native_def": "CarpetFineRedPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        65,
+        26,
+        19
+      ],
+      "native_def": "CarpetFineRedSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        20,
+        45,
+        24
+      ],
+      "native_def": "CarpetFineSage"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        40,
+        33
+      ],
+      "native_def": "CarpetFineSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        99,
+        6,
+        7
+      ],
+      "native_def": "CarpetFineScarlet"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        18,
+        18,
+        18
+      ],
+      "native_def": "CarpetFineSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        52,
+        53
+      ],
+      "native_def": "CarpetFineTeal"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        30,
+        13,
+        4
+      ],
+      "native_def": "CarpetFineUmberBurnt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        53,
+        26
+      ],
+      "native_def": "CarpetFineViridian"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        20,
+        33,
+        26
+      ],
+      "native_def": "CarpetFineViridianSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        127,
+        127,
+        127
+      ],
+      "native_def": "CarpetFineWhite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        156,
+        156,
+        37
+      ],
+      "native_def": "CarpetFineYellowPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        31,
+        32
+      ],
+      "native_def": "CarpetGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        40,
+        9,
+        32
+      ],
+      "native_def": "CarpetGrape"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        94,
+        95,
+        94
+      ],
+      "native_def": "CarpetGrayLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        27,
+        38,
+        13
+      ],
+      "native_def": "CarpetGreen"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        25,
+        30,
+        20
+      ],
+      "native_def": "CarpetGreenFaded"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        59,
+        38
+      ],
+      "native_def": "CarpetGreenForest"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        58,
+        59,
+        21
+      ],
+      "native_def": "CarpetGreenMarsh"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        31,
+        32,
+        18
+      ],
+      "native_def": "CarpetGreenMuddy"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        88,
+        156,
+        111
+      ],
+      "native_def": "CarpetGreenPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        28,
+        14
+      ],
+      "native_def": "CarpetGreenPine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        43,
+        59,
+        21
+      ],
+      "native_def": "CarpetGreenSwamp"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        22,
+        23,
+        22
+      ],
+      "native_def": "CarpetGreyDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        53,
+        18,
+        53
+      ],
+      "native_def": "CarpetIndigo"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        71,
+        25,
+        66
+      ],
+      "native_def": "CarpetIndigoLight"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        94,
+        95,
+        28
+      ],
+      "native_def": "CarpetLimePale"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        85,
+        80,
+        62
+      ],
+      "native_def": "CarpetLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        9,
+        22
+      ],
+      "native_def": "CarpetMagenta"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        15,
+        23
+      ],
+      "native_def": "CarpetMagentaSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        63,
+        59
+      ],
+      "native_def": "CarpetMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        12,
+        28
+      ],
+      "native_def": "CarpetMarine"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        5,
+        27,
+        28
+      ],
+      "native_def": "CarpetMoss"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        21,
+        58,
+        59
+      ],
+      "native_def": "CarpetMossBright"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        91,
+        59,
+        8
+      ],
+      "native_def": "CarpetMustard"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        49,
+        9
+      ],
+      "native_def": "CarpetOlive"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        27,
+        4
+      ],
+      "native_def": "CarpetOliveDark"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        95,
+        32,
+        5
+      ],
+      "native_def": "CarpetOrange"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        125,
+        64,
+        4
+      ],
+      "native_def": "CarpetOrangePastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        198,
+        126,
+        162
+      ],
+      "native_def": "CarpetPink"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        5,
+        12
+      ],
+      "native_def": "CarpetPlum"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        33,
+        9,
+        48
+      ],
+      "native_def": "CarpetPurple"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        5,
+        28
+      ],
+      "native_def": "CarpetPurpleDeep"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        46,
+        21,
+        59
+      ],
+      "native_def": "CarpetPurpleMuted"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        18,
+        32
+      ],
+      "native_def": "CarpetPurpleSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        48,
+        8,
+        11
+      ],
+      "native_def": "CarpetRed"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        138,
+        43,
+        43
+      ],
+      "native_def": "CarpetRedPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        24,
+        18
+      ],
+      "native_def": "CarpetRedSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        41,
+        22
+      ],
+      "native_def": "CarpetSage"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        37,
+        30
+      ],
+      "native_def": "CarpetSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        91,
+        6,
+        6
+      ],
+      "native_def": "CarpetScarlet"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        17,
+        17,
+        17
+      ],
+      "native_def": "CarpetSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        48,
+        48
+      ],
+      "native_def": "CarpetTeal"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        28,
+        12,
+        3
+      ],
+      "native_def": "CarpetUmberBurnt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        9,
+        49,
+        24
+      ],
+      "native_def": "CarpetViridian"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        19,
+        30,
+        24
+      ],
+      "native_def": "CarpetViridianSubtle"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        116,
+        116,
+        116
+      ],
+      "native_def": "CarpetWhite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        142,
+        143,
+        34
+      ],
+      "native_def": "CarpetYellowPastel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        55,
+        54,
+        55
+      ],
+      "native_def": "Concrete"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        36,
+        30,
+        31
+      ],
+      "native_def": "FineTileGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        82,
+        77,
+        60
+      ],
+      "native_def": "FineTileLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        107,
+        107,
+        107
+      ],
+      "native_def": "FineTileMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        71,
+        53,
+        46
+      ],
+      "native_def": "FineTileSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        16,
+        16
+      ],
+      "native_def": "FineTileSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        26,
+        21,
+        22
+      ],
+      "native_def": "FlagstoneGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        59,
+        55,
+        43
+      ],
+      "native_def": "FlagstoneLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        41,
+        43,
+        41
+      ],
+      "native_def": "FlagstoneMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        26,
+        21
+      ],
+      "native_def": "FlagstoneSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        26,
+        26,
+        26
+      ],
+      "native_def": "FlagstoneSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        170,
+        127,
+        126
+      ],
+      "native_def": "Flesh"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        79,
+        62,
+        57
+      ],
+      "native_def": "FungalGravel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        91,
+        90,
+        26
+      ],
+      "native_def": "GoldTile"
+    },
+    {
+      "label": "G",
+      "terrain": "Granite_Rough",
+      "rgb": [
+        30,
+        25,
+        26
+      ],
+      "native_def": "Granite_Rough"
+    },
+    {
+      "label": "G",
+      "terrain": "Granite_RoughHewn",
+      "rgb": [
+        30,
+        25,
+        26
+      ],
+      "native_def": "Granite_RoughHewn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        32,
+        26,
+        27
+      ],
+      "native_def": "Granite_Smooth"
+    },
+    {
+      "label": "G",
+      "terrain": "Gravel",
+      "rgb": [
+        93,
+        76,
+        60
+      ],
+      "native_def": "Gravel"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        93,
+        89,
+        88
+      ],
+      "native_def": "GraySurface"
+    },
+    {
+      "label": "G",
+      "terrain": "Ice",
+      "rgb": [
+        156,
+        164,
+        173
+      ],
+      "native_def": "Ice"
+    },
+    {
+      "label": "G",
+      "terrain": "Limestone_Rough",
+      "rgb": [
+        68,
+        64,
+        50
+      ],
+      "native_def": "Limestone_Rough"
+    },
+    {
+      "label": "G",
+      "terrain": "Limestone_RoughHewn",
+      "rgb": [
+        68,
+        64,
+        50
+      ],
+      "native_def": "Limestone_RoughHewn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        73,
+        68,
+        53
+      ],
+      "native_def": "Limestone_Smooth"
+    },
+    {
+      "label": "G",
+      "terrain": "Marble_Rough",
+      "rgb": [
+        47,
+        50,
+        47
+      ],
+      "native_def": "Marble_Rough"
+    },
+    {
+      "label": "G",
+      "terrain": "Marble_RoughHewn",
+      "rgb": [
+        48,
+        50,
+        48
+      ],
+      "native_def": "Marble_RoughHewn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        51,
+        53,
+        51
+      ],
+      "native_def": "Marble_Smooth"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        57,
+        63,
+        49
+      ],
+      "native_def": "Marsh"
+    },
+    {
+      "label": "G",
+      "terrain": "MarshyTerrain",
+      "rgb": [
+        74,
+        67,
+        57
+      ],
+      "native_def": "MarshyTerrain"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        29,
+        29,
+        29
+      ],
+      "native_def": "MetalTile"
+    },
+    {
+      "label": "G",
+      "terrain": "MossyTerrain",
+      "rgb": [
+        85,
+        69,
+        60
+      ],
+      "native_def": "MossyTerrain"
+    },
+    {
+      "label": "G",
+      "terrain": "Mud",
+      "rgb": [
+        74,
+        59,
+        46
+      ],
+      "native_def": "Mud"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        107,
+        89,
+        74
+      ],
+      "native_def": "PackedDirt"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        54,
+        54,
+        54
+      ],
+      "native_def": "PavedTile"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        38,
+        38,
+        38
+      ],
+      "native_def": "Plates_Spikecore"
+    },
+    {
+      "label": "G",
+      "terrain": "Riverbank",
+      "rgb": [
+        77,
+        59,
+        46
+      ],
+      "native_def": "Riverbank"
+    },
+    {
+      "label": "G",
+      "terrain": "Sand",
+      "rgb": [
+        126,
+        112,
+        93
+      ],
+      "native_def": "Sand"
+    },
+    {
+      "label": "G",
+      "terrain": "Sandstone_Rough",
+      "rgb": [
+        43,
+        30,
+        24
+      ],
+      "native_def": "Sandstone_Rough"
+    },
+    {
+      "label": "G",
+      "terrain": "Sandstone_RoughHewn",
+      "rgb": [
+        43,
+        30,
+        24
+      ],
+      "native_def": "Sandstone_RoughHewn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        46,
+        31,
+        26
+      ],
+      "native_def": "Sandstone_Smooth"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        44,
+        43,
+        44
+      ],
+      "native_def": "SilverTile"
+    },
+    {
+      "label": "G",
+      "terrain": "Slate_Rough",
+      "rgb": [
+        13,
+        13,
+        13
+      ],
+      "native_def": "Slate_Rough"
+    },
+    {
+      "label": "G",
+      "terrain": "Slate_RoughHewn",
+      "rgb": [
+        13,
+        13,
+        13
+      ],
+      "native_def": "Slate_RoughHewn"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        14,
+        14,
+        14
+      ],
+      "native_def": "Slate_Smooth"
+    },
+    {
+      "label": "G",
+      "terrain": "SoftSand",
+      "rgb": [
+        132,
+        119,
+        103
+      ],
+      "native_def": "SoftSand"
+    },
+    {
+      "label": "G",
+      "terrain": "Soil",
+      "rgb": [
+        96,
+        78,
+        63
+      ],
+      "native_def": "Soil"
+    },
+    {
+      "label": "G",
+      "terrain": "SoilRich",
+      "rgb": [
+        74,
+        60,
+        49
+      ],
+      "native_def": "SoilRich"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        108,
+        107,
+        108
+      ],
+      "native_def": "SterileTile"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        126,
+        104,
+        63
+      ],
+      "native_def": "StrawMatting"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        28,
+        30
+      ],
+      "native_def": "Tile_MorbidGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        79,
+        74,
+        58
+      ],
+      "native_def": "Tile_MorbidLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        103,
+        102,
+        103
+      ],
+      "native_def": "Tile_MorbidMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        68,
+        51,
+        44
+      ],
+      "native_def": "Tile_MorbidSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        15,
+        16
+      ],
+      "native_def": "Tile_MorbidSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        34,
+        27,
+        29
+      ],
+      "native_def": "Tile_SpikecoreGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        76,
+        71,
+        55
+      ],
+      "native_def": "Tile_SpikecoreLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        99,
+        98,
+        99
+      ],
+      "native_def": "Tile_SpikecoreMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        66,
+        49,
+        42
+      ],
+      "native_def": "Tile_SpikecoreSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        15,
+        15,
+        15
+      ],
+      "native_def": "Tile_SpikecoreSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        35,
+        28,
+        30
+      ],
+      "native_def": "Tile_TotemicGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        79,
+        74,
+        58
+      ],
+      "native_def": "Tile_TotemicLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        103,
+        102,
+        103
+      ],
+      "native_def": "Tile_TotemicMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        68,
+        51,
+        44
+      ],
+      "native_def": "Tile_TotemicSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        16,
+        15,
+        16
+      ],
+      "native_def": "Tile_TotemicSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        36,
+        36,
+        36
+      ],
+      "native_def": "Tile_Transhumanist"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        29,
+        24,
+        24
+      ],
+      "native_def": "TileGranite"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        65,
+        61,
+        47
+      ],
+      "native_def": "TileLimestone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        45,
+        48,
+        45
+      ],
+      "native_def": "TileMarble"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        41,
+        28,
+        23
+      ],
+      "native_def": "TileSandstone"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        26,
+        26,
+        26
+      ],
+      "native_def": "TileSlate"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        74,
+        74,
+        74
+      ],
+      "native_def": "Underwall"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        37,
+        34,
+        33
+      ],
+      "native_def": "Voidmetal"
+    },
+    {
+      "label": "W",
+      "terrain": null,
+      "rgb": [
+        68,
+        78,
+        88
+      ],
+      "native_def": "WaterDeep"
+    },
+    {
+      "label": "S",
+      "terrain": null,
+      "rgb": [
+        78,
+        87,
+        94
+      ],
+      "native_def": "WaterMovingChestDeep"
+    },
+    {
+      "label": "S",
+      "terrain": null,
+      "rgb": [
+        88,
+        97,
+        99
+      ],
+      "native_def": "WaterMovingShallow"
+    },
+    {
+      "label": "W",
+      "terrain": null,
+      "rgb": [
+        68,
+        78,
+        88
+      ],
+      "native_def": "WaterOceanDeep"
+    },
+    {
+      "label": "S",
+      "terrain": null,
+      "rgb": [
+        88,
+        97,
+        99
+      ],
+      "native_def": "WaterOceanShallow"
+    },
+    {
+      "label": "S",
+      "terrain": null,
+      "rgb": [
+        88,
+        97,
+        99
+      ],
+      "native_def": "WaterShallow"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        41,
+        22,
+        11
+      ],
+      "native_def": "WoodPlankFloor"
+    },
+    {
+      "label": "M",
+      "terrain": null,
+      "rgb": [
+        54,
+        39,
+        28
+      ],
+      "overlay": "SolidStoneColor"
+    },
+    {
+      "label": "M",
+      "terrain": null,
+      "rgb": [
+        76,
+        52,
+        38
+      ],
+      "overlay": "SolidStoneHighlightColor"
+    },
+    {
+      "label": "M",
+      "terrain": null,
+      "rgb": [
+        28,
+        19,
+        14
+      ],
+      "overlay": "SolidStoneShadowColor"
+    },
+    {
+      "label": "M",
+      "terrain": null,
+      "rgb": [
+        66,
+        55,
+        43
+      ],
+      "overlay": "CaveColor"
+    },
+    {
+      "label": "N",
+      "terrain": null,
+      "rgb": [
+        97,
+        97,
+        97
+      ],
+      "overlay": "MissingTerrainColor"
+    }
+  ],
+  "max_distance": 2,
+  "min_margin": 1,
+  "missing_preview_colors": [],
+  "protocol": "Loaded native renderer catalog, exact-color tolerance; competing materials become unknown"
+}

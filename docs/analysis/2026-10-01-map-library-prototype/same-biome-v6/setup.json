@@ -1,0 +1,10 @@
+{
+  "purpose": "Final static source replay beside unchanged adaptive generation",
+  "base_commit": "67721ad49c63e953d348ba64b08abebdeb10b8d0",
+  "paid_api_calls": 0,
+  "fixed_reference_cases": 8,
+  "source_manifest": "cave-v5/source-manifest.json",
+  "old_source_manifest_sha256": "e7ce4315311808c0491909902528063008075b69fee7b93db82b06f18a693485",
+  "inventory_sha256": "3eec5755eb69a5fb17d44180281ea4a6819c6b14b526acabf9b859af0cd70bad",
+  "policy": "Same dimensions and biome exact initial static fields; different biome adaptive; no product/DLL/UI deployment"
+}

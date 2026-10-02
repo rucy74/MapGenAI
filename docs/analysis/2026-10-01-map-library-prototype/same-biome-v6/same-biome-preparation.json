@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "paid_api_calls": 0,
+  "source": "source-native-r1",
+  "admitted_for_native_verification": [
+    "gl-lake",
+    "gl-valley",
+    "gl-lone-mountain",
+    "gl-cliff",
+    "gl-archipelago",
+    "gl-oasis"
+  ],
+  "quarantined_sources": [
+    {
+      "id": "gl-cave-entrance",
+      "reason": "Unsafe original loaded roof; reject replica",
+      "source_retained": true,
+      "exact_replay_selected": false
+    },
+    {
+      "id": "gl-secluded-valley",
+      "reason": "Unsafe original loaded roof; reject replica",
+      "source_retained": true,
+      "exact_replay_selected": false
+    }
+  ],
+  "bindings": [
+    {
+      "id": "gl-lake",
+      "adaptive_command_sha256": "4fce606fb1fa427bbb7b80d4ea6a3f4b8237e4e64bc75fef6a5db0a6000d809e",
+      "replica_command_sha256": "1a936813e5015e5e2dfd560404dca06c2086285d74d4fd893ba064c8e9daae31",
+      "snapshot_sha256": "a80f39bb1a1282938a3c391f7df366e2321225f2f801ec1cea53100e0a53b146",
+      "true_png_sha256": "8c3b98f97463d3aa6047de7fc2bc165979982bdca821ded6ca00f4f2329910d5",
+      "default_png_sha256": "a30e5a6993e9b89ae1a47b813c83b2372e580148c56ebdfb6ec9a57bfe7b0217"
+    },
+    {
+      "id": "gl-valley",
+      "adaptive_command_sha256": "25f445c7f62521f3664e416f0fbf3a6c7091dea2e7451afd23fad18461ba4c50",
+      "replica_command_sha256": "167fa5b5cb7cb444c356e9bf066efe442e991c1d5562114467888e8ebb42777b",
+      "snapshot_sha256": "797718609efa5d573d3b6e90dda9f1b6a89c8d526a6f842ec088fef4a8e6cdf8",
+      "true_png_sha256": "ebb98e8bc2b7dfed1e784c3ca14d58529a50d6878e15d6effeeb686a418b15bf",
+      "default_png_sha256": "1dd65c3cdb5694ffe3eb3d14a1457dd009a2cc9e1ccdefe92c6e2e13c46c45a3"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "adaptive_command_sha256": "2171bebdc1e8c06452b5c1e1f5d3f4947222754b8076cba3864345354a093799",
+      "replica_command_sha256": "29699240fe4c1bab44161a837c36a35139c3534e9676c0062228f498eb05609f",
+      "snapshot_sha256": "0ddd8416a768addf23e41ef7e3c941956b9f6e4cdeed435be82b882816f357b8",
+      "true_png_sha256": "18e5e557e34451a6203c2bd6ff35951219a3f485f71e6ac1be5e06062adb8921",
+      "default_png_sha256": "4106d1c7e1521c0bc7e50b68b66ab5da614dcb0a82a9add8df09a30645af975a"
+    },
+    {
+      "id": "gl-cliff",
+      "adaptive_command_sha256": "8c1b5a33f707706a456d91e029d029a956a113478383b941cfa38412beb7dff9",
+      "replica_command_sha256": "49c8567c959b755cdc7dc850b460389dab3335fd79d13bf5b2a62c56f04d6faf",
+      "snapshot_sha256": "1e5a57120b38404b0c129c37ce332d0510a784459285b96ade9707394c2aa236",
+      "true_png_sha256": "24fa5f45e7ba703a15097289bd3e117ba76d52fa4a5a57def67aab857a628bcb",
+      "default_png_sha256": "fec80af0a54771b37bf9c551c914b732c72e999ac290b9e42763635f11f2c3fb"
+    },
+    {
+      "id": "gl-archipelago",
+      "adaptive_command_sha256": "98ac7b3ddba1aba20374601d9681f7084a40207734366a610e854219604754c0",
+      "replica_command_sha256": "dface20881a0c1cd1cf0e074703098b10c81dd4868ea2ba25c3bd146ee1b1a2f",
+      "snapshot_sha256": "3e6fa974c68fe801cfb776f771372d4859a5db8c12aaa1b813c51401d39bd693",
+      "true_png_sha256": "f32bb4aa8f79926543cd0d6aaf04961601e3de0707c6d45e570d2e78894a3f28",
+      "default_png_sha256": "c194ab0b4271e189bc8686d13d90c42f3ebf789e1e242e4705d662023780e606"
+    },
+    {
+      "id": "gl-oasis",
+      "adaptive_command_sha256": "c0f152052a6d78270ff38f36598755bcbad318384c8b1c59ef1ee281b81a2b28",
+      "replica_command_sha256": "6e03e72878523cb4c87b68934f0dd1aef36e3e9dba68c14edfe6292be56d94ce",
+      "snapshot_sha256": "6bb20d4b20b0c38c94270c99d9cecb66725661a4144a1f03ae59cb0e054ba753",
+      "true_png_sha256": "8ef5a549ddc655f4e0775b394075cdf4692b11ceeee80ecfd274a0b29bec1397",
+      "default_png_sha256": "89a29274a852c4870810d56cb3316eeff2d036ecaba085a8539158e70fa69ce2"
+    }
+  ],
+  "policy": "Same biome and dimensions on fresh full recipes only; other-biome/size adaptive bytes unchanged; no final success before actual raw and both PNGs match"
+}

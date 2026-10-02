@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "purpose": "Baseline-only causal B comparison; prepared, not built or launched",
+  "created_utc": "2026-10-02T01:15:23.673124+00:00",
+  "repository": "F:\\Projects\\Rimworld\\active\\mapgen_ai",
+  "from_commit": "67721ad49c63e953d348ba64b08abebdeb10b8d0",
+  "source": {
+    "git_path": "tools/map-library-prototype/Probe.cs",
+    "git_blob": "8bbad07fef7ab4b7b967262300b2a3ecf1829840",
+    "sha256": "A5C0F5D4BBDBCC3A5099A04535FBF6C88AA70FA120A15977C78C318365564CA7",
+    "bytes": 98309,
+    "unchanged_git_blob_bytes": true
+  },
+  "project": {
+    "git_path": "tools/map-library-prototype/PrototypeProbe.csproj",
+    "git_blob": "bd69fdf26f76afbebbf56a6a626a4b24b5ed53dd",
+    "original_sha256": "AA15DF4CEF22B43B76D080F25A9EF9AB6C09CDA8020F61094122B763E0DF81A7",
+    "prepared_sha256": "BFE5BA57D876A3B291E84E98A6BB1F4EE80D20789E145D16AC31005291DB47C7",
+    "changes": "Only HintPath contents made absolute"
+  },
+  "launcher": {
+    "original": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\tools\\map-library-prototype\\run.ps1",
+    "original_sha256": "253DC72F659E6EC687F5F9F7F17C19EED62E1EE9135B39A059DE09DA48A58C46",
+    "prepared_sha256": "2AD80CBEB65A306C63CEBA529034495204042D6F20FDBB5AF058814C9E398144",
+    "changes": [
+      "Absolute repository root",
+      "Verified archived DLL absolute path",
+      "Fixed DLL/source SHA guards instead of timestamp freshness",
+      "Missing archived DLL message"
+    ],
+    "other_guards_preserved": true
+  },
+  "archived_probe": {
+    "path": "C:\\Users\\choco\\Documents\\Codex\\2026-09-13\\new-chat-2\\work\\mapgenai-headless-runtime\\ArchivedProbes\\MapGenAI_Probe_library_20261002-001534-680\\Assemblies\\MapGenAI.MapLibraryProbe.dll",
+    "sha256": "55F196AACF7D73673F9B0570E8DB14A96EF6F6C825C9C233C15D950613E8AC32",
+    "bytes": 85504,
+    "owner_profile": "F:\\Projects\\Rimworld\\work\\mapgenai-library-profiles\\20261002-001534-680",
+    "cleanup_evidence": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-10-01-map-library-prototype\\cave-v5\\cave-b-native-r1\\cleanup.json",
+    "cleanup_sha256": "71F601359836326C0B2D334C30D37472746CB11326D2C558B30DDD7747BA47B5",
+    "launch_evidence": "F:\\Projects\\Rimworld\\active\\mapgen_ai\\docs\\analysis\\2026-10-01-map-library-prototype\\cave-v5\\cave-b-native-r1\\launch.json",
+    "launch_sha256": "DE2BA2452D8432455C658207ABA480562E3107604968063F5B6DD570490AE3ED",
+    "historical_launch_probe_sha256": "55F196AACF7D73673F9B0570E8DB14A96EF6F6C825C9C233C15D950613E8AC32"
+  },
+  "product": {
+    "path": "G:\\SteamLibrary\\steamapps\\common\\RimWorld\\Mods\\MapGenAI-Dev\\Assemblies\\MapGenAI.dll",
+    "sha256": "6343F3116063E4C6DEA2CDEFA16B9914ECF9BDE401B13012FDB90ECE04004EF6",
+    "unchanged": true
+  },
+  "built": false,
+  "launched": false,
+  "product_dll_modified": false,
+  "limits": "The archived DLL is authenticated by historical launch/cleanup and its bytes. No rebuild or original compiler-input proof is claimed."
+}

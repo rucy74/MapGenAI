@@ -1,0 +1,80 @@
+{
+  "method": "observed-terrain",
+  "source_sha256": "42d70385fe372f6e83e56d21913eb1f5a1be3f9172458bfcd06dcadea584d1b4",
+  "row_order": "south-first",
+  "loss": {
+    "M": {
+      "input_cells": 0,
+      "omitted_small_cells": 0,
+      "components": 0
+    },
+    "S": {
+      "input_cells": 53652,
+      "omitted_small_cells": 148,
+      "components": 1
+    },
+    "W": {
+      "input_cells": 13527,
+      "omitted_small_cells": 0,
+      "components": 1
+    }
+  },
+  "shape_count": 2,
+  "ground_policy": "Native water, rock, buildings, roads and elevations protected at application; unknown preserved",
+  "seed_policy": "Current tile seed; sampled source composition retained",
+  "procedural_reproduction": false,
+  "ground_cells": 8568,
+  "ground_materials": [
+    {
+      "def": "Sand",
+      "role": "sand"
+    },
+    {
+      "def": "Soil",
+      "role": "base"
+    },
+    {
+      "def": "SoilRich",
+      "role": "fertile"
+    }
+  ],
+  "ground_runs": 722,
+  "omitted_ground": {
+    "AncientConcrete": {
+      "cells": 206,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "FlagstoneLimestone": {
+      "cells": 23,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    },
+    "TileGranite": {
+      "cells": 57,
+      "reason": "Unavailable, unsafe, or no portable ground role"
+    }
+  },
+  "runtime_contract": "Complete observed developer geology, rock, ground and water; no duplicate product polygon edits",
+  "source_water_cells": 53646,
+  "known_dry_cells": 8854,
+  "unclassified_water_scope_cells": 0,
+  "water_runs": 1260,
+  "water_fragment_omissions": 0,
+  "water_policy": "Known dry cells clear ordinary ponds; special/connected water, roads and structures protected; unknown untouched",
+  "rock_cells": 0,
+  "observed_nonrock_cells": 62500,
+  "unknown_rock_cells": 0,
+  "rock_runs": 1,
+  "omitted_small_rock_cells": 0,
+  "rock_type_policy": "Target native stone and ore generation, not a source resource transplant",
+  "known_geology_cells": 62089,
+  "unknown_geology_cells": 411,
+  "raw_cave_cells": 0,
+  "portable_cave_cells": 0,
+  "raw_natural_roof_cells": 0,
+  "unsupported_source_roof_cells": 0,
+  "source_terrain_sha256": "42d70385fe372f6e83e56d21913eb1f5a1be3f9172458bfcd06dcadea584d1b4",
+  "source_geology_sha256": "4f0ef774d85f08a6f85ba9d613111ae09c7a8534df38f22e08181634b81d3ba4",
+  "scaling": "Nearest source cell; observed grid intensities retained, coordinate width scales with map size",
+  "diagnostic_polygon_params_sha256": "d0ca38db1420004bf574d6769de65dd69114e68b12e22b59492d09cc26113c41",
+  "product_polygon_params_omitted": true
+}

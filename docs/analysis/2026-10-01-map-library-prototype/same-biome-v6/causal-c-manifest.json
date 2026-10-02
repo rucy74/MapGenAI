@@ -1,0 +1,24 @@
+{
+  "world_seed": "map-library-target-c-20261001",
+  "cases": [
+    {
+      "id": "gl-lake",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-lake.json"
+    },
+    {
+      "id": "gl-valley",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-valley.json"
+    },
+    {
+      "id": "gl-lone-mountain",
+      "biome": "AridShrubland",
+      "size": 250,
+      "command": "../cave-v5/recipes/gl-lone-mountain.json"
+    }
+  ],
+  "causal_scope": "Same first three original C cases/order/world seed; inspect pre-existing native variation behind LoneMountain Preview108/16 mismatch"
+}
