@@ -20,6 +20,7 @@ namespace MapGenAI.MapLibraryProbe
     {
         static string output, manifest, worldSeed;
         static bool pending, finished;
+        [ThreadStatic] static ReplicaComposition generatingReplica;
         static readonly List<object> results = new List<object>();
         static readonly List<object> checks = new List<object>();
         static Probe()
@@ -33,11 +34,22 @@ namespace MapGenAI.MapLibraryProbe
             h.Patch(AccessTools.Method(typeof(WorldGenerator), "GenerateWorld"), prefix:new HarmonyMethod(typeof(Probe), nameof(Seed)));
             h.Patch(AccessTools.Method(typeof(TickManager), "DoSingleTick"), prefix:new HarmonyMethod(typeof(Probe), nameof(NoSimulation)));
             h.Patch(AccessTools.Method(typeof(LLMClientFactory), "Create"), prefix:new HarmonyMethod(typeof(Probe), nameof(NoProvider)));
+            h.Patch(AccessTools.Method(typeof(MapGenerator),nameof(MapGenerator.GenerateContentsIntoMap)),prefix:new HarmonyMethod(typeof(Probe),nameof(ReplicaSteps)));
+            h.Patch(AccessTools.Method(typeof(MapGenerator),nameof(MapGenerator.MapGeneratorPostInit)),prefix:new HarmonyMethod(typeof(Probe),nameof(ReplicaSteps)));
             LongEventHandler.ExecuteWhenFinished(Start);
         }
         static void Seed(ref string seedString) => seedString = worldSeed;
         static bool NoSimulation() => false;
         static bool NoProvider() => throw new InvalidOperationException("Paid provider calls forbidden in map-library prototype");
+        [HarmonyPriority(Priority.Last),HarmonyAfter("Choco.MapGenAI")]
+        static void ReplicaSteps(ref IEnumerable<GenStepWithParams> genStepDefs)
+        {
+            if(generatingReplica==null)return;
+            var owned=genStepDefs.Where(s=>(s.def.genStep is ReplicaPass pass && pass.OwnedBy(generatingReplica))
+                || (s.def.genStep is ReplicaExistingFixture fixture && fixture.OwnedBy(generatingReplica)) || (s.def.genStep is Capture capture && capture.Replica==generatingReplica)).ToArray();
+            if(owned.Length!=(generatingReplica.ExpectedRejection?3:2))throw new Exception("Exact replica requires only its owned placement, final capture and optional guard fixture steps");
+            genStepDefs=owned;
+        }
         static void Check(bool ok, string name) { checks.Add(new Dictionary<string,object>{{"ok",ok},{"name",name}}); if (!ok) throw new Exception(name); }
         static void Start()
         {
@@ -92,12 +104,24 @@ namespace MapGenAI.MapLibraryProbe
                 WaterPass water=null;
                 RockComposition rock=null;
                 CaveComposition cave=null;SimpleJsonObject command=null;
+                ReplicaComposition replica=null;string resolvedCommand=null;
                 if (!string.IsNullOrEmpty(commandFile)) {
-                    command=ReadCommand(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(manifest),commandFile)));
+                    resolvedCommand=Path.GetFullPath(Path.Combine(Path.GetDirectoryName(manifest),commandFile));
+                    command=ReadCommand(resolvedCommand);
                     if(command.GetObject("ground_layer")!=null)ground=new GroundPass(command.GetObject("ground_layer"),id);
                     if(command.GetObject("water_layer")!=null)water=new WaterPass(command.GetObject("water_layer"),id);
                     if(command.GetObject("rock_layer")!=null)rock=new RockComposition(command.GetObject("rock_layer"),id);
                     if(command.GetObject("cave_layer")!=null)cave=new CaveComposition(command.GetObject("cave_layer"),id);
+                    var replicaLayer=command.GetObject("replica_layer");
+                    if(replicaLayer!=null) {
+                        bool compatible=replicaLayer.GetString("source_biome")==biome && ReplicaComposition.Integer(replicaLayer,"width")==size && ReplicaComposition.Integer(replicaLayer,"height")==size;
+                        Save(id+"-replica-selection.json",new Dictionary<string,object>{{"schema_version",1},{"selected",compatible},{"reason",compatible?"same biome and dimensions; strict raw snapshot validation follows":"different biome or dimensions; unchanged adaptive generation"}});
+                        if(compatible) {
+                            if(ground==null || water==null || rock==null || cave==null || command.GetObject("params")?.Keys.Any()!=false)
+                                throw new Exception("Exact replica requires all four observed sidecars and empty product parameters");
+                            replica=new ReplicaComposition(replicaLayer,resolvedCommand,id,biome,size);
+                        }
+                    }
                     if(rock!=null)rock.Cave=cave;if(ground!=null)ground.Cave=cave;if(water!=null)water.Cave=cave;
                     if((ground!=null || water!=null || rock!=null || cave!=null) && command.GetObject("params")?.Keys.Any()==false) {
                         // Ground-only developer controls have no product edit. The
@@ -147,7 +171,7 @@ namespace MapGenAI.MapLibraryProbe
                     parent.Tile=target;parent.SetFaction(Faction.OfPlayer);Find.WorldObjects.Add(parent);
                     MapGenParams.RestoreSnapshot(state,target);
                 }
-                if(cave!=null && item.GetBool("compare_without_cave")) {
+                if(replica==null && cave!=null && item.GetBool("compare_without_cave")) {
                     var rockOnly=(MapGeneratorDef)typeof(object).GetMethod("MemberwiseClone",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(original,null);
                     rockOnly.genSteps=new List<GenStepDef>(original.genSteps);string replayId=id+"-rock-only";
                     var replayRock=command.GetObject("rock_layer")==null?null:new RockComposition(command.GetObject("rock_layer"),replayId);
@@ -182,9 +206,22 @@ namespace MapGenAI.MapLibraryProbe
                 if(cave!=null && (id=="cave-guard" || id=="unknown-cave" || id=="cave-unsafe"))generator.genSteps.Add(new GenStepDef{defName="MapLibraryCaveGuardLate_"+id,order=1600.5f,genStep=new CaveGuardFixture(cave,true)});
                 if(cave!=null)generator.genSteps.Add(new GenStepDef{defName="MapLibraryCaveRoof_"+id,order=1601,genStep=new CaveRoofPass(cave)});
                 var capture=new Capture{Id=id,Size=size,Target=target,State=state,IsSource=!string.IsNullOrEmpty(gl),Rock=rock,Cave=cave};
+                capture.CaptureReplica=item.GetBool("capture_replica");
+                if(replica!=null) {
+                    replica.ExpectedRejection=item.GetBool("replica_guard_existing");
+                    replica.UserStateBefore=MapStateCodec.Serialize(MapGenParams.CaptureState(target));
+                    generator.genSteps.Clear();
+                    if(replica.ExpectedRejection)generator.genSteps.Add(new GenStepDef{defName="MapLibraryReplicaGuard_"+id,order=198,genStep=new ReplicaExistingFixture(replica)});
+                    generator.genSteps.Add(new GenStepDef{defName="MapLibraryReplica_"+id,order=199,genStep=new ReplicaPass(replica)});
+                    capture.Rock=null;capture.Cave=null;capture.Replica=replica;capture.CaptureReplica=true;
+                }
                 generator.genSteps.Add(new GenStepDef{defName="MapLibraryCapture_"+id,order=99999,genStep=capture});
                 var clock=System.Diagnostics.Stopwatch.StartNew();
-                var map=MapGenerator.GenerateMap(new IntVec3(size,1,size),parent,generator);
+                Map map;
+                try {generatingReplica=replica;map=MapGenerator.GenerateMap(new IntVec3(size,1,size),parent,generator);}
+                finally {generatingReplica=null;}
+                if(replica!=null)Check(replica.ExpectedRejection?replica.GuardPassed:replica.Applied && replica.FinalPassed,
+                    (replica.ExpectedRejection?"Exact replica existing-content guard rejected without mutation: ":"Exact replica placement and post-init fidelity verified: ")+id);
                 clock.Stop(); Check(capture.Captured,"Actual full map capture completed: "+id);
                 results.Add(new Dictionary<string,object>{{"id",id},{"tile",target},{"biome",map.Biome.defName},{"size",size},{"gl_id",gl},{"world_seed",worldSeed},{"seconds",clock.Elapsed.TotalSeconds},{"mutators",tile.Mutators.Select(m=>m.defName).ToArray()},{"rainfall",tile.rainfall},{"temperature",tile.temperature},{"counts",capture.Counts},{"authoring_report_present",capture.AuthoringReportPresent},{"provider_calls",0}});
                 Save("progress.json",new Dictionary<string,object>{{"results",results},{"checks",checks}});
@@ -1007,12 +1044,15 @@ namespace MapGenAI.MapLibraryProbe
         sealed class Capture : GenStep
         {
             public string Id; public int Size,Target; public bool IsSource,Captured,AuthoringReportPresent; public TileMapState State;
+            public bool CaptureReplica;bool postInitCapture;
+            public ReplicaComposition Replica;
             public RockComposition Rock;
             public CaveComposition Cave;
             public Dictionary<string,int> Counts;
             public override int SeedPart=>2739471;
             public override void Generate(Map map,GenStepParams parms)
             {
+                if(Replica!=null && !postInitCapture)return;
                 var labels=new char[Size*Size]; Counts=new Dictionary<string,int>{{"mountain",0},{"water",0},{"shallow",0},{"ground",0}};
                 foreach(var c in map.AllCells) {
                     // Observe permanent topology beneath seasonal ThinIce, while
@@ -1113,6 +1153,310 @@ namespace MapGenAI.MapLibraryProbe
                     if(report!=null)Check(report.issues.Count==0,"Reported authoring placements succeeded: "+Id);
                 }
                 Captured=true;
+            }
+            public override void PostMapInitialized(Map map,GenStepParams parms)
+            {
+                if(!CaptureReplica)return;
+                if(Replica!=null) {
+                    if(Replica.GuardRejected){Replica.AuditGuard(map);Captured=true;Counts=new Dictionary<string,int>();return;}
+                    if(!Replica.Applied){Replica.AuditFailure(map,"Replica placement did not finish; final observation refused");Captured=true;Counts=new Dictionary<string,int>();return;}
+                    postInitCapture=true;Generate(map,parms);
+                }
+                ReplicaSnapshot.Render(map,Id,Size,Target,parms);
+                var actual=ReplicaSnapshot.Observe(map,Id);
+                SaveObservation(Id+"-replica.json",actual);
+                if(Replica!=null)Replica.Audit(map,actual);
+                else SaveObservation(Id+"-replica-native-audit.json",new Dictionary<string,object>{{"schema_version",1},{"stage",99999},
+                    {"capture_phase","post-map-initialized"},{"exact_selected",false},{"reason","source observation only"},
+                    {"legacy_map_png_equals_final",ReplicaSnapshot.Hash(Path.Combine(output,Id+"-map.png"))==ReplicaSnapshot.Hash(Path.Combine(output,Id+"-replica-map.png"))},
+                    {"legacy_map_default_png_equals_final",ReplicaSnapshot.Hash(Path.Combine(output,Id+"-map-default.png"))==ReplicaSnapshot.Hash(Path.Combine(output,Id+"-replica-map-default.png"))}});
+            }
+        }
+        sealed class ReplicaPass : GenStep
+        {
+            readonly ReplicaComposition replica;public ReplicaPass(ReplicaComposition value){replica=value;}
+            public bool OwnedBy(ReplicaComposition value)=>replica==value;
+            public override int SeedPart=>2739481;
+            public override void Generate(Map map,GenStepParams parms)
+            {
+                try{replica.Apply(map);}catch(Exception e){replica.AuditFailure(map,e.ToString());throw;}
+            }
+        }
+        sealed class ReplicaExistingFixture : GenStep
+        {
+            readonly ReplicaComposition replica;public ReplicaExistingFixture(ReplicaComposition value){replica=value;}
+            public bool OwnedBy(ReplicaComposition value)=>replica==value;
+            public override int SeedPart=>2739482;
+            public override void Generate(Map map,GenStepParams parms)=>replica.GuardThing=GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.Wall,ThingDefOf.Steel),new IntVec3(5,0,5),map);
+        }
+        sealed class ReplicaComposition
+        {
+            readonly SimpleJsonObject source;readonly Dictionary<string,object> expected=new Dictionary<string,object>();
+            readonly TerrainDef[] terrains;readonly RoofDef[] roofs;readonly ColorDef[] colors;readonly List<ReplicaEdifice> edifices=new List<ReplicaEdifice>();
+            readonly int width,height;readonly string id,snapshotSha;int preexistingThings,preexistingRoofs,preexistingTerrain,unsafeRoofs;
+            public bool Applied,FinalPassed,ExpectedRejection,GuardRejected,GuardPassed;public string UserStateBefore;public Thing GuardThing;
+            bool mutationStarted;string failure,guardBefore;
+            sealed class ReplicaEdifice {public int Id,X,Z,Rotation,HitPoints;public bool UsesHitPoints;public ThingDef Def,Stuff;public int[] Footprint;public string Canonical;}
+            static System.Collections.IDictionary Fields(SimpleJsonObject obj)=>(System.Collections.IDictionary)typeof(SimpleJsonObject).GetField("Values",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(obj);
+            static object Value(SimpleJsonObject obj,string key) {var fields=Fields(obj);if(!fields.Contains(key))throw new FormatException("Missing replica field: "+key);return fields[key];}
+            static string String(SimpleJsonObject obj,string key)=>Value(obj,key) as string??throw new FormatException("Expected replica string: "+key);
+            static string Text(object value) {
+                if(value==null || value.GetType().FullName!="MapGenAI.UI.JsonNumber")throw new FormatException("Expected replica JSON number");
+                return (string)value.GetType().GetField("Text").GetValue(value);
+            }
+            public static int Integer(SimpleJsonObject obj,string key)=>Int(Text(Value(obj,key)));
+            static int Int(string value) {if(!int.TryParse(value,System.Globalization.NumberStyles.AllowLeadingSign,System.Globalization.CultureInfo.InvariantCulture,out var parsed))throw new FormatException("Expected exact replica integer");return parsed;}
+            static System.Collections.IList List(SimpleJsonObject obj,string key)=>Value(obj,key) as System.Collections.IList??throw new FormatException("Expected replica array: "+key);
+            static string[] Strings(SimpleJsonObject obj,string key)=>List(obj,key).Cast<object>().Select(v=>v as string??throw new FormatException("Expected replica string array: "+key)).ToArray();
+            static int[] Ints(SimpleJsonObject obj,string key)=>List(obj,key).Cast<object>().Select(v=>Int(Text(v))).ToArray();
+            static bool Bool(SimpleJsonObject obj,string key)=>Value(obj,key) is bool value?value:throw new FormatException("Expected replica boolean: "+key);
+            static float[] Numbers(SimpleJsonObject obj,string key) {
+                foreach(var value in List(obj,key))if(!double.TryParse(Text(value),System.Globalization.NumberStyles.Float,System.Globalization.CultureInfo.InvariantCulture,out var d)
+                    || double.IsNaN(d) || double.IsInfinity(d) || Math.Abs(d)>float.MaxValue || (key=="caves" && d<0))throw new FormatException("Invalid finite replica grid: "+key);
+                var values=obj.GetFloatArray(key);if(values.Any(v=>float.IsNaN(v)||float.IsInfinity(v)))throw new FormatException("Invalid replica float grid");return values;
+            }
+            static bool Sha(string value)=>value!=null && value.Length==64 && value.All(c=>(c>='0' && c<='9') || (c>='a' && c<='f') || (c>='A' && c<='F'));
+            static string ArtifactPath(string relative,string baseDirectory,string root)
+            {
+                if(string.IsNullOrEmpty(relative) || Path.IsPathRooted(relative))throw new FormatException("Replica evidence must be a relative artifact path");
+                string path=Path.GetFullPath(Path.Combine(baseDirectory,relative));
+                if(!path.StartsWith(root+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new FormatException("Replica evidence escaped the manifest artifact root");
+                for(string parent=path;parent!=null && (parent==root || parent.StartsWith(root+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase));parent=Path.GetDirectoryName(parent))
+                    if((File.GetAttributes(parent)&FileAttributes.ReparsePoint)!=0)throw new FormatException("Linked replica evidence paths are not allowed");
+                return path;
+            }
+            public ReplicaComposition(SimpleJsonObject layer,string commandPath,string ident,string biome,int size)
+            {
+                id=ident;width=Integer(layer,"width");height=Integer(layer,"height");snapshotSha=String(layer,"sha256");
+                if(Integer(layer,"schema_version")!=1 || String(layer,"mode")!="source-replica" || String(layer,"source_biome")!=biome || width!=size || height!=size || width<=0 || height<=0 || (long)width*height>1000000 || !Sha(snapshotSha))throw new FormatException("Invalid exact replica metadata");
+                string root=Path.GetFullPath(Path.GetDirectoryName(manifest)),path=ArtifactPath(String(layer,"snapshot_file"),Path.GetDirectoryName(commandPath),root);
+                if(new FileInfo(path).Length>64*1024*1024)throw new FormatException("Replica snapshot exceeds 64 MiB");
+                if(!string.Equals(ReplicaSnapshot.Hash(path),snapshotSha,StringComparison.OrdinalIgnoreCase))throw new FormatException("Replica snapshot SHA256 mismatch");
+                string json=File.ReadAllText(path);if(json.Length>64*1024*1024)throw new FormatException("Replica snapshot text exceeds 64 MiB");
+                if(json.Length<=SimpleJson.MaxLength)source=SimpleJson.Parse(json);
+                else {var reader=Activator.CreateInstance(typeof(SimpleJson).GetNestedType("Reader",BindingFlags.NonPublic),new object[]{json});source=(SimpleJsonObject)reader.GetType().GetMethod("ReadRoot").Invoke(reader,null);}
+                int area=checked(width*height);
+                if(Integer(source,"schema_version")!=1 || String(source,"mode")!="source-replica" || String(source,"biome")!=biome || Integer(source,"width")!=width || Integer(source,"height")!=height
+                    || String(source,"row_order")!="south-first" || String(source,"known_mask")!=new string('1',area) || Strings(source,"unsupported").Length!=0)throw new FormatException("Incomplete or unsupported replica snapshot");
+                var context=source.GetObject("context");if(context==null || String(context,"capture_phase")!="post-map-initialized")throw new FormatException("Replica requires actual post-init observation");
+                if(Integer(context,"stage")!=99999 || String(context,"source_biome")!=biome)throw new FormatException("Invalid replica capture context");
+                Bool(context,"gl_patch_active");Bool(context,"gl_stable_cave_roof_override");
+                if(!string.Equals(String(context,"engine_assembly_sha256"),ReplicaSnapshot.Hash(typeof(Map).Assembly.Location),StringComparison.OrdinalIgnoreCase))throw new FormatException("Replica source game assembly differs");
+                var bindings=source.GetObject("source_bindings");if(bindings==null || new[]{"terrain_sha256","geology_sha256","map_png_sha256","map_default_png_sha256"}.Any(k=>!Sha(String(bindings,k))))throw new FormatException("Missing replica source evidence hashes");
+                var files=source.GetObject("binding_files");if(files==null)throw new FormatException("Missing replica source evidence files");
+                foreach(string key in new[]{"terrain","geology","map_png","map_default_png"}) {
+                    string evidence=ArtifactPath(String(files,key),Path.GetDirectoryName(path),root);
+                    if(new FileInfo(evidence).Length>64*1024*1024 || !string.Equals(ReplicaSnapshot.Hash(evidence),String(bindings,key+"_sha256"),StringComparison.OrdinalIgnoreCase))throw new FormatException("Replica source evidence SHA256 mismatch: "+key);
+                }
+                var terrainNames=Strings(source,"terrain_table");var roofNames=Strings(source,"roof_table");var colorNames=Strings(source,"color_table");
+                if(new[]{terrainNames,roofNames,colorNames}.Any(names=>names.Length==0 || names[0]!="None" || names.Distinct().Count()!=names.Length))throw new FormatException("Invalid replica definition tables");
+                terrains=terrainNames.Select(name=>name=="None"?null:DefDatabase<TerrainDef>.GetNamed(name)).ToArray();roofs=roofNames.Select(name=>name=="None"?null:DefDatabase<RoofDef>.GetNamed(name)).ToArray();colors=colorNames.Select(name=>name=="None"?null:DefDatabase<ColorDef>.GetNamed(name)).ToArray();
+                var roofMetadata=source.GetObject("roof_def_metadata");if(roofMetadata==null || !roofMetadata.Keys.OrderBy(k=>k).SequenceEqual(roofNames.Skip(1).OrderBy(k=>k)))throw new FormatException("Missing replica roof definition metadata");
+                foreach(var roof in roofs.Where(r=>r!=null)) {
+                    var meta=roofMetadata.GetObject(roof.defName);
+                    if(meta==null || Bool(meta,"is_natural")!=roof.isNatural || Bool(meta,"can_collapse")!=roof.canCollapse || Bool(meta,"is_thick_roof")!=roof.isThickRoof)throw new FormatException("Replica roof metadata differs from loaded definition");
+                }
+                foreach(string key in new[]{"top_indices","permanent_indices","surface_indices","under_indices","foundation_indices","temp_indices","color_indices","roof_indices","edifice_indices"}) {
+                    var values=Ints(source,key);int limit=key=="color_indices"?colors.Length:key=="roof_indices"?roofs.Length:key=="edifice_indices"?int.MaxValue:terrains.Length;
+                    if(values.Length!=area || values.Any(v=>v<0 || v>=limit) || ((key=="permanent_indices" || key=="surface_indices") && values.Any(v=>v==0)))throw new FormatException("Invalid replica indices: "+key);expected[key]=values;
+                }
+                foreach(string key in new[]{"elevation","caves","fertility"}){var values=Numbers(source,key);if(values.Length!=area)throw new FormatException("Invalid replica grid length");expected[key]=values;}
+                string walkable=String(source,"walkable");if(walkable.Length!=area || walkable.Any(v=>v!='0' && v!='1'))throw new FormatException("Invalid actual replica walkability");expected["walkable"]=walkable;
+                foreach(string key in new[]{"native_roof_supported","projected_roof_supported"}){string mask=String(source,key);if(mask.Length!=area || mask.Any(v=>v!='0' && v!='1'))throw new FormatException("Missing replica roof support observation");}
+                var observedRoofs=(int[])expected["roof_indices"];string observedSupport=String(source,"native_roof_supported"),projectedSupport=String(source,"projected_roof_supported");
+                if(Enumerable.Range(0,area).Any(n=>observedRoofs[n]>0 && roofs[observedRoofs[n]].canCollapse && (observedSupport[n]!='1' || projectedSupport[n]!='1')))throw new FormatException("Source replica includes unsafe collapsing roof");
+                var indices=(int[])expected["edifice_indices"];var used=new bool[area];int next=1;
+                foreach(var item in List(source,"edifices")) {
+                    var record=item as SimpleJsonObject??throw new FormatException("Expected replica edifice object");
+                    var edifice=new ReplicaEdifice{Id=Integer(record,"id"),X=Integer(record,"x"),Z=Integer(record,"z"),Rotation=Integer(record,"rotation"),HitPoints=Integer(record,"hit_points"),UsesHitPoints=Bool(record,"uses_hit_points"),
+                        Def=DefDatabase<ThingDef>.GetNamed(String(record,"def")),Stuff=String(record,"stuff")=="None"?null:DefDatabase<ThingDef>.GetNamed(String(record,"stuff")),Footprint=Ints(record,"footprint")};
+                    if(edifice.Id!=next++ || edifice.X<0 || edifice.X>=width || edifice.Z<0 || edifice.Z>=height || edifice.Rotation<0 || edifice.Rotation>3
+                        || !typeof(Building).IsAssignableFrom(edifice.Def.thingClass) || edifice.UsesHitPoints!=edifice.Def.useHitPoints || (edifice.UsesHitPoints && edifice.HitPoints<=0)
+                        || (!edifice.UsesHitPoints && edifice.HitPoints<-1) || Bool(record,"door_open") || edifice.Def.MadeFromStuff!=(edifice.Stuff!=null)
+                        || (edifice.Stuff!=null && !edifice.Stuff.IsStuff) || Bool(record,"natural_rock")!=(edifice.Def.building?.isNaturalRock==true)
+                        || Bool(record,"resource_rock")!=(edifice.Def.building?.isNaturalRock==true && edifice.Def.building.isResourceRock))throw new FormatException("Unsupported replica edifice state");
+                    var rect=GenAdj.OccupiedRect(new IntVec3(edifice.X,0,edifice.Z),new Rot4(edifice.Rotation),edifice.Def.size);
+                    var actual=rect.Where(c=>c.x>=0 && c.x<width && c.z>=0 && c.z<height).Select(c=>c.z*width+c.x).OrderBy(v=>v).ToArray();
+                    if(actual.Length!=rect.Area || !actual.SequenceEqual(edifice.Footprint))throw new FormatException("Replica edifice footprint differs from loaded definition");
+                    foreach(int n in actual){if(used[n] || indices[n]!=edifice.Id)throw new FormatException("Overlapping or inconsistent replica edifices");used[n]=true;}
+                    edifice.Canonical=Canonical(record);edifices.Add(edifice);
+                }
+                if(indices.Any(v=>v<0 || v>edifices.Count) || Enumerable.Range(0,area).Any(n=>(indices[n]>0)!=used[n]))throw new FormatException("Replica edifice coverage is incomplete");
+                // Only terrain combinations that the public setters can reconstruct are supported.
+                var top=(int[])expected["top_indices"];var under=(int[])expected["under_indices"];var temp=(int[])expected["temp_indices"];var foundations=(int[])expected["foundation_indices"];
+                for(int n=0;n<area;n++)if((top[n]>0 && (terrains[top[n]].temporary || terrains[top[n]].isFoundation || (terrains[top[n]].layerable && under[n]==0)))
+                    || (foundations[n]>0 && !terrains[foundations[n]].isFoundation) || (temp[n]>0 && !terrains[temp[n]].temporary))throw new FormatException("Unsupported replica terrain layer combination");
+            }
+            static string Canonical(SimpleJsonObject record)=>String(record,"def")+"|"+String(record,"stuff")+"|"+Integer(record,"rotation")+"|"+Integer(record,"x")+"|"+Integer(record,"z")+"|"+Integer(record,"hit_points")+"|"+Bool(record,"uses_hit_points")+"|"+Bool(record,"natural_rock")+"|"+Bool(record,"resource_rock")+"|"+Bool(record,"door_open")+"|"+string.Join(",",Ints(record,"footprint"));
+            public void Apply(Map map)
+            {
+                preexistingThings=map.listerThings.AllThings.Count;preexistingRoofs=map.AllCells.Count(c=>c.Roofed(map));
+                preexistingTerrain=Enumerable.Range(0,map.cellIndices.NumGridCells).Count(n=>map.terrainGrid.topGrid[n]!=null || map.terrainGrid.UnderTerrainAt(n)!=null || map.terrainGrid.FoundationAt(n)!=null || map.terrainGrid.TempTerrainAt(n)!=null || map.terrainGrid.colorGrid[n]!=null);
+                if(map.Size.x!=width || map.Size.z!=height || map.Biome.defName!=source.GetString("biome") || preexistingThings!=0 || preexistingRoofs!=0 || preexistingTerrain!=0) {
+                    if(ExpectedRejection && GuardThing?.Spawned==true && preexistingThings==1 && preexistingRoofs==0 && preexistingTerrain==0){guardBefore=GuardSignature(map);GuardRejected=true;return;}
+                    throw new Exception("Exact replica requires an empty new map; existing content was not removed");
+                }
+                if(ExpectedRejection)throw new Exception("Expected existing-content guard fixture was not exercised");
+                mutationStarted=true;
+                var top=(int[])expected["top_indices"];var under=(int[])expected["under_indices"];var foundation=(int[])expected["foundation_indices"];var temp=(int[])expected["temp_indices"];var color=(int[])expected["color_indices"];
+                var e=(float[])expected["elevation"];var cv=(float[])expected["caves"];var fertility=(float[])expected["fertility"];
+                using(map.pathing.DisableIncrementalScope())foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c);var grid=map.terrainGrid;
+                    if(foundation[n]>0)grid.SetFoundation(c,terrains[foundation[n]]);
+                    if(top[n]>0)grid.SetTerrain(c,terrains[top[n]]);
+                    if(under[n]>0)grid.SetUnderTerrain(c,terrains[under[n]]);
+                    if(temp[n]>0)grid.SetTempTerrain(c,terrains[temp[n]]);
+                    if(color[n]>0)grid.SetTerrainColor(c,colors[color[n]]);
+                    MapGenerator.Elevation[c]=e[n];MapGenerator.Caves[c]=cv[n];MapGenerator.Fertility[c]=fertility[n];
+                }
+                foreach(var edifice in edifices) {
+                    var at=new IntVec3(edifice.X,0,edifice.Z);
+                    if(edifice.Footprint.Any(n=>map.thingGrid.ThingsListAt(new IntVec3(n%width,0,n/width)).Count!=0))throw new Exception("Replica spawn footprint is occupied; nothing was wiped");
+                    var thing=ThingMaker.MakeThing(edifice.Def,edifice.Stuff);thing.HitPoints=edifice.HitPoints;
+                    // No occupant exists in this footprint. Respawning prevents initial pawn generation by spawner comps.
+                    GenSpawn.Spawn(thing,at,map,new Rot4(edifice.Rotation),WipeMode.Vanish,respawningAfterLoad:true);
+                    if(!thing.Spawned || edifice.Footprint.Any(n=>new IntVec3(n%width,0,n/width).GetEdifice(map)!=thing))throw new Exception("Replica edifice did not occupy its observed footprint");
+                }
+                if(map.listerThings.AllThings.Count!=edifices.Count)throw new Exception("Unsupported replica spawn side effects; candidate rejected");
+                var desired=((int[])expected["roof_indices"]).Select(n=>roofs[n]).ToArray();
+                foreach(var c in map.AllCells) {
+                    var roof=desired[map.cellIndices.CellToIndex(c)];if(roof!=null && roof.canCollapse && !CaveComposition.Supported(map,c,desired))unsafeRoofs++;
+                }
+                if(unsafeRoofs!=0)throw new Exception("Observed roofs lack native support; exact candidate rejected without roof installation");
+                foreach(var c in map.AllCells)map.roofGrid.SetRoof(c,desired[map.cellIndices.CellToIndex(c)]);
+                Applied=true;
+            }
+            public void AuditFailure(Map map,string reason)
+            {
+                if(failure==null)failure=reason;
+                SaveObservation(id+"-replica-native-audit.json",new Dictionary<string,object>{{"schema_version",1},{"stage",199},{"capture_phase","placement-failed"},{"exact_selected",true},
+                    {"source_snapshot_sha256",snapshotSha},{"applied",Applied},{"pass",false},{"reason",failure},{"mutation_started",mutationStarted},
+                    {"existing_things_before",preexistingThings},{"existing_roofs_before",preexistingRoofs},{"existing_terrain_cells_before",preexistingTerrain},{"unsafe_roof_cells",unsafeRoofs},
+                    {"protected_changes",mutationStarted?0:map.listerThings.AllThings.Count==preexistingThings?0:1},{"unknown_changes",0}});
+            }
+            public void AuditGuard(Map map)
+            {
+                int stateChanges=UserStateBefore==MapStateCodec.Serialize(MapGenParams.CaptureState((int)map.Tile))?0:1;
+                bool unchanged=guardBefore!=null && guardBefore==GuardSignature(map);
+                GuardPassed=GuardRejected && !Applied && GuardThing?.Spawned==true && new IntVec3(5,0,5).GetEdifice(map)==GuardThing && map.listerThings.AllThings.Count==1
+                    && unchanged && stateChanges==0 && map.AllCells.All(c=>!c.Roofed(map)) && Enumerable.Range(0,map.cellIndices.NumGridCells).All(n=>map.terrainGrid.topGrid[n]==null && map.terrainGrid.UnderTerrainAt(n)==null && map.terrainGrid.FoundationAt(n)==null && map.terrainGrid.TempTerrainAt(n)==null && map.terrainGrid.colorGrid[n]==null);
+                SaveObservation(id+"-replica-native-audit.json",new Dictionary<string,object>{{"schema_version",1},{"stage",99999},{"capture_phase","post-map-initialized"},{"exact_selected",true},
+                    {"source_snapshot_sha256",snapshotSha},{"applied",false},{"pass",false},{"expected_rejection",true},{"expected_rejection_pass",GuardPassed},
+                    {"reason","Preexisting Wall fixture preserved; exact replica was refused before grid or object mutation"},{"fixture_x",5},{"fixture_z",5},
+                    {"existing_things_before",preexistingThings},{"existing_roofs_before",preexistingRoofs},{"existing_terrain_cells_before",preexistingTerrain},{"protected_changes",unchanged?0:1},{"unknown_changes",0},
+                    {"user_state_changes",stateChanges},{"grid_and_content_unchanged",unchanged},{"mutation_started",mutationStarted}});
+            }
+            static string GuardSignature(Map map)
+            {
+                using(var stream=new MemoryStream()) {
+                    using(var writer=new BinaryWriter(stream,System.Text.Encoding.UTF8,true)) {
+                        foreach(var c in map.AllCells) {
+                            int n=map.cellIndices.CellToIndex(c);var grid=map.terrainGrid;
+                            foreach(var def in new Def[]{grid.topGrid[n],grid.UnderTerrainAt(n),grid.FoundationAt(n),grid.TempTerrainAt(n),grid.colorGrid[n],c.GetRoof(map)})writer.Write(def?.defName??"None");
+                            writer.Write(MapGenerator.Elevation[c]);writer.Write(MapGenerator.Caves[c]);writer.Write(MapGenerator.Fertility[c]);
+                        }
+                        foreach(var thing in map.listerThings.AllThings.OrderBy(t=>t.thingIDNumber)) {
+                            writer.Write(thing.thingIDNumber);writer.Write(thing.def.defName);writer.Write(thing.Stuff?.defName??"None");writer.Write(thing.Position.x);writer.Write(thing.Position.z);writer.Write(thing.Rotation.AsInt);writer.Write(thing.HitPoints);
+                        }
+                    }
+                    using(var sha=System.Security.Cryptography.SHA256.Create())return BitConverter.ToString(sha.ComputeHash(stream.ToArray())).Replace("-","");
+                }
+            }
+            public void Audit(Map map,Dictionary<string,object> actual)
+            {
+                var mismatch=new Dictionary<string,int>();
+                foreach(var field in expected) {
+                    if(field.Value is int[] ints)mismatch[field.Key]=ints.Zip((int[])actual[field.Key],(a,b)=>a==b?0:1).Sum();
+                    else if(field.Value is float[] values)mismatch[field.Key]=values.Zip((float[])actual[field.Key],(a,b)=>a==b?0:1).Sum();
+                    else if(field.Value is string text)mismatch[field.Key]=text.Zip((string)actual[field.Key],(a,b)=>a==b?0:1).Sum();
+                }
+                // Table indices alone are insufficient if the first-observed definition order changes.
+                foreach(string key in new[]{"terrain_table","roof_table","color_table"})mismatch[key]=Strings(source,key).SequenceEqual(((System.Collections.IEnumerable)actual[key]).Cast<string>())?0:1;
+                var observed=((System.Collections.IEnumerable)actual["edifices"]).Cast<object>().Select(v=>Canonical(SimpleJson.Parse(SimpleJson.Serialize(v)))).ToArray();
+                mismatch["edifice_records"]=edifices.Select(v=>v.Canonical).SequenceEqual(observed)?0:1;
+                mismatch["unsupported_features"]=((System.Collections.IEnumerable)actual["unsupported"]).Cast<object>().Count();
+                var bindings=(Dictionary<string,object>)actual["source_bindings"];var original=source.GetObject("source_bindings");
+                bool truePng=string.Equals(original.GetString("map_png_sha256"),(string)bindings["map_png_sha256"],StringComparison.OrdinalIgnoreCase);
+                bool defaultPng=string.Equals(original.GetString("map_default_png_sha256"),(string)bindings["map_default_png_sha256"],StringComparison.OrdinalIgnoreCase);
+                int stateChanges=UserStateBefore==MapStateCodec.Serialize(MapGenParams.CaptureState((int)map.Tile))?0:1;
+                int finalUnsafe=map.AllCells.Count(c=>c.GetRoof(map)?.canCollapse==true && !RoofCollapseUtility.WithinRangeOfRoofHolder(c,map));
+                FinalPassed=Applied && mismatch.Values.All(v=>v==0) && truePng && defaultPng && stateChanges==0 && finalUnsafe==0;
+                SaveObservation(id+"-replica-native-audit.json",new Dictionary<string,object>{{"schema_version",1},{"stage",99999},{"capture_phase","post-map-initialized"},{"exact_selected",true},
+                    {"reason","same biome and size; explicit observed static snapshot on empty developer map"},{"source_snapshot_sha256",snapshotSha},{"applied",Applied},{"pass",FinalPassed},
+                    {"existing_things_before",preexistingThings},{"existing_roofs_before",preexistingRoofs},{"existing_terrain_cells_before",preexistingTerrain},{"protected_changes",0},{"unknown_changes",0},
+                    {"user_state_changes",stateChanges},{"unsafe_roof_cells",Math.Max(unsafeRoofs,finalUnsafe)},{"field_mismatches",mismatch},{"map_png_hash_equal",truePng},{"map_default_png_hash_equal",defaultPng},
+                    {"actual_map_png_sha256",bindings["map_png_sha256"]},{"actual_map_default_png_sha256",bindings["map_default_png_sha256"]},
+                    {"scope","Generated static terrain layers, E/C/fertility, roof, walkability and edifice definition/stuff/rotation/footprint/HP; pawn, plant, item, quest and survival state excluded."}});
+            }
+        }
+        static class ReplicaSnapshot
+        {
+            public static string Hash(string path) {
+                using(var sha=System.Security.Cryptography.SHA256.Create())return BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(path))).Replace("-","").ToLowerInvariant();
+            }
+            static int Name(List<string> names,Def def) {
+                string name=def?.defName??"None";int index=names.IndexOf(name);if(index<0){index=names.Count;names.Add(name);}return index;
+            }
+            public static Dictionary<string,object> Observe(Map map,string id)
+            {
+                int count=map.cellIndices.NumGridCells;
+                var terrainNames=new List<string>{"None"};var roofNames=new List<string>{"None"};var colorNames=new List<string>{"None"};
+                var top=new int[count];var permanent=new int[count];var surface=new int[count];var under=new int[count];var foundation=new int[count];var temp=new int[count];var colors=new int[count];var roofs=new int[count];
+                var elevation=new float[count];var caves=new float[count];var fertility=new float[count];var walkable=new char[count];var native=new char[count];var projected=new char[count];
+                var edificeIndices=new int[count];var unique=new Dictionary<Building,int>();var edifRecords=new List<object>();var unsupported=new List<string>();
+                var roofMetadata=new Dictionary<string,object>();var roofDefs=map.AllCells.Select(c=>c.GetRoof(map)).ToArray();
+                foreach(var c in map.AllCells) {
+                    int n=map.cellIndices.CellToIndex(c);var grid=map.terrainGrid;
+                    top[n]=Name(terrainNames,grid.topGrid[n]);permanent[n]=Name(terrainNames,grid.TerrainAtIgnoreTemp(n));surface[n]=Name(terrainNames,grid.TerrainAt(n));
+                    under[n]=Name(terrainNames,grid.UnderTerrainAt(n));foundation[n]=Name(terrainNames,grid.FoundationAt(n));temp[n]=Name(terrainNames,grid.TempTerrainAt(n));colors[n]=Name(colorNames,grid.colorGrid[n]);
+                    elevation[n]=MapGenerator.Elevation[c];caves[n]=MapGenerator.Caves[c];fertility[n]=MapGenerator.Fertility[c];walkable[n]=c.Walkable(map)?'1':'0';
+                    if(new[]{elevation[n],caves[n],fertility[n]}.Any(v=>float.IsNaN(v) || float.IsInfinity(v)))unsupported.Add("non-finite-grid:"+n);
+                    var roof=roofDefs[n];roofs[n]=Name(roofNames,roof);
+                    native[n]=roof!=null && RoofCollapseUtility.WithinRangeOfRoofHolder(c,map)?'1':'0';projected[n]=roof!=null && CaveComposition.Supported(map,c,roofDefs)?'1':'0';
+                    if(roof!=null && !roofMetadata.ContainsKey(roof.defName))roofMetadata[roof.defName]=new Dictionary<string,object>{{"is_natural",roof.isNatural},{"can_collapse",roof.canCollapse},{"is_thick_roof",roof.isThickRoof}};
+                    var building=c.GetEdifice(map);if(building==null)continue;
+                    if(!unique.TryGetValue(building,out var recordId)) {
+                        recordId=unique.Count+1;unique[building]=recordId;
+                        var footprint=building.OccupiedRect().Where(at=>at.InBounds(map) && at.GetEdifice(map)==building).Select(at=>map.cellIndices.CellToIndex(at)).OrderBy(v=>v).ToArray();
+                        if(footprint.Length!=building.OccupiedRect().Area)unsupported.Add("partial-edifice-footprint:"+recordId);
+                        bool open=building is Building_Door door && door.Open;
+                        if(open)unsupported.Add("open-door-state:"+recordId);
+                        edifRecords.Add(new Dictionary<string,object>{{"id",recordId},{"def",building.def.defName},{"stuff",building.Stuff?.defName??"None"},
+                            {"rotation",building.Rotation.AsInt},{"x",building.Position.x},{"z",building.Position.z},{"footprint",footprint},
+                            {"hit_points",building.HitPoints},{"uses_hit_points",building.def.useHitPoints},{"natural_rock",RockComposition.Natural(building)},
+                            {"resource_rock",RockComposition.Resource(building)},{"door_open",open}});
+                    }
+                    edificeIndices[n]=recordId;
+                }
+                foreach(var thing in map.listerThings.AllThings.Where(t=>!(t is Building b && unique.ContainsKey(b)) && (t.def.passability==Traversability.Impassable || t.def.holdsRoof)))
+                    unsupported.Add("unobserved-blocking-thing:"+thing.def.defName+":"+thing.Position.x+":"+thing.Position.z);
+                var gl=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("GeologicalLandforms.ExtensionUtils")).FirstOrDefault(t=>t!=null);
+                bool stable=gl!=null && (bool)gl.GetMethod("HasStableCaveRoofs",BindingFlags.Public|BindingFlags.Static).Invoke(null,new object[]{map});
+                var supportPatches=Harmony.GetPatchInfo(AccessTools.Method(typeof(RoofCollapseUtility),nameof(RoofCollapseUtility.WithinRangeOfRoofHolder)));
+                bool glPatch=supportPatches?.Prefixes.Any(p=>p.owner.StartsWith("GeologicalLandforms.",StringComparison.Ordinal))==true;
+                return new Dictionary<string,object>{{"schema_version",1},{"mode","source-replica"},{"biome",map.Biome.defName},{"width",map.Size.x},{"height",map.Size.z},{"row_order","south-first"},
+                    {"known_mask",new string('1',count)},{"terrain_table",terrainNames},{"top_indices",top},{"permanent_indices",permanent},{"surface_indices",surface},
+                    {"under_indices",under},{"foundation_indices",foundation},{"temp_indices",temp},{"color_table",colorNames},{"color_indices",colors},
+                    {"elevation",elevation},{"caves",caves},{"fertility",fertility},{"roof_table",roofNames},{"roof_indices",roofs},{"walkable",new string(walkable)},
+                    {"edifice_indices",edificeIndices},{"edifices",edifRecords},{"native_roof_supported",new string(native)},{"projected_roof_supported",new string(projected)},
+                    {"roof_def_metadata",roofMetadata},{"unsupported",unsupported},
+                    {"source_bindings",new Dictionary<string,object>{{"terrain_sha256",Hash(Path.Combine(output,id+"-terrain.json"))},{"geology_sha256",Hash(Path.Combine(output,id+"-geology.json"))},
+                        {"map_png_sha256",Hash(Path.Combine(output,id+"-replica-map.png"))},{"map_default_png_sha256",Hash(Path.Combine(output,id+"-replica-map-default.png"))}}},
+                    {"binding_files",new Dictionary<string,object>{{"terrain",id+"-terrain.json"},{"geology",id+"-geology.json"},{"map_png",id+"-replica-map.png"},{"map_default_png",id+"-replica-map-default.png"}}},
+                    {"context",new Dictionary<string,object>{{"stage",99999},{"capture_phase","post-map-initialized"},{"source_biome",map.Biome.defName},{"hilliness",map.TileInfo.hilliness.ToString()},
+                        {"gl_patch_active",glPatch},{"gl_stable_cave_roof_override",stable},{"engine_version",typeof(Map).Assembly.GetName().Version.ToString()},
+                        {"engine_assembly_sha256",Hash(typeof(Map).Assembly.Location)},{"active_package_ids",LoadedModManager.RunningModsListForReading.Select(m=>m.PackageId).ToArray()}}}};
+            }
+            public static void Render(Map map,string id,int size,int target,GenStepParams parms)
+            {
+                foreach(bool trueColors in new[]{true,false}) {
+                    var request=new MapPreview.MapPreviewRequest(Find.World.info.seedString,target,new IntVec2(size,size));var result=new MapPreview.MapPreviewResult(request);var gt=typeof(MapPreview.MapPreviewGenerator);
+                    var step=(GenStep)Activator.CreateInstance(gt.GetNestedType("PreviewTextureGenStep",BindingFlags.NonPublic),new object[]{result,trueColors});
+                    step.Generate(map,parms);gt.GetMethod("AddBevelToSolidStone",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{result});
+                    var texture=new Texture2D(size,size,TextureFormat.RGBA32,false);
+                    try {texture.SetPixels(result.Pixels);texture.Apply();File.WriteAllBytes(Path.Combine(output,id+(trueColors?"-replica-map.png":"-replica-map-default.png")),ImageConversion.EncodeToPNG(texture));}
+                    finally {UnityEngine.Object.Destroy(texture);}
+                }
             }
         }
         static void Save(string name,object value)=>File.WriteAllText(Path.Combine(output,name),SimpleJson.Serialize(value));

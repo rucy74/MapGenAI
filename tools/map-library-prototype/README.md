@@ -1,5 +1,20 @@
 # Map library developer prototype
 
+## 같은 바이옴의 정확한 초기 지형 재현
+
+`same_biome_prepare.py`는 새 실제 원본의 마지막 `PostMapInitialized` 관측을 별도로 묶는다. 같은 BiomeDef·같은 가로/세로 크기·빈 제품 params·4개 관측 sidecar가 있는 새 일회용 후보에서는 `replica_layer`를 선택한다. 원본 바닥의 모든 층·색·높이·동굴·비옥도·지붕·실제 암석/광석/건물의 고유 점유 및 보행 상태를 복제하고, 실제 Map Preview 두 색상 모드와 모든 raw 필드를 최종 대조한다. 다른 바이옴/크기에서는 복제 파일을 열지 않고 기존 적응 경로를 유지한다.
+
+조건을 만족해도 원본에 무지지 지붕·unknown·필수 정보 누락이 있으면 정확 재현 후보를 제외한다. 이번 정해진 GL8 원본 중 CaveEntrance/SecludedValley2는 unsafe roof로 격리했고, 나머지6은 실제 최종13grid 전체와 고유 건물/PNG2가100% 일치했다. 원본8 전체 성공이나 범용 세이브 복제로 부르지 않는다. 식물·pawn·아이템·퀘스트·시간 변화의 재현은 범위 밖이고 제품 추천 UI·codec·Undo·설치 DLL에는 아직 연결하지 않았다. 기존 편집 지도/사용자 건물을 지우는 복제도 아니다. 외부 모드의 지연 callback이나 99999보다 늦은 source genstep까지 검증한 것은 아니다.
+
+```powershell
+# source-manifest.json의 capture_replica:true를 run.ps1 -WithGL로 새 소유 폴더에 생성/Archive한다.
+python -X utf8 tools/map-library-prototype/same_biome_prepare.py --folder docs/analysis/2026-10-01-map-library-prototype/same-biome-v6 --source docs/analysis/2026-10-01-map-library-prototype/same-biome-v6/source-native-r1
+# 준비된 same-biome-a/b/c manifest를 run.ps1로 새 폴더에 생성/Archive한다.
+python -X utf8 tools/map-library-prototype/same_biome_report.py --help
+```
+
+원시 `*-terrain.json`/`*-geology.json`/`*-replica.json` 및 launch/cleanup/Player.log는 현장 검증 자료로 이 PC에 보존하고 Git에서 제외한다. Git에 저장된 exact 레시피만 내려받아서는 원본 snapshot이 없으므로 바로 실행할 수 없다. 새 환경에서는 source를 실제 생성하고 prepare로 경로/해시를 다시 연결해야 한다. [관측·보호 계약](same-biome-contract.md), [실제 결과와 한계](../../docs/analysis/2026-10-01-map-library-prototype/same-biome-v6/report.md), [실제 그림 HTML](../../docs/analysis/2026-10-01-map-library-prototype/same-biome-v6/same-biome-review.html).
+
 ## 동굴·자연 지붕·높이 이식 실험
 
 `--details --caves`는 새 원본 `*-geology.json`을 요구한다. terrain-v2와 별개로 native working grid가 폐기되기 전99999에서 실제 높이·Caves·지붕 이름·통행 가능 여부·인공 바닥/건물을 캡처한다. 기존6종에 CaveEntrance와 SecludedValley를 더한8종을 새로 생성한다. 이미지나 지붕 개수 합계에서 동굴을 추측하지 않는다.
